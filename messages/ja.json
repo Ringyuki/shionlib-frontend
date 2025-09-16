@@ -1,0 +1,16 @@
+{
+  "ShionlibHome": {
+    "title": "Shionlib - ギャルゲーリソースサイト！"
+  },
+  "Meta": {
+    "title": "Shionlib - ギャルゲーリソースサイト！",
+    "titleShort": "Shionlib",
+    "template": "%s - Shionlib",
+    "description": "Shionlib - 無料・オープンソース・気軽に使えるギャルゲーリソースサイト",
+    "keywords": ["Shionlib", "ギャルゲー", "リソース", "無料", "オープンソース", "気軽"],
+    "og": {
+      "title": "Shionlib - ギャルゲーリソースサイト！",
+      "description": "Shionlib - 無料・オープンソース・気軽に使えるギャルゲーリソースサイト"
+    }
+  }
+}

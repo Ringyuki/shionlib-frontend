@@ -1,0 +1,16 @@
+{
+  "ShionlibHome": {
+    "title": "书音的图书馆 - Galgame 资源站！"
+  },
+  "Meta": {
+    "title": "书音的图书馆 - Galgame 资源站！",
+    "titleShort": "书音的图书馆",
+    "template": "%s - 书音的图书馆",
+    "description": "书音的图书馆 - 免费、开源、零门槛的 Galgame 资源站",
+    "keywords": ["书音的图书馆", "Galgame", "资源站", "免费", "开源", "零门槛"],
+    "og": {
+      "title": "书音的图书馆 - Galgame 资源站！",
+      "description": "书音的图书馆 - 免费、开源、零门槛的 Galgame 资源站"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "ShionlibHome": {
+    "title": "Shionlib - A Galgame Resource Site!"
+  },
+  "Meta": {
+    "title": "Shionlib - A Galgame Resource Site!",
+    "titleShort": "Shionlib",
+    "template": "%s - Shionlib",
+    "description": "Shionlib - Free, open-source, and easy-access Galgame resource site",
+    "keywords": ["Shionlib", "Galgame", "Resource", "Free", "Open Source", "Easy Access"],
+    "og": {
+      "title": "Shionlib - A Galgame Resource Site!",
+      "description": "Shionlib - Free, open-source, and easy-access Galgame resource site"
+    }
+  }
+}

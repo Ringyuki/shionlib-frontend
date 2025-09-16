@@ -40,3 +40,6 @@ next-env.d.ts
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# PrimeReact
+themes/primereact/
