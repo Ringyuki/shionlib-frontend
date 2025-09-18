@@ -1,7 +1,4 @@
 {
-  "ShionlibHome": {
-    "title": "书音的图书馆 - Galgame 资源站！"
-  },
   "Meta": {
     "title": "书音的图书馆 - Galgame 资源站！",
     "titleShort": "书音的图书馆",
@@ -21,6 +18,25 @@
           "system": "跟随系统",
           "light": "亮色",
           "dark": "暗色"
+        }
+      },
+      "User": {
+        "LoginOrRegisteDialog": {
+          "title": "登录或注册",
+          "description": "登录或注册"
+        },
+        "Login": {
+          "title": "登录",
+          "description": "登录",
+          "identifier": "邮箱或用户名",
+          "password": "密码",
+          "login": "登录",
+          "success": "登录成功",
+          "validation": {
+            "identifier": "用户名或邮箱不能为空",
+            "email": "请输入有效的邮箱地址",
+            "password": "密码至少需要8个字符"
+          }
         }
       }
     }

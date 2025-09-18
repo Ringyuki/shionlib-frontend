@@ -1,7 +1,4 @@
 {
-  "ShionlibHome": {
-    "title": "Shionlib - A Galgame Resource Site!"
-  },
   "Meta": {
     "title": "Shionlib - A Galgame Resource Site!",
     "titleShort": "Shionlib",
@@ -21,6 +18,25 @@
           "system": "System",
           "light": "Light",
           "dark": "Dark"
+        }
+      },
+      "User": {
+        "LoginOrRegisteDialog": {
+          "title": "Login or Register",
+          "description": "Login or Register"
+        },
+        "Login": {
+          "title": "Login",
+          "description": "Login",
+          "identifier": "Email or Username",
+          "password": "Password",
+          "login": "Login",
+          "success": "Login successfully",
+          "validation": {
+            "identifier": "Email or Username is required",
+            "email": "Please enter a valid email address",
+            "password": "Password must be at least 8 characters"
+          }
         }
       }
     }

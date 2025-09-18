@@ -4,6 +4,14 @@ import createNextIntlPlugin from 'next-intl/plugin'
 const withNextIntl = createNextIntlPlugin()
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 't.vndb.org',
+      },
+    ],
+  },
   rewrites: async () => {
     return [
       {

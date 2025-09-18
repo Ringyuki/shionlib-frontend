@@ -1,7 +1,4 @@
 {
-  "ShionlibHome": {
-    "title": "Shionlib - ギャルゲーリソースサイト！"
-  },
   "Meta": {
     "title": "Shionlib - ギャルゲーリソースサイト！",
     "titleShort": "Shionlib",
@@ -21,6 +18,25 @@
           "system": "システム",
           "light": "ライト",
           "dark": "ダーク"
+        }
+      },
+      "User": {
+        "LoginOrRegisteDialog": {
+          "title": "ログインまたは登録",
+          "description": "ログインまたは登録"
+        },
+        "Login": {
+          "title": "ログイン",
+          "description": "ログイン",
+          "identifier": "メールアドレスまたはユーザー名",
+          "password": "パスワード",
+          "login": "ログイン",
+          "success": "ログイン成功",
+          "validation": {
+            "identifier": "ユーザー名またはメールアドレスが空です",
+            "email": "有効なメールアドレスを入力してください",
+            "password": "パスワードは8文字以上必要です"
+          }
         }
       }
     }

@@ -1,4 +1,5 @@
 import ThemeSwitcher from '@/components/common/top-bar/ThemeSwitcher'
+import { LoginOrRegisteDialog } from '@/components/common/user/LoginOrRegisteDialog'
 
 const startContent = () => {
   return (
@@ -10,8 +11,9 @@ const startContent = () => {
 
 const endContent = () => {
   return (
-    <div className="max-h-full">
+    <div className="max-h-full flex items-center gap-2">
       <ThemeSwitcher />
+      <LoginOrRegisteDialog />
     </div>
   )
 }

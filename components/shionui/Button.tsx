@@ -6,6 +6,7 @@ import { cn } from '@/libs/cn'
 import { cva as createVariants } from 'class-variance-authority'
 import { motion, AnimatePresence } from 'motion/react'
 import { useState } from 'react'
+import { Loader2 } from 'lucide-react'
 
 const baseButton = createVariants(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive cursor-pointer",
@@ -263,6 +264,7 @@ interface Ripple {
 type ShionButtonProps = React.ComponentProps<'button'> &
   VariantProps<typeof shionButtonVariants> & {
     asChild?: boolean
+    loading?: boolean
   }
 
 function Button({
@@ -271,6 +273,9 @@ function Button({
   appearance,
   size,
   asChild = false,
+  loading = false,
+  disabled,
+  children,
   ...props
 }: ShionButtonProps) {
   const [ripples, setRipples] = useState<Ripple[]>([])
@@ -285,11 +290,16 @@ function Button({
 
   const Comp = asChild ? Slot : 'button'
   const base = baseButton({ size })
+  const isDisabled = disabled || loading
+
   return (
     <Comp
       data-slot="button"
+      disabled={isDisabled}
       onMouseDown={e => {
-        addRipple(e)
+        if (!isDisabled) {
+          addRipple(e)
+        }
         props.onMouseDown?.(e)
       }}
       className={cn(
@@ -297,10 +307,41 @@ function Button({
         shionButtonVariants({ intent, appearance, size }),
         className,
         'relative overflow-hidden duration-250',
+        loading && 'cursor-not-allowed',
       )}
       {...props}
     >
-      <span className="relative z-10">{props.children}</span>
+      <motion.span
+        className="relative z-10 flex items-center"
+        layout="position"
+        transition={{ duration: 0.2, ease: [0.05, 0.7, 0.1, 1] }}
+      >
+        <AnimatePresence mode="wait">
+          {loading && (
+            <motion.span
+              key="loading-icon"
+              initial={{ opacity: 0, scale: 0.8, width: 0, marginRight: 0 }}
+              animate={{ opacity: 1, scale: 1, width: 16, marginRight: 4 }}
+              exit={{ opacity: 0, scale: 0.8, width: 0, marginRight: 0 }}
+              transition={{ duration: 0.2, ease: [0.05, 0.7, 0.1, 1] }}
+              className="flex items-center overflow-hidden"
+            >
+              <Loader2 className="size-4 animate-spin" />
+            </motion.span>
+          )}
+        </AnimatePresence>
+
+        <motion.span
+          layout
+          transition={{
+            duration: 0.2,
+            ease: [0.05, 0.7, 0.1, 1],
+          }}
+          className="flex items-center"
+        >
+          {children}
+        </motion.span>
+      </motion.span>
       <AnimatePresence>
         {ripples.map(({ id, x, y, size }) => (
           <motion.span

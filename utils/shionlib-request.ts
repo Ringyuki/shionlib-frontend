@@ -7,7 +7,12 @@ export const shionlibRequest = () => {
     : `http://localhost:${process.env.INTERNAL_API_URL}`
 
   const basicFetch = async <T>(path: string, options: RequestInit): Promise<BasicResponse<T>> => {
-    const response = await fetch(`${baseUrl}${path}`, options)
+    const response = await fetch(`${baseUrl}${path}`, {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
     const data = (await response.json()) as BasicResponse<T>
 
     if (data.code !== 0) {

@@ -12,38 +12,20 @@ import {
   AlertDialogAction,
   AlertDialogDescription,
 } from '@/components/shionui/AlertDialog'
-import { getLocale } from 'next-intl/server'
-
-interface GameCover {
-  language: string
-  url: string
-  type: string
-  dims: number[]
-}
-
-interface GameItem {
-  id: number
-  title_jp: string
-  title_zh: string
-  title_en: string
-  covers: GameCover[]
-  views: number
-}
+import { Input } from '@/components/shionui/Input'
+import { Textarea } from '@/components/shionui/Textarea'
+import { Label } from '@/components/shionui/Label'
+import { GameItem } from '@/interfaces/game/game.interface'
+import { GameCard } from '@/components/game/GameCard'
 
 export async function getTestData() {
   const data = await shionlibRequest().get<PaginatedResponse<GameItem>>('/game/list')
 
-  const locale = await getLocale()
-  const getTitle = (item: GameItem): string => {
-    return (item[`title_${locale}` as keyof GameItem] as string) || item.title_jp
-  }
   return (
     <div className="flex flex-wrap gap-2">
       {data.data?.items.map(item => (
         <div key={item.id} className="flex gap-2">
-          <Button appearance="solid" intent="primary" size="lg">
-            {getTitle(item)}
-          </Button>
+          <GameCard game={item} />
         </div>
       ))}
       <AlertDialog>
@@ -63,6 +45,16 @@ export async function getTestData() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      <div className="grid w-full gap-3">
+        <Label htmlFor="input">Input</Label>
+        <Input clearable id="input" />
+      </div>
+
+      <div className="grid w-full gap-3">
+        <Label htmlFor="textarea">Textarea</Label>
+        <Textarea className="resize-none" clearable id="textarea" />
+      </div>
     </div>
   )
 }
