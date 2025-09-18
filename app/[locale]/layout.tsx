@@ -7,7 +7,7 @@ import { routing } from '@/i18n/routing'
 import { langMap } from './metadata'
 import { SupportedLocales } from '@/config/i18n/supported'
 export { generateMetadata } from './metadata'
-import '../globals.css'
+import '@/public/assets/styles/globals.css'
 import { toastOptions } from './toastOption'
 import ShionlibTopBar from '@/components/common/top-bar/TopBar'
 

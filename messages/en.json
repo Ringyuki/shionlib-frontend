@@ -12,5 +12,17 @@
       "title": "Shionlib - A Galgame Resource Site!",
       "description": "Shionlib - Free, open-source, and easy-access Galgame resource site"
     }
+  },
+  "Components": {
+    "Common": {
+      "TopBar": {
+        "ThemeSwitcher": {
+          "label": "Theme Settings",
+          "system": "System",
+          "light": "Light",
+          "dark": "Dark"
+        }
+      }
+    }
   }
 }

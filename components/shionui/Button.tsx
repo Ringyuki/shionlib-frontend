@@ -1,0 +1,329 @@
+'use client'
+
+import { Slot } from '@radix-ui/react-slot'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from '@/libs/cn'
+import { cva as createVariants } from 'class-variance-authority'
+import { motion, AnimatePresence } from 'motion/react'
+import { useState } from 'react'
+
+const baseButton = createVariants(
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive cursor-pointer",
+  {
+    variants: {
+      size: {
+        default: 'h-9 px-4 py-2 has-[>svg]:px-3',
+        sm: 'h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5',
+        lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
+        icon: 'size-9',
+      },
+    },
+    defaultVariants: { size: 'default' },
+  },
+)
+
+const shionButtonVariants = cva('', {
+  variants: {
+    intent: {
+      primary: '',
+      secondary: '',
+      success: '',
+      warning: '',
+      info: '',
+      destructive: '',
+      neutral: '',
+    },
+    appearance: {
+      solid: '',
+      outline: '',
+      soft: '',
+      ghost: '',
+      link: '',
+    },
+    size: {
+      default: '',
+      sm: '',
+      lg: '',
+      icon: '',
+    },
+  },
+  compoundVariants: [
+    {
+      intent: 'primary',
+      appearance: 'solid',
+      className:
+        'bg-primary text-primary-foreground shadow-xs hover:bg-primary-700 active:bg-primary-800',
+    },
+    {
+      intent: 'secondary',
+      appearance: 'solid',
+      className:
+        'bg-secondary text-secondary-foreground shadow-xs hover:bg-neutral/25 active:bg-neutral/35',
+    },
+    {
+      intent: 'success',
+      appearance: 'solid',
+      className: 'bg-success text-white shadow-xs hover:bg-success-700 active:bg-success-800',
+    },
+    {
+      intent: 'warning',
+      appearance: 'solid',
+      className:
+        'bg-warning text-warning-foreground shadow-xs hover:bg-warning-700 active:bg-warning-800',
+    },
+    {
+      intent: 'info',
+      appearance: 'solid',
+      className: 'bg-info text-info-foreground shadow-xs hover:bg-info-700 active:bg-info-800',
+    },
+    {
+      intent: 'destructive',
+      appearance: 'solid',
+      className: 'bg-destructive text-white shadow-xs hover:bg-danger-700 active:bg-danger-800',
+    },
+    {
+      intent: 'neutral',
+      appearance: 'solid',
+      className:
+        'bg-neutral-800 text-white shadow-xs hover:bg-neutral-700 active:bg-neutral-800 dark:bg-neutral-200 dark:text-neutral-900 dark:hover:bg-neutral-300',
+    },
+
+    // outline
+    {
+      intent: 'primary',
+      appearance: 'outline',
+      className:
+        'border border-primary/30 text-primary bg-background hover:bg-primary-100 active:bg-primary-200 dark:bg-input/30',
+    },
+    {
+      intent: 'secondary',
+      appearance: 'outline',
+      className:
+        'border border-border text-foreground bg-background hover:bg-accent-100 active:bg-accent-200 dark:bg-input/30',
+    },
+    {
+      intent: 'success',
+      appearance: 'outline',
+      className:
+        'border border-success/30 text-success bg-background hover:bg-success-100 active:bg-success-200 dark:bg-input/30',
+    },
+    {
+      intent: 'warning',
+      appearance: 'outline',
+      className:
+        'border border-warning/30 text-warning bg-background hover:bg-warning-100 active:bg-warning-200 dark:bg-input/30',
+    },
+    {
+      intent: 'info',
+      appearance: 'outline',
+      className:
+        'border border-info/30 text-info bg-background hover:bg-info-100 active:bg-info-200 dark:bg-input/30',
+    },
+    {
+      intent: 'destructive',
+      appearance: 'outline',
+      className:
+        'border border-destructive/30 text-destructive bg-background hover:bg-danger-100 active:bg-danger-200 dark:bg-input/30',
+    },
+    {
+      intent: 'neutral',
+      appearance: 'outline',
+      className:
+        'border border-neutral-300 text-foreground bg-background hover:bg-neutral-100 active:bg-neutral-200 dark:border-input dark:bg-input/30 dark:hover:bg-input/50',
+    },
+
+    // soft
+    {
+      intent: 'primary',
+      appearance: 'soft',
+      className: 'bg-primary/15 text-primary hover:bg-primary/25 active:bg-primary/35',
+    },
+    {
+      intent: 'secondary',
+      appearance: 'soft',
+      className:
+        'bg-secondary text-secondary-foreground hover:bg-secondary/25 active:bg-secondary/35',
+    },
+    {
+      intent: 'success',
+      appearance: 'soft',
+      className: 'bg-success/15 text-success hover:bg-success/25 active:bg-success/35',
+    },
+    {
+      intent: 'warning',
+      appearance: 'soft',
+      className: 'bg-warning/15 text-warning hover:bg-warning/25 active:bg-warning/35',
+    },
+    {
+      intent: 'info',
+      appearance: 'soft',
+      className: 'bg-info/15 text-info hover:bg-info/25 active:bg-info/35',
+    },
+    {
+      intent: 'destructive',
+      appearance: 'soft',
+      className:
+        'bg-destructive/15 text-destructive hover:bg-destructive/25 active:bg-destructive/35',
+    },
+    {
+      intent: 'neutral',
+      appearance: 'soft',
+      className:
+        'bg-neutral-100 text-foreground hover:bg-neutral-200 active:bg-neutral-300 dark:bg-input/30 dark:hover:bg-input/50',
+    },
+
+    // ghost
+    {
+      intent: 'primary',
+      appearance: 'ghost',
+      className: 'text-primary hover:bg-primary/10 active:bg-primary/20',
+    },
+    {
+      intent: 'secondary',
+      appearance: 'ghost',
+      className: 'hover:bg-secondary/70 active:bg-secondary/80',
+    },
+    {
+      intent: 'success',
+      appearance: 'ghost',
+      className: 'text-success hover:bg-success/10 active:bg-success/20',
+    },
+    {
+      intent: 'warning',
+      appearance: 'ghost',
+      className: 'text-warning hover:bg-warning/10 active:bg-warning/20',
+    },
+    {
+      intent: 'info',
+      appearance: 'ghost',
+      className: 'text-info hover:bg-info/10 active:bg-info/20',
+    },
+    {
+      intent: 'destructive',
+      appearance: 'ghost',
+      className: 'text-destructive hover:bg-destructive/10 active:bg-destructive/20',
+    },
+    {
+      intent: 'neutral',
+      appearance: 'ghost',
+      className: 'hover:bg-neutral-100 dark:hover:bg-input/40 active:bg-neutral-200',
+    },
+
+    // link
+    {
+      intent: 'primary',
+      appearance: 'link',
+      className: 'text-primary underline-offset-4 hover:underline active:underline',
+    },
+    {
+      intent: 'secondary',
+      appearance: 'link',
+      className: 'text-foreground/80 underline-offset-4 hover:underline',
+    },
+    {
+      intent: 'success',
+      appearance: 'link',
+      className: 'text-success underline-offset-4 hover:underline',
+    },
+    {
+      intent: 'warning',
+      appearance: 'link',
+      className: 'text-warning underline-offset-4 hover:underline',
+    },
+    {
+      intent: 'info',
+      appearance: 'link',
+      className: 'text-info underline-offset-4 hover:underline',
+    },
+    {
+      intent: 'destructive',
+      appearance: 'link',
+      className: 'text-destructive underline-offset-4 hover:underline',
+    },
+    {
+      intent: 'neutral',
+      appearance: 'link',
+      className: 'text-foreground/80 underline-offset-4 hover:underline',
+    },
+  ],
+  defaultVariants: {
+    intent: 'primary',
+    appearance: 'solid',
+    size: 'default',
+  },
+})
+
+interface Ripple {
+  id: number
+  x: number
+  y: number
+  size: number
+}
+
+type ShionButtonProps = React.ComponentProps<'button'> &
+  VariantProps<typeof shionButtonVariants> & {
+    asChild?: boolean
+  }
+
+function Button({
+  className,
+  intent,
+  appearance,
+  size,
+  asChild = false,
+  ...props
+}: ShionButtonProps) {
+  const [ripples, setRipples] = useState<Ripple[]>([])
+  const addRipple = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    const size = Math.max(rect.width, rect.height) * 2
+    const id = Date.now() + Math.random()
+    setRipples(prev => [...prev, { id, x, y, size }])
+  }
+
+  const Comp = asChild ? Slot : 'button'
+  const base = baseButton({ size })
+  return (
+    <Comp
+      data-slot="button"
+      onMouseDown={e => {
+        addRipple(e)
+        props.onMouseDown?.(e)
+      }}
+      className={cn(
+        base,
+        shionButtonVariants({ intent, appearance, size }),
+        className,
+        'relative overflow-hidden duration-250',
+      )}
+      {...props}
+    >
+      <span className="relative z-10">{props.children}</span>
+      <AnimatePresence>
+        {ripples.map(({ id, x, y, size }) => (
+          <motion.span
+            key={id}
+            initial={{ opacity: 0.35, scale: 0 }}
+            animate={{ opacity: 0, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.65, ease: 'easeOut' }}
+            onAnimationComplete={() => setRipples(prev => prev.filter(r => r.id !== id))}
+            className="pointer-events-none absolute z-0 rounded-full"
+            style={{
+              width: size,
+              height: size,
+              left: x - size / 2,
+              top: y - size / 2,
+              background: 'currentColor',
+              filter: 'blur(0.5px)',
+            }}
+          />
+        ))}
+      </AnimatePresence>
+    </Comp>
+  )
+}
+
+export { Button, shionButtonVariants }

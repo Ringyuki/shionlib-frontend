@@ -12,5 +12,17 @@
       "title": "书音的图书馆 - Galgame 资源站！",
       "description": "书音的图书馆 - 免费、开源、零门槛的 Galgame 资源站"
     }
+  },
+  "Components": {
+    "Common": {
+      "TopBar": {
+        "ThemeSwitcher": {
+          "label": "主题设置",
+          "system": "跟随系统",
+          "light": "亮色",
+          "dark": "暗色"
+        }
+      }
+    }
   }
 }

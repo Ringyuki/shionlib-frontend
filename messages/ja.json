@@ -12,5 +12,17 @@
       "title": "Shionlib - ギャルゲーリソースサイト！",
       "description": "Shionlib - 無料・オープンソース・気軽に使えるギャルゲーリソースサイト"
     }
+  },
+  "Components": {
+    "Common": {
+      "TopBar": {
+        "ThemeSwitcher": {
+          "label": "テーマ設定",
+          "system": "システム",
+          "light": "ライト",
+          "dark": "ダーク"
+        }
+      }
+    }
   }
 }
