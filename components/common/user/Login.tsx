@@ -2,7 +2,6 @@
 
 import { Button } from '@/components/shionui/Button'
 import { useShionlibUserStore } from '@/store/userStore'
-import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { Control, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -20,6 +19,7 @@ import { toast } from 'react-hot-toast'
 import { useState } from 'react'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { User } from '@/interfaces/user/user.interface'
+import { usePathname, useRouter } from '@/i18n/navigation'
 
 interface LoginProps {
   onSuccess?: () => void
@@ -27,14 +27,12 @@ interface LoginProps {
 
 export const Login = ({ onSuccess }: LoginProps) => {
   const t = useTranslations('Components.Common.User.Login')
-  const router = useRouter()
   const { setUser } = useShionlibUserStore()
+  const router = useRouter()
+  const pathname = usePathname()
 
   const loginSchema = z.object({
-    identifier: z.union([
-      z.string().min(1, t('validation.identifier')),
-      z.string().email(t('validation.email')),
-    ]),
+    identifier: z.string().min(1, t('validation.identifier')),
     password: z.string().min(8, t('validation.password')),
   })
 
@@ -49,13 +47,14 @@ export const Login = ({ onSuccess }: LoginProps) => {
   const onSubmit = async (data: z.infer<typeof loginSchema>) => {
     try {
       setLoading(true)
-      await shionlibRequest().post('/user/login', data)
+      await shionlibRequest().post('/user/login', { data })
       try {
         const data = await shionlibRequest().get<User>('/user/me')
         setUser(data.data!)
-        router.push('/')
         onSuccess?.()
         toast.success(t('success'))
+        const targetLocale = data.data?.lang || 'en'
+        router.replace(pathname, { locale: targetLocale })
       } catch {}
     } catch {
     } finally {
@@ -88,13 +87,13 @@ export const Login = ({ onSuccess }: LoginProps) => {
             <FormItem>
               <FormLabel>{t('password')}</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} type="password" />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" loading={loading}>
+        <Button type="submit" loading={loading} className="w-full">
           {t('login')}
         </Button>
       </form>

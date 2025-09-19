@@ -46,8 +46,32 @@
           "success": "ログイン成功",
           "validation": {
             "identifier": "ユーザー名またはメールアドレスが空です",
-            "email": "有効なメールアドレスを入力してください",
             "password": "パスワードは8文字以上必要です"
+          }
+        },
+        "Register": {
+          "title": "登録",
+          "description": "登録",
+          "username": "ユーザー名",
+          "email": "メールアドレス",
+          "password": "パスワード",
+          "passwordConfirm": "確認パスワード",
+          "verifyUuid": "検証コードUUID",
+          "verifyCode": "検証コード",
+          "getVerifyCode": "検証コードを取得",
+          "verifyCodeSent": "検証コードが送信されました",
+          "verifyCodeSentError": "検証コード送信に失敗しました",
+          "register": "登録",
+          "success": "登録成功",
+          "validation": {
+            "username": "ユーザー名が空です",
+            "email": "有効なメールアドレスを入力してください",
+            "password": "パスワードは8文字以上必要です",
+            "passwordConfirm": "確認パスワードは8文字以上必要です",
+            "passwordRegex": "パスワードは8文字以上必要で、少なくとも1つの英字、1つの数字、1つの大文字が含まれている必要があります",
+            "passwordDiff": "パスワードと確認パスワードが一致しません",
+            "verifyUuid": "検証コードUUIDが空です",
+            "verifyCode": "検証コードが空です"
           }
         }
       }

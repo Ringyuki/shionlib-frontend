@@ -1,6 +1,7 @@
 'use client'
 
 import { ThemeProvider } from 'next-themes'
+import { AppProgressProvider as ProgressProvider } from '@bprogress/next'
 
 export default function ShionlibProvider({ children }: { children: React.ReactNode }) {
   return (
@@ -11,7 +12,14 @@ export default function ShionlibProvider({ children }: { children: React.ReactNo
       storageKey="theme"
       enableColorScheme={false}
     >
-      {children}
+      <ProgressProvider
+        height="2px"
+        color="var(--primary)"
+        options={{ showSpinner: false }}
+        shallowRouting
+      >
+        {children}
+      </ProgressProvider>
     </ThemeProvider>
   )
 }

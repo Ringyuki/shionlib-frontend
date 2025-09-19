@@ -46,7 +46,7 @@ const endContent = () => {
 
 const ShionlibTopBar = () => {
   return (
-    <div className="fixed top-4 left-1/2 rounded-xl -translate-x-1/2 z-50 w-full max-w-7xl px-3 h-16 flex items-center justify-between dark:bg-[rgba(255,255,255,0.05)] bg-[rgba(0,0,0,0.05)] backdrop-blur-lg">
+    <div className="fixed top-0 md:top-4 left-1/2 md:rounded-xl -translate-x-1/2 z-50 w-full max-w-7xl px-3 h-16 flex items-center justify-between dark:bg-[rgba(0,0,0,0.2)] bg-[rgba(255,255,255,0.2)] backdrop-blur-lg">
       {startContent()}
       {endContent()}
     </div>

@@ -46,8 +46,32 @@
           "success": "Login successfully",
           "validation": {
             "identifier": "Email or Username is required",
-            "email": "Please enter a valid email address",
             "password": "Password must be at least 8 characters"
+          }
+        },
+        "Register": {
+          "title": "Register",
+          "description": "Register",
+          "username": "Username",
+          "email": "Email",
+          "password": "Password",
+          "passwordConfirm": "Confirm Password",
+          "verifyUuid": "Verify UUID",
+          "verifyCode": "Verify Code",
+          "getVerifyCode": "Get Verify Code",
+          "verifyCodeSent": "Verify Code Sent",
+          "verifyCodeSentError": "Verify Code Sent Error",
+          "register": "Register",
+          "success": "Register successfully",
+          "validation": {
+            "username": "Username is required",
+            "email": "Please enter a valid email address",
+            "password": "Password is required",
+            "passwordConfirm": "Confirm Password is required",
+            "passwordRegex": "Password must be at least 8 characters and contain at least one letter, one number, and one uppercase letter",
+            "passwordDiff": "Password and Confirm Password are not the same",
+            "verifyUuid": "Verify UUID is required",
+            "verifyCode": "Verify Code is required"
           }
         }
       }

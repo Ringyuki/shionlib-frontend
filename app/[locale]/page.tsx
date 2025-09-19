@@ -5,31 +5,28 @@ import { Textarea } from '@/components/shionui/Textarea'
 import { Label } from '@/components/shionui/Label'
 import { GameItem } from '@/interfaces/game/game.interface'
 import { GameCard } from '@/components/game/GameCard'
+import { Masonry } from '@/components/common/shared/Masonry'
 
 export async function getTestData() {
-  const data = await shionlibRequest().get<PaginatedResponse<GameItem>>('/game/list')
+  const data = await shionlibRequest().get<PaginatedResponse<GameItem>>('/game/list', {
+    params: {
+      pageSize: 20,
+    },
+  })
 
   return (
-    <div className="flex flex-wrap gap-2">
-      {data.data?.items.map(item => (
-        <div key={item.id} className="flex gap-2">
-          <GameCard game={item} />
-        </div>
-      ))}
-
-      <div className="grid w-full gap-3">
-        <Label htmlFor="input">Input</Label>
-        <Input clearable id="input" />
-      </div>
-
-      <div className="grid w-full gap-3">
-        <Label htmlFor="textarea">Textarea</Label>
-        <Textarea className="resize-none" clearable id="textarea" />
-      </div>
+    <div className="flex flex-col gap-8 w-full">
+      <Masonry>
+        {data.data?.items.map(item => (
+          <div key={item.id} className="break-inside-avoid">
+            <GameCard game={item} />
+          </div>
+        ))}
+      </Masonry>
     </div>
   )
 }
 
-export default function Shion() {
-  return <div className="container mx-auto my-4 space-y-6">{getTestData()}</div>
+export default async function Shion() {
+  return <div className="container mx-auto my-4 space-y-6">{await getTestData()}</div>
 }

@@ -1,3 +1,5 @@
+import { SupportedLocales } from '@/config/i18n/supported'
+
 export interface User {
   id: number
   name: string
@@ -5,4 +7,5 @@ export interface User {
   cover: string
   bio: string
   role: number
+  lang: SupportedLocales
 }

@@ -11,6 +11,7 @@ import { Button } from '@/components/shionui/Button'
 import { Login } from './Login'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
+import { Register } from './Register'
 
 interface LoginOrRegisteDialogProps {
   initialDialogType?: 'login' | 'register'
@@ -74,7 +75,11 @@ export const LoginOrRegisteDialog = ({
               : t('registerDescriptionLinkText')}
           </Button>
         </DialogDescription>
-        <Login onSuccess={() => setOpen(false)} />
+        {dialogTypeInner === 'login' ? (
+          <Login onSuccess={() => setOpen(false)} />
+        ) : (
+          <Register onSuccess={() => setOpen(false)} />
+        )}
       </DialogContent>
     </Dialog>
   )
