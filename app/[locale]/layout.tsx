@@ -10,6 +10,7 @@ export { generateMetadata } from './metadata'
 import '@/public/assets/styles/globals.css'
 import { toastOptions } from './toastOption'
 import ShionlibTopBar from '@/components/common/top-bar/TopBar'
+import { GlobalDialogs } from '@/components/common/user/GlobalDialogs'
 
 export default async function ShionlibLayout({ children, params }: Readonly<Props>) {
   const { locale } = await params
@@ -27,6 +28,7 @@ export default async function ShionlibLayout({ children, params }: Readonly<Prop
               <div className="flex min-h-[calc(100dvh-24rem)] w-full max-w-7xl grow px-3 pt-20">
                 {children}
               </div>
+              <GlobalDialogs />
               <Toaster toastOptions={toastOptions} />
             </ShionlibProvider>
           </div>

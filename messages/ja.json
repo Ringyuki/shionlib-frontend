@@ -22,8 +22,20 @@
       },
       "User": {
         "LoginOrRegisteDialog": {
-          "title": "ログインまたは登録",
-          "description": "ログインまたは登録"
+          "button": "ログイン",
+          "loginTitle": "ログイン",
+          "registerTitle": "登録",
+          "loginDescription": "アカウントをお持ちでない方は",
+          "loginDescriptionLinkText": "こちら",
+          "registerDescription": "アカウントをお持ちの方は",
+          "registerDescriptionLinkText": "こちら"
+        },
+        "LogoutDialog": {
+          "button": "ログアウト",
+          "title": "ログアウト",
+          "description": "ログアウトしてもよろしいですか？",
+          "logout": "ログアウト",
+          "cancel": "キャンセル"
         },
         "Login": {
           "title": "ログイン",

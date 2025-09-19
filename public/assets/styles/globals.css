@@ -232,6 +232,13 @@ html {
   --color-slate-800: var(--neutral-800);
   --color-slate-900: var(--neutral-900);
   --color-slate-950: var(--neutral-950);
+  /* toast */
+  --toast-text-success: var(--toast-text-success);
+  --toast-text-destructive: var(--toast-text-destructive);
+  --toast-bg-success: var(--toast-bg-success);
+  --toast-bg-destructive: var(--toast-bg-destructive);
+  /* skeleton */
+  --color-skeleton-bg: var(--skeleton-bg);
 }
 
 @layer base {

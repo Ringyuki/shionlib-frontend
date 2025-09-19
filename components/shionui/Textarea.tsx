@@ -4,7 +4,7 @@ import * as React from 'react'
 import { XIcon } from 'lucide-react'
 import { motion, AnimatePresence } from 'motion/react'
 
-import { cn } from '@/libs/cn'
+import { cn } from '@/utils/cn'
 
 type TextareaSize = 'sm' | 'md' | 'lg'
 

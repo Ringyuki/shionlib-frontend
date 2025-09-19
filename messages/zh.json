@@ -22,8 +22,20 @@
       },
       "User": {
         "LoginOrRegisteDialog": {
-          "title": "登录或注册",
-          "description": "登录或注册"
+          "button": "登录",
+          "loginTitle": "登录到书音的图书馆",
+          "registerTitle": "注册",
+          "loginDescription": "还没有账号？",
+          "loginDescriptionLinkText": "立即注册",
+          "registerDescription": "已有书音的图书馆账号？",
+          "registerDescriptionLinkText": "立即登录"
+        },
+        "LogoutDialog": {
+          "button": "登出",
+          "title": "登出",
+          "description": "确定要登出吗？",
+          "logout": "登出",
+          "cancel": "取消"
         },
         "Login": {
           "title": "登录",

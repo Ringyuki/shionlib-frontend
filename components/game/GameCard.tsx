@@ -1,5 +1,5 @@
 import { GameCover, GameItem } from '@/interfaces/game/game.interface'
-import { cn } from '@/libs/cn'
+import { cn } from '@/utils/cn'
 import { getLocale } from 'next-intl/server'
 import { FadeImage } from '../common/shared/FadeImage'
 

@@ -4,7 +4,7 @@ import * as React from 'react'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { XIcon } from 'lucide-react'
 
-import { cn } from '@/libs/cn'
+import { cn } from '@/utils/cn'
 
 type DialogTone = 'neutral' | 'info' | 'success' | 'warning' | 'destructive'
 

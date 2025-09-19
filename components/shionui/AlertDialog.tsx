@@ -3,7 +3,7 @@
 import * as React from 'react'
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog'
 
-import { cn } from '@/libs/cn'
+import { cn } from '@/utils/cn'
 import { Button } from '@/components/shionui/Button'
 
 type AlertDialogTone = 'neutral' | 'info' | 'success' | 'warning' | 'destructive'
@@ -157,12 +157,22 @@ function AlertDialogDescription({
 function AlertDialogAction({
   className,
   tone,
+  loading,
   ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Action> & { tone?: AlertDialogTone }) {
+}: React.ComponentProps<typeof AlertDialogPrimitive.Action> & {
+  tone?: AlertDialogTone
+  loading?: boolean
+}) {
   const intent = toneToIntent(tone)
   return (
     <AlertDialogPrimitive.Action asChild>
-      <Button intent={intent} appearance="solid" className={className} {...props} />
+      <Button
+        intent={intent}
+        appearance="solid"
+        className={className}
+        loading={loading}
+        {...props}
+      />
     </AlertDialogPrimitive.Action>
   )
 }
@@ -170,12 +180,22 @@ function AlertDialogAction({
 function AlertDialogCancel({
   className,
   tone,
+  loading,
   ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Cancel> & { tone?: AlertDialogTone }) {
+}: React.ComponentProps<typeof AlertDialogPrimitive.Cancel> & {
+  tone?: AlertDialogTone
+  loading?: boolean
+}) {
   const intent = toneToIntent(tone)
   return (
     <AlertDialogPrimitive.Cancel asChild>
-      <Button intent={intent} appearance="outline" className={cn(className)} {...props} />
+      <Button
+        intent={intent}
+        appearance="outline"
+        className={cn(className)}
+        loading={loading}
+        {...props}
+      />
     </AlertDialogPrimitive.Cancel>
   )
 }

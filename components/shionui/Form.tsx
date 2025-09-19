@@ -13,7 +13,7 @@ import {
   type FieldValues,
 } from 'react-hook-form'
 
-import { cn } from '@/libs/cn'
+import { cn } from '@/utils/cn'
 import { Label } from '@/components/shionui/Label'
 
 const Form = FormProvider

@@ -22,8 +22,20 @@
       },
       "User": {
         "LoginOrRegisteDialog": {
-          "title": "Login or Register",
-          "description": "Login or Register"
+          "button": "Sign in",
+          "loginTitle": "Login",
+          "registerTitle": "Register",
+          "loginDescription": "Don't have an account?",
+          "loginDescriptionLinkText": "Register here",
+          "registerDescription": "Already have an account?",
+          "registerDescriptionLinkText": "Login here"
+        },
+        "LogoutDialog": {
+          "button": "Logout",
+          "title": "Logout",
+          "description": "Are you sure you want to logout?",
+          "logout": "Logout",
+          "cancel": "Cancel"
         },
         "Login": {
           "title": "Login",

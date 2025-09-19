@@ -1,19 +1,45 @@
+'use client'
+
 import ThemeSwitcher from '@/components/common/top-bar/ThemeSwitcher'
-import { LoginOrRegisteDialog } from '@/components/common/user/LoginOrRegisteDialog'
+import { TopBarAvatar } from '@/components/common/top-bar/Avatar'
+import { useShionlibUserStore } from '@/store/userStore'
+import { useAuthDialogStore } from '@/store/authDialogStore'
+import { useState, useEffect } from 'react'
+import { Button } from '@/components/shionui/Button'
+import { useTranslations } from 'next-intl'
+import { Skeleton } from '@/components/shionui/Skeleton'
 
 const startContent = () => {
   return (
-    <div className="flex items-center w-32">
-      <img className="w-full h-full" src="/assets/images/shionlib-logo.png" alt="Shionlib Logo" />
+    <div className="flex items-center h-full p-5.5 pl-0">
+      <img className="h-full" src="/assets/images/shionlib-logo.png" alt="Shionlib Logo" />
     </div>
   )
 }
 
 const endContent = () => {
+  const { user } = useShionlibUserStore()
+  const isLoggedIn = !!user.id
+  const t = useTranslations('Components.Common.User.LoginOrRegisteDialog')
+  const { openAuthDialog } = useAuthDialogStore()
+
+  const [isLoading, setIsLoading] = useState(true)
+  useEffect(() => {
+    setIsLoading(false)
+  }, [user])
+
   return (
     <div className="max-h-full flex items-center gap-2">
       <ThemeSwitcher />
-      <LoginOrRegisteDialog />
+      {isLoading ? (
+        <Skeleton className="w-[60px] h-[28px] rounded-md" />
+      ) : isLoggedIn ? (
+        <TopBarAvatar user={user} className="cursor-pointer" />
+      ) : (
+        <Button size="sm" onClick={() => openAuthDialog('login')}>
+          {t('button')}
+        </Button>
+      )}
     </div>
   )
 }

@@ -2,7 +2,7 @@
 
 import Image, { ImageProps } from 'next/image'
 import { useState } from 'react'
-import { cn } from '@/libs/cn'
+import { cn } from '@/utils/cn'
 
 type Props = ImageProps & {
   aspectRatio?: string

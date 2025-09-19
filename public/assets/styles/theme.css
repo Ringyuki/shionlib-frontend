@@ -84,7 +84,7 @@
   --secondary: var(--neutral-100);
   --secondary-foreground: var(--neutral-900);
   --muted: var(--neutral-100);
-  --muted-foreground: var(--neutral-600);
+  --muted-foreground: var(--neutral-400);
   --accent: var(--primary-50);
   --accent-foreground: var(--primary-800);
   --success: var(--success-600);
@@ -112,6 +112,16 @@
   --sidebar-accent-foreground: var(--neutral-900);
   --sidebar-border: var(--neutral-200);
   --sidebar-ring: var(--primary-500);
+
+  --toast-text-success: var(--success-600);
+  --toast-text-destructive: var(--danger-600);
+  --toast-bg-success: var(--success-100);
+  --toast-bg-destructive: var(--danger-100);
+
+  --skeleton-bg: var(--neutral-300);
+  --skeleton-track: var(--neutral-200);
+  --skeleton-sheen: rgba(255, 255, 255, 0.6);
+  --skeleton-angle: 100deg;
 }
 
 .dark {
@@ -153,4 +163,51 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: var(--primary-600);
+
+  --toast-text-success: var(--success-100);
+  --toast-text-destructive: var(--danger-100);
+  --toast-bg-success: var(--success-950);
+  --toast-bg-destructive: var(--danger-950);
+
+  --skeleton-bg: var(--neutral-300);
+  --skeleton-track: var(--neutral-800);
+  --skeleton-sheen: rgba(255, 255, 255, 0.18);
+}
+
+.skeleton-primary {
+  --skeleton-track: color-mix(in oklab, var(--primary-600) 10%, var(--neutral-200));
+}
+.dark .skeleton-primary {
+  --skeleton-track: color-mix(in oklab, var(--primary-600) 12%, var(--neutral-800));
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--skeleton-track);
+  border-radius: var(--radius, 0.625rem);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  isolation: isolate;
+}
+.skeleton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    var(--skeleton-angle, 100deg),
+    transparent 0%,
+    transparent 35%,
+    var(--skeleton-sheen) 50%,
+    transparent 65%,
+    transparent 100%
+  );
+  transform: translateX(-150%);
+  animation: skeleton-shimmer var(--skeleton-duration, 1400ms) cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+@keyframes skeleton-shimmer {
+  to {
+    transform: translateX(150%);
+  }
 }

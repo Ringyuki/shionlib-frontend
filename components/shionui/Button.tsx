@@ -2,7 +2,7 @@
 
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/libs/cn'
+import { cn } from '@/utils/cn'
 import { cva as createVariants } from 'class-variance-authority'
 import { motion, AnimatePresence } from 'motion/react'
 import { useState } from 'react'
@@ -306,7 +306,7 @@ function Button({
         base,
         shionButtonVariants({ intent, appearance, size }),
         className,
-        'relative overflow-hidden duration-250',
+        'relative overflow-hidden duration-250 active:scale-98 active:duration-80',
         loading && 'cursor-not-allowed',
       )}
       {...props}
