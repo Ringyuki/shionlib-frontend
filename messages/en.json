@@ -75,6 +75,25 @@
           }
         }
       }
+    },
+    "Game": {
+      "GameActions": {
+        "download": "Download",
+        "edit": "Edit this game",
+        "addToFavorites": "Add to favorites",
+        "goToDiscussion": "Go to discussion"
+      },
+      "GameContent": {
+        "gameDetail": "Game Detail",
+        "gameCharacter": "Game Character"
+      },
+      "GameDetail": {
+        "tags": "Game Tags",
+        "introduction": "Game Introduction",
+        "chooseLanguage": "Choose Language",
+        "images": "Screenshots",
+        "staff": "Staffs"
+      }
     }
   }
 }

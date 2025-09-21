@@ -8,18 +8,19 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/shionui/Button'
 import { useTranslations } from 'next-intl'
 import { Skeleton } from '@/components/shionui/Skeleton'
+import { Link } from '@/i18n/navigation'
 
 const startContent = () => {
   return (
-    <div className="flex items-center h-full p-5.5 pl-0">
+    <Link href="/" className="flex items-center h-full p-5.5 pl-0">
       <img className="h-full" src="/assets/images/shionlib-logo.png" alt="Shionlib Logo" />
-    </div>
+    </Link>
   )
 }
 
 const endContent = () => {
   const { user } = useShionlibUserStore()
-  const isLoggedIn = !!user.id
+  const isLoggedIn = !!user?.id
   const t = useTranslations('Components.Common.User.LoginOrRegisteDialog')
   const { openAuthDialog } = useAuthDialogStore()
 
@@ -46,9 +47,22 @@ const endContent = () => {
 
 const ShionlibTopBar = () => {
   return (
-    <div className="fixed top-0 md:top-4 left-1/2 md:rounded-xl -translate-x-1/2 z-50 w-full max-w-7xl px-3 h-16 flex items-center justify-between dark:bg-[rgba(0,0,0,0.2)] bg-[rgba(255,255,255,0.2)] backdrop-blur-lg">
-      {startContent()}
-      {endContent()}
+    <div
+      className="
+      fixed inset-x-0 top-0 md:top-4 z-50
+      [body[data-scroll-locked]_&]:pr-[var(--removed-body-scroll-bar-size,0px)]
+    "
+    >
+      <div
+        className="
+        mx-auto w-full max-w-7xl px-3 h-16
+        md:rounded-xl flex items-center justify-between
+        dark:bg-[rgba(0,0,0,0.5)] bg-[rgba(255,255,255,0.5)] backdrop-blur-lg
+      "
+      >
+        {startContent()}
+        {endContent()}
+      </div>
     </div>
   )
 }

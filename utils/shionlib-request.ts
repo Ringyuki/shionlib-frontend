@@ -1,11 +1,12 @@
 import { BasicResponse, ErrorResponse } from '@/interfaces/api/shionlib-api-res.interface'
 import { resolvePreferredLocale } from './language-preference'
+import { ShionlibBizError } from '@/libs/errors'
 
 export const shionlibRequest = () => {
   const isBrowser = typeof window !== 'undefined'
   const baseUrl = isBrowser
     ? process.env.NEXT_PUBLIC_PROD_API_PATH
-    : `http://localhost:${process.env.INTERNAL_API_URL}`
+    : `http://localhost:${process.env.INTERNAL_API_PORT}`
 
   const basicFetch = async <T>(
     path: string,
@@ -32,11 +33,12 @@ export const shionlibRequest = () => {
                     .map(error => error.messages.map(message => `${message}`))
                     .join('\n')}`
                 : ''
-            }`,
+            } (${data.code})`,
           )
         } catch {}
       }
-      console.error((data as ErrorResponse).data.errors)
+      console.error(data)
+      throw new ShionlibBizError(data.code, data.message)
     }
 
     return data

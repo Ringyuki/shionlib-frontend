@@ -7,6 +7,8 @@ import { cva as createVariants } from 'class-variance-authority'
 import { motion, AnimatePresence } from 'motion/react'
 import { useState } from 'react'
 import { Loader2 } from 'lucide-react'
+import { useAuthDialogStore } from '@/store/authDialogStore'
+import { useShionlibUserStore } from '@/store/userStore'
 
 const baseButton = createVariants(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive cursor-pointer",
@@ -265,6 +267,7 @@ type ShionButtonProps = React.ComponentProps<'button'> &
   VariantProps<typeof shionButtonVariants> & {
     asChild?: boolean
     loading?: boolean
+    loginRequired?: boolean
   }
 
 function Button({
@@ -276,6 +279,7 @@ function Button({
   loading = false,
   disabled,
   children,
+  loginRequired = false,
   ...props
 }: ShionButtonProps) {
   const [ripples, setRipples] = useState<Ripple[]>([])
@@ -291,12 +295,21 @@ function Button({
   const Comp = asChild ? Slot : 'button'
   const base = baseButton({ size })
   const isDisabled = disabled || loading
+  const { user } = useShionlibUserStore()
+  const isLoggedIn = !!user?.id
+
+  const handleLoginRequired = () => {
+    if (loginRequired && !isLoggedIn) {
+      useAuthDialogStore.getState().openAuthDialog('login')
+    }
+  }
 
   return (
     <Comp
       data-slot="button"
       disabled={isDisabled}
       onMouseDown={e => {
+        handleLoginRequired()
         if (!isDisabled) {
           addRipple(e)
         }

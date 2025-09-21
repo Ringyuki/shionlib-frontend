@@ -20,6 +20,7 @@ import { useState } from 'react'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { User } from '@/interfaces/user/user.interface'
 import { usePathname, useRouter } from '@/i18n/navigation'
+import { useLocale } from 'next-intl'
 
 interface LoginProps {
   onSuccess?: () => void
@@ -30,7 +31,7 @@ export const Login = ({ onSuccess }: LoginProps) => {
   const { setUser } = useShionlibUserStore()
   const router = useRouter()
   const pathname = usePathname()
-
+  const locale = useLocale()
   const loginSchema = z.object({
     identifier: z.string().min(1, t('validation.identifier')),
     password: z.string().min(8, t('validation.password')),
@@ -54,6 +55,7 @@ export const Login = ({ onSuccess }: LoginProps) => {
         onSuccess?.()
         toast.success(t('success'))
         const targetLocale = data.data?.lang || 'en'
+        if (targetLocale === locale) return
         router.replace(pathname, { locale: targetLocale })
       } catch {}
     } catch {

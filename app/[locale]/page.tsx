@@ -1,8 +1,5 @@
 import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
 import { shionlibRequest } from '@/utils/shionlib-request'
-import { Input } from '@/components/shionui/Input'
-import { Textarea } from '@/components/shionui/Textarea'
-import { Label } from '@/components/shionui/Label'
 import { GameItem } from '@/interfaces/game/game.interface'
 import { GameCard } from '@/components/game/GameCard'
 import { Masonry } from '@/components/common/shared/Masonry'

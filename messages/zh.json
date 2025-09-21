@@ -75,6 +75,25 @@
           }
         }
       }
+    },
+    "Game": {
+      "GameActions": {
+        "download": "下载",
+        "edit": "编辑此游戏",
+        "addToFavorites": "添加到收藏",
+        "goToDiscussion": "前往讨论"
+      },
+      "GameContent": {
+        "gameDetail": "游戏详情",
+        "gameCharacter": "出场角色"
+      },
+      "GameDetail": {
+        "tags": "游戏标签",
+        "introduction": "游戏介绍",
+        "chooseLanguage": "选择语言",
+        "images": "游戏图片",
+        "staff": "制作人员"
+      }
     }
   }
 }

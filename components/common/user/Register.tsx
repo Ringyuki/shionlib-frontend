@@ -1,9 +1,8 @@
 import { Button } from '@/components/shionui/Button'
-import { useShionlibUserStore } from '@/store/userStore'
 import { useTranslations } from 'next-intl'
 import { Control, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { email, z } from 'zod'
+import { z } from 'zod'
 import { Input } from '@/components/shionui/Input'
 import {
   InputOTP,
@@ -24,6 +23,7 @@ import { toast } from 'react-hot-toast'
 import { useEffect, useState } from 'react'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { verficationCodeUtil } from '@/utils/verification-code'
+import { resolvePreferredLocale } from '@/utils/language-preference'
 
 interface RegisterProps {
   onSuccess?: () => void
@@ -105,6 +105,7 @@ export const Register = ({ onSuccess }: RegisterProps) => {
   const onSubmit = async (data: z.infer<typeof registerSchema>) => {
     try {
       setRegisterLoading(true)
+      const lang = await resolvePreferredLocale()
       await shionlibRequest().post('/user', {
         data: {
           name: data.name,
@@ -112,8 +113,11 @@ export const Register = ({ onSuccess }: RegisterProps) => {
           password: data.password,
           code: data.verify_code,
           uuid: verifyCodeUuid,
+          lang,
         },
       })
+      onSuccess?.()
+      toast.success(t('success'))
     } catch {
     } finally {
       setRegisterLoading(false)

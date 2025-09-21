@@ -8,18 +8,18 @@ type Props = ImageProps & {
   aspectRatio?: string
 }
 
-export function FadeImage({ className, aspectRatio, priority, ...props }: Props) {
+export function FadeImage({ className, aspectRatio, priority, fill = true, ...props }: Props) {
   const [loaded, setLoaded] = useState(false)
 
   return (
     <div
-      className="relative w-full overflow-hidden"
+      className="relative w-full h-full overflow-hidden"
       style={aspectRatio ? { aspectRatio } : undefined}
     >
       <Image
         {...props}
         priority={priority}
-        fill
+        fill={fill}
         onLoad={() => setLoaded(true)}
         className={cn(
           'object-cover transition-opacity duration-300 ease-out',

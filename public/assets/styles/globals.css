@@ -19,6 +19,18 @@ html {
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  --color-card-soft: var(--card-soft);
+  --color-card-soft-foreground: var(--card-soft-foreground);
+  --color-card-muted: var(--card-muted);
+  --color-card-muted-foreground: var(--card-muted-foreground);
+  --color-card-elevated: var(--card-elevated);
+  --color-card-elevated-foreground: var(--card-elevated-foreground);
+  --color-card-accent: var(--card-accent);
+  --color-card-accent-foreground: var(--card-accent-foreground);
+  --color-card-hover: var(--card-hover);
+  --color-card-active: var(--card-active);
+  --color-card-border: var(--card-border);
+  --color-card-ring: var(--card-ring);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
@@ -247,5 +259,20 @@ html {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  body[data-scroll-locked] .scroll-adjust {
+    margin-right: var(--remove-body-scroll-bar-size);
+  }
+}
+
+.rmiz-dialog [data-rmiz-modal-overlay='visible'] {
+  background-color: var(--background);
+}
+.rmiz-dialog {
+  button {
+    display: none;
   }
 }

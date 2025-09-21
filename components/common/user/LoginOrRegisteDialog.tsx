@@ -24,17 +24,16 @@ interface LoginOrRegisteDialogProps {
 }
 
 export const LoginOrRegisteDialog = ({
-  initialDialogType = 'login',
+  dialogType = 'login',
   className,
   open: openProp,
   onOpenChange,
-  dialogType: typeProp,
   onDialogTypeChange,
   hideTrigger,
 }: LoginOrRegisteDialogProps) => {
   const t = useTranslations('Components.Common.User.LoginOrRegisteDialog')
   const [openInner, setOpenInner] = useState(false)
-  const [dialogTypeInner, setDialogTypeInner] = useState<'login' | 'register'>(initialDialogType)
+  const [dialogTypeInner, setDialogTypeInner] = useState<'login' | 'register'>(dialogType)
 
   const isControlledOpen = openProp !== undefined
 
@@ -78,7 +77,7 @@ export const LoginOrRegisteDialog = ({
         {dialogTypeInner === 'login' ? (
           <Login onSuccess={() => setOpen(false)} />
         ) : (
-          <Register onSuccess={() => setOpen(false)} />
+          <Register onSuccess={() => setDialogTypeInner('login')} />
         )}
       </DialogContent>
     </Dialog>

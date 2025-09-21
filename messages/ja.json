@@ -75,6 +75,25 @@
           }
         }
       }
+    },
+    "Game": {
+      "GameActions": {
+        "download": "ダウンロード",
+        "edit": "このゲームを編集",
+        "addToFavorites": "お気に入りに追加",
+        "goToDiscussion": "討論に移動"
+      },
+      "GameContent": {
+        "gameDetail": "ゲーム詳細",
+        "gameCharacter": "キャラクター"
+      },
+      "GameDetail": {
+        "tags": "ゲームタグ",
+        "introduction": "ゲーム紹介",
+        "chooseLanguage": "言語を選択",
+        "images": "スクリーンショット",
+        "staff": "スタッフ"
+      }
     }
   }
 }

@@ -8,5 +8,5 @@ export default async function GameLayout({ children, params }: Readonly<Props>) 
   if (!hasLocale(routing.locales, locale)) {
     notFound()
   }
-  return <>{children}</>
+  return <div className="my-4 w-full">{children}</div>
 }

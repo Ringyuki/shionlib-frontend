@@ -11,7 +11,7 @@ export type SupportedLocales =
 | 'zh'
 | 'ja'
 
-export const supportedLocalesEnum = {
+export const supportedLocalesEnum: Record<string, SupportedLocales> = {
   EN: 'en',
   ZH: 'zh',
   JA: 'ja',
