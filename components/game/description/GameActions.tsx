@@ -1,16 +1,20 @@
+'use client'
+
 import { Button } from '@/components/shionui/Button'
-import { Pencil, Download, Heart, MessageSquareMore } from 'lucide-react'
-import { getTranslations } from 'next-intl/server'
+import { Pencil, Download, MessageSquareMore } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { GameData } from '@/interfaces/game/game.interface'
 import { Separator } from '@/components/shionui/Separator'
 import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/shionui/Tooltip'
+import { Favorite } from './game-actions/Favorite'
 
 interface GameActionsProps {
   game: GameData
 }
 
-export const GameActions = async ({ game }: GameActionsProps) => {
-  const t = await getTranslations('Components.Game.GameActions')
+export const GameActions = ({ game }: GameActionsProps) => {
+  const t = useTranslations('Components.Game.GameActions')
+
   return (
     <div className="flex gap-2 items-center">
       <Button intent="primary">
@@ -26,16 +30,7 @@ export const GameActions = async ({ game }: GameActionsProps) => {
         </span>
       </Button>
       <Separator orientation="vertical" />
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button size="icon" intent="destructive" appearance="ghost" loginRequired>
-            <Heart />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <span>{t('addToFavorites')}</span>
-        </TooltipContent>
-      </Tooltip>
+      <Favorite isFavorite={game.is_favorite} gameId={game.id} />
       <Tooltip>
         <TooltipTrigger asChild>
           <Button size="icon" intent="success" appearance="ghost" loginRequired>

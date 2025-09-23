@@ -13,16 +13,38 @@ export const shionlibRequest = () => {
     options: RequestInit,
     params?: Record<string, any>,
   ): Promise<BasicResponse<T>> => {
+    const headers = new Headers(await buildHeaders(options))
+    if (!isBrowser) {
+      const { cookies } = await import('next/headers')
+      const cookieString = (await cookies()).toString()
+      if (cookieString) headers.set('Cookie', cookieString)
+    }
+    const token =
+      headers.get('Cookie') &&
+      headers
+        .get('Cookie')
+        ?.split('; ')
+        .find(cookie => cookie.startsWith('shionlib_access_token='))
+        ?.split('=')[1]
     const response = await fetch(
       `${baseUrl}${path}${params ? `?${new URLSearchParams(params).toString()}` : ''}`,
       {
         ...options,
-        headers: await buildHeaders(options),
+        headers: {
+          ...headers,
+          ...(await buildHeaders(options)),
+          Authorization: `${token && `Bearer ${token}`}`,
+        },
+        credentials: 'include',
       },
     )
     const data = (await response.json()) as BasicResponse<T>
 
     if (data.code !== 0) {
+      if (data.code <= 1000) {
+        console.error(data)
+        throw new Error(data.message)
+      }
       if (isBrowser) {
         try {
           const mod = await import('react-hot-toast')

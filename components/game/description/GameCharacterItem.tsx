@@ -40,7 +40,7 @@ export const GameCharacterItem = async ({ character }: GameCharacterItemProps) =
   const roleBadgeColorMap: { [key in GameCharacterRole]: string } = {
     main: 'bg-warning',
     primary: 'bg-primary',
-    side: 'bg-accent-foreground',
+    side: 'bg-accent text-accent-foreground',
     appears: 'bg-secondary text-secondary-foreground',
   } as const
 

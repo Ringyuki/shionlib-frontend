@@ -20,7 +20,8 @@
     "GlobalNotFound": {
       "title": "ページが見つかりません",
       "details": "お探しのページは存在しないか、移動された可能性があります。",
-      "back": "戻る"
+      "back": "戻る",
+      "reset": "リセット"
     },
     "NotFound": {
       "title": "ページが見つかりません",
@@ -106,6 +107,8 @@
         "download": "ダウンロード",
         "edit": "このゲームを編集",
         "addToFavorites": "お気に入りに追加",
+        "favorited": "お気に入り",
+        "removeFromFavorites": "お気に入りから削除",
         "goToDiscussion": "討論に移動"
       },
       "GameContent": {

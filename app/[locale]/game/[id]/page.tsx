@@ -5,15 +5,11 @@ import { GameHeader } from '@/components/game/description/GameHeader'
 import { GameContent } from '@/components/game/description/GameContent'
 
 const getGameData = async (id: string) => {
-  try {
-    const data = await shionlibRequest().get<GameData>(`/game/${id}`)
-    if (!data.data) {
-      notFound()
-    }
-    return data.data
-  } catch {
+  const data = await shionlibRequest().get<GameData>(`/game/${id}`)
+  if (!data.data) {
     notFound()
   }
+  return data.data
 }
 
 export default async function GamePage({ params }: { params: { id: string } }) {

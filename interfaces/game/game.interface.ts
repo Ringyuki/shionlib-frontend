@@ -58,6 +58,8 @@ export interface GameData {
   nsfw: boolean
   type?: string
   platform: Platform[]
+
+  is_favorite: boolean
 }
 
 export interface GameStaff {

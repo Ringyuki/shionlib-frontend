@@ -20,7 +20,8 @@
     "GlobalNotFound": {
       "title": "Page Not Found",
       "details": "The page you are looking for does not exist or has been moved.",
-      "back": "Back"
+      "back": "Back",
+      "reset": "Reset"
     },
     "NotFound": {
       "title": "Page Not Found",
@@ -106,6 +107,8 @@
         "download": "Download",
         "edit": "Edit this game",
         "addToFavorites": "Add to favorites",
+        "favorited": "Favorited",
+        "removeFromFavorites": "Remove from favorites",
         "goToDiscussion": "Go to discussion"
       },
       "GameContent": {
