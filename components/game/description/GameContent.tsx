@@ -22,7 +22,7 @@ export const GameContent = async ({ game }: GameContentProps) => {
             <GameDetail game={game} />
           </TabsContent>
           <TabsContent value="gameCharacter">
-            <GameCharacter />
+            <GameCharacter characters={game.characters} />
           </TabsContent>
         </Tabs>
       </div>

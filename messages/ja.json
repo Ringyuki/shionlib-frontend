@@ -10,8 +10,33 @@
       "description": "Shionlib - 無料・オープンソース・気軽に使えるギャルゲーリソースサイト"
     }
   },
+  "Pages": {
+    "GlobalError": {
+      "title": "エラー",
+      "details": "エラーが発生しました。",
+      "back": "戻る",
+      "reset": "リセット"
+    },
+    "GlobalNotFound": {
+      "title": "ページが見つかりません",
+      "details": "お探しのページは存在しないか、移動された可能性があります。",
+      "back": "戻る"
+    },
+    "NotFound": {
+      "title": "ページが見つかりません",
+      "details": "お探しのページは存在しないか、移動された可能性があります。"
+    }
+  },
   "Components": {
     "Common": {
+      "Error": {
+        "ErrorView": {
+          "defaultTitle": "エラー",
+          "defaultDetails": "エラーが発生しました。",
+          "back": "戻る",
+          "reset": "リセット"
+        }
+      },
       "TopBar": {
         "ThemeSwitcher": {
           "label": "テーマ設定",
@@ -92,7 +117,33 @@
         "introduction": "ゲーム紹介",
         "chooseLanguage": "言語を選択",
         "images": "スクリーンショット",
-        "staff": "スタッフ"
+        "staff": "スタッフ",
+        "extraInfo": "その他の情報"
+      },
+      "GameCharacterItem": {
+        "noImage": "画像がありません",
+        "gender": "性別",
+        "roleMain": "主人公",
+        "rolePrimary": "主要キャラクター",
+        "roleSide": "サイドキャラクター",
+        "roleAppears": "客串キャラクター",
+        "blood_type": "血液型",
+        "height": "身長(cm)",
+        "weight": "体重(kg)",
+        "bust": "バスト(cm)",
+        "waist": "ウエスト(cm)",
+        "hips": "ヒップ(cm)",
+        "cup": "カップ",
+        "age": "年齢(歳)",
+        "birthday": "誕生日(月/日)",
+        "female": "女性",
+        "male": "男性",
+        "non_binary": "非二元性別",
+        "ambiguous": "中性/未知",
+        "characterDetailDialogTitle": "キャラクター詳細"
+      },
+      "GameLinks": {
+        "links": "関連リンク"
       }
     }
   }

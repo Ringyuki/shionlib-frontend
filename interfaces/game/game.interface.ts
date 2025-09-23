@@ -3,6 +3,15 @@ export interface GameCover {
   url: string
   type: string
   dims: number[]
+  sexual: number
+  violence: number
+}
+
+export interface GameImage {
+  url: string
+  dims: number[]
+  sexual: number
+  violence: number
 }
 
 export interface GameItem {
@@ -14,29 +23,12 @@ export interface GameItem {
   views: number
 }
 
-export type Platform = 'win' | 'ios' | 'and' | 'ps3' | 'ps4' | 'psv' | 'psp' | 'swi' | 'dvd'
-export const platformNameMap: Record<Platform, string> = {
-  win: 'Windows',
-  ios: 'iOS',
-  and: 'Android',
-  ps3: 'PlayStation 3',
-  ps4: 'PlayStation 4',
-  psv: 'PlayStation Vita',
-  psp: 'PlayStation Portable',
-  swi: 'Nintendo Switch',
-  dvd: 'DVD',
+export interface ExtraInfo {
+  key: string
+  value: string
 }
-export const platformTokenMap: Record<Platform, { bg: string; fg: string }> = {
-  win: { bg: 'var(--platform-win)', fg: 'var(--platform-win-fg)' },
-  ios: { bg: 'var(--platform-ios)', fg: 'var(--platform-ios-fg)' },
-  and: { bg: 'var(--platform-and)', fg: 'var(--platform-and-fg)' },
-  ps3: { bg: 'var(--platform-ps3)', fg: 'var(--platform-ps3-fg)' },
-  ps4: { bg: 'var(--platform-ps4)', fg: 'var(--platform-ps4-fg)' },
-  psv: { bg: 'var(--platform-psv)', fg: 'var(--platform-psv-fg)' },
-  psp: { bg: 'var(--platform-psp)', fg: 'var(--platform-psp-fg)' },
-  swi: { bg: 'var(--platform-swi)', fg: 'var(--platform-swi-fg)' },
-  dvd: { bg: 'var(--platform-dvd)', fg: 'var(--platform-dvd-fg)' },
-}
+
+export type Platform = 'win' | 'ios' | 'and' | 'lin' | 'ps3' | 'ps4' | 'psv' | 'psp' | 'swi' | 'dvd'
 
 export interface GameData {
   creator_id: number
@@ -53,13 +45,15 @@ export interface GameData {
   intro_zh: string
   intro_en: string
   covers?: GameCover[]
-  images: string[]
+  images: GameImage[]
   release_date: Date
-  extra_info: Record<string, string>[]
+  extra_info: ExtraInfo[]
+  link: GameLink[]
 
   tags: string[]
   staffs: GameStaff[]
   developers: DeveloperRelation[]
+  characters: GameCharacterRelation[]
 
   nsfw: boolean
   type?: string
@@ -85,9 +79,8 @@ export interface DeveloperRelation {
 export interface GameCharacter {
   b_id?: string
   v_id?: string
+  id: number
   image?: string
-  actor?: string
-  role?: string
 
   name_jp?: string
   name_zh?: string
@@ -96,19 +89,33 @@ export interface GameCharacter {
   intro_jp?: string
   intro_zh?: string
   intro_en?: string
-  gender?: string
-
-  extra_info?: Record<string, string>[]
+  gender?: GameCharacterGender[]
+  blood_type?: GameCharacterBloodType
+  height?: number
+  weight?: number
+  bust?: number
+  waist?: number
+  hips?: number
+  cup?: string
+  age?: number
+  birthday: number[] // [month, day]
 }
+
+export type GameCharacterBloodType = 'a' | 'b' | 'ab' | 'o'
+export type GameCharacterGender = 'm' | 'f' | 'o' | 'a'
+export const GameCharacterGenderMap: { [key in GameCharacterGender]: string } = {
+  m: 'male',
+  f: 'female',
+  o: 'non_binary',
+  a: 'ambiguous',
+}
+export type GameCharacterRole = 'main' | 'primary' | 'side' | 'appears'
 
 export interface GameCharacterRelation {
   image?: string
   actor?: string
-  role?: string
-  extra_info?: Record<string, string>[]
-
-  game_id: number
-  character_id: number
+  role?: GameCharacterRole
+  character: GameCharacter
 }
 
 export interface GameCover {
@@ -121,4 +128,11 @@ export interface GameCover {
 export interface GameCoverRelation {
   game_id: number
   cover_id: number
+}
+
+export interface GameLink {
+  id: number
+  url: string
+  label: string
+  name: string
 }

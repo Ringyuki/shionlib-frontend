@@ -18,7 +18,7 @@ const getGameData = async (id: string) => {
 
 export default async function GamePage({ params }: { params: { id: string } }) {
   const { id } = await params
-  if (!id) {
+  if (!id || isNaN(Number(id))) {
     notFound()
   }
   const game = await getGameData(id)

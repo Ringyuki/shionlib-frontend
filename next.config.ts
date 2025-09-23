@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 't.vndb.org',
       },
+      {
+        protocol: 'https',
+        hostname: 'lain.bgm.tv',
+      },
     ],
   },
   rewrites: async () => {

@@ -10,8 +10,33 @@
       "description": "Shionlib - Free, open-source, and easy-access Galgame resource site"
     }
   },
+  "Pages": {
+    "GlobalError": {
+      "title": "Error",
+      "details": "We encountered some errors, please try again later.",
+      "back": "Back",
+      "reset": "Reset"
+    },
+    "GlobalNotFound": {
+      "title": "Page Not Found",
+      "details": "The page you are looking for does not exist or has been moved.",
+      "back": "Back"
+    },
+    "NotFound": {
+      "title": "Page Not Found",
+      "details": "The page you are looking for does not exist or has been moved."
+    }
+  },
   "Components": {
     "Common": {
+      "Error": {
+        "ErrorView": {
+          "defaultTitle": "Error",
+          "defaultDetails": "We encountered some errors, please try again later.",
+          "back": "Back",
+          "reset": "Reset"
+        }
+      },
       "TopBar": {
         "ThemeSwitcher": {
           "label": "Theme Settings",
@@ -92,7 +117,33 @@
         "introduction": "Game Introduction",
         "chooseLanguage": "Choose Language",
         "images": "Screenshots",
-        "staff": "Staffs"
+        "staff": "Staffs",
+        "extraInfo": "Extra Info"
+      },
+      "GameCharacterItem": {
+        "noImage": "No Image",
+        "gender": "Gender",
+        "roleMain": "Main",
+        "rolePrimary": "Primary",
+        "roleSide": "Side",
+        "roleAppears": "Appears",
+        "blood_type": "Blood Type",
+        "height": "Height(cm)",
+        "weight": "Weight(kg)",
+        "bust": "Bust(cm)",
+        "waist": "Waist(cm)",
+        "hips": "Hips(cm)",
+        "cup": "Cup",
+        "age": "Age(years)",
+        "birthday": "Birthday(month/day)",
+        "female": "Female",
+        "male": "Male",
+        "non_binary": "Non-Binary",
+        "ambiguous": "Ambiguous",
+        "characterDetailDialogTitle": "Character Detail"
+      },
+      "GameLinks": {
+        "links": "Related Links"
       }
     }
   }

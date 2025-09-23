@@ -7,7 +7,7 @@ import { Masonry } from '@/components/common/shared/Masonry'
 export async function getTestData() {
   const data = await shionlibRequest().get<PaginatedResponse<GameItem>>('/game/list', {
     params: {
-      pageSize: 20,
+      pageSize: 100,
     },
   })
 

@@ -16,7 +16,7 @@ export const GameHeader = async ({ game }: { game: GameData }) => {
 
   const { title } = getPreferredContent(game, 'title', lang)
   const all_titles = [game.title_jp, game.title_zh, game.title_en]
-  const excess_titles = all_titles.filter(t => t !== title).filter(t => t !== '')
+  const excess_titles = all_titles.filter(t => t !== title).filter(t => !!t)
 
   const { cover, vertical, aspect } = getPreferredContent(game, 'cover', lang)
   const width = vertical ? 200 : 450

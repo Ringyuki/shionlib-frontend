@@ -10,8 +10,32 @@
       "description": "书音的图书馆 - 免费、开源、零门槛的 Galgame 资源站"
     }
   },
+  "Pages": {
+    "GlobalError": {
+      "title": "出错了",
+      "details": "我们遇到一些错误，请稍后重试。",
+      "back": "返回",
+      "reset": "重新加载"
+    },
+    "GlobalNotFound": {
+      "title": "页面未找到",
+      "details": "您访问的页面不存在或已被移动。",
+      "back": "返回"
+    },
+    "NotFound": {
+      "title": "页面未找到",
+      "details": "您访问的页面不存在或已被移动。"
+    }
+  },
   "Components": {
     "Common": {
+      "Error": {
+        "ErrorView": {
+          "defaultTitle": "出错了",
+          "defaultDetails": "我们遇到一些错误，请稍后重试。",
+          "back": "返回"
+        }
+      },
       "TopBar": {
         "ThemeSwitcher": {
           "label": "主题设置",
@@ -92,7 +116,33 @@
         "introduction": "游戏介绍",
         "chooseLanguage": "选择语言",
         "images": "游戏图片",
-        "staff": "制作人员"
+        "staff": "制作人员",
+        "extraInfo": "其他信息"
+      },
+      "GameCharacterItem": {
+        "noImage": "无图片",
+        "gender": "性别",
+        "roleMain": "主角",
+        "rolePrimary": "主要角色",
+        "roleSide": "配角",
+        "roleAppears": "客串",
+        "blood_type": "血型",
+        "height": "身高(cm)",
+        "weight": "体重(kg)",
+        "bust": "胸围(cm)",
+        "waist": "腰围(cm)",
+        "hips": "臀围(cm)",
+        "cup": "罩杯",
+        "age": "年龄(岁)",
+        "birthday": "生日(月/日)",
+        "female": "女",
+        "male": "男",
+        "non_binary": "非二元性别",
+        "ambiguous": "中性/未知",
+        "characterDetailDialogTitle": "角色详情"
+      },
+      "GameLinks": {
+        "links": "相关链接"
       }
     }
   }

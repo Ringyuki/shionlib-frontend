@@ -5,6 +5,8 @@ import { GameDescription } from './GameDescription'
 import { GameImages } from './GameImages'
 import { GameTags } from './GameTags'
 import { GameStaff } from './GameStaff'
+import { GameExtraInfo } from './GameExtraInfo'
+import { GameLinks } from './GameLinks'
 
 interface GameDetailProps {
   game: GameData
@@ -18,6 +20,8 @@ export const GameDetail = ({ game }: GameDetailProps) => {
         <GameDescription game={game} />
         <GameImages images={game.images} />
         <GameStaff staffs={game.staffs} />
+        <GameExtraInfo extra_info={game.extra_info} />
+        <GameLinks link={game.link} />
       </div>
     </div>
   )

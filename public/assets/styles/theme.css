@@ -142,6 +142,8 @@
   --platform-ios-fg: #ffffff;
   --platform-and: #3ddc84;
   --platform-and-fg: #0a1b12;
+  --platform-lin: #f5f5f5;
+  --platform-lin-fg: #111111;
   --platform-ps3: #003791;
   --platform-ps3-fg: #ffffff;
   --platform-ps4: #00439c;
@@ -224,6 +226,8 @@
   --platform-ios-fg: #111111;
   --platform-and: #3ddc84;
   --platform-and-fg: #0a1b12;
+  --platform-lin: #f5f5f5;
+  --platform-lin-fg: #111111;
   --platform-ps3: #0a3f9c;
   --platform-ps3-fg: #ffffff;
   --platform-ps4: #0d4aac;

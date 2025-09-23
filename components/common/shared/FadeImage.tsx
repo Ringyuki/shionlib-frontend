@@ -18,6 +18,7 @@ export function FadeImage({ className, aspectRatio, priority, fill = true, ...pr
     >
       <Image
         {...props}
+        alt={props.alt ?? ''}
         priority={priority}
         fill={fill}
         onLoad={() => setLoaded(true)}
