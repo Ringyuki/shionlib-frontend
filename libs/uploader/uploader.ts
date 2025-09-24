@@ -1,7 +1,7 @@
 import { sha256 } from '@noble/hashes/sha2.js'
 import { createShionlibLargeFileUploadApi, LargeFileUploadApi } from './large-file-upload.api'
 
-type Phase =
+export type Phase =
   | 'idle'
   | 'hashing'
   | 'initializing'
@@ -40,7 +40,7 @@ export type UploaderOptions = {
 }
 
 export class ShionlibLargeFileUploader {
-  readonly file: File
+  private file: File
   private api: LargeFileUploadApi
   private phase: Phase = 'idle'
   private startedAt = 0
@@ -86,7 +86,9 @@ export class ShionlibLargeFileUploader {
   }
 
   async start() {
-    if (this.phase === 'idle') {
+    console.log('this phase', this.phase)
+    if (this.phase === 'idle' || this.phase === 'error') {
+      console.log('start', this.phase)
       try {
         this.setPhase('hashing')
         this.fileSha256 = await this.hashFile(this.file)
@@ -111,7 +113,8 @@ export class ShionlibLargeFileUploader {
       }
     }
 
-    const canUpload = this.phase === 'idle' || this.phase === 'paused'
+    const canUpload =
+      this.phase === 'idle' || this.phase === 'paused' || this.phase === 'initializing'
     if (canUpload) {
       try {
         this.setPhase('uploading')
@@ -145,6 +148,10 @@ export class ShionlibLargeFileUploader {
     } finally {
       this.setPhase('aborted')
     }
+  }
+
+  async getSessionId() {
+    return this.sessionId
   }
 
   private async uploadAll() {

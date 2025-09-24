@@ -100,16 +100,63 @@
             "verifyCode": "検証コードが空です"
           }
         }
+      },
+      "Uploader": {
+        "FileUploader": {
+          "dropzone": "ファイルをここにドラッグ&ドロップするか、クリックしてファイルを選択してください",
+          "status": "ステータス",
+          "Idle": "空閒",
+          "Hashing": "ハッシュ計算",
+          "Initializing": "初期化",
+          "Uploading": "アップロード中",
+          "Paused": "一時停止",
+          "Completing": "チャンクの結合",
+          "Completed": "完了",
+          "Aborted": "キャンセル",
+          "Error": "エラー"
+        },
+        "UploadController": {
+          "start": "開始",
+          "pause": "一時停止",
+          "resume": "続行",
+          "cancel": "キャンセル"
+        },
+        "UploadProgress": {
+          "speed": "速度",
+          "eta": "残り"
+        }
       }
     },
     "Game": {
       "GameActions": {
         "download": "ダウンロード",
+        "upload": "アップロード",
         "edit": "このゲームを編集",
         "addToFavorites": "お気に入りに追加",
         "favorited": "お気に入り",
         "removeFromFavorites": "お気に入りから削除",
-        "goToDiscussion": "討論に移動"
+        "goToDiscussion": "討論に移動",
+        "GameUploadDialog": {
+          "title": "ゲームをアップロード",
+          "alert1Title": "注意",
+          "alert1Description": "ここでゲームリソースファイルをアップロードできます。アップロードしたファイルは、Shionlibサーバーに保存され、すべてのユーザーがダウンロードできるようになります。\nこのアップロードは、Shionlibの所有権に属します。\nアップロードが成功すると、アップロードを取り消すことができなくなり、Shionlibサーバーに保存されたファイルを削除することもできなくなります。",
+          "alert2Title": "注意",
+          "alert2Description": "アップロードする前に、ゲームの著作権を所有しているか、著作権所有者からアップロードの許可を得ていることを確認してください。著作権侵害の申し立てがあった場合、Shionlibは関連するコンテンツを削除し、アカウントを停止する権利を留保します。\nアップロード中は、ページをリロードしたり、ページを閉じたりしないでください。",
+          "platform": "プラットフォーム",
+          "platformPlaceholder": "リソースの実行プラットフォームを選択",
+          "language": "言語",
+          "languagePlaceholder": "リソースのゲーム言語を選択",
+          "note": "注意",
+          "notePlaceholder": "注意事項を入力してください",
+          "submit": "確認",
+          "waitForUploadCompleted": "ファイルがアップロードされるのを待ってください",
+          "success": "アップロード成功",
+          "validation": {
+            "platform": "プラットフォームは必須です",
+            "language": "言語は必須です",
+            "note": "注意事項は255文字以内で入力してください"
+          }
+        }
       },
       "GameContent": {
         "gameDetail": "ゲーム詳細",

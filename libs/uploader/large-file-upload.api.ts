@@ -57,7 +57,7 @@ export function createShionlibLargeFileUploadApi(prefix = '/uploads/large'): Lar
     },
 
     async status(id) {
-      const res = await req.post<StatusResp>(`${prefix}/${id}/status`)
+      const res = await req.get<StatusResp>(`${prefix}/${id}/status`)
       return res.data!
     },
 

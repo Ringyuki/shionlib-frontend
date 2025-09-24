@@ -100,16 +100,63 @@
             "verifyCode": "Verify Code is required"
           }
         }
+      },
+      "Uploader": {
+        "FileUploader": {
+          "dropzone": "Drop file here or click to select file",
+          "status": "Status",
+          "Idle": "Idle",
+          "Hashing": "Hashing",
+          "Initializing": "Initializing",
+          "Uploading": "Uploading",
+          "Paused": "Paused",
+          "Completing": "Completing",
+          "Completed": "Completed",
+          "Aborted": "Aborted",
+          "Error": "Error"
+        },
+        "UploadController": {
+          "start": "Start",
+          "pause": "Pause",
+          "resume": "Resume",
+          "cancel": "Cancel"
+        },
+        "UploadProgress": {
+          "speed": "Speed",
+          "eta": "Remaining"
+        }
       }
     },
     "Game": {
       "GameActions": {
         "download": "Download",
+        "upload": "Upload",
         "edit": "Edit this game",
         "addToFavorites": "Add to favorites",
         "favorited": "Favorited",
         "removeFromFavorites": "Remove from favorites",
-        "goToDiscussion": "Go to discussion"
+        "goToDiscussion": "Go to discussion",
+        "GameUploadDialog": {
+          "title": "Upload Game",
+          "alert1Title": "Attention Required",
+          "alert1Description": "You can upload the game resources file here. The file you upload will be stored on the server of Shionlib, and provided to all users for download.\nPlease note that you will not receive any benefits from this.\nOnce the upload process is completed successfully, you will not be able to revoke this upload, and you will not be able to delete the files stored on the server of Shionlib, the final ownership of the files belongs to the Shionlib.",
+          "alert2Title": "Upload Notice",
+          "alert2Description": "Uploading files will consume your \"Upload Quota\". After the upload process starts, the corresponding file size quota will be pre-deducted. If the upload process is not completed successfully, the quota will not be consumed.\nThe game file needs to be packaged in a [b]single[/b] zip file, and [b]cannot be set to a password[/b].\nAfter the upload is completed, the system will check the file and finally upload it to S3, and the download information will be updated after all processes are completed.\nPlease do not refresh or close the page during the upload process.",
+          "platform": "Platform",
+          "platformPlaceholder": "Select the running platform of the resource",
+          "language": "Language",
+          "languagePlaceholder": "Select the game language of the resource",
+          "note": "Note",
+          "notePlaceholder": "Enter the note information (if any)",
+          "submit": "Submit",
+          "waitForUploadCompleted": "Wait for the file to be uploaded",
+          "success": "Submit success",
+          "validation": {
+            "platform": "Platform is required",
+            "language": "Language is required",
+            "note": "Note must be less than 255 characters"
+          }
+        }
       },
       "GameContent": {
         "gameDetail": "Game Detail",

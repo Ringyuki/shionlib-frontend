@@ -29,6 +29,42 @@ export interface ExtraInfo {
 }
 
 export type Platform = 'win' | 'ios' | 'and' | 'lin' | 'ps3' | 'ps4' | 'psv' | 'psp' | 'swi' | 'dvd'
+export enum PlatformEnum {
+  win = 'Windows',
+  ios = 'iOS',
+  and = 'Android',
+  lin = 'Linux',
+  ps3 = 'PlayStation 3',
+  ps4 = 'PlayStation 4',
+  psv = 'PlayStation Vita',
+  psp = 'PlayStation Portable',
+  swi = 'Nintendo Switch',
+  dvd = 'DVD',
+}
+export const PlatformOptions: Array<{ label: string; value: Platform }> = [
+  { value: 'win', label: 'Windows' },
+  { value: 'ios', label: 'iOS' },
+  { value: 'and', label: 'Android' },
+  { value: 'lin', label: 'Linux' },
+  { value: 'ps3', label: 'PlayStation 3' },
+  { value: 'ps4', label: 'PlayStation 4' },
+  { value: 'psv', label: 'PlayStation Vita' },
+  { value: 'psp', label: 'PlayStation Portable' },
+  { value: 'swi', label: 'Nintendo Switch' },
+  { value: 'dvd', label: 'DVD' },
+]
+
+export type Language = 'jp' | 'zh' | 'en'
+export enum LanguageEnum {
+  jp = 'Japanese',
+  zh = 'Chinese',
+  en = 'English',
+}
+export const LanguageOptions: Array<{ label: string; value: Language }> = [
+  { value: 'jp', label: 'Japanese' },
+  { value: 'zh', label: 'Chinese' },
+  { value: 'en', label: 'English' },
+]
 
 export interface GameData {
   creator_id: number

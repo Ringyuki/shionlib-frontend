@@ -40,14 +40,13 @@ export const shionlibRequest = () => {
     )
     const data = (await response.json()) as BasicResponse<T>
 
+    let mod
+    if (isBrowser) {
+      mod = await import('react-hot-toast')
+    }
     if (data.code !== 0) {
       if (data.code <= 1000) {
-        console.error(data)
-        throw new Error(data.message)
-      }
-      if (isBrowser) {
-        try {
-          const mod = await import('react-hot-toast')
+        if (isBrowser && mod) {
           mod.toast.error(
             `${data.message}${
               (data as ErrorResponse).data?.errors
@@ -57,7 +56,20 @@ export const shionlibRequest = () => {
                 : ''
             } (${data.code})`,
           )
-        } catch {}
+        }
+        console.error(data)
+        throw new Error(data.message)
+      }
+      if (isBrowser && mod) {
+        mod?.toast.error(
+          `${data.message}${
+            (data as ErrorResponse).data?.errors
+              ? `: ${(data as ErrorResponse).data.errors
+                  .map(error => error.messages.map(message => `${message}`))
+                  .join('\n')}`
+              : ''
+          } (${data.code})`,
+        )
       }
       console.error(data)
       throw new ShionlibBizError(data.code, data.message)

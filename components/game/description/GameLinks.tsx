@@ -17,7 +17,7 @@ export const GameLinks = ({ link }: GameLinksProps) => {
         <Link2 />
         <span>{t('links')}</span>
       </h2>
-      <div className="flex gap-6">
+      <div className="flex gap-6 flex-wrap">
         {uniqueLink.map(l => (
           <div key={l.id} className="flex items-center">
             <Button appearance="link" intent="neutral" className="p-0">
