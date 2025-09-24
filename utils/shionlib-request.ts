@@ -33,7 +33,7 @@ export const shionlibRequest = () => {
         headers: {
           ...headers,
           ...(await buildHeaders(options)),
-          Authorization: `${token && `Bearer ${token}`}`,
+          Authorization: `${token ? `Bearer ${token}` : ''}`,
         },
         credentials: 'include',
       },
