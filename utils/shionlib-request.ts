@@ -1,44 +1,68 @@
 import { BasicResponse, ErrorResponse } from '@/interfaces/api/shionlib-api-res.interface'
 import { resolvePreferredLocale } from './language-preference'
 import { ShionlibBizError } from '@/libs/errors'
+import { ShouldRefreshCodes, IsFatalAuthByCodes } from '@/enums/auth/auth-status.enum'
+import { useShionlibUserStore } from '@/store/userStore'
+
+let refreshPromise: Promise<void> | null = null
+const shouldRefresh = (code: number) => {
+  return ShouldRefreshCodes.includes(code)
+}
+const isFatalAuthByCode = (code: number) => {
+  return IsFatalAuthByCodes.includes(code)
+}
+
+const isBrowser = typeof window !== 'undefined'
 
 export const shionlibRequest = () => {
-  const isBrowser = typeof window !== 'undefined'
-  const baseUrl = isBrowser
-    ? process.env.NEXT_PUBLIC_PROD_API_PATH
-    : `http://localhost:${process.env.INTERNAL_API_PORT}`
-
   const basicFetch = async <T>(
     path: string,
     options: RequestInit,
     params?: Record<string, any>,
   ): Promise<BasicResponse<T>> => {
-    const headers = new Headers(await buildHeaders(options))
-    if (!isBrowser) {
-      const { cookies } = await import('next/headers')
-      const cookieString = (await cookies()).toString()
-      if (cookieString) headers.set('Cookie', cookieString)
-    }
-    const token =
-      headers.get('Cookie') &&
-      headers
-        .get('Cookie')
-        ?.split('; ')
-        .find(cookie => cookie.startsWith('shionlib_access_token='))
-        ?.split('=')[1]
-    const response = await fetch(
-      `${baseUrl}${path}${params ? `?${new URLSearchParams(params).toString()}` : ''}`,
-      {
+    const baseUrl = isBrowser
+      ? process.env.NEXT_PUBLIC_PROD_API_PATH
+      : `http://localhost:${process.env.INTERNAL_API_PORT}`
+
+    const init = async (): Promise<RequestInit> => {
+      const headers = new Headers(await buildHeaders(options))
+      if (!isBrowser) {
+        const { cookies } = await import('next/headers')
+        const cookieString = (await cookies()).toString()
+        if (cookieString) headers.set('Cookie', cookieString)
+      }
+      return {
         ...options,
-        headers: {
-          ...headers,
-          ...(await buildHeaders(options)),
-          Authorization: `${token ? `Bearer ${token}` : ''}`,
-        },
+        headers,
         credentials: 'include',
-      },
-    )
-    const data = (await response.json()) as BasicResponse<T>
+      }
+    }
+    const reqUrl = () =>
+      `${baseUrl}${path}${params ? `?${new URLSearchParams(params).toString()}` : ''}`
+
+    const requestOnce = async (): Promise<BasicResponse<T>> => {
+      const opt = await init()
+      const res = await fetch(reqUrl(), opt)
+      const data = (await res.json().catch(() => ({}))) as BasicResponse<T>
+      return data
+    }
+
+    let data = await requestOnce()
+    if (data && data.code === 0) return data
+
+    if (isFatalAuthByCode(data.code)) {
+      await doLogout(baseUrl!)
+      throw new ShionlibBizError(data.code, data.message)
+    }
+    if (shouldRefresh(data.code)) {
+      try {
+        await doRefresh(baseUrl!)
+        const retried = await requestOnce()
+        if (retried.code === 0) return retried
+      } catch {
+        throw new ShionlibBizError(data.code, data.message)
+      }
+    }
 
     let mod
     if (isBrowser) {
@@ -181,4 +205,41 @@ const buildHeaders = async (options?: RequestInit): Promise<HeadersInit> => {
     ...(existing as Record<string, string> | undefined),
   }
   return record
+}
+
+const doRefresh = async (baseUrl: string) => {
+  if (!refreshPromise) {
+    refreshPromise = fetch(`${baseUrl}/auth/token/refresh`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(async res => {
+        const data = await res.json().catch(() => ({}))
+        if (!(res.ok && data && data.code === 0)) {
+          if (isFatalAuthByCode(data.code)) {
+            await doLogout(baseUrl)
+            throw new ShionlibBizError(data.code, data.message)
+          }
+          throw new Error((data && data.message) || 'Token refresh failed')
+        }
+      })
+      .finally(() => {
+        refreshPromise = null
+      })
+  }
+  return refreshPromise
+}
+
+const doLogout = async (baseUrl: string) => {
+  return fetch(`${baseUrl}/auth/logout`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+  }).finally(async () => {
+    refreshPromise = null
+    if (isBrowser) {
+      useShionlibUserStore.getState().logout()
+    }
+  })
 }
