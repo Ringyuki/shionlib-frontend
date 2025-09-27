@@ -10,6 +10,7 @@ import { gameDownloadSourceSchemaType } from './GameDownloadSourceInfoForm'
 import { z } from 'zod'
 import { toast } from 'react-hot-toast'
 import { shionlibRequest } from '@/utils/shionlib-request'
+import { UploadQuota } from './UploadQuota'
 
 interface GameUploadDialogProps {
   game_id: number
@@ -28,6 +29,14 @@ export const GameUploadDialog = ({
   const [phase, setPhase] = useState<Phase>('idle')
   const closable = phase === 'idle'
   const [uploadSessionId, setUploadSessionId] = useState<number | null>(null)
+  const [fileSize, setFileSize] = useState<number>(0)
+  const handleFileSelected = (file: File) => {
+    if (!file) {
+      setFileSize(0)
+      return
+    }
+    setFileSize(file.size)
+  }
 
   const [loading, setLoading] = useState(false)
   const handleSubmit = async (data: z.infer<typeof gameDownloadSourceSchemaType>) => {
@@ -52,7 +61,7 @@ export const GameUploadDialog = ({
   }
   return (
     <Dialog open={open} onOpenChange={onOpenChange} maskClosable={closable}>
-      <DialogContent className="max-w-2xl!">
+      <DialogContent className="max-w-3xl!" aria-describedby={undefined}>
         <DialogHeader>
           <DialogTitle>{t('title')}</DialogTitle>
         </DialogHeader>
@@ -81,7 +90,12 @@ export const GameUploadDialog = ({
             />
           </AlertDescription>
         </Alert>
-        <FileUploader onPhaseChange={setPhase} onUploadComplete={setUploadSessionId} />
+        <UploadQuota fileSize={fileSize} />
+        <FileUploader
+          onPhaseChange={setPhase}
+          onUploadComplete={setUploadSessionId}
+          onFileSelected={handleFileSelected}
+        />
         <GameDownloadSourceInfoForm onSubmit={handleSubmit} loading={loading} />
       </DialogContent>
     </Dialog>

@@ -6,6 +6,7 @@ import {
   FileUpload as ShionFileUpload,
   Dropzone as FileUploadDropzone,
   List as FileUploadList,
+  Trigger as FileUploadTrigger,
 } from '@/components/shionui/FileUpload'
 import { UploadController } from './UploadController'
 import { UploadProgress } from './UploadProgress'
@@ -14,25 +15,29 @@ import { cn } from '@/utils/cn'
 import { FileList } from './FileList'
 import { UploadStatus } from './UploadStatus'
 import { useTranslations } from 'next-intl'
+import { AllowedLargeArchiveFileMimeTypes } from '@/enums/upload/allowed-large-file.enum'
+import { toast } from 'react-hot-toast'
+import { Upload as UploadIcon } from 'lucide-react'
+import { OnGoingSession } from '@/components/game/description/game-actions/upload/OnGoingSession'
 
 interface FileUploaderProps {
   className?: string
   title?: string
   description?: string
-  accept?: string
   concurrency?: number
   desiredChunkSize?: number
   smallFileThreshold?: number
+  onFileSelected?: (file: File) => void
   onPhaseChange?: (phase: Phase) => void
   onUploadComplete?: (sessionId: number) => void
 }
 
 export function FileUploader({
   className,
-  accept,
   concurrency,
   desiredChunkSize,
   smallFileThreshold,
+  onFileSelected,
   onPhaseChange,
   onUploadComplete,
 }: FileUploaderProps) {
@@ -48,6 +53,7 @@ export function FileUploader({
   const [speedBps, setSpeedBps] = React.useState(0)
   const [etaSec, setEtaSec] = React.useState<number | null>(null)
   const uploaderRef = React.useRef<ShionlibLargeFileUploader | null>(null)
+  const [pendingSessionId, setPendingSessionId] = React.useState<number | null>(null)
 
   const resetProgress = (f: File | null) => {
     setBytesUploaded(0)
@@ -60,7 +66,10 @@ export function FileUploader({
   const attachListeners = React.useCallback((uploader: ShionlibLargeFileUploader) => {
     const unsubs: Array<() => void> = []
     const unsub = uploader.on((e: UploaderEvents) => {
-      if (e.type === 'status') setPhase(e.phase)
+      if (e.type === 'status') {
+        console.log('set phase', e.phase)
+        setPhase(e.phase)
+      }
       if (e.type === 'hash-progress') {
         setBytesHashed(e.bytesHashed)
         setTotalBytes(e.totalBytes)
@@ -72,6 +81,13 @@ export function FileUploader({
         setEtaSec(e.etaSec)
       }
       if (e.type === 'done') handleComplete()
+      if (e.type === 'file-mismatch') {
+        toast.error(t('fileMismatch'))
+        setPhase('idle')
+        resetProgress(null)
+        setFile(null)
+        setPendingSessionId(null)
+      }
     })
     unsubs.push(unsub)
     return () => unsubs.forEach(fn => fn())
@@ -89,19 +105,40 @@ export function FileUploader({
     return uploader
   }, [file, concurrency, desiredChunkSize, smallFileThreshold, attachListeners])
 
-  const handleFilesAccepted = (files: File[]) => {
+  const handleFilesAccepted = async (files: File[]) => {
     const f = files?.[0] ?? null
     setFile(f)
+    onFileSelected?.(f)
     setPhase('idle')
     resetProgress(f)
+
+    if (f && pendingSessionId != null) {
+      const uploader = new ShionlibLargeFileUploader(f, {
+        concurrency,
+        desiredChunkSize,
+        smallFileThreshold,
+      })
+      attachListeners(uploader)
+      uploaderRef.current = uploader
+      try {
+        await uploader.resumeFromSession(pendingSessionId)
+      } finally {
+        setPendingSessionId(null)
+      }
+    }
   }
   const handleFilesValueChange = (files: File[]) => {
     const f = files?.[0] ?? null
     setFile(f)
+    onFileSelected?.(f)
     if (!f) {
       setPhase('idle')
       resetProgress(null)
     }
+  }
+  const handleFileReject = (f: File) => {
+    console.log('file mime type', f.type)
+    toast.error(t('invalidFileFormat'))
   }
   React.useEffect(() => {
     if (file) {
@@ -109,6 +146,17 @@ export function FileUploader({
     }
   }, [file])
 
+  const handleResumeFromSession = async (sessionId: number) => {
+    console.log('resume from session', sessionId)
+    if (!file) {
+      setPendingSessionId(sessionId)
+      document.getElementById('resume-file-trigger')?.click()
+      return
+    }
+    const uploader = uploaderRef.current ?? createUploader()
+    if (!uploader) return
+    await uploader.resumeFromSession(sessionId)
+  }
   const handleStart = async () => {
     if (!file) return
     const uploader = uploaderRef.current ?? createUploader()
@@ -134,23 +182,30 @@ export function FileUploader({
     uploaderRef.current = null
   }
 
-  const disabled = !file || phase === 'uploading' || phase === 'completed'
   const shionFileUploadDisabled = phase !== 'idle' || !!file
 
   return (
-    <Card className={cn('w-full max-w-2xl bg-transparent border-none rounded-md p-0', className)}>
+    <Card className={cn('w-full max-w-3xl bg-transparent border-none rounded-md p-0', className)}>
+      <OnGoingSession onResume={handleResumeFromSession} phase={phase} />
       <CardContent className="flex flex-col gap-4 p-0">
         <ShionFileUpload
-          accept={accept}
+          value={file ? [file] : []}
+          accept={Object.values(AllowedLargeArchiveFileMimeTypes).join(',')}
           maxFiles={1}
           disabled={shionFileUploadDisabled}
           multiple={false}
           onAccept={handleFilesAccepted}
           onValueChange={handleFilesValueChange}
+          onFileReject={handleFileReject}
         >
           <FileUploadDropzone className="min-h-28 w-full cursor-pointer">
-            <div className="text-muted-foreground text-sm">{t('dropzone')}</div>
+            <div className="text-muted-foreground text-sm flex flex-col items-center gap-2">
+              <UploadIcon className="size-4" />
+              <span>{t('dropzone')}</span>
+              <span>{t('dropzoneSupportFileFormat')}</span>
+            </div>
           </FileUploadDropzone>
+          <FileUploadTrigger id="resume-file-trigger" className="hidden" />
           <FileUploadList className="mt-2">
             <FileList phase={phase} />
           </FileUploadList>
@@ -170,7 +225,6 @@ export function FileUploader({
           onPause={handlePause}
           onResume={handleResume}
           onCancel={handleCancel}
-          disabled={disabled}
         />
       </CardFooter>
     </Card>

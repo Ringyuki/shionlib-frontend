@@ -26,6 +26,7 @@ export type UploaderEvents =
   | { type: 'retry'; index: number; attempt: number; delayMs: number }
   | { type: 'error'; error: unknown }
   | { type: 'done'; sessionId: number }
+  | { type: 'file-mismatch'; sessionId: number }
 
 export type UploaderOptions = {
   api?: LargeFileUploadApi
@@ -57,6 +58,7 @@ export class ShionlibLargeFileUploader {
     desiredChunkSize?: number
     smallFileThreshold: number
   }
+  private abortController?: AbortController
 
   constructor(file: File, options: UploaderOptions = {}) {
     this.file = file
@@ -85,29 +87,45 @@ export class ShionlibLargeFileUploader {
     this.emit({ type: 'status', phase: p })
   }
 
+  private resetState() {
+    this.startedAt = 0
+    this.bytesUploaded = 0
+    this.uploaded.clear()
+    this.sessionId = undefined
+    this.chunkSize = undefined
+    this.totalChunks = undefined
+    this.fileSha256 = undefined
+  }
+
   async start() {
-    console.log('this phase', this.phase)
-    if (this.phase === 'idle' || this.phase === 'error') {
-      console.log('start', this.phase)
+    if (this.phase === 'idle' || this.phase === 'error' || this.phase === 'aborted') {
+      if (this.phase === 'aborted') {
+        this.resetState()
+      }
+      this.abortController = new AbortController()
       try {
         this.setPhase('hashing')
         this.fileSha256 = await this.hashFile(this.file)
 
         this.setPhase('initializing')
-        const init = await this.api.init({
-          file_name: this.file.name,
-          total_size: this.file.size,
-          file_sha256: this.fileSha256,
-          chunk_size: this.opts.desiredChunkSize,
-        })
+        const init = await this.api.init(
+          {
+            file_name: this.file.name,
+            total_size: this.file.size,
+            file_sha256: this.fileSha256,
+            chunk_size: this.opts.desiredChunkSize,
+          },
+          { signal: this.abortController?.signal },
+        )
         this.sessionId = init.upload_session_id
         this.chunkSize = init.chunk_size
         this.totalChunks = init.total_chunks
 
-        const st = await this.api.status(this.sessionId)
+        const st = await this.api.status(this.sessionId, { signal: this.abortController?.signal })
         st.uploaded_chunks.forEach(i => this.uploaded.add(i))
         this.bytesUploaded = this.uploadedSize()
-      } catch (e) {
+      } catch (e: any) {
+        if (e.name === 'AbortError') return
         this.setPhase('error')
         this.emit({ type: 'error', error: e })
       }
@@ -122,7 +140,7 @@ export class ShionlibLargeFileUploader {
         await this.uploadAll()
 
         this.setPhase('completing')
-        await this.api.complete(this.sessionId!)
+        await this.api.complete(this.sessionId!, { signal: this.abortController?.signal })
         this.setPhase('completed')
         this.emit({ type: 'done', sessionId: this.sessionId! })
       } catch (e) {
@@ -142,16 +160,63 @@ export class ShionlibLargeFileUploader {
     if (this.phase === 'paused') this.start()
   }
   async cancel() {
-    if (!this.sessionId) return
-    try {
-      await this.api.abort(this.sessionId)
-    } finally {
-      this.setPhase('aborted')
+    if (this.phase === 'aborted') return
+    this.setPhase('aborted')
+    this.abortController?.abort()
+    const sid = this.sessionId
+    if (sid) {
+      try {
+        const cleanup = new AbortController()
+        await this.api.abort(sid, { signal: cleanup.signal })
+      } catch {}
     }
+    this.resetState()
   }
 
-  async getSessionId() {
-    return this.sessionId
+  async resumeFromSession(sessionId: number) {
+    if (this.phase === 'uploading') throw new Error('Already uploading')
+    this.resetState()
+    this.sessionId = sessionId
+    this.abortController = new AbortController()
+    try {
+      this.setPhase('initializing')
+      const st = await this.api.status(sessionId, { signal: this.abortController.signal })
+
+      this.chunkSize = st.chunk_size
+      this.totalChunks = st.total_chunks
+
+      if (this.file.size !== st.total_size) {
+        throw new Error('FileMismatch')
+      }
+
+      this.setPhase('hashing')
+      const localHash = await this.hashFile(this.file)
+      if (localHash !== st.file_sha256) {
+        throw new Error('FileMismatch')
+      }
+      this.fileSha256 = localHash
+
+      this.uploaded.clear()
+      st.uploaded_chunks.forEach(i => this.uploaded.add(i))
+      this.bytesUploaded = this.uploadedSize()
+
+      this.setPhase('uploading')
+      this.startedAt = performance.now()
+      await this.uploadAll()
+
+      this.setPhase('completing')
+      await this.api.complete(this.sessionId!, { signal: this.abortController.signal })
+      this.setPhase('completed')
+      this.emit({ type: 'done', sessionId: this.sessionId! })
+    } catch (e: any) {
+      if (e?.message === 'FileMismatch') {
+        this.emit({ type: 'file-mismatch', sessionId: this.sessionId! })
+        return
+      }
+      if (this.phase === 'aborted' || e?.name === 'AbortError') return
+      this.setPhase('error')
+      this.emit({ type: 'error', error: e })
+    }
   }
 
   private async uploadAll() {
@@ -179,7 +244,11 @@ export class ShionlibLargeFileUploader {
     const blob = this.file.slice(start, end)
     const chunkSha = await this.hashChunk(blob)
 
-    await this.withRetry(index, () => this.api.putChunk(this.sessionId!, index, blob, chunkSha))
+    await this.withRetry(index, () =>
+      this.api.putChunk(this.sessionId!, index, blob, chunkSha, {
+        signal: this.abortController?.signal,
+      }),
+    )
 
     this.uploaded.add(index)
     this.bytesUploaded += blob.size
@@ -200,10 +269,11 @@ export class ShionlibLargeFileUploader {
   private async withRetry(index: number, fn: () => Promise<any>) {
     const { retries, baseDelayMs, maxDelayMs } = this.opts.retry
     for (let attempt = 1; ; attempt++) {
+      if (this.abortController?.signal.aborted) throw new Error('Aborted')
       try {
         return await fn()
-      } catch (e) {
-        if (attempt > retries || this.phase !== 'uploading') throw e
+      } catch (e: any) {
+        if (e.name === 'AbortError' || attempt > retries || this.phase !== 'uploading') throw e
         const delay = Math.min(maxDelayMs, baseDelayMs * 2 ** (attempt - 1))
         this.emit({ type: 'retry', index, attempt, delayMs: delay })
         await new Promise(r => setTimeout(r, delay))
@@ -223,20 +293,39 @@ export class ShionlibLargeFileUploader {
     return bytes
   }
 
+  // TODO: use web worker to hash file
   private async hashFile(file: File) {
     const total = file.size
     if (total <= this.opts.smallFileThreshold) {
       return this.hashChunk(file)
     }
-    const step = 1024 * 1024 * 4
+    const step = 1024 * 1024 * 16
     const hasher = sha256.create()
     let off = 0
+    // while (off < total) {
+    //   if (this.abortController?.signal.aborted) throw new DOMException('Aborted', 'AbortError')
+    //   const end = Math.min(off + step, total)
+    //   hasher.update(new Uint8Array(await file.slice(off, end).arrayBuffer()))
+    //   off = end
+    //   this.emit({ type: 'hash-progress', bytesHashed: off, totalBytes: total })
+    //   if (off % (1024 * 1024 * 64) === 0) await new Promise(r => setTimeout(r))
+    // }
+    let nextPromise = file.slice(0, Math.min(step, total)).arrayBuffer()
     while (off < total) {
-      const end = Math.min(off + step, total)
-      hasher.update(new Uint8Array(await file.slice(off, end).arrayBuffer()))
-      off = end
+      if (this.abortController?.signal.aborted) throw new DOMException('Aborted', 'AbortError')
+      // wait for the previous read result
+      const ab = await nextPromise
+      hasher.update(new Uint8Array(ab))
+      off = Math.min(off + step, total)
       this.emit({ type: 'hash-progress', bytesHashed: off, totalBytes: total })
-      if (off % (1024 * 1024 * 64) === 0) await new Promise(r => setTimeout(r))
+      // start the next read (await in the next round to implement read-compute pipeline)
+      if (off < total) {
+        const end = Math.min(off + step, total)
+        nextPromise = file.slice(off, end).arrayBuffer()
+      }
+      if (off % (1024 * 1024 * 256) === 0) {
+        await new Promise(r => setTimeout(r))
+      }
     }
     return this.toHex(hasher.digest())
   }
@@ -251,5 +340,9 @@ export class ShionlibLargeFileUploader {
     let s = ''
     for (let i = 0; i < arr.length; i++) s += arr[i].toString(16).padStart(2, '0')
     return s
+  }
+
+  async getSessionId() {
+    return this.sessionId
   }
 }

@@ -3,29 +3,29 @@
     "title": "Shionlib - A Galgame Resource Site!",
     "titleShort": "Shionlib",
     "template": "%s - Shionlib",
-    "description": "Shionlib - Free, open-source, and easy-access Galgame resource site",
-    "keywords": ["Shionlib", "Galgame", "Resource", "Free", "Open Source", "Easy Access"],
+    "description": "Shionlib - Free, open-source, easy-access Galgame resource site",
+    "keywords": ["Shionlib", "Galgame", "Resource Site", "Free", "Open Source", "Easy Access"],
     "og": {
       "title": "Shionlib - A Galgame Resource Site!",
-      "description": "Shionlib - Free, open-source, and easy-access Galgame resource site"
+      "description": "Shionlib - Free, open-source, easy-access Galgame resource site"
     }
   },
   "Pages": {
     "GlobalError": {
       "title": "Error",
-      "details": "We encountered some errors, please try again later.",
+      "details": "We ran into an error. Please try again later.",
       "back": "Back",
-      "reset": "Reset"
+      "reset": "Reload"
     },
     "GlobalNotFound": {
       "title": "Page Not Found",
-      "details": "The page you are looking for does not exist or has been moved.",
+      "details": "The page you are looking for does not exist or may have been moved.",
       "back": "Back",
-      "reset": "Reset"
+      "reset": "Reload"
     },
     "NotFound": {
       "title": "Page Not Found",
-      "details": "The page you are looking for does not exist or has been moved."
+      "details": "The page you are looking for does not exist or may have been moved."
     }
   },
   "Components": {
@@ -33,45 +33,45 @@
       "Error": {
         "ErrorView": {
           "defaultTitle": "Error",
-          "defaultDetails": "We encountered some errors, please try again later.",
+          "defaultDetails": "We ran into an error. Please try again later.",
           "back": "Back",
-          "reset": "Reset"
+          "reset": "Reload"
         }
       },
       "TopBar": {
         "ThemeSwitcher": {
-          "label": "Theme Settings",
-          "system": "System",
+          "label": "Theme",
+          "system": "Match system",
           "light": "Light",
           "dark": "Dark"
         }
       },
       "User": {
         "LoginOrRegisteDialog": {
-          "button": "Sign in",
-          "loginTitle": "Login",
+          "button": "Log in",
+          "loginTitle": "Log in to Shionlib",
           "registerTitle": "Register",
           "loginDescription": "Don't have an account?",
-          "loginDescriptionLinkText": "Register here",
-          "registerDescription": "Already have an account?",
-          "registerDescriptionLinkText": "Login here"
+          "loginDescriptionLinkText": "Register now",
+          "registerDescription": "Already have a Shionlib account?",
+          "registerDescriptionLinkText": "Log in now"
         },
         "LogoutDialog": {
-          "button": "Logout",
-          "title": "Logout",
-          "description": "Are you sure you want to logout?",
-          "logout": "Logout",
+          "button": "Log out",
+          "title": "Log out",
+          "description": "Are you sure you want to log out?",
+          "logout": "Log out",
           "cancel": "Cancel"
         },
         "Login": {
-          "title": "Login",
-          "description": "Login",
-          "identifier": "Email or Username",
+          "title": "Log in",
+          "description": "Log in",
+          "identifier": "Email or username",
           "password": "Password",
-          "login": "Login",
-          "success": "Login successfully",
+          "login": "Log in",
+          "success": "Logged in successfully",
           "validation": {
-            "identifier": "Email or Username is required",
+            "identifier": "Email or username is required",
             "password": "Password must be at least 8 characters"
           }
         },
@@ -81,39 +81,42 @@
           "username": "Username",
           "email": "Email",
           "password": "Password",
-          "passwordConfirm": "Confirm Password",
-          "verifyUuid": "Verify UUID",
-          "verifyCode": "Verify Code",
-          "getVerifyCode": "Get Verify Code",
-          "verifyCodeSent": "Verify Code Sent",
-          "verifyCodeSentError": "Verify Code Sent Error",
+          "passwordConfirm": "Confirm password",
+          "verifyUuid": "Verification UUID",
+          "verifyCode": "Verification code",
+          "getVerifyCode": "Get code",
           "register": "Register",
-          "success": "Register successfully",
+          "verifyCodeSent": "Verification code sent",
+          "verifyCodeSentError": "Failed to send verification code",
+          "success": "Registered successfully",
           "validation": {
             "username": "Username is required",
             "email": "Please enter a valid email address",
-            "password": "Password is required",
-            "passwordConfirm": "Confirm Password is required",
-            "passwordRegex": "Password must be at least 8 characters and contain at least one letter, one number, and one uppercase letter",
-            "passwordDiff": "Password and Confirm Password are not the same",
-            "verifyUuid": "Verify UUID is required",
-            "verifyCode": "Verify Code is required"
+            "password": "Password must be at least 8 characters",
+            "passwordConfirm": "Confirm password must be at least 8 characters",
+            "passwordRegex": "Password must be at least 8 characters and include at least one letter, one number, and one uppercase letter",
+            "passwordDiff": "Password and confirm password do not match",
+            "verifyUuid": "Verification UUID is required",
+            "verifyCode": "Verification code is required"
           }
         }
       },
       "Uploader": {
         "FileUploader": {
-          "dropzone": "Drop file here or click to select file",
+          "dropzone": "Click or drag files here to upload",
+          "dropzoneSupportFileFormat": "Supported formats: zip/rar/7z/tar/gzip",
           "status": "Status",
           "Idle": "Idle",
           "Hashing": "Hashing",
           "Initializing": "Initializing",
           "Uploading": "Uploading",
           "Paused": "Paused",
-          "Completing": "Completing",
+          "Completing": "Finalizing",
           "Completed": "Completed",
-          "Aborted": "Aborted",
-          "Error": "Error"
+          "Aborted": "Canceled",
+          "Error": "Error",
+          "invalidFileFormat": "Unsupported file format",
+          "fileMismatch": "Please select the same file to continue"
         },
         "UploadController": {
           "start": "Start",
@@ -123,7 +126,7 @@
         },
         "UploadProgress": {
           "speed": "Speed",
-          "eta": "Remaining"
+          "eta": "Time remaining"
         }
       }
     },
@@ -133,67 +136,79 @@
         "upload": "Upload",
         "edit": "Edit this game",
         "addToFavorites": "Add to favorites",
-        "favorited": "Favorited",
+        "favorited": "Added to favorites",
         "removeFromFavorites": "Remove from favorites",
         "goToDiscussion": "Go to discussion",
         "GameUploadDialog": {
           "title": "Upload Game",
-          "alert1Title": "Attention Required",
-          "alert1Description": "You can upload the game resources file here. The file you upload will be stored on the server of Shionlib, and provided to all users for download.\nPlease note that you will not receive any benefits from this.\nOnce the upload process is completed successfully, you will not be able to revoke this upload, and you will not be able to delete the files stored on the server of Shionlib, the final ownership of the files belongs to the Shionlib.",
-          "alert2Title": "Upload Notice",
-          "alert2Description": "Uploading files will consume your \"Upload Quota\". After the upload process starts, the corresponding file size quota will be pre-deducted. If the upload process is not completed successfully, the quota will not be consumed.\nThe game file needs to be packaged in a [b]single[/b] zip file, and [b]cannot be set to a password[/b].\nAfter the upload is completed, the system will check the file and finally upload it to S3, and the download information will be updated after all processes are completed.\nPlease do not refresh or close the page during the upload process.",
+          "alert1Title": "Notice",
+          "alert1Description": "You can upload the game package here. Files you upload will be stored on Shionlib servers and made available for all users to download. Once the upload completes successfully, it cannot be revoked and the files stored on Shionlib servers cannot be deleted.",
+          "alert2Title": "Upload Guidelines",
+          "alert2Description": "Uploading files consumes your \"upload quota\". When the upload starts, quota equal to the file size will be reserved. If the upload does not finish successfully, the quota will be returned after verification.\nPackage the game into a [b]single[/b] zip/rar/7z/tar/gzip file and [b]do not set a password[/b].\nAfter the upload completes, the system will verify the file and then push it to S3. Download information will be updated when all steps finish.\nDo not refresh or close the page during the upload.",
           "platform": "Platform",
-          "platformPlaceholder": "Select the running platform of the resource",
+          "platformPlaceholder": "Select the target platform for this resource",
           "language": "Language",
-          "languagePlaceholder": "Select the game language of the resource",
-          "note": "Note",
-          "notePlaceholder": "Enter the note information (if any)",
+          "languagePlaceholder": "Select the game's language",
+          "note": "Notes",
+          "notePlaceholder": "Enter notes (optional)",
           "submit": "Submit",
-          "waitForUploadCompleted": "Wait for the file to be uploaded",
-          "success": "Submit success",
+          "waitForUploadCompleted": "Waiting for file upload to complete",
+          "success": "Submitted successfully",
           "validation": {
             "platform": "Platform is required",
             "language": "Language is required",
-            "note": "Note must be less than 255 characters"
+            "note": "Notes must be at most 255 characters"
           }
+        },
+        "UploadQuota": {
+          "title": "Upload quota",
+          "size": "Total size",
+          "used": "Used",
+          "remaining": "Remaining"
+        },
+        "OnGoingSession": {
+          "title": "On Going Session",
+          "expires": "Expires",
+          "resume": "Resume from the same file",
+          "cancel": "Cancel"
         }
       },
       "GameContent": {
-        "gameDetail": "Game Detail",
-        "gameCharacter": "Game Character"
+        "gameDetail": "Game details",
+        "gameCharacter": "Characters"
       },
       "GameDetail": {
-        "tags": "Game Tags",
-        "introduction": "Game Introduction",
-        "chooseLanguage": "Choose Language",
+        "tags": "Tags",
+        "introduction": "Overview",
+        "chooseLanguage": "Choose language",
         "images": "Screenshots",
-        "staff": "Staffs",
-        "extraInfo": "Extra Info"
+        "staff": "Staff",
+        "extraInfo": "Additional info"
       },
       "GameCharacterItem": {
-        "noImage": "No Image",
+        "noImage": "No image",
         "gender": "Gender",
-        "roleMain": "Main",
-        "rolePrimary": "Primary",
-        "roleSide": "Side",
-        "roleAppears": "Appears",
-        "blood_type": "Blood Type",
-        "height": "Height(cm)",
-        "weight": "Weight(kg)",
-        "bust": "Bust(cm)",
-        "waist": "Waist(cm)",
-        "hips": "Hips(cm)",
+        "roleMain": "Protagonist",
+        "rolePrimary": "Primary character",
+        "roleSide": "Supporting character",
+        "roleAppears": "Cameo",
+        "blood_type": "Blood type",
+        "height": "Height (cm)",
+        "weight": "Weight (kg)",
+        "bust": "Bust (cm)",
+        "waist": "Waist (cm)",
+        "hips": "Hips (cm)",
         "cup": "Cup",
-        "age": "Age(years)",
-        "birthday": "Birthday(month/day)",
+        "age": "Age (years)",
+        "birthday": "Birthday (MM/DD)",
         "female": "Female",
         "male": "Male",
-        "non_binary": "Non-Binary",
-        "ambiguous": "Ambiguous",
-        "characterDetailDialogTitle": "Character Detail"
+        "non_binary": "Non-binary",
+        "ambiguous": "Unknown / Androgynous",
+        "characterDetailDialogTitle": "Character details"
       },
       "GameLinks": {
-        "links": "Related Links"
+        "links": "Related links"
       }
     }
   }

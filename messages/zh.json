@@ -103,6 +103,7 @@
       "Uploader": {
         "FileUploader": {
           "dropzone": "点击或拖拽文件到此处",
+          "dropzoneSupportFileFormat": "支持的文件格式：zip/rar/7z/tar/gzip",
           "status": "状态",
           "Idle": "空闲",
           "Hashing": "计算哈希",
@@ -112,7 +113,9 @@
           "Completing": "合并分片",
           "Completed": "完成",
           "Aborted": "取消",
-          "Error": "错误"
+          "Error": "错误",
+          "invalidFileFormat": "文件格式不支持",
+          "fileMismatch": "请选择相同文件继续"
         },
         "UploadController": {
           "start": "开始",
@@ -138,9 +141,9 @@
         "GameUploadDialog": {
           "title": "上传游戏",
           "alert1Title": "注意",
-          "alert1Description": "你可以在此上传游戏本体，你上传的文件将会储存到Shionlib服务器中，并提供给所有用户下载。\n请注意，你并不会因此获得任何收益。\n一旦上传流程成功完成，你将无法撤销此次上传，也无法删除储存在Shionlib服务器中的文件，文件的最终所有权归Shionlib所有。",
+          "alert1Description": "你可以在此上传游戏本体，你上传的文件将会储存到Shionlib服务器中，并提供给所有用户下载。\n一旦上传流程成功完成，你将无法撤销此次上传，也无法删除储存在Shionlib服务器中的文件。",
           "alert2Title": "上传须知",
-          "alert2Description": "上传文件会消耗你的 “上传额度”，上传开始后，对应文件大小的额度会被预先扣除。如果上传流程没有成功完成，则不会消耗额度。\n游戏文件需要被打包在[b]单个[/b] zip 文件中，并且[b]不能设置密码[/b] 。\n上传完成后，系统将会对文件进行检查并最终上传至S3，下载信息会在所有流程完成后更新。\n上传进行过程中，请勿刷新或关闭页面。",
+          "alert2Description": "上传文件会消耗你的 “上传额度”，上传开始后，对应文件大小的额度会被预先扣除。如果上传流程没有成功完成，系统会在确认后退还额度。\n游戏文件需要被打包在[b]单个[/b] zip/rar/7z/tar/gzip 文件中，并且[b]不能设置密码[/b] 。\n上传完成后，系统将会对文件进行检查并最终上传至S3，下载信息会在所有流程完成后更新。\n上传进行过程中，请勿刷新或关闭页面。",
           "platform": "平台",
           "platformPlaceholder": "选择该资源的运行平台",
           "language": "语言",
@@ -155,6 +158,18 @@
             "language": "语言不能为空",
             "note": "备注不能超过255个字符"
           }
+        },
+        "UploadQuota": {
+          "title": "上传额度",
+          "size": "总大小",
+          "used": "已使用",
+          "remaining": "剩余"
+        },
+        "OnGoingSession": {
+          "title": "进行中的上传",
+          "expires": "过期",
+          "resume": "选择相同文件继续",
+          "cancel": "取消"
         }
       },
       "GameContent": {

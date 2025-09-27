@@ -11,6 +11,7 @@ import '@/public/assets/styles/globals.css'
 import { toastOptions } from './toastOption'
 import ShionlibTopBar from '@/components/common/top-bar/TopBar'
 import { GlobalDialogs } from '@/components/common/user/GlobalDialogs'
+import { TokenRefresh } from '@/components/common/auth/TokenRefresh'
 
 export default async function ShionlibLayout({ children, params }: Readonly<Props>) {
   const { locale } = await params
@@ -21,6 +22,7 @@ export default async function ShionlibLayout({ children, params }: Readonly<Prop
   return (
     <html lang={langMap[locale as SupportedLocales]} suppressHydrationWarning>
       <body>
+        <TokenRefresh />
         <NextIntlClientProvider>
           <div className="relative flex flex-col items-center justify-center min-h-screen bg-radial">
             <ShionlibProvider>

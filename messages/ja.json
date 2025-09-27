@@ -4,7 +4,7 @@
     "titleShort": "Shionlib",
     "template": "%s - Shionlib",
     "description": "Shionlib - 無料・オープンソース・気軽に使えるギャルゲーリソースサイト",
-    "keywords": ["Shionlib", "ギャルゲー", "リソース", "無料", "オープンソース", "気軽"],
+    "keywords": ["Shionlib", "ギャルゲー", "リソースサイト", "無料", "オープンソース", "気軽"],
     "og": {
       "title": "Shionlib - ギャルゲーリソースサイト！",
       "description": "Shionlib - 無料・オープンソース・気軽に使えるギャルゲーリソースサイト"
@@ -13,15 +13,15 @@
   "Pages": {
     "GlobalError": {
       "title": "エラー",
-      "details": "エラーが発生しました。",
+      "details": "エラーが発生しました。後でもう一度お試しください。",
       "back": "戻る",
-      "reset": "リセット"
+      "reset": "再読み込み"
     },
     "GlobalNotFound": {
       "title": "ページが見つかりません",
       "details": "お探しのページは存在しないか、移動された可能性があります。",
       "back": "戻る",
-      "reset": "リセット"
+      "reset": "再読み込み"
     },
     "NotFound": {
       "title": "ページが見つかりません",
@@ -33,15 +33,15 @@
       "Error": {
         "ErrorView": {
           "defaultTitle": "エラー",
-          "defaultDetails": "エラーが発生しました。",
+          "defaultDetails": "エラーが発生しました。後でもう一度お試しください。",
           "back": "戻る",
-          "reset": "リセット"
+          "reset": "再読み込み"
         }
       },
       "TopBar": {
         "ThemeSwitcher": {
-          "label": "テーマ設定",
-          "system": "システム",
+          "label": "テーマ",
+          "system": "システムに合わせる",
           "light": "ライト",
           "dark": "ダーク"
         }
@@ -49,12 +49,12 @@
       "User": {
         "LoginOrRegisteDialog": {
           "button": "ログイン",
-          "loginTitle": "ログイン",
-          "registerTitle": "登録",
+          "loginTitle": "Shionlib にログイン",
+          "registerTitle": "新規登録",
           "loginDescription": "アカウントをお持ちでない方は",
-          "loginDescriptionLinkText": "こちら",
-          "registerDescription": "アカウントをお持ちの方は",
-          "registerDescriptionLinkText": "こちら"
+          "loginDescriptionLinkText": "今すぐ登録",
+          "registerDescription": "すでに Shionlib のアカウントをお持ちの方は",
+          "registerDescriptionLinkText": "今すぐログイン"
         },
         "LogoutDialog": {
           "button": "ログアウト",
@@ -69,61 +69,64 @@
           "identifier": "メールアドレスまたはユーザー名",
           "password": "パスワード",
           "login": "ログイン",
-          "success": "ログイン成功",
+          "success": "ログインしました",
           "validation": {
-            "identifier": "ユーザー名またはメールアドレスが空です",
-            "password": "パスワードは8文字以上必要です"
+            "identifier": "ユーザー名またはメールアドレスは必須です",
+            "password": "パスワードは8文字以上が必要です"
           }
         },
         "Register": {
-          "title": "登録",
-          "description": "登録",
+          "title": "新規登録",
+          "description": "新規登録",
           "username": "ユーザー名",
           "email": "メールアドレス",
           "password": "パスワード",
-          "passwordConfirm": "確認パスワード",
-          "verifyUuid": "検証コードUUID",
-          "verifyCode": "検証コード",
-          "getVerifyCode": "検証コードを取得",
-          "verifyCodeSent": "検証コードが送信されました",
-          "verifyCodeSentError": "検証コード送信に失敗しました",
+          "passwordConfirm": "パスワード（確認）",
+          "verifyUuid": "認証UUID",
+          "verifyCode": "認証コード",
+          "getVerifyCode": "認証コードを送信",
           "register": "登録",
-          "success": "登録成功",
+          "verifyCodeSent": "認証コードを送信しました",
+          "verifyCodeSentError": "認証コードの送信に失敗しました",
+          "success": "登録が完了しました",
           "validation": {
-            "username": "ユーザー名が空です",
+            "username": "ユーザー名は必須です",
             "email": "有効なメールアドレスを入力してください",
-            "password": "パスワードは8文字以上必要です",
-            "passwordConfirm": "確認パスワードは8文字以上必要です",
-            "passwordRegex": "パスワードは8文字以上必要で、少なくとも1つの英字、1つの数字、1つの大文字が含まれている必要があります",
-            "passwordDiff": "パスワードと確認パスワードが一致しません",
-            "verifyUuid": "検証コードUUIDが空です",
-            "verifyCode": "検証コードが空です"
+            "password": "パスワードは8文字以上が必要です",
+            "passwordConfirm": "確認用パスワードは8文字以上が必要です",
+            "passwordRegex": "パスワードは8文字以上で、英字・数字・大文字をそれぞれ少なくとも1文字含めてください",
+            "passwordDiff": "パスワードと確認用パスワードが一致しません",
+            "verifyUuid": "認証UUIDは必須です",
+            "verifyCode": "認証コードは必須です"
           }
         }
       },
       "Uploader": {
         "FileUploader": {
-          "dropzone": "ファイルをここにドラッグ&ドロップするか、クリックしてファイルを選択してください",
+          "dropzone": "ここにドラッグ＆ドロップするか、クリックしてファイルを選択",
+          "dropzoneSupportFileFormat": "対応形式：zip/rar/7z/tar/gzip",
           "status": "ステータス",
-          "Idle": "空閒",
-          "Hashing": "ハッシュ計算",
-          "Initializing": "初期化",
+          "Idle": "待機",
+          "Hashing": "ハッシュ計算中",
+          "Initializing": "初期化中",
           "Uploading": "アップロード中",
-          "Paused": "一時停止",
-          "Completing": "チャンクの結合",
+          "Paused": "一時停止中",
+          "Completing": "最終処理",
           "Completed": "完了",
-          "Aborted": "キャンセル",
-          "Error": "エラー"
+          "Aborted": "中止",
+          "Error": "エラー",
+          "invalidFileFormat": "非対応のファイル形式です",
+          "fileMismatch": "同じファイルから続ける"
         },
         "UploadController": {
           "start": "開始",
           "pause": "一時停止",
-          "resume": "続行",
+          "resume": "再開",
           "cancel": "キャンセル"
         },
         "UploadProgress": {
           "speed": "速度",
-          "eta": "残り"
+          "eta": "残り時間"
         }
       }
     },
@@ -133,29 +136,41 @@
         "upload": "アップロード",
         "edit": "このゲームを編集",
         "addToFavorites": "お気に入りに追加",
-        "favorited": "お気に入り",
+        "favorited": "お気に入りに追加済み",
         "removeFromFavorites": "お気に入りから削除",
-        "goToDiscussion": "討論に移動",
+        "goToDiscussion": "ディスカッションへ",
         "GameUploadDialog": {
           "title": "ゲームをアップロード",
           "alert1Title": "注意",
-          "alert1Description": "ここでゲームリソースファイルをアップロードできます。アップロードしたファイルは、Shionlibサーバーに保存され、すべてのユーザーがダウンロードできるようになります。\nこのアップロードは、Shionlibの所有権に属します。\nアップロードが成功すると、アップロードを取り消すことができなくなり、Shionlibサーバーに保存されたファイルを削除することもできなくなります。",
-          "alert2Title": "注意",
-          "alert2Description": "アップロードする前に、ゲームの著作権を所有しているか、著作権所有者からアップロードの許可を得ていることを確認してください。著作権侵害の申し立てがあった場合、Shionlibは関連するコンテンツを削除し、アカウントを停止する権利を留保します。\nアップロード中は、ページをリロードしたり、ページを閉じたりしないでください。",
+          "alert1Description": "ここでゲームパッケージをアップロードできます。アップロードしたファイルは Shionlib のサーバーに保存され、すべてのユーザーがダウンロードできるようになります。アップロードが正常に完了すると取り消すことはできず、保存されたファイルを削除することもできません。",
+          "alert2Title": "アップロードの注意事項",
+          "alert2Description": "ファイルのアップロードは「アップロードクォータ」を消費します。アップロード開始時に、ファイルサイズに相当するクォータが先に確保されます。アップロードが最後まで完了しなかった場合は、確認後にクォータが返還されます。\nゲームファイルは[b]1つの[/b] zip/rar/7z/tar/gzip ファイルにまとめ、[b]パスワードは設定しないでください[/b]。\nアップロード完了後、システムがファイルを検査して S3 に転送します。すべての処理が完了するとダウンロード情報が更新されます。\nアップロード中はページを再読み込みしたり閉じたりしないでください。",
           "platform": "プラットフォーム",
-          "platformPlaceholder": "リソースの実行プラットフォームを選択",
+          "platformPlaceholder": "対象プラットフォームを選択",
           "language": "言語",
-          "languagePlaceholder": "リソースのゲーム言語を選択",
-          "note": "注意",
-          "notePlaceholder": "注意事項を入力してください",
-          "submit": "確認",
-          "waitForUploadCompleted": "ファイルがアップロードされるのを待ってください",
-          "success": "アップロード成功",
+          "languagePlaceholder": "ゲームの言語を選択",
+          "note": "備考",
+          "notePlaceholder": "備考（任意）を入力",
+          "submit": "送信",
+          "waitForUploadCompleted": "アップロードの完了を待機中",
+          "success": "送信しました",
           "validation": {
             "platform": "プラットフォームは必須です",
             "language": "言語は必須です",
-            "note": "注意事項は255文字以内で入力してください"
+            "note": "備考は255文字以内で入力してください"
           }
+        },
+        "UploadQuota": {
+          "title": "アップロードクォータ",
+          "size": "総サイズ",
+          "used": "使用済み",
+          "remaining": "残り"
+        },
+        "OnGoingSession": {
+          "title": "進行中のアップロード",
+          "expires": "期限",
+          "resume": "同じファイルから続ける",
+          "cancel": "キャンセル"
         }
       },
       "GameContent": {
@@ -163,33 +178,33 @@
         "gameCharacter": "キャラクター"
       },
       "GameDetail": {
-        "tags": "ゲームタグ",
-        "introduction": "ゲーム紹介",
+        "tags": "タグ",
+        "introduction": "紹介",
         "chooseLanguage": "言語を選択",
         "images": "スクリーンショット",
         "staff": "スタッフ",
         "extraInfo": "その他の情報"
       },
       "GameCharacterItem": {
-        "noImage": "画像がありません",
+        "noImage": "画像なし",
         "gender": "性別",
         "roleMain": "主人公",
         "rolePrimary": "主要キャラクター",
-        "roleSide": "サイドキャラクター",
-        "roleAppears": "客串キャラクター",
+        "roleSide": "サブキャラクター",
+        "roleAppears": "カメオ",
         "blood_type": "血液型",
-        "height": "身長(cm)",
-        "weight": "体重(kg)",
-        "bust": "バスト(cm)",
-        "waist": "ウエスト(cm)",
-        "hips": "ヒップ(cm)",
+        "height": "身長（cm）",
+        "weight": "体重（kg）",
+        "bust": "バスト（cm）",
+        "waist": "ウエスト（cm）",
+        "hips": "ヒップ（cm）",
         "cup": "カップ",
-        "age": "年齢(歳)",
-        "birthday": "誕生日(月/日)",
+        "age": "年齢（歳）",
+        "birthday": "誕生日（月/日）",
         "female": "女性",
         "male": "男性",
-        "non_binary": "非二元性別",
-        "ambiguous": "中性/未知",
+        "non_binary": "ノンバイナリー",
+        "ambiguous": "不明／中性的",
         "characterDetailDialogTitle": "キャラクター詳細"
       },
       "GameLinks": {

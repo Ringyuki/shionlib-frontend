@@ -32,12 +32,10 @@ export function UploadController({
   onPause,
   onResume,
   onCancel,
-  disabled,
 }: UploadControllerProps) {
   const t = useTranslations('Components.Common.Uploader.UploadController')
-  const isWorking = phase === 'hashing' || phase === 'initializing' || phase === 'completing'
-  const canStart =
-    phase === 'idle' || phase === 'error' || phase === 'aborted' || phase === 'completed'
+
+  const canStart = phase === 'idle' || phase === 'error' || phase === 'aborted'
   const canPause = phase === 'uploading'
   const canResume = phase === 'paused'
   const canCancel =
@@ -50,7 +48,7 @@ export function UploadController({
         appearance="soft"
         intent="primary"
         onClick={onStart}
-        disabled={!canStart || disabled}
+        disabled={!canStart}
       >
         <span className="flex items-center gap-2">
           <UploadIcon className="size-4" />
@@ -62,7 +60,7 @@ export function UploadController({
         appearance="soft"
         intent="neutral"
         onClick={onPause}
-        disabled={!canPause || disabled}
+        disabled={!canPause}
       >
         <span className="flex items-center gap-2">
           <Pause className="size-4" />
@@ -74,7 +72,7 @@ export function UploadController({
         appearance="soft"
         intent="primary"
         onClick={onResume}
-        disabled={!canResume || disabled}
+        disabled={!canResume}
       >
         <span className="flex items-center gap-2">
           <Play className="size-4" />
@@ -86,7 +84,7 @@ export function UploadController({
         appearance="soft"
         intent="destructive"
         onClick={onCancel}
-        disabled={!canCancel || disabled}
+        disabled={!canCancel}
       >
         <span className="flex items-center gap-2">
           <Square className="size-4" />

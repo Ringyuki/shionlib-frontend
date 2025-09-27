@@ -1,0 +1,10 @@
+export enum AllowedLargeArchiveFileMimeTypes {
+  'application/zip' = 'application/zip',
+  'application/x-rar' = 'application/x-rar',
+  'application/vnd.rar' = 'application/vnd.rar',
+  'application/x-rar-compressed' = 'application/x-rar-compressed',
+  'application/x-7z-compressed' = 'application/x-7z-compressed',
+  'application/x-tar' = 'application/x-tar',
+  'application/x-gzip' = 'application/x-gzip',
+  'application/gzip' = 'application/gzip',
+}
