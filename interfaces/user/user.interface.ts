@@ -9,3 +9,9 @@ export interface User {
   role: number
   lang: SupportedLocales
 }
+
+export interface UserAvatar {
+  id: number
+  name: string
+  avatar: string
+}

@@ -49,11 +49,9 @@ export function UploadController({
         intent="primary"
         onClick={onStart}
         disabled={!canStart}
+        renderIcon={<UploadIcon className="size-4" />}
       >
-        <span className="flex items-center gap-2">
-          <UploadIcon className="size-4" />
-          <span>{t('start')}</span>
-        </span>
+        {t('start')}
       </Button>
       <Button
         className="w-full sm:w-auto"
@@ -61,11 +59,9 @@ export function UploadController({
         intent="neutral"
         onClick={onPause}
         disabled={!canPause}
+        renderIcon={<Pause className="size-4" />}
       >
-        <span className="flex items-center gap-2">
-          <Pause className="size-4" />
-          <span>{t('pause')}</span>
-        </span>
+        {t('pause')}
       </Button>
       <Button
         className="w-full sm:w-auto"
@@ -73,11 +69,9 @@ export function UploadController({
         intent="primary"
         onClick={onResume}
         disabled={!canResume}
+        renderIcon={<Play className="size-4" />}
       >
-        <span className="flex items-center gap-2">
-          <Play className="size-4" />
-          <span>{t('resume')}</span>
-        </span>
+        {t('resume')}
       </Button>
       <Button
         className="w-full sm:w-auto"
@@ -85,11 +79,9 @@ export function UploadController({
         intent="destructive"
         onClick={onCancel}
         disabled={!canCancel}
+        renderIcon={<Square className="size-4" />}
       >
-        <span className="flex items-center gap-2">
-          <Square className="size-4" />
-          <span>{t('cancel')}</span>
-        </span>
+        {t('cancel')}
       </Button>
     </div>
   )

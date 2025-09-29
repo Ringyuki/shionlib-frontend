@@ -9,7 +9,7 @@ interface GameLinksProps {
 }
 
 export const GameLinks = ({ link }: GameLinksProps) => {
-  const t = useTranslations('Components.Game.GameLinks')
+  const t = useTranslations('Components.Game.Description.GameLinks')
   const uniqueLink = link.filter((l, index, self) => index === self.findIndex(t => t.url === l.url))
   return (
     <>

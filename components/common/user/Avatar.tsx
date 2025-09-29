@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { Avatar as ShionlibAvatar, AvatarImage, AvatarFallback } from '@/components/shionui/Avatar'
-import { User } from '@/interfaces/user/user.interface'
+import { User, UserAvatar } from '@/interfaces/user/user.interface'
 import { cn } from '@/utils/cn'
 
 type UserAvatarProps = {
-  user: User
+  user: User | UserAvatar
 } & React.ComponentPropsWithoutRef<typeof ShionlibAvatar>
 
 export const Avatar = React.forwardRef<React.ComponentRef<typeof ShionlibAvatar>, UserAvatarProps>(

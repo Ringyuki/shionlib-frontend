@@ -47,7 +47,7 @@ export const shionlibRequest = () => {
       return data
     }
 
-    let data = await requestOnce()
+    const data = await requestOnce()
     if (data && data.code === 0) return data
 
     if (isFatalAuthByCode(data.code)) {

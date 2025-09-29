@@ -25,9 +25,9 @@ export const GameUploadDialog = ({
   onOpenChange,
   onUploadComplete,
 }: GameUploadDialogProps) => {
-  const t = useTranslations('Components.Game.GameActions.GameUploadDialog')
+  const t = useTranslations('Components.Game.Upload.GameUploadDialog')
   const [phase, setPhase] = useState<Phase>('idle')
-  const closable = phase === 'idle'
+  const closable = phase === 'idle' || phase === 'error' || phase === 'aborted'
   const [uploadSessionId, setUploadSessionId] = useState<number | null>(null)
   const [fileSize, setFileSize] = useState<number>(0)
   const handleFileSelected = (file: File) => {
@@ -92,6 +92,7 @@ export const GameUploadDialog = ({
         </Alert>
         <UploadQuota fileSize={fileSize} />
         <FileUploader
+          className="max-w-3xl"
           onPhaseChange={setPhase}
           onUploadComplete={setUploadSessionId}
           onFileSelected={handleFileSelected}

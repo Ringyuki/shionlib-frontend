@@ -5,8 +5,8 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/utils/cn'
 import { cva as createVariants } from 'class-variance-authority'
 import { motion, AnimatePresence } from 'motion/react'
-import { useState } from 'react'
-import { Loader2 } from 'lucide-react'
+import { useState, Children, isValidElement } from 'react'
+import { Loader2, LoaderCircle } from 'lucide-react'
 import { useAuthDialogStore } from '@/store/authDialogStore'
 import { useShionlibUserStore } from '@/store/userStore'
 
@@ -268,6 +268,7 @@ type ShionButtonProps = React.ComponentProps<'button'> &
     asChild?: boolean
     loading?: boolean
     loginRequired?: boolean
+    renderIcon?: React.ReactNode | (() => React.ReactNode)
   }
 
 function Button({
@@ -280,6 +281,7 @@ function Button({
   disabled,
   children,
   loginRequired = false,
+  renderIcon,
   ...props
 }: ShionButtonProps) {
   const [ripples, setRipples] = useState<Ripple[]>([])
@@ -306,9 +308,10 @@ function Button({
 
   return (
     <Comp
+      type="button"
       data-slot="button"
       disabled={isDisabled}
-      onMouseDown={e => {
+      onPointerDown={e => {
         handleLoginRequired()
         if (!isDisabled) {
           addRipple(e)
@@ -324,37 +327,103 @@ function Button({
       )}
       {...props}
     >
-      <motion.span
-        className="relative z-10 flex items-center"
-        layout="position"
-        transition={{ duration: 0.2, ease: [0.05, 0.7, 0.1, 1] }}
-      >
-        <AnimatePresence mode="wait">
-          {loading && (
-            <motion.span
-              key="loading-icon"
-              initial={{ opacity: 0, scale: 0.8, width: 0, marginRight: 0 }}
-              animate={{ opacity: 1, scale: 1, width: 16, marginRight: 4 }}
-              exit={{ opacity: 0, scale: 0.8, width: 0, marginRight: 0 }}
-              transition={{ duration: 0.2, ease: [0.05, 0.7, 0.1, 1] }}
-              className="flex items-center overflow-hidden"
-            >
-              <Loader2 className="size-4 animate-spin" />
-            </motion.span>
-          )}
-        </AnimatePresence>
+      {(() => {
+        const childArray = Children.toArray(children)
+        const slotIconChild = childArray.find(
+          child =>
+            isValidElement(child) &&
+            ((child.props as any)?.slot === 'icon' ||
+              (child.props as any)?.['data-slot'] === 'icon'),
+        ) as React.ReactElement | undefined
 
-        <motion.span
-          layout
-          transition={{
-            duration: 0.2,
-            ease: [0.05, 0.7, 0.1, 1],
-          }}
-          className="flex items-center"
-        >
-          {children}
-        </motion.span>
-      </motion.span>
+        const contentChildren = slotIconChild
+          ? childArray.filter(c => c !== slotIconChild)
+          : children
+
+        const iconFromProp =
+          typeof renderIcon === 'function' ? (renderIcon as () => React.ReactNode)() : renderIcon
+        const iconNode = iconFromProp ?? slotIconChild ?? null
+        const hasIcon = !!iconNode
+        const isIconOnly =
+          size === 'icon' &&
+          hasIcon &&
+          (!contentChildren || (Array.isArray(contentChildren) && contentChildren.length === 0))
+
+        return (
+          <motion.span
+            className="relative z-10 flex items-center"
+            layout="position"
+            initial={false}
+            transition={{ duration: 0.2, ease: [0.05, 0.7, 0.1, 1] }}
+          >
+            {hasIcon ? (
+              <span
+                className={cn(
+                  'relative inline-flex size-4 items-center justify-center',
+                  !isIconOnly && contentChildren ? 'mr-1.5' : undefined,
+                )}
+                aria-hidden="true"
+              >
+                <motion.span
+                  initial={false}
+                  animate={{ opacity: loading ? 1 : 0, scale: loading ? 1 : 0.85 }}
+                  transition={{ opacity: { duration: 0.14 }, scale: { duration: 0.18 } }}
+                  className="absolute inset-0 inline-flex items-center justify-center"
+                >
+                  <motion.span
+                    className="size-4 inline-flex items-center justify-center origin-center"
+                    animate={loading ? { rotate: 360 } : { rotate: 0 }}
+                    transition={
+                      loading ? { duration: 1, ease: 'linear', repeat: Infinity } : { duration: 0 }
+                    }
+                  >
+                    <LoaderCircle className="w-full h-full" />
+                  </motion.span>
+                </motion.span>
+                <motion.span
+                  initial={false}
+                  animate={{ opacity: loading ? 0 : 1, scale: loading ? 0.85 : 1 }}
+                  transition={{ opacity: { duration: 0.14 }, scale: { duration: 0.18 } }}
+                  className="inline-flex items-center justify-center"
+                >
+                  {iconNode}
+                </motion.span>
+              </span>
+            ) : (
+              <AnimatePresence initial={false}>
+                {loading && (
+                  <motion.span
+                    key="loading-icon"
+                    initial={{ opacity: 0, scale: 0.8, width: 0, marginRight: 0 }}
+                    animate={{ opacity: 1, scale: 1, width: 16, marginRight: 4 }}
+                    exit={{ opacity: 0, scale: 0.8, width: 0, marginRight: 0 }}
+                    transition={{ opacity: { duration: 0.14 }, scale: { duration: 0.18 } }}
+                    className="flex items-center overflow-hidden"
+                  >
+                    <motion.span
+                      className="size-4 inline-flex items-center justify-center origin-center"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, ease: 'linear', repeat: Infinity }}
+                    >
+                      <Loader2 className="w-full h-full" />
+                    </motion.span>
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            )}
+
+            {!isIconOnly && (
+              <motion.span
+                layout
+                transition={{ duration: 0.2, ease: [0.05, 0.7, 0.1, 1] }}
+                className="flex items-center"
+              >
+                {contentChildren}
+              </motion.span>
+            )}
+          </motion.span>
+        )
+      })()}
       <AnimatePresence>
         {ripples.map(({ id, x, y, size }) => (
           <motion.span

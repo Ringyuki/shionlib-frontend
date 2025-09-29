@@ -18,7 +18,7 @@ import { useTranslations } from 'next-intl'
 import { AllowedLargeArchiveFileMimeTypes } from '@/enums/upload/allowed-large-file.enum'
 import { toast } from 'react-hot-toast'
 import { Upload as UploadIcon } from 'lucide-react'
-import { OnGoingSession } from '@/components/game/description/game-actions/upload/OnGoingSession'
+import { OnGoingSession } from '@/components/game/upload/OnGoingSession'
 
 interface FileUploaderProps {
   className?: string
@@ -136,8 +136,13 @@ export function FileUploader({
       resetProgress(null)
     }
   }
-  const handleFileReject = (f: File) => {
+  const handleFileReject = (f: File, message: string) => {
+    console.log('file reject', message)
     console.log('file mime type', f.type)
+    if (message === 'File too small') {
+      toast.error(t('fileTooSmall', { size: 500 }))
+      return
+    }
     toast.error(t('invalidFileFormat'))
   }
   React.useEffect(() => {
@@ -185,7 +190,7 @@ export function FileUploader({
   const shionFileUploadDisabled = phase !== 'idle' || !!file
 
   return (
-    <Card className={cn('w-full max-w-3xl bg-transparent border-none rounded-md p-0', className)}>
+    <Card className={cn('w-full bg-transparent border-none rounded-md p-0', className)}>
       <OnGoingSession onResume={handleResumeFromSession} phase={phase} />
       <CardContent className="flex flex-col gap-4 p-0">
         <ShionFileUpload
@@ -196,6 +201,7 @@ export function FileUploader({
           multiple={false}
           onAccept={handleFilesAccepted}
           onValueChange={handleFilesValueChange}
+          minSize={1024 * 1024 * 500}
           onFileReject={handleFileReject}
         >
           <FileUploadDropzone className="min-h-28 w-full cursor-pointer">

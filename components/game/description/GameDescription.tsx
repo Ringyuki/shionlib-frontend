@@ -18,7 +18,7 @@ interface GameDescriptionProps {
 }
 
 export const GameDescription = ({ game }: GameDescriptionProps) => {
-  const t = useTranslations('Components.Game.GameDetail')
+  const t = useTranslations('Components.Game.Description.GameDetail')
   const locale = useLocale()
   const langMap = { en: 'en', ja: 'jp', zh: 'zh' } as const
   const lang = langMap[locale as keyof typeof langMap] ?? 'jp'

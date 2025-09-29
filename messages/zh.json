@@ -4,7 +4,16 @@
     "titleShort": "书音的图书馆",
     "template": "%s - 书音的图书馆",
     "description": "书音的图书馆 - 免费、开源、零门槛的 Galgame 资源站",
-    "keywords": ["书音的图书馆", "Galgame", "资源站", "免费", "开源", "零门槛"],
+    "keywords": [
+      "书音的图书馆",
+      "Visual Novel",
+      "Galgame",
+      "视觉小说",
+      "资源站",
+      "免费",
+      "开源",
+      "零门槛"
+    ],
     "og": {
       "title": "书音的图书馆 - Galgame 资源站！",
       "description": "书音的图书馆 - 免费、开源、零门槛的 Galgame 资源站"
@@ -115,6 +124,7 @@
           "Aborted": "取消",
           "Error": "错误",
           "invalidFileFormat": "文件格式不支持",
+          "fileTooSmall": "文件大小不能小于 {size}MB",
           "fileMismatch": "请选择相同文件继续"
         },
         "UploadController": {
@@ -130,14 +140,55 @@
       }
     },
     "Game": {
-      "GameActions": {
+      "Actions": {
         "download": "下载",
         "upload": "上传",
         "edit": "编辑此游戏",
         "addToFavorites": "添加到收藏",
         "favorited": "已收藏",
         "removeFromFavorites": "取消收藏",
-        "goToDiscussion": "前往讨论",
+        "goToDiscussion": "前往讨论"
+      },
+      "Description": {
+        "GameCharacterItem": {
+          "noImage": "无图片",
+          "gender": "性别",
+          "roleMain": "主角",
+          "rolePrimary": "主要角色",
+          "roleSide": "配角",
+          "roleAppears": "客串",
+          "blood_type": "血型",
+          "height": "身高(cm)",
+          "weight": "体重(kg)",
+          "bust": "胸围(cm)",
+          "waist": "腰围(cm)",
+          "hips": "臀围(cm)",
+          "cup": "罩杯",
+          "age": "年龄(岁)",
+          "birthday": "生日(月/日)",
+          "female": "女",
+          "male": "男",
+          "non_binary": "非二元性别",
+          "ambiguous": "中性/未知",
+          "characterDetailDialogTitle": "角色详情"
+        },
+        "GameLinks": {
+          "links": "相关链接"
+        },
+        "GameDetail": {
+          "tags": "游戏标签",
+          "introduction": "游戏介绍",
+          "chooseLanguage": "选择语言",
+          "images": "游戏图片",
+          "staff": "制作人员",
+          "extraInfo": "其他信息"
+        },
+        "GameContent": {
+          "gameDetail": "游戏详情",
+          "gameCharacter": "出场角色"
+        }
+      },
+      "Upload": {
         "GameUploadDialog": {
           "title": "上传游戏",
           "alert1Title": "注意",
@@ -172,42 +223,22 @@
           "cancel": "取消"
         }
       },
-      "GameContent": {
-        "gameDetail": "游戏详情",
-        "gameCharacter": "出场角色"
-      },
-      "GameDetail": {
-        "tags": "游戏标签",
-        "introduction": "游戏介绍",
-        "chooseLanguage": "选择语言",
-        "images": "游戏图片",
-        "staff": "制作人员",
-        "extraInfo": "其他信息"
-      },
-      "GameCharacterItem": {
-        "noImage": "无图片",
-        "gender": "性别",
-        "roleMain": "主角",
-        "rolePrimary": "主要角色",
-        "roleSide": "配角",
-        "roleAppears": "客串",
-        "blood_type": "血型",
-        "height": "身高(cm)",
-        "weight": "体重(kg)",
-        "bust": "胸围(cm)",
-        "waist": "腰围(cm)",
-        "hips": "臀围(cm)",
-        "cup": "罩杯",
-        "age": "年龄(岁)",
-        "birthday": "生日(月/日)",
-        "female": "女",
-        "male": "男",
-        "non_binary": "非二元性别",
-        "ambiguous": "中性/未知",
-        "characterDetailDialogTitle": "角色详情"
-      },
-      "GameLinks": {
-        "links": "相关链接"
+      "Download": {
+        "GameDownloadDialog": {
+          "title": "下载"
+        },
+        "GameDownloadDrawer": {
+          "title": "下载"
+        },
+        "GameDownloadContent": {
+          "alertTitle": "注意",
+          "alertDescription": "以下资源均由 Shionlib 用户上传，请自行鉴别文件安全性。\n下载链接有效期为 60 分钟，请确保在有效期内完成下载。"
+        },
+        "GameDownloadFileItem": {
+          "downloadStarted": "下载已开始",
+          "pushToAria2": "推送到 Aria2",
+          "normalDownload": "普通下载"
+        }
       }
     }
   }

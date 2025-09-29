@@ -6,13 +6,14 @@ import { Progress } from '@/components/shionui/Progress'
 import { UploadQuota as UploadQuotaType } from '@/interfaces/upload/upload-quota.interface'
 import { useEffect, useState, useRef } from 'react'
 import { cn } from '@/utils/cn'
+import { formatBytes } from '@/utils/bytes-format'
 
 interface UploadQuotaProps {
   fileSize: number
 }
 
 export const UploadQuota = ({ fileSize }: UploadQuotaProps) => {
-  const t = useTranslations('Components.Game.GameActions.UploadQuota')
+  const t = useTranslations('Components.Game.Upload.UploadQuota')
   const [used, setUsed] = useState<number>(0)
   const [size, setSize] = useState<number>(0)
   const [calcUsed, setCalcUsed] = useState<number>(0)
@@ -50,18 +51,6 @@ export const UploadQuota = ({ fileSize }: UploadQuotaProps) => {
 
   const isExceeded = calcUsed > size
   const percent = size && calcUsed ? (calcUsed / size) * 100 : 0
-
-  const formatBytes = (bytes: number) => {
-    if (!Number.isFinite(bytes)) return '0 B'
-    const units = ['B', 'KB', 'MB', 'GB', 'TB']
-    let i = 0
-    let n = bytes
-    while (n >= 1024 && i < units.length - 1) {
-      n /= 1024
-      i++
-    }
-    return `${n.toFixed(1)} ${units[i]}`
-  }
 
   return (
     <div className="flex flex-col gap-2">

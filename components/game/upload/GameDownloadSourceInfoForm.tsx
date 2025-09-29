@@ -25,6 +25,7 @@ import {
   LanguageOptions,
 } from '@/interfaces/game/game.interface'
 import { Button } from '@/components/shionui/Button'
+import { cn } from '@/utils/cn'
 
 const platformValues = PlatformOptions.map(option => option.value) as [Platform, ...Platform[]]
 const languageValues = LanguageOptions.map(option => option.value) as [Language, ...Language[]]
@@ -36,15 +37,17 @@ export const gameDownloadSourceSchemaType = z.object({
 })
 
 interface GameDownloadSourceInfoFormProps {
+  className?: string
   onSubmit: (data: z.infer<typeof gameDownloadSourceSchemaType>) => void
   loading: boolean
 }
 
 export const GameDownloadSourceInfoForm = ({
+  className,
   onSubmit,
   loading,
 }: GameDownloadSourceInfoFormProps) => {
-  const t = useTranslations('Components.Game.GameActions.GameUploadDialog')
+  const t = useTranslations('Components.Game.Upload.GameUploadDialog')
 
   const gameDownloadSourceSchema = z.object({
     platform: z.enum(platformValues).array().min(1, t('validation.platform')),
@@ -66,7 +69,7 @@ export const GameDownloadSourceInfoForm = ({
     onSubmit(data)
   }
   return (
-    <div className="flex flex-col">
+    <div className={cn('flex flex-col', className)}>
       <Form {...form}>
         <form className="space-y-4" onSubmit={form.handleSubmit(handleSubmit)}>
           <FormField

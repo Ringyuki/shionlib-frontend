@@ -5,7 +5,7 @@ import { GameTitle } from './GameTitle'
 import { GameDeveloper } from './GameDeveloper'
 import { GamePlatform } from './GamePlatform'
 import { GameReleaseTime } from './GameReleaseTime'
-import { GameActions } from './GameActions'
+import { GameActions } from '../actions/GameActions'
 import { getPreferredContent } from './helpers/getPreferredContent'
 import { getLocale } from 'next-intl/server'
 

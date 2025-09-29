@@ -7,7 +7,7 @@ interface GameExtraInfoProps {
 }
 
 export const GameExtraInfo = ({ extra_info }: GameExtraInfoProps) => {
-  const t = useTranslations('Components.Game.GameDetail')
+  const t = useTranslations('Components.Game.Description.GameDetail')
 
   return (
     extra_info.length > 0 && (

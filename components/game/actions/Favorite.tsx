@@ -14,7 +14,7 @@ interface FavoriteProps {
 }
 
 export const Favorite = ({ isFavorite, gameId }: FavoriteProps) => {
-  const t = useTranslations('Components.Game.GameActions')
+  const t = useTranslations('Components.Game.Actions')
   const [isFavorite_, setIsFavorite_] = useState(isFavorite)
 
   const [loading, setLoading] = useState(false)
@@ -43,9 +43,8 @@ export const Favorite = ({ isFavorite, gameId }: FavoriteProps) => {
           onClick={handleFavorite}
           loading={loading}
           loginRequired
-        >
-          <Heart className={cn(isFavorite_ && 'fill-destructive')} />
-        </Button>
+          renderIcon={() => <Heart className={cn(isFavorite_ && 'fill-destructive')} />}
+        />
       </TooltipTrigger>
       <TooltipContent>
         <span>{isFavorite_ ? t('removeFromFavorites') : t('addToFavorites')}</span>

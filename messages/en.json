@@ -1,13 +1,21 @@
 {
   "Meta": {
-    "title": "Shionlib - A Galgame Resource Site!",
+    "title": "Shionlib - A Visual Novel/Galgame Resource Site!",
     "titleShort": "Shionlib",
     "template": "%s - Shionlib",
-    "description": "Shionlib - Free, open-source, easy-access Galgame resource site",
-    "keywords": ["Shionlib", "Galgame", "Resource Site", "Free", "Open Source", "Easy Access"],
+    "description": "Shionlib - Free, open-source, easy-access Visual Novel/Galgame resource site",
+    "keywords": [
+      "Shionlib",
+      "Visual Novel",
+      "Galgame",
+      "Resource Site",
+      "Free",
+      "Open Source",
+      "Easy Access"
+    ],
     "og": {
-      "title": "Shionlib - A Galgame Resource Site!",
-      "description": "Shionlib - Free, open-source, easy-access Galgame resource site"
+      "title": "Shionlib - A Visual Novel/Galgame Resource Site!",
+      "description": "Shionlib - Free, open-source, easy-access Visual Novel/Galgame resource site"
     }
   },
   "Pages": {
@@ -116,6 +124,7 @@
           "Aborted": "Canceled",
           "Error": "Error",
           "invalidFileFormat": "Unsupported file format",
+          "fileTooSmall": "File size must be at least {size}MB",
           "fileMismatch": "Please select the same file to continue"
         },
         "UploadController": {
@@ -131,14 +140,55 @@
       }
     },
     "Game": {
-      "GameActions": {
+      "Actions": {
         "download": "Download",
         "upload": "Upload",
         "edit": "Edit this game",
         "addToFavorites": "Add to favorites",
         "favorited": "Added to favorites",
         "removeFromFavorites": "Remove from favorites",
-        "goToDiscussion": "Go to discussion",
+        "goToDiscussion": "Go to discussion"
+      },
+      "Description": {
+        "GameCharacterItem": {
+          "noImage": "No image",
+          "gender": "Gender",
+          "roleMain": "Protagonist",
+          "rolePrimary": "Primary character",
+          "roleSide": "Supporting character",
+          "roleAppears": "Cameo",
+          "blood_type": "Blood type",
+          "height": "Height (cm)",
+          "weight": "Weight (kg)",
+          "bust": "Bust (cm)",
+          "waist": "Waist (cm)",
+          "hips": "Hips (cm)",
+          "cup": "Cup",
+          "age": "Age (years)",
+          "birthday": "Birthday (MM/DD)",
+          "female": "Female",
+          "male": "Male",
+          "non_binary": "Non-binary",
+          "ambiguous": "Unknown / Androgynous",
+          "characterDetailDialogTitle": "Character details"
+        },
+        "GameLinks": {
+          "links": "Related links"
+        },
+        "GameContent": {
+          "gameDetail": "Game details",
+          "gameCharacter": "Characters"
+        },
+        "GameDetail": {
+          "tags": "Tags",
+          "introduction": "Overview",
+          "chooseLanguage": "Choose language",
+          "images": "Screenshots",
+          "staff": "Staff",
+          "extraInfo": "Additional info"
+        }
+      },
+      "Upload": {
         "GameUploadDialog": {
           "title": "Upload Game",
           "alert1Title": "Notice",
@@ -173,42 +223,22 @@
           "cancel": "Cancel"
         }
       },
-      "GameContent": {
-        "gameDetail": "Game details",
-        "gameCharacter": "Characters"
-      },
-      "GameDetail": {
-        "tags": "Tags",
-        "introduction": "Overview",
-        "chooseLanguage": "Choose language",
-        "images": "Screenshots",
-        "staff": "Staff",
-        "extraInfo": "Additional info"
-      },
-      "GameCharacterItem": {
-        "noImage": "No image",
-        "gender": "Gender",
-        "roleMain": "Protagonist",
-        "rolePrimary": "Primary character",
-        "roleSide": "Supporting character",
-        "roleAppears": "Cameo",
-        "blood_type": "Blood type",
-        "height": "Height (cm)",
-        "weight": "Weight (kg)",
-        "bust": "Bust (cm)",
-        "waist": "Waist (cm)",
-        "hips": "Hips (cm)",
-        "cup": "Cup",
-        "age": "Age (years)",
-        "birthday": "Birthday (MM/DD)",
-        "female": "Female",
-        "male": "Male",
-        "non_binary": "Non-binary",
-        "ambiguous": "Unknown / Androgynous",
-        "characterDetailDialogTitle": "Character details"
-      },
-      "GameLinks": {
-        "links": "Related links"
+      "Download": {
+        "GameDownloadDialog": {
+          "title": "Download"
+        },
+        "GameDownloadDrawer": {
+          "title": "Download"
+        },
+        "GameDownloadContent": {
+          "alertTitle": "Notice",
+          "alertDescription": "The following resources are uploaded by Shionlib users. Please verify the safety of the files yourself.\nThe download link is valid for 60 minutes, so please complete the download within the valid period."
+        },
+        "GameDownloadFileItem": {
+          "downloadStarted": "Download started",
+          "pushToAria2": "Push to Aria2",
+          "normalDownload": "Normal Download"
+        }
       }
     }
   }

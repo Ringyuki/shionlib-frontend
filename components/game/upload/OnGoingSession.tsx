@@ -21,7 +21,7 @@ interface OnGoingSessionProps {
 }
 
 export const OnGoingSession = ({ onResume, phase }: OnGoingSessionProps) => {
-  const t = useTranslations('Components.Game.GameActions.OnGoingSession')
+  const t = useTranslations('Components.Game.Upload.OnGoingSession')
   const locale = useLocale() as SupportedLocales
   const [onGoingSession, setOnGoingSession] = useState<UploadSession[]>([])
   useEffect(() => {
@@ -69,9 +69,8 @@ export const OnGoingSession = ({ onResume, phase }: OnGoingSessionProps) => {
                         appearance="soft"
                         size="icon"
                         onClick={() => onResume(session.upload_session_id)}
-                      >
-                        <StepForward className="size-3" />
-                      </Button>
+                        renderIcon={<StepForward className="size-3" />}
+                      />
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>{t('resume')}</p>
@@ -88,9 +87,8 @@ export const OnGoingSession = ({ onResume, phase }: OnGoingSessionProps) => {
                         appearance="soft"
                         size="icon"
                         onClick={() => handleCancel(session.upload_session_id)}
-                      >
-                        <Square className="size-3" />
-                      </Button>
+                        renderIcon={<Square className="size-3" />}
+                      />
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>{t('cancel')}</p>

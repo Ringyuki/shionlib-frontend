@@ -9,7 +9,7 @@ interface GameContentProps {
 }
 
 export const GameContent = async ({ game }: GameContentProps) => {
-  const t = await getTranslations('Components.Game.GameContent')
+  const t = await getTranslations('Components.Game.Description.GameContent')
   return (
     <div className="flex flex-col gap-4 shadow-xl bg-card-soft w-full rounded-md p-4">
       <div className="w-full">

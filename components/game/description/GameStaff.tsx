@@ -7,7 +7,7 @@ interface GameStaffProps {
 }
 
 export const GameStaff = ({ staffs }: GameStaffProps) => {
-  const t = useTranslations('Components.Game.GameDetail')
+  const t = useTranslations('Components.Game.Description.GameDetail')
   return (
     staffs.length > 0 && (
       <>

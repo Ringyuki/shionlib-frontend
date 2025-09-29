@@ -22,9 +22,13 @@ export const FileList = ({ phase }: FileListProps) => {
       <FileUploadItemPreview />
       <FileUploadItemMetadata />
       <FileUploadItemDelete disabled={phase !== 'idle'} asChild>
-        <Button appearance="soft" intent="destructive" size="icon" disabled={phase !== 'idle'}>
-          <Trash2 className="size-4" />
-        </Button>
+        <Button
+          appearance="soft"
+          intent="destructive"
+          size="icon"
+          disabled={phase !== 'idle'}
+          renderIcon={<Trash2 className="size-4" />}
+        />
       </FileUploadItemDelete>
     </FileUploadItem>
   ))

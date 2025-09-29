@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 import * as React from 'react'
 import { cn } from '@/utils/cn'
+import { formatBytes } from '@/utils/bytes-format'
 
 const ROOT_NAME = 'FileUpload'
 const DROPZONE_NAME = 'FileUploadDropzone'
@@ -295,6 +296,7 @@ interface FileUploadRootProps
   accept?: string
   maxFiles?: number
   maxSize?: number
+  minSize?: number
   dir?: Direction
   label?: string
   name?: string
@@ -318,6 +320,7 @@ function FileUploadRoot(props: FileUploadRootProps) {
     accept,
     maxFiles,
     maxSize,
+    minSize,
     dir: dirProp,
     label,
     name,
@@ -491,6 +494,13 @@ function FileUploadRoot(props: FileUploadRootProps) {
             rejected = true
             invalid = true
           }
+        }
+
+        if (minSize && file.size < minSize) {
+          rejectionMessage = 'File too small'
+          onFileReject?.(file, rejectionMessage)
+          rejected = true
+          invalid = true
         }
 
         if (maxSize && file.size > maxSize) {
@@ -954,7 +964,10 @@ function FileUploadItem(props: FileUploadItemProps) {
         data-slot="file-upload-item"
         dir={context.dir}
         {...itemProps}
-        className={cn('relative flex items-center gap-2.5 rounded-md border p-3', className)}
+        className={cn(
+          'relative flex items-center gap-2.5 rounded-md border p-3 flex-wrap',
+          className,
+        )}
       >
         {props.children}
         <span id={statusId} className="sr-only">
@@ -963,13 +976,6 @@ function FileUploadItem(props: FileUploadItemProps) {
       </ItemPrimitive>
     </FileUploadItemContext.Provider>
   )
-}
-
-function formatBytes(bytes: number) {
-  if (bytes === 0) return '0 B'
-  const sizes = ['B', 'KB', 'MB', 'GB', 'TB']
-  const i = Math.floor(Math.log(bytes) / Math.log(1024))
-  return `${(bytes / 1024 ** i).toFixed(i ? 1 : 0)} ${sizes[i]}`
 }
 
 function getFileIcon(file: File) {

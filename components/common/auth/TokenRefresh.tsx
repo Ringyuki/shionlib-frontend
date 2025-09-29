@@ -12,6 +12,7 @@ export const TokenRefresh = () => {
     setInterval(
       () => {
         if (isLogin && isBrowser) {
+          console.log('token refresh')
           shionlibRequest()
             .get('/user/me')
             .catch(() => {})
@@ -19,7 +20,7 @@ export const TokenRefresh = () => {
       },
       1000 * 60 * 10, // 10 minutes
     )
-  }, [])
+  }, [isLogin, isBrowser])
 
   return null
 }

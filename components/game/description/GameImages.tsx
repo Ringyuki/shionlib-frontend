@@ -9,7 +9,7 @@ interface GameImagesProps {
 }
 
 export const GameImages = ({ images }: GameImagesProps) => {
-  const t = useTranslations('Components.Game.GameDetail')
+  const t = useTranslations('Components.Game.Description.GameDetail')
 
   return (
     images.length > 0 && (
