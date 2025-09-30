@@ -57,8 +57,8 @@ export async function generateMetadata({
       images: [`/api/og?l=${locale}`],
     },
     robots: {
-      index: true,
-      follow: true,
+      index: false,
+      follow: false,
     },
   }
 }
