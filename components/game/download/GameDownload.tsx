@@ -4,6 +4,8 @@ import { GameDownloadResource } from '@/interfaces/game/game-download-resource'
 import { GameDownloadDrawer } from './GameDownloadDrawer'
 import { GameDownloadDialog } from './GameDownloadDialog'
 import { useMedia } from 'react-use'
+import { toast } from 'react-hot-toast'
+import { useTranslations } from 'next-intl'
 
 interface GameDownloadDrawerProps {
   game_id: number
@@ -19,6 +21,7 @@ export const GameDownload = ({
   onOpenChange,
 }: GameDownloadDrawerProps) => {
   const isMobile = useMedia('(max-width: 1536px)', false)
+  const t = useTranslations('Components.Game.Download.GameDownload')
 
   const [downloadResources, setDownloadResources] = useState<GameDownloadResource[]>([])
   const [isReady, setIsReady] = useState(false)
@@ -35,6 +38,13 @@ export const GameDownload = ({
         const res = await shionlibRequest().get<GameDownloadResource[]>(
           `/game/${game_id}/download-source`,
         )
+        if (res.data?.length === 0) {
+          setIsReady(false)
+          onLoadingChange(false)
+          onOpenChange(false)
+          toast.error(t('noDownloadSource'))
+          return
+        }
         if (!isCancelled) {
           setDownloadResources(res.data ?? [])
           setIsReady(true)

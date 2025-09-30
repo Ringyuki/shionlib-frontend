@@ -397,13 +397,20 @@ function Button({
                     initial={{ opacity: 0, scale: 0.8, width: 0, marginRight: 0 }}
                     animate={{ opacity: 1, scale: 1, width: 16, marginRight: 4 }}
                     exit={{ opacity: 0, scale: 0.8, width: 0, marginRight: 0 }}
-                    transition={{ opacity: { duration: 0.14 }, scale: { duration: 0.18 } }}
+                    transition={{
+                      type: 'tween',
+                      ease: [0.2, 0.8, 0.2, 1],
+                      opacity: { duration: 0.14 },
+                      scale: { duration: 0.18 },
+                      width: { duration: 0.14 },
+                      marginRight: { duration: 0.14 },
+                    }}
                     className="flex items-center overflow-hidden"
                   >
                     <motion.span
                       className="size-4 inline-flex items-center justify-center origin-center"
                       animate={{ rotate: 360 }}
-                      transition={{ duration: 1, ease: 'linear', repeat: Infinity }}
+                      transition={{ duration: 0.8, ease: 'linear', repeat: Infinity }}
                     >
                       <Loader2 className="w-full h-full" />
                     </motion.span>

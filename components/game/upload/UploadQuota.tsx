@@ -19,11 +19,8 @@ export const UploadQuota = ({ fileSize }: UploadQuotaProps) => {
   const [calcUsed, setCalcUsed] = useState<number>(0)
   const [loading, setLoading] = useState(false)
 
-  const didFetch = useRef(false)
   useEffect(() => {
     const fetchQuota = async () => {
-      if (didFetch.current) return
-      didFetch.current = true
       setLoading(true)
       try {
         const res = await shionlibRequest().get<UploadQuotaType>('/uploads/quota')

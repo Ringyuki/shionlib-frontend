@@ -22,6 +22,8 @@ export const GameActions = ({ game }: GameActionsProps) => {
   const [downloadOpen, setDownloadOpen] = useState(false)
   const [downloadBtnLoading, setDownloadBtnLoading] = useState(false)
 
+  const [editLoading, setEditLoading] = useState(false)
+
   return (
     <>
       <div className="flex gap-2 items-center flex-wrap">
@@ -44,7 +46,18 @@ export const GameActions = ({ game }: GameActionsProps) => {
             >
               {t('upload')}
             </Button>
-            <Button intent="primary" appearance="ghost" loginRequired renderIcon={<Pencil />}>
+            <Button
+              intent="primary"
+              appearance="ghost"
+              loginRequired
+              loading={editLoading}
+              onClick={async () => {
+                setEditLoading(true)
+                await new Promise(resolve => setTimeout(resolve, 2000))
+                setEditLoading(false)
+              }}
+              renderIcon={<Pencil />}
+            >
               {t('edit')}
             </Button>
           </div>

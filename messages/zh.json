@@ -234,10 +234,17 @@
           "alertTitle": "注意",
           "alertDescription": "以下资源均由 Shionlib 用户上传，请自行鉴别文件安全性。\n下载链接有效期为 60 分钟，请确保在有效期内完成下载。"
         },
+        "GameDownload": {
+          "noDownloadSource": "暂无下载资源"
+        },
         "GameDownloadFileItem": {
           "downloadStarted": "下载已开始",
           "pushToAria2": "推送到 Aria2",
-          "normalDownload": "普通下载"
+          "normalDownload": "普通下载",
+          "aria2NotReady": "无法连接到 Aria2",
+          "aria2Unauthorized": "未授权",
+          "aria2FailedToFetch": "无法连接到 Aria2",
+          "aria2UnknownError": "未知错误"
         }
       }
     }

@@ -234,10 +234,17 @@
           "alertTitle": "Notice",
           "alertDescription": "The following resources are uploaded by Shionlib users. Please verify the safety of the files yourself.\nThe download link is valid for 60 minutes, so please complete the download within the valid period."
         },
+        "GameDownload": {
+          "noDownloadSource": "No download source"
+        },
         "GameDownloadFileItem": {
           "downloadStarted": "Download started",
           "pushToAria2": "Push to Aria2",
-          "normalDownload": "Normal Download"
+          "normalDownload": "Normal Download",
+          "aria2NotReady": "Cannot connect to Aria2",
+          "aria2Unauthorized": "Unauthorized",
+          "aria2FailedToFetch": "Cannot connect to Aria2",
+          "aria2UnknownError": "Unknown error"
         }
       }
     }

@@ -9,6 +9,7 @@ import { shionlibRequest } from '@/utils/shionlib-request'
 import { useState } from 'react'
 import { GameDownloadResourceFileLink } from '@/interfaces/game/game-download-resource'
 import { toast } from 'react-hot-toast'
+import { addUrl } from './helpers/aria2'
 
 interface GameDownloadFileItemProps {
   file: GameDownloadResourceFile
@@ -31,12 +32,21 @@ export const GameDownloadFileItem = ({ file }: GameDownloadFileItemProps) => {
 
   const handlePushToAria2 = async () => {
     let url = downloadLink
+    setPushToAria2Loading(true)
     if (!url) {
-      setPushToAria2Loading(true)
       url = await getDownloadLink()
-      setPushToAria2Loading(false)
     }
     if (!url) return
+
+    const res = await addUrl(url, file.file_name)
+    if (!res.success) {
+      toast.error(t(res.message ?? 'aria2UnknownError'))
+      setPushToAria2Loading(false)
+      return
+    }
+
+    toast.success(t('downloadStarted'))
+    setPushToAria2Loading(false)
   }
   const handleNormalDownload = async () => {
     let url = downloadLink
