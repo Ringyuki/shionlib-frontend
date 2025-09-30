@@ -2,8 +2,9 @@ module.exports = {
   apps: [
     {
       name: 'shionlib-frontend',
-      script: 'npm',
-      args: 'run start',
+      script: 'pnpm',
+      args: 'start',
+      port: 2333,
       instances: 1,
       autorestart: true,
       watch: false,
