@@ -1,10 +1,12 @@
+const path = require('path')
+
 module.exports = {
   apps: [
     {
       name: 'shionlib-frontend',
-      script: 'pnpm',
-      args: 'start',
       port: 2333,
+      cwd: path.join(__dirname),
+      script: './.next/standalone/server.js',
       instances: 1,
       autorestart: true,
       watch: false,
