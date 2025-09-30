@@ -10,7 +10,7 @@ import { useTranslations } from 'next-intl'
 import { Skeleton } from '@/components/shionui/Skeleton'
 import { Link } from '@/i18n/navigation'
 
-const startContent = () => {
+const StartContent = () => {
   return (
     <Link href="/" className="flex items-center h-full p-5.5 pl-0">
       <img className="h-full" src="/assets/images/shionlib-logo.png" alt="Shionlib Logo" />
@@ -18,7 +18,7 @@ const startContent = () => {
   )
 }
 
-const endContent = () => {
+const EndContent = () => {
   const { user } = useShionlibUserStore()
   const isLoggedIn = !!user?.id
   const t = useTranslations('Components.Common.User.LoginOrRegisteDialog')
@@ -60,8 +60,8 @@ const ShionlibTopBar = () => {
         dark:bg-[rgba(0,0,0,0.5)] bg-[rgba(255,255,255,0.5)] backdrop-blur-lg
       "
       >
-        {startContent()}
-        {endContent()}
+        {StartContent()}
+        {EndContent()}
       </div>
     </div>
   )

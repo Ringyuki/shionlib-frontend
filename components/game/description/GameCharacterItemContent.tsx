@@ -68,7 +68,22 @@ export const GameCharacterItemContent = ({
           )}
           <div
             className="text-sm break-words break-all"
-            dangerouslySetInnerHTML={{ __html: intro.replace(/\n/g, '<br />') }}
+            dangerouslySetInnerHTML={{
+              __html: intro
+                .replace(/\n/g, '<br />')
+                .replace(/\[b\]/g, '<span class="font-bold">')
+                .replace(/\[\/b\]/g, '</span>')
+                .replace(
+                  /\[spoiler\]/g,
+                  '<span class="text-black dark:text-white bg-black dark:bg-white hover:text-white/80 dark:hover:text-black/80 transition-all duration-200">',
+                )
+                .replace(/\[\/spoiler\]/g, '</span>')
+                .replace(
+                  /\[mask\]/g,
+                  '<span class="text-black dark:text-white bg-black dark:bg-white hover:text-white/80 dark:hover:text-black/80 transition-all duration-200">',
+                )
+                .replace(/\[\/mask\]/g, '</span>'),
+            }}
           />
           {extra_info.length > 0 && (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
