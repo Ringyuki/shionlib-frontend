@@ -4,7 +4,7 @@ module.exports = {
   apps: [
     {
       name: 'shionlib-frontend',
-      port: 2333,
+      port: 2948,
       cwd: path.join(__dirname),
       script: './.next/standalone/server.js',
       instances: 1,
