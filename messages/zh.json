@@ -238,6 +238,9 @@
           "noDownloadSource": "暂无下载资源"
         },
         "GameDownloadFileItem": {
+          "onlyVisibleForYourself": "仅自己可见",
+          "processing": "处理中",
+          "pending": "等待上传",
           "downloadStarted": "下载已开始",
           "pushToAria2": "推送到 Aria2",
           "normalDownload": "普通下载",

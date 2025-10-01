@@ -14,6 +14,7 @@ export interface GameDownloadResource {
 export interface GameDownloadResourceFile {
   id: number
   type: number
+  file_status: number
   file_name: string
   file_size: number
   file_url?: string

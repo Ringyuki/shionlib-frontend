@@ -238,6 +238,9 @@
           "noDownloadSource": "No download source"
         },
         "GameDownloadFileItem": {
+          "onlyVisibleForYourself": "Only visible for yourself",
+          "processing": "Processing",
+          "pending": "Pending",
           "downloadStarted": "Download started",
           "pushToAria2": "Push to Aria2",
           "normalDownload": "Normal Download",

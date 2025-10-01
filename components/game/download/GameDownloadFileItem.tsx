@@ -1,6 +1,6 @@
 import { GameDownloadResourceFile } from '@/interfaces/game/game-download-resource'
 import { useTranslations } from 'next-intl'
-import { FileArchive, CloudCheck, Hash, Zap, Globe } from 'lucide-react'
+import { FileArchive, CloudCheck, Hash, Zap, Globe, CloudUpload } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/shionui/Tooltip'
 import { Button } from '@/components/shionui/Button'
 import { Badge } from '@/components/shionui/Badge'
@@ -77,9 +77,27 @@ export const GameDownloadFileItem = ({ file }: GameDownloadFileItemProps) => {
           </span>
           <span className="text-muted-foreground text-xs">{formatBytes(file.file_size)}</span>
           {file.type === 1 && (
-            <Badge size="sm" variant="warning">
-              <CloudCheck className="size-3" />
-              S3
+            <Badge
+              size="sm"
+              variant={
+                file.file_status === 3 ? 'success' : file.file_status === 2 ? 'warning' : 'neutral'
+              }
+            >
+              {file.file_status === 3 ? (
+                <CloudCheck className="size-3" />
+              ) : (
+                <CloudUpload className="size-3" />
+              )}
+              {file.file_status === 3
+                ? 'S3'
+                : file.file_status === 2
+                  ? t('processing')
+                  : t('pending')}
+            </Badge>
+          )}
+          {file.file_status !== 3 && (
+            <Badge size="sm" variant="neutral">
+              {t('onlyVisibleForYourself')}
             </Badge>
           )}
         </div>
@@ -88,40 +106,42 @@ export const GameDownloadFileItem = ({ file }: GameDownloadFileItemProps) => {
           <span className="break-words break-all">{file.file_hash}</span>
         </div>
       </div>
-      <div className="flex gap-2 w-full md:w-auto">
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              intent="primary"
-              appearance="soft"
-              size="icon"
-              className="size-8"
-              loading={pushToAria2Loading}
-              onClick={handlePushToAria2}
-              renderIcon={<Zap />}
-            />
-          </TooltipTrigger>
-          <TooltipContent>
-            <span>{t('pushToAria2')}</span>
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              intent="neutral"
-              appearance="ghost"
-              size="icon"
-              className="size-8 text-secondary-foreground/50"
-              loading={normalDownloadLoading}
-              onClick={handleNormalDownload}
-              renderIcon={<Globe />}
-            />
-          </TooltipTrigger>
-          <TooltipContent>
-            <span>{t('normalDownload')}</span>
-          </TooltipContent>
-        </Tooltip>
-      </div>
+      {file.file_status === 3 && (
+        <div className="flex gap-2 w-full md:w-auto">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                intent="primary"
+                appearance="soft"
+                size="icon"
+                className="size-8"
+                loading={pushToAria2Loading}
+                onClick={handlePushToAria2}
+                renderIcon={<Zap />}
+              />
+            </TooltipTrigger>
+            <TooltipContent>
+              <span>{t('pushToAria2')}</span>
+            </TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                intent="neutral"
+                appearance="ghost"
+                size="icon"
+                className="size-8 text-secondary-foreground/50"
+                loading={normalDownloadLoading}
+                onClick={handleNormalDownload}
+                renderIcon={<Globe />}
+              />
+            </TooltipTrigger>
+            <TooltipContent>
+              <span>{t('normalDownload')}</span>
+            </TooltipContent>
+          </Tooltip>
+        </div>
+      )}
     </div>
   )
 }
