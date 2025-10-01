@@ -30,7 +30,16 @@ export const GameCard = async ({ game }: GameCardProps) => {
       style={{ aspectRatio: aspect, marginBottom: '1rem' }}
     >
       <div className="relative w-full overflow-hidden rounded-md" style={{ aspectRatio: aspect }}>
-        <FadeImage src={cover.url} alt={title} aspectRatio={aspect} sizes={sizes} />
+        <FadeImage
+          src={
+            cover.url.startsWith('http')
+              ? cover.url
+              : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + cover.url
+          }
+          alt={title}
+          aspectRatio={aspect}
+          sizes={sizes}
+        />
       </div>
       <div className="flex flex-col gap-2">
         <h3 className="text-sm font-medium">{title}</h3>

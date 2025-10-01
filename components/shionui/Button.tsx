@@ -312,11 +312,13 @@ function Button({
       data-slot="button"
       disabled={isDisabled}
       onPointerDown={e => {
-        handleLoginRequired()
         if (!isDisabled) {
           addRipple(e)
         }
         props.onMouseDown?.(e)
+      }}
+      onMouseDown={e => {
+        handleLoginRequired()
       }}
       className={cn(
         base,

@@ -14,6 +14,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'lain.bgm.tv',
       },
+      {
+        protocol: 'https',
+        hostname: process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_HOST!,
+      },
     ],
   },
   rewrites: async () => {

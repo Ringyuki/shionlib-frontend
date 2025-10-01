@@ -30,7 +30,11 @@ export const GameCharacterItemContent = ({
       >
         {character.image ? (
           <FadeImage
-            src={character.image}
+            src={
+              character.image.startsWith('http')
+                ? character.image
+                : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + character.image
+            }
             alt={name}
             aspectRatio="3 / 4"
             className="w-full h-full object-contain"

@@ -20,7 +20,16 @@ export const GameImages = ({ images }: GameImagesProps) => {
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
           {images.map(image => (
-            <ZoomImage key={image.url} src={image.url} alt={image.url} aspectRatio="16 / 9" />
+            <ZoomImage
+              key={image.url}
+              src={
+                image.url.startsWith('http')
+                  ? image.url
+                  : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + image.url
+              }
+              alt={image.url}
+              aspectRatio="16 / 9"
+            />
           ))}
         </div>
       </>

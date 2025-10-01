@@ -29,7 +29,7 @@ export const GameDownloadDrawer = ({
       shouldScaleBackground
       setBackgroundColorOnScale={false}
     >
-      <DrawerContent>
+      <DrawerContent className="min-h-[50vh]">
         <DrawerHeader>
           <DrawerTitle>{t('title')}</DrawerTitle>
         </DrawerHeader>

@@ -27,7 +27,11 @@ export const GameHeader = async ({ game }: { game: GameData }) => {
         style={{ aspectRatio: aspect }}
       >
         <FadeImage
-          src={cover.url}
+          src={
+            cover.url.startsWith('http')
+              ? cover.url
+              : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + cover.url
+          }
           alt={title}
           height={300}
           fill={false}

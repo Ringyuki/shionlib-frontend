@@ -57,11 +57,11 @@
       "User": {
         "LoginOrRegisteDialog": {
           "button": "登录",
-          "loginTitle": "登录到书音的图书馆",
+          "loginTitle": "登录到 Shionlib",
           "registerTitle": "注册",
           "loginDescription": "还没有账号？",
           "loginDescriptionLinkText": "立即注册",
-          "registerDescription": "已有书音的图书馆账号？",
+          "registerDescription": "已有 Shionlib 账号？",
           "registerDescriptionLinkText": "立即登录"
         },
         "LogoutDialog": {
