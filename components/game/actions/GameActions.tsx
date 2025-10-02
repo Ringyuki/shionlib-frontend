@@ -58,7 +58,7 @@ export const GameActions = ({ game }: GameActionsProps) => {
               }}
               renderIcon={<Pencil />}
             >
-              {t('edit')}
+              <span className="hidden md:block">{t('edit')}</span>
             </Button>
           </div>
           <Separator orientation="vertical" className="h-4! hidden md:block" />

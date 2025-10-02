@@ -264,7 +264,7 @@ html {
 
 @layer utilities {
   body[data-scroll-locked] .scroll-adjust {
-    margin-right: var(--remove-body-scroll-bar-size);
+    margin-right: var(--removed-body-scroll-bar-size);
   }
 }
 

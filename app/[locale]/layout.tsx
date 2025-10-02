@@ -34,7 +34,11 @@ export default async function ShionlibLayout({ children, params }: Readonly<Prop
                 {children}
               </div>
               <GlobalDialogs />
-              <Toaster toastOptions={toastOptions} />
+              <Toaster
+                toastOptions={toastOptions}
+                containerClassName="[body[data-scroll-locked]_&]:pr-[var(--removed-body-scroll-bar-size,0px)] scroll-adjust"
+                containerStyle={{ paddingRight: 'var(--removed-body-scroll-bar-size, 0px)' }}
+              />
             </ShionlibProvider>
           </div>
         </NextIntlClientProvider>

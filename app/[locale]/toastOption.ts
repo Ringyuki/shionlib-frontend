@@ -1,4 +1,6 @@
-export const toastOptions = {
+import { ToasterProps } from 'react-hot-toast'
+
+export const toastOptions: ToasterProps['toastOptions'] = {
   success: {
     iconTheme: {
       primary: 'var(--toast-text-success)',

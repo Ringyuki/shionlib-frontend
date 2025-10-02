@@ -244,10 +244,21 @@
           "downloadStarted": "下载已开始",
           "pushToAria2": "推送到 Aria2",
           "normalDownload": "普通下载",
-          "aria2NotReady": "无法连接到 Aria2",
+          "aria2NotReady": "无法连接到 Aria2，请检查设置是否正确",
           "aria2Unauthorized": "未授权",
-          "aria2FailedToFetch": "无法连接到 Aria2",
+          "aria2FailedToFetch": "无法连接到 Aria2，请检查设置是否正确",
           "aria2UnknownError": "未知错误"
+        }
+      },
+      "Cover": {
+        "GameCover": {
+          "viewAllCovers": "查看全部"
+        },
+        "GameCoverDialog": {
+          "title": "全部封面"
+        },
+        "GameCoverDrawer": {
+          "title": "全部封面"
         }
       }
     }

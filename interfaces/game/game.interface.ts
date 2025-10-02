@@ -1,5 +1,5 @@
 export interface GameCover {
-  language: string
+  language: Language
   url: string
   type: string
   dims: number[]
@@ -110,7 +110,7 @@ export interface GameData {
   intro_jp: string
   intro_zh: string
   intro_en: string
-  covers?: GameCover[]
+  covers: GameCover[]
   images: GameImage[]
   release_date: Date
   extra_info: ExtraInfo[]
@@ -184,13 +184,6 @@ export interface GameCharacterRelation {
   actor?: string
   role?: GameCharacterRole
   character: GameCharacter
-}
-
-export interface GameCover {
-  language: string
-  url: string
-  type: string
-  dims: number[]
 }
 
 export interface GameCoverRelation {

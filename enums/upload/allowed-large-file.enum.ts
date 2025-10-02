@@ -10,3 +10,5 @@ export enum AllowedLargeArchiveFileMimeTypes {
   'application/x-gzip' = 'application/x-gzip',
   'application/gzip' = 'application/gzip',
 }
+
+export const AllowedLargeArchiveFileExtensions = ['.zip', '.rar', '.7z', '.tar', '.gzip'] as const

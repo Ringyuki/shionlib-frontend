@@ -177,6 +177,7 @@ export const Register = ({ onSuccess }: RegisterProps) => {
                   value={(field.value ?? '').toUpperCase()}
                   onChange={val => field.onChange(val.toUpperCase())}
                   pasteTransformer={p => p.toUpperCase()}
+                  className="max-w-full!"
                 >
                   <InputOTPGroup>
                     <InputOTPSlot index={0} />

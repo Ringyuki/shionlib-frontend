@@ -15,7 +15,7 @@ import { cn } from '@/utils/cn'
 import { FileList } from './FileList'
 import { UploadStatus } from './UploadStatus'
 import { useTranslations } from 'next-intl'
-import { AllowedLargeArchiveFileMimeTypes } from '@/enums/upload/allowed-large-file.enum'
+import { AllowedLargeArchiveFileExtensions } from '@/enums/upload/allowed-large-file.enum'
 import { toast } from 'react-hot-toast'
 import { Upload as UploadIcon } from 'lucide-react'
 import { OnGoingSession } from '@/components/game/upload/OnGoingSession'
@@ -195,7 +195,7 @@ export function FileUploader({
       <CardContent className="flex flex-col gap-4 p-0">
         <ShionFileUpload
           value={file ? [file] : []}
-          accept={Object.values(AllowedLargeArchiveFileMimeTypes).join(',')}
+          accept={AllowedLargeArchiveFileExtensions.join(',')}
           maxFiles={1}
           disabled={shionFileUploadDisabled}
           multiple={false}
