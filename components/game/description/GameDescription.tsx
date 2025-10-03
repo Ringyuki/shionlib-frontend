@@ -12,6 +12,7 @@ import {
   SelectLabel,
 } from '@/components/shionui/Select'
 import { useEffect, useState } from 'react'
+import bbcodeToHtml from '@/utils/bbcode-format'
 
 interface GameDescriptionProps {
   game: GameData
@@ -59,7 +60,7 @@ export const GameDescription = ({ game }: GameDescriptionProps) => {
       </h2>
       <div
         className="text-sm break-words"
-        dangerouslySetInnerHTML={{ __html: selectedIntro.replace(/\n/g, '<br />') }}
+        dangerouslySetInnerHTML={{ __html: bbcodeToHtml(selectedIntro) }}
       />
     </>
   )

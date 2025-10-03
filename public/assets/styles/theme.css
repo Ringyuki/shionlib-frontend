@@ -144,6 +144,10 @@
   --platform-and-fg: #0a1b12;
   --platform-lin: #f5f5f5;
   --platform-lin-fg: #111111;
+  --platform-mac: #111111;
+  --platform-mac-fg: #ffffff;
+  --platform-ps2: #003791;
+  --platform-ps2-fg: #ffffff;
   --platform-ps3: #003791;
   --platform-ps3-fg: #ffffff;
   --platform-ps4: #00439c;
@@ -156,6 +160,14 @@
   --platform-swi-fg: #ffffff;
   --platform-dvd: var(--neutral-500);
   --platform-dvd-fg: #ffffff;
+  --platform-mob: #f5f5f5;
+  --platform-mob-fg: #111111;
+  --platform-web: #f5f5f5;
+  --platform-web-fg: #111111;
+  --platform-vnd: #f5f5f5;
+  --platform-vnd-fg: #111111;
+  --platform-drc: #f5f5f5;
+  --platform-drc-fg: #111111;
 }
 
 .dark {
@@ -228,6 +240,10 @@
   --platform-and-fg: #0a1b12;
   --platform-lin: #f5f5f5;
   --platform-lin-fg: #111111;
+  --platform-mac: #111111;
+  --platform-mac-fg: #ffffff;
+  --platform-ps2: #003791;
+  --platform-ps2-fg: #ffffff;
   --platform-ps3: #0a3f9c;
   --platform-ps3-fg: #ffffff;
   --platform-ps4: #0d4aac;
@@ -240,6 +256,14 @@
   --platform-swi-fg: #ffffff;
   --platform-dvd: var(--neutral-500);
   --platform-dvd-fg: #111827;
+  --platform-mob: #f5f5f5;
+  --platform-mob-fg: #111111;
+  --platform-web: #f5f5f5;
+  --platform-web-fg: #111111;
+  --platform-vnd: #f5f5f5;
+  --platform-vnd-fg: #111111;
+  --platform-drc: #f5f5f5;
+  --platform-drc-fg: #111111;
 }
 
 .skeleton-primary {

@@ -260,19 +260,21 @@ html {
   body {
     @apply bg-background text-foreground;
   }
+  .bbcode-url {
+    @apply text-primary hover:text-primary/80 transition-all duration-200;
+  }
 }
 
 @layer utilities {
   body[data-scroll-locked] .scroll-adjust {
     margin-right: var(--removed-body-scroll-bar-size);
   }
-}
-
-.rmiz-dialog [data-rmiz-modal-overlay='visible'] {
-  background-color: var(--background);
-}
-.rmiz-dialog {
-  button {
-    display: none;
+  .rmiz-dialog [data-rmiz-modal-overlay='visible'] {
+    background-color: var(--background);
+  }
+  .rmiz-dialog {
+    button {
+      display: none;
+    }
   }
 }

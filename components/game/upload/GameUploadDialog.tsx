@@ -11,6 +11,7 @@ import { z } from 'zod'
 import { toast } from 'react-hot-toast'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { UploadQuota } from './UploadQuota'
+import bbcodeToHtml from '@/utils/bbcode-format'
 
 interface GameUploadDialogProps {
   game_id: number
@@ -71,7 +72,7 @@ export const GameUploadDialog = ({
           <AlertDescription>
             <span
               dangerouslySetInnerHTML={{
-                __html: t('alert1Description').replace(/\n/g, '<br />'),
+                __html: bbcodeToHtml(t('alert1Description')),
               }}
             />
           </AlertDescription>
@@ -82,10 +83,7 @@ export const GameUploadDialog = ({
           <AlertDescription>
             <span
               dangerouslySetInnerHTML={{
-                __html: t('alert2Description')
-                  .replace(/\n/g, '<br />')
-                  .replace(/\[b\]/g, '<span class="font-bold">')
-                  .replace(/\[\/b\]/g, '</span>'),
+                __html: bbcodeToHtml(t('alert2Description')),
               }}
             />
           </AlertDescription>

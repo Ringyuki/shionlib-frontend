@@ -27,31 +27,59 @@ export interface ExtraInfo {
   key: string
   value: string
 }
-
-export type Platform = 'win' | 'ios' | 'and' | 'lin' | 'ps3' | 'ps4' | 'psv' | 'psp' | 'swi' | 'dvd'
+// ["win","lin","mac","ios","and","psp","ps2","drc","vnd","web","mob"]
+export type Platform =
+  | 'win'
+  | 'ios'
+  | 'and'
+  | 'lin'
+  | 'mac'
+  | 'ps2'
+  | 'ps3'
+  | 'ps4'
+  | 'psv'
+  | 'psp'
+  | 'swi'
+  | 'dvd'
+  | 'mob'
+  | 'web'
+  | 'vnd'
+  | 'drc'
 export enum PlatformEnum {
   win = 'Windows',
   ios = 'iOS',
   and = 'Android',
   lin = 'Linux',
+  mac = 'macOS',
+  ps2 = 'PlayStation 2',
   ps3 = 'PlayStation 3',
   ps4 = 'PlayStation 4',
   psv = 'PlayStation Vita',
   psp = 'PlayStation Portable',
   swi = 'Nintendo Switch',
   dvd = 'DVD',
+  mob = 'Mobile',
+  web = 'Web',
+  vnd = 'VNDS',
+  drc = 'DRC',
 }
 export const PlatformOptions: Array<{ label: string; value: Platform }> = [
   { value: 'win', label: 'Windows' },
   { value: 'ios', label: 'iOS' },
   { value: 'and', label: 'Android' },
   { value: 'lin', label: 'Linux' },
+  { value: 'mac', label: 'macOS' },
+  { value: 'ps2', label: 'PlayStation 2' },
   { value: 'ps3', label: 'PlayStation 3' },
   { value: 'ps4', label: 'PlayStation 4' },
   { value: 'psv', label: 'PlayStation Vita' },
   { value: 'psp', label: 'PlayStation Portable' },
   { value: 'swi', label: 'Nintendo Switch' },
   { value: 'dvd', label: 'DVD' },
+  { value: 'mob', label: 'Mobile' },
+  { value: 'web', label: 'Web' },
+  { value: 'vnd', label: 'VNDS' },
+  { value: 'drc', label: 'DRC' },
 ]
 
 export const platformNameMap: Record<Platform, string> = {
@@ -59,24 +87,36 @@ export const platformNameMap: Record<Platform, string> = {
   ios: 'iOS',
   and: 'Android',
   lin: 'Linux',
+  mac: 'macOS',
+  ps2: 'PlayStation 2',
   ps3: 'PlayStation 3',
   ps4: 'PlayStation 4',
   psv: 'PlayStation Vita',
   psp: 'PlayStation Portable',
   swi: 'Nintendo Switch',
   dvd: 'DVD',
+  mob: 'Mobile',
+  web: 'Web',
+  vnd: 'VNDS',
+  drc: 'DRC',
 }
 export const platformTokenMap: Record<Platform, { bg: string; fg: string }> = {
   win: { bg: 'var(--platform-win)', fg: 'var(--platform-win-fg)' },
   ios: { bg: 'var(--platform-ios)', fg: 'var(--platform-ios-fg)' },
   and: { bg: 'var(--platform-and)', fg: 'var(--platform-and-fg)' },
   lin: { bg: 'var(--platform-lin)', fg: 'var(--platform-lin-fg)' },
+  mac: { bg: 'var(--platform-mac)', fg: 'var(--platform-mac-fg)' },
+  ps2: { bg: 'var(--platform-ps2)', fg: 'var(--platform-ps2-fg)' },
   ps3: { bg: 'var(--platform-ps3)', fg: 'var(--platform-ps3-fg)' },
   ps4: { bg: 'var(--platform-ps4)', fg: 'var(--platform-ps4-fg)' },
   psv: { bg: 'var(--platform-psv)', fg: 'var(--platform-psv-fg)' },
   psp: { bg: 'var(--platform-psp)', fg: 'var(--platform-psp-fg)' },
   swi: { bg: 'var(--platform-swi)', fg: 'var(--platform-swi-fg)' },
   dvd: { bg: 'var(--platform-dvd)', fg: 'var(--platform-dvd-fg)' },
+  mob: { bg: 'var(--platform-mob)', fg: 'var(--platform-mob-fg)' },
+  web: { bg: 'var(--platform-web)', fg: 'var(--platform-web-fg)' },
+  vnd: { bg: 'var(--platform-vnd)', fg: 'var(--platform-vnd-fg)' },
+  drc: { bg: 'var(--platform-drc)', fg: 'var(--platform-drc-fg)' },
 }
 
 export type Language = 'jp' | 'zh' | 'en'
