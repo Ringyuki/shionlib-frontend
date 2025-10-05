@@ -29,6 +29,14 @@
     }
   },
   "Components": {
+    "ShionUI": {
+      "DatePicker": {
+        "pickADate": "日付を選択"
+      },
+      "TagsInput": {
+        "placeholder": "入力して Enter を押してください"
+      }
+    },
     "Common": {
       "Error": {
         "ErrorView": {
@@ -251,6 +259,49 @@
         },
         "GameCoverDrawer": {
           "title": "すべてのカバー"
+        }
+      },
+      "Edit": {
+        "EditLayout": {
+          "edit": "ゲーム情報を編集",
+          "description": "このページでゲーム情報を編集できます。編集可能なフィールドのみが表示されます。管理権限を取得するために管理者に申請できます。編集内容は記録され、誰でも閲覧できます。"
+        },
+        "EditTabsNav": {
+          "scalar": "基本情報",
+          "cover": "カバー",
+          "image": "画像",
+          "link": "リンク",
+          "developer": "開発者",
+          "character": "キャラクター"
+        },
+        "Scalar": {
+          "title_zh": "タイトル（中国語）",
+          "title_en": "タイトル（英語）",
+          "title_jp": "タイトル（日本語）",
+          "type": "タイプ",
+          "platform": "プラットフォーム",
+          "platformPlaceholder": "対象プラットフォームを選択",
+          "aliases": "別名",
+          "tags": "タグ",
+          "intro_zh": "紹介（中国語）",
+          "intro_en": "紹介（英語）",
+          "intro_jp": "紹介（日本語）",
+          "release_date": "発売日",
+          "extra_info": "その他の情報",
+          "extra_info_key": "キー",
+          "extra_info_key_placeholder": "キーを入力",
+          "extra_info_value": "値",
+          "extra_info_value_placeholder": "値を入力",
+          "add_extra_info": "その他の情報を追加",
+          "staffs": "スタッフ",
+          "staff_name": "名前",
+          "staff_name_placeholder": "名前を入力",
+          "staff_role": "役割",
+          "staff_role_placeholder": "役割を入力",
+          "add_staff": "スタッフを追加",
+          "nsfw": "NSFWかどうか",
+          "submit": "送信",
+          "success": "送信成功"
         }
       }
     }

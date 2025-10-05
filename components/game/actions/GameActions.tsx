@@ -1,15 +1,15 @@
 'use client'
 
 import { Button } from '@/components/shionui/Button'
-import { Pencil, Download, Upload, MessageSquareMore } from 'lucide-react'
+import { MessageSquareMore } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { GameData } from '@/interfaces/game/game.interface'
 import { Separator } from '@/components/shionui/Separator'
 import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/shionui/Tooltip'
+import { Download } from './Download'
+import { Upload } from './Upload'
 import { Favorite } from './Favorite'
-import { GameUpload } from '../upload/GameUpload'
-import { GameDownload } from '../download/GameDownload'
-import { useState } from 'react'
+import { Edit } from './Edit'
 
 interface GameActionsProps {
   game: GameData
@@ -17,49 +17,14 @@ interface GameActionsProps {
 
 export const GameActions = ({ game }: GameActionsProps) => {
   const t = useTranslations('Components.Game.Actions')
-
-  const [uploadOpen, setUploadOpen] = useState(false)
-  const [downloadOpen, setDownloadOpen] = useState(false)
-  const [downloadBtnLoading, setDownloadBtnLoading] = useState(false)
-
-  const [editLoading, setEditLoading] = useState(false)
-
   return (
     <>
       <div className="flex gap-2 items-center flex-wrap">
         <div className="flex gap-2 md:items-center flex-col md:flex-row items-start">
           <div className="flex gap-2 items-center">
-            <Button
-              intent="primary"
-              onClick={() => setDownloadOpen(true)}
-              loading={downloadBtnLoading}
-              renderIcon={<Download />}
-            >
-              {t('download')}
-            </Button>
-            <Button
-              intent="neutral"
-              appearance="outline"
-              loginRequired
-              onClick={() => setUploadOpen(true)}
-              renderIcon={<Upload />}
-            >
-              {t('upload')}
-            </Button>
-            <Button
-              intent="primary"
-              appearance="ghost"
-              loginRequired
-              loading={editLoading}
-              onClick={async () => {
-                setEditLoading(true)
-                await new Promise(resolve => setTimeout(resolve, 2000))
-                setEditLoading(false)
-              }}
-              renderIcon={<Pencil />}
-            >
-              <span className="hidden md:block">{t('edit')}</span>
-            </Button>
+            <Download game_id={game.id} />
+            <Upload game_id={game.id} />
+            <Edit game_id={game.id} />
           </div>
           <Separator orientation="vertical" className="h-4! hidden md:block" />
           <div className="flex gap-2 items-center">
@@ -81,18 +46,6 @@ export const GameActions = ({ game }: GameActionsProps) => {
           </div>
         </div>
       </div>
-      <GameUpload
-        game_id={game.id}
-        open={uploadOpen}
-        onOpenChange={setUploadOpen}
-        onUploadComplete={() => setUploadOpen(false)}
-      />
-      <GameDownload
-        game_id={game.id}
-        open={downloadOpen}
-        onOpenChange={setDownloadOpen}
-        onLoadingChange={setDownloadBtnLoading}
-      />
     </>
   )
 }

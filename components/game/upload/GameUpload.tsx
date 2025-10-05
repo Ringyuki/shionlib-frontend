@@ -10,7 +10,7 @@ interface GameUploadProps {
 }
 
 export const GameUpload = ({ game_id, open, onOpenChange, onUploadComplete }: GameUploadProps) => {
-  const isMobile = useMedia('(max-width: 1536px)', false)
+  const isMobile = useMedia('(max-width: 1024px)', false)
   return (
     <div className="hidden">
       {isMobile ? (

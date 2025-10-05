@@ -37,6 +37,14 @@
     }
   },
   "Components": {
+    "ShionUI": {
+      "DatePicker": {
+        "pickADate": "Pick a date"
+      },
+      "TagsInput": {
+        "placeholder": "Type and press Enter..."
+      }
+    },
     "Common": {
       "Error": {
         "ErrorView": {
@@ -259,6 +267,49 @@
         },
         "GameCoverDrawer": {
           "title": "All covers"
+        }
+      },
+      "Edit": {
+        "EditLayout": {
+          "edit": "Edit game information",
+          "description": "You can edit the game information on this page, only the fields you have permission to edit are displayed. You can apply to the administrator to get more fields editing permission. Your edits will be recorded, and everyone can view them."
+        },
+        "EditTabsNav": {
+          "scalar": "Basic Information",
+          "cover": "Covers",
+          "image": "Images",
+          "link": "Links",
+          "developer": "Developers",
+          "character": "Characters"
+        },
+        "Scalar": {
+          "title_zh": "Title (Chinese)",
+          "title_en": "Title (English)",
+          "title_jp": "Title (Japanese)",
+          "type": "Type",
+          "platform": "Platform",
+          "platformPlaceholder": "Select target platform",
+          "aliases": "Aliases",
+          "tags": "Tags",
+          "intro_zh": "Introduction (Chinese)",
+          "intro_en": "Introduction (English)",
+          "intro_jp": "Introduction (Japanese)",
+          "release_date": "Release date",
+          "extra_info": "Extra info",
+          "extra_info_key": "Key",
+          "extra_info_key_placeholder": "Enter key",
+          "extra_info_value": "Value",
+          "extra_info_value_placeholder": "Enter value",
+          "add_extra_info": "Add extra info",
+          "staffs": "Staffs",
+          "staff_name": "Name",
+          "staff_name_placeholder": "Enter name",
+          "staff_role": "Role",
+          "staff_role_placeholder": "Enter role",
+          "add_staff": "Add staff",
+          "nsfw": "Is NSFW",
+          "submit": "Submit",
+          "success": "Submitted successfully"
         }
       }
     }

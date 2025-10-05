@@ -1,5 +1,5 @@
 import { Badge } from '@/components/shionui/Badge'
-import { MdWindow, MdPhoneIphone, MdWeb } from 'react-icons/md'
+import { MdWindow, MdWeb } from 'react-icons/md'
 import { FaAndroid, FaLinux } from 'react-icons/fa'
 import {
   SiPlaystationvita,
@@ -29,10 +29,10 @@ const PlatformIconMap: Record<Platform, React.ElementType> = {
   psv: SiPlaystationvita,
   swi: SiNintendoswitch,
   dvd: FcDvdLogo,
-  mob: MdPhoneIphone,
+  mob: MdWeb,
   web: MdWeb,
-  vnd: MdPhoneIphone,
-  drc: MdPhoneIphone,
+  vnd: MdWeb,
+  drc: MdWeb,
 }
 interface GamePlatformProps {
   platform: Platform[]

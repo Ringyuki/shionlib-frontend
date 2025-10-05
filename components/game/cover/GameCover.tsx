@@ -23,7 +23,7 @@ export const GameCover = ({ covers, preferredCoverInfo, title }: GameCoverProps)
   const t = useTranslations('Components.Game.Cover.GameCover')
   const { cover: preferredCover, vertical, aspect } = preferredCoverInfo
   const width = vertical ? 200 : 450
-  const isMobile = useMedia('(max-width: 768px)')
+  const isMobile = useMedia('(max-width: 768px)', false)
   const [open, setOpen] = useState(false)
   return (
     <>
@@ -43,7 +43,7 @@ export const GameCover = ({ covers, preferredCoverInfo, title }: GameCoverProps)
           width={width}
           className="w-full! h-full"
         />
-        {covers.length > 1 && (
+        {covers.length > 0 && (
           <div className="absolute bottom-2 right-2 md:right-auto md:left-1/2 md:-translate-x-1/2 opacity-100 md:opacity-0 group-hover/cover:opacity-100 transition-all duration-200">
             <Button
               intent="secondary"

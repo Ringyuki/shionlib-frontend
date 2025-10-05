@@ -20,7 +20,7 @@ export const GameDownload = ({
   onLoadingChange,
   onOpenChange,
 }: GameDownloadDrawerProps) => {
-  const isMobile = useMedia('(max-width: 1536px)', false)
+  const isMobile = useMedia('(max-width: 1024px)', false)
   const t = useTranslations('Components.Game.Download.GameDownload')
 
   const [downloadResources, setDownloadResources] = useState<GameDownloadResource[]>([])

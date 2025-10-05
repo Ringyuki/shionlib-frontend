@@ -12,7 +12,7 @@ interface GlobalDialogState {
   closeLogoutDialog: () => void
 }
 
-export const useAuthDialogStore = create<GlobalDialogState>(set => ({
+export const useAuthDialogStore = create<GlobalDialogState>()(set => ({
   authDialogOpen: false,
   authDialogType: 'login',
   openAuthDialog: (type = 'login') => set({ authDialogOpen: true, authDialogType: type }),

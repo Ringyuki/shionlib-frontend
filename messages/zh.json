@@ -37,6 +37,14 @@
     }
   },
   "Components": {
+    "ShionUI": {
+      "DatePicker": {
+        "pickADate": "选择日期"
+      },
+      "TagsInput": {
+        "placeholder": "输入内容并按下回车确认"
+      }
+    },
     "Common": {
       "Error": {
         "ErrorView": {
@@ -259,6 +267,49 @@
         },
         "GameCoverDrawer": {
           "title": "全部封面"
+        }
+      },
+      "Edit": {
+        "EditLayout": {
+          "edit": "编辑游戏信息",
+          "description": "你可以在此页面编辑游戏信息，仅展示你有权限编辑的字段。你可以通过向管理员申请来获得更多字段的编辑权限。你的编辑会被记录，所有人都可以查看。"
+        },
+        "EditTabsNav": {
+          "scalar": "基本信息",
+          "cover": "封面",
+          "image": "图片",
+          "link": "相关链接",
+          "developer": "制作人员",
+          "character": "出场角色"
+        },
+        "Scalar": {
+          "title_zh": "标题（中文）",
+          "title_en": "标题（英语）",
+          "title_jp": "标题（日语）",
+          "type": "类型",
+          "platform": "平台",
+          "platformPlaceholder": "选择游戏的运行平台",
+          "aliases": "别名",
+          "tags": "标签",
+          "intro_zh": "介绍（中文）",
+          "intro_en": "介绍（英语）",
+          "intro_jp": "介绍（日语）",
+          "release_date": "发行日期",
+          "extra_info": "其他信息",
+          "extra_info_key": "键",
+          "extra_info_key_placeholder": "输入键",
+          "extra_info_value": "值",
+          "extra_info_value_placeholder": "输入值",
+          "add_extra_info": "添加其他信息",
+          "staffs": "制作人员",
+          "staff_name": "名称",
+          "staff_name_placeholder": "输入名称",
+          "staff_role": "角色",
+          "staff_role_placeholder": "输入角色",
+          "add_staff": "添加制作人员",
+          "nsfw": "是否NSFW",
+          "submit": "提交更改",
+          "success": "提交成功"
         }
       }
     }

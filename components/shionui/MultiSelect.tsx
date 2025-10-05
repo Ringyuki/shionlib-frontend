@@ -131,13 +131,15 @@ function MultiSelectValue({
   placeholder,
   separator = ', ',
   className,
+  resolveLabel,
 }: {
   placeholder?: React.ReactNode
   separator?: string
   className?: string
+  resolveLabel?: (value: string) => React.ReactNode
 }) {
   const { selectedValues, getLabel } = useMultiSelectContext()
-  const labels = selectedValues.map(v => getLabel(v))
+  const labels = selectedValues.map(v => resolveLabel?.(v) ?? getLabel(v))
   const hasValue = labels.length > 0
   return (
     <span data-slot="select-value" className={cn('truncate', className)}>

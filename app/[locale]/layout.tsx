@@ -8,7 +8,7 @@ import { langMap } from './metadata'
 import { SupportedLocales } from '@/config/i18n/supported'
 export { generateMetadata } from './metadata'
 import '@/public/assets/styles/globals.css'
-import { toastOptions } from './toastOption'
+import { toastProps } from './toastOption'
 import ShionlibTopBar from '@/components/common/top-bar/TopBar'
 import { GlobalDialogs } from '@/components/common/user/GlobalDialogs'
 import { TokenRefresh } from '@/components/common/auth/TokenRefresh'
@@ -34,11 +34,7 @@ export default async function ShionlibLayout({ children, params }: Readonly<Prop
                 {children}
               </div>
               <GlobalDialogs />
-              <Toaster
-                toastOptions={toastOptions}
-                containerClassName="[body[data-scroll-locked]_&]:pr-[var(--removed-body-scroll-bar-size,0px)] scroll-adjust"
-                containerStyle={{ paddingRight: 'var(--removed-body-scroll-bar-size, 0px)' }}
-              />
+              <Toaster {...toastProps} />
             </ShionlibProvider>
           </div>
         </NextIntlClientProvider>

@@ -16,7 +16,7 @@ export default function ShionlibProvider({ children }: { children: React.ReactNo
         height="3px"
         color="var(--primary)"
         options={{ showSpinner: false }}
-        shallowRouting
+        // shallowRouting
       >
         {children}
       </ProgressProvider>

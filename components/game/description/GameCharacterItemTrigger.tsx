@@ -21,12 +21,12 @@ export const GameCharacterItemTrigger = ({ character, name }: GameCharacterItemT
   return (
     <>
       <div className="relative rounded-md border-2 border-muted overflow-hidden w-full aspect-[3/4] cursor-pointer bg-card hover:opacity-80 transition-all duration-200">
-        {character.image && (
+        {character.character.image && (
           <FadeImage
             src={
-              character.image.startsWith('http')
-                ? character.image
-                : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + character.image
+              character.character.image.startsWith('http')
+                ? character.character.image
+                : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + character.character.image
             }
             alt={name}
             aspectRatio="3 / 4"

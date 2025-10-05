@@ -29,12 +29,12 @@ export const GameCharacterItemContent = ({
         className="shrink-0 m-auto w-[240px] md:w-[300px] overflow-hidden rounded-md"
         style={{ aspectRatio: '3 / 4' }}
       >
-        {character.image ? (
+        {character.character.image ? (
           <FadeImage
             src={
-              character.image.startsWith('http')
-                ? character.image
-                : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + character.image
+              character.character.image.startsWith('http')
+                ? character.character.image
+                : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + character.character.image
             }
             alt={name}
             aspectRatio="3 / 4"

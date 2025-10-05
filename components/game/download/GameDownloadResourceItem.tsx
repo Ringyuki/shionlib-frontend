@@ -1,5 +1,5 @@
 import { GameDownloadResource } from '@/interfaces/game/game-download-resource'
-import { MdWindow } from 'react-icons/md'
+import { MdWindow, MdWeb } from 'react-icons/md'
 import { FaApple, FaAndroid, FaLinux } from 'react-icons/fa'
 import {
   SiPlaystationvita,
@@ -7,11 +7,13 @@ import {
   SiPlaystationportable,
   SiPlaystation4,
   SiPlaystation3,
+  SiMacos,
+  SiPlaystation2,
 } from 'react-icons/si'
 import { FcDvdLogo } from 'react-icons/fc'
 import { Badge } from '@/components/shionui/Badge'
 import { Avatar } from '@/components/common/user/Avatar'
-import { platformTokenMap } from '@/interfaces/game/game.interface'
+import { platformTokenMap, Platform } from '@/interfaces/game/game.interface'
 import { platformNameMap } from '@/interfaces/game/game.interface'
 import { LanguageNameMap } from '@/interfaces/game/game.interface'
 import { GameDownloadFileItem } from './GameDownloadFileItem'
@@ -20,17 +22,23 @@ interface GameDownloadResourceItemProps {
   resource: GameDownloadResource
 }
 
-const PlatformIconMap = {
+const PlatformIconMap: Record<Platform, React.ElementType> = {
   win: MdWindow,
   ios: FaApple,
   and: FaAndroid,
   lin: FaLinux,
+  ps2: SiPlaystation2,
   ps3: SiPlaystation3,
   ps4: SiPlaystation4,
   psp: SiPlaystationportable,
   psv: SiPlaystationvita,
   swi: SiNintendoswitch,
   dvd: FcDvdLogo,
+  mac: SiMacos,
+  mob: MdWeb,
+  web: MdWeb,
+  vnd: MdWeb,
+  drc: MdWeb,
 }
 
 export const GameDownloadResourceItem = ({ resource }: GameDownloadResourceItemProps) => {
