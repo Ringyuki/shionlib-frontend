@@ -319,7 +319,7 @@ function Button({
         }
         props.onMouseDown?.(e)
       }}
-      onMouseDown={e => {
+      onMouseDown={() => {
         handleLoginRequired()
       }}
       className={cn(

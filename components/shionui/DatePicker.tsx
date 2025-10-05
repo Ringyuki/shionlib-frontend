@@ -29,7 +29,7 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
       value,
       onChange,
       placeholder,
-      dateFormat = 'PPP',
+      dateFormat = TimeFormatEnum.EEEE_MMM_DD_YYYY,
       locale = 'en',
       disabled = false,
       clearable = true,
@@ -40,6 +40,7 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
     ref,
   ) => {
     const t = useTranslations('Components.ShionUI.DatePicker')
+    const intlLocale = useLocale() as SupportedLocales
     const [open, setOpen] = React.useState(false)
     const [selectedDate, setSelectedDate] = React.useState<Date | null>(() => {
       if (!value) return null
@@ -71,13 +72,8 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
       onChange?.(null)
     }
 
-    const displayValue = selectedDate
-      ? timeFormat(
-          selectedDate,
-          (useLocale() as SupportedLocales) || locale,
-          TimeFormatEnum.EEEE_MMM_DD_YYYY,
-        )
-      : ''
+    const currentLocale = intlLocale || (locale as SupportedLocales)
+    const displayValue = selectedDate ? timeFormat(selectedDate, currentLocale, dateFormat) : ''
 
     return (
       <Popover open={open} onOpenChange={setOpen}>
