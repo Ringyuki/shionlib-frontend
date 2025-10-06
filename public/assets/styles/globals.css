@@ -7,7 +7,7 @@
 
 html {
   font-size: 16px;
-  line-height: 1;
+  line-height: normal;
 }
 
 @theme inline {

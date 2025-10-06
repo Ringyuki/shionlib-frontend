@@ -37,6 +37,12 @@
         "placeholder": "入力して Enter を押してください"
       }
     },
+    "Editor": {
+      "Plugins": {
+        "placeholderPrefix": "押す",
+        "placeholderSuffix": "コマンドを入力..."
+      }
+    },
     "Common": {
       "Error": {
         "ErrorView": {

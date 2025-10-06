@@ -45,6 +45,12 @@
         "placeholder": "Type and press Enter..."
       }
     },
+    "Editor": {
+      "Plugins": {
+        "placeholderPrefix": "Press",
+        "placeholderSuffix": "for commands..."
+      }
+    },
     "Common": {
       "Error": {
         "ErrorView": {

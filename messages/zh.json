@@ -45,6 +45,12 @@
         "placeholder": "输入内容并按下回车确认"
       }
     },
+    "Editor": {
+      "Plugins": {
+        "placeholderPrefix": "按下",
+        "placeholderSuffix": "输入命令..."
+      }
+    },
     "Common": {
       "Error": {
         "ErrorView": {
