@@ -1,4 +1,4 @@
-import { CAN_USE_DOM } from '@/components/editor/shared/can-use-dom'
+import { CAN_USE_DOM } from '@/components/editor/libs/shared/can-use-dom'
 
 declare global {
   interface Document {
