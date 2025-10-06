@@ -8,8 +8,10 @@ import { BaselineIcon } from 'lucide-react'
 import { useToolbarContext } from '@/components/editor/libs/context/toolbar-context'
 import { useUpdateToolbarHandler } from '@/components/editor/libs/editor-hooks/use-update-toolbar'
 import ColorPicker from '@/components/editor/libs/editor-ui/colorpicker'
+import { useTranslations } from 'next-intl'
 
 export function FontColorToolbarPlugin() {
+  const t = useTranslations('Components.Editor.Toolbar')
   const { activeEditor } = useToolbarContext()
 
   const [fontColor, setFontColor] = useState('#000')
@@ -49,7 +51,7 @@ export function FontColorToolbarPlugin() {
       icon={<BaselineIcon className="size-4" />}
       color={fontColor}
       onChange={onFontColorSelect}
-      title="text color"
+      title={t('textColor')}
     />
   )
 }

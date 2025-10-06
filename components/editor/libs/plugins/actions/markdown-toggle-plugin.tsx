@@ -12,6 +12,7 @@ import { $createTextNode, $getRoot } from 'lexical'
 import { FileTextIcon } from 'lucide-react'
 
 import { Button } from '@/components/shionui/Button'
+import { useTranslations } from 'next-intl'
 
 export function MarkdownTogglePlugin({
   shouldPreserveNewLinesInMarkdown,
@@ -20,6 +21,7 @@ export function MarkdownTogglePlugin({
   shouldPreserveNewLinesInMarkdown: boolean
   transformers: Array<Transformer>
 }) {
+  const t = useTranslations('Components.Editor.Actions')
   const [editor] = useLexicalComposerContext()
 
   const handleMarkdownToggle = useCallback(() => {

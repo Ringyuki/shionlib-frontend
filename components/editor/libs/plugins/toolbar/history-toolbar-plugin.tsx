@@ -15,10 +15,12 @@ import { RedoIcon, UndoIcon } from 'lucide-react'
 
 import { useToolbarContext } from '@/components/editor/libs/context/toolbar-context'
 import { Button } from '@/components/shionui/Button'
+import { useTranslations } from 'next-intl'
 
 const IS_APPLE = true
 
 export function HistoryToolbarPlugin() {
+  const t = useTranslations('Components.Editor.Toolbar')
   const [editor] = useLexicalComposerContext()
   const { activeEditor, $updateToolbar } = useToolbarContext()
   const [isEditable, setIsEditable] = useState(editor.isEditable())
@@ -61,9 +63,9 @@ export function HistoryToolbarPlugin() {
         onClick={() => {
           activeEditor.dispatchCommand(UNDO_COMMAND, undefined)
         }}
-        title={IS_APPLE ? 'Undo (⌘Z)' : 'Undo (Ctrl+Z)'}
+        title={IS_APPLE ? t('undoMac') : t('undoWin')}
         type="button"
-        aria-label="Undo"
+        aria-label={t('undo')}
         size="icon"
         className="!h-8 !w-8"
         appearance={'outline'}
@@ -75,9 +77,9 @@ export function HistoryToolbarPlugin() {
         onClick={() => {
           activeEditor.dispatchCommand(REDO_COMMAND, undefined)
         }}
-        title={IS_APPLE ? 'Redo (⇧⌘Z)' : 'Redo (Ctrl+Y)'}
+        title={IS_APPLE ? t('redoMac') : t('redoWin')}
         type="button"
-        aria-label="Redo"
+        aria-label={t('redo')}
         appearance={'outline'}
         size="icon"
         className="!h-8 !w-8"

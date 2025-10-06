@@ -6,8 +6,10 @@ import { DownloadIcon, UploadIcon } from 'lucide-react'
 
 import { Button } from '@/components/shionui/Button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/shionui/Tooltip'
+import { useTranslations } from 'next-intl'
 
 export function ImportExportPlugin() {
+  const t = useTranslations('Components.Editor.Actions')
   const [editor] = useLexicalComposerContext()
   return (
     <>
@@ -24,7 +26,7 @@ export function ImportExportPlugin() {
             <UploadIcon className="size-4" />
           </Button>
         </TooltipTrigger>
-        <TooltipContent>Import Content</TooltipContent>
+        <TooltipContent>{t('importContent')}</TooltipContent>
       </Tooltip>
 
       <Tooltip>
@@ -33,8 +35,8 @@ export function ImportExportPlugin() {
             appearance={'ghost'}
             onClick={() =>
               exportFile(editor, {
-                fileName: `Playground ${new Date().toISOString()}`,
-                source: 'Playground',
+                fileName: `${t('exportFilePrefix')} ${new Date().toISOString()}`,
+                source: t('exportSource'),
               })
             }
             title="Export"
@@ -45,7 +47,7 @@ export function ImportExportPlugin() {
             <DownloadIcon className="size-4" />
           </Button>
         </TooltipTrigger>
-        <TooltipContent>Export Content</TooltipContent>
+        <TooltipContent>{t('exportContent')}</TooltipContent>
       </Tooltip>
     </>
   )

@@ -6,8 +6,10 @@ import { LockIcon, UnlockIcon } from 'lucide-react'
 
 import { Button } from '@/components/shionui/Button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/shionui/Tooltip'
+import { useTranslations } from 'next-intl'
 
 export function EditModeTogglePlugin() {
+  const t = useTranslations('Components.Editor.Actions')
   const [editor] = useLexicalComposerContext()
   const [isEditable, setIsEditable] = useState(() => editor.isEditable())
 
@@ -28,7 +30,7 @@ export function EditModeTogglePlugin() {
           {isEditable ? <LockIcon className="size-4" /> : <UnlockIcon className="size-4" />}
         </Button>
       </TooltipTrigger>
-      <TooltipContent>{isEditable ? 'View Only Mode' : 'Edit Mode'}</TooltipContent>
+      <TooltipContent>{isEditable ? t('viewOnlyMode') : t('editMode')}</TooltipContent>
     </Tooltip>
   )
 }

@@ -16,8 +16,10 @@ import {
   DialogTrigger,
 } from '@/components/shionui/Dialog'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/shionui/Tooltip'
+import { useTranslations } from 'next-intl'
 
 export function ClearEditorActionPlugin() {
+  const t = useTranslations('Components.Editor.Actions')
   const [editor] = useLexicalComposerContext()
 
   return (
@@ -30,17 +32,17 @@ export function ClearEditorActionPlugin() {
             </Button>
           </DialogTrigger>
         </TooltipTrigger>
-        <TooltipContent>Clear Editor</TooltipContent>
+        <TooltipContent>{t('clearEditor')}</TooltipContent>
       </Tooltip>
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Clear Editor</DialogTitle>
-          <DialogDescription>Are you sure you want to clear the editor?</DialogDescription>
+          <DialogTitle>{t('clearEditor')}</DialogTitle>
+          <DialogDescription>{t('clearEditorConfirm')}</DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
-            <Button appearance="outline">Cancel</Button>
+            <Button appearance="outline">{t('cancel')}</Button>
           </DialogClose>
 
           <DialogClose asChild>
@@ -50,7 +52,7 @@ export function ClearEditorActionPlugin() {
                 editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined)
               }}
             >
-              Clear
+              {t('clear')}
             </Button>
           </DialogClose>
         </DialogFooter>

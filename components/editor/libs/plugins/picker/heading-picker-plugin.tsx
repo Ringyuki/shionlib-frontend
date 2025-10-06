@@ -4,9 +4,11 @@ import { $getSelection, $isRangeSelection } from 'lexical'
 import { Heading1Icon, Heading2Icon, Heading3Icon } from 'lucide-react'
 
 import { ComponentPickerOption } from '@/components/editor/libs/plugins/picker/component-picker-option'
+import { useTranslations } from 'next-intl'
 
 export function HeadingPickerPlugin({ n }: { n: 1 | 2 | 3 }) {
-  return new ComponentPickerOption(`Heading ${n}`, {
+  const t = useTranslations('Components.Editor.Picker')
+  return new ComponentPickerOption(t('headingN', { n }), {
     icon: <HeadingIcons n={n} />,
     keywords: ['heading', 'header', `h${n}`],
     onSelect: (_, editor) =>

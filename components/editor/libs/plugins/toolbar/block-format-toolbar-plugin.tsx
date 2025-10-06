@@ -9,9 +9,11 @@ import { useToolbarContext } from '@/components/editor/libs/context/toolbar-cont
 import { useUpdateToolbarHandler } from '@/components/editor/libs/editor-hooks/use-update-toolbar'
 import { blockTypeToBlockName } from '@/components/editor/libs/plugins/toolbar/block-format/block-format-data'
 import { Select, SelectContent, SelectGroup, SelectTrigger } from '@/components/shionui/Select'
+import { useTranslations } from 'next-intl'
 
 export function BlockFormatDropDown({ children }: { children: React.ReactNode }) {
   const { activeEditor, blockType, setBlockType } = useToolbarContext()
+  const t = useTranslations()
 
   function $updateToolbar(selection: BaseSelection) {
     if ($isRangeSelection(selection)) {
@@ -58,7 +60,11 @@ export function BlockFormatDropDown({ children }: { children: React.ReactNode })
     >
       <SelectTrigger className="!h-8 w-min gap-1">
         {blockTypeToBlockName[blockType].icon}
-        <span>{blockTypeToBlockName[blockType].label}</span>
+        <span>
+          {typeof blockTypeToBlockName[blockType].label === 'function'
+            ? (blockTypeToBlockName[blockType].label as any)(t)
+            : blockTypeToBlockName[blockType].label}
+        </span>
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>{children}</SelectGroup>

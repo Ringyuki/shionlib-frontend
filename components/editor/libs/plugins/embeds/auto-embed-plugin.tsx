@@ -25,6 +25,7 @@ import { useEditorModal } from '@/components/editor/libs/editor-hooks/use-modal'
 import { INSERT_TWEET_COMMAND } from '@/components/editor/libs/plugins/embeds/twitter-plugin'
 import { INSERT_YOUTUBE_COMMAND } from '@/components/editor/libs/plugins/embeds/youtube-plugin'
 import { Button } from '@/components/shionui/Button'
+import { useTranslations } from 'next-intl'
 import { Command, CommandGroup, CommandItem, CommandList } from '@/components/shionui/Command'
 import { DialogFooter } from '@/components/shionui/Dialog'
 import { Input } from '@/components/shionui/Input'
@@ -133,6 +134,7 @@ export function AutoEmbedDialog({
   embedConfig: CustomEmbedConfig
   onClose: () => void
 }): JSX.Element {
+  const t = useTranslations('Components.Editor.Embeds')
   const [text, setText] = useState('')
   const [editor] = useLexicalComposerContext()
   const [embedResult, setEmbedResult] = useState<EmbedMatchResult | null>(null)
@@ -179,7 +181,7 @@ export function AutoEmbedDialog({
             onClick={onClick}
             data-test-id={`${embedConfig.type}-embed-modal-submit-btn`}
           >
-            Embed
+            {t('embed')}
           </Button>
         </DialogFooter>
       </div>
@@ -188,10 +190,11 @@ export function AutoEmbedDialog({
 }
 
 export function AutoEmbedPlugin(): JSX.Element {
+  const t = useTranslations('Components.Editor.Embeds')
   const [modal, showModal] = useEditorModal()
 
   const openEmbedModal = (embedConfig: CustomEmbedConfig) => {
-    showModal(`Embed ${embedConfig.contentName}`, onClose => (
+    showModal(t('embedWithName', { name: embedConfig.contentName }), onClose => (
       <AutoEmbedDialog embedConfig={embedConfig} onClose={onClose} />
     ))
   }
@@ -202,10 +205,10 @@ export function AutoEmbedPlugin(): JSX.Element {
     dismissFn: () => void,
   ) => {
     return [
-      new AutoEmbedOption('Dismiss', {
+      new AutoEmbedOption(t('dismiss'), {
         onSelect: dismissFn,
       }),
-      new AutoEmbedOption(`Embed ${activeEmbedConfig.contentName}`, {
+      new AutoEmbedOption(t('embedWithName', { name: activeEmbedConfig.contentName }), {
         onSelect: embedFn,
       }),
     ]

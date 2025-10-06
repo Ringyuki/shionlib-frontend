@@ -10,41 +10,46 @@ import {
   TextIcon,
 } from 'lucide-react'
 
-export const blockTypeToBlockName: Record<string, { label: string; icon: React.ReactNode }> = {
+import { useTranslations } from 'next-intl'
+
+export const blockTypeToBlockName: Record<
+  string,
+  { label: string | ((t: (k: string, v?: any) => string) => string); icon: React.ReactNode }
+> = {
   paragraph: {
-    label: 'Paragraph',
+    label: (t: any) => t('Components.Editor.Picker.paragraph'),
     icon: <TextIcon className="size-4" />,
   },
   h1: {
-    label: 'Heading 1',
+    label: (t: any) => t('Components.Editor.Picker.headingN', { n: 1 }),
     icon: <Heading1Icon className="size-4" />,
   },
   h2: {
-    label: 'Heading 2',
+    label: (t: any) => t('Components.Editor.Picker.headingN', { n: 2 }),
     icon: <Heading2Icon className="size-4" />,
   },
   h3: {
-    label: 'Heading 3',
+    label: (t: any) => t('Components.Editor.Picker.headingN', { n: 3 }),
     icon: <Heading3Icon className="size-4" />,
   },
   number: {
-    label: 'Numbered List',
+    label: (t: any) => t('Components.Editor.Picker.numberedList'),
     icon: <ListOrderedIcon className="size-4" />,
   },
   bullet: {
-    label: 'Bulleted List',
+    label: (t: any) => t('Components.Editor.Picker.bulletedList'),
     icon: <ListIcon className="size-4" />,
   },
   check: {
-    label: 'Check List',
+    label: (t: any) => t('Components.Editor.Picker.checkList'),
     icon: <ListTodoIcon className="size-4" />,
   },
   code: {
-    label: 'Code Block',
+    label: (t: any) => t('Components.Editor.Picker.code'),
     icon: <CodeIcon className="size-4" />,
   },
   quote: {
-    label: 'Quote',
+    label: (t: any) => t('Components.Editor.Picker.quote'),
     icon: <QuoteIcon className="size-4" />,
   },
 }

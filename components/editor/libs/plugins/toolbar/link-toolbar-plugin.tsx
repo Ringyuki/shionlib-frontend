@@ -15,12 +15,14 @@ import { useUpdateToolbarHandler } from '@/components/editor/libs/editor-hooks/u
 import { getSelectedNode } from '@/components/editor/libs/utils/get-selected-node'
 import { sanitizeUrl } from '@/components/editor/libs/utils/url'
 import { Toggle } from '@/components/ui/toggle'
+import { useTranslations } from 'next-intl'
 
 export function LinkToolbarPlugin({
   setIsLinkEditMode,
 }: {
   setIsLinkEditMode: (isEditMode: boolean) => void
 }) {
+  const t = useTranslations('Components.Editor.Toolbar')
   const { activeEditor } = useToolbarContext()
   const [isLink, setIsLink] = useState(false)
 
@@ -78,7 +80,7 @@ export function LinkToolbarPlugin({
       variant={'outline'}
       size="sm"
       className="!h-8 !w-8"
-      aria-label="Toggle link"
+      aria-label={t('toggleLink')}
       onClick={insertLink}
     >
       <LinkIcon className="h-4 w-4" />

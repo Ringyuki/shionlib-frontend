@@ -8,8 +8,10 @@ import { PaintBucketIcon } from 'lucide-react'
 import { useToolbarContext } from '@/components/editor/libs/context/toolbar-context'
 import { useUpdateToolbarHandler } from '@/components/editor/libs/editor-hooks/use-update-toolbar'
 import ColorPicker from '@/components/editor/libs/editor-ui/colorpicker'
+import { useTranslations } from 'next-intl'
 
 export function FontBackgroundToolbarPlugin() {
+  const t = useTranslations('Components.Editor.Toolbar')
   const { activeEditor } = useToolbarContext()
 
   const [bgColor, setBgColor] = useState('#fff')
@@ -49,7 +51,7 @@ export function FontBackgroundToolbarPlugin() {
       icon={<PaintBucketIcon className="size-4" />}
       color={bgColor}
       onChange={onBgColorSelect}
-      title="text background color"
+      title={t('textBackgroundColor')}
     />
   )
 }

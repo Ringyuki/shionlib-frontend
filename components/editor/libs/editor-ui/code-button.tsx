@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { $isCodeNode } from '@lexical/code'
 import { $getNearestNodeFromDOMNode, $getSelection, $setSelection, LexicalEditor } from 'lexical'
 import { CircleCheckIcon, CopyIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 import { useDebounce } from '@/components/editor/libs/editor-hooks/use-debounce'
 
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export function CopyButton({ editor, getCodeDOMNode }: Props) {
+  const t = useTranslations('Components.Editor.Toolbar')
   const [isCopyCompleted, setCopyCompleted] = useState<boolean>(false)
 
   const removeSuccessIcon = useDebounce(() => {
@@ -51,7 +53,7 @@ export function CopyButton({ editor, getCodeDOMNode }: Props) {
     <button
       className="text-foreground/50 flex shrink-0 cursor-pointer items-center rounded border border-transparent bg-none p-1 uppercase"
       onClick={handleClick}
-      aria-label="copy"
+      aria-label={t('copy')}
     >
       {isCopyCompleted ? <CircleCheckIcon className="size-4" /> : <CopyIcon className="size-4" />}
     </button>

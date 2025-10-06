@@ -38,6 +38,7 @@ import {
 } from '@/components/editor/libs/nodes/image-node'
 import { CAN_USE_DOM } from '@/components/editor/libs/shared/can-use-dom'
 import { Button } from '@/components/shionui/Button'
+import { useTranslations } from 'next-intl'
 import { DialogFooter } from '@/components/shionui/Dialog'
 import { Input } from '@/components/shionui/Input'
 import { Label } from '@/components/shionui/Label'
@@ -62,6 +63,7 @@ export function InsertImageUriDialogBody({
 }: {
   onClick: (payload: InsertImagePayload) => void
 }) {
+  const t = useTranslations('Components.Editor.Images')
   const [src, setSrc] = useState('')
   const [altText, setAltText] = useState('')
 
@@ -70,20 +72,20 @@ export function InsertImageUriDialogBody({
   return (
     <div className="grid gap-4 py-4">
       <div className="grid gap-2">
-        <Label htmlFor="image-url">Image URL</Label>
+        <Label htmlFor="image-url">{t('imageUrl')}</Label>
         <Input
           id="image-url"
-          placeholder="i.e. https://source.unsplash.com/random"
+          placeholder={t('imageUrlPlaceholder')}
           onChange={e => setSrc(e.target.value)}
           value={src}
           data-test-id="image-modal-url-input"
         />
       </div>
       <div className="grid gap-2">
-        <Label htmlFor="alt-text">Alt Text</Label>
+        <Label htmlFor="alt-text">{t('altText')}</Label>
         <Input
           id="alt-text"
-          placeholder="Random unsplash image"
+          placeholder={t('altTextPlaceholder')}
           onChange={e => setAltText(e.target.value)}
           value={altText}
           data-test-id="image-modal-alt-text-input"
@@ -96,7 +98,7 @@ export function InsertImageUriDialogBody({
           onClick={() => onClick({ altText, src })}
           data-test-id="image-modal-confirm-btn"
         >
-          Confirm
+          {t('confirm')}
         </Button>
       </DialogFooter>
     </div>
@@ -108,6 +110,7 @@ export function InsertImageUploadedDialogBody({
 }: {
   onClick: (payload: InsertImagePayload) => void
 }) {
+  const t = useTranslations('Components.Editor.Images')
   const [src, setSrc] = useState('')
   const [altText, setAltText] = useState('')
 
@@ -129,7 +132,7 @@ export function InsertImageUploadedDialogBody({
   return (
     <div className="grid gap-4 py-4">
       <div className="grid gap-2">
-        <Label htmlFor="image-upload">Image Upload</Label>
+        <Label htmlFor="image-upload">{t('imageUpload')}</Label>
         <Input
           id="image-upload"
           type="file"
@@ -139,10 +142,10 @@ export function InsertImageUploadedDialogBody({
         />
       </div>
       <div className="grid gap-2">
-        <Label htmlFor="alt-text">Alt Text</Label>
+        <Label htmlFor="alt-text">{t('altText')}</Label>
         <Input
           id="alt-text"
-          placeholder="Descriptive alternative text"
+          placeholder={t('altTextUploadedPlaceholder')}
           onChange={e => setAltText(e.target.value)}
           value={altText}
           data-test-id="image-modal-alt-text-input"
@@ -154,7 +157,7 @@ export function InsertImageUploadedDialogBody({
         onClick={() => onClick({ altText, src })}
         data-test-id="image-modal-file-upload-btn"
       >
-        Confirm
+        {t('confirm')}
       </Button>
     </div>
   )
@@ -167,6 +170,7 @@ export function InsertImageDialog({
   activeEditor: LexicalEditor
   onClose: () => void
 }): JSX.Element {
+  const t = useTranslations('Components.Editor.Images')
   const hasModifier = useRef(false)
 
   useEffect(() => {
@@ -189,10 +193,10 @@ export function InsertImageDialog({
     <Tabs defaultValue="url">
       <TabsList className="w-full">
         <TabsTrigger value="url" className="w-full">
-          URL
+          {t('tabUrl')}
         </TabsTrigger>
         <TabsTrigger value="file" className="w-full">
-          File
+          {t('tabFile')}
         </TabsTrigger>
       </TabsList>
       <TabsContents>

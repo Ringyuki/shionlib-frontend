@@ -14,8 +14,10 @@ import {
   DialogTrigger,
 } from '@/components/shionui/Dialog'
 import { ScrollArea, ScrollBar } from '@/components/shionui/ScrollArea'
+import { useTranslations } from 'next-intl'
 
 export function TreeViewPlugin(): JSX.Element {
+  const t = useTranslations('Components.Editor.Actions')
   const [editor] = useLexicalComposerContext()
   return (
     <Dialog>
@@ -26,7 +28,7 @@ export function TreeViewPlugin(): JSX.Element {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Tree View</DialogTitle>
+          <DialogTitle>{t('treeView')}</DialogTitle>
         </DialogHeader>
         <ScrollArea className="bg-foreground text-background h-96 overflow-hidden rounded-lg p-2">
           <TreeView
