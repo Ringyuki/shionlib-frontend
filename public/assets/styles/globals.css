@@ -3,11 +3,9 @@
 @import './theme.css';
 
 @custom-variant dark (&:is(.dark *));
-@plugin "daisyui";
 
 html {
   font-size: 16px;
-  line-height: normal;
 }
 
 @theme inline {

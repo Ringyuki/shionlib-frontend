@@ -7,7 +7,7 @@ import { SubscriptIcon, SuperscriptIcon } from 'lucide-react'
 
 import { useToolbarContext } from '@/components/editor/libs/context/toolbar-context'
 import { useUpdateToolbarHandler } from '@/components/editor/libs/editor-hooks/use-update-toolbar'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { ToggleGroup, ToggleGroupItem } from '@/components/shionui/animated/ToggleGroup'
 import { useTranslations } from 'next-intl'
 
 export function SubSuperToolbarPlugin() {

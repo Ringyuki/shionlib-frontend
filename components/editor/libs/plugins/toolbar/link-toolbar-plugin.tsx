@@ -14,7 +14,7 @@ import { useToolbarContext } from '@/components/editor/libs/context/toolbar-cont
 import { useUpdateToolbarHandler } from '@/components/editor/libs/editor-hooks/use-update-toolbar'
 import { getSelectedNode } from '@/components/editor/libs/utils/get-selected-node'
 import { sanitizeUrl } from '@/components/editor/libs/utils/url'
-import { Toggle } from '@/components/ui/toggle'
+import { Toggle } from '@/components/shionui/animated/Toggle'
 import { useTranslations } from 'next-intl'
 
 export function LinkToolbarPlugin({

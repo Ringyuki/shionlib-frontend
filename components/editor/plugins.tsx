@@ -28,7 +28,6 @@ import { MarkdownTogglePlugin } from '@/components/editor/libs/plugins/actions/m
 import { MaxLengthPlugin } from '@/components/editor/libs/plugins/actions/max-length-plugin'
 import { TreeViewPlugin } from '@/components/editor/libs/plugins/actions/tree-view-plugin'
 import { AutoLinkPlugin } from '@/components/editor/libs/plugins/auto-link-plugin'
-import { AutocompletePlugin } from '@/components/editor/libs/plugins/autocomplete-plugin'
 import { CodeActionMenuPlugin } from '@/components/editor/libs/plugins/code-action-menu-plugin'
 import { CodeHighlightPlugin } from '@/components/editor/libs/plugins/code-highlight-plugin'
 import { ComponentPickerMenuPlugin } from '@/components/editor/libs/plugins/component-picker-menu-plugin'
@@ -38,8 +37,6 @@ import { DraggableBlockPlugin } from '@/components/editor/libs/plugins/draggable
 import { AutoEmbedPlugin } from '@/components/editor/libs/plugins/embeds/auto-embed-plugin'
 import { TwitterPlugin } from '@/components/editor/libs/plugins/embeds/twitter-plugin'
 import { YouTubePlugin } from '@/components/editor/libs/plugins/embeds/youtube-plugin'
-import { EmojiPickerPlugin } from '@/components/editor/libs/plugins/emoji-picker-plugin'
-import { EmojisPlugin } from '@/components/editor/libs/plugins/emojis-plugin'
 import { FloatingLinkEditorPlugin } from '@/components/editor/libs/plugins/floating-link-editor-plugin'
 import { FloatingTextFormatToolbarPlugin } from '@/components/editor/libs/plugins/floating-text-format-plugin'
 import { ImagesPlugin } from '@/components/editor/libs/plugins/images-plugin'
@@ -82,7 +79,6 @@ import { HistoryToolbarPlugin } from '@/components/editor/libs/plugins/toolbar/h
 import { LinkToolbarPlugin } from '@/components/editor/libs/plugins/toolbar/link-toolbar-plugin'
 import { SubSuperToolbarPlugin } from '@/components/editor/libs/plugins/toolbar/subsuper-toolbar-plugin'
 import { ToolbarPlugin } from '@/components/editor/libs/plugins/toolbar/toolbar-plugin'
-import { EMOJI } from '@/components/editor/libs/transformers/markdown-emoji-transformer'
 import { HR } from '@/components/editor/libs/transformers/markdown-hr-transformer'
 import { IMAGE } from '@/components/editor/libs/transformers/markdown-image-transformer'
 import { TABLE } from '@/components/editor/libs/transformers/markdown-table-transformer'
@@ -95,6 +91,7 @@ const maxLength = 500
 
 export function Plugins({}) {
   const t = useTranslations('Components.Editor.Plugins')
+  const tPicker = useTranslations('Components.Editor.Picker')
   const [floatingAnchorElem, setFloatingAnchorElem] = useState<HTMLDivElement | null>(null)
   const [isLinkEditMode, setIsLinkEditMode] = useState<boolean>(false)
 
@@ -180,7 +177,6 @@ export function Plugins({}) {
         <MentionsPlugin />
         <DraggableBlockPlugin anchorElem={floatingAnchorElem} />
         <KeywordsPlugin />
-        <EmojisPlugin />
         <ImagesPlugin captionsEnabled={false} />
 
         <LayoutPlugin />
@@ -197,7 +193,6 @@ export function Plugins({}) {
             TABLE,
             HR,
             IMAGE,
-            EMOJI,
             TWEET,
             CHECK_LIST,
             ...ELEMENT_TRANSFORMERS,
@@ -207,7 +202,6 @@ export function Plugins({}) {
           ]}
         />
         <TabFocusPlugin />
-        <AutocompletePlugin />
         <AutoLinkPlugin />
         <LinkPlugin />
 
@@ -217,7 +211,7 @@ export function Plugins({}) {
             HeadingPickerPlugin({ n: 1 }),
             HeadingPickerPlugin({ n: 2 }),
             HeadingPickerPlugin({ n: 3 }),
-            TablePickerPlugin(),
+            TablePickerPlugin({ t: (key: string) => tPicker(key) }),
             CheckListPickerPlugin(),
             NumberedListPickerPlugin(),
             BulletedListPickerPlugin(),
@@ -233,12 +227,13 @@ export function Plugins({}) {
             AlignmentPickerPlugin({ alignment: 'right' }),
             AlignmentPickerPlugin({ alignment: 'justify' }),
           ]}
-          dynamicOptionsFn={DynamicTablePickerPlugin}
+          dynamicOptionsFn={({ queryString }) =>
+            DynamicTablePickerPlugin({ queryString, t: (key: string) => tPicker(key) })
+          }
         />
 
         <ContextMenuPlugin />
         <DragDropPastePlugin />
-        <EmojiPickerPlugin />
 
         <FloatingLinkEditorPlugin
           anchorElem={floatingAnchorElem}
@@ -265,7 +260,6 @@ export function Plugins({}) {
                 TABLE,
                 HR,
                 IMAGE,
-                EMOJI,
                 TWEET,
                 CHECK_LIST,
                 ...ELEMENT_TRANSFORMERS,

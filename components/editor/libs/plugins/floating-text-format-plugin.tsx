@@ -39,7 +39,7 @@ import { getDOMRangeRect } from '@/components/editor/libs/utils/get-dom-range-re
 import { getSelectedNode } from '@/components/editor/libs/utils/get-selected-node'
 import { setFloatingElemPosition } from '@/components/editor/libs/utils/set-floating-elem-position'
 import { Separator } from '@/components/shionui/Separator'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { ToggleGroup, ToggleGroupItem } from '@/components/shionui/animated/ToggleGroup'
 
 function FloatingTextFormat({
   editor,

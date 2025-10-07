@@ -2,11 +2,9 @@ import { INSERT_TABLE_COMMAND } from '@lexical/table'
 import { TableIcon } from 'lucide-react'
 
 import { ComponentPickerOption } from '@/components/editor/libs/plugins/picker/component-picker-option'
-import { useTranslations } from 'next-intl'
 import { InsertTableDialog } from '@/components/editor/libs/plugins/table-plugin'
 
-export function TablePickerPlugin() {
-  const t = useTranslations('Components.Editor.Picker')
+export function TablePickerPlugin({ t }: { t: (key: string) => string }) {
   return new ComponentPickerOption(t('table'), {
     icon: <TableIcon className="size-4" />,
     keywords: ['table', 'grid', 'spreadsheet', 'rows', 'columns'],
@@ -17,8 +15,13 @@ export function TablePickerPlugin() {
   })
 }
 
-export function DynamicTablePickerPlugin({ queryString }: { queryString: string }) {
-  const t = useTranslations('Components.Editor.Picker')
+export function DynamicTablePickerPlugin({
+  queryString,
+  t,
+}: {
+  queryString: string
+  t: (key: string) => string
+}) {
   const options: Array<ComponentPickerOption> = []
 
   if (queryString == null) {
@@ -34,7 +37,7 @@ export function DynamicTablePickerPlugin({ queryString }: { queryString: string 
     options.push(
       ...colOptions.map(
         columns =>
-          new ComponentPickerOption(`${rows}x${columns} Table`, {
+          new ComponentPickerOption(`${rows}x${columns} ${t('table')}`, {
             icon: <i className="icon table" />,
             keywords: ['table'],
             onSelect: (_, editor) =>

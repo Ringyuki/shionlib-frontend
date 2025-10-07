@@ -1,158 +1,76 @@
-'use client'
-
 import * as React from 'react'
-import { Toggle as TogglePrimitive } from '@base-ui-components/react/toggle'
-import { ToggleGroup as ToggleGroupPrimitive } from '@base-ui-components/react/toggle-group'
-import { AnimatePresence, motion, type HTMLMotionProps } from 'motion/react'
+import { type VariantProps } from 'class-variance-authority'
 
 import {
-  Highlight,
-  HighlightItem,
-  type HighlightItemProps,
-  type HighlightProps,
-} from '@/components/shionui/animated/libs/primitives/effects/highlight'
+  ToggleGroup as ToggleGroupPrimitive,
+  ToggleGroupItem as ToggleGroupItemPrimitive,
+  ToggleGroupHighlight as ToggleGroupHighlightPrimitive,
+  ToggleGroupHighlightItem as ToggleGroupHighlightItemPrimitive,
+  useToggleGroup as useToggleGroupPrimitive,
+  type ToggleGroupProps as ToggleGroupPrimitiveProps,
+  type ToggleGroupItemProps as ToggleGroupItemPrimitiveProps,
+} from '@/components/shionui/animated/libs/primitives/radix/toggle-group'
+import { toggleVariants } from '@/components/shionui/animated/Toggle'
+import { cn } from '@/utils/cn'
 import { getStrictContext } from '@/components/shionui/libs/get-strict-context'
-import { useControlledState } from '@/components/shionui/animated/hooks/use-controlled-state'
-
-type ToggleGroupContextType = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value: any[]
-  setValue: ToggleGroupProps['onValueChange']
-  toggleMultiple: boolean | undefined
-}
 
 const [ToggleGroupProvider, useToggleGroup] =
-  getStrictContext<ToggleGroupContextType>('ToggleGroupContext')
+  getStrictContext<VariantProps<typeof toggleVariants>>('ToggleGroupContext')
 
-type ToggleGroupProps = React.ComponentProps<typeof ToggleGroupPrimitive>
+type ToggleGroupProps = ToggleGroupPrimitiveProps & VariantProps<typeof toggleVariants>
 
-function ToggleGroup(props: ToggleGroupProps) {
-  const [value, setValue] = useControlledState({
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    value: props.value as any[],
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    defaultValue: props.defaultValue as any[],
-    onChange: props.onValueChange,
-  })
-
+function ToggleGroup({ className, variant, size, children, ...props }: ToggleGroupProps) {
   return (
-    <ToggleGroupProvider value={{ value, setValue, toggleMultiple: props.multiple }}>
-      <ToggleGroupPrimitive data-slot="toggle-group" {...props} onValueChange={setValue} />
-    </ToggleGroupProvider>
-  )
-}
-
-type ToggleProps = Omit<React.ComponentProps<typeof TogglePrimitive>, 'render'> &
-  HTMLMotionProps<'button'>
-
-function Toggle({
-  value,
-  pressed,
-  defaultPressed,
-  onPressedChange,
-  nativeButton,
-  disabled,
-  ...props
-}: ToggleProps) {
-  return (
-    <TogglePrimitive
-      value={value}
-      disabled={disabled}
-      pressed={pressed}
-      defaultPressed={defaultPressed}
-      onPressedChange={onPressedChange}
-      nativeButton={nativeButton}
-      render={<motion.button data-slot="toggle" whileTap={{ scale: 0.95 }} {...props} />}
-    />
-  )
-}
-
-type ToggleGroupHighlightProps = Omit<HighlightProps, 'controlledItems'>
-
-function ToggleGroupHighlight({
-  transition = { type: 'spring', stiffness: 200, damping: 25 },
-  ...props
-}: ToggleGroupHighlightProps) {
-  const { value } = useToggleGroup()
-
-  return (
-    <Highlight
-      data-slot="toggle-group-highlight"
-      controlledItems
-      value={value?.[0] ?? null}
-      exitDelay={0}
-      transition={transition}
+    <ToggleGroupPrimitive
+      data-variant={variant}
+      data-size={size}
+      className={cn(
+        'group/toggle-group flex gap-0.5 w-fit items-center rounded-lg data-[variant=outline]:shadow-xs data-[variant=outline]:border data-[variant=outline]:p-0.5',
+        className,
+      )}
       {...props}
-    />
+    >
+      <ToggleGroupProvider value={{ variant, size }}>
+        {props.type === 'single' ? (
+          <ToggleGroupHighlightPrimitive className="bg-accent rounded-md">
+            {children}
+          </ToggleGroupHighlightPrimitive>
+        ) : (
+          children
+        )}
+      </ToggleGroupProvider>
+    </ToggleGroupPrimitive>
   )
 }
 
-type ToggleHighlightProps = HighlightItemProps &
-  HTMLMotionProps<'div'> & {
-    children: React.ReactElement
-  }
+type ToggleGroupItemProps = ToggleGroupItemPrimitiveProps & VariantProps<typeof toggleVariants>
 
-function ToggleHighlight({ children, style, ...props }: ToggleHighlightProps) {
-  const { toggleMultiple, value } = useToggleGroup()
+function ToggleGroupItem({ className, children, variant, size, ...props }: ToggleGroupItemProps) {
+  const { variant: contextVariant, size: contextSize } = useToggleGroup()
+  const { type } = useToggleGroupPrimitive()
 
-  if (!toggleMultiple) {
-    return (
-      <HighlightItem data-slot="toggle-highlight" style={{ inset: 0, ...style }} {...props}>
+  return (
+    <ToggleGroupHighlightItemPrimitive
+      value={props.value}
+      className={cn(type === 'multiple' && 'bg-accent rounded-md')}
+    >
+      <ToggleGroupItemPrimitive
+        data-variant={contextVariant || variant}
+        data-size={contextSize || size}
+        className={cn(
+          toggleVariants({
+            variant: contextVariant || variant,
+            size: contextSize || size,
+          }),
+          'min-w-0 border-0 flex-1 shrink-0 shadow-none rounded-md focus:z-10 focus-visible:z-10',
+          className,
+        )}
+        {...props}
+      >
         {children}
-      </HighlightItem>
-    )
-  }
-
-  if (toggleMultiple && React.isValidElement(children)) {
-    const isActive = props.value && value && value.includes(props.value)
-
-    const element = children as React.ReactElement<React.ComponentProps<'div'>>
-
-    return React.cloneElement(
-      children,
-      {
-        style: {
-          ...element.props.style,
-          position: 'relative',
-        },
-        ...element.props,
-      },
-      <>
-        <AnimatePresence>
-          {isActive && (
-            <motion.div
-              data-slot="toggle-highlight"
-              style={{ position: 'absolute', inset: 0, zIndex: 0, ...style }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              {...props}
-            />
-          )}
-        </AnimatePresence>
-
-        <div
-          style={{
-            position: 'relative',
-            zIndex: 1,
-          }}
-        >
-          {element.props.children}
-        </div>
-      </>,
-    )
-  }
+      </ToggleGroupItemPrimitive>
+    </ToggleGroupHighlightItemPrimitive>
+  )
 }
 
-export {
-  ToggleGroup,
-  ToggleGroupHighlight,
-  Toggle,
-  ToggleHighlight,
-  useToggleGroup,
-  type ToggleGroupProps,
-  type ToggleGroupHighlightProps,
-  type ToggleProps,
-  type ToggleHighlightProps,
-  type ToggleGroupContextType,
-}
+export { ToggleGroup, ToggleGroupItem, type ToggleGroupProps, type ToggleGroupItemProps }

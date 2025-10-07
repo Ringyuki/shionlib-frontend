@@ -25,7 +25,7 @@ import { useToolbarContext } from '@/components/editor/libs/context/toolbar-cont
 import { useUpdateToolbarHandler } from '@/components/editor/libs/editor-hooks/use-update-toolbar'
 import { getSelectedNode } from '@/components/editor/libs/utils/get-selected-node'
 import { Separator } from '@/components/shionui/Separator'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { ToggleGroup, ToggleGroupItem } from '@/components/shionui/animated/ToggleGroup'
 
 const ELEMENT_FORMAT_OPTIONS: {
   [key in Exclude<ElementFormatType, 'start' | 'end' | ''>]: {

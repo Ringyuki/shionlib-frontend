@@ -7,7 +7,7 @@ import { BoldIcon, CodeIcon, ItalicIcon, StrikethroughIcon, UnderlineIcon } from
 
 import { useToolbarContext } from '@/components/editor/libs/context/toolbar-context'
 import { useUpdateToolbarHandler } from '@/components/editor/libs/editor-hooks/use-update-toolbar'
-import { Toggle } from '@/components/ui/toggle'
+import { Toggle } from '@/components/shionui/animated/Toggle'
 
 const Icons: Partial<Record<TextFormatType, React.ElementType>> = {
   bold: BoldIcon,
