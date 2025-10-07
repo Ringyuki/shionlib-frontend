@@ -9,8 +9,8 @@ import { TableCellNode, TableNode, TableRowNode } from '@lexical/table'
 import { Klass, LexicalNode, LexicalNodeReplacement, ParagraphNode, TextNode } from 'lexical'
 
 import { AutocompleteNode } from '@/components/editor/libs/nodes/autocomplete-node'
-import { TweetNode } from '@/components/editor/libs/nodes/embeds/tweet-node'
-import { YouTubeNode } from '@/components/editor/libs/nodes/embeds/youtube-node'
+// import { TweetNode } from '@/components/editor/libs/nodes/embeds/tweet-node'
+// import { YouTubeNode } from '@/components/editor/libs/nodes/embeds/youtube-node'
 import { EmojiNode } from '@/components/editor/libs/nodes/emoji-node'
 import { ImageNode } from '@/components/editor/libs/nodes/image-node'
 import { KeywordNode } from '@/components/editor/libs/nodes/keyword-node'
@@ -41,7 +41,7 @@ export const nodes: ReadonlyArray<Klass<LexicalNode> | LexicalNodeReplacement> =
   LayoutContainerNode,
   LayoutItemNode,
   AutoLinkNode,
-  TweetNode,
-  YouTubeNode,
+  // TweetNode,
+  // YouTubeNode,
   AutocompleteNode,
 ]

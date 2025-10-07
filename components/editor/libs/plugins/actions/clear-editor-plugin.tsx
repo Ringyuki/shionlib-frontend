@@ -6,15 +6,16 @@ import { Trash2Icon } from 'lucide-react'
 
 import { Button } from '@/components/shionui/Button'
 import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/shionui/Dialog'
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from '@/components/shionui/AlertDialog'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/shionui/Tooltip'
 import { useTranslations } from 'next-intl'
 
@@ -23,40 +24,34 @@ export function ClearEditorActionPlugin() {
   const [editor] = useLexicalComposerContext()
 
   return (
-    <Dialog>
-      <Tooltip disableHoverableContent>
+    <AlertDialog>
+      <Tooltip>
         <TooltipTrigger asChild>
-          <DialogTrigger asChild>
+          <AlertDialogTrigger asChild>
             <Button size={'sm'} appearance={'ghost'} className="p-2">
               <Trash2Icon className="h-4 w-4" />
             </Button>
-          </DialogTrigger>
+          </AlertDialogTrigger>
         </TooltipTrigger>
         <TooltipContent>{t('clearEditor')}</TooltipContent>
       </Tooltip>
-
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>{t('clearEditor')}</DialogTitle>
-          <DialogDescription>{t('clearEditorConfirm')}</DialogDescription>
-        </DialogHeader>
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button appearance="outline">{t('cancel')}</Button>
-          </DialogClose>
-
-          <DialogClose asChild>
-            <Button
-              intent="destructive"
-              onClick={() => {
-                editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined)
-              }}
-            >
-              {t('clear')}
-            </Button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+      <AlertDialogContent tone="destructive">
+        <AlertDialogHeader>
+          <AlertDialogTitle>{t('clearEditor')}</AlertDialogTitle>
+        </AlertDialogHeader>
+        <AlertDialogDescription>{t('clearEditorConfirm')}</AlertDialogDescription>
+        <AlertDialogFooter>
+          <AlertDialogCancel tone="destructive">{t('cancel')}</AlertDialogCancel>
+          <AlertDialogAction
+            tone="destructive"
+            onClick={() => {
+              editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined)
+            }}
+          >
+            {t('clear')}
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   )
 }

@@ -108,7 +108,8 @@
         "markdown": "Markdown",
         "viewOnlyMode": "仅查看模式",
         "editMode": "编辑模式",
-        "treeView": "树形视图"
+        "treeView": "树形视图",
+        "submit": "提交"
       }
     },
     "Common": {
@@ -210,6 +211,15 @@
         "UploadProgress": {
           "speed": "速度",
           "eta": "剩余"
+        }
+      },
+      "Comment": {
+        "CommentContent": {
+          "comments": "评论",
+          "description": "耳を澄まして。"
+        },
+        "CommentBox": {
+          "success": "评论成功"
         }
       }
     },

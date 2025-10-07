@@ -33,10 +33,10 @@ export enum TimeFormatEnum {
 
 export const timeFormat = (
   date: Date | number | string,
-  locale: SupportedLocales,
+  locale: string,
   formatPattern: TimeFormatEnum,
 ) => {
-  return format(date, formatPattern, { locale: localeMap[locale] })
+  return format(date, formatPattern, { locale: localeMap[locale as SupportedLocales] })
 }
 
 export const timeFromNow = (date: Date | number | string, locale: SupportedLocales) => {

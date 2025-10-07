@@ -19,17 +19,29 @@ const editorConfig: InitialConfigType = {
   },
 }
 
-export function Editor({
-  editorState,
-  editorSerializedState,
-  onChange,
-  onSerializedChange,
-}: {
+interface EditorProps {
   editorState?: EditorState
   editorSerializedState?: SerializedEditorState
   onChange?: (editorState: EditorState) => void
   onSerializedChange?: (editorSerializedState: SerializedEditorState) => void
-}) {
+  autoFocus?: boolean
+  onSubmit?: () => void
+  isSubmitting?: boolean
+  isSubmitDisabled?: boolean
+  clearSignal?: number
+}
+
+export const Editor = ({
+  editorState,
+  editorSerializedState,
+  onChange,
+  onSerializedChange,
+  autoFocus,
+  onSubmit,
+  isSubmitting,
+  isSubmitDisabled,
+  clearSignal,
+}: EditorProps) => {
   return (
     <div className="bg-background overflow-hidden rounded-lg border shadow">
       <LexicalComposer
@@ -40,7 +52,13 @@ export function Editor({
         }}
       >
         <TooltipProvider>
-          <Plugins />
+          <Plugins
+            autoFocus={autoFocus}
+            onSubmit={onSubmit}
+            isSubmitting={isSubmitting}
+            isSubmitDisabled={isSubmitDisabled}
+            clearSignal={clearSignal}
+          />
 
           <OnChangePlugin
             ignoreSelectionChange={true}

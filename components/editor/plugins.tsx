@@ -21,6 +21,8 @@ import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin
 import { TablePlugin } from '@lexical/react/LexicalTablePlugin'
 import { ContentEditable } from '@/components/editor/libs/editor-ui/content-editable'
 import { ActionsPlugin } from '@/components/editor/libs/plugins/actions/actions-plugin'
+import { ClearOnSignalPlugin } from '@/components/editor/libs/plugins/actions/clear-on-signal-plugin'
+import { SubmitPlugin } from '@/components/editor/libs/plugins/actions/submit-plugin'
 import { CharacterLimitPlugin } from '@/components/editor/libs/plugins/actions/character-limit-plugin'
 import { ClearEditorActionPlugin } from '@/components/editor/libs/plugins/actions/clear-editor-plugin'
 import { EditModeTogglePlugin } from '@/components/editor/libs/plugins/actions/edit-mode-toggle-plugin'
@@ -35,8 +37,8 @@ import { ContextMenuPlugin } from '@/components/editor/libs/plugins/context-menu
 import { DragDropPastePlugin } from '@/components/editor/libs/plugins/drag-drop-paste-plugin'
 import { DraggableBlockPlugin } from '@/components/editor/libs/plugins/draggable-block-plugin'
 import { AutoEmbedPlugin } from '@/components/editor/libs/plugins/embeds/auto-embed-plugin'
-import { TwitterPlugin } from '@/components/editor/libs/plugins/embeds/twitter-plugin'
-import { YouTubePlugin } from '@/components/editor/libs/plugins/embeds/youtube-plugin'
+// import { TwitterPlugin } from '@/components/editor/libs/plugins/embeds/twitter-plugin'
+// import { YouTubePlugin } from '@/components/editor/libs/plugins/embeds/youtube-plugin'
 import { FloatingLinkEditorPlugin } from '@/components/editor/libs/plugins/floating-link-editor-plugin'
 import { FloatingTextFormatToolbarPlugin } from '@/components/editor/libs/plugins/floating-text-format-plugin'
 import { ImagesPlugin } from '@/components/editor/libs/plugins/images-plugin'
@@ -82,14 +84,32 @@ import { ToolbarPlugin } from '@/components/editor/libs/plugins/toolbar/toolbar-
 import { HR } from '@/components/editor/libs/transformers/markdown-hr-transformer'
 import { IMAGE } from '@/components/editor/libs/transformers/markdown-image-transformer'
 import { TABLE } from '@/components/editor/libs/transformers/markdown-table-transformer'
-import { TWEET } from '@/components/editor/libs/transformers/markdown-tweet-transformer'
+// import { TWEET } from '@/components/editor/libs/transformers/markdown-tweet-transformer'
 import { Separator } from '@/components/shionui/Separator'
 import { Kbd } from '@/components/shionui/Kbd'
 import { useTranslations } from 'next-intl'
 
 const maxLength = 500
 
-export function Plugins({}) {
+interface PluginsProps {
+  placeholder?: string
+  autoFocus?: boolean
+  onSubmit?: () => void
+  isSubmitting?: boolean
+  isSubmitDisabled?: boolean
+  submitLabel?: string | React.ReactNode
+  clearSignal?: number
+}
+
+export const Plugins = ({
+  placeholder,
+  autoFocus,
+  onSubmit,
+  submitLabel,
+  isSubmitting,
+  isSubmitDisabled,
+  clearSignal,
+}: PluginsProps) => {
   const t = useTranslations('Components.Editor.Plugins')
   const tPicker = useTranslations('Components.Editor.Picker')
   const [floatingAnchorElem, setFloatingAnchorElem] = useState<HTMLDivElement | null>(null)
@@ -100,7 +120,7 @@ export function Plugins({}) {
       setFloatingAnchorElem(_floatingAnchorElem)
     }
   }
-  const placeholder = (
+  const initialPlaceholder = (
     <span className="flex items-center gap-1">
       {t('placeholderPrefix')}
       <Kbd>/</Kbd>
@@ -150,14 +170,15 @@ export function Plugins({}) {
         )}
       </ToolbarPlugin>
       <div className="relative">
-        <AutoFocusPlugin />
+        <ClearOnSignalPlugin signal={clearSignal} />
+        {autoFocus && <AutoFocusPlugin />}
         <RichTextPlugin
           contentEditable={
             <div className="">
               <div className="" ref={onRef}>
                 <ContentEditable
-                  placeholder={placeholder}
-                  className="ContentEditable__root relative block min-h-72 max-h-[80vh] overflow-auto px-8 py-4 text-base focus:outline-none"
+                  placeholder={placeholder || initialPlaceholder}
+                  className="ContentEditable__root relative block min-h-60 max-h-[80vh] overflow-auto px-8 py-4 text-base focus:outline-none"
                 />
               </div>
             </div>
@@ -182,8 +203,8 @@ export function Plugins({}) {
         <LayoutPlugin />
 
         <AutoEmbedPlugin />
-        <TwitterPlugin />
-        <YouTubePlugin />
+        {/* <TwitterPlugin /> */}
+        {/* <YouTubePlugin /> */}
 
         <CodeHighlightPlugin />
         <CodeActionMenuPlugin anchorElem={floatingAnchorElem} />
@@ -193,7 +214,7 @@ export function Plugins({}) {
             TABLE,
             HR,
             IMAGE,
-            TWEET,
+            // TWEET,
             CHECK_LIST,
             ...ELEMENT_TRANSFORMERS,
             ...MULTILINE_ELEMENT_TRANSFORMERS,
@@ -217,11 +238,8 @@ export function Plugins({}) {
             BulletedListPickerPlugin(),
             QuotePickerPlugin(),
             CodePickerPlugin(),
-            // DividerPickerPlugin(),
             EmbedsPickerPlugin({ embed: 'tweet' }),
-            // EmbedsPickerPlugin({ embed: 'youtube-video' }),
             ImagePickerPlugin(),
-            // ColumnsLayoutPickerPlugin(),
             AlignmentPickerPlugin({ alignment: 'left' }),
             AlignmentPickerPlugin({ alignment: 'center' }),
             AlignmentPickerPlugin({ alignment: 'right' }),
@@ -260,7 +278,7 @@ export function Plugins({}) {
                 TABLE,
                 HR,
                 IMAGE,
-                TWEET,
+                // TWEET,
                 CHECK_LIST,
                 ...ELEMENT_TRANSFORMERS,
                 ...MULTILINE_ELEMENT_TRANSFORMERS,
@@ -274,6 +292,14 @@ export function Plugins({}) {
               <ClearEditorPlugin />
             </>
             <TreeViewPlugin />
+            {onSubmit && (
+              <SubmitPlugin
+                onSubmit={onSubmit}
+                label={submitLabel}
+                isLoading={isSubmitting}
+                disabled={isSubmitDisabled}
+              />
+            )}
           </div>
         </div>
       </ActionsPlugin>

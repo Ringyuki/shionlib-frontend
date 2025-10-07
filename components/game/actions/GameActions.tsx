@@ -1,13 +1,11 @@
 'use client'
 
-import { Button } from '@/components/shionui/Button'
-import { MessageSquareMore } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { GameData } from '@/interfaces/game/game.interface'
 import { Separator } from '@/components/shionui/Separator'
-import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/shionui/Tooltip'
 import { Download } from './Download'
 import { Upload } from './Upload'
+import { Comment } from './Comment'
 import { Favorite } from './Favorite'
 import { Edit } from './Edit'
 
@@ -29,20 +27,7 @@ export const GameActions = ({ game }: GameActionsProps) => {
           <Separator orientation="vertical" className="h-4! hidden md:block" />
           <div className="flex gap-2 items-center">
             <Favorite isFavorite={game.is_favorite} gameId={game.id} />
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  size="icon"
-                  intent="success"
-                  appearance="ghost"
-                  loginRequired
-                  renderIcon={<MessageSquareMore />}
-                />
-              </TooltipTrigger>
-              <TooltipContent>
-                <span>{t('goToDiscussion')}</span>
-              </TooltipContent>
-            </Tooltip>
+            <Comment />
           </div>
         </div>
       </div>

@@ -108,7 +108,8 @@
         "markdown": "Markdown",
         "viewOnlyMode": "View Only Mode",
         "editMode": "Edit Mode",
-        "treeView": "Tree View"
+        "treeView": "Tree View",
+        "submit": "Submit"
       }
     },
     "Common": {
@@ -210,6 +211,15 @@
         "UploadProgress": {
           "speed": "Speed",
           "eta": "Time remaining"
+        }
+      },
+      "Comment": {
+        "CommentContent": {
+          "comments": "Comments",
+          "description": "耳を澄まして。"
+        },
+        "CommentBox": {
+          "success": "Comment successfully"
         }
       }
     },

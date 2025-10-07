@@ -100,7 +100,8 @@
         "markdown": "Markdown",
         "viewOnlyMode": "閲覧モード",
         "editMode": "編集モード",
-        "treeView": "ツリービュー"
+        "treeView": "ツリービュー",
+        "submit": "送信"
       }
     },
     "Common": {
@@ -202,6 +203,15 @@
         "UploadProgress": {
           "speed": "速度",
           "eta": "残り時間"
+        }
+      },
+      "Comment": {
+        "CommentContent": {
+          "comments": "コメント",
+          "description": "耳を澄まして。"
+        },
+        "CommentBox": {
+          "success": "コメント成功"
         }
       }
     },

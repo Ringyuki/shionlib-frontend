@@ -45,10 +45,10 @@ export const LogoutDialog = ({ open, onOpenChange }: LogoutDialogProps) => {
         </AlertDialogHeader>
         <AlertDialogDescription>{t('description')}</AlertDialogDescription>
         <AlertDialogFooter>
+          <AlertDialogCancel tone="destructive">{t('cancel')}</AlertDialogCancel>
           <AlertDialogAction tone="destructive" loading={loading} onClick={handleLogout}>
             {t('logout')}
           </AlertDialogAction>
-          <AlertDialogCancel tone="destructive">{t('cancel')}</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

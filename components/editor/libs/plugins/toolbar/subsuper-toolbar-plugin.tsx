@@ -28,15 +28,26 @@ export function SubSuperToolbarPlugin() {
   return (
     <ToggleGroup
       type="single"
-      defaultValue={isSubscript ? 'subscript' : isSuperscript ? 'superscript' : ''}
+      value={isSubscript ? 'subscript' : isSuperscript ? 'superscript' : undefined}
+      onValueChange={next => {
+        if (next === 'subscript') {
+          activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'subscript')
+          return
+        }
+        if (next === 'superscript') {
+          activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'superscript')
+          return
+        }
+        if (!next) {
+          if (isSubscript) activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'subscript')
+          else if (isSuperscript) activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'superscript')
+        }
+      }}
     >
       <ToggleGroupItem
         value="subscript"
         size="sm"
         aria-label={t('toggleSubscript')}
-        onClick={() => {
-          activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'subscript')
-        }}
         variant={'outline'}
       >
         <SubscriptIcon className="h-4 w-4" />
@@ -45,9 +56,6 @@ export function SubSuperToolbarPlugin() {
         value="superscript"
         size="sm"
         aria-label={t('toggleSuperscript')}
-        onClick={() => {
-          activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'superscript')
-        }}
         variant={'outline'}
       >
         <SuperscriptIcon className="h-4 w-4" />

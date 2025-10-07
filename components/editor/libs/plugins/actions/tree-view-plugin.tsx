@@ -30,7 +30,7 @@ export function TreeViewPlugin(): JSX.Element {
         <DialogHeader>
           <DialogTitle>{t('treeView')}</DialogTitle>
         </DialogHeader>
-        <ScrollArea className="bg-foreground text-background h-96 overflow-hidden rounded-lg p-2">
+        <ScrollArea className="bg-card-soft border border-card-border text-foreground h-96 overflow-hidden rounded-lg p-2">
           <TreeView
             viewClassName="tree-view-output"
             treeTypeButtonClassName="debug-treetype-button"
