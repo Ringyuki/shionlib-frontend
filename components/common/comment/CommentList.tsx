@@ -1,15 +1,12 @@
 import { Comment } from '@/interfaces/comment/comment.interface'
-import { CommentItem } from './CommentItem'
+import { CommentListClient } from './CommentListClient'
+import { renderLexicalHTML } from '@/components/editor/server/render'
 
 interface CommentListProps {
   comments: Comment[]
 }
 
 export const CommentList = ({ comments }: CommentListProps) => {
-  return (
-    <div className="flex flex-col gap-4">
-      {comments.length > 0 &&
-        comments.map(comment => <CommentItem key={comment.id} comment={comment} />)}
-    </div>
-  )
+  const initial = comments.map(c => ({ ...c, html: renderLexicalHTML(c.content) }))
+  return <CommentListClient initial={initial} />
 }

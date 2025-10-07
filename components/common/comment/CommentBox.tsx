@@ -5,10 +5,14 @@ import { Avatar } from '@/components/common/user/Avatar'
 import { useShionlibUserStore } from '@/store/userStore'
 import { CommentEditor } from './CommentEditor'
 import { shionlibRequest } from '@/utils/shionlib-request'
-import { SerializedEditorState } from 'lexical'
+import { SerializedEditorState, createEditor } from 'lexical'
 import { useTranslations } from 'next-intl'
 import { toast } from 'react-hot-toast'
 import { Comment } from '@/interfaces/comment/comment.interface'
+import { RenderedComment, useCommentListStore } from '@/store/commentListStore'
+import { $generateHtmlFromNodes } from '@lexical/html'
+import { nodes } from '@/components/editor/nodes'
+import { editorTheme } from '@/components/editor/libs/themes/editor-theme'
 
 interface CommentBoxProps {
   game_id: string
@@ -18,8 +22,20 @@ interface CommentBoxProps {
 export const CommentBox = ({ game_id, parent_id }: CommentBoxProps) => {
   const t = useTranslations('Components.Common.Comment.CommentBox')
   const [isLoading, setIsLoading] = useState(false)
-  const editorRef = useRef(null)
+  const editorRef = useRef<{ clearEditor: () => void } | null>(null)
   const { user } = useShionlibUserStore()
+  const { addComment } = useCommentListStore()
+
+  const toHtml = (serialized: SerializedEditorState) => {
+    const editor = createEditor({ namespace: 'ClientRender', nodes, theme: editorTheme })
+    const state = editor.parseEditorState(serialized as any)
+    let html = ''
+    editor.setEditorState(state)
+    editor.update(() => {
+      html = $generateHtmlFromNodes(editor)
+    })
+    return html
+  }
 
   const handleSubmit = async (serialized: SerializedEditorState) => {
     setIsLoading(true)
@@ -31,9 +47,9 @@ export const CommentBox = ({ game_id, parent_id }: CommentBoxProps) => {
         },
       })
       toast.success(t('success'))
-      if (editorRef.current && 'clearEditor' in editorRef.current) {
-        ;(editorRef.current as any).clearEditor()
-      }
+      const html = toHtml(serialized)
+      addComment({ ...(data.data as Comment), html } as RenderedComment)
+      editorRef.current?.clearEditor()
     } catch {
     } finally {
       setIsLoading(false)
