@@ -4,7 +4,7 @@ import { create } from 'zustand'
 import { Comment } from '@/interfaces/comment/comment.interface'
 
 export interface RenderedComment extends Comment {
-  html?: string
+  html: string
 }
 
 interface CommentListStore {

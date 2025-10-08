@@ -39,6 +39,9 @@ export const timeFormat = (
   return format(date, formatPattern, { locale: localeMap[locale as SupportedLocales] })
 }
 
-export const timeFromNow = (date: Date | number | string, locale: SupportedLocales) => {
-  return formatDistanceToNow(date, { locale: localeMap[locale], addSuffix: true })
+export const timeFromNow = (date: Date | number | string, locale: string) => {
+  return formatDistanceToNow(date, {
+    locale: localeMap[locale as SupportedLocales],
+    addSuffix: true,
+  })
 }

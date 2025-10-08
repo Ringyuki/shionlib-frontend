@@ -9,6 +9,7 @@ import { TooltipProvider } from '@/components/shionui/Tooltip'
 
 import { nodes } from './nodes'
 import { Plugins } from './plugins'
+import { Plugin, PluginProps } from './interfaces/plugin'
 
 const editorConfig: InitialConfigType = {
   namespace: 'Editor',
@@ -20,6 +21,8 @@ const editorConfig: InitialConfigType = {
 }
 
 interface EditorProps {
+  CustomPlugins?: Plugin
+  CustomPluginProps?: PluginProps
   editorState?: EditorState
   editorSerializedState?: SerializedEditorState
   onChange?: (editorState: EditorState) => void
@@ -32,6 +35,8 @@ interface EditorProps {
 }
 
 export const Editor = ({
+  CustomPlugins,
+  CustomPluginProps,
   editorState,
   editorSerializedState,
   onChange,
@@ -52,13 +57,24 @@ export const Editor = ({
         }}
       >
         <TooltipProvider>
-          <Plugins
-            autoFocus={autoFocus}
-            onSubmit={onSubmit}
-            isSubmitting={isSubmitting}
-            isSubmitDisabled={isSubmitDisabled}
-            clearSignal={clearSignal}
-          />
+          {CustomPlugins ? (
+            <CustomPlugins
+              autoFocus={autoFocus}
+              onSubmit={onSubmit}
+              isSubmitting={isSubmitting}
+              isSubmitDisabled={isSubmitDisabled}
+              clearSignal={clearSignal}
+              {...CustomPluginProps}
+            />
+          ) : (
+            <Plugins
+              autoFocus={autoFocus}
+              onSubmit={onSubmit}
+              isSubmitting={isSubmitting}
+              isSubmitDisabled={isSubmitDisabled}
+              clearSignal={clearSignal}
+            />
+          )}
 
           <OnChangePlugin
             ignoreSelectionChange={true}

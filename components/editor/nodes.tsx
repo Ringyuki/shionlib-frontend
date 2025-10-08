@@ -9,14 +9,11 @@ import { TableCellNode, TableNode, TableRowNode } from '@lexical/table'
 import { Klass, LexicalNode, LexicalNodeReplacement, ParagraphNode, TextNode } from 'lexical'
 
 import { AutocompleteNode } from '@/components/editor/libs/nodes/autocomplete-node'
-// import { TweetNode } from '@/components/editor/libs/nodes/embeds/tweet-node'
-// import { YouTubeNode } from '@/components/editor/libs/nodes/embeds/youtube-node'
 import { EmojiNode } from '@/components/editor/libs/nodes/emoji-node'
 import { ImageNode } from '@/components/editor/libs/nodes/image-node'
 import { KeywordNode } from '@/components/editor/libs/nodes/keyword-node'
 import { LayoutContainerNode } from '@/components/editor/libs/nodes/layout-container-node'
 import { LayoutItemNode } from '@/components/editor/libs/nodes/layout-item-node'
-import { MentionNode } from '@/components/editor/libs/nodes/mention-node'
 
 export const nodes: ReadonlyArray<Klass<LexicalNode> | LexicalNodeReplacement> = [
   HeadingNode,
@@ -34,14 +31,11 @@ export const nodes: ReadonlyArray<Klass<LexicalNode> | LexicalNodeReplacement> =
   CodeNode,
   CodeHighlightNode,
   HorizontalRuleNode,
-  MentionNode,
   ImageNode,
   EmojiNode,
   KeywordNode,
   LayoutContainerNode,
   LayoutItemNode,
   AutoLinkNode,
-  // TweetNode,
-  // YouTubeNode,
   AutocompleteNode,
 ]

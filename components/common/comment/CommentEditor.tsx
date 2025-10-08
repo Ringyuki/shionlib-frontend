@@ -1,6 +1,7 @@
 import { $getRoot, SerializedEditorState } from 'lexical'
 import { initialValue } from './constants/initialValue'
 import { Editor } from '@/components/editor/Editor'
+import { Plugins } from './editor/plugins'
 import { useState, useImperativeHandle, forwardRef } from 'react'
 
 interface CommentEditorProps {
@@ -21,6 +22,7 @@ export const CommentEditor = forwardRef(({ onSubmit, isSubmitting }: CommentEdit
   return (
     <div className="flex flex-col w-full">
       <Editor
+        CustomPlugins={Plugins}
         editorSerializedState={serialized}
         onSerializedChange={value => setSerialized(value)}
         autoFocus={false}
