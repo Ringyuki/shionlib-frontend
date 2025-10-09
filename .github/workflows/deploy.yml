@@ -1,0 +1,134 @@
+name: deploy frontend
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: shionlib-frontend-deploy
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.10.0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Format check
+        run: pnpm format:check
+
+      - name: ESLint
+        run: pnpm lint
+
+      - name: Type check
+        run: pnpm exec tsc -p tsconfig.json --noEmit
+
+  build-and-deploy:
+    name: Build and Deploy
+    needs: checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.10.0
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        env:
+          NEXT_PUBLIC_PROD_API_PATH: ${{ secrets.NEXT_PUBLIC_PROD_API_PATH }}
+          NEXT_PUBLIC_API_PORT: ${{ secrets.NEXT_PUBLIC_API_PORT }}
+          NEXT_PUBLIC_SHIONLIB_IMAGE_BED_HOST: ${{ secrets.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_HOST }}
+          NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL: ${{ secrets.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL }}
+        run: pnpm build
+
+      - name: Compose standalone bundle
+        run: |
+          cp -r public .next/standalone/
+          mkdir -p .next/standalone/.next
+          cp -r .next/static .next/standalone/.next/
+
+      - name: Archive artifact
+        run: |
+          SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
+          TAR_NAME="release-${SHORT_SHA}.tgz"
+          echo "TAR_NAME=$TAR_NAME" >> $GITHUB_ENV
+          tar -czf "$TAR_NAME" -C .next/standalone .
+
+      - name: Upload to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: '${{ env.TAR_NAME }}'
+          target: '/tmp'
+
+      - name: Deploy on server and restart pm2
+        uses: appleboy/ssh-action@v1.2.0
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+          DEPLOY_DIR: ${{ secrets.DEPLOY_DIR }}
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          envs: 'GITHUB_SHA,DEPLOY_DIR'
+          script: |
+            set -euo pipefail
+            DEPLOY_DIR="${{ secrets.DEPLOY_DIR }}"
+            KEEP_RELEASES=5
+
+            mkdir -p "$DEPLOY_DIR/releases" "$DEPLOY_DIR/current"
+
+            SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
+            TS_UTC=$(date -u +%Y%m%d%H%M%S)
+            RELEASE_NAME="${TS_UTC}-${SHORT_SHA}"
+            RELEASE_DIR="$DEPLOY_DIR/releases/$RELEASE_NAME"
+            SHARED_DIR="$DEPLOY_DIR/shared"
+
+            TAR_NAME="release-${SHORT_SHA}.tgz"
+            mkdir -p "$RELEASE_DIR"
+            tar -xzf "/tmp/$TAR_NAME" -C "$RELEASE_DIR"
+            rm -f "/tmp/$TAR_NAME"
+
+            ln -sfn "$SHARED_DIR/.env" "$RELEASE_DIR/.env"
+            ln -sfn "$SHARED_DIR/ecosystem.config.cjs" "$RELEASE_DIR/ecosystem.config.cjs"
+            ln -sfn "$RELEASE_DIR" "$DEPLOY_DIR/current"
+
+            cd "$DEPLOY_DIR/current"
+            pm2 restart shionlib-frontend || pm2 start "ecosystem.config.cjs" --env production
+
+            cd "$DEPLOY_DIR/releases"
+            ls -1dt */ | tail -n +$((KEEP_RELEASES+1)) | xargs -r rm -rf
