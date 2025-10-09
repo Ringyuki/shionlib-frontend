@@ -88,7 +88,7 @@ jobs:
           source: '${{ env.TAR_NAME }}'
           target: '/tmp'
 
-      - name: Deploy on server and restart pm2
+      - name: Deploy on server
         uses: appleboy/ssh-action@v1.2.0
         env:
           GITHUB_SHA: ${{ github.sha }}
@@ -122,7 +122,26 @@ jobs:
             ln -sfn "$RELEASE_DIR" "$DEPLOY_DIR/current"
 
             cd "$DEPLOY_DIR/current"
-            pm2 restart shionlib-frontend || pm2 start "ecosystem.config.cjs" --env production
+
+            if [ -s "$HOME/.nvm/nvm.sh" ]; then
+              . "$HOME/.nvm/nvm.sh"
+              nvm use --silent >/dev/null 2>&1 || true
+            fi
+            export PATH="$PATH:/usr/local/bin:$HOME/.local/bin:$HOME/.npm-global/bin"
+            PM2_BIN="$(command -v pm2 || true)"
+            if [ -z "$PM2_BIN" ]; then
+              CANDIDATE_BIN=$(find "$HOME/.nvm/versions/node" -maxdepth 2 -type d -name bin 2>/dev/null | head -n1)
+              if [ -n "$CANDIDATE_BIN" ]; then
+                export PATH="$CANDIDATE_BIN:$PATH"
+                PM2_BIN="$(command -v pm2 || true)"
+              fi
+            fi
+            if [ -z "$PM2_BIN" ]; then
+              echo "pm2 not found in PATH" >&2
+              exit 127
+            fi
+
+            "$PM2_BIN" restart shionlib-frontend || "$PM2_BIN" start "ecosystem.config.cjs" --env production
 
             cd "$DEPLOY_DIR/releases"
             ls -1dt */ | tail -n +$((KEEP_RELEASES+1)) | xargs -r rm -rf
