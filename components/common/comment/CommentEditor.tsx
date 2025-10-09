@@ -51,3 +51,5 @@ export const CommentEditor = forwardRef(
     )
   },
 )
+
+CommentEditor.displayName = 'CommentEditor'

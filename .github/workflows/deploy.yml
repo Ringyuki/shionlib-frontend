@@ -40,6 +40,7 @@ jobs:
   build-and-deploy:
     name: Build and Deploy
     needs: checks
+    environment: deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -60,10 +61,10 @@ jobs:
 
       - name: Build
         env:
-          NEXT_PUBLIC_PROD_API_PATH: ${{ secrets.NEXT_PUBLIC_PROD_API_PATH }}
-          NEXT_PUBLIC_API_PORT: ${{ secrets.NEXT_PUBLIC_API_PORT }}
-          NEXT_PUBLIC_SHIONLIB_IMAGE_BED_HOST: ${{ secrets.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_HOST }}
-          NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL: ${{ secrets.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL }}
+          NEXT_PUBLIC_PROD_API_PATH: ${{ vars.NEXT_PUBLIC_PROD_API_PATH }}
+          NEXT_PUBLIC_API_PORT: ${{ vars.NEXT_PUBLIC_API_PORT }}
+          NEXT_PUBLIC_SHIONLIB_IMAGE_BED_HOST: ${{ vars.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_HOST }}
+          NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL: ${{ vars.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL }}
         run: pnpm build
 
       - name: Compose standalone bundle
