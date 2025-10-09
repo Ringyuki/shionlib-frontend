@@ -211,7 +211,7 @@ function FloatingLinkEditor({
   return (
     <div
       ref={editorRef}
-      className="absolute top-0 left-0 w-full max-w-sm rounded-md opacity-0 shadow-md"
+      className="absolute top-0 left-0 w-full max-w-sm rounded-md bg-card shadow-md"
     >
       {!isLink ? null : isLinkEditMode ? (
         <div className="flex items-center space-x-2 rounded-md border p-1 pl-2">

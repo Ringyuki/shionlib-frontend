@@ -48,7 +48,7 @@ export const Editor = ({
   clearSignal,
 }: EditorProps) => {
   return (
-    <div className="bg-background overflow-hidden rounded-lg border shadow">
+    <div className="w-full min-w-0 bg-background overflow-hidden rounded-lg border shadow">
       <LexicalComposer
         initialConfig={{
           ...editorConfig,

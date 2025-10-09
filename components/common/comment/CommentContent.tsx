@@ -19,7 +19,7 @@ export const CommentContent = ({ game_id, comments }: CommentContentProps) => {
     >
       <div className="flex flex-col gap-2">
         <h2 className="flex items-center gap-2 text-lg font-bold">
-          <MessageSquareMore className="size-4" />
+          <MessageSquareMore />
           {t('comments')}
         </h2>
         <p className="text-sm text-muted-foreground">{t('description')}</p>

@@ -212,6 +212,33 @@
         },
         "CommentBox": {
           "success": "コメント成功"
+        },
+        "CommentItem": {
+          "edited": "編集于"
+        },
+        "CommentParent": {
+          "parent": "返信"
+        },
+        "Actions": {
+          "MoreActions": {
+            "edit": "編集",
+            "delete": "削除"
+          },
+          "Edit": {
+            "edit": "編集",
+            "title": "コメントを編集",
+            "cancel": "キャンセル",
+            "confirm": "保存",
+            "success": "編集成功"
+          },
+          "Delete": {
+            "delete": "削除",
+            "title": "コメントを削除",
+            "description": "コメントを削除してよろしいですか？",
+            "cancel": "キャンセル",
+            "confirm": "削除",
+            "success": "削除成功"
+          }
         }
       }
     },

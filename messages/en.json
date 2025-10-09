@@ -220,6 +220,33 @@
         },
         "CommentBox": {
           "success": "Comment successfully"
+        },
+        "CommentItem": {
+          "edited": "edited at"
+        },
+        "CommentParent": {
+          "parent": "Reply to"
+        },
+        "Actions": {
+          "MoreActions": {
+            "edit": "Edit",
+            "delete": "Delete"
+          },
+          "Edit": {
+            "edit": "Edit",
+            "title": "Edit comment",
+            "cancel": "Cancel",
+            "confirm": "Save",
+            "success": "Edited successfully"
+          },
+          "Delete": {
+            "delete": "Delete",
+            "title": "Delete comment",
+            "description": "Are you sure you want to delete this comment?",
+            "cancel": "Cancel",
+            "confirm": "Delete",
+            "success": "Deleted successfully"
+          }
         }
       }
     },

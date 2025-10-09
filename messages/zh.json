@@ -220,6 +220,33 @@
         },
         "CommentBox": {
           "success": "评论成功"
+        },
+        "CommentItem": {
+          "edited": "编辑于"
+        },
+        "CommentParent": {
+          "parent": "回复给"
+        },
+        "Actions": {
+          "MoreActions": {
+            "edit": "编辑",
+            "delete": "删除"
+          },
+          "Edit": {
+            "edit": "编辑",
+            "title": "编辑评论",
+            "cancel": "取消",
+            "confirm": "保存",
+            "success": "编辑成功"
+          },
+          "Delete": {
+            "delete": "删除",
+            "title": "删除评论",
+            "description": "确定要删除此评论吗？",
+            "cancel": "取消",
+            "confirm": "删除",
+            "success": "删除成功"
+          }
         }
       }
     },

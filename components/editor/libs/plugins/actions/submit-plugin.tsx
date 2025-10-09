@@ -56,15 +56,16 @@ export function SubmitPlugin({
       onClick={handleSubmit}
       loading={isLoading}
       disabled={disabled}
+      loginRequired
       className="ml-2"
     >
       {label || (
         <div className="flex items-center gap-1">
           <span>{t('submit')}</span>
           <span className="inline-flex items-center text-xs">
-            <Kbd className="text-primary text-[0.6rem]">{isApple ? '⌘' : 'Ctrl'}</Kbd>
+            <Kbd className="text-primary text-[0.6rem] bg-white">{isApple ? '⌘' : 'Ctrl'}</Kbd>
             <span>+</span>
-            <Kbd className="text-primary text-[0.6rem]">Enter</Kbd>
+            <Kbd className="text-primary text-[0.6rem] bg-white">Enter</Kbd>
           </span>
         </div>
       )}

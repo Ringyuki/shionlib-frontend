@@ -19,7 +19,7 @@ const getComments = async (game_id: string) => {
   const data = await shionlibRequest().get<PaginatedResponse<Comment>>(`/comment/game/${game_id}`, {
     params: {
       page: 1,
-      page_size: 100,
+      pageSize: 100,
     },
   })
   return data.data?.items as Comment[]

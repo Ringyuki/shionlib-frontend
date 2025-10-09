@@ -1,26 +1,29 @@
 'use client'
 
-import { RenderedComment, useCommentListStore } from '@/store/commentListStore'
+import { useCommentListStore } from '@/store/commentListStore'
+import { Comment } from '@/interfaces/comment/comment.interface'
 import { CommentItem } from './CommentItem'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
-export function CommentListClient({ initial }: { initial: RenderedComment[] }) {
+export const CommentListClient = ({ initial }: { initial: Comment[] }) => {
   const { comments, setComments } = useCommentListStore()
+  const [hydrated, setHydrated] = useState(false)
   useEffect(() => {
     setComments(initial)
+    setHydrated(true)
   }, [initial, setComments])
 
-  const list = comments.length > 0 ? comments : initial
+  const list = hydrated ? comments : initial
   const sorted = useMemo(
-    () => [...list].sort((a, b) => new Date(a.created).getTime() - new Date(b.created).getTime()),
+    () => [...list].sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime()),
     [list],
   )
 
   return (
     <div className="flex flex-col gap-4">
-      {sorted.map(comment => (
-        <CommentItem key={comment.id} comment={comment} />
-      ))}
+      {sorted.map(comment => {
+        return <CommentItem key={comment.id} comment={comment} />
+      })}
     </div>
   )
 }

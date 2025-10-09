@@ -85,7 +85,6 @@ export const Plugins: Plugin<PluginsProps> = ({
   clearSignal,
 }: PluginsProps) => {
   const t = useTranslations('Components.Editor.Plugins')
-  const tPicker = useTranslations('Components.Editor.Picker')
   const [floatingAnchorElem, setFloatingAnchorElem] = useState<HTMLDivElement | null>(null)
   const [isLinkEditMode, setIsLinkEditMode] = useState<boolean>(false)
 
@@ -102,7 +101,7 @@ export const Plugins: Plugin<PluginsProps> = ({
     </span>
   )
   return (
-    <div className="relative">
+    <div className="relative w-full min-w-0">
       <ToolbarPlugin>
         {({ blockType }) => (
           <div className="vertical-align-middle sticky top-0 z-10 flex items-center gap-2 overflow-auto border-b p-1">
@@ -143,12 +142,12 @@ export const Plugins: Plugin<PluginsProps> = ({
           </div>
         )}
       </ToolbarPlugin>
-      <div className="relative">
+      <div className="relative w-full min-w-0">
         <ClearOnSignalPlugin signal={clearSignal} />
         <RichTextPlugin
           contentEditable={
-            <div className="">
-              <div className="" ref={onRef}>
+            <div className="w-full min-w-0">
+              <div className="w-full min-w-0" ref={onRef}>
                 <ContentEditable
                   placeholder={placeholder || initialPlaceholder}
                   className="ContentEditable__root relative block min-h-60 max-h-[80vh] overflow-auto px-8 py-4 text-base focus:outline-none"

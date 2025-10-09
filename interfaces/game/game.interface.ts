@@ -162,7 +162,7 @@ export interface GameData {
   characters: GameCharacterRelation[]
 
   nsfw: boolean
-  type?: string
+  type: string
   platform: Platform[]
 
   is_favorite: boolean
