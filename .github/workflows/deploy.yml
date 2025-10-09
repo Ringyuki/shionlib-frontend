@@ -100,6 +100,8 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           envs: 'GITHUB_SHA,DEPLOY_DIR'
           script: |
+            source ~/.bashrc 2>/dev/null || true
+            source ~/.profile 2>/dev/null || true
             set -euo pipefail
             DEPLOY_DIR="${{ secrets.DEPLOY_DIR }}"
             KEEP_RELEASES=5
@@ -122,41 +124,7 @@ jobs:
             ln -sfn "$RELEASE_DIR" "$DEPLOY_DIR/current"
 
             cd "$DEPLOY_DIR/current"
-            set -x
-            export NVM_DIR="$HOME/.nvm"
-            if [ -s "$NVM_DIR/nvm.sh" ]; then
-              set +u
-              . "$NVM_DIR/nvm.sh"
-              set -u
-            fi
-            export PATH="$PATH:/usr/local/bin:$HOME/.local/bin:$HOME/.npm-global/bin"
-            if command -v npm >/dev/null 2>&1; then
-              export PATH="$(npm bin -g 2>/dev/null):$PATH"
-            fi
-            echo "whoami=$(whoami)"
-            echo "PATH=$PATH"
-            command -v node || true
-            node -v || true
-            command -v pm2 || true
-            pm2 -v || true
-
-            PM2_BIN="$(command -v pm2 || true)"
-            if [ -z "$PM2_BIN" ]; then
-              for candidate in "$HOME/.nvm/versions/node"/*/bin/pm2 \
-                               "/usr/local/bin/pm2" \
-                               "/usr/bin/pm2"; do
-                if [ -x "$candidate" ]; then
-                  PM2_BIN="$candidate"
-                  break
-                fi
-              done
-            fi
-            if [ -z "$PM2_BIN" ]; then
-              echo "pm2 not found in PATH or common locations" >&2
-              exit 127
-            fi
-
-            "$PM2_BIN" restart shionlib-frontend || "$PM2_BIN" start "ecosystem.config.cjs" --env production
+            pm2 restart shionlib-frontend || pm2 start "ecosystem.config.cjs" --env production
 
             cd "$DEPLOY_DIR/releases"
             ls -1dt */ | tail -n +$((KEEP_RELEASES+1)) | xargs -r rm -rf
