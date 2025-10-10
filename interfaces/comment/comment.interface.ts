@@ -2,7 +2,7 @@ export interface Comment {
   id: number
   html: string
   parent_id: number | null
-  parent: {
+  parent?: {
     id: number
     html: string
     creator: {

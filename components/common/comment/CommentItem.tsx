@@ -42,7 +42,7 @@ export const CommentItem = ({ comment }: CommentItemProps) => {
           </span>
         </div>
       </div>
-      {comment.parent.id && <CommentParent parent={comment.parent} />}
+      {comment.parent?.id && <CommentParent parent={comment.parent} />}
       <div dangerouslySetInnerHTML={{ __html: comment.html || '' }} />
       <CommentActions
         comment_id={comment.id}
