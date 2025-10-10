@@ -76,7 +76,7 @@ jobs:
           SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
           TAR_NAME="release-${SHORT_SHA}.tgz"
           echo "TAR_NAME=$TAR_NAME" >> $GITHUB_ENV
-          tar -czf "$TAR_NAME" -C .next standalone
+          tar -czf "$TAR_NAME" -C . .next
 
       - name: Upload to server
         uses: appleboy/scp-action@v0.1.7
