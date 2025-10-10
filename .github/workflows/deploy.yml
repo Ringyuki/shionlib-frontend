@@ -120,6 +120,7 @@ jobs:
             rm -f "/tmp/$TAR_NAME"
 
             ln -sfn "$SHARED_DIR/.env" "$RELEASE_DIR/.env"
+            ln -sfn "$SHARED_DIR/.env" "$RELEASE_DIR/.next/standalone/.env"
             ln -sfn "$SHARED_DIR/ecosystem.config.cjs" "$RELEASE_DIR/ecosystem.config.cjs"
             ln -sfn "$RELEASE_DIR" "$DEPLOY_DIR/current"
 
