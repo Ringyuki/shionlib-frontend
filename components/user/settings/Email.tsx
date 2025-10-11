@@ -117,7 +117,7 @@ export const EmailSettings = ({ email }: EmailSettingsProps) => {
         <DrawerFlow
           open={open}
           onOpenChange={setOpen}
-          currentEmail={email}
+          currentEmail={email!}
           onSubmit={onSubmit}
           isSubmitting={isUpdating}
         />
@@ -125,7 +125,7 @@ export const EmailSettings = ({ email }: EmailSettingsProps) => {
         <DialogFlow
           open={open}
           onOpenChange={setOpen}
-          currentEmail={email}
+          currentEmail={email!}
           onSubmit={onSubmit}
           isSubmitting={isUpdating}
         />

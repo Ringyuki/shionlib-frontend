@@ -7,7 +7,7 @@ export interface User {
   cover: string
   bio: string
   role: number
-  email: string
+  email?: string
   lang: SupportedLocales
 }
 
