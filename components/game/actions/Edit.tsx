@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { Permission } from '@/interfaces/edit/permisson.interface'
 import { useEditPermissionStore } from '@/store/editPermissionStore'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/i18n/navigation.client'
 
 interface EditProps {
   game_id: number

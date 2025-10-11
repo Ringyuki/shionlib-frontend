@@ -1,8 +1,9 @@
 'use client'
+
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/shionui/Button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/shionui/Card'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/i18n/navigation.client'
 
 type ErrorViewProps = {
   title?: string

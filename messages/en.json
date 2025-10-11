@@ -34,6 +34,12 @@
     "NotFound": {
       "title": "Page Not Found",
       "details": "The page you are looking for does not exist or may have been moved."
+    },
+    "User": {
+      "Settings": {
+        "title": "Edit settings",
+        "description": "You can manage your personal information on this page."
+      }
     }
   },
   "Components": {
@@ -127,6 +133,10 @@
           "system": "Match system",
           "light": "Light",
           "dark": "Dark"
+        },
+        "Settings": {
+          "personalSettings": "Personal settings",
+          "siteSettings": "Site settings"
         }
       },
       "User": {
@@ -413,6 +423,94 @@
           "nsfw": "Is NSFW",
           "submit": "Submit",
           "success": "Submitted successfully"
+        }
+      }
+    },
+    "User": {
+      "Settings": {
+        "TabsNav": {
+          "personal": "Personal information",
+          "site": "Site settings"
+        },
+        "Avatar": {
+          "title": "Avatar",
+          "description": "You can manage your avatar here.",
+          "help": "Click the avatar on the right to select an image.",
+          "tips": "Although this setting is optional, we still recommend you to set an avatar.",
+          "update": "Update avatar",
+          "success": "Updated successfully"
+        },
+        "AvatarResize": {
+          "title": "Resize avatar",
+          "crop": "Crop"
+        },
+        "Name": {
+          "title": "Username",
+          "description": "You can manage your username here. Username is your unique identifier (one of them), so your username cannot be the same as others.",
+          "update": "Update username",
+          "success": "Updated successfully"
+        },
+        "Password": {
+          "title": "Password",
+          "description": "You can manage your password here. Password must be at least 8 characters and include at least one letter, one number, and one uppercase letter.",
+          "update": "Update password",
+          "forget": "Forgot password?",
+          "success": "Updated successfully, please log in again"
+        },
+        "PasswordForm": {
+          "validation": {
+            "currentPassword": "Current password must be at least 8 characters",
+            "password": "Password must be at least 8 characters",
+            "passwordConfirm": "Confirm password must be at least 8 characters",
+            "passwordRegex": "Password must be at least 8 characters and include at least one letter, one number, and one uppercase letter",
+            "passwordDiff": "Password and confirm password do not match"
+          },
+          "currentPassword": "Current password",
+          "password": "Password",
+          "passwordConfirm": "Confirm password"
+        },
+        "Email": {
+          "title": "Email",
+          "description": "You can manage your email here. We will send a verification code to your existing email, then you can fill in the new email and complete the verification.",
+          "currentEmail": "Current email",
+          "help": "Existing email not available? Please contact the administrator for the next step.",
+          "update": "Send verification code",
+          "success": "Updated successfully, please log in again"
+        },
+        "EmailFlow": {
+          "title": "Update email",
+          "step1": {
+            "title": "Verify current email",
+            "description": "Verification code has been sent to your current email, if you don't receive it, please check your spam folder.",
+            "currentEmail": "Current email",
+            "verifyCode": "Verification code",
+            "validation": {
+              "verifyCode": "Verification code is required"
+            }
+          },
+          "step2": {
+            "title": "Verify new email",
+            "description": "Fill in the new email and complete the verification.",
+            "newEmail": "New email",
+            "getVerifyCode": "Get verification code",
+            "verifyCodeSent": "Verification code sent",
+            "verifyCode": "Verification code",
+            "validation": {
+              "email": "Please enter a valid email address",
+              "verifyCode": "Verification code is required"
+            }
+          },
+          "previous": "Previous",
+          "next": "Next",
+          "done": "Done"
+        },
+        "Language": {
+          "title": "Language",
+          "description": "You can update your language preference here.",
+          "selectLanguage": "Select language",
+          "chooseLanguage": "Select language",
+          "update": "Update language",
+          "success": "Updated successfully"
         }
       }
     }

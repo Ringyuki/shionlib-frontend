@@ -11,7 +11,15 @@ export const Avatar = React.forwardRef<React.ComponentRef<typeof ShionlibAvatar>
   ({ user, className, ...props }, ref) => {
     return (
       <ShionlibAvatar ref={ref} className={cn('rounded-full select-none', className)} {...props}>
-        <AvatarImage src={user.avatar} />
+        <AvatarImage
+          src={
+            user.avatar
+              ? user.avatar.startsWith('http')
+                ? user.avatar
+                : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + user.avatar
+              : ''
+          }
+        />
         <AvatarFallback className="bg-primary/20">
           {user.name.slice(0, 2).toUpperCase()}
         </AvatarFallback>

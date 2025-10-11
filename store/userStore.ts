@@ -25,16 +25,23 @@ const initialUser: ShionlibUserInfo = {
 export interface ShionlibUserStore {
   user: ShionlibUserInfo
   setUser: (user: ShionlibUserInfo) => void
+  getUser: () => ShionlibUserInfo
+  updateUser: (user: Partial<ShionlibUserInfo>) => void
   logout: () => void
 }
 
 export const useShionlibUserStore = create<ShionlibUserStore>()(
   persist(
-    set => ({
+    (set, get) => ({
       user: initialUser,
       setUser: (user: ShionlibUserInfo) =>
         set(() => ({
           user,
+        })),
+      getUser: () => get().user,
+      updateUser: (updates: Partial<ShionlibUserInfo>) =>
+        set(() => ({
+          user: { ...get().user, ...updates },
         })),
       logout: () =>
         set(() => ({

@@ -32,18 +32,22 @@ interface RegisterProps {
 export const Register = ({ onSuccess }: RegisterProps) => {
   const t = useTranslations('Components.Common.User.Register')
 
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]+$/
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)\S+$/
 
   const registerSchema = z
     .object({
       name: z.string().min(1, t('validation.username')),
       email: z.email(t('validation.email')),
-      verify_code: z.string().min(1, t('validation.verifyCode')),
+      verify_code: z.string().length(6, t('validation.verifyCode')),
       password: z
         .string()
         .min(8, t('validation.password'))
+        .max(50, t('validation.password'))
         .regex(passwordRegex, t('validation.passwordRegex')),
-      password_confirm: z.string().min(8, t('validation.password')),
+      password_confirm: z
+        .string()
+        .min(8, t('validation.password'))
+        .max(50, t('validation.password')),
     })
     .refine(data => data.password === data.password_confirm, {
       path: ['password_confirm'],
@@ -203,7 +207,7 @@ export const Register = ({ onSuccess }: RegisterProps) => {
             <FormItem>
               <FormLabel>{t('password')}</FormLabel>
               <FormControl>
-                <Input {...field} type="password" />
+                <Input {...field} type="password" maxLength={50} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -216,7 +220,7 @@ export const Register = ({ onSuccess }: RegisterProps) => {
             <FormItem>
               <FormLabel>{t('passwordConfirm')}</FormLabel>
               <FormControl>
-                <Input {...field} type="password" />
+                <Input {...field} type="password" maxLength={50} />
               </FormControl>
               <FormMessage />
             </FormItem>

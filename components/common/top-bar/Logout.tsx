@@ -11,20 +11,18 @@ export const Logout = () => {
   const t = useTranslations('Components.Common.User.LogoutDialog')
   const { openLogoutDialog } = useAuthDialogStore()
   return (
-    <>
-      <DropdownMenuItem
-        variant="destructive"
-        className="cursor-pointer duration-200"
-        onSelect={e => {
-          e.preventDefault()
-          openLogoutDialog()
-        }}
-      >
-        <DropdownMenuLabel>{t('button')}</DropdownMenuLabel>
-        <DropdownMenuShortcut>
-          <LogOut className="text-red-500" />
-        </DropdownMenuShortcut>
-      </DropdownMenuItem>
-    </>
+    <DropdownMenuItem
+      variant="destructive"
+      className="cursor-pointer duration-200"
+      onSelect={e => {
+        e.preventDefault()
+        openLogoutDialog()
+      }}
+    >
+      <DropdownMenuLabel>{t('button')}</DropdownMenuLabel>
+      <DropdownMenuShortcut>
+        <LogOut className="text-red-500" />
+      </DropdownMenuShortcut>
+    </DropdownMenuItem>
   )
 }

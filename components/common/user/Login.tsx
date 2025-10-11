@@ -19,7 +19,7 @@ import { toast } from 'react-hot-toast'
 import { useState } from 'react'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { User } from '@/interfaces/user/user.interface'
-import { usePathname, useRouter } from '@/i18n/navigation'
+import { usePathname, useRouter } from '@/i18n/navigation.client'
 import { useLocale } from 'next-intl'
 
 interface LoginProps {

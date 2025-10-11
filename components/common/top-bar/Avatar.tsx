@@ -8,6 +8,7 @@ import {
   DropdownMenuSeparator,
 } from '@/components/shionui/DropdownMenu'
 import { Logout } from '@/components/common/top-bar/Logout'
+import { Settings } from '@/components/common/top-bar/Settings'
 
 interface AvatarProps {
   user: User
@@ -20,7 +21,7 @@ export const TopBarAvatar = ({ user, className }: AvatarProps) => {
       <DropdownMenuTrigger asChild className={className}>
         <Avatar user={user} />
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="w-48" side="bottom" align="end">
         <DropdownMenuLabel>
           <div className="flex items-center gap-2">
             <Avatar user={user} />
@@ -28,6 +29,7 @@ export const TopBarAvatar = ({ user, className }: AvatarProps) => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <Settings />
         <Logout />
       </DropdownMenuContent>
     </DropdownMenu>

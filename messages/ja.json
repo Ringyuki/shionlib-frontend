@@ -26,6 +26,12 @@
     "NotFound": {
       "title": "ページが見つかりません",
       "details": "お探しのページは存在しないか、移動された可能性があります。"
+    },
+    "User": {
+      "Settings": {
+        "title": "設定を編集",
+        "description": "このページではあなたの個人情報を管理できます。"
+      }
     }
   },
   "Components": {
@@ -119,6 +125,10 @@
           "system": "システムに合わせる",
           "light": "ライト",
           "dark": "ダーク"
+        },
+        "Settings": {
+          "personalSettings": "個人情報設定",
+          "siteSettings": "サイト設定"
         }
       },
       "User": {
@@ -405,6 +415,94 @@
           "nsfw": "NSFWかどうか",
           "submit": "送信",
           "success": "送信成功"
+        }
+      }
+    },
+    "User": {
+      "Settings": {
+        "TabsNav": {
+          "personal": "個人情報",
+          "site": "サイト設定"
+        },
+        "Avatar": {
+          "title": "アバター",
+          "description": "このページではあなたのアバターを設定できます。",
+          "help": "右側のアバターをクリックして画像を選択してください。",
+          "tips": "この設定は任意ですが、アバターを設定することをお勧めします。",
+          "update": "アバターを更新",
+          "success": "更新成功"
+        },
+        "AvatarResize": {
+          "title": "アバターのサイズを調整",
+          "crop": "裁剪"
+        },
+        "Name": {
+          "title": "ユーザー名",
+          "description": "このページではあなたのユーザー名を設定できます。ユーザー名はあなたの唯一の識別子であり、他のユーザーと同じにすることはできません。",
+          "update": "ユーザー名を更新",
+          "success": "更新成功"
+        },
+        "Password": {
+          "title": "パスワード",
+          "description": "このページではあなたのパスワードを設定できます。パスワードは8文字以上で、英字・数字・大文字をそれぞれ少なくとも1文字含めてください。",
+          "update": "パスワードを更新",
+          "forget": "パスワードを忘れた？",
+          "success": "更新成功, 再ログインしてください"
+        },
+        "PasswordForm": {
+          "validation": {
+            "currentPassword": "現在のパスワードは8文字以上が必要です",
+            "password": "パスワードは8文字以上が必要です",
+            "passwordConfirm": "確認用パスワードは8文字以上が必要です",
+            "passwordRegex": "パスワードは8文字以上で、英字・数字・大文字をそれぞれ少なくとも1文字含めてください",
+            "passwordDiff": "パスワードと確認用パスワードが一致しません"
+          },
+          "currentPassword": "現在のパスワード",
+          "password": "パスワード",
+          "passwordConfirm": "確認用パスワード"
+        },
+        "Email": {
+          "title": "メールアドレス",
+          "description": "このページではあなたのメールアドレスを設定できます。現在のメールアドレスに検証コードを送信し、新しいメールアドレスを入力して検証できます。",
+          "currentEmail": "現在のメールアドレス",
+          "help": "現在のメールアドレスが利用できない場合は、管理者に連絡してください。",
+          "update": "検証コードを送信",
+          "success": "更新成功, 再ログインしてください"
+        },
+        "EmailFlow": {
+          "title": "メールアドレスを更新",
+          "step1": {
+            "title": "現在のメールアドレスを検証",
+            "description": "検証コードは現在のメールアドレスに送信されました。受信しない場合は、迷惑メールフォルダを確認してください。",
+            "currentEmail": "現在のメールアドレス",
+            "verifyCode": "検証コード",
+            "validation": {
+              "verifyCode": "検証コードは必須です"
+            }
+          },
+          "step2": {
+            "title": "新しいメールアドレスを検証",
+            "description": "新しいメールアドレスを入力して検証してください。",
+            "newEmail": "新しいメールアドレス",
+            "getVerifyCode": "検証コードを送信",
+            "verifyCodeSent": "検証コードを送信しました",
+            "verifyCode": "検証コード",
+            "validation": {
+              "email": "有効なメールアドレスを入力してください",
+              "verifyCode": "検証コードは必須です"
+            }
+          },
+          "previous": "前へ",
+          "next": "次へ",
+          "done": "完了"
+        },
+        "Language": {
+          "title": "言語",
+          "description": "このページではあなたの言語偏好を設定できます。",
+          "selectLanguage": "言語を選択",
+          "chooseLanguage": "言語を選択",
+          "update": "言語を更新",
+          "success": "更新成功"
         }
       }
     }

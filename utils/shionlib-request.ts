@@ -31,11 +31,13 @@ export const shionlibRequest = () => {
         const cookieString = (await cookies()).toString()
         if (cookieString) headers.set('Cookie', cookieString)
       }
-      return {
-        ...options,
-        headers,
-        credentials: 'include',
+      // if body is FormData, we will not manually set Content-Type so browser can set boundary.
+      const opt: RequestInit = { ...options, headers, credentials: 'include' }
+      const maybeBody: any = (opt as any).body
+      if (maybeBody instanceof FormData) {
+        headers.delete('Content-Type')
       }
+      return opt
     }
     const reqUrl = () =>
       `${baseUrl}${path}${params ? `?${new URLSearchParams(params).toString()}` : ''}`
@@ -172,12 +174,33 @@ export const shionlibRequest = () => {
     )
   }
 
+  const _fetch = async <T>(
+    path: string,
+    config?: {
+      method: string
+      data?: any
+      params?: Record<string, any>
+      options?: RequestInit
+    },
+  ): Promise<BasicResponse<T>> => {
+    return await basicFetch<T>(
+      path,
+      {
+        method: config?.method,
+        body: config?.data,
+        ...config?.options,
+      },
+      config?.params,
+    )
+  }
+
   return {
     get,
     post,
     put,
     delete: _delete,
     patch,
+    fetch: _fetch,
   }
 }
 

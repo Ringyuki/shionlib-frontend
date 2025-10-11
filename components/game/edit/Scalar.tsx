@@ -21,7 +21,7 @@ import { Check } from 'lucide-react'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { useParams } from 'next/navigation'
 import { toast } from 'react-hot-toast'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/i18n/navigation.client'
 import { pick } from './helper/pick'
 
 interface ScalarProps {
