@@ -50,8 +50,11 @@ export const GameCover = ({ covers, preferredCoverInfo, title, content_limit }: 
         style={{ aspectRatio: aspect }}
       >
         {(() => {
-          if (preferredCover.sexual > 0) {
-            if (content_limit === ContentLimit.SHOW_WITH_SPOILER)
+          if (preferredCover.sexual > 1) {
+            if (
+              content_limit === ContentLimit.SHOW_WITH_SPOILER ||
+              content_limit === ContentLimit.NEVER_SHOW_NSFW_CONTENT
+            )
               return (
                 <Spoiler showHint={true} blur={32} className="rounded-none! h-full!">
                   <_GameCover cover={preferredCover.url} title={title} width={width} />

@@ -54,8 +54,11 @@ export const GameCard = async ({ game, content_limit }: GameCardProps) => {
     >
       <div className="relative w-full overflow-hidden rounded-md" style={{ aspectRatio: aspect }}>
         {(() => {
-          if (cover.sexual > 0) {
-            if (content_limit === ContentLimit.SHOW_WITH_SPOILER)
+          if (cover.sexual > 1) {
+            if (
+              content_limit === ContentLimit.SHOW_WITH_SPOILER ||
+              content_limit === ContentLimit.NEVER_SHOW_NSFW_CONTENT
+            )
               return (
                 <Spoiler showHint={false} open={false} blur={16} className="!rounded-none !h-full">
                   <_GameCover cover={cover.url} title={title} sizes={sizes} aspect={aspect} />
