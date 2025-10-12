@@ -16,7 +16,7 @@ export async function getTestData() {
       <Masonry>
         {data.data?.items.map(item => (
           <div key={item.id} className="break-inside-avoid">
-            <GameCard game={item} />
+            <GameCard game={item} content_limit={data.data?.meta.content_limit} />
           </div>
         ))}
       </Masonry>

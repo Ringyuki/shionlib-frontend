@@ -1,6 +1,12 @@
-import { getTranslations } from 'next-intl/server'
+import { shionlibRequest } from '@/utils/shionlib-request'
+import { User } from '@/interfaces/user/user.interface'
+import { SiteSettings } from '@/components/user/settings/SiteSettings'
+import { notFound } from 'next/navigation'
 
 export default async function UserSiteSettingsPage() {
-  const t = await getTranslations('Pages.User.Settings')
-  return <div>{t('title')}</div>
+  const data = await shionlibRequest().get<User>('/user/me')
+  if (!data.data) {
+    notFound()
+  }
+  return <SiteSettings user={data.data} />
 }

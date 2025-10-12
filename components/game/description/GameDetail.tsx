@@ -18,7 +18,7 @@ export const GameDetail = ({ game }: GameDetailProps) => {
       <div className="flex flex-col gap-8">
         <GameTags tags={game.tags} />
         <GameDescription game={game} />
-        <GameImages images={game.images} />
+        <GameImages images={game.images} content_limit={game.content_limit} />
         <GameStaff staffs={game.staffs} />
         <GameExtraInfo extra_info={game.extra_info} />
         <GameLinks link={game.link} />

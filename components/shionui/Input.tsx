@@ -14,6 +14,8 @@ type InputProps = Omit<React.ComponentProps<'input'>, 'prefix' | 'suffix' | 'siz
   suffix?: React.ReactNode
   clearable?: boolean
   onClear?: () => void
+  inputClassName?: string
+  rightSlot?: React.ReactNode
 }
 
 const sizeClasses: Record<InputSize, string> = {
@@ -28,7 +30,18 @@ const calcPadding = (base: string, hasPrefix: boolean, hasSuffixOrClear: boolean
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
-    { className, type, size = 'md' as InputSize, prefix, suffix, clearable, onClear, ...props },
+    {
+      className,
+      type,
+      size = 'md' as InputSize,
+      prefix,
+      suffix,
+      clearable,
+      onClear,
+      inputClassName,
+      rightSlot,
+      ...props
+    },
     ref,
   ) => {
     const inputRef = React.useRef<HTMLInputElement>(null)
@@ -70,7 +83,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       props.onInput?.(e)
     }
 
-    const baseClass = calcPadding(sizeClasses[size], !!prefix, !!suffix || !!clearable)
+    const baseClass = calcPadding(
+      sizeClasses[size],
+      !!prefix,
+      !!suffix || !!clearable || !!rightSlot,
+    )
 
     return (
       <div data-slot="input-wrapper" className={cn('relative w-full min-w-0', className)}>
@@ -88,6 +105,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             baseClass,
             'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
             'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
+            inputClassName,
           )}
           onInput={handleInput}
           {...props}
@@ -115,6 +133,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               {suffix}
             </span>
           )}
+          {rightSlot}
         </div>
       </div>
     )

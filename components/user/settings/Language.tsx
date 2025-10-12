@@ -59,7 +59,7 @@ export const LanguageSettings = ({ initialLanguage }: LanguageSettingsProps) => 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{t('title')}</CardTitle>
+        <CardTitle className="text-xl">{t('title')}</CardTitle>
         <CardDescription className="text-card-foreground">{t('description')}</CardDescription>
         <CardAction>
           <Languages className="size-12 text-purple-600" />

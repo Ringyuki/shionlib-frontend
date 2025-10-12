@@ -4,11 +4,14 @@ import { cn } from '@/utils/cn'
 import { JP, CN, US } from 'country-flag-icons/string/3x2'
 import { Languages, Proportions } from 'lucide-react'
 import { Language, LanguageNameMap } from '@/interfaces/game/game.interface'
+import { ContentLimit } from '@/interfaces/user/user.interface'
+import { Spoiler } from '@/components/shionui/Spoiler'
 
 interface GameCoverContentProps {
   className?: string
   covers: GameCover[]
   title: string
+  content_limit?: ContentLimit
 }
 
 const flagMap: Record<Language, string> = {
@@ -17,7 +20,27 @@ const flagMap: Record<Language, string> = {
   en: US,
 }
 
-export const GameCoverContent = ({ covers, title, className }: GameCoverContentProps) => {
+const _GameCover = ({ cover, title, sizes }: { cover: string; title: string; sizes: string }) => {
+  return (
+    <FadeImage
+      src={cover}
+      alt={title}
+      className="w-full h-full object-cover"
+      sizes={sizes}
+      fill
+      onClick={() => {
+        window.open(cover, '_blank')
+      }}
+    />
+  )
+}
+
+export const GameCoverContent = ({
+  covers,
+  title,
+  className,
+  content_limit,
+}: GameCoverContentProps) => {
   return (
     <div className={cn('grid grid-cols-1 md:grid-cols-2 gap-3', 'w-full', className)}>
       {covers.map(cover => {
@@ -33,16 +56,19 @@ export const GameCoverContent = ({ covers, title, className }: GameCoverContentP
             className="relative w-full flex flex-col gap-2 cursor-pointer hover:opacity-80 transition-all duration-200"
             style={{ aspectRatio: aspect }}
           >
-            <FadeImage
-              src={url}
-              alt={title}
-              className="w-full h-full object-cover"
-              sizes={sizes}
-              fill
-              onClick={() => {
-                window.open(url, '_blank')
-              }}
-            />
+            {(() => {
+              if (cover.sexual > 0) {
+                if (content_limit === ContentLimit.SHOW_WITH_SPOILER)
+                  return (
+                    <Spoiler showHint={true} blur={32} className="!rounded-none !h-full">
+                      <_GameCover cover={url} title={title} sizes={sizes} />
+                    </Spoiler>
+                  )
+                if (content_limit === ContentLimit.JUST_SHOW)
+                  return <_GameCover cover={url} title={title} sizes={sizes} />
+              }
+              return <_GameCover cover={url} title={title} sizes={sizes} />
+            })()}
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-1">
                 <Languages className="size-3" />

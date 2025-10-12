@@ -1,3 +1,5 @@
+import { ContentLimit } from '@/interfaces/user/user.interface'
+
 export interface GameCover {
   language: Language
   url: string
@@ -166,6 +168,7 @@ export interface GameData {
   platform: Platform[]
 
   is_favorite: boolean
+  content_limit: ContentLimit
 }
 
 export interface GameStaff {

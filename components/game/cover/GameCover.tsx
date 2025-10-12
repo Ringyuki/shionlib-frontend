@@ -8,6 +8,8 @@ import { useTranslations } from 'next-intl'
 import { GameCoverDialog } from './GameCoverDialog'
 import { GameCoverDrawer } from './GameCoverDrawer'
 import { useState } from 'react'
+import { ContentLimit } from '@/interfaces/user/user.interface'
+import { Spoiler } from '@/components/shionui/Spoiler'
 
 interface GameCoverProps {
   covers: GameCoverInterface[]
@@ -17,9 +19,25 @@ interface GameCoverProps {
     aspect: string
   }
   title: string
+  content_limit?: ContentLimit
 }
 
-export const GameCover = ({ covers, preferredCoverInfo, title }: GameCoverProps) => {
+const _GameCover = ({ cover, title, width }: { cover: string; title: string; width: number }) => {
+  return (
+    <FadeImage
+      src={
+        cover.startsWith('http') ? cover : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + cover
+      }
+      alt={title}
+      height={300}
+      fill={false}
+      width={width}
+      className="w-full! h-full"
+    />
+  )
+}
+
+export const GameCover = ({ covers, preferredCoverInfo, title, content_limit }: GameCoverProps) => {
   const t = useTranslations('Components.Game.Cover.GameCover')
   const { cover: preferredCover, vertical, aspect } = preferredCoverInfo
   const width = vertical ? 200 : 450
@@ -31,18 +49,19 @@ export const GameCover = ({ covers, preferredCoverInfo, title }: GameCoverProps)
         className="w-full md:w-fit overflow-hidden h-[200px] md:h-[300px] relative group/cover"
         style={{ aspectRatio: aspect }}
       >
-        <FadeImage
-          src={
-            preferredCover.url.startsWith('http')
-              ? preferredCover.url
-              : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + preferredCover.url
+        {(() => {
+          if (preferredCover.sexual > 0) {
+            if (content_limit === ContentLimit.SHOW_WITH_SPOILER)
+              return (
+                <Spoiler showHint={true} blur={32} className="rounded-none! h-full!">
+                  <_GameCover cover={preferredCover.url} title={title} width={width} />
+                </Spoiler>
+              )
+            if (content_limit === ContentLimit.JUST_SHOW)
+              return _GameCover({ cover: preferredCover.url, title, width })
           }
-          alt={title}
-          height={300}
-          fill={false}
-          width={width}
-          className="w-full! h-full"
-        />
+          return _GameCover({ cover: preferredCover.url, title, width })
+        })()}
         {covers.length > 0 && (
           <div className="absolute bottom-2 right-2 md:right-auto md:left-1/2 md:-translate-x-1/2 opacity-100 md:opacity-0 group-hover/cover:opacity-100 transition-all duration-200">
             <Button
@@ -57,9 +76,21 @@ export const GameCover = ({ covers, preferredCoverInfo, title }: GameCoverProps)
         )}
       </div>
       {isMobile ? (
-        <GameCoverDrawer covers={covers} title={title} open={open} onOpenChange={setOpen} />
+        <GameCoverDrawer
+          covers={covers}
+          title={title}
+          open={open}
+          onOpenChange={setOpen}
+          content_limit={content_limit}
+        />
       ) : (
-        <GameCoverDialog covers={covers} title={title} open={open} onOpenChange={setOpen} />
+        <GameCoverDialog
+          covers={covers}
+          title={title}
+          open={open}
+          onOpenChange={setOpen}
+          content_limit={content_limit}
+        />
       )}
     </>
   )

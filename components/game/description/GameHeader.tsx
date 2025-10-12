@@ -25,6 +25,7 @@ export const GameHeader = async ({ game }: { game: GameData }) => {
         covers={game.covers}
         preferredCoverInfo={{ cover, vertical, aspect }}
         title={title}
+        content_limit={game.content_limit}
       />
       <div className="p-4 pt-2 md:p-6 md:pl-2 flex flex-1 h-auto justify-between gap-2 flex-col">
         <div className="flex flex-col gap-2">

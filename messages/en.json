@@ -44,6 +44,9 @@
   },
   "Components": {
     "ShionUI": {
+      "Spoiler": {
+        "hintText": "Click to view"
+      },
       "DatePicker": {
         "pickADate": "Pick a date"
       },
@@ -511,6 +514,27 @@
           "chooseLanguage": "Select language",
           "update": "Update language",
           "success": "Updated successfully"
+        },
+        "ContentLimit": {
+          "title": "Content limit",
+          "description": "You can update your content display preferences here.",
+          "selectContentLimit": "Select content limit",
+          "chooseContentLimit": "Select content limit",
+          "showWithSpoiler": "Show with spoiler",
+          "justShow": "Just show",
+          "neverShowNsfwContent": "Never show NSFW content",
+          "tipsTitle": "Tips",
+          "tipsDescription": "This setting will take effect in 30 minutes. You can also log in again to make the changes take effect immediately.",
+          "update": "Update content limit",
+          "success": "Updated successfully"
+        },
+        "Aria2": {
+          "title": "Aria2",
+          "description": "You can update your Aria2 settings here. This setting will only be saved to your local browser and will not be uploaded to Shionlib servers.",
+          "port": "Port",
+          "authSecret": "Auth secret",
+          "save": "Save",
+          "success": "Saved successfully"
         }
       }
     }

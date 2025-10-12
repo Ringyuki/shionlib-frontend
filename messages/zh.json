@@ -44,6 +44,9 @@
   },
   "Components": {
     "ShionUI": {
+      "Spoiler": {
+        "hintText": "点击以查看"
+      },
       "DatePicker": {
         "pickADate": "选择日期"
       },
@@ -511,6 +514,27 @@
           "chooseLanguage": "选择语言",
           "update": "更新语言",
           "success": "更新成功"
+        },
+        "ContentLimit": {
+          "title": "内容限制",
+          "description": "你可以在此更新你的内容显示偏好。",
+          "selectContentLimit": "选择内容限制",
+          "chooseContentLimit": "选择内容限制",
+          "showWithSpoiler": "显示Spoiler包裹的 NSFW 内容",
+          "justShow": "直接显示所有 NSFW 内容",
+          "neverShowNsfwContent": "不显示 NSFW 内容",
+          "tipsTitle": "提示",
+          "tipsDescription": "此项设置变更后会在30分钟内生效。你也可以重新登录来使变更立即生效。",
+          "update": "更新内容限制",
+          "success": "更新成功"
+        },
+        "Aria2": {
+          "title": "Aria2",
+          "description": "你可以在此更新你的 Aria2 设置。此项设置仅会保存到你的本地浏览器中，不会上传到 Shionlib 服务器。",
+          "port": "端口",
+          "authSecret": "认证密钥",
+          "save": "保存",
+          "success": "已保存"
         }
       }
     }

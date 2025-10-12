@@ -1,3 +1,5 @@
+import { ContentLimit } from '../user/user.interface'
+
 interface ShionlibApiRes<T> {
   code: number
   message: string
@@ -14,6 +16,7 @@ interface PaginatedRes<T> {
     itemsPerPage: number
     totalPages: number
     currentPage: number
+    content_limit?: ContentLimit
   }
 }
 

@@ -3,7 +3,6 @@ import { AvatarSettings } from '@/components/user/settings/Avatar'
 import { NameSettings } from '@/components/user/settings/Name'
 import { PasswordSettings } from '@/components/user/settings/Password'
 import { EmailSettings } from '@/components/user/settings/Email'
-import { LanguageSettings } from '@/components/user/settings/Language'
 
 interface UserSettingsProps {
   user: User
@@ -16,7 +15,6 @@ export const UserSettings = ({ user }: UserSettingsProps) => {
       <NameSettings name={user.name} />
       <PasswordSettings />
       <EmailSettings email={user.email} />
-      <LanguageSettings initialLanguage={user.lang} />
     </div>
   )
 }
