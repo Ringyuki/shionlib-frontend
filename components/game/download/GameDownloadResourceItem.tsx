@@ -1,6 +1,7 @@
 import { GameDownloadResource } from '@/interfaces/game/game-download-resource'
 import { MdWindow, MdWeb } from 'react-icons/md'
 import { FaApple, FaAndroid, FaLinux } from 'react-icons/fa'
+import { Clock } from 'lucide-react'
 import {
   SiPlaystationvita,
   SiNintendoswitch,
@@ -17,6 +18,9 @@ import { platformTokenMap, Platform } from '@/interfaces/game/game.interface'
 import { platformNameMap } from '@/interfaces/game/game.interface'
 import { LanguageNameMap } from '@/interfaces/game/game.interface'
 import { GameDownloadFileItem } from './GameDownloadFileItem'
+import { timeFromNow } from '@/utils/time-format'
+import { useLocale } from 'next-intl'
+import { useTranslations } from 'next-intl'
 
 interface GameDownloadResourceItemProps {
   resource: GameDownloadResource
@@ -42,6 +46,8 @@ const PlatformIconMap: Record<Platform, React.ElementType> = {
 }
 
 export const GameDownloadResourceItem = ({ resource }: GameDownloadResourceItemProps) => {
+  const locale = useLocale()
+  const t = useTranslations('Components.Game.Download.GameDownloadResourceItem')
   return (
     <div
       key={resource.id}
@@ -74,7 +80,13 @@ export const GameDownloadResourceItem = ({ resource }: GameDownloadResourceItemP
               )
             })}
           </div>
-          <Avatar user={resource.creator} className="size-6 text-xs" />
+          <div className="flex gap-2 items-center">
+            <Avatar user={resource.creator} className="size-6 text-xs" />
+            <span className="text-muted-foreground text-xs font-light flex items-center gap-1">
+              <span>{t('created')}</span>
+              {timeFromNow(resource.created, locale)}
+            </span>
+          </div>
         </div>
       </div>
       <div className="flex flex-col gap-2 rounded-lg w-full">

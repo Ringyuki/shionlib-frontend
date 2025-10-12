@@ -361,6 +361,9 @@
         "GameDownload": {
           "noDownloadSource": "No download source"
         },
+        "GameDownloadResourceItem": {
+          "created": "Uploaded at"
+        },
         "GameDownloadFileItem": {
           "onlyVisibleForYourself": "Only visible for yourself",
           "processing": "Processing",
@@ -369,7 +372,7 @@
           "pushToAria2": "Push to Aria2",
           "normalDownload": "Normal Download",
           "aria2NotReady": "Cannot connect to Aria2, please check your settings",
-          "aria2Unauthorized": "Unauthorized",
+          "aria2Unauthorized": "Unauthorized, please check your settings",
           "aria2FailedToFetch": "Cannot connect to Aria2, please check your settings",
           "aria2UnknownError": "Unknown error"
         }

@@ -361,6 +361,9 @@
         "GameDownload": {
           "noDownloadSource": "暂无下载资源"
         },
+        "GameDownloadResourceItem": {
+          "created": "上传于"
+        },
         "GameDownloadFileItem": {
           "onlyVisibleForYourself": "仅自己可见",
           "processing": "处理中",
@@ -369,7 +372,7 @@
           "pushToAria2": "推送到 Aria2",
           "normalDownload": "普通下载",
           "aria2NotReady": "无法连接到 Aria2，请检查设置是否正确",
-          "aria2Unauthorized": "未授权",
+          "aria2Unauthorized": "未授权，请检查设置是否正确",
           "aria2FailedToFetch": "无法连接到 Aria2，请检查设置是否正确",
           "aria2UnknownError": "未知错误"
         }
@@ -524,7 +527,7 @@
           "justShow": "直接显示所有 NSFW 内容",
           "neverShowNsfwContent": "不显示 NSFW 内容",
           "tipsTitle": "提示",
-          "tipsDescription": "此项设置变更后会在30分钟内生效。你也可以重新登录来使变更立即生效。",
+          "tipsDescription": "此项设置会在变更后的30分钟内生效。你也可以重新登录来使变更立即生效。",
           "update": "更新内容限制",
           "success": "更新成功"
         },

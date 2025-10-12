@@ -9,6 +9,8 @@ export interface GameDownloadResource {
   downloads: number
   creator: Creator
   files: GameDownloadResourceFile[]
+  created: string
+  updated: string
 }
 
 export interface GameDownloadResourceFile {

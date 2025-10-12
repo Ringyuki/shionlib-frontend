@@ -1,16 +1,13 @@
-const PORT = 16800
-const AUTH_SECRET = ''
-
-export const check = async () => {
+export const check = async (port: number, auth_secret: string) => {
   const data = {
     jsonrpc: '2.0',
     method: 'aria2.getVersion',
     id: 'get_version_check',
-    params: ['token:' + AUTH_SECRET],
+    params: ['token:' + auth_secret],
   }
 
   try {
-    const res = await fetch(`http://localhost:${PORT}/jsonrpc`, {
+    const res = await fetch(`http://localhost:${port}/jsonrpc`, {
       method: 'POST',
       body: JSON.stringify(data),
     })
@@ -30,8 +27,13 @@ export const check = async () => {
   }
 }
 
-export const addUrl = async (file_url: string, file_name: string) => {
-  const ready = await check()
+export const addUrl = async (
+  file_url: string,
+  file_name: string,
+  port: number,
+  auth_secret: string,
+) => {
+  const ready = await check(port, auth_secret)
   if (ready !== true) {
     return handleAria2Error(ready)
   }
@@ -41,7 +43,7 @@ export const addUrl = async (file_url: string, file_name: string) => {
     method: 'aria2.addUri',
     id: 'add_url_' + file_name,
     params: [
-      'token:' + AUTH_SECRET,
+      'token:' + auth_secret,
       [file_url],
       {
         out: file_name,
@@ -59,7 +61,7 @@ export const addUrl = async (file_url: string, file_name: string) => {
   document.body.removeChild(motrixLink)
 
   try {
-    await fetch(`http://localhost:${PORT}/jsonrpc`, {
+    await fetch(`http://localhost:${port}/jsonrpc`, {
       method: 'POST',
       body: JSON.stringify(data),
     })

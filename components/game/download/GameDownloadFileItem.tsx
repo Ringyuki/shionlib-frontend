@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { GameDownloadResourceFileLink } from '@/interfaces/game/game-download-resource'
 import { toast } from 'react-hot-toast'
 import { addUrl } from './helpers/aria2'
+import { useAria2Store } from '@/store/aria2Store'
 
 interface GameDownloadFileItemProps {
   file: GameDownloadResourceFile
@@ -19,6 +20,8 @@ export const GameDownloadFileItem = ({ file }: GameDownloadFileItemProps) => {
   const t = useTranslations('Components.Game.Download.GameDownloadFileItem')
   const [pushToAria2Loading, setPushToAria2Loading] = useState(false)
   const [normalDownloadLoading, setNormalDownloadLoading] = useState(false)
+  const { getSettings } = useAria2Store()
+  const { port, auth_secret } = getSettings()
 
   const [downloadLink, setDownloadLink] = useState<string | null>(null)
   const getDownloadLink = async (): Promise<string | null> => {
@@ -38,7 +41,7 @@ export const GameDownloadFileItem = ({ file }: GameDownloadFileItemProps) => {
     }
     if (!url) return
 
-    const res = await addUrl(url, file.file_name)
+    const res = await addUrl(url, file.file_name, port, auth_secret)
     if (!res.success) {
       toast.error(t(res.message ?? 'aria2UnknownError'))
       setPushToAria2Loading(false)
