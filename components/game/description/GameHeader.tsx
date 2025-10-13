@@ -20,7 +20,7 @@ export const GameHeader = async ({ game }: { game: GameData }) => {
 
   const { cover, vertical, aspect } = getPreferredContent(game, 'cover', lang)
   return (
-    <div className="flex flex-col md:flex-row overflow-hidden md:gap-4 gap-2 shadow-xl bg-card-soft w-full rounded-md">
+    <div className="flex flex-col md:flex-row overflow-hidden md:gap-4 gap-2 shadow-content-strong bg-card-soft w-full rounded-md">
       <GameCover
         covers={game.covers}
         preferredCoverInfo={{ cover, vertical, aspect }}

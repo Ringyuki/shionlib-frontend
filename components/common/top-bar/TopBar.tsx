@@ -8,14 +8,10 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/shionui/Button'
 import { useTranslations } from 'next-intl'
 import { Skeleton } from '@/components/shionui/Skeleton'
-import { Link } from '@/i18n/navigation'
+import { SiteLogo } from '@/components/common/top-bar/SiteLogo'
 
 const StartContent = () => {
-  return (
-    <Link href="/" className="flex items-center h-full p-5.5 pl-0">
-      <img className="h-full" src="/assets/images/shionlib-logo.png" alt="Shionlib Logo" />
-    </Link>
-  )
+  return <SiteLogo />
 }
 
 const EndContent = () => {
@@ -57,7 +53,7 @@ const ShionlibTopBar = () => {
         className="
         mx-auto w-full max-w-7xl px-3 h-16
         md:rounded-xl flex items-center justify-between
-        dark:bg-[rgba(0,0,0,0.5)] bg-[rgba(255,255,255,0.5)] backdrop-blur-lg
+        dark:bg-[rgba(0,0,0,0.5)] bg-[rgba(255,255,255,0.7)] backdrop-blur-xl backdrop-saturate-[3.5]
       "
       >
         {StartContent()}

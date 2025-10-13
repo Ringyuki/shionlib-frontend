@@ -38,7 +38,7 @@
     "User": {
       "Settings": {
         "title": "编辑设置",
-        "description": "你可以在此页面管理你的设置。"
+        "description": "你可以在此页面管理你的个人信息和站点设置。"
       }
     }
   },
@@ -139,7 +139,8 @@
         },
         "Settings": {
           "personalSettings": "个人设置",
-          "siteSettings": "站点设置"
+          "siteSettings": "站点设置",
+          "settings": "编辑设置"
         }
       },
       "User": {

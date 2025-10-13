@@ -20,9 +20,11 @@ export const Avatar = React.forwardRef<React.ComponentRef<typeof ShionlibAvatar>
               : ''
           }
         />
-        <AvatarFallback className="bg-primary/20">
-          {user.name.slice(0, 2).toUpperCase()}
-        </AvatarFallback>
+        {!user.avatar && (
+          <AvatarFallback className="bg-primary/20">
+            {user.name.slice(0, 2).toUpperCase()}
+          </AvatarFallback>
+        )}
       </ShionlibAvatar>
     )
   },

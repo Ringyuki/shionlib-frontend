@@ -14,7 +14,7 @@ export const CommentContent = ({ game_id, comments }: CommentContentProps) => {
 
   return (
     <div
-      className="flex flex-col gap-4 w-full p-4 bg-card rounded-lg shadow-xl"
+      className="flex flex-col gap-4 w-full p-4 bg-card rounded-lg shadow-content-strong"
       id="comment-content"
     >
       <div className="flex flex-col gap-2">

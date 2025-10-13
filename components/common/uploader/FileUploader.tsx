@@ -190,7 +190,7 @@ export function FileUploader({
   const shionFileUploadDisabled = phase !== 'idle' || !!file
 
   return (
-    <Card className={cn('w-full bg-transparent border-none rounded-md p-0', className)}>
+    <Card className={cn('w-full bg-transparent border-none shadow-none rounded-md p-0', className)}>
       <OnGoingSession onResume={handleResumeFromSession} phase={phase} />
       <CardContent className="flex flex-col gap-4 p-0">
         <ShionFileUpload

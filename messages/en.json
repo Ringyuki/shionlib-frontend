@@ -38,7 +38,7 @@
     "User": {
       "Settings": {
         "title": "Edit settings",
-        "description": "You can manage your personal information on this page."
+        "description": "You can manage your personal information and site settings on this page."
       }
     }
   },
@@ -139,7 +139,8 @@
         },
         "Settings": {
           "personalSettings": "Personal settings",
-          "siteSettings": "Site settings"
+          "siteSettings": "Site settings",
+          "settings": "settings"
         }
       },
       "User": {

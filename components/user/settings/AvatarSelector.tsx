@@ -43,7 +43,11 @@ export const AvatarSelector = ({ avatar, name, onUpdate }: AvatarSelectorProps) 
           }
           className="bg-primary/20"
         />
-        <AvatarFallback className="bg-primary/20">{name.slice(0, 2).toUpperCase()}</AvatarFallback>
+        {!avatar && (
+          <AvatarFallback className="bg-primary/20">
+            {name.slice(0, 2).toUpperCase()}
+          </AvatarFallback>
+        )}
       </Avatar>
       <input
         className="hidden"

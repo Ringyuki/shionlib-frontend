@@ -30,7 +30,7 @@
     "User": {
       "Settings": {
         "title": "設定を編集",
-        "description": "このページではあなたの個人情報を管理できます。"
+        "description": "このページではあなたの個人情報とサイト設定を管理できます。"
       }
     }
   },
@@ -131,7 +131,8 @@
         },
         "Settings": {
           "personalSettings": "個人情報設定",
-          "siteSettings": "サイト設定"
+          "siteSettings": "サイト設定",
+          "settings": "情報とサイト設定"
         }
       },
       "User": {

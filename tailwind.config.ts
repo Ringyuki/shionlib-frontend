@@ -29,6 +29,13 @@ export default {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      boxShadow: {
+        'content-subtle': '0 4px 20px rgba(0,0,0,0.06)',
+        'content-strong': '0 10px 40px rgba(0,0,0,0.10)',
+        card: '0 8px 24px rgba(0,0,0,0.08)',
+        'card-hover': '0 12px 32px rgba(0,0,0,0.12)',
+        'card-hero': '0 16px 60px rgba(0,0,0,0.14)',
+      },
     },
   },
   plugins: [],
