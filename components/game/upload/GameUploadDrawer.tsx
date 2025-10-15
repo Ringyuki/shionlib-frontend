@@ -64,13 +64,7 @@ export const GameUploadDrawer = ({
     }
   }
   return (
-    <Drawer
-      open={open}
-      onOpenChange={onOpenChange}
-      shouldScaleBackground
-      setBackgroundColorOnScale={false}
-      dismissible={closable}
-    >
+    <Drawer open={open} onOpenChange={onOpenChange} dismissible={closable}>
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>{t('title')}</DrawerTitle>

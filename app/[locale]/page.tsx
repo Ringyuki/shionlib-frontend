@@ -3,9 +3,12 @@ import { shionlibRequest } from '@/utils/shionlib-request'
 import { GameItem } from '@/interfaces/game/game.interface'
 import { GameCard } from '@/components/game/GameCard'
 import { Masonry } from '@/components/common/shared/Masonry'
+import { ContentLimit } from '@/interfaces/user/user.interface'
 
 export async function getTestData() {
-  const data = await shionlibRequest().get<PaginatedResponse<GameItem>>('/game/list', {
+  const data = await shionlibRequest().get<
+    PaginatedResponse<GameItem, { content_limit: ContentLimit }>
+  >('/game/list', {
     params: {
       pageSize: 100,
     },

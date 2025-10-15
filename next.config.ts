@@ -23,6 +23,10 @@ const nextConfig: NextConfig = {
   rewrites: async () => {
     return [
       {
+        source: '/api/bff/:path*',
+        destination: '/api/bff/:path*',
+      },
+      {
         source: '/api/:path*',
         destination: `http://localhost:${process.env.NEXT_PUBLIC_API_PORT}/:path*`,
       },

@@ -8,6 +8,11 @@ interface CommentActionsProps {
   like_count: number
   is_liked: boolean
   onReplyClick: () => void
+  onEdited?: () => void
+  likeable?: boolean
+  showReplyBtn?: boolean
+  showDeleteBtn?: boolean
+  showEditBtn?: boolean
 }
 
 export const CommentActions = ({
@@ -16,14 +21,30 @@ export const CommentActions = ({
   like_count,
   is_liked,
   onReplyClick,
+  onEdited,
+  likeable = true,
+  showReplyBtn = true,
+  showDeleteBtn = true,
+  showEditBtn = true,
 }: CommentActionsProps) => {
   return (
     <div className="flex justify-between">
       <div className="flex gap-2">
-        <Like is_liked={is_liked} like_count={like_count} comment_id={comment_id} />
-        <Reply onReplyClick={onReplyClick} />
+        <Like
+          is_liked={is_liked}
+          like_count={like_count}
+          comment_id={comment_id}
+          likeable={likeable}
+        />
+        {showReplyBtn && <Reply onReplyClick={onReplyClick} />}
       </div>
-      <MoreActions creator_id={creator_id} comment_id={comment_id} />
+      <MoreActions
+        creator_id={creator_id}
+        comment_id={comment_id}
+        showDeleteBtn={showDeleteBtn}
+        showEditBtn={showEditBtn}
+        onEdited={onEdited}
+      />
     </div>
   )
 }

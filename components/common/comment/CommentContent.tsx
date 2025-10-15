@@ -25,7 +25,7 @@ export const CommentContent = ({ game_id, comments }: CommentContentProps) => {
         <p className="text-sm text-muted-foreground">{t('description')}</p>
       </div>
       <CommentBox game_id={game_id} />
-      <CommentList comments={comments} />
+      {comments.length > 0 && <CommentList comments={comments} />}
     </div>
   )
 }

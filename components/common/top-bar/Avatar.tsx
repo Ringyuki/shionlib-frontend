@@ -9,6 +9,7 @@ import {
 } from '@/components/shionui/DropdownMenu'
 import { Logout } from '@/components/common/top-bar/Logout'
 import { Settings } from '@/components/common/top-bar/Settings'
+import { Profile } from '@/components/common/top-bar/Profile'
 
 interface AvatarProps {
   user: User
@@ -29,6 +30,7 @@ export const TopBarAvatar = ({ user, className }: AvatarProps) => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <Profile />
         <Settings />
         <Logout />
       </DropdownMenuContent>

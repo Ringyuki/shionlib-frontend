@@ -23,12 +23,7 @@ export const GameDownloadDrawer = ({
 }: GameDownloadDrawerProps) => {
   const t = useTranslations('Components.Game.Download.GameDownloadDrawer')
   return (
-    <Drawer
-      open={open}
-      onOpenChange={onOpenChange}
-      shouldScaleBackground
-      setBackgroundColorOnScale={false}
-    >
+    <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerContent className="min-h-[50vh]">
         <DrawerHeader>
           <DrawerTitle>{t('title')}</DrawerTitle>

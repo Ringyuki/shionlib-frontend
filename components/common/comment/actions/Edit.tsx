@@ -15,6 +15,7 @@ import { Comment } from '@/interfaces/comment/comment.interface'
 interface EditProps {
   creator_id: number
   comment_id: number
+  onEdited?: () => void
 }
 
 const getContent = async (comment_id: number) => {
@@ -22,7 +23,7 @@ const getContent = async (comment_id: number) => {
   return response.data
 }
 
-export const Edit = ({ creator_id, comment_id }: EditProps) => {
+export const Edit = ({ creator_id, comment_id, onEdited }: EditProps) => {
   const [open, setOpen] = useState(false)
   const [content, setContent] = useState<SerializedEditorState>()
   const [submitLoading, setSubmitLoading] = useState(false)
@@ -55,6 +56,7 @@ export const Edit = ({ creator_id, comment_id }: EditProps) => {
       updateComment(date.data!)
       toast.success(t('success'))
       setOpen(false)
+      onEdited?.()
     } catch {
     } finally {
       setSubmitLoading(false)

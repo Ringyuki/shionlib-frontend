@@ -15,6 +15,12 @@ export interface Comment {
   reply_count: number
   like_count: number
   is_liked: boolean
+  game?: {
+    title_zh: string
+    title_jp: string
+    title_en: string
+    id: number
+  }
   creator: {
     id: number
     name: string

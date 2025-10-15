@@ -6,9 +6,17 @@ import { cn } from '@/utils/cn'
 
 type Props = ImageProps & {
   aspectRatio?: string
+  localFile?: boolean
 }
 
-export function FadeImage({ className, aspectRatio, priority, fill = true, ...props }: Props) {
+export function FadeImage({
+  className,
+  aspectRatio,
+  priority,
+  fill = true,
+  localFile = false,
+  ...props
+}: Props) {
   const [loaded, setLoaded] = useState(false)
 
   return (
@@ -18,6 +26,11 @@ export function FadeImage({ className, aspectRatio, priority, fill = true, ...pr
     >
       <Image
         {...props}
+        src={
+          props.src.toString().startsWith('http') || localFile
+            ? props.src
+            : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL! + props.src
+        }
         alt={props.alt ?? ''}
         priority={priority}
         fill={fill}

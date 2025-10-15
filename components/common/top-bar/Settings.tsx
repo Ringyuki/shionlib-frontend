@@ -12,16 +12,6 @@ export const Settings = () => {
   const router = useRouter()
   return (
     <>
-      {/* <DropdownMenuItem
-        variant="default"
-        className="cursor-pointer duration-200"
-        onClick={() => router.push('/user/settings/personal')}
-      >
-        <DropdownMenuLabel>{t('personalSettings')}</DropdownMenuLabel>
-        <DropdownMenuShortcut>
-          <UserIcon className="text-primary" />
-        </DropdownMenuShortcut>
-      </DropdownMenuItem> */}
       <DropdownMenuItem
         variant="default"
         className="cursor-pointer duration-200"

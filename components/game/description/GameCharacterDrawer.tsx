@@ -28,7 +28,7 @@ export const GameCharacterDrawer = ({
   const t = useTranslations('Components.Game.Description.GameCharacterItem')
 
   return (
-    <Drawer shouldScaleBackground setBackgroundColorOnScale={false}>
+    <Drawer>
       <DrawerTrigger>
         <GameCharacterItemTrigger character={character} name={name} />
       </DrawerTrigger>

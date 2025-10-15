@@ -1,7 +1,6 @@
 import { GameDownloadResource } from '@/interfaces/game/game-download-resource'
 import { MdWindow, MdWeb } from 'react-icons/md'
 import { FaApple, FaAndroid, FaLinux } from 'react-icons/fa'
-import { Clock } from 'lucide-react'
 import {
   SiPlaystationvita,
   SiNintendoswitch,

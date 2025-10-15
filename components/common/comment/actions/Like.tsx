@@ -9,14 +9,16 @@ interface LikeProps {
   is_liked: boolean
   like_count: number
   comment_id: number
+  likeable?: boolean
 }
 
-export const Like = ({ is_liked, like_count, comment_id }: LikeProps) => {
+export const Like = ({ is_liked, like_count, comment_id, likeable = true }: LikeProps) => {
   const [isLiked_, setIsLiked_] = useState(is_liked)
   const [isLikedLoading, setIsLikedLoading] = useState(false)
   const { updateComment, getComment } = useCommentListStore()
 
   const handleLike = async () => {
+    if (!likeable) return
     setIsLikedLoading(true)
     try {
       await shionlibRequest().post(`/comment/${comment_id}/like`)
@@ -43,6 +45,7 @@ export const Like = ({ is_liked, like_count, comment_id }: LikeProps) => {
       renderIcon={<Heart className={cn(isLiked_ && 'fill-destructive')} />}
       onClick={handleLike}
       loading={isLikedLoading}
+      disabled={!likeable}
     >
       <span className="font-light">{like_count || 0}</span>
     </Button>

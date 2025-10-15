@@ -15,6 +15,7 @@ import { FcDvdLogo } from 'react-icons/fc'
 import { Platform } from '@/interfaces/game/game.interface'
 import { platformNameMap, platformTokenMap } from '@/interfaces/game/game.interface'
 import { cn } from '@/utils/cn'
+import { Plus } from 'lucide-react'
 
 const PlatformIconMap: Record<Platform, React.ElementType> = {
   win: MdWindow,
@@ -36,10 +37,17 @@ const PlatformIconMap: Record<Platform, React.ElementType> = {
 }
 interface GamePlatformProps {
   platform: Platform[]
+  max?: number
+  show_more_count?: boolean
   className?: string
 }
 
-export const GamePlatform = ({ platform, className }: GamePlatformProps) => {
+export const GamePlatform = ({ platform, className, max, show_more_count }: GamePlatformProps) => {
+  let more_count = 0
+  if (max && platform.length > max) {
+    more_count = platform.length - max
+    platform = platform.slice(0, max)
+  }
   return (
     <div className={cn('flex flex-wrap gap-2 items-center', className)}>
       {platform
@@ -60,6 +68,12 @@ export const GamePlatform = ({ platform, className }: GamePlatformProps) => {
             </Badge>
           )
         })}
+      {show_more_count && more_count > 0 && (
+        <Badge variant="secondary" className="gap-[1px]">
+          <Plus />
+          {more_count}
+        </Badge>
+      )}
     </div>
   )
 }

@@ -12,6 +12,20 @@ import { toastProps } from './toastOption'
 import ShionlibTopBar from '@/components/common/top-bar/TopBar'
 import { GlobalDialogs } from '@/components/common/user/GlobalDialogs'
 import { TokenRefresh } from '@/components/common/auth/TokenRefresh'
+import { Noto_Sans, Noto_Sans_SC, Noto_Sans_JP } from 'next/font/google'
+
+const notoSans_Latin = Noto_Sans({
+  display: 'swap',
+  variable: '--font-latin',
+})
+const notoSans_SC = Noto_Sans_SC({
+  display: 'swap',
+  variable: '--font-sc',
+})
+const notoSans_JP = Noto_Sans_JP({
+  display: 'swap',
+  variable: '--font-jp',
+})
 
 export default async function ShionlibLayout({ children, params }: Readonly<Props>) {
   const { locale } = await params
@@ -21,7 +35,9 @@ export default async function ShionlibLayout({ children, params }: Readonly<Prop
 
   return (
     <html lang={langMap[locale as SupportedLocales]} suppressHydrationWarning>
-      <body>
+      <body
+        className={`${notoSans_Latin.variable} ${notoSans_SC.variable} ${notoSans_JP.variable}`}
+      >
         <TokenRefresh />
         <NextIntlClientProvider>
           <div className="relative flex flex-col items-center justify-center min-h-screen bg-radial">

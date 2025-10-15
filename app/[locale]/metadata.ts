@@ -4,9 +4,9 @@ import { supportedLocales, SupportedLocales } from '@/config/i18n/supported'
 import { shionlibSiteConfig } from '@/config/site/shion-lib'
 
 export const langMap: Record<SupportedLocales, string> = {
-  en: 'en_US',
-  zh: 'zh_CN',
-  ja: 'ja_JP',
+  en: 'en',
+  zh: 'zh_Hans',
+  ja: 'ja',
 } as const
 
 export async function generateMetadata({

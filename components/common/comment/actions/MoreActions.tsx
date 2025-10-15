@@ -11,18 +11,33 @@ import { Edit } from './Edit'
 interface MoreActionsProps {
   creator_id: number
   comment_id: number
+  showDeleteBtn?: boolean
+  showEditBtn?: boolean
+  onEdited?: () => void
 }
 
-export const MoreActions = ({ creator_id, comment_id }: MoreActionsProps) => {
+export const MoreActions = ({
+  creator_id,
+  comment_id,
+  showDeleteBtn = true,
+  showEditBtn = true,
+  onEdited,
+}: MoreActionsProps) => {
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button intent="secondary" size="icon" appearance="ghost" renderIcon={<Ellipsis />} />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <Edit creator_id={creator_id} comment_id={comment_id} />
-        <Delete comment_id={comment_id} creator_id={creator_id} />
-      </DropdownMenuContent>
-    </DropdownMenu>
+    (showDeleteBtn || showEditBtn) && (
+      <DropdownMenu>
+        <DropdownMenuTrigger suppressHydrationWarning asChild>
+          <span>
+            <Button intent="secondary" size="icon" appearance="ghost" renderIcon={<Ellipsis />} />
+          </span>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent onClick={e => e.stopPropagation()}>
+          {showEditBtn && (
+            <Edit creator_id={creator_id} comment_id={comment_id} onEdited={onEdited} />
+          )}
+          {showDeleteBtn && <Delete comment_id={comment_id} creator_id={creator_id} />}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    )
   )
 }

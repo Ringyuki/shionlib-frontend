@@ -17,6 +17,7 @@ export default function ShionlibProvider({ children }: { children: React.ReactNo
         color="var(--primary)"
         options={{ showSpinner: false }}
         shallowRouting
+        disableSameURL
       >
         {children}
       </ProgressProvider>

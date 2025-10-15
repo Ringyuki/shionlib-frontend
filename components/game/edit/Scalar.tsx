@@ -65,7 +65,7 @@ export const Scalar = ({ data }: ScalarProps) => {
           {permissions?.scalarFields.includes('EXTRA') && <ExtraInfo form={form} />}
           {permissions?.scalarFields.includes('STAFFS') && <Staffs form={form} />}
           {permissions?.scalarFields.includes('NSFW') && <NSFW form={form} />}
-          <Button type="submit" className="w-full" loading={loading} renderIcon={<Check />}>
+          <Button type="submit" className="w-full mt-12" loading={loading} renderIcon={<Check />}>
             {t('submit')}
           </Button>
         </form>

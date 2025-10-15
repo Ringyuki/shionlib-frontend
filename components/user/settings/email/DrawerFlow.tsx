@@ -24,13 +24,7 @@ export const DrawerFlow = ({
 }: DrawerFlowProps) => {
   const t = useTranslations('Components.User.Settings.EmailFlow')
   return (
-    <Drawer
-      open={open}
-      onOpenChange={onOpenChange}
-      dismissible={false}
-      shouldScaleBackground
-      setBackgroundColorOnScale={false}
-    >
+    <Drawer open={open} onOpenChange={onOpenChange} dismissible={false}>
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>{t('title')}</DrawerTitle>

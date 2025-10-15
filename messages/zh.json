@@ -141,6 +141,9 @@
           "personalSettings": "个人设置",
           "siteSettings": "站点设置",
           "settings": "编辑设置"
+        },
+        "Profile": {
+          "profile": "个人资料"
         }
       },
       "User": {
@@ -236,7 +239,8 @@
           "success": "评论成功"
         },
         "CommentItem": {
-          "edited": "编辑于"
+          "edited": "编辑于",
+          "source": "评论在"
         },
         "CommentParent": {
           "parent": "回复给"
@@ -261,6 +265,11 @@
             "confirm": "删除",
             "success": "删除成功"
           }
+        }
+      },
+      "Content": {
+        "Empty": {
+          "title": "什么都没有..."
         }
       }
     },
@@ -539,6 +548,70 @@
           "authSecret": "认证密钥",
           "save": "保存",
           "success": "已保存"
+        }
+      },
+      "Home": {
+        "Profile": {
+          "UserProfile": {
+            "role": {
+              "user": "用户",
+              "admin": "管理员",
+              "super_admin": "超级管理员"
+            },
+            "joined": "加入于"
+          },
+          "Datas": {
+            "upload": "上传的游戏",
+            "comment": "评论",
+            "favorite": "收藏",
+            "edit": "编辑"
+          }
+        },
+        "Uploads": {
+          "ResourceItem": {
+            "created": "上传于",
+            "moreThanOneFilePrefix": "等",
+            "moreThanOneFileSuffix": "个文件"
+          }
+        },
+        "HomeTabsNav": {
+          "upload": "上传",
+          "comment": "评论",
+          "favorite": "收藏",
+          "edit": "编辑"
+        },
+        "Edits": {
+          "EditRecordItem": {
+            "edited": "编辑了",
+            "actionType": {
+              "UPDATE_SCALAR": "更新了基本信息",
+              "ADD_RELATION": "添加了关联",
+              "REMOVE_RELATION": "移除了关联",
+              "SET_RELATION": "设置了关联",
+              "UPDATE_RELATION": "更新了关联"
+            },
+            "relationType": {
+              "cover": "封面",
+              "image": "图片",
+              "link": "相关链接",
+              "developer": "制作人员",
+              "character": "出场角色"
+            },
+            "entity": {
+              "game": "游戏",
+              "character": "角色",
+              "developer": "制作人员"
+            },
+            "fieldChanges": "修改字段"
+          },
+          "EditChanges": {
+            "changes": "变更详情",
+            "before": "修改前",
+            "after": "修改后",
+            "added": "添加",
+            "removed": "移除",
+            "empty": "（空）"
+          }
         }
       }
     }

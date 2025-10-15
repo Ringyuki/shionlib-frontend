@@ -13,6 +13,9 @@ const isFatalAuthByCode = (code: number) => {
 }
 
 const isBrowser = typeof window !== 'undefined'
+const baseUrl = isBrowser
+  ? process.env.NEXT_PUBLIC_PROD_API_PATH
+  : `http://localhost:${process.env.INTERNAL_API_PORT}`
 
 export const shionlibRequest = () => {
   const basicFetch = async <T>(
@@ -20,10 +23,6 @@ export const shionlibRequest = () => {
     options: RequestInit,
     params?: Record<string, any>,
   ): Promise<BasicResponse<T>> => {
-    const baseUrl = isBrowser
-      ? process.env.NEXT_PUBLIC_PROD_API_PATH
-      : `http://localhost:${process.env.INTERNAL_API_PORT}`
-
     const init = async (): Promise<RequestInit> => {
       const headers = new Headers(await buildHeaders(options))
       if (!isBrowser) {

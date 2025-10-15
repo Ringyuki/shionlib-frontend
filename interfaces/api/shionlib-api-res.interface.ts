@@ -1,5 +1,3 @@
-import { ContentLimit } from '../user/user.interface'
-
 interface ShionlibApiRes<T> {
   code: number
   message: string
@@ -8,16 +6,20 @@ interface ShionlibApiRes<T> {
   timestamp: string
 }
 
-interface PaginatedRes<T> {
+type MetaBase = {
+  totalItems: number
+  itemCount: number
+  itemsPerPage: number
+  totalPages: number
+  currentPage: number
+}
+
+interface PaginatedRes<
+  T,
+  E extends Record<string, unknown> = Record<string, string | number | boolean | undefined>,
+> {
   items: T[]
-  meta: {
-    totalItems: number
-    itemCount: number
-    itemsPerPage: number
-    totalPages: number
-    currentPage: number
-    content_limit?: ContentLimit
-  }
+  meta: MetaBase & E
 }
 
 export interface FieldError {
@@ -29,7 +31,10 @@ export interface BasicResponse<T> extends ShionlibApiRes<T> {
   data: T | null
 }
 
-export type PaginatedResponse<T> = PaginatedRes<T>
+export type PaginatedResponse<
+  T,
+  E extends Record<string, unknown> = Record<string, string | number | boolean | undefined>,
+> = PaginatedRes<T, E>
 
 export interface ErrorResponse
   extends ShionlibApiRes<{

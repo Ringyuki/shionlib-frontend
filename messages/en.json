@@ -141,6 +141,9 @@
           "personalSettings": "Personal settings",
           "siteSettings": "Site settings",
           "settings": "settings"
+        },
+        "Profile": {
+          "profile": "Profile"
         }
       },
       "User": {
@@ -236,7 +239,8 @@
           "success": "Comment successfully"
         },
         "CommentItem": {
-          "edited": "edited at"
+          "edited": "edited at",
+          "source": "commented on"
         },
         "CommentParent": {
           "parent": "Reply to"
@@ -261,6 +265,11 @@
             "confirm": "Delete",
             "success": "Deleted successfully"
           }
+        }
+      },
+      "Content": {
+        "Empty": {
+          "title": "Nothing here..."
         }
       }
     },
@@ -539,6 +548,70 @@
           "authSecret": "Auth secret",
           "save": "Save",
           "success": "Saved successfully"
+        }
+      },
+      "Home": {
+        "Profile": {
+          "UserProfile": {
+            "role": {
+              "user": "User",
+              "admin": "Admin",
+              "super_admin": "Super Admin"
+            },
+            "joined": "Joined at"
+          },
+          "Datas": {
+            "upload": "Uploads",
+            "comment": "Comments",
+            "favorite": "Favorites",
+            "edit": "Edits"
+          }
+        },
+        "Uploads": {
+          "ResourceItem": {
+            "created": "Uploaded at",
+            "moreThanOneFilePrefix": "etc.",
+            "moreThanOneFileSuffix": "files"
+          }
+        },
+        "HomeTabsNav": {
+          "upload": "Uploads",
+          "comment": "Comments",
+          "favorite": "Favorites",
+          "edit": "Edits"
+        },
+        "Edits": {
+          "EditRecordItem": {
+            "edited": "Edited",
+            "actionType": {
+              "UPDATE_SCALAR": "Updated basic information",
+              "ADD_RELATION": "Added relation",
+              "REMOVE_RELATION": "Removed relation",
+              "SET_RELATION": "Set relation",
+              "UPDATE_RELATION": "Updated relation"
+            },
+            "relationType": {
+              "cover": "Cover",
+              "image": "Image",
+              "link": "Link",
+              "developer": "Developer",
+              "character": "Character"
+            },
+            "entity": {
+              "game": "Game",
+              "character": "Character",
+              "developer": "Developer"
+            },
+            "fieldChanges": "Field changes"
+          },
+          "EditChanges": {
+            "changes": "Changes",
+            "before": "Before",
+            "after": "After",
+            "added": "Added",
+            "removed": "Removed",
+            "empty": "(Empty)"
+          }
         }
       }
     }
