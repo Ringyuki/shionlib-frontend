@@ -1,17 +1,17 @@
-import { cn } from '@/utils/cn'
+'use client'
+
+import useMasonry from '@/hooks/useMasonry'
 
 interface MasonryProps {
   children: React.ReactNode
-  className?: string
 }
 
-export function Masonry({ children, className }: MasonryProps) {
+export function Masonry({ children }: MasonryProps) {
+  const masonryContainer = useMasonry()
   return (
     <div
-      className={cn(
-        'w-full columns-2 sm:columns-3 md:columns-4 lg:columns-5 xl:columns-6 gap-x-8',
-        className,
-      )}
+      ref={masonryContainer}
+      className="grid items-start gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
     >
       {children}
     </div>

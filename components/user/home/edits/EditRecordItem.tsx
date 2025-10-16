@@ -60,18 +60,27 @@ export const EditRecordItem = async ({ record }: EditRecordItemProps) => {
     return actionText
   }
 
-  const content = (
+  return (
     <Card className="py-0 overflow-hidden">
       <CardContent className="p-4">
         <div className="flex flex-col gap-3">
           <div className="flex items-start justify-between gap-2">
             <div className="flex items-center gap-2 flex-1">
-              <Edit className="size-4 text-muted-foreground" />
+              <Edit className="size-4 text-muted-foreground shrink-0" />
               <div className="flex flex-col gap-1">
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="font-medium">{t('edited')}</span>
                   <Badge variant="secondary">{t(`entity.${record.entity}`)}</Badge>
-                  <span className="font-bold">{entityTitle}</span>
+                  {entityLink ? (
+                    <Link
+                      href={entityLink}
+                      className="hover:opacity-85 transition-all duration-200"
+                    >
+                      <span className="font-bold">{entityTitle}</span>
+                    </Link>
+                  ) : (
+                    <span className="font-bold">{entityTitle}</span>
+                  )}
                   <div className="flex flex-wrap gap-2">
                     <Badge variant="outline">{getActionDescription()}</Badge>
                   </div>
@@ -102,14 +111,4 @@ export const EditRecordItem = async ({ record }: EditRecordItemProps) => {
       </CardContent>
     </Card>
   )
-
-  if (entityLink) {
-    return (
-      <Link href={entityLink} className="hover:opacity-85 transition-all duration-200">
-        {content}
-      </Link>
-    )
-  }
-
-  return content
 }

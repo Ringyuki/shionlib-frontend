@@ -57,7 +57,7 @@ export const GameCoverContent = ({
             style={{ aspectRatio: aspect }}
           >
             {(() => {
-              if (cover.sexual > 1) {
+              if (cover.sexual >= 1) {
                 if (
                   content_limit === ContentLimit.SHOW_WITH_SPOILER ||
                   content_limit === ContentLimit.NEVER_SHOW_NSFW_CONTENT

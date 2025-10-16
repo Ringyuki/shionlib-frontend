@@ -38,7 +38,7 @@ export const ResourceItem = async ({ resource, content_limit }: ResourceItemProp
           <div className="flex flex-col sm:grid sm:grid-cols-12">
             <div className="sm:col-span-4 h-40 sm:h-32 w-full">
               {(() => {
-                if (cover.sexual > 1) {
+                if (cover.sexual >= 1) {
                   if (
                     content_limit === ContentLimit.SHOW_WITH_SPOILER ||
                     content_limit === ContentLimit.NEVER_SHOW_NSFW_CONTENT

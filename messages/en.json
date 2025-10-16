@@ -606,8 +606,6 @@
           },
           "EditChanges": {
             "changes": "Changes",
-            "before": "Before",
-            "after": "After",
             "added": "Added",
             "removed": "Removed",
             "empty": "(Empty)"

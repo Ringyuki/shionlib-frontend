@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 import { Badge } from '@/components/shionui/Badge'
-import { ArrowRight, Plus, Minus } from 'lucide-react'
+import { ArrowRight, Plus, Minus, ArrowDown } from 'lucide-react'
+import { ScrollArea } from '@/components/shionui/ScrollArea'
 
 interface EditChangesProps {
   changes: any
@@ -45,7 +46,7 @@ export const EditChanges = async ({ changes }: EditChangesProps) => {
               {added.map((item: any, index: number) => (
                 <div
                   key={index}
-                  className="text-sm bg-green-50 dark:bg-green-950/20 p-2 rounded border border-green-200 dark:border-green-800"
+                  className="text-sm bg-green-50 dark:bg-green-950/20 p-2 rounded-md border border-green-200 dark:border-green-800"
                 >
                   <pre className="whitespace-pre-wrap break-words font-mono text-xs">
                     {formatValue(item)}
@@ -68,7 +69,7 @@ export const EditChanges = async ({ changes }: EditChangesProps) => {
               {removed.map((item: any, index: number) => (
                 <div
                   key={index}
-                  className="text-sm bg-red-50 dark:bg-red-950/20 p-2 rounded border border-red-200 dark:border-red-800"
+                  className="text-sm bg-red-50 dark:bg-red-950/20 p-2 rounded-md border border-red-200 dark:border-red-800"
                 >
                   <pre className="whitespace-pre-wrap break-words font-mono text-xs">
                     {formatValue(item)}
@@ -112,24 +113,27 @@ export const EditChanges = async ({ changes }: EditChangesProps) => {
 
               <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-2 items-start">
                 <div className="flex flex-col gap-1">
-                  <span className="text-xs text-muted-foreground">{t('before')}</span>
-                  <div className="text-sm bg-red-50 dark:bg-red-950/20 p-2 rounded border border-red-200 dark:border-red-800">
-                    <pre className="whitespace-pre-wrap break-words font-mono text-xs max-h-40 overflow-y-auto">
-                      {formatValue(beforeValue)}
-                    </pre>
+                  <div className="text-sm bg-red-50 dark:bg-red-950/20 p-2 rounded-md border border-red-200 dark:border-red-800">
+                    <ScrollArea className="max-h-40">
+                      <pre className="whitespace-pre-wrap break-words font-mono text-xs overflow-y-auto">
+                        {formatValue(beforeValue)}
+                      </pre>
+                    </ScrollArea>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-center md:pt-6">
-                  <ArrowRight className="size-4 text-muted-foreground" />
+                <div className="flex items-center justify-center">
+                  <ArrowRight className="size-4 text-muted-foreground md:block hidden" />
+                  <ArrowDown className="size-4 text-muted-foreground md:hidden block" />
                 </div>
 
                 <div className="flex flex-col gap-1">
-                  <span className="text-xs text-muted-foreground">{t('after')}</span>
-                  <div className="text-sm bg-green-50 dark:bg-green-950/20 p-2 rounded border border-green-200 dark:border-green-800">
-                    <pre className="whitespace-pre-wrap break-words font-mono text-xs max-h-40 overflow-y-auto">
-                      {formatValue(afterValue)}
-                    </pre>
+                  <div className="text-sm bg-green-50 dark:bg-green-950/20 p-2 rounded-md border border-green-200 dark:border-green-800">
+                    <ScrollArea className="max-h-40">
+                      <pre className="whitespace-pre-wrap break-words font-mono text-xs overflow-y-auto">
+                        {formatValue(afterValue)}
+                      </pre>
+                    </ScrollArea>
                   </div>
                 </div>
               </div>

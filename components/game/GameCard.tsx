@@ -50,11 +50,11 @@ export const GameCard = async ({ game, content_limit }: GameCardProps) => {
       className={cn(
         'flex flex-col gap-2 w-full break-inside-avoid select-none cursor-pointer hover:opacity-85 transition-all duration-200',
       )}
-      style={{ aspectRatio: aspect, marginBottom: '1rem' }}
+      style={{ aspectRatio: aspect }}
     >
       <div className="relative w-full overflow-hidden rounded-md" style={{ aspectRatio: aspect }}>
         {(() => {
-          if (cover.sexual > 1) {
+          if (cover.sexual >= 1) {
             if (
               content_limit === ContentLimit.SHOW_WITH_SPOILER ||
               content_limit === ContentLimit.NEVER_SHOW_NSFW_CONTENT

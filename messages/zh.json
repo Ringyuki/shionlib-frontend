@@ -606,8 +606,6 @@
           },
           "EditChanges": {
             "changes": "变更详情",
-            "before": "修改前",
-            "after": "修改后",
             "added": "添加",
             "removed": "移除",
             "empty": "（空）"

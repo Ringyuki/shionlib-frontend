@@ -599,8 +599,6 @@
           },
           "EditChanges": {
             "changes": "変更の詳細",
-            "before": "変更前",
-            "after": "変更後",
             "added": "追加",
             "removed": "削除",
             "empty": "（空）"
