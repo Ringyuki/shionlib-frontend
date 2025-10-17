@@ -369,7 +369,7 @@
           "alertDescription": "The following resources are uploaded by Shionlib users. Please verify the safety of the files yourself.\nThe download link is valid for 60 minutes, so please complete the download within the valid period."
         },
         "GameDownload": {
-          "noDownloadSource": "No download source"
+          "noDownloadSource": "No download source available"
         },
         "GameDownloadResourceItem": {
           "created": "Uploaded at"
@@ -610,6 +610,20 @@
             "removed": "Removed",
             "empty": "(Empty)"
           }
+        }
+      }
+    },
+    "Developer": {
+      "Intros": {
+        "BasicInfos": {
+          "unknown": "No link",
+          "works_count": "{count} works in total",
+          "parent_developer": "Parent company"
+        },
+        "Details": {
+          "intro": "Introduction",
+          "no_intro": "No introduction",
+          "extra_info": "Extra info"
         }
       }
     }

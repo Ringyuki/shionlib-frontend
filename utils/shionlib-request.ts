@@ -97,7 +97,7 @@ export const shionlibRequest = () => {
         )
       }
       console.error(data)
-      throw new ShionlibBizError(data.code, data.message)
+      // throw new ShionlibBizError(data.code, data.message)
     }
 
     return data

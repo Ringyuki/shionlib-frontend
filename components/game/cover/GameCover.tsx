@@ -32,7 +32,7 @@ const _GameCover = ({ cover, title, width }: { cover: string; title: string; wid
       height={300}
       fill={false}
       width={width}
-      className="w-full! h-full"
+      className="h-full w-full md:w-auto"
     />
   )
 }
@@ -53,7 +53,8 @@ export const GameCover = ({ covers, preferredCoverInfo, title, content_limit }: 
           if (preferredCover.sexual >= 1) {
             if (
               content_limit === ContentLimit.SHOW_WITH_SPOILER ||
-              content_limit === ContentLimit.NEVER_SHOW_NSFW_CONTENT
+              content_limit === ContentLimit.NEVER_SHOW_NSFW_CONTENT ||
+              !content_limit
             )
               return (
                 <Spoiler showHint={true} blur={32} className="rounded-none! h-full!">

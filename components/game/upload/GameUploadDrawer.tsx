@@ -12,7 +12,7 @@ import { toast } from 'react-hot-toast'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { UploadQuota } from './UploadQuota'
 import { cn } from '@/utils/cn'
-import bbcodeToHtml from '@/utils/bbcode-format'
+import { BBCodeContent } from '@/components/common/content/BBCode'
 
 interface GameUploadDrawerProps {
   className?: string
@@ -76,22 +76,14 @@ export const GameUploadDrawer = ({
             <Info />
             <AlertTitle>{t('alert1Title')}</AlertTitle>
             <AlertDescription>
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: bbcodeToHtml(t('alert1Description')),
-                }}
-              />
+              <BBCodeContent content={t('alert1Description')} />
             </AlertDescription>
           </Alert>
           <Alert intent="warning" appearance="solid">
             <AlertCircle />
             <AlertTitle>{t('alert2Title')}</AlertTitle>
             <AlertDescription>
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: bbcodeToHtml(t('alert2Description')),
-                }}
-              />
+              <BBCodeContent content={t('alert2Description')} />
             </AlertDescription>
           </Alert>
           <UploadQuota fileSize={fileSize} />

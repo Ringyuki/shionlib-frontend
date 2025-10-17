@@ -612,6 +612,20 @@
           }
         }
       }
+    },
+    "Developer": {
+      "Intros": {
+        "BasicInfos": {
+          "unknown": "暂无链接",
+          "works_count": "共 {count} 部作品",
+          "parent_developer": "母公司"
+        },
+        "Details": {
+          "intro": "介绍",
+          "no_intro": "暂无介绍",
+          "extra_info": "其他信息"
+        }
+      }
     }
   }
 }

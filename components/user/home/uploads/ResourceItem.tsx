@@ -41,7 +41,8 @@ export const ResourceItem = async ({ resource, content_limit }: ResourceItemProp
                 if (cover.sexual >= 1) {
                   if (
                     content_limit === ContentLimit.SHOW_WITH_SPOILER ||
-                    content_limit === ContentLimit.NEVER_SHOW_NSFW_CONTENT
+                    content_limit === ContentLimit.NEVER_SHOW_NSFW_CONTENT ||
+                    !content_limit
                   )
                     return (
                       <Spoiler showHint={true} blur={16} className="!rounded-none !h-full">

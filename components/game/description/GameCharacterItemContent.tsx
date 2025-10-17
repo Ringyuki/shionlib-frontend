@@ -3,7 +3,7 @@ import { FadeImage } from '@/components/common/shared/FadeImage'
 import { Separator } from '@/components/shionui/Separator'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/utils/cn'
-import bbcodeToHtml from '@/utils/bbcode-format'
+import { BBCodeContent } from '@/components/common/content/BBCode'
 
 interface GameCharacterItemContentProps {
   className?: string
@@ -71,12 +71,7 @@ export const GameCharacterItemContent = ({
               </span>
             </div>
           )}
-          <div
-            className="text-sm break-words break-all"
-            dangerouslySetInnerHTML={{
-              __html: bbcodeToHtml(intro),
-            }}
-          />
+          <BBCodeContent content={intro} className="text-sm break-words break-all" />
           {extra_info.length > 0 && (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {extra_info.map(info => (

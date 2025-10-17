@@ -57,7 +57,8 @@ export const GameCard = async ({ game, content_limit }: GameCardProps) => {
           if (cover.sexual >= 1) {
             if (
               content_limit === ContentLimit.SHOW_WITH_SPOILER ||
-              content_limit === ContentLimit.NEVER_SHOW_NSFW_CONTENT
+              content_limit === ContentLimit.NEVER_SHOW_NSFW_CONTENT ||
+              !content_limit
             )
               return (
                 <Spoiler showHint={false} open={false} blur={16} className="!rounded-none !h-full">

@@ -4,7 +4,7 @@ import { GameDownloadResourceItem } from './GameDownloadResourceItem'
 import { Alert, AlertDescription, AlertTitle } from '@/components/shionui/Alert'
 import { useTranslations } from 'next-intl'
 import { AlertCircle } from 'lucide-react'
-import bbcodeToHtml from '@/utils/bbcode-format'
+import { BBCodeContent } from '@/components/common/content/BBCode'
 
 interface GameDownloadContentProps {
   className?: string
@@ -24,11 +24,7 @@ export const GameDownloadContent = ({ downloadResources, className }: GameDownlo
         <AlertCircle />
         <AlertTitle>{t('alertTitle')}</AlertTitle>
         <AlertDescription>
-          <span
-            dangerouslySetInnerHTML={{
-              __html: bbcodeToHtml(t('alertDescription')),
-            }}
-          />
+          <BBCodeContent content={t('alertDescription')} />
         </AlertDescription>
       </Alert>
       {downloadResources.map(resource => (

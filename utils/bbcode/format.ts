@@ -101,12 +101,13 @@ export default function bbcodeToHtml(input: unknown, options: Partial<BBCodeOpti
   text = replaceNested(
     text,
     /\[spoiler\]([\s\S]*?)\[\/spoiler\]/gi,
-    (_m, c: string) => `<span class="${escapeAttr(opts.spoilerClass)}">${c}</span>`,
+    (_m, c: string) =>
+      `<span data-spoiler="true" class="${escapeAttr(opts.spoilerClass)}">${c}</span>`,
   )
   text = replaceNested(
     text,
     /\[mask\]([\s\S]*?)\[\/mask\]/gi,
-    (_m, c: string) => `<span class="${escapeAttr(opts.maskClass)}">${c}</span>`,
+    (_m, c: string) => `<span data-mask="true" class="${escapeAttr(opts.maskClass)}">${c}</span>`,
   )
 
   text = replaceNested(

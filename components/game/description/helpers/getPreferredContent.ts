@@ -1,4 +1,5 @@
 import { GameData, GameCover, GameCharacter } from '@/interfaces/game/game.interface'
+import { Developer } from '@/interfaces/developer/developer.interface'
 
 export type ContentType = 'cover' | 'title' | 'intro'
 type Lang = 'en' | 'jp' | 'zh'
@@ -127,5 +128,18 @@ export function getPreferredCharacterContent(
           .filter(k => k.startsWith('intro_') && !character[k as keyof GameCharacter])
           .map(k => k.replace('intro_', '')),
       }
+  }
+}
+
+export function getPreferredDeveloperContent(developer: Developer, lang: Lang): PreferredIntro {
+  const intro =
+    (developer[`intro_${lang}`] as string) || developer.intro_jp || developer.intro_en || ''
+  return {
+    intro: intro,
+    language:
+      developer[`intro_${lang}`] === intro ? lang : intro === developer.intro_en ? 'en' : 'jp',
+    disable_languages: Object.keys(developer)
+      .filter(k => k.startsWith('intro_') && !developer[k as keyof Developer])
+      .map(k => k.replace('intro_', '')),
   }
 }

@@ -605,6 +605,20 @@
           }
         }
       }
+    },
+    "Developer": {
+      "Intros": {
+        "BasicInfos": {
+          "unknown": "リンクがありません",
+          "works_count": "合計 {count} 作品",
+          "parent_developer": "親会社"
+        },
+        "Details": {
+          "intro": "紹介",
+          "no_intro": "紹介がありません",
+          "extra_info": "その他の情報"
+        }
+      }
     }
   }
 }

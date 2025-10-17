@@ -21,11 +21,13 @@ export function FadeImage({
 
   return (
     <div
-      className="relative w-full h-full overflow-hidden"
+      className={cn('relative w-full h-full overflow-hidden', className)}
       style={aspectRatio ? { aspectRatio } : undefined}
     >
       <Image
         {...props}
+        width={props.width}
+        height={props.height}
         src={
           props.src.toString().startsWith('http') || localFile
             ? props.src

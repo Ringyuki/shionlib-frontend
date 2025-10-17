@@ -19,6 +19,7 @@ const nextConfig: NextConfig = {
         hostname: process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_HOST!,
       },
     ],
+    contentDispositionType: 'inline',
   },
   rewrites: async () => {
     return [

@@ -34,10 +34,12 @@ export default async function ShionlibLayout({ children, params }: Readonly<Prop
   }
 
   return (
-    <html lang={langMap[locale as SupportedLocales]} suppressHydrationWarning>
-      <body
-        className={`${notoSans_Latin.variable} ${notoSans_SC.variable} ${notoSans_JP.variable}`}
-      >
+    <html
+      lang={langMap[locale as SupportedLocales]}
+      className={`${notoSans_Latin.variable} ${notoSans_SC.variable} ${notoSans_JP.variable}`}
+      suppressHydrationWarning
+    >
+      <body>
         <TokenRefresh />
         <NextIntlClientProvider>
           <div className="relative flex flex-col items-center justify-center min-h-screen bg-radial">
