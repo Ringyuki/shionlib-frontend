@@ -28,11 +28,11 @@ const nextConfig: NextConfig = {
         destination: `http://localhost:${process.env.NEXT_PUBLIC_API_PORT}/:path*`,
       },
       {
-        source: '/:locale/:vn([csvpo].*)',
+        source: '/:locale/:vn([csvpo]\\d+)',
         destination: 'https://vndb.org/:vn',
       },
       {
-        source: '/:locale/:vn([csvpo].*)/:rest*',
+        source: '/:locale/:vn([csvpo]\\d+)/:rest*',
         destination: 'https://vndb.org/:vn/:rest*',
       },
     ]

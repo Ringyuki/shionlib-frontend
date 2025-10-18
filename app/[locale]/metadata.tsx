@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { supportedLocales, SupportedLocales } from '@/config/i18n/supported'
-import { shionlibSiteConfig } from '@/config/site/shion-lib'
+import { shionlibSiteConfig } from '@/config/site/shionlib'
 
 export const langMap: Record<SupportedLocales, string> = {
   en: 'en',
@@ -44,10 +44,10 @@ export async function generateMetadata({
       description: t('og.description'),
       url: `/${locale}`,
       images: [{ url: `/api/og?l=${locale}` }],
-      locale: langMap[locale as SupportedLocales] ?? 'en_US',
+      locale: langMap[locale as SupportedLocales],
       alternateLocale: supportedLocales
         .filter(l => l !== locale)
-        .map(l => langMap[l as SupportedLocales] ?? 'en_US'),
+        .map(l => langMap[l as SupportedLocales]),
       siteName: t('titleShort'),
     },
     twitter: {
@@ -57,8 +57,8 @@ export async function generateMetadata({
       images: [`/api/og?l=${locale}`],
     },
     robots: {
-      index: false,
-      follow: false,
+      index: shionlibSiteConfig.robots.index,
+      follow: shionlibSiteConfig.robots.follow,
     },
   }
 }

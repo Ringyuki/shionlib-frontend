@@ -144,6 +144,20 @@
         },
         "Profile": {
           "profile": "个人资料"
+        },
+        "NavBar": {
+          "menu": "菜单",
+          "home": "首页",
+          "games": "游戏",
+          "producers": "会社",
+          "docs": "文档",
+          "releases": "新作",
+          "about": "关于"
+        }
+      },
+      "Footer": {
+        "ShionlibFooter": {
+          "contact": "联系我们"
         }
       },
       "User": {
@@ -272,7 +286,7 @@
           "title": "什么都没有..."
         },
         "BBCodeSupported": {
-          "title": "支持 BBCode 格式",
+          "title": "支持 BBCode",
           "exampleTitle": "示例",
           "example": "[b]Bold[/b]\n[i]Italic[/i]\n[u]Underline[/u]\n[s]Strikethrough[/s]\n[quote]Quote[/quote]\n[spoiler]Spoiler[/spoiler]\n[mask]Mask[/mask]\n[url=https://shionlib.com]Shionlib[/url]"
         }

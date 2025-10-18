@@ -20,7 +20,7 @@ export const BBCodeSupported = ({
 }: BBCodeSupportedProps) => {
   const t = useTranslations('Components.Common.Content.BBCodeSupported')
   return (
-    <Alert intent="info" appearance="solid">
+    <Alert appearance="solid">
       <Info />
       <AlertTitle>{title ?? t('title')}</AlertTitle>
       {showDescription && description && (
@@ -29,7 +29,7 @@ export const BBCodeSupported = ({
         </AlertDescription>
       )}
       <AlertDescription>{exampleTitle ?? t('exampleTitle')}</AlertDescription>
-      <AlertDescription className="flex gap-20">
+      <AlertDescription className="flex md:gap-20 max-w-full overflow-x-auto scrollbar-hide">
         <BBCodeContent content={example ?? t('example')} onlyBr />
         <BBCodeContent content={example ?? t('example')} />
       </AlertDescription>

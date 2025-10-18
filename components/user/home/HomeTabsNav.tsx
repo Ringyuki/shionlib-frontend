@@ -31,7 +31,7 @@ export const HomeTabsNav = ({ user }: HomeTabsNavProps) => {
     <Card className="rounded-md sticky md:top-24 top-18 z-20 py-0 dark:bg-[rgba(0,0,0,0.5)] bg-[rgba(255,255,255,0.7)] backdrop-blur-xl backdrop-saturate-[3.5]">
       <CardContent className="p-0">
         <Tabs value={active} className="w-full!">
-          <TabsList className="w-full! bg-transparent!">
+          <TabsList className="w-full! bg-transparent!" highlightClassName="bg-secondary">
             {tabs.map(tab => (
               <TabsTrigger key={tab.href} value={tab.href} asChild>
                 <Link href={tab.href}>{t(tab.name)}</Link>

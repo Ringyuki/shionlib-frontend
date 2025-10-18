@@ -31,8 +31,8 @@ export default function ThemeSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button appearance="ghost" intent="primary" size="icon">
-          <Palette className="size-4" />
+        <Button appearance="ghost" intent="secondary" size="icon">
+          <Palette className="size-5" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>

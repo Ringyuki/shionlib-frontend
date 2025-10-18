@@ -36,6 +36,43 @@ export default {
         'card-hover': '0 12px 32px rgba(0,0,0,0.12)',
         'card-hero': '0 16px 60px rgba(0,0,0,0.14)',
       },
+      keyframes: {
+        'mobile-nav-in': {
+          '0%': {
+            opacity: '0',
+            transform: 'scaleY(0.95)',
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'scaleY(1)',
+          },
+        },
+        'mobile-nav-out': {
+          '0%': {
+            opacity: '1',
+            transform: 'scaleY(1)',
+          },
+          '100%': {
+            opacity: '0',
+            transform: 'scaleY(0.95)',
+          },
+        },
+        'nav-item-in': {
+          '0%': {
+            opacity: '0',
+            transform: 'translateX(-12px)',
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateX(0)',
+          },
+        },
+      },
+      animation: {
+        'mobile-nav-in': 'mobile-nav-in 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+        'mobile-nav-out': 'mobile-nav-out 0.25s cubic-bezier(0.4, 0, 1, 1)',
+        'nav-item-in': 'nav-item-in 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+      },
     },
   },
   plugins: [],

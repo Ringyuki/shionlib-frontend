@@ -356,7 +356,6 @@ function Button({
         return (
           <motion.span
             className="relative z-10 flex items-center"
-            layout="position"
             initial={false}
             transition={{ duration: 0.2, ease: [0.05, 0.7, 0.1, 1] }}
           >
@@ -425,7 +424,6 @@ function Button({
 
             {!isIconOnly && (
               <motion.span
-                layout
                 transition={{ duration: 0.2, ease: [0.05, 0.7, 0.1, 1] }}
                 className="flex items-center"
               >

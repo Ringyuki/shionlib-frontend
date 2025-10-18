@@ -10,7 +10,7 @@ const getData = async () => {
     PaginatedResponse<GameItem, { content_limit: ContentLimit }>
   >('/game/list', {
     params: {
-      pageSize: 100,
+      pageSize: 50,
     },
   })
   return data

@@ -1,4 +1,4 @@
-export interface ShionlibSiteConfig {
+export interface ShionlibSeoConfig {
   title: string
   titleShort: string
   description: string
@@ -22,4 +22,19 @@ interface ShionlibSiteImage {
   alt: string
   width: number
   height: number
+}
+
+export interface ShionlibSiteConfig {
+  canonical: string
+  robots: {
+    index: boolean
+    follow: boolean
+  }
+}
+
+export interface NavBarConfig {
+  links: {
+    label: string
+    href: string
+  }[]
 }

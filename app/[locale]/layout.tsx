@@ -13,6 +13,7 @@ import ShionlibTopBar from '@/components/common/top-bar/TopBar'
 import { GlobalDialogs } from '@/components/common/user/GlobalDialogs'
 import { TokenRefresh } from '@/components/common/auth/TokenRefresh'
 import { Noto_Sans, Noto_Sans_SC, Noto_Sans_JP } from 'next/font/google'
+import { ShionlibFooter } from '@/components/common/footer/Footer'
 
 const notoSans_Latin = Noto_Sans({
   display: 'swap',
@@ -51,6 +52,7 @@ export default async function ShionlibLayout({ children, params }: Readonly<Prop
               >
                 {children}
               </div>
+              <ShionlibFooter />
               <GlobalDialogs />
               <Toaster {...toastProps} />
             </ShionlibProvider>

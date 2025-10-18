@@ -9,9 +9,22 @@ import { Button } from '@/components/shionui/Button'
 import { useTranslations } from 'next-intl'
 import { Skeleton } from '@/components/shionui/Skeleton'
 import { SiteLogo } from '@/components/common/top-bar/SiteLogo'
+import { Nav } from '@/components/common/top-bar/Nav'
+import { MobileNav } from '@/components/common/top-bar/MobileNav'
+import { navBarConfig } from '@/config/site/shionlib'
 
 const StartContent = () => {
-  return <SiteLogo />
+  return (
+    <>
+      <div className="hidden md:flex items-center gap-8">
+        <SiteLogo />
+        <Nav />
+      </div>
+      <div className="block md:hidden items-center gap-8">
+        <MobileNav items={navBarConfig.links} />
+      </div>
+    </>
+  )
 }
 
 const EndContent = () => {
@@ -51,13 +64,13 @@ const ShionlibTopBar = () => {
     >
       <div
         className="
-        mx-auto w-full max-w-7xl px-3 h-16
+        mx-auto w-full max-w-7xl px-6 h-16
         md:rounded-xl flex items-center justify-between
         dark:bg-[rgba(0,0,0,0.5)] bg-[rgba(255,255,255,0.7)] backdrop-blur-xl backdrop-saturate-[3.5]
       "
       >
-        {StartContent()}
-        {EndContent()}
+        <StartContent />
+        <EndContent />
       </div>
     </div>
   )

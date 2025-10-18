@@ -144,6 +144,20 @@
         },
         "Profile": {
           "profile": "Profile"
+        },
+        "NavBar": {
+          "menu": "Menu",
+          "home": "Home",
+          "games": "Games",
+          "producers": "Producers",
+          "docs": "Docs",
+          "releases": "Releases",
+          "about": "About"
+        }
+      },
+      "Footer": {
+        "ShionlibFooter": {
+          "contact": "Contact"
         }
       },
       "User": {

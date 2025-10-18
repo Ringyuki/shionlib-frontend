@@ -137,6 +137,20 @@
         "Profile": {
           "profile": "プロフィール",
           "joined": "参加"
+        },
+        "NavBar": {
+          "menu": "メニュー",
+          "home": "ホーム",
+          "games": "ゲーム",
+          "producers": "会社",
+          "docs": "ドキュメント",
+          "releases": "新作",
+          "about": "紹介"
+        }
+      },
+      "Footer": {
+        "ShionlibFooter": {
+          "contact": "お問い合わせ"
         }
       },
       "User": {
