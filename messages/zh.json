@@ -270,6 +270,11 @@
       "Content": {
         "Empty": {
           "title": "什么都没有..."
+        },
+        "BBCodeSupported": {
+          "title": "支持 BBCode 格式",
+          "exampleTitle": "示例",
+          "example": "[b]Bold[/b]\n[i]Italic[/i]\n[u]Underline[/u]\n[s]Strikethrough[/s]\n[quote]Quote[/quote]\n[spoiler]Spoiler[/spoiler]\n[mask]Mask[/mask]\n[url=https://shionlib.com]Shionlib[/url]"
         }
       }
     },
@@ -452,6 +457,7 @@
           "platformPlaceholder": "选择游戏的运行平台",
           "aliases": "别名",
           "tags": "标签",
+          "intro_info_description": "以下字段 [b]介绍（中文）[/b]、[b]介绍（英语）[/b]、[b]介绍（日语）[/b] 支持 BBCode。",
           "intro_zh": "介绍（中文）",
           "intro_en": "介绍（英语）",
           "intro_jp": "介绍（日语）",

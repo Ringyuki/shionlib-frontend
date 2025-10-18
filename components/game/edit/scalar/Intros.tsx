@@ -3,6 +3,7 @@ import { Textarea } from '@/components/shionui/Textarea'
 import { useTranslations } from 'next-intl'
 import { UseFormReturn } from 'react-hook-form'
 import { GameScalar } from '@/interfaces/edit/game-scalar.interface'
+import { BBCodeSupported } from '@/components/common/content/BBCodeSupported'
 
 interface IntrosProps {
   form: UseFormReturn<GameScalar>
@@ -11,7 +12,8 @@ interface IntrosProps {
 export const Intros = ({ form }: IntrosProps) => {
   const t = useTranslations('Components.Game.Edit.Scalar')
   return (
-    <>
+    <div className="flex flex-col gap-2">
+      <BBCodeSupported description={t('intro_info_description')} showDescription />
       <FormField
         control={form.control}
         name="intro_zh"
@@ -51,6 +53,6 @@ export const Intros = ({ form }: IntrosProps) => {
           </FormItem>
         )}
       />
-    </>
+    </div>
   )
 }

@@ -6,6 +6,35 @@ export interface BBCodeOptions {
 }
 
 type ReactNode = React.ReactNode
+type SupportedTags =
+  | 'bold'
+  | 'italic'
+  | 'underline'
+  | 'strikethrough'
+  | 'quote'
+  | 'spoiler'
+  | 'mask'
+  // | 'color'
+  // | 'size'
+  | 'url'
+  | 'urlWithLabel'
+// | 'img'
+// | 'list'
+export const supportedTags: SupportedTags[] = [
+  'bold',
+  'italic',
+  'underline',
+  'strikethrough',
+  'quote',
+  'spoiler',
+  'mask',
+  // 'color',
+  // 'size',
+  'url',
+  'urlWithLabel',
+  // 'img',
+  // 'list',
+] as const
 
 export const bbcodeRender = (input: unknown, options: BBCodeOptions = {}): ReactNode => {
   const opts = {
@@ -31,7 +60,7 @@ export const bbcodeRender = (input: unknown, options: BBCodeOptions = {}): React
     if (depth > 50) return str // prevent infinite recursion
 
     // split by tags and process
-    const patterns = [
+    const patterns: { regex: RegExp; handler: SupportedTags }[] = [
       { regex: /(\[b\])([\s\S]*?)(\[\/b\])/i, handler: 'bold' },
       { regex: /(\[i\])([\s\S]*?)(\[\/i\])/i, handler: 'italic' },
       { regex: /(\[u\])([\s\S]*?)(\[\/u\])/i, handler: 'underline' },
@@ -39,16 +68,17 @@ export const bbcodeRender = (input: unknown, options: BBCodeOptions = {}): React
       { regex: /(\[quote\])([\s\S]*?)(\[\/quote\])/i, handler: 'quote' },
       { regex: /(\[spoiler\])([\s\S]*?)(\[\/spoiler\])/i, handler: 'spoiler' },
       { regex: /(\[mask\])([\s\S]*?)(\[\/mask\])/i, handler: 'mask' },
-      { regex: /(\[color=([#a-z0-9]+)\])([\s\S]*?)(\[\/color\])/i, handler: 'color' },
-      { regex: /(\[size=(\d{1,3})\])([\s\S]*?)(\[\/size\])/i, handler: 'size' },
+      // { regex: /(\[color=([#a-z0-9]+)\])([\s\S]*?)(\[\/color\])/i, handler: 'color' },
+      // { regex: /(\[size=(\d{1,3})\])([\s\S]*?)(\[\/size\])/i, handler: 'size' },
       { regex: /(\[url\])([\s\S]*?)(\[\/url\])/i, handler: 'url' },
       { regex: /(\[url=([^\]]+?)\])([\s\S]*?)(\[\/url\])/i, handler: 'urlWithLabel' },
-      { regex: /(\[img\])([\s\S]*?)(\[\/img\])/i, handler: 'img' },
-      { regex: /(\[list(?:=(1))?\])([\s\S]*?)(\[\/list\])/i, handler: 'list' },
+      // { regex: /(\[img\])([\s\S]*?)(\[\/img\])/i, handler: 'img' },
+      // { regex: /(\[list(?:=(1))?\])([\s\S]*?)(\[\/list\])/i, handler: 'list' },
     ]
 
     // find the earliest tag
-    let earliestMatch: { index: number; match: RegExpMatchArray; handler: string } | null = null
+    let earliestMatch: { index: number; match: RegExpMatchArray; handler: SupportedTags } | null =
+      null
 
     for (const { regex, handler } of patterns) {
       const match = str.match(regex)
@@ -96,7 +126,14 @@ export const bbcodeRender = (input: unknown, options: BBCodeOptions = {}): React
         result.push(<s key={key}>{parseSegment(match[2], depth + 1)}</s>)
         break
       case 'quote':
-        result.push(<blockquote key={key}>{parseSegment(match[2], depth + 1)}</blockquote>)
+        result.push(
+          <span
+            className="my-3 border-l-4 border-muted-foreground/20 pl-4 text-muted-foreground"
+            key={key}
+          >
+            {parseSegment(match[2], depth + 1)}
+          </span>,
+        )
         break
       case 'spoiler':
         result.push(
@@ -112,32 +149,32 @@ export const bbcodeRender = (input: unknown, options: BBCodeOptions = {}): React
           </SpoilerText>,
         )
         break
-      case 'color': {
-        const color = match[2]
-        const content = match[3]
-        const safe = sanitizeColor(color)
-        if (safe) {
-          result.push(
-            <span key={key} style={{ color: safe }}>
-              {parseSegment(content, depth + 1)}
-            </span>,
-          )
-        } else {
-          result.push(parseSegment(content, depth + 1))
-        }
-        break
-      }
-      case 'size': {
-        const size = match[2]
-        const content = match[3]
-        const px = clamp(parseInt(size, 10), 8, 64)
-        result.push(
-          <span key={key} style={{ fontSize: `${px}px` }}>
-            {parseSegment(content, depth + 1)}
-          </span>,
-        )
-        break
-      }
+      // case 'color': {
+      //   const color = match[2]
+      //   const content = match[3]
+      //   const safe = sanitizeColor(color)
+      //   if (safe) {
+      //     result.push(
+      //       <span key={key} style={{ color: safe }}>
+      //         {parseSegment(content, depth + 1)}
+      //       </span>,
+      //     )
+      //   } else {
+      //     result.push(parseSegment(content, depth + 1))
+      //   }
+      //   break
+      // }
+      // case 'size': {
+      //   const size = match[2]
+      //   const content = match[3]
+      //   const px = clamp(parseInt(size, 10), 8, 64)
+      //   result.push(
+      //     <span key={key} style={{ fontSize: `${px}px` }}>
+      //       {parseSegment(content, depth + 1)}
+      //     </span>,
+      //   )
+      //   break
+      // }
       case 'url': {
         const href = match[2]
         const safe = sanitizeUrl(href)
@@ -167,37 +204,37 @@ export const bbcodeRender = (input: unknown, options: BBCodeOptions = {}): React
         }
         break
       }
-      case 'img': {
-        const src = match[2]
-        const safe = sanitizeImageUrl(src)
-        if (safe) {
-          result.push(<img key={key} src={safe} alt="" loading="lazy" />)
-        } else {
-          result.push(src)
-        }
-        break
-      }
-      case 'list': {
-        const orderedFlag = match[2]
-        const content = match[3]
-        const parts = content.split(/\[\*\]/g)
-        const startsWithItem = /^\s*\[\*\]/.test(content)
-        const items = parts
-          .map(s => s.trim())
-          .filter((s, i) => (startsWithItem ? s.length : i > 0 && s.length))
+      // case 'img': {
+      //   const src = match[2]
+      //   const safe = sanitizeImageUrl(src)
+      //   if (safe) {
+      //     result.push(<img key={key} src={safe} alt="" loading="lazy" />)
+      //   } else {
+      //     result.push(src)
+      //   }
+      //   break
+      // }
+      // case 'list': {
+      //   const orderedFlag = match[2]
+      //   const content = match[3]
+      //   const parts = content.split(/\[\*\]/g)
+      //   const startsWithItem = /^\s*\[\*\]/.test(content)
+      //   const items = parts
+      //     .map(s => s.trim())
+      //     .filter((s, i) => (startsWithItem ? s.length : i > 0 && s.length))
 
-        if (items.length) {
-          const Tag = orderedFlag === '1' ? 'ol' : 'ul'
-          result.push(
-            <Tag key={key}>
-              {items.map((item, i) => (
-                <li key={i}>{parseSegment(item, depth + 1)}</li>
-              ))}
-            </Tag>,
-          )
-        }
-        break
-      }
+      //   if (items.length) {
+      //     const Tag = orderedFlag === '1' ? 'ol' : 'ul'
+      //     result.push(
+      //       <Tag key={key}>
+      //         {items.map((item, i) => (
+      //           <li key={i}>{parseSegment(item, depth + 1)}</li>
+      //         ))}
+      //       </Tag>,
+      //     )
+      //   }
+      //   break
+      // }
     }
 
     // process content after the tag

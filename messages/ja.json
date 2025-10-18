@@ -263,6 +263,11 @@
       "Content": {
         "Empty": {
           "title": "何もありません..."
+        },
+        "BBCodeSupported": {
+          "title": "BBCode サポート",
+          "exampleTitle": "例",
+          "example": "[b]Bold[/b]\n[i]Italic[/i]\n[u]Underline[/u]\n[s]Strikethrough[/s]\n[quote]Quote[/quote]\n[spoiler]Spoiler[/spoiler]\n[mask]Mask[/mask]\n[url=https://shionlib.com]Shionlib[/url]"
         }
       }
     },
@@ -445,6 +450,7 @@
           "platformPlaceholder": "対象プラットフォームを選択",
           "aliases": "別名",
           "tags": "タグ",
+          "intro_info_description": "以下のフィールド [b]紹介（中国語）[/b]、[b]紹介（英語）[/b]、[b]紹介（日本語）[/b] は BBCode をサポートしています。",
           "intro_zh": "紹介（中国語）",
           "intro_en": "紹介（英語）",
           "intro_jp": "紹介（日本語）",

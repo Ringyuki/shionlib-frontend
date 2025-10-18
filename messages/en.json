@@ -270,6 +270,11 @@
       "Content": {
         "Empty": {
           "title": "Nothing here..."
+        },
+        "BBCodeSupported": {
+          "title": "BBCode Supported",
+          "exampleTitle": "Example",
+          "example": "[b]Bold[/b]\n[i]Italic[/i]\n[u]Underline[/u]\n[s]Strikethrough[/s]\n[quote]Quote[/quote]\n[spoiler]Spoiler[/spoiler]\n[mask]Mask[/mask]\n[url=https://shionlib.com]Shionlib[/url]"
         }
       }
     },
@@ -452,6 +457,7 @@
           "platformPlaceholder": "Select target platform",
           "aliases": "Aliases",
           "tags": "Tags",
+          "intro_info_description": "The following fields [b]Introduction (Chinese)[/b], [b]Introduction (English)[/b], [b]Introduction (Japanese)[/b] support BBCode.",
           "intro_zh": "Introduction (Chinese)",
           "intro_en": "Introduction (English)",
           "intro_jp": "Introduction (Japanese)",
