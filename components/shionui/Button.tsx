@@ -211,7 +211,7 @@ const shionButtonVariants = cva('', {
     {
       intent: 'neutral',
       appearance: 'ghost',
-      className: 'hover:bg-neutral-100 dark:hover:bg-input/40 active:bg-neutral-200',
+      className: 'hover:bg-neutral-100 dark:hover:bg-input/40',
     },
 
     // link

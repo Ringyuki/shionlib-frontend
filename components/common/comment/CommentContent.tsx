@@ -3,6 +3,7 @@ import { CommentList } from './CommentList'
 import { MessageSquareMore } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { Comment } from '@/interfaces/comment/comment.interface'
+import { Empty } from '@/components/common/content/Empty'
 
 interface CommentContentProps {
   comments: Comment[] | []
@@ -26,6 +27,7 @@ export const CommentContent = ({ game_id, comments }: CommentContentProps) => {
       </div>
       <CommentBox game_id={game_id} />
       {comments.length > 0 && <CommentList comments={comments} />}
+      {comments.length === 0 && <Empty />}
     </div>
   )
 }

@@ -320,6 +320,38 @@
           "images": "Screenshots",
           "staff": "Staff",
           "extraInfo": "Additional info"
+        },
+        "BangumiExtraInfoKeyMap": {
+          "birthday": "Birthday",
+          "source": "Source",
+          "twitter": "Twitter",
+          "homepage": "Homepage",
+          "official_website": "Official Website",
+          "parent_company": "Parent Company",
+          "script": "Script",
+          "original_work": "Original Work",
+          "original_art": "Original Art",
+          "sd_original_art": "SD Original Art",
+          "cg_artists": "CG Artists",
+          "logo_design": "Logo Design",
+          "ui_design": "UI Design",
+          "design": "Design",
+          "character_design": "Character Design",
+          "setting_cooperation": "Setting Cooperation",
+          "project": "Project",
+          "project_cooperation": "Project Cooperation",
+          "director": "Director",
+          "producer": "Producer",
+          "background": "Background",
+          "cooperation": "Cooperation",
+          "publish": "Publish",
+          "music": "Music",
+          "theme_song_lyrics": "Theme Song Lyrics",
+          "theme_song_composition": "Theme Song Composition",
+          "theme_song_performance": "Theme Song Performance",
+          "sound_director": "Sound Director",
+          "animation_production": "Animation Production",
+          "programming": "Programming"
         }
       },
       "Upload": {
@@ -621,9 +653,7 @@
           "parent_developer": "Parent company"
         },
         "Details": {
-          "intro": "Introduction",
-          "no_intro": "No introduction",
-          "extra_info": "Extra info"
+          "no_intro": "No introduction"
         }
       }
     }

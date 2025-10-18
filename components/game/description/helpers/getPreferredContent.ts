@@ -55,20 +55,40 @@ export function getPreferredContent(
       }
     case 'title':
       const title =
-        (game[`title_${lang}` as keyof GameData] as string) || game.title_jp || game.title_en
+        (game[`title_${lang}` as keyof GameData] as string) ||
+        game.title_jp ||
+        game.title_en ||
+        game.title_zh
       return {
         title: title,
-        language: game[`title_${lang}`] === title ? lang : title === game.title_en ? 'en' : 'jp',
+        language:
+          game[`title_${lang}`] === title
+            ? lang
+            : title === game.title_en
+              ? 'en'
+              : title === game.title_zh
+                ? 'zh'
+                : 'jp',
         disable_languages: Object.keys(game)
           .filter(k => k.startsWith('title_') && !game[k as keyof GameData])
           .map(k => k.replace('title_', '')),
       }
     case 'intro':
       const intro =
-        (game[`intro_${lang}` as keyof GameData] as string) || game.intro_jp || game.intro_en
+        (game[`intro_${lang}` as keyof GameData] as string) ||
+        game.intro_jp ||
+        game.intro_en ||
+        game.intro_zh
       return {
         intro: intro,
-        language: game[`intro_${lang}`] === intro ? lang : intro === game.intro_en ? 'en' : 'jp',
+        language:
+          game[`intro_${lang}`] === intro
+            ? lang
+            : intro === game.intro_en
+              ? 'en'
+              : intro === game.intro_zh
+                ? 'zh'
+                : 'jp',
         disable_languages: Object.keys(game)
           .filter(k => k.startsWith('intro_') && !game[k as keyof GameData])
           .map(k => k.replace('intro_', '')),
@@ -108,22 +128,42 @@ export function getPreferredCharacterContent(
   switch (contentType) {
     case 'name':
       const name =
-        (character[`name_${lang}`] as string) || character.name_jp || character.name_en || ''
+        (character[`name_${lang}`] as string) ||
+        character.name_jp ||
+        character.name_en ||
+        character.name_zh ||
+        ''
       return {
         name: name,
         language:
-          character[`name_${lang}`] === name ? lang : name === character.name_en ? 'en' : 'jp',
+          character[`name_${lang}`] === name
+            ? lang
+            : name === character.name_en
+              ? 'en'
+              : name === character.name_zh
+                ? 'zh'
+                : 'jp',
         disable_languages: Object.keys(character)
           .filter(k => k.startsWith('name_') && !character[k as keyof GameCharacter])
           .map(k => k.replace('name_', '')),
       }
     case 'intro':
       const intro =
-        (character[`intro_${lang}`] as string) || character.intro_jp || character.intro_en || ''
+        (character[`intro_${lang}`] as string) ||
+        character.intro_jp ||
+        character.intro_en ||
+        character.intro_zh ||
+        ''
       return {
         intro: intro,
         language:
-          character[`intro_${lang}`] === intro ? lang : intro === character.intro_en ? 'en' : 'jp',
+          character[`intro_${lang}`] === intro
+            ? lang
+            : intro === character.intro_en
+              ? 'en'
+              : intro === character.intro_zh
+                ? 'zh'
+                : 'jp',
         disable_languages: Object.keys(character)
           .filter(k => k.startsWith('intro_') && !character[k as keyof GameCharacter])
           .map(k => k.replace('intro_', '')),
@@ -133,11 +173,21 @@ export function getPreferredCharacterContent(
 
 export function getPreferredDeveloperContent(developer: Developer, lang: Lang): PreferredIntro {
   const intro =
-    (developer[`intro_${lang}`] as string) || developer.intro_jp || developer.intro_en || ''
+    (developer[`intro_${lang}`] as string) ||
+    developer.intro_jp ||
+    developer.intro_en ||
+    developer.intro_zh ||
+    ''
   return {
     intro: intro,
     language:
-      developer[`intro_${lang}`] === intro ? lang : intro === developer.intro_en ? 'en' : 'jp',
+      developer[`intro_${lang}`] === intro
+        ? lang
+        : intro === developer.intro_en
+          ? 'en'
+          : intro === developer.intro_zh
+            ? 'zh'
+            : 'jp',
     disable_languages: Object.keys(developer)
       .filter(k => k.startsWith('intro_') && !developer[k as keyof Developer])
       .map(k => k.replace('intro_', '')),

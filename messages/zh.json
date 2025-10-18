@@ -320,6 +320,38 @@
         "GameContent": {
           "gameDetail": "游戏详情",
           "gameCharacter": "出场角色"
+        },
+        "BangumiExtraInfoKeyMap": {
+          "birthday": "生日",
+          "source": "引用来源",
+          "twitter": "推特",
+          "homepage": "主页",
+          "official_website": "官方网站",
+          "parent_company": "母公司",
+          "script": "脚本",
+          "original_work": "原作",
+          "original_art": "原画",
+          "sd_original_art": "SD原画",
+          "cg_artists": "CG",
+          "logo_design": "Logo 设计",
+          "ui_design": "UI 设计",
+          "design": "设计",
+          "character_design": "人物设定",
+          "setting_cooperation": "设定协力",
+          "project": "企划",
+          "project_cooperation": "企划协力",
+          "director": "导演",
+          "producer": "制作人",
+          "background": "背景",
+          "cooperation": "协力",
+          "publish": "发行",
+          "music": "音乐",
+          "theme_song_lyrics": "主题歌作词",
+          "theme_song_composition": "主题歌作曲",
+          "theme_song_performance": "主题歌演出",
+          "sound_director": "音响监督",
+          "animation_production": "动画制作",
+          "programming": "程序"
         }
       },
       "Upload": {
@@ -621,9 +653,7 @@
           "parent_developer": "母公司"
         },
         "Details": {
-          "intro": "介绍",
-          "no_intro": "暂无介绍",
-          "extra_info": "其他信息"
+          "no_intro": "暂无介绍"
         }
       }
     }

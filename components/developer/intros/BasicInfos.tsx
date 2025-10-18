@@ -13,7 +13,7 @@ interface BasicInfosProps {
 export const BasicInfos = async ({ developer, works_count }: BasicInfosProps) => {
   const t = await getTranslations('Components.Developer.Intros.BasicInfos')
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex flex-col md:flex-row items-center gap-4">
       {developer.logo ? (
         <FadeImage
           src={developer.logo}
@@ -28,8 +28,8 @@ export const BasicInfos = async ({ developer, works_count }: BasicInfosProps) =>
           <Building2 className="size-10" />
         </div>
       )}
-      <div className="flex flex-col flex-1 gap-2">
-        <div className="flex justify-between items-center">
+      <div className="flex flex-col flex-1 gap-2 items-center md:items-start">
+        <div className="flex flex-col md:flex-row justify-between items-center w-full">
           <h2 className="text-2xl font-normal flex items-center gap-2">
             {developer.name}
             <Badge variant="secondary">{t('works_count', { count: works_count })}</Badge>
@@ -49,7 +49,7 @@ export const BasicInfos = async ({ developer, works_count }: BasicInfosProps) =>
             </div>
           )}
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 justify-center md:justify-start">
           {developer.aliases.length > 0 &&
             developer.aliases.map(alias => (
               <span key={alias} className="font-light">

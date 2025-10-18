@@ -313,6 +313,38 @@
           "images": "スクリーンショット",
           "staff": "スタッフ",
           "extraInfo": "その他の情報"
+        },
+        "BangumiExtraInfoKeyMap": {
+          "birthday": "誕生日",
+          "source": "出典",
+          "twitter": "ツイッター",
+          "homepage": "ホームページ",
+          "official_website": "公式サイト",
+          "parent_company": "親会社",
+          "script": "脚本",
+          "original_work": "原作",
+          "original_art": "原画",
+          "sd_original_art": "SD原画",
+          "cg_artists": "CG",
+          "logo_design": "ロゴデザイン",
+          "ui_design": "UIデザイン",
+          "design": "デザイン",
+          "character_design": "キャラクターデザイン",
+          "setting_cooperation": "設定協力",
+          "project": "企画",
+          "project_cooperation": "企画協力",
+          "director": "監督",
+          "producer": "プロデューサー",
+          "background": "背景",
+          "cooperation": "協力",
+          "publish": "発売",
+          "music": "音楽",
+          "theme_song_lyrics": "主題歌作詞",
+          "theme_song_composition": "主題歌作曲",
+          "theme_song_performance": "主題歌歌唱",
+          "sound_director": "音響監督",
+          "animation_production": "アニメーション制作",
+          "programming": "プログラミング"
         }
       },
       "Upload": {
@@ -614,9 +646,7 @@
           "parent_developer": "親会社"
         },
         "Details": {
-          "intro": "紹介",
-          "no_intro": "紹介がありません",
-          "extra_info": "その他の情報"
+          "no_intro": "紹介がありません"
         }
       }
     }

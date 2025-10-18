@@ -24,12 +24,16 @@ const nextConfig: NextConfig = {
   rewrites: async () => {
     return [
       {
-        source: '/api/bff/:path*',
-        destination: '/api/bff/:path*',
-      },
-      {
         source: '/api/:path*',
         destination: `http://localhost:${process.env.NEXT_PUBLIC_API_PORT}/:path*`,
+      },
+      {
+        source: '/:locale/:vn([csvpo].*)',
+        destination: 'https://vndb.org/:vn',
+      },
+      {
+        source: '/:locale/:vn([csvpo].*)/:rest*',
+        destination: 'https://vndb.org/:vn/:rest*',
       },
     ]
   },
