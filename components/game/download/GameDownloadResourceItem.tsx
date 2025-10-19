@@ -9,6 +9,7 @@ import {
   SiPlaystation3,
   SiMacos,
   SiPlaystation2,
+  SiNintendo3Ds,
 } from 'react-icons/si'
 import { FcDvdLogo } from 'react-icons/fc'
 import { Badge } from '@/components/shionui/Badge'
@@ -42,6 +43,8 @@ const PlatformIconMap: Record<Platform, React.ElementType> = {
   web: MdWeb,
   vnd: MdWeb,
   drc: MdWeb,
+  gba: SiNintendo3Ds,
+  nds: SiNintendo3Ds,
 }
 
 export const GameDownloadResourceItem = ({ resource }: GameDownloadResourceItemProps) => {
