@@ -62,14 +62,14 @@ function CommandInput({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
-    <div data-slot="command-input-wrapper" className="flex h-9 items-center gap-2 border-b px-3">
+    <div
+      data-slot="command-input-wrapper"
+      className={cn('flex h-9 items-center gap-2 border-b px-3', className)}
+    >
       <SearchIcon className="size-4 shrink-0 opacity-50" />
       <CommandPrimitive.Input
         data-slot="command-input"
-        className={cn(
-          'placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50',
-          className,
-        )}
+        className="placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
         {...props}
       />
     </div>
@@ -125,7 +125,16 @@ function CommandSeparator({
   )
 }
 
-function CommandItem({ className, ...props }: React.ComponentProps<typeof CommandPrimitive.Item>) {
+function CommandItem({
+  className,
+  id,
+  value,
+  ...props
+}: Omit<React.ComponentProps<typeof CommandPrimitive.Item>, 'id'> & {
+  id?: string | number
+}) {
+  const uniqueValue = id !== undefined ? String(id) : value
+
   return (
     <CommandPrimitive.Item
       data-slot="command-item"
@@ -133,6 +142,7 @@ function CommandItem({ className, ...props }: React.ComponentProps<typeof Comman
         "data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className,
       )}
+      value={uniqueValue}
       {...props}
     />
   )

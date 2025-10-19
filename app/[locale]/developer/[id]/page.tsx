@@ -21,7 +21,7 @@ const getData = async (id: string, page: string) => {
     shionlibRequest().get<PaginatedResponse<GameItem>>(`/game/list`, {
       params: {
         page: page,
-        pageSize: 12,
+        pageSize: 15,
         developer_id: id,
       },
     }),

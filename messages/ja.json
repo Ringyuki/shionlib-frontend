@@ -123,6 +123,9 @@
         }
       },
       "TopBar": {
+        "SearchTrigger": {
+          "search": "検索..."
+        },
         "ThemeSwitcher": {
           "label": "テーマ",
           "system": "システムに合わせる",
@@ -282,6 +285,23 @@
           "title": "BBCode サポート",
           "exampleTitle": "例",
           "example": "[b]Bold[/b]\n[i]Italic[/i]\n[u]Underline[/u]\n[s]Strikethrough[/s]\n[quote]Quote[/quote]\n[spoiler]Spoiler[/spoiler]\n[mask]Mask[/mask]\n[url=https://shionlib.com]Shionlib[/url]"
+        }
+      },
+      "Search": {
+        "Command": {
+          "SearchCommand": {
+            "placeholder": "内容を検索...",
+            "press_enter_to_search": "Enter キーで検索",
+            "history": "履歴",
+            "clear_history": "履歴をクリア",
+            "trending": "人気"
+          }
+        },
+        "Game": {
+          "Results": {
+            "result_prefix": "検索",
+            "result_suffix": "{total} 件の結果"
+          }
         }
       }
     },

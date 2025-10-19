@@ -100,15 +100,9 @@ export const MobileNav = ({ items }: MobileNavProps) => {
               {t('menu')}
             </div>
             <div className="flex flex-col gap-3">
-              <NavItem href="/" label={t('home')} index={0} isOpen={open} />
+              <NavItem href="/" label={t('home')} />
               {items.map((item, index) => (
-                <NavItem
-                  key={index}
-                  href={item.href}
-                  label={t(item.label)}
-                  index={index + 1}
-                  isOpen={open}
-                />
+                <NavItem key={index} href={item.href} label={t(item.label)} />
               ))}
             </div>
           </div>
@@ -120,28 +114,17 @@ export const MobileNav = ({ items }: MobileNavProps) => {
 
 interface NavItemProps {
   href: string
-  className?: string
   label: string
-  index: number
-  isOpen: boolean
 }
 
-const NavItem = ({ href, className, label, index, isOpen }: NavItemProps) => {
+const NavItem = ({ href, label }: NavItemProps) => {
   const router = useRouter()
   return (
     <div
       onClick={() => {
         router.push(href.toString())
       }}
-      className={cn(
-        'text-xl font-medium cursor-pointer transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]',
-        'hover:text-primary hover:translate-x-1',
-        isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-3',
-        className,
-      )}
-      style={{
-        transitionDelay: isOpen ? `${200 + index * 50}ms` : '0ms',
-      }}
+      className={cn('text-xl font-medium cursor-pointer')}
     >
       {label}
     </div>

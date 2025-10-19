@@ -12,6 +12,7 @@ import { SiteLogo } from '@/components/common/top-bar/SiteLogo'
 import { Nav } from '@/components/common/top-bar/Nav'
 import { MobileNav } from '@/components/common/top-bar/MobileNav'
 import { navBarConfig } from '@/config/site/shionlib'
+import { SearchTrigger } from '@/components/common/top-bar/SearchTrigger'
 
 const StartContent = () => {
   return (
@@ -40,6 +41,7 @@ const EndContent = () => {
 
   return (
     <div className="max-h-full flex items-center gap-2">
+      <SearchTrigger />
       <ThemeSwitcher />
       {isLoading ? (
         <Skeleton className="w-[60px] h-[28px] rounded-md" />

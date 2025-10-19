@@ -168,6 +168,10 @@
   --platform-vnd-fg: #111111;
   --platform-drc: #f5f5f5;
   --platform-drc-fg: #111111;
+  --platform-gba: #f5f5f5;
+  --platform-gba-fg: #111111;
+  --platform-nds: #f5f5f5;
+  --platform-nds-fg: #111111;
 }
 
 .dark {
@@ -264,6 +268,10 @@
   --platform-vnd-fg: #111111;
   --platform-drc: #f5f5f5;
   --platform-drc-fg: #111111;
+  --platform-gba: #f5f5f5;
+  --platform-gba-fg: #111111;
+  --platform-nds: #f5f5f5;
+  --platform-nds-fg: #111111;
 }
 
 .skeleton-primary {

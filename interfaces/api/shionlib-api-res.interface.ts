@@ -6,13 +6,15 @@ interface ShionlibApiRes<T> {
   timestamp: string
 }
 
-type MetaBase = {
+export interface PaginatedMeta {
   totalItems: number
   itemCount: number
   itemsPerPage: number
   totalPages: number
   currentPage: number
 }
+
+type MetaBase = PaginatedMeta
 
 interface PaginatedRes<
   T,

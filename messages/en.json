@@ -131,6 +131,9 @@
         }
       },
       "TopBar": {
+        "SearchTrigger": {
+          "search": "Search..."
+        },
         "ThemeSwitcher": {
           "label": "Theme",
           "system": "Match system",
@@ -289,6 +292,23 @@
           "title": "BBCode Supported",
           "exampleTitle": "Example",
           "example": "[b]Bold[/b]\n[i]Italic[/i]\n[u]Underline[/u]\n[s]Strikethrough[/s]\n[quote]Quote[/quote]\n[spoiler]Spoiler[/spoiler]\n[mask]Mask[/mask]\n[url=https://shionlib.com]Shionlib[/url]"
+        }
+      },
+      "Search": {
+        "Command": {
+          "SearchCommand": {
+            "placeholder": "Enter content...",
+            "press_enter_to_search": "Press Enter to search",
+            "history": "History",
+            "delete_all": "Delete all",
+            "trending": "Trending"
+          }
+        },
+        "Game": {
+          "Results": {
+            "result_prefix": "Search for",
+            "result_suffix": "{total} results found"
+          }
         }
       }
     },

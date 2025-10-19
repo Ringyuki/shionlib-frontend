@@ -62,9 +62,8 @@ export function SubmitPlugin({
       {label || (
         <div className="flex items-center gap-1">
           <span>{t('submit')}</span>
-          <span className="inline-flex items-center text-xs">
+          <span className="inline-flex items-center gap-1">
             <Kbd className="text-primary text-[0.6rem] bg-white">{isApple ? '⌘' : 'Ctrl'}</Kbd>
-            <span>+</span>
             <Kbd className="text-primary text-[0.6rem] bg-white">Enter</Kbd>
           </span>
         </div>

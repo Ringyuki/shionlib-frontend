@@ -97,7 +97,9 @@ export const shionlibRequest = () => {
         )
       }
       console.error(data)
-      // throw new ShionlibBizError(data.code, data.message)
+      if (data.code !== 404) {
+        throw new ShionlibBizError(data.code, data.message)
+      }
     }
 
     return data

@@ -356,6 +356,24 @@ function Button({
         return (
           <motion.span
             className="relative z-10 flex items-center"
+            layout="position"
+            transformTemplate={(_t, generated) => {
+              // remove all animations on y-axis
+              let s = generated
+              // remove translateY
+              s = s.replace(/translateY\(\s*[^)]*\)/g, 'translateY(0px)')
+              // normalize translate3d(x, y, z) -> y to 0px
+              s = s.replace(
+                /translate3d\(\s*([^,]+),\s*([^,]+),\s*([^\)]+)\)/g,
+                (_m, x, _y, z) => `translate3d(${x}, 0px, ${z})`,
+              )
+              // normalize translate(x, y) -> y to 0px (keep x)
+              s = s.replace(
+                /translate\(\s*([^,]+),\s*([^\)]+)\)/g,
+                (_m, x) => `translate(${x}, 0px)`,
+              )
+              return s
+            }}
             initial={false}
             transition={{ duration: 0.2, ease: [0.05, 0.7, 0.1, 1] }}
           >
@@ -424,6 +442,20 @@ function Button({
 
             {!isIconOnly && (
               <motion.span
+                layout="position"
+                transformTemplate={(t, generated) => {
+                  let s = generated
+                  s = s.replace(/translateY\(\s*[^)]*\)/g, 'translateY(0px)')
+                  s = s.replace(
+                    /translate3d\(\s*([^,]+),\s*([^,]+),\s*([^\)]+)\)/g,
+                    (_m, x, _y, z) => `translate3d(${x}, 0px, ${z})`,
+                  )
+                  s = s.replace(
+                    /translate\(\s*([^,]+),\s*([^\)]+)\)/g,
+                    (_m, x) => `translate(${x}, 0px)`,
+                  )
+                  return s
+                }}
                 transition={{ duration: 0.2, ease: [0.05, 0.7, 0.1, 1] }}
                 className="flex items-center"
               >

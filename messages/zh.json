@@ -131,6 +131,9 @@
         }
       },
       "TopBar": {
+        "SearchTrigger": {
+          "search": "搜索..."
+        },
         "ThemeSwitcher": {
           "label": "主题设置",
           "system": "跟随系统",
@@ -289,6 +292,23 @@
           "title": "支持 BBCode",
           "exampleTitle": "示例",
           "example": "[b]Bold[/b]\n[i]Italic[/i]\n[u]Underline[/u]\n[s]Strikethrough[/s]\n[quote]Quote[/quote]\n[spoiler]Spoiler[/spoiler]\n[mask]Mask[/mask]\n[url=https://shionlib.com]Shionlib[/url]"
+        }
+      },
+      "Search": {
+        "Command": {
+          "SearchCommand": {
+            "placeholder": "输入内容...",
+            "press_enter_to_search": "按下回车键搜索",
+            "history": "历史记录",
+            "delete_all": "清空历史记录",
+            "trending": "热门搜索"
+          }
+        },
+        "Game": {
+          "Results": {
+            "result_prefix": "搜索",
+            "result_suffix": "共 {total} 个结果"
+          }
         }
       }
     },

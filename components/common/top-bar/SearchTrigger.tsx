@@ -1,0 +1,53 @@
+import { Kbd } from '@/components/shionui/Kbd'
+import { SearchIcon } from 'lucide-react'
+import { useSearchStore } from '@/store/searchStore'
+import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
+import { isIOS, isMacOs } from 'react-device-detect'
+import { Button } from '@/components/shionui/Button'
+
+export const SearchTrigger = () => {
+  const { openSearchDialog } = useSearchStore()
+  const t = useTranslations('Components.Common.TopBar.SearchTrigger')
+
+  const [isApple, setIsApple] = useState(false)
+  useEffect(() => {
+    setIsApple(isMacOs || isIOS)
+  }, [isMacOs, isIOS])
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault()
+        openSearchDialog()
+      }
+    }
+    window.addEventListener('keydown', down)
+    return () => window.removeEventListener('keydown', down)
+  }, [])
+
+  return (
+    <>
+      <div
+        className="bg-secondary rounded-md p-2 hidden md:flex items-center justify-between gap-1 lg:gap-12 select-none cursor-pointer hover:opacity-70 transition-opacity ease-in-out"
+        onClick={openSearchDialog}
+      >
+        <div className="flex items-center gap-2">
+          <SearchIcon className="w-4 h-4" />
+          <span className="text-sm font-medium text-foreground/70">{t('search')}</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <Kbd className="text-sm font-medium bg-white border">{isApple ? '⌘' : 'Ctrl'}</Kbd>
+          <Kbd className="text-sm font-medium bg-white border">K</Kbd>
+        </div>
+      </div>
+      <div
+        className="block md:hidden cursor-pointer hover:opacity-70 transition-opacity ease-in-out"
+        onClick={openSearchDialog}
+      >
+        <Button appearance="ghost" intent="secondary" size="icon">
+          <SearchIcon className="w-4 h-4" />
+        </Button>
+      </div>
+    </>
+  )
+}

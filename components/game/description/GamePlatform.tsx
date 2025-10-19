@@ -10,6 +10,7 @@ import {
   SiPlaystation2,
   SiMacos,
   SiIos,
+  SiNintendo3Ds,
 } from 'react-icons/si'
 import { FcDvdLogo } from 'react-icons/fc'
 import { Platform } from '@/interfaces/game/game.interface'
@@ -34,6 +35,8 @@ const PlatformIconMap: Record<Platform, React.ElementType> = {
   web: MdWeb,
   vnd: MdWeb,
   drc: MdWeb,
+  gba: SiNintendo3Ds,
+  nds: SiNintendo3Ds,
 }
 interface GamePlatformProps {
   platform: Platform[]
@@ -49,31 +52,33 @@ export const GamePlatform = ({ platform, className, max, show_more_count }: Game
     platform = platform.slice(0, max)
   }
   return (
-    <div className={cn('flex flex-wrap gap-2 items-center', className)}>
-      {platform
-        .filter(p => Object.keys(PlatformIconMap).includes(p))
-        ?.map(p => {
-          const IconComponent = PlatformIconMap[p]
-          return (
-            <Badge
-              key={p}
-              style={{
-                backgroundColor: platformTokenMap[p].bg,
-                color: platformTokenMap[p].fg,
-                userSelect: 'none',
-              }}
-            >
-              <IconComponent className="size-4" />
-              {platformNameMap[p]}
-            </Badge>
-          )
-        })}
-      {show_more_count && more_count > 0 && (
-        <Badge variant="secondary" className="gap-[1px]">
-          <Plus />
-          {more_count}
-        </Badge>
-      )}
-    </div>
+    platform.length > 0 && (
+      <div className={cn('flex flex-wrap gap-2 items-center', className)}>
+        {platform
+          .filter(p => Object.keys(PlatformIconMap).includes(p))
+          ?.map(p => {
+            const IconComponent = PlatformIconMap[p]
+            return (
+              <Badge
+                key={p}
+                style={{
+                  backgroundColor: platformTokenMap[p].bg,
+                  color: platformTokenMap[p].fg,
+                  userSelect: 'none',
+                }}
+              >
+                <IconComponent className="size-4" />
+                {platformNameMap[p]}
+              </Badge>
+            )
+          })}
+        {show_more_count && more_count > 0 && (
+          <Badge variant="secondary" className="gap-[1px]">
+            <Plus />
+            {more_count}
+          </Badge>
+        )}
+      </div>
+    )
   )
 }

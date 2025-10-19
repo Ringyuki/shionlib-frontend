@@ -47,6 +47,8 @@ export type Platform =
   | 'web'
   | 'vnd'
   | 'drc'
+  | 'gba'
+  | 'nds'
 export enum PlatformEnum {
   win = 'Windows',
   ios = 'iOS',
@@ -64,6 +66,8 @@ export enum PlatformEnum {
   web = 'Web',
   vnd = 'VNDS',
   drc = 'DRC',
+  gba = 'Game Boy Advance',
+  nds = 'Nintendo DS',
 }
 export const PlatformOptions: Array<{ label: string; value: Platform }> = [
   { value: 'win', label: 'Windows' },
@@ -82,6 +86,8 @@ export const PlatformOptions: Array<{ label: string; value: Platform }> = [
   { value: 'web', label: 'Web' },
   { value: 'vnd', label: 'VNDS' },
   { value: 'drc', label: 'DRC' },
+  { value: 'gba', label: 'Game Boy Advance' },
+  { value: 'nds', label: 'Nintendo DS' },
 ]
 
 export const platformNameMap: Record<Platform, string> = {
@@ -101,6 +107,8 @@ export const platformNameMap: Record<Platform, string> = {
   web: 'Web',
   vnd: 'VNDS',
   drc: 'DRC',
+  gba: 'Game Boy Advance',
+  nds: 'Nintendo DS',
 }
 export const platformTokenMap: Record<Platform, { bg: string; fg: string }> = {
   win: { bg: 'var(--platform-win)', fg: 'var(--platform-win-fg)' },
@@ -119,6 +127,8 @@ export const platformTokenMap: Record<Platform, { bg: string; fg: string }> = {
   web: { bg: 'var(--platform-web)', fg: 'var(--platform-web-fg)' },
   vnd: { bg: 'var(--platform-vnd)', fg: 'var(--platform-vnd-fg)' },
   drc: { bg: 'var(--platform-drc)', fg: 'var(--platform-drc-fg)' },
+  gba: { bg: 'var(--platform-gba)', fg: 'var(--platform-gba-fg)' },
+  nds: { bg: 'var(--platform-nds)', fg: 'var(--platform-nds-fg)' },
 }
 
 export type Language = 'jp' | 'zh' | 'en'
