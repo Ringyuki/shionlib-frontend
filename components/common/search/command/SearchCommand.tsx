@@ -14,7 +14,7 @@ import { Suggest } from './Suggest'
 
 export const SearchCommand = () => {
   const t = useTranslations('Components.Common.Search.Command.SearchCommand')
-  const { addHistory, closeSearchDialog, history } = useSearchStore()
+  const { addHistory, closeSearchDialog } = useSearchStore()
 
   const router = useRouter()
   const [q, setQ] = useState('')
@@ -53,7 +53,7 @@ export const SearchCommand = () => {
               <Suggest q={q} onSelect={handleSelectItem} />
             ) : (
               <>
-                <History history={history} onSelect={handleSelectItem} />
+                <History onSelect={handleSelectItem} />
                 <Trending onSelect={handleSelectItem} />
               </>
             )}

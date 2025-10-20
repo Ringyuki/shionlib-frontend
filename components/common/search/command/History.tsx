@@ -5,13 +5,12 @@ import { useTranslations } from 'next-intl'
 import { useSearchStore } from '@/store/searchStore'
 
 interface HistoryProps {
-  history: SearchHistory[]
   onSelect: (query: string) => void
 }
 
-export const History = ({ history, onSelect }: HistoryProps) => {
+export const History = ({ onSelect }: HistoryProps) => {
   const t = useTranslations('Components.Common.Search.Command.History')
-  const { deleteAllHistory } = useSearchStore()
+  const { deleteAllHistory, history } = useSearchStore()
 
   const handleSelectItem = (query: string) => {
     onSelect(query)
