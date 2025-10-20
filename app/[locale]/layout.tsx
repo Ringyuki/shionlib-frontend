@@ -12,7 +12,7 @@ import { toastProps } from './toastOption'
 import ShionlibTopBar from '@/components/common/top-bar/TopBar'
 import { GlobalDialogs } from '@/components/common/user/GlobalDialogs'
 import { TokenRefresh } from '@/components/common/auth/TokenRefresh'
-import { Noto_Sans, Noto_Sans_SC, Noto_Sans_JP } from 'next/font/google'
+import { Noto_Sans, Noto_Sans_SC, Noto_Sans_JP, Noto_Sans_Mono } from 'next/font/google'
 import { ShionlibFooter } from '@/components/common/footer/Footer'
 
 const notoSans_Latin = Noto_Sans({
@@ -27,6 +27,10 @@ const notoSans_JP = Noto_Sans_JP({
   display: 'swap',
   variable: '--font-jp',
 })
+const notoSans_Mono = Noto_Sans_Mono({
+  display: 'swap',
+  variable: '--font-mono',
+})
 
 export default async function ShionlibLayout({ children, params }: Readonly<Props>) {
   const { locale } = await params
@@ -37,7 +41,7 @@ export default async function ShionlibLayout({ children, params }: Readonly<Prop
   return (
     <html
       lang={langMap[locale as SupportedLocales]}
-      className={`${notoSans_Latin.variable} ${notoSans_SC.variable} ${notoSans_JP.variable}`}
+      className={`${notoSans_Latin.variable} ${notoSans_SC.variable} ${notoSans_JP.variable} ${notoSans_Mono.variable}`}
       suppressHydrationWarning
     >
       <body>

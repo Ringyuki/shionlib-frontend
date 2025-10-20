@@ -1,5 +1,5 @@
 import { PaginatedResponse, PaginatedMeta } from '@/interfaces/api/shionlib-api-res.interface'
-import { GameItem } from '@/interfaces/game/game.interface'
+import { GameSearchItem } from '@/interfaces/game/game.interface'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { Results } from '@/components/common/search/game/Results'
 
@@ -11,7 +11,7 @@ interface SearchGamePageProps {
 }
 
 const getData = async (page: string, q: string) => {
-  const data = await shionlibRequest().get<PaginatedResponse<GameItem>>(`/search/games`, {
+  const data = await shionlibRequest().get<PaginatedResponse<GameSearchItem>>(`/search/games`, {
     params: {
       page: page ?? '1',
       pageSize: 15,

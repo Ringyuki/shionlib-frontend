@@ -37,7 +37,7 @@ export const SearchTrigger = () => {
         </div>
         <div className="flex items-center gap-1">
           <Kbd className="text-sm font-medium bg-white border">{isApple ? '⌘' : 'Ctrl'}</Kbd>
-          <Kbd className="text-sm font-medium bg-white border">K</Kbd>
+          <Kbd className="text-xs font-medium bg-white border">K</Kbd>
         </div>
       </div>
       <div

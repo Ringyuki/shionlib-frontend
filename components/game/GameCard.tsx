@@ -1,4 +1,4 @@
-import { GameItem, GameData } from '@/interfaces/game/game.interface'
+import { GameItem, GameSearchItem, GameData } from '@/interfaces/game/game.interface'
 import { cn } from '@/utils/cn'
 import { FadeImage } from '../common/shared/FadeImage'
 import { Link } from '@/i18n/navigation'
@@ -8,7 +8,7 @@ import { Spoiler } from '../shionui/Spoiler'
 import { ContentLimit } from '@/interfaces/user/user.interface'
 
 interface GameCardProps {
-  game: GameItem
+  game: GameItem | GameSearchItem
   content_limit?: ContentLimit
 }
 
@@ -39,7 +39,7 @@ export const GameCard = async ({ game, content_limit }: GameCardProps) => {
   const locale = await getLocale()
   const langMap = { en: 'en', ja: 'jp', zh: 'zh' } as const
   const lang = langMap[locale as keyof typeof langMap] ?? 'jp'
-  const { title } = getPreferredContent(game as unknown as GameData, 'title', lang)
+  const { title, language } = getPreferredContent(game as unknown as GameData, 'title', lang)
   const { cover, aspect } = getPreferredContent(game as unknown as GameData, 'cover', lang)
   const sizes =
     '((min-width: 1280px) 280px), ((min-width: 1024px) 240px), ((min-width: 768px) 200px), ((min-width: 640px) 180px), 160px'
@@ -72,7 +72,19 @@ export const GameCard = async ({ game, content_limit }: GameCardProps) => {
         })()}
       </div>
       <div className="flex flex-col gap-2">
-        <h3 className="text-sm font-medium">{title}</h3>
+        {typeof game === 'object' && '_formatted' in game ? (
+          <h3
+            className="text-sm font-medium"
+            dangerouslySetInnerHTML={{
+              __html:
+                (game as GameSearchItem)._formatted?.[
+                  `title_${language}` as keyof GameSearchItem['_formatted']
+                ] || title,
+            }}
+          />
+        ) : (
+          <h3 className="text-sm font-medium">{title}</h3>
+        )}
       </div>
     </Link>
   )

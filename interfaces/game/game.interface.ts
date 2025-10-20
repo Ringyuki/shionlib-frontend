@@ -25,6 +25,23 @@ export interface GameItem {
   views: number
 }
 
+export interface GameSearchItem extends GameItem {
+  aliases: string[]
+  intro_jp: string
+  intro_zh: string
+  intro_en: string
+  developers: { developer: { id: number; name: string } }[]
+  _formatted?: {
+    title_jp?: string
+    title_zh?: string
+    title_en?: string
+    aliases?: string[]
+    intro_jp?: string
+    intro_zh?: string
+    intro_en?: string
+  }
+}
+
 export interface ExtraInfo {
   key: string
   value: string

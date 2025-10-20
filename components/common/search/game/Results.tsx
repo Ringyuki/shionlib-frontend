@@ -1,4 +1,4 @@
-import { GameItem } from '@/interfaces/game/game.interface'
+import { GameSearchItem } from '@/interfaces/game/game.interface'
 import { Pagination } from '@/components/common/content/Pagination'
 import { GameCard } from '@/components/game/GameCard'
 import { Masonry } from '@/components/common/shared/Masonry'
@@ -8,7 +8,7 @@ import { SearchIcon } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 
 interface ResultsProps {
-  games: GameItem[]
+  games: GameSearchItem[]
   pagination: PaginatedMeta
   q: string
 }

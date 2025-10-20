@@ -1,6 +1,6 @@
 .EditorTheme__code {
   background-color: transparent;
-  font-family: Menlo, Consolas, Monaco, monospace;
+  font-family: var(--font-mono), Menlo, Consolas, Monaco, monospace;
   display: block;
   padding: 8px 8px 8px 52px;
   line-height: 1.53;

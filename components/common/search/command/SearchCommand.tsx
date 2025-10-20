@@ -13,7 +13,7 @@ import { useTranslations } from 'next-intl'
 import { ScrollArea } from '@/components/shionui/ScrollArea'
 import { Kbd } from '@/components/shionui/Kbd'
 import { CornerDownLeft, TrashIcon } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from '@/i18n/navigation.client'
 import { useSearchStore } from '@/store/searchStore'
 
@@ -70,7 +70,7 @@ export const SearchCommand = () => {
             }
           }}
         />
-        <CommandList className="max-h-[400px] mt-2">
+        <CommandList className="max-h-[400px] mt-2 my-1">
           <ScrollArea className="h-[400px]">
             {history.length > 0 && (
               <>
@@ -90,7 +90,12 @@ export const SearchCommand = () => {
                   className="py-1! px-1!"
                 >
                   {history.map(item => (
-                    <CommandItem key={item.id} id={item.id} onSelect={() => handleSelectItem(item)}>
+                    <CommandItem
+                      className="border border-transparent data-[selected=true]:border-primary/20"
+                      key={item.id}
+                      id={item.id}
+                      onSelect={() => handleSelectItem(item)}
+                    >
                       {item.query}
                     </CommandItem>
                   ))}
@@ -98,9 +103,14 @@ export const SearchCommand = () => {
                 <CommandSeparator className="my-2" />
               </>
             )}
-            <CommandGroup heading={t('trending')} className="py-1! px-1!">
+            <CommandGroup heading={t('trending')} className="py-1! px-1! pb-0!">
               {trendingMock.map(item => (
-                <CommandItem key={item.id} id={item.id} onSelect={() => handleSelectItem(item)}>
+                <CommandItem
+                  className="border border-transparent data-[selected=true]:border-primary/20"
+                  key={item.id}
+                  id={item.id}
+                  onSelect={() => handleSelectItem(item)}
+                >
                   {item.query}
                 </CommandItem>
               ))}

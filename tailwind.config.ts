@@ -4,6 +4,18 @@ export default {
   content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './pages/**/*.{ts,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        mono: [
+          'var(--font-mono)',
+          'ui-monospace',
+          'SFMono-Regular',
+          'Menlo',
+          'Consolas',
+          'Liberation Mono',
+          'Monaco',
+          'monospace',
+        ],
+      },
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',

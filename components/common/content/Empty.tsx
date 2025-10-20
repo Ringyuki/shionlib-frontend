@@ -6,15 +6,15 @@ import {
   EmptyMedia,
 } from '@/components/shionui/Empty'
 import { FadeImage } from '../shared/FadeImage'
-import { getTranslations } from 'next-intl/server'
+import { useTranslations } from 'next-intl'
 
 interface EmptyProps {
   title?: string
   description?: string
 }
 
-export const Empty = async ({ title, description }: EmptyProps) => {
-  const t = await getTranslations('Components.Common.Content.Empty')
+export const Empty = ({ title, description }: EmptyProps) => {
+  const t = useTranslations('Components.Common.Content.Empty')
   return (
     <EmptyComponent>
       <EmptyHeader>
