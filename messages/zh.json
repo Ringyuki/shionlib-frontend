@@ -298,10 +298,17 @@
         "Command": {
           "SearchCommand": {
             "placeholder": "输入内容...",
-            "press_enter_to_search": "按下回车键搜索",
+            "press_enter_to_search": "按下回车键搜索"
+          },
+          "History": {
             "history": "历史记录",
-            "delete_all": "清空历史记录",
+            "delete_all": "清空历史记录"
+          },
+          "Trending": {
             "trending": "热门搜索"
+          },
+          "Suggest": {
+            "suggest": "搜索建议"
           }
         },
         "Game": {

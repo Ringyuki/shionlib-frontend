@@ -5,7 +5,16 @@ export interface SearchHistory {
 }
 
 export interface SearchTrending {
-  id: number
+  trending: SearchTrendingItem[]
+  updated_at: string
+}
+
+export interface SearchTrendingItem {
+  score: number
   query: string
-  created_at: string
+}
+
+export interface SearchSuggestItem {
+  query: string
+  score: number
 }

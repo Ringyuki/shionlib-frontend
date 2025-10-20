@@ -14,9 +14,6 @@ export enum IsFatalAuthByCodeEnum {
 export type ShouldRefreshCode = 200101 | 200102
 export type IsFatalAuthByCode = 200105 | 200106 | 200104 | 200103 | 300105
 
-export const ShouldRefreshCodes = [200101, 200102]
-export const IsFatalAuthByCodes = [200105, 200106, 200104, 200103, 300105]
-
 // AUTH_UNAUTHORIZED = 200101,
 // AUTH_INVALID_TOKEN = 200102,
 // AUTH_INVALID_REFRESH_TOKEN = 200103,

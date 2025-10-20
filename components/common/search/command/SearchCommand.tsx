@@ -1,31 +1,26 @@
 'use client'
 
-import {
-  Command,
-  CommandInput,
-  CommandList,
-  CommandGroup,
-  CommandItem,
-  CommandShortcut,
-  CommandSeparator,
-} from '@/components/shionui/Command'
+import { Command, CommandInput, CommandList } from '@/components/shionui/Command'
 import { useTranslations } from 'next-intl'
 import { ScrollArea } from '@/components/shionui/ScrollArea'
 import { Kbd } from '@/components/shionui/Kbd'
-import { CornerDownLeft, TrashIcon } from 'lucide-react'
+import { CornerDownLeft } from 'lucide-react'
 import { useState } from 'react'
 import { useRouter } from '@/i18n/navigation.client'
 import { useSearchStore } from '@/store/searchStore'
+import { History } from './History'
+import { Trending } from './Trending'
+import { Suggest } from './Suggest'
 
 export const SearchCommand = () => {
   const t = useTranslations('Components.Common.Search.Command.SearchCommand')
-  const { addHistory, closeSearchDialog, history, deleteAllHistory } = useSearchStore()
+  const { addHistory, closeSearchDialog, history } = useSearchStore()
 
   const router = useRouter()
   const [q, setQ] = useState('')
-  const handleSelectItem = (item: { id: number; query: string; created_at: string }) => {
-    setQ(item.query)
-    handleSearch(item.query)
+  const handleSelectItem = (query: string) => {
+    setQ(query)
+    handleSearch(query)
   }
   const handleSearch = (_q?: string) => {
     const query = (_q || q).trim()
@@ -39,24 +34,6 @@ export const SearchCommand = () => {
       })
     }
   }
-
-  const trendingMock = [
-    {
-      id: 4,
-      query: 'Hello',
-      created_at: '2021-01-01',
-    },
-    {
-      id: 5,
-      query: 'World',
-      created_at: '2021-01-02',
-    },
-    {
-      id: 6,
-      query: 'Shionlib',
-      created_at: '2021-01-03',
-    },
-  ]
   return (
     <Command>
       <div className="border-4 rounded-xl">
@@ -72,49 +49,14 @@ export const SearchCommand = () => {
         />
         <CommandList className="max-h-[400px] mt-2 my-1">
           <ScrollArea className="h-[400px]">
-            {history.length > 0 && (
+            {q ? (
+              <Suggest q={q} onSelect={handleSelectItem} />
+            ) : (
               <>
-                <CommandGroup
-                  heading={
-                    <span className="flex justify-between">
-                      <span>{t('history')}</span>
-                      <span
-                        className="text-destructive cursor-pointer hover:text-destructive/80 transition-colors flex items-center gap-1"
-                        onClick={() => deleteAllHistory()}
-                      >
-                        <TrashIcon className="size-3" />
-                        {t('delete_all')}
-                      </span>
-                    </span>
-                  }
-                  className="py-1! px-1!"
-                >
-                  {history.map(item => (
-                    <CommandItem
-                      className="border border-transparent data-[selected=true]:border-primary/20"
-                      key={item.id}
-                      id={item.id}
-                      onSelect={() => handleSelectItem(item)}
-                    >
-                      {item.query}
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
-                <CommandSeparator className="my-2" />
+                <History history={history} onSelect={handleSelectItem} />
+                <Trending onSelect={handleSelectItem} />
               </>
             )}
-            <CommandGroup heading={t('trending')} className="py-1! px-1! pb-0!">
-              {trendingMock.map(item => (
-                <CommandItem
-                  className="border border-transparent data-[selected=true]:border-primary/20"
-                  key={item.id}
-                  id={item.id}
-                  onSelect={() => handleSelectItem(item)}
-                >
-                  {item.query}
-                </CommandItem>
-              ))}
-            </CommandGroup>
           </ScrollArea>
         </CommandList>
         <div className="bg-secondary rounded-b-lg flex items-center gap-1 py-2 px-1 text-xs text-muted-foreground">

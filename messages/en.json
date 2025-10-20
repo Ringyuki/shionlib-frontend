@@ -298,10 +298,17 @@
         "Command": {
           "SearchCommand": {
             "placeholder": "Enter content...",
-            "press_enter_to_search": "Press Enter to search",
+            "press_enter_to_search": "Press Enter to search"
+          },
+          "History": {
             "history": "History",
-            "delete_all": "Delete all",
+            "delete_all": "Delete all"
+          },
+          "Trending": {
             "trending": "Trending"
+          },
+          "Suggest": {
+            "suggest": "Suggestions"
           }
         },
         "Game": {

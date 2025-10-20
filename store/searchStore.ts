@@ -4,9 +4,9 @@ import { SearchHistory, SearchTrending } from '@/interfaces/search/Search.interf
 
 interface SearchStore {
   history: SearchHistory[]
-  trending: SearchTrending[]
+  trending: SearchTrending
   setHistory: (history: SearchHistory[]) => void
-  setTrending: (trending: SearchTrending[]) => void
+  setTrending: (trending: SearchTrending) => void
   deleteHistory: (id: number) => void
   deleteAllHistory: () => void
   addHistory: (history: SearchHistory) => void
@@ -19,9 +19,9 @@ export const useSearchStore = create<SearchStore>()(
   persist(
     (set, get) => ({
       history: [],
-      trending: [],
+      trending: { trending: [], updated_at: '' },
       setHistory: (history: SearchHistory[]) => set({ history }),
-      setTrending: (trending: SearchTrending[]) => set({ trending }),
+      setTrending: (trending: SearchTrending) => set({ trending }),
       deleteHistory: (id: number) =>
         set({ history: get().history.filter(history => history.id !== id) }),
       deleteAllHistory: () => set({ history: [] }),

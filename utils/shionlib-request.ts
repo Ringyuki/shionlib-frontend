@@ -1,15 +1,16 @@
 import { BasicResponse, ErrorResponse } from '@/interfaces/api/shionlib-api-res.interface'
 import { resolvePreferredLocale } from './language-preference'
 import { ShionlibBizError } from '@/libs/errors'
-import { ShouldRefreshCodes, IsFatalAuthByCodes } from '@/enums/auth/auth-status.enum'
+import { SHOULD_REFRESH_CODES, IS_FATAL_AUTH_BY_CODES } from '@/constants/auth/auth-status-codes'
+import { NOT_FOUND_CODES } from '@/constants/not-found-codes'
 import { useShionlibUserStore } from '@/store/userStore'
 
 let refreshPromise: Promise<void> | null = null
 const shouldRefresh = (code: number) => {
-  return ShouldRefreshCodes.includes(code)
+  return SHOULD_REFRESH_CODES.includes(code)
 }
 const isFatalAuthByCode = (code: number) => {
-  return IsFatalAuthByCodes.includes(code)
+  return IS_FATAL_AUTH_BY_CODES.includes(code)
 }
 
 const isBrowser = typeof window !== 'undefined'
@@ -97,7 +98,7 @@ export const shionlibRequest = () => {
         )
       }
       console.error(data)
-      if (data.code !== 404) {
+      if (!NOT_FOUND_CODES.includes(data.code)) {
         throw new ShionlibBizError(data.code, data.message)
       }
     }

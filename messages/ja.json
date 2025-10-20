@@ -291,10 +291,17 @@
         "Command": {
           "SearchCommand": {
             "placeholder": "内容を検索...",
-            "press_enter_to_search": "Enter キーで検索",
+            "press_enter_to_search": "Enter キーで検索"
+          },
+          "History": {
             "history": "履歴",
-            "clear_history": "履歴をクリア",
-            "trending": "人気"
+            "delete_all": "履歴をクリア"
+          },
+          "Trending": {
+            "trending": "人気の検索"
+          },
+          "Suggest": {
+            "suggest": "検索候補"
           }
         },
         "Game": {
