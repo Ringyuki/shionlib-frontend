@@ -34,6 +34,26 @@
       }
     }
   },
+  "Docs": {
+    "categories": {
+      "about": "紹介",
+      "dev": "開発",
+      "faq": "よくある質問",
+      "guides": "ガイド"
+    },
+    "about": {
+      "about-shionlib": "Shionlib について"
+    },
+    "dev": {
+      "3": "title3"
+    },
+    "faq": {
+      "1": "title1"
+    },
+    "guides": {
+      "2": "title2"
+    }
+  },
   "Components": {
     "ShionUI": {
       "Spoiler": {
@@ -694,6 +714,20 @@
         },
         "Details": {
           "no_intro": "紹介がありません"
+        }
+      }
+    },
+    "Docs": {
+      "SideBar": {
+        "title": "ドキュメントディレクトリ"
+      },
+      "Content": {
+        "DocTOC": {
+          "title": "ページインデックス"
+        },
+        "DocNav": {
+          "prev": "前のページ",
+          "next": "次のページ"
         }
       }
     }

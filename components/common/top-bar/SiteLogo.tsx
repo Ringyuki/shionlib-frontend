@@ -1,12 +1,5 @@
 import { Link } from '@/i18n/navigation'
 import { cn } from '@/utils/cn'
-import { Cinzel } from 'next/font/google'
-
-const cinzel = Cinzel({
-  subsets: ['latin'],
-  weight: ['700'],
-  display: 'swap',
-})
 
 interface SiteLogoProps {
   size?: 'sm' | 'base' | 'lg' | 'xl' | number | string
@@ -24,9 +17,9 @@ export const SiteLogo = ({ size, className }: SiteLogoProps) => {
           size === 'lg' && 'text-lg',
           size === 'xl' && 'text-xl',
           typeof size === 'number' && `text-[${size}px]`,
-          cinzel.className,
           className,
         )}
+        style={{ fontFamily: 'var(--font-cinzel)' }}
       >
         Shionlib
       </span>

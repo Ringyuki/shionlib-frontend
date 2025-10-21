@@ -42,6 +42,26 @@
       }
     }
   },
+  "Docs": {
+    "categories": {
+      "about": "关于",
+      "dev": "开发文档",
+      "faq": "常见问题",
+      "guides": "指南"
+    },
+    "about": {
+      "about-shionlib": "关于 Shionlib"
+    },
+    "dev": {
+      "3": "title3"
+    },
+    "faq": {
+      "1": "title1"
+    },
+    "guides": {
+      "2": "title2"
+    }
+  },
   "Components": {
     "ShionUI": {
       "Spoiler": {
@@ -701,6 +721,20 @@
         },
         "Details": {
           "no_intro": "暂无介绍"
+        }
+      }
+    },
+    "Docs": {
+      "SideBar": {
+        "title": "文档目录"
+      },
+      "Content": {
+        "DocTOC": {
+          "title": "页面索引"
+        },
+        "DocNav": {
+          "prev": "上一篇",
+          "next": "下一篇"
         }
       }
     }

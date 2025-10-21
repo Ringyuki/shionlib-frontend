@@ -2,6 +2,7 @@
 @import 'tw-animate-css';
 @import './theme.css';
 @import './font.css';
+@import './prose.css';
 @config '../../../tailwind.config.ts';
 
 @custom-variant dark (&:is(.dark *));

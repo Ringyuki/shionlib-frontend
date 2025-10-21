@@ -40,6 +40,7 @@ export const timeFormat = (
 }
 
 export const timeFromNow = (date: Date | number | string, locale: string) => {
+  if (!date) return ''
   return formatDistanceToNow(date, {
     locale: localeMap[locale as SupportedLocales],
     addSuffix: true,

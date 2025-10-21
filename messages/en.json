@@ -42,6 +42,26 @@
       }
     }
   },
+  "Docs": {
+    "categories": {
+      "about": "About",
+      "dev": "Development",
+      "faq": "FAQ",
+      "guides": "Guide"
+    },
+    "about": {
+      "about-shionlib": "About Shionlib"
+    },
+    "dev": {
+      "3": "title3"
+    },
+    "faq": {
+      "1": "title1"
+    },
+    "guides": {
+      "2": "title2"
+    }
+  },
   "Components": {
     "ShionUI": {
       "Spoiler": {
@@ -701,6 +721,20 @@
         },
         "Details": {
           "no_intro": "No introduction"
+        }
+      }
+    },
+    "Docs": {
+      "SideBar": {
+        "title": "Documents Directory"
+      },
+      "Content": {
+        "DocTOC": {
+          "title": "Page Index"
+        },
+        "DocNav": {
+          "prev": "Previous",
+          "next": "Next"
         }
       }
     }

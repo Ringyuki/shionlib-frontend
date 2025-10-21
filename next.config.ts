@@ -1,9 +1,18 @@
 import type { NextConfig } from 'next'
 import createNextIntlPlugin from 'next-intl/plugin'
+import createMDX from '@next/mdx'
+import remarkFrontmatter from 'remark-frontmatter'
+import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 
 const withNextIntl = createNextIntlPlugin()
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: [remarkFrontmatter, [remarkMdxFrontmatter, { name: 'frontmatter' }]],
+  },
+})
 
 const nextConfig: NextConfig = {
+  pageExtensions: ['ts', 'tsx', 'mdx'],
   images: {
     remotePatterns: [
       {
@@ -13,6 +22,10 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'lain.bgm.tv',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.yurari.moe',
       },
       {
         protocol: 'https',
@@ -43,4 +56,4 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default withNextIntl(nextConfig)
+export default withNextIntl(withMDX(nextConfig))

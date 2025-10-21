@@ -14,22 +14,33 @@ import { GlobalDialogs } from '@/components/common/user/GlobalDialogs'
 import { TokenRefresh } from '@/components/common/auth/TokenRefresh'
 import { Noto_Sans, Noto_Sans_SC, Noto_Sans_JP, Noto_Sans_Mono } from 'next/font/google'
 import { ShionlibFooter } from '@/components/common/footer/Footer'
+import { Cinzel } from 'next/font/google'
 
+const cinzel = Cinzel({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800', '900'],
+  display: 'swap',
+  variable: '--font-cinzel',
+})
 const notoSans_Latin = Noto_Sans({
   display: 'swap',
   variable: '--font-latin',
+  subsets: ['latin'],
 })
 const notoSans_SC = Noto_Sans_SC({
   display: 'swap',
   variable: '--font-sc',
+  subsets: ['latin'],
 })
 const notoSans_JP = Noto_Sans_JP({
   display: 'swap',
   variable: '--font-jp',
+  subsets: ['latin'],
 })
 const notoSans_Mono = Noto_Sans_Mono({
   display: 'swap',
   variable: '--font-mono',
+  subsets: ['latin'],
 })
 
 export default async function ShionlibLayout({ children, params }: Readonly<Props>) {
@@ -41,7 +52,7 @@ export default async function ShionlibLayout({ children, params }: Readonly<Prop
   return (
     <html
       lang={langMap[locale as SupportedLocales]}
-      className={`${notoSans_Latin.variable} ${notoSans_SC.variable} ${notoSans_JP.variable} ${notoSans_Mono.variable}`}
+      className={`${notoSans_Latin.variable} ${notoSans_SC.variable} ${notoSans_JP.variable} ${notoSans_Mono.variable} ${cinzel.variable}`}
       suppressHydrationWarning
     >
       <body>

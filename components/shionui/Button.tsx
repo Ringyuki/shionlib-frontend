@@ -271,6 +271,7 @@ type ShionButtonProps = React.ComponentProps<'button'> &
     loading?: boolean
     loginRequired?: boolean
     renderIcon?: React.ReactNode | (() => React.ReactNode)
+    iconPosition?: 'left' | 'right'
   }
 
 function Button({
@@ -284,6 +285,7 @@ function Button({
   children,
   loginRequired = false,
   renderIcon,
+  iconPosition = 'left',
   ...props
 }: ShionButtonProps) {
   const [ripples, setRipples] = useState<Ripple[]>([])
@@ -353,6 +355,113 @@ function Button({
           hasIcon &&
           (!contentChildren || (Array.isArray(contentChildren) && contentChildren.length === 0))
 
+        const hasText = !isIconOnly && !!contentChildren
+
+        const iconElement = hasIcon ? (
+          <span
+            className={cn(
+              'relative inline-flex size-4 items-center justify-center',
+              hasText ? (iconPosition === 'right' ? 'ml-1.5' : 'mr-1.5') : undefined,
+            )}
+            aria-hidden="true"
+          >
+            <motion.span
+              initial={false}
+              animate={{ opacity: loading ? 1 : 0, scale: loading ? 1 : 0.85 }}
+              transition={{ opacity: { duration: 0.14 }, scale: { duration: 0.18 } }}
+              className="absolute inset-0 inline-flex items-center justify-center"
+            >
+              <motion.span
+                className="size-4 inline-flex items-center justify-center origin-center"
+                animate={loading ? { rotate: 360 } : { rotate: 0 }}
+                transition={
+                  loading ? { duration: 1, ease: 'linear', repeat: Infinity } : { duration: 0 }
+                }
+              >
+                <LoaderCircle className="w-full h-full" />
+              </motion.span>
+            </motion.span>
+            <motion.span
+              initial={false}
+              animate={{ opacity: loading ? 0 : 1, scale: loading ? 0.85 : 1 }}
+              transition={{ opacity: { duration: 0.14 }, scale: { duration: 0.18 } }}
+              className="inline-flex items-center justify-center"
+            >
+              {iconNode}
+            </motion.span>
+          </span>
+        ) : (
+          <AnimatePresence initial={false}>
+            {loading && (
+              <motion.span
+                key="loading-icon"
+                initial={{
+                  opacity: 0,
+                  scale: 0.8,
+                  width: 0,
+                  ...(iconPosition === 'right' ? { marginLeft: 0 } : { marginRight: 0 }),
+                }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                  width: 16,
+                  ...(iconPosition === 'right'
+                    ? { marginLeft: hasText ? 4 : 0 }
+                    : { marginRight: hasText ? 4 : 0 }),
+                }}
+                exit={{
+                  opacity: 0,
+                  scale: 0.8,
+                  width: 0,
+                  ...(iconPosition === 'right' ? { marginLeft: 0 } : { marginRight: 0 }),
+                }}
+                transition={{
+                  type: 'tween',
+                  ease: [0.2, 0.8, 0.2, 1],
+                  opacity: { duration: 0.14 },
+                  scale: { duration: 0.18 },
+                  width: { duration: 0.14 },
+                  ...(iconPosition === 'right'
+                    ? { marginLeft: { duration: 0.14 } }
+                    : { marginRight: { duration: 0.14 } }),
+                }}
+                className="flex items-center overflow-hidden"
+              >
+                <motion.span
+                  className="size-4 inline-flex items-center justify-center origin-center"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 0.8, ease: 'linear', repeat: Infinity }}
+                >
+                  <Loader2 className="w-full h-full" />
+                </motion.span>
+              </motion.span>
+            )}
+          </AnimatePresence>
+        )
+
+        const contentElement = !isIconOnly ? (
+          <motion.span
+            layout="position"
+            transformTemplate={(t, generated) => {
+              let s = generated
+              s = s.replace(/translateY\(\s*[^)]*\)/g, 'translateY(0px)')
+              s = s.replace(
+                /translate3d\(\s*([^,]+),\s*([^,]+),\s*([^\)]+)\)/g,
+                (_m, x, _y, z) => `translate3d(${x}, 0px, ${z})`,
+              )
+              s = s.replace(
+                /translate\(\s*([^,]+),\s*([^\)]+)\)/g,
+                (_m, x) => `translate(${x}, 0px)`,
+              )
+              return s
+            }}
+            transition={{ duration: 0.2, ease: [0.05, 0.7, 0.1, 1] }}
+            className="flex items-center"
+          >
+            {contentChildren}
+          </motion.span>
+        ) : null
+
         return (
           <motion.span
             className="relative z-10 flex items-center"
@@ -377,90 +486,16 @@ function Button({
             initial={false}
             transition={{ duration: 0.2, ease: [0.05, 0.7, 0.1, 1] }}
           >
-            {hasIcon ? (
-              <span
-                className={cn(
-                  'relative inline-flex size-4 items-center justify-center',
-                  !isIconOnly && contentChildren ? 'mr-1.5' : undefined,
-                )}
-                aria-hidden="true"
-              >
-                <motion.span
-                  initial={false}
-                  animate={{ opacity: loading ? 1 : 0, scale: loading ? 1 : 0.85 }}
-                  transition={{ opacity: { duration: 0.14 }, scale: { duration: 0.18 } }}
-                  className="absolute inset-0 inline-flex items-center justify-center"
-                >
-                  <motion.span
-                    className="size-4 inline-flex items-center justify-center origin-center"
-                    animate={loading ? { rotate: 360 } : { rotate: 0 }}
-                    transition={
-                      loading ? { duration: 1, ease: 'linear', repeat: Infinity } : { duration: 0 }
-                    }
-                  >
-                    <LoaderCircle className="w-full h-full" />
-                  </motion.span>
-                </motion.span>
-                <motion.span
-                  initial={false}
-                  animate={{ opacity: loading ? 0 : 1, scale: loading ? 0.85 : 1 }}
-                  transition={{ opacity: { duration: 0.14 }, scale: { duration: 0.18 } }}
-                  className="inline-flex items-center justify-center"
-                >
-                  {iconNode}
-                </motion.span>
-              </span>
+            {iconPosition === 'right' ? (
+              <>
+                {contentElement}
+                {iconElement}
+              </>
             ) : (
-              <AnimatePresence initial={false}>
-                {loading && (
-                  <motion.span
-                    key="loading-icon"
-                    initial={{ opacity: 0, scale: 0.8, width: 0, marginRight: 0 }}
-                    animate={{ opacity: 1, scale: 1, width: 16, marginRight: 4 }}
-                    exit={{ opacity: 0, scale: 0.8, width: 0, marginRight: 0 }}
-                    transition={{
-                      type: 'tween',
-                      ease: [0.2, 0.8, 0.2, 1],
-                      opacity: { duration: 0.14 },
-                      scale: { duration: 0.18 },
-                      width: { duration: 0.14 },
-                      marginRight: { duration: 0.14 },
-                    }}
-                    className="flex items-center overflow-hidden"
-                  >
-                    <motion.span
-                      className="size-4 inline-flex items-center justify-center origin-center"
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 0.8, ease: 'linear', repeat: Infinity }}
-                    >
-                      <Loader2 className="w-full h-full" />
-                    </motion.span>
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            )}
-
-            {!isIconOnly && (
-              <motion.span
-                layout="position"
-                transformTemplate={(t, generated) => {
-                  let s = generated
-                  s = s.replace(/translateY\(\s*[^)]*\)/g, 'translateY(0px)')
-                  s = s.replace(
-                    /translate3d\(\s*([^,]+),\s*([^,]+),\s*([^\)]+)\)/g,
-                    (_m, x, _y, z) => `translate3d(${x}, 0px, ${z})`,
-                  )
-                  s = s.replace(
-                    /translate\(\s*([^,]+),\s*([^\)]+)\)/g,
-                    (_m, x) => `translate(${x}, 0px)`,
-                  )
-                  return s
-                }}
-                transition={{ duration: 0.2, ease: [0.05, 0.7, 0.1, 1] }}
-                className="flex items-center"
-              >
-                {contentChildren}
-              </motion.span>
+              <>
+                {iconElement}
+                {contentElement}
+              </>
             )}
           </motion.span>
         )
