@@ -1,5 +1,5 @@
 import { SiteLogo } from '@/components/common/top-bar/SiteLogo'
-import { Link } from '@/i18n/navigation'
+import Link from 'next/link'
 import { Copyright, Github, MessageCircle } from 'lucide-react'
 import { RiTelegram2Fill } from 'react-icons/ri'
 import Image from 'next/image'

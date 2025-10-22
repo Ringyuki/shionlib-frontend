@@ -24,22 +24,23 @@ interface MasonryProps {
   className?: string
 }
 
-export function Masonry({
+export const Masonry = ({
   children,
   columnCountBreakpoints = defaultColumnCountBreakpoints,
   rowGap = 6,
   className,
-}: MasonryProps) {
+}: MasonryProps) => {
   const [masonryContainer, isInitialized] = useMasonry()
 
+  console.log(columnCountBreakpoints)
   return (
     <div
       ref={masonryContainer}
       data-initialized={isInitialized ? 'true' : 'false'}
       className={cn(
         'grid items-start',
-        `gap-${rowGap}`,
         `grid-cols-${columnCountBreakpoints.default} sm:grid-cols-${columnCountBreakpoints.sm} md:grid-cols-${columnCountBreakpoints.md} lg:grid-cols-${columnCountBreakpoints.lg}`,
+        `gap-${rowGap}`,
         'opacity-0 transition-opacity duration-200',
         isInitialized && 'opacity-100',
         className,

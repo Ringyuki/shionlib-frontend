@@ -6,6 +6,8 @@
 @config '../../../tailwind.config.ts';
 
 @custom-variant dark (&:is(.dark *));
+@source inline('{sm:,md:,lg:,xl:,}grid-cols-{{1..12}}');
+@source inline('gap-{{0..12}}');
 
 html {
   font-size: 16px;
