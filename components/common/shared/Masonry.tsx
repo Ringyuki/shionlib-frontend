@@ -3,11 +3,33 @@
 import useMasonry from '@/hooks/useMasonry'
 import { cn } from '@/utils/cn'
 
-interface MasonryProps {
-  children: React.ReactNode
+interface ColumnCountBreakpoints {
+  default: number
+  sm: number
+  md: number
+  lg: number
 }
 
-export function Masonry({ children }: MasonryProps) {
+const defaultColumnCountBreakpoints: ColumnCountBreakpoints = {
+  default: 2,
+  sm: 3,
+  md: 4,
+  lg: 5,
+}
+
+interface MasonryProps {
+  children: React.ReactNode
+  columnCountBreakpoints?: ColumnCountBreakpoints
+  rowGap?: number
+  className?: string
+}
+
+export function Masonry({
+  children,
+  columnCountBreakpoints = defaultColumnCountBreakpoints,
+  rowGap = 6,
+  className,
+}: MasonryProps) {
   const [masonryContainer, isInitialized] = useMasonry()
 
   return (
@@ -15,8 +37,12 @@ export function Masonry({ children }: MasonryProps) {
       ref={masonryContainer}
       data-initialized={isInitialized ? 'true' : 'false'}
       className={cn(
-        'grid items-start gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 opacity-0 transition-opacity duration-200',
+        'grid items-start',
+        `gap-${rowGap}`,
+        `grid-cols-${columnCountBreakpoints.default} sm:grid-cols-${columnCountBreakpoints.sm} md:grid-cols-${columnCountBreakpoints.md} lg:grid-cols-${columnCountBreakpoints.lg}`,
+        'opacity-0 transition-opacity duration-200',
         isInitialized && 'opacity-100',
+        className,
       )}
     >
       {children}

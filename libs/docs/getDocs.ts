@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { markdownToText } from '@/utils/markdown-to-text'
+import { calcTextCount } from './helpers/text-count'
 import type { DocsMetadata, DocsFrontmatter, Doc } from '@/interfaces/contents/docs.interface'
 
 const getDocsRoot = (locale?: string) => {
@@ -38,7 +38,7 @@ export const getAllDocs = (locale?: string) => {
           banner: data.banner,
           date: data.date ? new Date(data.date).toISOString() : '',
           description: data.description || '',
-          text_count: markdownToText(fileContents).length - 300,
+          text_count: calcTextCount(fileContents, data),
           slug,
         })
       }

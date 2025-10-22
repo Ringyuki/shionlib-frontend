@@ -3,7 +3,7 @@
 import { useMemo } from 'react'
 import { useSelectedLayoutSegment } from 'next/navigation'
 import { Tabs, TabsList, TabsTrigger } from '@/components/shionui/animated/Tabs'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation.client'
 import { useTranslations } from 'next-intl'
 
 const tabs = [

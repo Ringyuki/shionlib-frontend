@@ -10,12 +10,12 @@ interface UserCommentsPageProps {
   searchParams: { page: string }
 }
 
-const getData = async (id: string, searchParams: { page: string }) => {
+const getData = async (id: string, page: string) => {
   const data = await shionlibRequest().get<
     PaginatedResponse<Comment, { is_current_user: boolean }>
   >(`/user/datas/${id}/comments`, {
     params: {
-      page: searchParams.page ?? '1',
+      page: page ?? '1',
     },
   })
   return data
@@ -24,7 +24,7 @@ const getData = async (id: string, searchParams: { page: string }) => {
 export default async function UserCommentsPage({ params, searchParams }: UserCommentsPageProps) {
   const { id } = await params
   const { page } = await searchParams
-  const data = await getData(id, { page })
+  const data = await getData(id, page)
   return (data.data?.items?.length ?? 0 > 0) ? (
     <div>
       <CommentContent

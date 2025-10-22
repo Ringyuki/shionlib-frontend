@@ -1,6 +1,6 @@
 import { DeveloperRelation } from '@/interfaces/game/game.interface'
 import { Button } from '@/components/shionui/Button'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { Building2 } from 'lucide-react'
 import { getLocale } from 'next-intl/server'
 

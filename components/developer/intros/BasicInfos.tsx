@@ -2,7 +2,7 @@ import { Developer } from '@/interfaces/developer/developer.interface'
 import { getTranslations } from 'next-intl/server'
 import { FadeImage } from '@/components/common/shared/FadeImage'
 import { Building2, Link as LinkIcon } from 'lucide-react'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { Badge } from '@/components/shionui/Badge'
 
 interface BasicInfosProps {

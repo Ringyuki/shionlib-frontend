@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { UserProfile as UserProfileType } from '@/interfaces/user/user.interface'
 import { useSelectedLayoutSegment } from 'next/navigation'
 import { Tabs, TabsList, TabsTrigger } from '@/components/shionui/animated/Tabs'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation.client'
 import { useTranslations } from 'next-intl'
 import { Card, CardContent } from '@/components/shionui/Card'
 

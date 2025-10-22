@@ -568,6 +568,7 @@
         "Password": {
           "title": "Password",
           "description": "You can manage your password here. Password must be at least 8 characters and include at least one letter, one number, and one uppercase letter.",
+          "note": "After saving, you will be logged out.",
           "update": "Update password",
           "forget": "Forgot password?",
           "success": "Updated successfully, please log in again"

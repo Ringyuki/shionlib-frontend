@@ -55,6 +55,7 @@ export const PasswordSettings = () => {
       <CardHeader>
         <CardTitle className="text-xl">{t('title')}</CardTitle>
         <CardDescription className="text-card-foreground">{t('description')}</CardDescription>
+        <CardDescription className="text-card-foreground">{t('note')}</CardDescription>
         <CardAction>
           <Lock className="size-12 text-warning" />
         </CardAction>

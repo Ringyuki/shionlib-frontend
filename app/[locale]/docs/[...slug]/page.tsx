@@ -27,7 +27,7 @@ export default async function DocsPage({ params }: DocsPageProps) {
   const { frontmatter, content } = getDocBySlug(slug.join('/'), locale)
   return (
     <div className="flex w-full">
-      <div className="flex-1 flex flex-col gap-4 px-4">
+      <div className="flex-1 flex flex-col gap-4 px-0 md:px-4">
         <DocHeader frontmatter={frontmatter} />
         <article className="shionlib-prose">
           <Mdx source={content} />

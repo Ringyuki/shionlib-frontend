@@ -5,7 +5,7 @@ import { useSelectedLayoutSegment } from 'next/navigation'
 import { Tabs, TabsList, TabsTrigger } from '@/components/shionui/animated/Tabs'
 import { useEditPermissionStore } from '@/store/editPermissionStore'
 import { useParams, redirect } from 'next/navigation'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation.client'
 import { useTranslations } from 'next-intl'
 
 const tabs = [

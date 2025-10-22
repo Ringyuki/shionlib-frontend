@@ -54,11 +54,8 @@ export const AvatarSettings = ({ avatar, name }: AvatarSettingsProps) => {
     <Card>
       <CardHeader>
         <CardTitle className="text-xl">{t('title')}</CardTitle>
-        <CardDescription className="text-card-foreground">
-          {t('description')}
-          <br />
-          {t('help')}
-        </CardDescription>
+        <CardDescription className="text-card-foreground">{t('description')}</CardDescription>
+        <CardDescription className="text-card-foreground">{t('help')}</CardDescription>
         <CardAction>
           <AvatarSelector avatar={avatar} name={name} onUpdate={setInputAvatar} />
         </CardAction>
