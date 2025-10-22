@@ -1,15 +1,9 @@
 import type { NextConfig } from 'next'
 import createNextIntlPlugin from 'next-intl/plugin'
 import createMDX from '@next/mdx'
-import remarkFrontmatter from 'remark-frontmatter'
-import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 
 const withNextIntl = createNextIntlPlugin()
-const withMDX = createMDX({
-  options: {
-    remarkPlugins: [remarkFrontmatter, [remarkMdxFrontmatter, { name: 'frontmatter' }]],
-  },
-})
+const withMDX = createMDX()
 
 const nextConfig: NextConfig = {
   pageExtensions: ['ts', 'tsx', 'mdx'],

@@ -2,7 +2,11 @@ import { Scalar } from '@/components/game/edit/Scalar'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { GameScalar } from '@/interfaces/edit/game-scalar.interface'
 
-export default async function ScalarPage({ params }: { params: { id: string } }) {
+interface ScalarPageProps {
+  params: { id: string }
+}
+
+export default async function ScalarPage({ params }: ScalarPageProps) {
   const { id } = await params
   const data = await shionlibRequest().get<GameScalar>(`/edit/game/${id}/scalar`)
 

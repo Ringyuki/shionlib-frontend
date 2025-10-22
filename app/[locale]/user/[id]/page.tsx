@@ -1,6 +1,10 @@
 import { redirect } from 'next/navigation'
 
-export default async function UserPage({ params }: { params: { id: string } }) {
+interface UserPageProps {
+  params: { id: string }
+}
+
+export default async function UserPage({ params }: UserPageProps) {
   const { id } = await params
   redirect(`/user/${id}/uploads`)
 }

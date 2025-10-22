@@ -25,7 +25,11 @@ const getComments = async (game_id: string) => {
   return data.data?.items as Comment[]
 }
 
-export default async function GamePage({ params }: { params: { id: string } }) {
+interface GamePageProps {
+  params: { id: string }
+}
+
+export default async function GamePage({ params }: GamePageProps) {
   const { id } = await params
   if (!id || isNaN(Number(id))) {
     notFound()
