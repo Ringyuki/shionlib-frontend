@@ -40,7 +40,7 @@ export default async function DeveloperPage({ params, searchParams }: DeveloperP
     notFound()
   }
   return (
-    <div className="flex flex-col gap-4">
+    <div className="my-4 w-full flex flex-col gap-4">
       <DeveloperContent developer={developer} games={games} works_count={meta?.totalItems ?? 0} />
       <Pagination
         className="mt-4"

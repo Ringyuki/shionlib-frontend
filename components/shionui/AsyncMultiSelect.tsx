@@ -317,9 +317,9 @@ function AsyncMultiSelectTrigger({
         data-slot="async-select-trigger"
         data-size={size}
         className={cn(
-          'border-input data-[placeholder]:text-muted-foreground focus-within:border-ring focus-within:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-full flex-wrap items-center gap-1.5 rounded-md border bg-transparent px-3 py-2 text-sm shadow-xs transition-all outline-none focus-within:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 duration-200',
-          size === 'default' && 'min-h-9',
-          size === 'sm' && 'min-h-8',
+          'border-input data-[placeholder]:text-muted-foreground focus-within:border-ring focus-within:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-full flex-wrap items-center gap-1.5 rounded-md border bg-transparent px-3 py-2 shadow-xs transition-all outline-none focus-within:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 duration-200',
+          size === 'default' && 'h-9',
+          size === 'sm' && 'h-8',
           disabled && 'pointer-events-none',
         )}
         onClick={handleContainerClick}

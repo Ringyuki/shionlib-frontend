@@ -59,7 +59,7 @@
       "1": "title1"
     },
     "guides": {
-      "2": "title2"
+      "upload-game-files": "Upload game files"
     }
   },
   "Components": {
@@ -755,6 +755,18 @@
         },
         "Details": {
           "no_intro": "No introduction"
+        }
+      },
+      "List": {
+        "Header": {
+          "title": "All Developers",
+          "description": "Browse our collection of developers and their games."
+        },
+        "Search": {
+          "placeholder": "Search developers"
+        },
+        "DeveloperItem": {
+          "works_count": "{count} works in total"
         }
       }
     },

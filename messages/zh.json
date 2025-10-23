@@ -59,7 +59,7 @@
       "1": "title1"
     },
     "guides": {
-      "2": "title2"
+      "upload-game-files": "上传游戏文件"
     }
   },
   "Components": {
@@ -755,6 +755,18 @@
         },
         "Details": {
           "no_intro": "暂无介绍"
+        }
+      },
+      "List": {
+        "Header": {
+          "title": "全部会社",
+          "description": "浏览 Shionlib 数据库中的所有会社/开发商。"
+        },
+        "Search": {
+          "placeholder": "搜索会社/开发商"
+        },
+        "DeveloperItem": {
+          "works_count": "共 {count} 部作品"
         }
       }
     },

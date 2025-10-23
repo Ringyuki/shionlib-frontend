@@ -15,4 +15,5 @@ export interface Developer {
     name: string
     aliases: string[]
   }
+  works_count: number
 }

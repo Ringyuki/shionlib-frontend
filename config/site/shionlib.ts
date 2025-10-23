@@ -19,12 +19,12 @@ export const navBarConfig: NavBarConfig = {
       href: '/developer',
     },
     {
-      label: 'docs',
-      href: '/docs',
-    },
-    {
       label: 'releases',
       href: '/release',
+    },
+    {
+      label: 'docs',
+      href: '/docs',
     },
     {
       label: 'about',

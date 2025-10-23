@@ -18,7 +18,7 @@ const PageHeaderTitle = ({ title }: PageHeaderTitleProps) => {
 }
 
 interface PageHeaderDescriptionProps {
-  description: string
+  description: string | React.ReactNode
 }
 
 const PageHeaderDescription = ({ description }: PageHeaderDescriptionProps) => {

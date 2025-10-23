@@ -16,7 +16,6 @@ interface GameFilterProps {
   initialMonth: number[]
   initialSortBy: SortBy
   initialSortOrder: SortOrder
-  initialPage: number
 }
 
 export const GameFilter = ({
@@ -25,7 +24,6 @@ export const GameFilter = ({
   initialMonth,
   initialSortBy,
   initialSortOrder,
-  initialPage,
 }: GameFilterProps) => {
   const [tags, setTags] = useState<string[]>(initialTags)
   const [year, setYear] = useState<number[]>(initialYear)
@@ -34,14 +32,7 @@ export const GameFilter = ({
   const [sortOrder, setSortOrder] = useState<SortOrder>(initialSortOrder)
 
   const router = useRouter()
-  const init = useRef(
-    initialTags.length > 0 ||
-      initialYear.length > 0 ||
-      initialMonth.length > 0 ||
-      initialSortBy !== SortBy.RELEASE_DATE ||
-      initialSortOrder !== SortOrder.DESC ||
-      initialPage !== 1,
-  )
+  const init = useRef(true)
 
   const buildHref = (
     _tags: string[],

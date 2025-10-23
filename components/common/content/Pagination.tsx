@@ -25,7 +25,7 @@ export type ContentPaginationProps = {
   pageParam?: string
   pageSizeParam?: string
   pageSize?: number
-  extraQuery?: ExtraQuery
+  extraQuery?: ExtraQuery | Record<string, any>
   needQsParse?: boolean
   siblingCount?: number
   boundaryCount?: number

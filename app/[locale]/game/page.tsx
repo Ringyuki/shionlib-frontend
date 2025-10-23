@@ -8,6 +8,7 @@ import { GameItem } from '@/interfaces/game/game.interface'
 import { ExtraQuery } from '@/components/common/content/Pagination'
 import qs from 'qs'
 import { parseGameSearchParams } from '@/libs/game/useGameList'
+import { ContentLimit } from '@/interfaces/user/user.interface'
 
 interface GamePageProps {
   searchParams: Promise<ExtraQuery>
@@ -31,9 +32,9 @@ const getData = async (
     },
     page,
   }
-  const data = await shionlibRequest().get<PaginatedResponse<GameItem>>(
-    `/game/list?${qs.stringify(query, { arrayFormat: 'brackets' })}&pageSize=20`,
-  )
+  const data = await shionlibRequest().get<
+    PaginatedResponse<GameItem, { content_limit: ContentLimit }>
+  >(`/game/list?${qs.stringify(query, { arrayFormat: 'brackets' })}&pageSize=20`)
   return data
 }
 
@@ -52,12 +53,12 @@ export default async function GamePage({ searchParams }: GamePageProps) {
           initialMonth={months}
           initialSortBy={sort_by}
           initialSortOrder={sort_order}
-          initialPage={page}
         />
         <Games
           games={data.data?.items ?? []}
           pagination={data.data?.meta as PaginatedMeta}
           extraQuery={filter as ExtraQuery}
+          content_limit={data.data?.meta.content_limit!}
         />
       </div>
     </div>

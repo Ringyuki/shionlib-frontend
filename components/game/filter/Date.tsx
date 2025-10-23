@@ -25,7 +25,7 @@ export const DateFilter = ({
   const t = useTranslations('Components.Game.Filter.Date')
   const [year, setYear] = useState<number[]>(yearValue ?? [])
   const [month, setMonth] = useState<number[]>(monthValue ?? [])
-  const years = Array.from({ length: 20 }, (_, i) => (new Date().getFullYear() - i).toString())
+  const years = Array.from({ length: 30 }, (_, i) => (new Date().getFullYear() - i).toString())
   const months = Array.from({ length: 12 }, (_, i) => (i + 1).toString())
   const handleYearChange = (year: number[]) => {
     setYear(year)

@@ -51,7 +51,7 @@
       "1": "title1"
     },
     "guides": {
-      "2": "title2"
+      "upload-game-files": "ゲームファイルをアップロード"
     }
   },
   "Components": {
@@ -748,6 +748,18 @@
         },
         "Details": {
           "no_intro": "紹介がありません"
+        }
+      },
+      "List": {
+        "Header": {
+          "title": "すべての会社",
+          "description": "Shionlib データベース内のすべての会社/開発者を表示します。"
+        },
+        "Search": {
+          "placeholder": "会社/開発者を検索"
+        },
+        "DeveloperItem": {
+          "works_count": "合計 {count} 作品"
         }
       }
     },
