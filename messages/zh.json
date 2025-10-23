@@ -545,6 +545,11 @@
         }
       },
       "Filter": {
+        "Header": {
+          "title": "所有游戏",
+          "description": "浏览 Shionlib 数据库中的所有游戏。",
+          "subDescription": "你可以通过不同的参数来筛选、过滤和排序游戏。"
+        },
         "GameFilter": {
           "tags": "过滤标签"
         },

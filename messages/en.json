@@ -545,6 +545,11 @@
         }
       },
       "Filter": {
+        "Header": {
+          "title": "All Games",
+          "description": "Browse all games in Shionlib database.",
+          "subDescription": "You can filter and sort the games by different criteria here."
+        },
         "GameFilter": {
           "tags": "Filter tags"
         },

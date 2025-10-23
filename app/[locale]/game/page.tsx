@@ -1,8 +1,4 @@
-import {
-  PageHeader,
-  PageHeaderTitle,
-  PageHeaderDescription,
-} from '@/components/common/content/PageHeader'
+import { Header } from '@/components/game/filter/Header'
 import { GameFilter } from '@/components/game/filter/GameFilter'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { SortBy, SortOrder } from '@/components/game/filter/enums/Sort.enum'
@@ -48,11 +44,7 @@ export default async function GamePage({ searchParams }: GamePageProps) {
 
   return (
     <div className="container mx-auto my-4">
-      <PageHeader>
-        <PageHeaderTitle title="All Games" />
-        <PageHeaderDescription description="Browse all games in Shionlib database." />
-        <PageHeaderDescription description="You can filter and sort the games by different criteria here." />
-      </PageHeader>
+      <Header />
       <div className="flex flex-col gap-6">
         <GameFilter
           initialTags={tags}
