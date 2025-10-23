@@ -89,7 +89,7 @@ export const GameDownloadSourceInfoForm = ({
                       })
                     }
                   >
-                    <MultiSelectTrigger className="w-full transition-all duration-200">
+                    <MultiSelectTrigger className="w-full transition-all duration-200 text-sm">
                       <MultiSelectValue
                         placeholder={t('platformPlaceholder')}
                         resolveLabel={v => PlatformOptions.find(p => p.value === v)?.label ?? v}
@@ -129,7 +129,7 @@ export const GameDownloadSourceInfoForm = ({
                       })
                     }
                   >
-                    <MultiSelectTrigger className="w-full transition-all duration-200">
+                    <MultiSelectTrigger className="w-full transition-all duration-200 text-sm">
                       <MultiSelectValue
                         placeholder={t('languagePlaceholder')}
                         resolveLabel={v => LanguageOptions.find(l => l.value === v)?.label ?? v}

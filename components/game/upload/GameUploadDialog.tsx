@@ -86,6 +86,7 @@ export const GameUploadDialog = ({
           onPhaseChange={setPhase}
           onUploadComplete={setUploadSessionId}
           onFileSelected={handleFileSelected}
+          desiredChunkSize={1024 * 1024 * 5}
         />
         <GameDownloadSourceInfoForm onSubmit={handleSubmit} loading={loading} />
       </DialogContent>

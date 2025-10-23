@@ -91,6 +91,7 @@ export const GameUploadDrawer = ({
             onPhaseChange={setPhase}
             onUploadComplete={setUploadSessionId}
             onFileSelected={handleFileSelected}
+            desiredChunkSize={1024 * 1024 * 5}
           />
           <GameDownloadSourceInfoForm onSubmit={handleSubmit} loading={loading} className="mb-4" />
         </div>
