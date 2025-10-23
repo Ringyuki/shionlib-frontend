@@ -12,8 +12,12 @@ import {
   PaginationEllipsis,
 } from '@/components/shionui/Pagination'
 import { usePathname } from '@/i18n/navigation.client'
+import qs from 'qs'
 
-type ExtraQuery = Record<string, string | number | boolean | undefined>
+export type ExtraQuery = Record<
+  string,
+  string | string[] | number | number[] | boolean | boolean[] | undefined
+>
 
 export type ContentPaginationProps = {
   currentPage: number
@@ -22,6 +26,7 @@ export type ContentPaginationProps = {
   pageSizeParam?: string
   pageSize?: number
   extraQuery?: ExtraQuery
+  needQsParse?: boolean
   siblingCount?: number
   boundaryCount?: number
   showPrevNext?: boolean
@@ -38,24 +43,21 @@ function buildHref(
     pageSizeParam: string
     pageSize?: number
     extraQuery?: ExtraQuery
+    needQsParse?: boolean
   },
 ): string {
   const { pageParam, pageSizeParam, pageSize, extraQuery } = options
-  const params = new URLSearchParams()
-
-  params.set(pageParam, String(page))
+  const qObj: Record<string, any> = {
+    [pageParam]: page,
+  }
   if (typeof pageSize === 'number' && !Number.isNaN(pageSize)) {
-    params.set(pageSizeParam, String(pageSize))
+    qObj[pageSizeParam] = pageSize
+  }
+  if (extraQuery && Object.keys(extraQuery).length) {
+    Object.assign(qObj, extraQuery)
   }
 
-  if (extraQuery) {
-    for (const [key, value] of Object.entries(extraQuery)) {
-      if (value === undefined) continue
-      params.set(key, String(value))
-    }
-  }
-
-  const queryString = params.toString()
+  const queryString = qs.stringify(qObj, { arrayFormat: 'brackets' })
   return queryString ? `${basePath}?${queryString}` : basePath
 }
 
@@ -103,6 +105,7 @@ export const Pagination = (props: ContentPaginationProps) => {
     pageSizeParam = 'pageSize',
     pageSize,
     extraQuery,
+    needQsParse = false,
     siblingCount = 1,
     boundaryCount = 1,
     showPrevNext = true,
@@ -123,7 +126,7 @@ export const Pagination = (props: ContentPaginationProps) => {
   const items = computePageItems(safeCurrentPage, safeTotalPages, siblingCount, boundaryCount)
 
   const makeHref = (page: number) =>
-    buildHref(basePath, page, { pageParam, pageSizeParam, pageSize, extraQuery })
+    buildHref(basePath, page, { pageParam, pageSizeParam, pageSize, extraQuery, needQsParse })
 
   return (
     <UIPagination className={className}>

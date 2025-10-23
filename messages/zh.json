@@ -72,6 +72,10 @@
       },
       "TagsInput": {
         "placeholder": "输入内容并按下回车确认"
+      },
+      "AsyncMultiSelect": {
+        "placeholder": "搜索...",
+        "emptyMessage": "没有找到结果"
       }
     },
     "Editor": {
@@ -538,6 +542,30 @@
           "nsfw": "是否NSFW",
           "submit": "提交更改",
           "success": "提交成功"
+        }
+      },
+      "Filter": {
+        "GameFilter": {
+          "tags": "过滤标签"
+        },
+        "Tags": {
+          "tags": "过滤标签",
+          "searchPlaceholder": "搜索标签"
+        },
+        "Date": {
+          "date": "过滤年份和月份",
+          "selectYear": "全部年份",
+          "selectMonth": "全部月份"
+        },
+        "Sort": {
+          "sort": "排序方式",
+          "selectSort": "选择排序方式",
+          "selectOrder": "选择排序顺序",
+          "release_date": "发行日期",
+          "views": "浏览量",
+          "downloads": "下载量",
+          "asc": "升序",
+          "desc": "降序"
         }
       }
     },

@@ -32,7 +32,6 @@ export const Masonry = ({
 }: MasonryProps) => {
   const [masonryContainer, isInitialized] = useMasonry()
 
-  console.log(columnCountBreakpoints)
   return (
     <div
       ref={masonryContainer}

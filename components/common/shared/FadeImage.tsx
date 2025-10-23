@@ -7,6 +7,7 @@ import { cn } from '@/utils/cn'
 type Props = ImageProps & {
   aspectRatio?: string
   localFile?: boolean
+  wrapElement?: 'span' | 'div'
 }
 
 export function FadeImage({
@@ -15,14 +16,19 @@ export function FadeImage({
   priority,
   fill = true,
   localFile = false,
+  wrapElement = 'div',
   ...props
 }: Props) {
   const [loaded, setLoaded] = useState(false)
-
+  const ContainerElement = wrapElement === 'span' ? 'span' : 'div'
   return (
-    <div
-      className={cn('relative w-full h-full overflow-hidden', className)}
-      style={aspectRatio ? { aspectRatio } : undefined}
+    <ContainerElement
+      className={cn(
+        'relative w-full h-full overflow-hidden',
+        wrapElement === 'span' ? 'inline-block' : '',
+        className,
+      )}
+      style={aspectRatio ? { aspectRatio } : {}}
     >
       <Image
         {...props}
@@ -43,6 +49,6 @@ export function FadeImage({
           className,
         )}
       />
-    </div>
+    </ContainerElement>
   )
 }

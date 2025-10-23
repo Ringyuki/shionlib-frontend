@@ -72,6 +72,10 @@
       },
       "TagsInput": {
         "placeholder": "Type and press Enter..."
+      },
+      "AsyncMultiSelect": {
+        "placeholder": "Search...",
+        "emptyMessage": "No results found"
       }
     },
     "Editor": {
@@ -538,6 +542,30 @@
           "nsfw": "Is NSFW",
           "submit": "Submit",
           "success": "Submitted successfully"
+        }
+      },
+      "Filter": {
+        "GameFilter": {
+          "tags": "Filter tags"
+        },
+        "Tags": {
+          "tags": "Filter tags",
+          "searchPlaceholder": "Search tags"
+        },
+        "Date": {
+          "date": "Filter year and month",
+          "selectYear": "All years",
+          "selectMonth": "All months"
+        },
+        "Sort": {
+          "sort": "Sort by",
+          "selectSort": "Select sort by",
+          "selectOrder": "Select sort order",
+          "release_date": "Release date",
+          "views": "Views",
+          "downloads": "Downloads",
+          "asc": "Ascending",
+          "desc": "Descending"
         }
       }
     },

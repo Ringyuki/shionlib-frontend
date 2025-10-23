@@ -28,7 +28,7 @@ export const navBarConfig: NavBarConfig = {
     },
     {
       label: 'about',
-      href: '/about',
+      href: '/docs/about/about-shionlib',
     },
   ],
 }

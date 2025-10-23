@@ -10,10 +10,17 @@ interface ZoomImageProps {
   src: string
   alt: string
   aspectRatio?: string
+  wrapElement?: 'span' | 'div'
   className?: string
 }
 
-export const ZoomImage = ({ src, alt, aspectRatio, className }: ZoomImageProps) => {
+export const ZoomImage = ({
+  src,
+  alt,
+  aspectRatio,
+  wrapElement = 'div',
+  className,
+}: ZoomImageProps) => {
   const handleZoomChange = (isZoomed: boolean) => {
     try {
       const body = document.body
@@ -48,6 +55,7 @@ export const ZoomImage = ({ src, alt, aspectRatio, className }: ZoomImageProps) 
   return (
     <Zoom
       key={src}
+      wrapElement={wrapElement}
       classDialog="rmiz-dialog"
       onZoomChange={handleZoomChange}
       ZoomContent={renderZoomContent}
@@ -57,6 +65,7 @@ export const ZoomImage = ({ src, alt, aspectRatio, className }: ZoomImageProps) 
         alt={alt}
         className={cn('w-full h-full rounded-md', className)}
         aspectRatio={aspectRatio}
+        wrapElement={wrapElement}
       />
     </Zoom>
   )

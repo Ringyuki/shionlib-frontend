@@ -64,6 +64,10 @@
       },
       "TagsInput": {
         "placeholder": "入力して Enter を押してください"
+      },
+      "AsyncMultiSelect": {
+        "placeholder": "検索...",
+        "emptyMessage": "結果が見つかりません"
       }
     },
     "Editor": {
@@ -531,6 +535,30 @@
           "nsfw": "NSFWかどうか",
           "submit": "送信",
           "success": "送信成功"
+        }
+      },
+      "Filter": {
+        "GameFilter": {
+          "tags": "タグをフィルター"
+        },
+        "Tags": {
+          "tags": "タグをフィルター",
+          "searchPlaceholder": "タグを検索"
+        },
+        "Date": {
+          "date": "年と月をフィルター",
+          "selectYear": "全部年",
+          "selectMonth": "全部月"
+        },
+        "Sort": {
+          "sort": "並び替え",
+          "selectSort": "並び替え方式を選択",
+          "selectOrder": "並び替え順序を選択",
+          "release_date": "発売日",
+          "views": "閲覧数",
+          "downloads": "ダウンロード数",
+          "asc": "昇順",
+          "desc": "降順"
         }
       }
     },

@@ -64,6 +64,7 @@ import { Separator } from '@/components/shionui/Separator'
 import { Kbd } from '@/components/shionui/Kbd'
 import { useTranslations } from 'next-intl'
 import { Plugin } from '@/components/editor/interfaces/plugin'
+import { ScrollArea, ScrollBar } from '@/components/shionui/ScrollArea'
 
 const maxLength = 500
 
@@ -104,42 +105,45 @@ export const Plugins: Plugin<PluginsProps> = ({
     <div className="relative w-full min-w-0">
       <ToolbarPlugin>
         {({ blockType }) => (
-          <div className="vertical-align-middle sticky top-0 z-10 flex items-center gap-2 overflow-auto border-b p-1">
-            <HistoryToolbarPlugin />
-            <Separator orientation="vertical" className="!h-7" />
-            <BlockFormatDropDown>
-              <FormatParagraph />
-              <FormatHeading levels={['h1', 'h2', 'h3']} />
-              <FormatNumberedList />
-              <FormatBulletedList />
-              <FormatCheckList />
-              <FormatCodeBlock />
-              <FormatQuote />
-            </BlockFormatDropDown>
-            {blockType === 'code' ? (
-              <CodeLanguageToolbarPlugin />
-            ) : (
-              <>
-                <FontSizeToolbarPlugin />
-                <Separator orientation="vertical" className="!h-7" />
-                <FontFormatToolbarPlugin format="bold" />
-                <FontFormatToolbarPlugin format="italic" />
-                <FontFormatToolbarPlugin format="underline" />
-                <FontFormatToolbarPlugin format="strikethrough" />
-                <Separator orientation="vertical" className="!h-7" />
-                <SubSuperToolbarPlugin />
-                <LinkToolbarPlugin setIsLinkEditMode={setIsLinkEditMode} />
-                <Separator orientation="vertical" className="!h-7" />
-                <ClearFormattingToolbarPlugin />
-                <Separator orientation="vertical" className="!h-7" />
-                <FontColorToolbarPlugin />
-                <FontBackgroundToolbarPlugin />
-                <Separator orientation="vertical" className="!h-7" />
-                <ElementFormatToolbarPlugin />
-                <Separator orientation="vertical" className="!h-7" />
-              </>
-            )}
-          </div>
+          <ScrollArea className="vertical-align-middle sticky top-0 z-10 flex items-center gap-2 overflow-auto border-b p-1">
+            <div className="flex w-max gap-2 py-1 px-1 overflow-visible">
+              <HistoryToolbarPlugin />
+              <Separator orientation="vertical" className="!h-7" />
+              <BlockFormatDropDown>
+                <FormatParagraph />
+                <FormatHeading levels={['h1', 'h2', 'h3']} />
+                <FormatNumberedList />
+                <FormatBulletedList />
+                <FormatCheckList />
+                <FormatCodeBlock />
+                <FormatQuote />
+              </BlockFormatDropDown>
+              {blockType === 'code' ? (
+                <CodeLanguageToolbarPlugin />
+              ) : (
+                <>
+                  <FontSizeToolbarPlugin />
+                  <Separator orientation="vertical" className="!h-7" />
+                  <FontFormatToolbarPlugin format="bold" />
+                  <FontFormatToolbarPlugin format="italic" />
+                  <FontFormatToolbarPlugin format="underline" />
+                  <FontFormatToolbarPlugin format="strikethrough" />
+                  <Separator orientation="vertical" className="!h-7" />
+                  <SubSuperToolbarPlugin />
+                  <LinkToolbarPlugin setIsLinkEditMode={setIsLinkEditMode} />
+                  <Separator orientation="vertical" className="!h-7" />
+                  <ClearFormattingToolbarPlugin />
+                  <Separator orientation="vertical" className="!h-7" />
+                  <FontColorToolbarPlugin />
+                  <FontBackgroundToolbarPlugin />
+                  <Separator orientation="vertical" className="!h-7" />
+                  <ElementFormatToolbarPlugin />
+                  <Separator orientation="vertical" className="!h-7" />
+                </>
+              )}
+            </div>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
         )}
       </ToolbarPlugin>
       <div className="relative w-full min-w-0">

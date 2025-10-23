@@ -37,7 +37,7 @@ export const Platform = ({ form }: PlatformProps) => {
                 })
               }
             >
-              <MultiSelectTrigger className="w-full transition-all duration-200">
+              <MultiSelectTrigger className="w-full">
                 <MultiSelectValue
                   placeholder={t('platformPlaceholder')}
                   resolveLabel={v => PlatformOptions.find(p => p.value === v)?.label ?? v}
@@ -45,11 +45,7 @@ export const Platform = ({ form }: PlatformProps) => {
               </MultiSelectTrigger>
               <MultiSelectContent>
                 {PlatformOptions.map(platform => (
-                  <MultiSelectItem
-                    key={platform.value}
-                    value={platform.value}
-                    className="hover:bg-primary/10 transition-all duration-200"
-                  >
+                  <MultiSelectItem key={platform.value} value={platform.value}>
                     {platform.label}
                   </MultiSelectItem>
                 ))}
