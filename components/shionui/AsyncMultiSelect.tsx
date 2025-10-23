@@ -373,9 +373,11 @@ function AsyncMultiSelectTrigger({
             onKeyDown={handleKeyDown}
             placeholder={selectedValues.length === 0 ? placeholder : ''}
             disabled={disabled}
-            className="placeholder:text-muted-foreground flex-1 bg-transparent text-sm outline-none"
+            className="placeholder:text-muted-foreground flex-1 bg-transparent leading-5 outline-none"
           />
-          {loading && <LoaderCircleIcon className="size-4 animate-spin text-muted-foreground" />}
+          {loading && (
+            <LoaderCircleIcon className="size-4 animate-spin fade-in-0 fade-out-0 duration-100 text-muted-foreground" />
+          )}
         </div>
       </div>
     </PopoverPrimitive.Anchor>
