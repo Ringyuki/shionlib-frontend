@@ -26,7 +26,7 @@ const getComments = async (game_id: string) => {
 }
 
 interface GamePageProps {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 export default async function GamePage({ params }: GamePageProps) {

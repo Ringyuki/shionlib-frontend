@@ -4,10 +4,10 @@ import { shionlibRequest } from '@/utils/shionlib-request'
 import { Results } from '@/components/common/search/game/Results'
 
 interface SearchGamePageProps {
-  searchParams: {
+  searchParams: Promise<{
     page: string
     q: string
-  }
+  }>
 }
 
 const getData = async (page: string, q: string) => {

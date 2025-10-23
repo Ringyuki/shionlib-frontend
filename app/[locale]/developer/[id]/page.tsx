@@ -7,12 +7,12 @@ import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
 import { Pagination } from '@/components/common/content/Pagination'
 
 interface DeveloperPageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
-  searchParams: {
+  }>
+  searchParams: Promise<{
     page: string
-  }
+  }>
 }
 
 const getData = async (id: string, page: string) => {

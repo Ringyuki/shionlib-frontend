@@ -7,8 +7,8 @@ import { ContentLimit } from '@/interfaces/user/user.interface'
 import { Pagination } from '@/components/common/content/Pagination'
 
 interface UserFavoritesPageProps {
-  params: { id: string }
-  searchParams: { page: string }
+  params: Promise<{ id: string }>
+  searchParams: Promise<{ page: string }>
 }
 
 const getData = async (id: string, searchParams: { page: string }) => {

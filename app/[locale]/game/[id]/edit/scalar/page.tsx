@@ -3,7 +3,7 @@ import { shionlibRequest } from '@/utils/shionlib-request'
 import { GameScalar } from '@/interfaces/edit/game-scalar.interface'
 
 interface ScalarPageProps {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 export default async function ScalarPage({ params }: ScalarPageProps) {

@@ -2,7 +2,7 @@ import { Cover } from '@/components/game/edit/Cover'
 import { shionlibRequest } from '@/utils/shionlib-request'
 
 interface CoverPageProps {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 export default async function CoverPage({ params }: CoverPageProps) {

@@ -10,7 +10,7 @@ import qs from 'qs'
 import { parseGameSearchParams } from '@/libs/game/useGameList'
 
 interface GamePageProps {
-  searchParams: ExtraQuery
+  searchParams: Promise<ExtraQuery>
 }
 
 const getData = async (

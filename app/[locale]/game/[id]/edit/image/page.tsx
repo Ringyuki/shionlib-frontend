@@ -2,7 +2,7 @@ import { Image } from '@/components/game/edit/Image'
 import { shionlibRequest } from '@/utils/shionlib-request'
 
 interface ImagePageProps {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 export default async function ImagePage({ params }: ImagePageProps) {

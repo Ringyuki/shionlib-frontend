@@ -6,8 +6,8 @@ import { Pagination } from '@/components/common/content/Pagination'
 import { Empty } from '@/components/common/content/Empty'
 
 interface UserEditsPageProps {
-  params: { id: string }
-  searchParams: { page: string }
+  params: Promise<{ id: string }>
+  searchParams: Promise<{ page: string }>
 }
 
 const getData = async (id: string, searchParams: { page: string }) => {

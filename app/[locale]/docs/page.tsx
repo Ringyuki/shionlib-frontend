@@ -3,7 +3,7 @@ import { DocCard } from '@/components/docs/DocCard'
 import { Masonry } from '@/components/common/shared/Masonry'
 
 interface DocsPageProps {
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }
 
 export default async function DocsPage({ params }: DocsPageProps) {

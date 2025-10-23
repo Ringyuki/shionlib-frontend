@@ -18,11 +18,11 @@ export function generateStaticParams() {
 export const dynamicParams = false
 
 interface DocsPageProps {
-  params: { locale: string; slug: string[] }
+  params: Promise<{ locale: string; slug: string[] }>
 }
 
 export default async function DocsPage({ params }: DocsPageProps) {
-  const { slug, locale } = await params
+  const { locale, slug } = await params
   const { prev, next } = getAdjacentDocs(slug.join('/'), locale)
   const { frontmatter, content } = getDocBySlug(slug.join('/'), locale)
   return (
