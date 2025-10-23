@@ -41,11 +41,12 @@ const useMasonry = () => {
       }
       items.forEach(el => {
         if (!(el instanceof HTMLElement)) return
+        el.style.marginTop = '0'
+        const epsilon = window.devicePixelRatio || 0.5
         let previous = el.previousSibling
         while (previous) {
-          if (previous.nodeType === 1) {
-            el.style.marginTop = '0'
-            if (previous instanceof HTMLElement && elementLeft(previous) === elementLeft(el)) {
+          if (previous.nodeType === 1 && previous instanceof HTMLElement) {
+            if (Math.abs(elementLeft(previous) - elementLeft(el)) < epsilon) {
               el.style.marginTop = -(elementTop(el) - elementBottom(previous) - gapSize) + 'px'
               break
             }
