@@ -37,7 +37,7 @@ export const Platform = ({ form }: PlatformProps) => {
                 })
               }
             >
-              <MultiSelectTrigger className="w-full text-sm">
+              <MultiSelectTrigger className="w-full">
                 <MultiSelectValue
                   placeholder={t('platformPlaceholder')}
                   resolveLabel={v => PlatformOptions.find(p => p.value === v)?.label ?? v}

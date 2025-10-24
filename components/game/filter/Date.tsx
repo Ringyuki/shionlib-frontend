@@ -43,7 +43,7 @@ export const DateFilter = ({
       </div>
       <div className="flex gap-2">
         <MultiSelect defaultValue={yearValue} value={year} onValueChange={handleYearChange}>
-          <MultiSelectTrigger className="w-64">
+          <MultiSelectTrigger className="w-64 text-base">
             <MultiSelectValue placeholder={t('selectYear')} resolveLabel={v => v} />
           </MultiSelectTrigger>
           <MultiSelectContent>
@@ -55,7 +55,7 @@ export const DateFilter = ({
           </MultiSelectContent>
         </MultiSelect>
         <MultiSelect defaultValue={monthValue} value={month} onValueChange={handleMonthChange}>
-          <MultiSelectTrigger className="w-64" disabled={year.length === 0}>
+          <MultiSelectTrigger className="w-64 text-base" disabled={year.length === 0}>
             <MultiSelectValue placeholder={t('selectMonth')} resolveLabel={v => v} />
           </MultiSelectTrigger>
           <MultiSelectContent>

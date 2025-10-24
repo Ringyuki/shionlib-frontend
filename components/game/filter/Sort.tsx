@@ -56,7 +56,7 @@ export const Sort = ({
           value={sortBy}
           onValueChange={handleSortByChange}
         >
-          <SelectTrigger>
+          <SelectTrigger className="text-base">
             <SelectValue placeholder={t('selectSort')} />
           </SelectTrigger>
           <SelectContent>
@@ -74,7 +74,7 @@ export const Sort = ({
           value={sortOrder}
           onValueChange={handleSortOrderChange}
         >
-          <SelectTrigger>
+          <SelectTrigger className="text-base">
             <SelectValue placeholder={t('selectOrder')} />
           </SelectTrigger>
           <SelectContent>

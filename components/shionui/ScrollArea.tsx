@@ -14,6 +14,9 @@ function ScrollArea({
     <ScrollAreaPrimitive.Root
       data-slot="scroll-area"
       className={cn('relative', className)}
+      onWheelCapture={e => {
+        e.stopPropagation()
+      }}
       {...props}
     >
       <ScrollAreaPrimitive.Viewport

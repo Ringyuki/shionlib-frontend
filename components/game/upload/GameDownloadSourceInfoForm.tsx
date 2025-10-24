@@ -89,7 +89,7 @@ export const GameDownloadSourceInfoForm = ({
                       })
                     }
                   >
-                    <MultiSelectTrigger className="w-full transition-all duration-200 text-sm">
+                    <MultiSelectTrigger className="w-full">
                       <MultiSelectValue
                         placeholder={t('platformPlaceholder')}
                         resolveLabel={v => PlatformOptions.find(p => p.value === v)?.label ?? v}
@@ -97,11 +97,7 @@ export const GameDownloadSourceInfoForm = ({
                     </MultiSelectTrigger>
                     <MultiSelectContent>
                       {PlatformOptions.map(platform => (
-                        <MultiSelectItem
-                          key={platform.value}
-                          value={platform.value}
-                          className="hover:bg-primary/10 transition-all duration-200"
-                        >
+                        <MultiSelectItem key={platform.value} value={platform.value}>
                           {platform.label}
                         </MultiSelectItem>
                       ))}
@@ -129,7 +125,7 @@ export const GameDownloadSourceInfoForm = ({
                       })
                     }
                   >
-                    <MultiSelectTrigger className="w-full transition-all duration-200 text-sm">
+                    <MultiSelectTrigger className="w-full">
                       <MultiSelectValue
                         placeholder={t('languagePlaceholder')}
                         resolveLabel={v => LanguageOptions.find(l => l.value === v)?.label ?? v}
@@ -137,11 +133,7 @@ export const GameDownloadSourceInfoForm = ({
                     </MultiSelectTrigger>
                     <MultiSelectContent>
                       {LanguageOptions.map(language => (
-                        <MultiSelectItem
-                          key={language.value}
-                          value={language.value}
-                          className="hover:bg-primary/10 transition-all duration-200"
-                        >
+                        <MultiSelectItem key={language.value} value={language.value}>
                           {language.label}
                         </MultiSelectItem>
                       ))}

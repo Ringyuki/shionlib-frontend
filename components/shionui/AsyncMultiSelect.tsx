@@ -317,7 +317,7 @@ function AsyncMultiSelectTrigger({
         data-slot="async-select-trigger"
         data-size={size}
         className={cn(
-          'border-input data-[placeholder]:text-muted-foreground focus-within:border-ring focus-within:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-full flex-wrap items-center gap-1.5 rounded-md border bg-transparent px-3 py-1 shadow-xs transition-all outline-none focus-within:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 duration-200',
+          'bg-input/30 border-input data-[placeholder]:text-muted-foreground focus-within:border-ring focus-within:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-input/50 flex w-full flex-wrap items-center gap-1.5 rounded-md border px-3 py-1 shadow-xs transition-all outline-none focus-within:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 duration-200',
           size === 'default' && 'h-9',
           size === 'sm' && 'h-8',
           disabled && 'pointer-events-none',
@@ -373,7 +373,7 @@ function AsyncMultiSelectTrigger({
             onKeyDown={handleKeyDown}
             placeholder={selectedValues.length === 0 ? placeholder : ''}
             disabled={disabled}
-            className="placeholder:text-muted-foreground flex-1 bg-transparent leading-5 outline-none"
+            className="placeholder:text-muted-foreground flex-1 leading-5 outline-none"
           />
           <span className="inline-flex w-4 h-4 flex-shrink-0">
             <motion.span

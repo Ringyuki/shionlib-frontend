@@ -4,7 +4,6 @@ import { Developer } from '@/interfaces/developer/developer.interface'
 import { GameItem } from '@/interfaces/game/game.interface'
 import { DeveloperContent } from '@/components/developer/DeveloperContent'
 import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
-import { Pagination } from '@/components/common/content/Pagination'
 
 interface DeveloperPageProps {
   params: Promise<{
@@ -41,11 +40,11 @@ export default async function DeveloperPage({ params, searchParams }: DeveloperP
   }
   return (
     <div className="my-4 w-full flex flex-col gap-4">
-      <DeveloperContent developer={developer} games={games} works_count={meta?.totalItems ?? 0} />
-      <Pagination
-        className="mt-4"
-        currentPage={meta?.currentPage ?? 1}
-        totalPages={meta?.totalPages ?? 1}
+      <DeveloperContent
+        developer={developer}
+        games={games}
+        meta={meta!}
+        works_count={meta?.totalItems ?? 0}
       />
     </div>
   )

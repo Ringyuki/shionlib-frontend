@@ -163,7 +163,7 @@ const TagsInput = React.forwardRef<HTMLDivElement, TagsInputProps>(
         ref={containerRef}
         data-slot="tags-input-wrapper"
         className={cn(
-          'border-input dark:bg-input/30 flex w-full flex-wrap items-center rounded-md border bg-transparent shadow-xs transition-[color,box-shadow] outline-none',
+          'border-input bg-input/30 hover:bg-input/50 flex w-full flex-wrap items-center rounded-md border shadow-xs transition-[color,box-shadow] outline-none',
           sizeConfig.container,
           'focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-[3px]',
           'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',

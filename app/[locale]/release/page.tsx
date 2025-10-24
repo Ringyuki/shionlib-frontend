@@ -1,31 +1,36 @@
-import {
-  PageHeader,
-  PageHeaderTitle,
-  PageHeaderDescription,
-} from '@/components/common/content/PageHeader'
-import { Link } from '@/i18n/navigation'
+import { ReleaseListHeader } from '@/components/release/list/Header'
+import { Releases } from '@/components/release/list/Releases'
+import { ReleaseItem } from '@/interfaces/release/upload.interface'
+import { shionlibRequest } from '@/utils/shionlib-request'
+import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
 
-export default function ReleasesPage() {
+const getData = async (page: number = 1) => {
+  const data = await shionlibRequest().get<PaginatedResponse<ReleaseItem>>(
+    `/game/download-source/list`,
+    {
+      params: {
+        page,
+        pageSize: 25,
+      },
+    },
+  )
+  return data
+}
+
+interface ReleasesPageProps {
+  searchParams: Promise<{
+    page: number
+  }>
+}
+
+export default async function ReleasesPage({ searchParams }: ReleasesPageProps) {
+  const { page } = await searchParams
+  const data = await getData(page)
+
   return (
-    <div className="container mx-auto my-4 space-y-6">
-      <PageHeader>
-        <PageHeaderTitle title="Latest Releases" />
-        <PageHeaderDescription description="Latest game files uploaded by Shionlib users." />
-        <PageHeaderDescription
-          description={
-            <span>
-              Every user can upload game files to Shionlib servers. you can follow this{' '}
-              <Link
-                href="/docs/guides/upload-game-files"
-                className="text-primary-500 hover:text-primary-600 transition-colors"
-              >
-                guide
-              </Link>{' '}
-              to learn how to upload game files.
-            </span>
-          }
-        />
-      </PageHeader>
+    <div className="container mx-auto my-4">
+      <ReleaseListHeader />
+      <Releases releases={data.data?.items || []} meta={data.data?.meta!} />
     </div>
   )
 }
