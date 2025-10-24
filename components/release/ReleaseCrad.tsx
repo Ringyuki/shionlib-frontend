@@ -27,7 +27,7 @@ export const ReleaseCard = async ({ release }: ReleaseCardProps) => {
       <Card className="py-0 hover:bg-card-hover transition-colors">
         <CardContent className="p-4 flex flex-col gap-2">
           <div className="flex gap-2 items-center justify-between">
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-2 items-center flex-wrap">
               <Avatar user={release.creator} className="size-6 text-xs" />
               <span className="text-sm font-light flex items-center gap-1">{t('uploaded_at')}</span>
               <span className="text-sm flex items-center gap-1 hover:text-primary-500 transition-colors">
@@ -39,13 +39,18 @@ export const ReleaseCard = async ({ release }: ReleaseCardProps) => {
               {timeFromNow(release.created, locale)}
             </Badge>
           </div>
-          <div className="flex gap-1 items-center font-mono">
-            <FileArchive className="size-4" />
-            <span className="text-lg">{release.files[0]}</span>
-            {release.files_count > 1 && (
-              <Badge variant="secondary" className="ml-2">
-                {t('more_than_one_file', { count: release.files_count })}
-              </Badge>
+          <div className="flex flex-col gap-1">
+            <div className="flex gap-1 items-center font-mono">
+              <FileArchive className="size-4" />
+              <span className="text-lg">{release.files[0]}</span>
+              {release.files_count > 1 && (
+                <Badge variant="secondary" className="ml-2">
+                  {t('more_than_one_file', { count: release.files_count })}
+                </Badge>
+              )}
+            </div>
+            {release.note && (
+              <span className="text-muted-foreground font-light font-mono">{release.note}</span>
             )}
           </div>
           <div className="flex flex-wrap gap-2 items-center justify-between">
