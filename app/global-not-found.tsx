@@ -29,12 +29,12 @@ export default function GlobalNotFound() {
           <div className="w-[100dvw] h-[100dvh] flex items-center justify-center">
             <Card className="w-fit max-w-sm gap-2">
               <CardHeader>
-                <CardTitle className="text-xl font-mono break-all">
+                <CardTitle className="text-xl font-mono! break-all">
                   {MESSAGES[locale as SupportedLocales].title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="mb-4 whitespace-pre-wrap break-words text-sm text-muted-foreground font-mono">
+                <p className="mb-4 whitespace-pre-wrap break-words text-sm text-muted-foreground font-mono!">
                   {MESSAGES[locale as SupportedLocales].details}
                 </p>
               </CardContent>

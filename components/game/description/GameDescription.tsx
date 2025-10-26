@@ -39,7 +39,7 @@ export const GameDescription = ({ game }: GameDescriptionProps) => {
         <BookOpenText />
         <span>{t('introduction')}</span>
         <Select onValueChange={setSelectedIntroLanguage} value={selectedIntroLanguage}>
-          <SelectTrigger className="font-normal font-mono text-xs ml-2">
+          <SelectTrigger className="font-normal font-mono! text-xs ml-2">
             <SelectValue placeholder={t('introduction')} />
           </SelectTrigger>
           <SelectContent>

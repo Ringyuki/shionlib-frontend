@@ -26,10 +26,10 @@ export default function ErrorView({
   return (
     <Card className="w-fit min-w-96 max-w-sm gap-2">
       <CardHeader>
-        <CardTitle className="text-xl font-mono break-all">{title || t('defaultTitle')}</CardTitle>
+        <CardTitle className="text-xl font-mono! break-all">{title || t('defaultTitle')}</CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="mb-4 whitespace-pre-wrap break-words text-sm text-muted-foreground font-mono">
+        <p className="mb-4 whitespace-pre-wrap break-words text-sm text-muted-foreground font-mono!">
           {details || t('defaultDetails')}
         </p>
       </CardContent>

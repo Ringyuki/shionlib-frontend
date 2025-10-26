@@ -98,7 +98,7 @@ export const EditRecordItem = async ({ record }: EditRecordItemProps) => {
               <span className="text-sm text-muted-foreground">{t('fieldChanges')}</span>
               <div className="flex flex-wrap gap-2">
                 {record.field_changes.map((field, index) => (
-                  <Badge key={index} variant="neutral" className="font-mono text-xs">
+                  <Badge key={index} variant="neutral" className="font-mono! text-xs">
                     {field}
                   </Badge>
                 ))}

@@ -1,4 +1,4 @@
-import { SearchTrendingItem } from '@/interfaces/search/Search.interface'
+import { SearchTrendingItem } from '@/interfaces/search/search.interface'
 import { CommandGroup, CommandItem } from '@/components/shionui/Command'
 import { useTranslations } from 'next-intl'
 import { shionlibRequest } from '@/utils/shionlib-request'

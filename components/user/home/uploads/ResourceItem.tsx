@@ -78,7 +78,7 @@ export const ResourceItem = async ({ resource, content_limit }: ResourceItemProp
                     </Badge>
                   ))}
                 </div>
-                <div className="flex flex-wrap gap-4 items-center text-muted-foreground font-light font-mono">
+                <div className="flex flex-wrap gap-4 items-center text-muted-foreground font-light font-mono!">
                   <div className="flex flex-wrap gap-1 items-center">
                     <FileArchive className="size-4" />
                     <span>{resource.file_name}</span>

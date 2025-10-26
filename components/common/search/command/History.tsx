@@ -1,4 +1,3 @@
-import { SearchHistory } from '@/interfaces/search/Search.interface'
 import { CommandGroup, CommandItem, CommandSeparator } from '@/components/shionui/Command'
 import { TrashIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'

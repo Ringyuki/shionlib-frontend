@@ -30,9 +30,7 @@ export const ReleaseCard = async ({ release }: ReleaseCardProps) => {
             <div className="flex gap-2 items-center flex-wrap">
               <Avatar user={release.creator} className="size-6 text-xs" />
               <span className="text-sm font-light flex items-center gap-1">{t('uploaded_at')}</span>
-              <span className="text-sm flex items-center gap-1 hover:text-primary-500 transition-colors">
-                {title}
-              </span>
+              <span className="text-sm hover:text-primary-500 transition-colors">{title}</span>
             </div>
             <Badge variant="neutral">
               <CalendarDays className="size-4" />
@@ -40,7 +38,7 @@ export const ReleaseCard = async ({ release }: ReleaseCardProps) => {
             </Badge>
           </div>
           <div className="flex flex-col gap-1">
-            <div className="flex gap-1 items-center font-mono">
+            <div className="flex gap-1 items-center font-mono!">
               <FileArchive className="size-4" />
               <span className="text-lg">{release.files[0]}</span>
               {release.files_count > 1 && (
@@ -50,7 +48,7 @@ export const ReleaseCard = async ({ release }: ReleaseCardProps) => {
               )}
             </div>
             {release.note && (
-              <span className="text-muted-foreground font-light font-mono">{release.note}</span>
+              <span className="text-muted-foreground font-light font-mono!">{release.note}</span>
             )}
           </div>
           <div className="flex flex-wrap gap-2 items-center justify-between">

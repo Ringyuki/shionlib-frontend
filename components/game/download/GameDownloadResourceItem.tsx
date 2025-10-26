@@ -96,7 +96,7 @@ export const GameDownloadResourceItem = ({ resource }: GameDownloadResourceItemP
           <GameDownloadFileItem key={file.id} file={file} />
         ))}
         {resource.note && (
-          <div className="text-xs text-muted-foreground font-light font-mono pl-2">
+          <div className="text-xs text-muted-foreground font-light font-mono! pl-2">
             {resource.note}
           </div>
         )}

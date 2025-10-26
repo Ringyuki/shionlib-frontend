@@ -1,20 +1,27 @@
 import { Separator } from '@/components/shionui/Separator'
+import { cn } from '@/utils/cn'
 
-const PageHeader = ({ children }: { children: React.ReactNode }) => {
+interface PageHeaderProps {
+  children: React.ReactNode
+  showSeparator?: boolean
+}
+
+const PageHeader = ({ children, showSeparator = true }: PageHeaderProps) => {
   return (
     <div className="flex flex-col">
       {children}
-      <Separator className="my-6" />
+      {showSeparator && <Separator className="my-6" />}
     </div>
   )
 }
 
 interface PageHeaderTitleProps {
   title: string
+  className?: string
 }
 
-const PageHeaderTitle = ({ title }: PageHeaderTitleProps) => {
-  return <h1 className="text-3xl font-medium py-2">{title}</h1>
+const PageHeaderTitle = ({ title, className }: PageHeaderTitleProps) => {
+  return <h1 className={cn('text-3xl font-medium py-2', className)}>{title}</h1>
 }
 
 interface PageHeaderDescriptionProps {

@@ -107,7 +107,7 @@
   --info: var(--info-600);
   --info-foreground: #ffffff;
   --destructive: var(--danger-600);
-  --destructive-foreground: #330404;
+  --destructive-foreground: #ffffff;
   --border: var(--neutral-200);
   --input: var(--neutral-200);
   --ring: var(--primary-500);

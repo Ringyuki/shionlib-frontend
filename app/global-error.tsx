@@ -35,12 +35,12 @@ export default function GlobalError({
           <div className="min-h-screen flex items-center justify-center bg-radial px-4">
             <Card className="w-fit max-w-sm gap-2">
               <CardHeader>
-                <CardTitle className="text-xl font-mono break-all">
+                <CardTitle className="text-xl font-mono! break-all">
                   {MESSAGES[locale as SupportedLocales].title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="mb-4 whitespace-pre-wrap break-words text-sm text-muted-foreground font-mono">
+                <p className="mb-4 whitespace-pre-wrap break-words text-sm text-muted-foreground font-mono!">
                   {error.message}
                 </p>
               </CardContent>

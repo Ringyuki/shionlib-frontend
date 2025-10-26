@@ -32,7 +32,7 @@ const _GameCover = ({ cover, title, width }: { cover: string; title: string; wid
       height={300}
       fill={false}
       width={width}
-      className="h-full w-full md:w-auto"
+      className="h-full w-full"
     />
   )
 }

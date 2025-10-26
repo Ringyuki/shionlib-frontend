@@ -798,6 +798,48 @@
         "uploaded_at": "上传在",
         "more_than_one_file": "等 {count} 个文件"
       }
+    },
+    "Home": {
+      "Activity": {
+        "Head": {
+          "title": "最新动态",
+          "description": "Shionlib 活动日志，用户和系统活动将会被记录在此。"
+        },
+        "ActivityCard": {
+          "system": "系统"
+        },
+        "Activities": {
+          "Comment": {
+            "commentedPrefix": "在",
+            "game": "游戏",
+            "commentedSuffix": "下发表了评论"
+          },
+          "FileUploaded": {
+            "uploadedToServerPrefix": "上传了文件",
+            "uploadedToServerSuffix": "",
+            "pending": "等待扫描",
+            "uploadedToS3Prefix": "文件",
+            "uploadedToS3Suffix": "已上传至 Shionlib 存储系统",
+            "processCompleted": "上传流程结束"
+          },
+          "FileScaned": {
+            "scannedPrefix": "文件",
+            "scannedSuffix": "扫描完成",
+            "pass": "通过",
+            "brokenOrTruncated": "损坏或不完整",
+            "brokenOrUnsupported": "损坏或不支持",
+            "encrypted": "加密",
+            "harmfulContent": "有害内容",
+            "processAborted": "上传流程终止"
+          },
+          "Edit": {
+            "editedPrefix": "编辑了",
+            "game": "游戏",
+            "developer": "会社/开发商",
+            "character": "角色"
+          }
+        }
+      }
     }
   }
 }

@@ -73,7 +73,7 @@ export const GameDownloadFileItem = ({ file }: GameDownloadFileItemProps) => {
   return (
     <div className="flex md:flex-row flex-col gap-2 justify-between items-center border-dashed border p-2 rounded-lg">
       <div className="flex flex-col gap-2">
-        <div className="text-sm font-medium font-mono flex items-center gap-2 flex-wrap">
+        <div className="text-sm font-medium font-mono! flex items-center gap-2 flex-wrap">
           <span className="flex items-center gap-1">
             <FileArchive className="size-3 shrink-0" />
             <span>{file.file_name}</span>

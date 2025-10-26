@@ -48,7 +48,7 @@ export const EditChanges = async ({ changes }: EditChangesProps) => {
                   key={index}
                   className="text-sm bg-green-50 dark:bg-green-950/20 p-2 rounded-md border border-green-200 dark:border-green-800"
                 >
-                  <pre className="whitespace-pre-wrap break-words font-mono text-xs">
+                  <pre className="whitespace-pre-wrap break-words font-mono! text-xs">
                     {formatValue(item)}
                   </pre>
                 </div>
@@ -71,7 +71,7 @@ export const EditChanges = async ({ changes }: EditChangesProps) => {
                   key={index}
                   className="text-sm bg-red-50 dark:bg-red-950/20 p-2 rounded-md border border-red-200 dark:border-red-800"
                 >
-                  <pre className="whitespace-pre-wrap break-words font-mono text-xs">
+                  <pre className="whitespace-pre-wrap break-words font-mono! text-xs">
                     {formatValue(item)}
                   </pre>
                 </div>
@@ -107,7 +107,7 @@ export const EditChanges = async ({ changes }: EditChangesProps) => {
 
           return (
             <div key={key} className="flex flex-col gap-2">
-              <Badge variant="neutral" className="font-mono text-xs w-fit">
+              <Badge variant="neutral" className="font-mono! text-xs w-fit">
                 {key}
               </Badge>
 
@@ -115,7 +115,7 @@ export const EditChanges = async ({ changes }: EditChangesProps) => {
                 <div className="flex flex-col gap-1">
                   <div className="text-sm bg-red-50 dark:bg-red-950/20 p-2 rounded-md border border-red-200 dark:border-red-800">
                     <ScrollArea className="max-h-40">
-                      <pre className="whitespace-pre-wrap break-words font-mono text-xs overflow-y-auto">
+                      <pre className="whitespace-pre-wrap break-words font-mono! text-xs overflow-y-auto">
                         {formatValue(beforeValue)}
                       </pre>
                     </ScrollArea>
@@ -130,7 +130,7 @@ export const EditChanges = async ({ changes }: EditChangesProps) => {
                 <div className="flex flex-col gap-1">
                   <div className="text-sm bg-green-50 dark:bg-green-950/20 p-2 rounded-md border border-green-200 dark:border-green-800">
                     <ScrollArea className="max-h-40">
-                      <pre className="whitespace-pre-wrap break-words font-mono text-xs overflow-y-auto">
+                      <pre className="whitespace-pre-wrap break-words font-mono! text-xs overflow-y-auto">
                         {formatValue(afterValue)}
                       </pre>
                     </ScrollArea>

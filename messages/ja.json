@@ -791,6 +791,48 @@
         "uploaded_at": "アップロードされた",
         "more_than_one_file": "等 {count} 個のファイル"
       }
+    },
+    "Home": {
+      "Activity": {
+        "Head": {
+          "title": "最新動態",
+          "description": "Shionlib 活動ログ、ユーザーとシステム活動はここに記録されます。"
+        },
+        "ActivityCard": {
+          "system": "システム"
+        },
+        "Activities": {
+          "Comment": {
+            "commentedPrefix": "コメントしました",
+            "game": "ゲーム",
+            "commentedSuffix": ""
+          },
+          "FileUploaded": {
+            "uploadedToServerPrefix": "ファイルをアップロードしました",
+            "uploadedToServerSuffix": "サーバーに",
+            "pending": "待機中",
+            "uploadedToS3Prefix": "ファイル",
+            "uploadedToS3Suffix": "Shionlib ストレージシステムにアップロードされました",
+            "processCompleted": "アップロードプロセス完了"
+          },
+          "FileScaned": {
+            "scannedPrefix": "ファイル",
+            "scannedSuffix": "スキャン完了",
+            "pass": "パス",
+            "brokenOrTruncated": "破損または不完全",
+            "brokenOrUnsupported": "破損または非対応",
+            "encrypted": "暗号化",
+            "harmfulContent": "有害な内容",
+            "processAborted": "アップロードプロセス中断"
+          },
+          "Edit": {
+            "editedPrefix": "編集しました",
+            "game": "ゲーム",
+            "developer": "開発者",
+            "character": "キャラクター"
+          }
+        }
+      }
     }
   }
 }

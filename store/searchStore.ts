@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
-import { SearchHistory, SearchTrending } from '@/interfaces/search/Search.interface'
+import { SearchHistory, SearchTrending } from '@/interfaces/search/search.interface'
 
 interface SearchStore {
   history: SearchHistory[]
