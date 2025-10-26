@@ -819,7 +819,7 @@
             "uploadedToServerSuffix": "",
             "pending": "等待扫描",
             "uploadedToS3Prefix": "文件",
-            "uploadedToS3Suffix": "已上传至 Shionlib 存储系统",
+            "uploadedToS3Suffix": "已上传至 Shionlib 储存桶",
             "processCompleted": "上传流程结束"
           },
           "FileScaned": {

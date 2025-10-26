@@ -31,7 +31,11 @@ const fileScanStatusMap: Record<
     badgeVariant: 'destructive',
     text: 'brokenOrUnsupported',
   },
-  [ActivityFileCheckStatus.ENCRYPTED]: { icon: Lock, badgeVariant: 'warning', text: 'encrypted' },
+  [ActivityFileCheckStatus.ENCRYPTED]: {
+    icon: Lock,
+    badgeVariant: 'destructive',
+    text: 'encrypted',
+  },
   [ActivityFileCheckStatus.HARMFUL]: {
     icon: Shield,
     badgeVariant: 'destructive',

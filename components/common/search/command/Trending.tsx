@@ -24,7 +24,7 @@ export const Trending = ({ onSelect }: TrendingProps) => {
     if (!trending.trending?.length) getTrending()
     if (
       trending.updated_at &&
-      new Date(trending.updated_at).getTime() - new Date().getTime() > 1000 * 60 * 60
+      new Date().getTime() - new Date(trending.updated_at).getTime() > 1000 * 60 * 60
     )
       getTrending()
   }, [])
