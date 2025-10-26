@@ -140,7 +140,7 @@ export function FileUploader({
     console.log('file reject', message)
     console.log('file mime type', f.type)
     if (message === 'File too small') {
-      toast.error(t('fileTooSmall', { size: 500 }))
+      toast.error(t('fileTooSmall', { size: 200 }))
       return
     }
     toast.error(t('invalidFileFormat'))
@@ -201,7 +201,7 @@ export function FileUploader({
           multiple={false}
           onAccept={handleFilesAccepted}
           onValueChange={handleFilesValueChange}
-          minSize={1024 * 1024 * 500}
+          minSize={1024 * 1024 * 200}
           onFileReject={handleFileReject}
         >
           <FileUploadDropzone className="min-h-28 w-full cursor-pointer">
