@@ -9,7 +9,11 @@ import { getPreferredContent } from './helpers/getPreferredContent'
 import { GameCover } from '../cover/GameCover'
 import { getLocale } from 'next-intl/server'
 
-export const GameHeader = async ({ game }: { game: GameData }) => {
+interface GameHeaderProps {
+  game: GameData
+}
+
+export const GameHeader = async ({ game }: GameHeaderProps) => {
   const locale = await getLocale()
   const langMap = { en: 'en', ja: 'jp', zh: 'zh' } as const
   const lang = langMap[locale as keyof typeof langMap] ?? 'jp'

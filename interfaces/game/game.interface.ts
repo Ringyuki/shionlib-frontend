@@ -21,6 +21,8 @@ export interface GameItem {
   title_jp: string
   title_zh: string
   title_en: string
+  aliases: string[]
+  type: string
   covers: GameCover[]
   views: number
 }

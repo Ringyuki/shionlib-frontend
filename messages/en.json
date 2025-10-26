@@ -839,6 +839,12 @@
             "character": "Character"
           }
         }
+      },
+      "Games": {
+        "Head": {
+          "title": "Recent Hot Games",
+          "description": "Recent hot games, sorted by views, downloads, creation time and release time. Updated every 12 hours."
+        }
       }
     }
   }
