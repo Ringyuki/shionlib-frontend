@@ -9,7 +9,7 @@ export const A = ({ href, children }: { href: string; children: ReactNode }) => 
       href={href}
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
-      className="text-primary-500 hover:text-primary-600 transition-colors flex items-center gap-1"
+      className="text-primary-500 hover:text-primary-600 transition-colors inline-flex items-center gap-1"
     >
       {children}
       {isExternal && <ExternalLink className="size-4 mt-0.75" />}

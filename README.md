@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Introduction
 
-## Getting Started
+👋 Hi, welcome to Shionlib!
 
-First, run the development server:
+As you can see, this is a resource site for visual novels/Galgame. We provide downloads for **game releases** and **translation patches**—free, barrier-free, and without speed limits.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Shionlib is **free** and **open source**. You can find our source code on [our GitHub repository](https://github.com/Ringyuki/shionlib-frontend). If you have questions or suggestions, feel free to open an [Issue](https://github.com/Ringyuki/shionlib-frontend/issues) or a [Pull Request](https://github.com/Ringyuki/shionlib-frontend/pulls).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Principles & Site Definition
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Shionlib will always be **free** and **open source**; we do not charge users any fees. All resources on Shionlib are uploaded by users, and we cannot guarantee their completeness or safety. If you’d like to upload game resources, please read the guide: [Upload Game Files](/zh/docs/guides/upload-game-files).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+If there are lawful purchase channels in your country/region, you can find store or official website links under **Related Links** on a game’s page. If something is missing, you can add it via the **Edit** function.
 
-## Learn More
+As mentioned above, in many countries and regions there is often a lack of compliant channels for purchasing legitimate visual novels/Galgame. Many excellent developers have also disappeared for various reasons, and their works can be hard to find across the internet.
 
-To learn more about Next.js, take a look at the following resources:
+Therefore, one of the original aims of Shionlib is to build a complete, curated archive of visual novels/Galgame across all eras, while giving more people the chance to experience this **wonderful art form**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+If you are able to, we **highly recommend** purchasing official copies to support the works and creators you love, so that the culture we care about can continue.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Community Groups
 
-## Deploy on Vercel
+You can find the link to our Telegram group at the bottom of the website.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Infringement Reports
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+If any content on the site infringes your rights, please contact us via the **Contact** button at the bottom of the site. After verification, we will remove the relevant content immediately.

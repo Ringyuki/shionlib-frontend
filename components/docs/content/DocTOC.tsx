@@ -12,11 +12,19 @@ interface TOCItem {
 
 const scrollToHeading = (id: string) => {
   const headingElement = document.getElementById(id)
-  if (headingElement) {
-    headingElement.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center',
-    })
+  if (!headingElement) return
+
+  const rect = headingElement.getBoundingClientRect()
+  const absoluteY = rect.top + window.pageYOffset
+  const topBar = document.querySelector('div.fixed.inset-x-0') as HTMLElement | null
+  const occludedTop = topBar ? topBar.getBoundingClientRect().bottom : 0
+
+  const extraMargin = 12
+  const targetY = Math.max(absoluteY - occludedTop - extraMargin, 0)
+
+  window.scrollTo({ top: targetY, behavior: 'smooth' })
+  if (window.location.hash !== `#${id}`) {
+    history.replaceState(null, '', `#${id}`)
   }
 }
 
