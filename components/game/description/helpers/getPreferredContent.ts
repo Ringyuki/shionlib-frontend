@@ -7,7 +7,7 @@ type Lang = 'en' | 'jp' | 'zh'
 export interface PreferredCover {
   cover: GameCover
   vertical: boolean
-  aspect: string
+  aspect: '1 / 1.5' | '1.5 / 1'
 }
 
 export interface PreferredIntro {

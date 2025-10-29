@@ -4,6 +4,7 @@ import { routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
 import { EditTabsNav } from '@/components/game/edit/EditTabsNav'
 import { getTranslations } from 'next-intl/server'
+import { createGenerateMetadata } from '@/libs/seo/metadata'
 
 export default async function EditLayout({ children, params }: Readonly<Props>) {
   const t = await getTranslations('Components.Game.Edit.EditLayout')
@@ -25,3 +26,15 @@ export default async function EditLayout({ children, params }: Readonly<Props>) 
     </div>
   )
 }
+
+export const generateMetadata = createGenerateMetadata(async ({ id }: { id: string }) => {
+  const t = await getTranslations('Pages.Game.Edit.EditLayout')
+  return {
+    title: t('title'),
+    path: `/game/${id}/edit`,
+    robots: {
+      index: false,
+      follow: false,
+    },
+  }
+})

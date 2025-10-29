@@ -2,6 +2,8 @@ import { PaginatedResponse, PaginatedMeta } from '@/interfaces/api/shionlib-api-
 import { GameSearchItem } from '@/interfaces/game/game.interface'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { Results } from '@/components/common/search/game/Results'
+import { createGenerateMetadata } from '@/libs/seo/metadata'
+import { getTranslations } from 'next-intl/server'
 
 interface SearchGamePageProps {
   searchParams: Promise<{
@@ -30,3 +32,17 @@ export default async function SearchGamePage({ searchParams }: SearchGamePagePro
     </div>
   )
 }
+
+export const generateMetadata = createGenerateMetadata(
+  async ({ q, page }: { q: string; page: string }) => {
+    const t = await getTranslations('Pages.Search.Game')
+    return {
+      title: t('title', { q }),
+      path: `/search/game?q=${q}&page=${page}`,
+      robots: {
+        index: false,
+        follow: false,
+      },
+    }
+  },
+)

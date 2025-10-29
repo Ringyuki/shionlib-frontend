@@ -1,9 +1,9 @@
 {
   "Meta": {
-    "title": "Shionlib - A Visual Novel/Galgame Resource Site!",
+    "title": "Shionlib - A Visual Novel/Galgame Archive",
     "titleShort": "Shionlib",
     "template": "%s - Shionlib",
-    "description": "Shionlib - Free, open-source, easy-access Visual Novel/Galgame resource site",
+    "description": "Shionlib - Free, open-source, easy-access Visual Novel/Galgame archive",
     "keywords": [
       "Shionlib",
       "Visual Novel",
@@ -14,8 +14,8 @@
       "Easy Access"
     ],
     "og": {
-      "title": "Shionlib - A Visual Novel/Galgame Resource Site!",
-      "description": "Shionlib - Free, open-source, easy-access Visual Novel/Galgame resource site"
+      "title": "Shionlib - A Visual Novel/Galgame Archive",
+      "description": "Shionlib - Free, open-source, easy-access Visual Novel/Galgame archive"
     }
   },
   "Pages": {
@@ -40,9 +40,24 @@
         "title": "Edit settings",
         "description": "You can manage your personal information and site settings on this page."
       }
+    },
+    "Game": {
+      "Edit": {
+        "EditLayout": {
+          "title": "Edit game information"
+        }
+      }
+    },
+    "Search": {
+      "Game": {
+        "title": "Search results {q}"
+      }
     }
   },
   "Docs": {
+    "Head": {
+      "title": "All Documents"
+    },
     "categories": {
       "about": "About",
       "dev": "Development",

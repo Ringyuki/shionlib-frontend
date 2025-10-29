@@ -3,6 +3,8 @@ import { Releases } from '@/components/release/list/Releases'
 import { ReleaseItem } from '@/interfaces/release/upload.interface'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
+import { createGenerateMetadata } from '@/libs/seo/metadata'
+import { getTranslations } from 'next-intl/server'
 
 const getData = async (page: number = 1) => {
   const data = await shionlibRequest().get<PaginatedResponse<ReleaseItem>>(
@@ -34,3 +36,12 @@ export default async function ReleasesPage({ searchParams }: ReleasesPageProps) 
     </div>
   )
 }
+
+export const generateMetadata = createGenerateMetadata(async () => {
+  const t = await getTranslations('Components.Release.List.Header')
+  return {
+    title: t('title'),
+    description: t('description'),
+    path: '/release',
+  }
+})

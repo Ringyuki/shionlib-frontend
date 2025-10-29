@@ -1,1 +1,1 @@
-export const NOT_FOUND_CODES = [400101]
+export const NOT_FOUND_CODES = [400101, 300101, 410101]

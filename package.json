@@ -95,6 +95,7 @@
     "react-medium-image-zoom": "^5.4.0",
     "react-use": "^17.6.0",
     "sanitize-html": "^2.17.0",
+    "sharp": "^0.34.4",
     "sonner": "^2.0.7",
     "spoiled": "^0.4.0",
     "tailwind-merge": "^3.3.1",

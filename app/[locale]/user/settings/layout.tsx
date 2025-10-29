@@ -4,6 +4,7 @@ import { routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import { UserSettingsTabsNav } from '@/components/user/settings/TabsNav'
+import { createGenerateMetadata } from '@/libs/seo/metadata'
 
 export default async function UserSettingsLayout({ children, params }: Readonly<Props>) {
   const t = await getTranslations('Pages.User.Settings')
@@ -24,3 +25,15 @@ export default async function UserSettingsLayout({ children, params }: Readonly<
     </div>
   )
 }
+
+export const generateMetadata = createGenerateMetadata(async () => {
+  const t = await getTranslations('Pages.User.Settings')
+  return {
+    title: t('title'),
+    path: `/user/settings`,
+    robots: {
+      index: false,
+      follow: false,
+    },
+  }
+})

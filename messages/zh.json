@@ -1,9 +1,9 @@
 {
   "Meta": {
-    "title": "书音的图书馆 - Galgame 资源站！",
+    "title": "书音的图书馆 - 视觉小说/Galgame 档案库",
     "titleShort": "书音的图书馆",
     "template": "%s - 书音的图书馆",
-    "description": "书音的图书馆 - 免费、开源、零门槛的 Galgame 资源站",
+    "description": "书音的图书馆 - 免费、开源、零门槛的 视觉小说/Galgame 档案库",
     "keywords": [
       "书音的图书馆",
       "Visual Novel",
@@ -15,8 +15,8 @@
       "零门槛"
     ],
     "og": {
-      "title": "书音的图书馆 - Galgame 资源站！",
-      "description": "书音的图书馆 - 免费、开源、零门槛的 Galgame 资源站"
+      "title": "书音的图书馆 - 视觉小说/Galgame 档案库",
+      "description": "书音的图书馆 - 免费、开源、零门槛的 视觉小说/Galgame 档案库"
     }
   },
   "Pages": {
@@ -40,9 +40,24 @@
         "title": "编辑设置",
         "description": "你可以在此页面管理你的个人信息和站点设置。"
       }
+    },
+    "Game": {
+      "Edit": {
+        "EditLayout": {
+          "title": "编辑游戏信息"
+        }
+      }
+    },
+    "Search": {
+      "Game": {
+        "title": "搜索结果 {q}"
+      }
     }
   },
   "Docs": {
+    "Head": {
+      "title": "全部文档"
+    },
     "categories": {
       "about": "关于",
       "dev": "开发文档",

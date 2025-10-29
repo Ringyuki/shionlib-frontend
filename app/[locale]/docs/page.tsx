@@ -1,6 +1,8 @@
 import { getAllDocs } from '@/libs/docs/getDocs'
 import { DocCard } from '@/components/docs/DocCard'
 import { Masonry } from '@/components/common/shared/Masonry'
+import { createGenerateMetadata } from '@/libs/seo/metadata'
+import { getTranslations } from 'next-intl/server'
 
 interface DocsPageProps {
   params: Promise<{ locale: string }>
@@ -19,3 +21,11 @@ export default async function DocsPage({ params }: DocsPageProps) {
     </Masonry>
   )
 }
+
+export const generateMetadata = createGenerateMetadata(async () => {
+  const t = await getTranslations('Docs.Head')
+  return {
+    title: t('title'),
+    path: '/docs',
+  }
+})

@@ -4,6 +4,8 @@ import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
 import { Developer } from '@/interfaces/developer/developer.interface'
 import { Search } from '@/components/developer/list/Search'
 import { Developers } from '@/components/developer/list/Developers'
+import { createGenerateMetadata } from '@/libs/seo/metadata'
+import { getTranslations } from 'next-intl/server'
 
 interface DeveloperPageProps {
   searchParams: Promise<{
@@ -36,3 +38,12 @@ export default async function DeveloperPage({ searchParams }: DeveloperPageProps
     </div>
   )
 }
+
+export const generateMetadata = createGenerateMetadata(async () => {
+  const t = await getTranslations('Components.Developer.List.Header')
+  return {
+    title: t('title'),
+    description: t('description'),
+    path: '/developer',
+  }
+})

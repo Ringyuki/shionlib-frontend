@@ -9,6 +9,8 @@ import { ExtraQuery } from '@/components/common/content/Pagination'
 import qs from 'qs'
 import { parseGameSearchParams } from '@/libs/game/useGameList'
 import { ContentLimit } from '@/interfaces/user/user.interface'
+import { createGenerateMetadata } from '@/libs/seo/metadata'
+import { getTranslations } from 'next-intl/server'
 
 interface GamePageProps {
   searchParams: Promise<ExtraQuery>
@@ -64,3 +66,12 @@ export default async function GamePage({ searchParams }: GamePageProps) {
     </div>
   )
 }
+
+export const generateMetadata = createGenerateMetadata(async () => {
+  const t = await getTranslations('Components.Game.Filter.Header')
+  return {
+    title: t('title'),
+    description: t('description'),
+    path: '/game',
+  }
+})

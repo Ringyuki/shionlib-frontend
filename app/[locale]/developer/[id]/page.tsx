@@ -4,6 +4,8 @@ import { Developer } from '@/interfaces/developer/developer.interface'
 import { GameItem } from '@/interfaces/game/game.interface'
 import { DeveloperContent } from '@/components/developer/DeveloperContent'
 import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
+import { createGenerateMetadata } from '@/libs/seo/metadata'
+import { getPreferredDeveloperContent } from '@/components/game/description/helpers/getPreferredContent'
 
 interface DeveloperPageProps {
   params: Promise<{
@@ -49,3 +51,30 @@ export default async function DeveloperPage({ params, searchParams }: DeveloperP
     </div>
   )
 }
+
+export const generateMetadata = createGenerateMetadata(
+  async ({ locale, id }: { locale: string; id: string }) => {
+    // duplicated request here, should add cache in the future
+    // TODO: add cache for repeated requests
+    const developer = await shionlibRequest().get<Developer>(`/developer/${id}`)
+    const langMap = { en: 'en', ja: 'jp', zh: 'zh' } as const
+    const lang = langMap[locale as keyof typeof langMap] ?? 'jp'
+    const { intro } = getPreferredDeveloperContent(developer.data!, lang)
+    return {
+      title: developer.data!.name,
+      description: intro
+        ? intro
+            .replace(/[\r\n]+/g, ' ')
+            .trim()
+            .slice(0, 100) + '...'
+        : undefined,
+      path: `/developer/${id}`,
+      og: {
+        title: developer.data!.name || developer.data?.aliases[0],
+        description: intro,
+        image: developer.data!.logo,
+        aspect: '1:1',
+      },
+    }
+  },
+)

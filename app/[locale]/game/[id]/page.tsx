@@ -6,6 +6,8 @@ import { GameContent } from '@/components/game/description/GameContent'
 import { CommentContent } from '@/components/common/comment/CommentContent'
 import { Comment } from '@/interfaces/comment/comment.interface'
 import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
+import { createGenerateMetadata } from '@/libs/seo/metadata'
+import { getPreferredContent } from '@/components/game/description/helpers/getPreferredContent'
 
 const getGameData = async (id: string) => {
   const data = await shionlibRequest().get<GameData>(`/game/${id}`)
@@ -45,3 +47,29 @@ export default async function GamePage({ params }: GamePageProps) {
     </div>
   )
 }
+
+export const generateMetadata = createGenerateMetadata(
+  async ({ locale, id }: { locale: string; id: string }) => {
+    const game = await getGameData(id)
+    const langMap = { en: 'en', ja: 'jp', zh: 'zh' } as const
+    const lang = langMap[locale as keyof typeof langMap] ?? 'jp'
+    const { title } = getPreferredContent(game, 'title', lang)
+    const { cover, aspect } = getPreferredContent(game, 'cover', lang)
+    const intro =
+      getPreferredContent(game, 'intro', lang)
+        .intro.replace(/[\r\n]+/g, ' ')
+        .trim()
+        .slice(0, 100) + '...'
+    return {
+      title: title,
+      description: intro,
+      path: `/game/${id}`,
+      og: {
+        title: title,
+        description: intro,
+        image: cover.url,
+        aspect: aspect === '1 / 1.5' ? '2:3' : '3:2',
+      },
+    }
+  },
+)

@@ -1,13 +1,13 @@
 {
   "Meta": {
-    "title": "Shionlib - ギャルゲーリソースサイト！",
+    "title": "Shionlib - ビジュアルノベル／ギャルゲー アーカイブ",
     "titleShort": "Shionlib",
     "template": "%s - Shionlib",
-    "description": "Shionlib - 無料・オープンソース・気軽に使えるギャルゲーリソースサイト",
+    "description": "Shionlib - 無料・オープンソース・気軽に使える ビジュアルノベル／ギャルゲー アーカイブ",
     "keywords": ["Shionlib", "ギャルゲー", "リソースサイト", "無料", "オープンソース", "気軽"],
     "og": {
-      "title": "Shionlib - ギャルゲーリソースサイト！",
-      "description": "Shionlib - 無料・オープンソース・気軽に使えるギャルゲーリソースサイト"
+      "title": "Shionlib - ビジュアルノベル／ギャルゲー アーカイブ",
+      "description": "Shionlib - 無料・オープンソース・気軽に使える ビジュアルノベル／ギャルゲー アーカイブ"
     }
   },
   "Pages": {
@@ -32,9 +32,24 @@
         "title": "設定を編集",
         "description": "このページではあなたの個人情報とサイト設定を管理できます。"
       }
+    },
+    "Game": {
+      "Edit": {
+        "EditLayout": {
+          "title": "ゲーム情報を編集"
+        }
+      }
+    },
+    "Search": {
+      "Game": {
+        "title": "検索結果 {q}"
+      }
     }
   },
   "Docs": {
+    "Head": {
+      "title": "すべてのドキュメント"
+    },
     "categories": {
       "about": "紹介",
       "dev": "開発",

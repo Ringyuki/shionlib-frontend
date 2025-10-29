@@ -5,6 +5,7 @@ import { UserProfile } from '@/components/user/home/profile/UserProfile'
 import { UserProfile as UserProfileType } from '@/interfaces/user/user.interface'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { HomeTabsNav } from '@/components/user/home/HomeTabsNav'
+import { createGenerateMetadata } from '@/libs/seo/metadata'
 
 export async function getUser(id: string) {
   const data = await shionlibRequest().get<UserProfileType>(`/user/${id}`)
@@ -42,3 +43,15 @@ export default async function UserLayout({ children, params }: Readonly<UserLayo
     </div>
   )
 }
+
+export const generateMetadata = createGenerateMetadata(async ({ id }: { id: string }) => {
+  const user = await getUser(id)
+  return {
+    title: user!.name,
+    path: `/user/${id}`,
+    robots: {
+      index: false,
+      follow: false,
+    },
+  }
+})

@@ -1,9 +1,14 @@
 import { getDirectoryTree } from '@/libs/docs/directoryTree'
 import { DocsSideBar } from '@/components/docs/sidebar/SideBar'
-import { getLocale } from 'next-intl/server'
 
-export default async function DocsLayout({ children }: { children: React.ReactNode }) {
-  const locale = await getLocale()
+export default async function DocsLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
   const tree = getDirectoryTree(locale)
   return (
     <div className="w-full my-4 flex">

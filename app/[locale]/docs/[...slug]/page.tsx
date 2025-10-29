@@ -1,4 +1,5 @@
 import { getDocBySlug, getAllDocs, getAdjacentDocs } from '@/libs/docs/getDocs'
+import { createGenerateMetadata } from '@/libs/seo/metadata'
 import { DocTOC } from '@/components/docs/content/DocTOC'
 import { DocHeader } from '@/components/docs/content/DocHeader'
 import { supportedLocales } from '@/config/i18n/supported'
@@ -40,3 +41,17 @@ export default async function DocsPage({ params }: DocsPageProps) {
     </div>
   )
 }
+
+export const generateMetadata = createGenerateMetadata(
+  async ({ locale, slug }: { locale: string; slug: string[] }) => {
+    const realSlug = slug.join('/')
+    const { frontmatter } = getDocBySlug(realSlug, locale)
+    const title = frontmatter.title || ''
+    return {
+      path: `/docs/${realSlug}`,
+      title,
+      description: frontmatter.description || '',
+      images: [`/og?l=${locale}&t=${encodeURIComponent(title)}`],
+    }
+  },
+)
