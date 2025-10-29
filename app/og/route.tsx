@@ -95,7 +95,7 @@ export async function GET(req: Request) {
                 whiteSpace: 'pre-wrap',
                 overflowWrap: 'break-word',
                 textOverflow: 'ellipsis',
-                WebkitLineClamp: webkitLineClamp,
+                WebkitLineClamp: 1,
                 WebkitBoxOrient: 'vertical',
                 overflow: 'hidden',
                 fontSize: aspectRatio === '3:2' ? 56 : 72,
