@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 import { makeETag } from './_utils/make-etag'
 import { defalutTitleMap, defaultDescriptionMap } from './_constants/maps'
-import { W, H, SAFE, GAP } from './_constants/constants'
+import { W, H, SAFE, GAP, baseUrl } from './_constants/constants'
 
 export const runtime = 'edge'
 export const contentType = 'image/png'
@@ -32,13 +32,8 @@ export async function GET(req: Request) {
     })
   }
 
-  const image = imageUrl
-    ? new URL(`/og/to-png?u=${imageUrl}`, new URL(req.url).origin).toString()
-    : undefined
-  const fallbackImageUrl = new URL(
-    '/assets/images/aecrf-s388z.png',
-    new URL(req.url).origin,
-  ).toString()
+  const image = imageUrl ? new URL(`/og/to-png?u=${imageUrl}`, baseUrl).toString() : undefined
+  const fallbackImageUrl = new URL('/assets/images/aecrf-s388z.png', baseUrl).toString()
 
   const [cinzelBold, notoSans] = await Promise.all([cinzelPromise, notoSansPromise])
 
