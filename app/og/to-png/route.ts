@@ -19,7 +19,7 @@ export async function GET(req: Request) {
   return new Response(body, {
     headers: {
       'content-type': 'image/png',
-      'cache-control': 'public, max-age=31536000, immutable',
+      'cache-control': 'public, max-age=604800',
     },
   })
 }

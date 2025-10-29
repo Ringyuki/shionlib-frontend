@@ -28,7 +28,7 @@ export async function GET(req: Request) {
   if (req.headers.get('if-none-match') === etag) {
     return new Response(null, {
       status: 304,
-      headers: { 'Cache-Control': 'public, max-age=31536000, immutable' },
+      headers: { 'cache-control': 'public, max-age=604800' },
     })
   }
 
@@ -186,7 +186,7 @@ export async function GET(req: Request) {
       height: H,
       emoji: 'noto',
       headers: {
-        'Cache-Control': 'public, max-age=31536000, immutable',
+        'cache-control': 'public, max-age=604800',
       },
       fonts: [
         { name: 'NotoSans', data: notoSans },
