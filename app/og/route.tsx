@@ -83,7 +83,7 @@ export async function GET(req: Request) {
         >
           <div
             style={{
-              width: aspectRatio === '1:1' ? 500 : textColWidth,
+              width: aspectRatio === '1:1' ? 550 : textColWidth,
               display: 'flex',
               flexDirection: 'column',
             }}
@@ -103,7 +103,7 @@ export async function GET(req: Request) {
                 color: '#f9fafb',
                 textShadow: '0 2px 12px rgba(0,0,0,0.35)',
                 marginBottom: description ? (aspectRatio === '3:2' ? 16 : 20) : 0,
-                maxWidth: aspectRatio === '1:1' ? 500 : textColWidth,
+                maxWidth: aspectRatio === '1:1' ? 550 : textColWidth,
               }}
             >
               {title}
@@ -125,7 +125,7 @@ export async function GET(req: Request) {
                   lineHeight: 1.35,
                   color: '#d1d5db',
                   opacity: 0.95,
-                  maxWidth: aspectRatio === '1:1' ? 500 : textColWidth,
+                  maxWidth: aspectRatio === '1:1' ? 550 : textColWidth,
                 }}
               >
                 {description}
