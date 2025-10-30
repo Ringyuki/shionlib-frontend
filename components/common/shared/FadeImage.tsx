@@ -35,7 +35,9 @@ export function FadeImage({
         width={props.width}
         height={props.height}
         src={
-          props.src.toString().startsWith('http') || localFile
+          props.src.toString().startsWith('http') ||
+          localFile ||
+          props.src.toString().includes('assets')
             ? props.src
             : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL! + props.src
         }
