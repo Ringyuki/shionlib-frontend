@@ -10,7 +10,7 @@ Shionlib is **free** and **open source**. You can find our source code on [our G
 
 ## Principles & Site Definition
 
-Shionlib will always be **free** and **open source**; we do not charge users any fees. All resources on Shionlib are uploaded by users, and we cannot guarantee their completeness or safety. If you’d like to upload game resources, please read the guide: [Upload Game Files](/en/docs/guides/upload-game-files).
+Shionlib will always be **free** and **open source**; we do not charge users any fees. All resources on Shionlib are uploaded by users, and we cannot guarantee their completeness or safety. If you’d like to upload game resources, please read the guide: [Upload Game Files](./contents/en/guides/upload-game-files.mdx).
 
 If there are lawful purchase channels in your country/region, you can find store or official website links under **Related Links** on a game’s page. If something is missing, you can add it via the **Edit** function.
 
