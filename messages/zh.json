@@ -199,7 +199,8 @@
       },
       "Footer": {
         "ShionlibFooter": {
-          "contact": "联系我们"
+          "contact": "联系我们",
+          "friendLink": "友情链接"
         }
       },
       "User": {
@@ -860,6 +861,12 @@
           "title": "近期热门",
           "description": "近期热门的游戏，按照浏览量、下载量、条目创建时间和游戏发售时间综合排序。每 12 小时更新一次。"
         }
+      }
+    },
+    "FriendLink": {
+      "Head": {
+        "title": "友情链接",
+        "description": "Shionlib 的友情链接，我们欢迎其他 视觉小说/Galgame 相关的网站加入我们的友情链接。如果你有兴趣加入，请通过网站底部的 联系我们 按钮提供你的网站信息。"
       }
     }
   }

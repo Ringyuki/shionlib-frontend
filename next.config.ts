@@ -23,6 +23,18 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'shionlib.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.kungal.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.moyu.moe',
+      },
+      {
+        protocol: 'https',
         hostname: process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_HOST!,
       },
     ],

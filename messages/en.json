@@ -199,7 +199,8 @@
       },
       "Footer": {
         "ShionlibFooter": {
-          "contact": "Contact"
+          "contact": "Contact",
+          "friendLink": "Friend Links"
         }
       },
       "User": {
@@ -860,6 +861,12 @@
           "title": "Recent Hot Games",
           "description": "Recent hot games, sorted by views, downloads, creation time and release time. Updated every 12 hours."
         }
+      }
+    },
+    "FriendLink": {
+      "Head": {
+        "title": "Friend Links",
+        "description": "Shionlib's friend links, we welcome other Visual Novel/Galgame related websites to join our friend links. If you are interested in joining, please provide your website information through the Contact button at the bottom of the website."
       }
     }
   }
