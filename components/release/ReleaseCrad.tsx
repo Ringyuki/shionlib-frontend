@@ -39,7 +39,7 @@ export const ReleaseCard = async ({ release }: ReleaseCardProps) => {
           </div>
           <div className="flex flex-col gap-1">
             <div className="flex gap-1 items-center font-mono!">
-              <FileArchive className="size-4" />
+              <FileArchive className="size-4 shrink-0" />
               <span className="text-lg">{release.files[0]}</span>
               {release.files_count > 1 && (
                 <Badge variant="secondary" className="ml-2">

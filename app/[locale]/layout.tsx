@@ -15,6 +15,7 @@ import { TokenRefresh } from '@/components/common/auth/TokenRefresh'
 import { Noto_Sans, Noto_Sans_SC, Noto_Sans_JP, Noto_Sans_Mono } from 'next/font/google'
 import { ShionlibFooter } from '@/components/common/footer/Footer'
 import { Cinzel } from 'next/font/google'
+import { UmamiProvider } from '@/components/common/site/UmamiProvider'
 
 const cinzel = Cinzel({
   subsets: ['latin'],
@@ -55,6 +56,9 @@ export default async function ShionlibLayout({ children, params }: Readonly<Prop
       className={`${notoSans_Latin.variable} ${notoSans_SC.variable} ${notoSans_JP.variable} ${notoSans_Mono.variable} ${cinzel.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <UmamiProvider />
+      </head>
       <body>
         <TokenRefresh />
         <NextIntlClientProvider>
