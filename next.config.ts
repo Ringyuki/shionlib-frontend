@@ -54,6 +54,10 @@ const nextConfig: NextConfig = {
         source: '/:locale/:vn([crsvpo]\\d+)/:rest*',
         destination: 'https://vndb.org/:vn/:rest*',
       },
+      {
+        source: '/:sitemap(sitemap.*)',
+        destination: `http://localhost:${process.env.NEXT_PUBLIC_API_PORT}/:sitemap`,
+      },
     ]
   },
   output: 'standalone',

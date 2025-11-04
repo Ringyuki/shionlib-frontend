@@ -5,7 +5,7 @@ import { Button } from '@/components/shionui/Button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/shionui/Card'
 import { useRouter } from '@/i18n/navigation.client'
 
-type ErrorViewProps = {
+interface ErrorViewProps {
   title?: string
   details?: string
   backText?: string
