@@ -8,6 +8,7 @@ import { Upload } from './Upload'
 import { Comment } from './Comment'
 import { Favorite } from './Favorite'
 import { Edit } from './Edit'
+import { History } from './History'
 
 interface GameActionsProps {
   game: GameData
@@ -23,6 +24,7 @@ export const GameActions = ({ game }: GameActionsProps) => {
             <Download game_id={game.id} />
             <Upload game_id={game.id} />
             <Edit game_id={game.id} />
+            <History game_id={game.id} />
           </div>
           <Separator orientation="vertical" className="h-4! hidden md:block" />
           <div className="flex gap-2 items-center">

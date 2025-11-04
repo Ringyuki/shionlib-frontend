@@ -357,6 +357,7 @@
         "download": "ダウンロード",
         "upload": "アップロード",
         "edit": "このゲームを編集",
+        "history": "編集履歴",
         "addToFavorites": "お気に入りに追加",
         "favorited": "お気に入りに追加済み",
         "removeFromFavorites": "お気に入りから削除",
@@ -552,6 +553,10 @@
           "submit": "送信",
           "success": "送信成功"
         }
+      },
+      "EditHistory": {
+        "title": "編集履歴",
+        "fieldChanges": "変更されたフィールド"
       },
       "Filter": {
         "Header": {

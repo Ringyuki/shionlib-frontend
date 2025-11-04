@@ -27,6 +27,12 @@ export interface DeveloperEntityInfo {
   aliases: string[]
 }
 
+interface Actor {
+  id: number
+  name: string
+  avatar: string
+}
+
 export type EditRecordItem =
   | {
       id: number
@@ -37,6 +43,7 @@ export type EditRecordItem =
       changes: any
       relation_type: EditRelationType | null
       entity_info: GameEntityInfo | null
+      actor: Actor | null
       created: string
       updated: string
     }
@@ -49,6 +56,7 @@ export type EditRecordItem =
       changes: any
       relation_type: EditRelationType | null
       entity_info: CharacterEntityInfo | null
+      actor: Actor | null
       created: string
       updated: string
     }
@@ -61,6 +69,7 @@ export type EditRecordItem =
       changes: any
       relation_type: EditRelationType | null
       entity_info: DeveloperEntityInfo | null
+      actor: Actor | null
       created: string
       updated: string
     }

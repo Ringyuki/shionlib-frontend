@@ -364,6 +364,7 @@
         "download": "Download",
         "upload": "Upload",
         "edit": "Edit this game",
+        "history": "Edit history",
         "addToFavorites": "Add to favorites",
         "favorited": "Added to favorites",
         "removeFromFavorites": "Remove from favorites",
@@ -559,6 +560,10 @@
           "submit": "Submit",
           "success": "Submitted successfully"
         }
+      },
+      "EditHistory": {
+        "title": "Edit history",
+        "fieldChanges": "Field changes"
       },
       "Filter": {
         "Header": {

@@ -37,6 +37,7 @@ type PaginationLinkProps = {
   href: string
   isActive?: boolean
   disabled?: boolean
+  noRouteChange?: boolean
 } & Pick<React.ComponentProps<typeof Button>, 'size' | 'className'> &
   Pick<React.ComponentProps<'button'>, 'onClick'> & {
     children?: React.ReactNode
@@ -50,6 +51,7 @@ function PaginationLink({
   onClick,
   children,
   disabled,
+  noRouteChange,
 }: PaginationLinkProps) {
   const router = useRouter()
   return (
@@ -64,7 +66,9 @@ function PaginationLink({
       onClick={e => {
         onClick?.(e)
         if (e.defaultPrevented) return
-        router.push(href)
+        if (!noRouteChange) {
+          router.push(href)
+        }
       }}
     >
       {children}

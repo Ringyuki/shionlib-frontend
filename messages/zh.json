@@ -364,6 +364,7 @@
         "download": "下载",
         "upload": "上传",
         "edit": "编辑此游戏",
+        "history": "编辑历史",
         "addToFavorites": "添加到收藏",
         "favorited": "已收藏",
         "removeFromFavorites": "取消收藏",
@@ -559,6 +560,10 @@
           "submit": "提交更改",
           "success": "提交成功"
         }
+      },
+      "EditHistory": {
+        "title": "编辑历史",
+        "fieldChanges": "修改字段"
       },
       "Filter": {
         "Header": {

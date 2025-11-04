@@ -1,4 +1,6 @@
-import { getTranslations } from 'next-intl/server'
+'use client'
+
+import { useTranslations } from 'next-intl'
 import { Badge } from '@/components/shionui/Badge'
 import { ArrowRight, Plus, Minus, ArrowDown } from 'lucide-react'
 import { ScrollArea } from '@/components/shionui/ScrollArea'
@@ -7,8 +9,8 @@ interface EditChangesProps {
   changes: any
 }
 
-export const EditChanges = async ({ changes }: EditChangesProps) => {
-  const t = await getTranslations('Components.User.Home.Edits.EditChanges')
+export const EditChanges = ({ changes }: EditChangesProps) => {
+  const t = useTranslations('Components.User.Home.Edits.EditChanges')
 
   if (!changes || typeof changes !== 'object') {
     return null

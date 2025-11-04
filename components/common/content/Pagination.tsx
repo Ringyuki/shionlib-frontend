@@ -33,6 +33,8 @@ export type ContentPaginationProps = {
   hideIfSinglePage?: boolean
   size?: 'icon' | 'default'
   className?: string
+  onPageChange?: (page: number) => void
+  noRouteChange?: boolean
 }
 
 function buildHref(
@@ -112,6 +114,8 @@ export const Pagination = (props: ContentPaginationProps) => {
     hideIfSinglePage = true,
     size = 'icon',
     className,
+    onPageChange,
+    noRouteChange = false,
   } = props
 
   const basePath = usePathname()
@@ -136,6 +140,11 @@ export const Pagination = (props: ContentPaginationProps) => {
             <PaginationPrevious
               href={makeHref(safeCurrentPage - 1)}
               disabled={safeCurrentPage === 1}
+              noRouteChange={noRouteChange}
+              onClick={() => {
+                if (safeCurrentPage === 1) return
+                onPageChange?.(safeCurrentPage - 1)
+              }}
             />
           </PaginationItem>
         )}
@@ -147,7 +156,16 @@ export const Pagination = (props: ContentPaginationProps) => {
             </PaginationItem>
           ) : (
             <PaginationItem key={it}>
-              <PaginationLink href={makeHref(it)} isActive={it === safeCurrentPage} size={size}>
+              <PaginationLink
+                href={makeHref(it)}
+                isActive={it === safeCurrentPage}
+                size={size}
+                noRouteChange={noRouteChange}
+                onClick={() => {
+                  if (it === safeCurrentPage) return
+                  onPageChange?.(it)
+                }}
+              >
                 {it}
               </PaginationLink>
             </PaginationItem>
@@ -159,6 +177,11 @@ export const Pagination = (props: ContentPaginationProps) => {
             <PaginationNext
               href={makeHref(safeCurrentPage + 1)}
               disabled={safeCurrentPage === safeTotalPages}
+              noRouteChange={noRouteChange}
+              onClick={() => {
+                if (safeCurrentPage === safeTotalPages) return
+                onPageChange?.(safeCurrentPage + 1)
+              }}
             />
           </PaginationItem>
         )}
