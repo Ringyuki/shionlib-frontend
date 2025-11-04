@@ -364,7 +364,10 @@
         "download": "Download",
         "upload": "Upload",
         "edit": "Edit this game",
-        "history": "Edit history",
+        "history": {
+          "history": "Edit history",
+          "noHistory": "No edit history"
+        },
         "addToFavorites": "Add to favorites",
         "favorited": "Added to favorites",
         "removeFromFavorites": "Remove from favorites",

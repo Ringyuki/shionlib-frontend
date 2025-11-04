@@ -13,6 +13,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/shionui/Tooltip'
+import { toast } from 'react-hot-toast'
 
 interface HistoryProps {
   game_id: number
@@ -31,7 +32,7 @@ const getHistories = async (game_id: number, page: number = 1) => {
 }
 
 export const History = ({ game_id }: HistoryProps) => {
-  const t = useTranslations('Components.Game.Actions')
+  const t = useTranslations('Components.Game.Actions.history')
 
   const [loading, setLoading] = useState(false)
   const [historyOpen, setHistoryOpen] = useState(false)
@@ -48,8 +49,12 @@ export const History = ({ game_id }: HistoryProps) => {
     try {
       setLoading(true)
       const res = await getHistories(game_id, page)
-      setHistories(res?.items ?? [])
-      setPagination(res?.meta!)
+      if (!res?.items.length) {
+        toast.error(t('noHistory'))
+        return
+      }
+      setHistories(res.items)
+      setPagination(res.meta)
       if (open) setHistoryOpen(true)
     } catch {
     } finally {

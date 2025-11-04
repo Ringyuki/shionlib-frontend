@@ -364,7 +364,10 @@
         "download": "下载",
         "upload": "上传",
         "edit": "编辑此游戏",
-        "history": "编辑历史",
+        "history": {
+          "history": "编辑历史",
+          "noHistory": "暂无编辑历史"
+        },
         "addToFavorites": "添加到收藏",
         "favorited": "已收藏",
         "removeFromFavorites": "取消收藏",
