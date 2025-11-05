@@ -1,38 +1,36 @@
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
-import { FlatCompat } from '@eslint/eslintrc'
-import prettier from 'eslint-plugin-prettier'
+import prettier from 'eslint-config-prettier/flat'
+import pluginPrettier from 'eslint-plugin-prettier'
+import { defineConfig, globalIgnores } from 'eslint/config'
+import nextVitals from 'eslint-config-next/core-web-vitals'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-})
-
-const eslintConfig = [
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
-  ...compat.extends('prettier'),
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  prettier,
   {
     plugins: {
-      prettier: prettier,
+      prettier: pluginPrettier,
     },
     rules: {
       'prettier/prettier': 'error',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
+      'react-hooks/preserve-manual-memoization': 'off',
+      'react-hooks/immutability': 'off',
+      'react-hooks/set-state-in-effect': 'off',
+      'react-hooks/refs': 'off',
+      'react-hooks/use-memo': 'off',
+      'react-hooks/static-components': 'off',
+      'react-hooks/purity': 'warn',
     },
   },
-  {
-    ignores: [
-      'node_modules/**',
-      '.next/**',
-      'out/**',
-      'build/**',
-      'next-env.d.ts',
-      'ecosystem.config.cjs',
-    ],
-  },
-]
+  globalIgnores([
+    'node_modules/**',
+    '.next/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts',
+    'ecosystem.config.cjs',
+  ]),
+])
 
 export default eslintConfig
