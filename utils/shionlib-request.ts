@@ -34,8 +34,8 @@ export const shionlibRequest = () => {
           const incoming = await nextHeaders()
           const realIp =
             incoming.get('cf-connecting-ip') ||
-            incoming.get('true-client-ip') ||
             incoming.get('x-forwarded-for')?.split(',')[0]?.trim()
+          console.log('realIp', realIp)
           if (realIp) headers.set('cf-connecting-ip', realIp)
         } catch {}
       }
