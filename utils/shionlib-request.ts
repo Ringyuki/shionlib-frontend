@@ -35,8 +35,7 @@ export const shionlibRequest = () => {
           const realIp =
             incoming.get('cf-connecting-ip') ||
             incoming.get('x-forwarded-for')?.split(',')[0]?.trim()
-          console.log('realIp', realIp)
-          if (realIp) headers.set('cf-connecting-ip', realIp)
+          if (realIp) headers.set('x-real-ip', realIp)
         } catch {}
       }
       // if body is FormData, we will not manually set Content-Type so browser can set boundary.
