@@ -17,4 +17,11 @@ export const friendLinks: FriendLink[] = [
     description:
       '开源, 免费, 零门槛, 纯手写, 最先进的 Galgame 补丁资源下载站, 提供 Windows, 安卓, KRKR, Tyranor 等各类平台的 Galgame 补丁资源下载。永远免费！',
   },
+  {
+    id: 3,
+    name: 'UUZ导航 | ACG导航站',
+    url: 'https://www.uuznav.com/',
+    logo: 'https://www.uuznav.com/favicon.ico',
+    description: '一个简约美观实用的导航网站，这里收录着超100个优秀优质的网站！',
+  },
 ]
