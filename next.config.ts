@@ -65,9 +65,6 @@ const nextConfig: NextConfig = {
     ]
   },
   output: 'standalone',
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
 }
 
 export default withNextIntl(withMDX(nextConfig))

@@ -4,7 +4,7 @@ import { NextRequest } from 'next/server'
 
 const intl = createMiddleware(routing)
 
-export default async function middleware(req: NextRequest) {
+export default async function proxy(req: NextRequest) {
   const token = req.cookies.get('shionlib_access_token')?.value
   const refresh_token = req.cookies.get('shionlib_refresh_token')?.value
   let refreshedSetCookies: string[] = []
