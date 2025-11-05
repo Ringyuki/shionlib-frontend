@@ -27,9 +27,17 @@ export const shionlibRequest = () => {
     const init = async (): Promise<RequestInit> => {
       const headers = new Headers(await buildHeaders(options))
       if (!isBrowser) {
-        const { cookies } = await import('next/headers')
+        const { cookies, headers: nextHeaders } = await import('next/headers')
         const cookieString = (await cookies()).toString()
         if (cookieString) headers.set('Cookie', cookieString)
+        try {
+          const incoming = await nextHeaders()
+          const realIp =
+            incoming.get('cf-connecting-ip') ||
+            incoming.get('true-client-ip') ||
+            incoming.get('x-forwarded-for')?.split(',')[0]?.trim()
+          if (realIp) headers.set('cf-connecting-ip', realIp)
+        } catch {}
       }
       // if body is FormData, we will not manually set Content-Type so browser can set boundary.
       const opt: RequestInit = { ...options, headers, credentials: 'include' }
