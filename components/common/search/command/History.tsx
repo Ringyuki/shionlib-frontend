@@ -35,8 +35,8 @@ export const History = ({ onSelect }: HistoryProps) => {
           {history.map(item => (
             <CommandItem
               className="border border-transparent data-[selected=true]:border-primary/20"
-              key={item.id}
-              id={item.id}
+              key={`${item.id}-${item.query}`}
+              id={`${item.id}-${item.query}`}
               onSelect={() => handleSelectItem(item.query)}
             >
               {item.query}
