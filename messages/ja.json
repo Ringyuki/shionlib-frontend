@@ -706,10 +706,25 @@
         "Aria2": {
           "title": "Aria2",
           "description": "このページではあなたの Aria2 設定を更新できます。この設定はローカルブラウザにのみ保存され、Shionlib サーバーにはアップロードされません。",
+          "protocol": "プロトコル",
+          "protocolPlaceholder": "プロトコルを選択",
+          "host": "ホスト",
+          "hostPlaceholder": "例：localhost または 127.0.0.1",
           "port": "ポート",
+          "path": "パス",
+          "pathPlaceholder": "例：/jsonrpc",
           "authSecret": "認証シークレット",
+          "downloadPath": "ダウンロードパス",
+          "downloadPathPlaceholder": "空欄にすると Aria2 のデフォルトパスを使用",
           "save": "保存",
-          "success": "保存成功"
+          "success": "保存成功",
+          "reset": "リセット",
+          "resetSuccess": "デフォルト設定にリセットしました",
+          "test": "接続テスト",
+          "testSuccess": "接続成功！",
+          "testFailed": "接続失敗",
+          "testFailedToConnect": "Aria2 サーバーに接続できません",
+          "testUnauthorized": "認証失敗、シークレットを確認してください"
         }
       },
       "Home": {

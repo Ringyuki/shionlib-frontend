@@ -713,10 +713,25 @@
         "Aria2": {
           "title": "Aria2",
           "description": "你可以在此更新你的 Aria2 设置。此项设置仅会保存到你的本地浏览器中，不会上传到 Shionlib 服务器。",
+          "protocol": "协议",
+          "protocolPlaceholder": "选择协议",
+          "host": "地址",
+          "hostPlaceholder": "例如：localhost 或 127.0.0.1",
           "port": "端口",
+          "path": "路径",
+          "pathPlaceholder": "例如：/jsonrpc",
           "authSecret": "认证密钥",
+          "downloadPath": "下载路径",
+          "downloadPathPlaceholder": "留空使用 Aria2 默认路径",
           "save": "保存",
-          "success": "已保存"
+          "success": "已保存",
+          "reset": "复位",
+          "resetSuccess": "已复位到默认设置",
+          "test": "测试连接",
+          "testSuccess": "连接成功！",
+          "testFailed": "连接失败",
+          "testFailedToConnect": "无法连接到 Aria2 服务器",
+          "testUnauthorized": "认证失败，请检查密钥"
         }
       },
       "Home": {

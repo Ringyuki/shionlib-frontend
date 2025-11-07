@@ -66,6 +66,20 @@ const nextConfig: NextConfig = {
     ]
   },
   output: 'standalone',
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            // 用于授权私有网络访问
+            key: 'Access-Control-Allow-Private-Network',
+            value: 'true',
+          },
+        ],
+      },
+    ]
+  },
 }
 
 export default withNextIntl(withMDX(nextConfig))
