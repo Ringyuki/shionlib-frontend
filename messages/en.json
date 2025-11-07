@@ -561,7 +561,15 @@
           "add_staff": "Add staff",
           "nsfw": "Is NSFW",
           "submit": "Submit",
-          "success": "Submitted successfully"
+          "success": "Submitted successfully",
+          "Comfirm": {
+            "title": "Confirm changes",
+            "cancel": "Cancel",
+            "submit": "Submit"
+          },
+          "Changes": {
+            "fieldChanges": "Field changes"
+          }
         }
       },
       "EditHistory": {

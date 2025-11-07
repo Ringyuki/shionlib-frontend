@@ -15,7 +15,7 @@ import { NSFW } from './scalar/NSFW'
 import { useForm } from 'react-hook-form'
 import { useEditPermissionStore } from '@/store/editPermissionStore'
 import { Button } from '@/components/shionui/Button'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Check } from 'lucide-react'
 import { shionlibRequest } from '@/utils/shionlib-request'
@@ -23,6 +23,8 @@ import { useParams } from 'next/navigation'
 import { toast } from 'react-hot-toast'
 import { useRouter } from '@/i18n/navigation.client'
 import { pick } from './helper/pick'
+import { pickChanges, ChangesResult } from '@/utils/pick-changes'
+import { Confirm } from './scalar/Comfirm'
 
 interface ScalarProps {
   data: GameScalar
@@ -51,10 +53,32 @@ export const Scalar = ({ data }: ScalarProps) => {
     }
   }
 
+  const [changes, setChanges] = useState<ChangesResult | null>(null)
+  const [formValues, setFormValues] = useState<GameScalar>(data)
+  const [open, setOpen] = useState(false)
+  useEffect(() => {
+    const subscription = form.watch(values => {
+      setFormValues(values as GameScalar)
+    })
+    return () => subscription.unsubscribe()
+  }, [form])
+  useEffect(() => {
+    const { field_changes, before, after } = pickChanges(formValues, data)
+    setChanges({ field_changes, before, after })
+  }, [formValues, data])
+  const handleSubmit = () => {
+    onSubmit(formValues)
+  }
   return (
     <div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form
+          onSubmit={e => {
+            e.preventDefault()
+            setOpen(true)
+          }}
+          className="space-y-4"
+        >
           {permissions?.scalarFields.includes('TITLES') && <Titles form={form} />}
           {permissions?.scalarFields.includes('PLATFORMS') && <Platform form={form} />}
           {permissions?.scalarFields.includes('TYPE') && <Type form={form} />}
@@ -65,11 +89,18 @@ export const Scalar = ({ data }: ScalarProps) => {
           {permissions?.scalarFields.includes('EXTRA') && <ExtraInfo form={form} />}
           {permissions?.scalarFields.includes('STAFFS') && <Staffs form={form} />}
           {permissions?.scalarFields.includes('NSFW') && <NSFW form={form} />}
-          <Button type="submit" className="w-full mt-12" loading={loading} renderIcon={<Check />}>
+          <Button
+            type="submit"
+            className="w-full mt-12"
+            disabled={!changes?.field_changes.length}
+            loading={loading}
+            renderIcon={<Check />}
+          >
             {t('submit')}
           </Button>
         </form>
       </Form>
+      <Confirm open={open} setOpen={setOpen} handleSubmit={handleSubmit} changes={changes} />
     </div>
   )
 }

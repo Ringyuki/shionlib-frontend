@@ -561,7 +561,15 @@
           "add_staff": "添加制作人员",
           "nsfw": "是否NSFW",
           "submit": "提交更改",
-          "success": "提交成功"
+          "success": "提交成功",
+          "Comfirm": {
+            "title": "确认更改",
+            "cancel": "取消",
+            "submit": "提交"
+          },
+          "Changes": {
+            "fieldChanges": "修改字段"
+          }
         }
       },
       "EditHistory": {

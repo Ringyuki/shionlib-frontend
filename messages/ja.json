@@ -554,7 +554,15 @@
           "add_staff": "スタッフを追加",
           "nsfw": "NSFWかどうか",
           "submit": "送信",
-          "success": "送信成功"
+          "success": "送信成功",
+          "Comfirm": {
+            "title": "変更を確認",
+            "cancel": "キャンセル",
+            "submit": "送信"
+          },
+          "Changes": {
+            "fieldChanges": "変更されたフィールド"
+          }
         }
       },
       "EditHistory": {

@@ -35,7 +35,7 @@ export const EditChanges = ({ changes }: EditChangesProps) => {
 
     return (
       <div className="flex flex-col gap-3">
-        <span className="text-sm font-medium text-muted-foreground">{t('changes')}:</span>
+        <span className="text-sm text-muted-foreground">{t('changes')}:</span>
         {added.length > 0 && (
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
@@ -97,7 +97,7 @@ export const EditChanges = ({ changes }: EditChangesProps) => {
 
     return (
       <div className="flex flex-col gap-3">
-        <span className="text-sm font-medium text-muted-foreground">{t('changes')}:</span>
+        <span className="text-sm text-muted-foreground">{t('changes')}:</span>
 
         {Array.from(allKeys).map(key => {
           const beforeValue = before[key]
@@ -117,7 +117,7 @@ export const EditChanges = ({ changes }: EditChangesProps) => {
                 <div className="flex flex-col gap-1">
                   <div className="text-sm bg-red-50 dark:bg-red-950/20 p-2 rounded-md border border-red-200 dark:border-red-800">
                     <ScrollArea className="max-h-40">
-                      <pre className="whitespace-pre-wrap break-words font-mono! text-xs overflow-y-auto">
+                      <pre className="whitespace-pre-wrap break-words font-mono! text-xs overflow-y-auto break-all">
                         {formatValue(beforeValue)}
                       </pre>
                     </ScrollArea>
@@ -132,7 +132,7 @@ export const EditChanges = ({ changes }: EditChangesProps) => {
                 <div className="flex flex-col gap-1">
                   <div className="text-sm bg-green-50 dark:bg-green-950/20 p-2 rounded-md border border-green-200 dark:border-green-800">
                     <ScrollArea className="max-h-40">
-                      <pre className="whitespace-pre-wrap break-words font-mono! text-xs overflow-y-auto">
+                      <pre className="whitespace-pre-wrap break-words font-mono! text-xs overflow-y-auto break-all">
                         {formatValue(afterValue)}
                       </pre>
                     </ScrollArea>
