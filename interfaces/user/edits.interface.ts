@@ -44,6 +44,7 @@ export type EditRecordItem =
       relation_type: EditRelationType | null
       entity_info: GameEntityInfo | null
       actor: Actor | null
+      note: string | null
       created: string
       updated: string
     }
@@ -57,6 +58,7 @@ export type EditRecordItem =
       relation_type: EditRelationType | null
       entity_info: CharacterEntityInfo | null
       actor: Actor | null
+      note: string | null
       created: string
       updated: string
     }
@@ -70,6 +72,7 @@ export type EditRecordItem =
       relation_type: EditRelationType | null
       entity_info: DeveloperEntityInfo | null
       actor: Actor | null
+      note: string | null
       created: string
       updated: string
     }

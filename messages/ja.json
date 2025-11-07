@@ -563,6 +563,10 @@
           "Changes": {
             "fieldChanges": "変更されたフィールド"
           }
+        },
+        "EditNote": {
+          "title": "編集備考",
+          "placeholder": "編集理由, 編集内容等(任意, e.g. 発売日を2025年11月10日に変更, 理由：発売延期)"
         }
       },
       "EditHistory": {

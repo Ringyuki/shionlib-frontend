@@ -570,6 +570,10 @@
           "Changes": {
             "fieldChanges": "Field changes"
           }
+        },
+        "EditNote": {
+          "title": "Edit Note",
+          "placeholder": "Edit reason, edit content etc. (optional, e.g. Changed release date to 2025-11-10, reason: release delayed)"
         }
       },
       "EditHistory": {

@@ -570,6 +570,10 @@
           "Changes": {
             "fieldChanges": "修改字段"
           }
+        },
+        "EditNote": {
+          "title": "备注",
+          "placeholder": "修改原因, 修改内容等(可选, e.g. 修改发售日期为2025年11月10日，原因：发售延期)"
         }
       },
       "EditHistory": {

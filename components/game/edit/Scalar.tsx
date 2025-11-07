@@ -25,6 +25,7 @@ import { useRouter } from '@/i18n/navigation.client'
 import { pick } from './helper/pick'
 import { pickChanges, ChangesResult } from '@/utils/pick-changes'
 import { Confirm } from './scalar/Comfirm'
+import { EditNote } from './EditNote'
 
 interface ScalarProps {
   data: GameScalar
@@ -43,7 +44,10 @@ export const Scalar = ({ data }: ScalarProps) => {
     try {
       setLoading(true)
       await shionlibRequest().patch(`/game/${id}/edit/scalar`, {
-        data: pick(data, permissions!.fields),
+        data: {
+          ...pick(data, permissions!.fields),
+          note,
+        },
       })
       toast.success(t('success'))
       router.push(`/game/${id}`, { scroll: true })
@@ -56,6 +60,7 @@ export const Scalar = ({ data }: ScalarProps) => {
   const [changes, setChanges] = useState<ChangesResult | null>(null)
   const [formValues, setFormValues] = useState<GameScalar>(data)
   const [open, setOpen] = useState(false)
+  const [note, setNote] = useState('')
   useEffect(() => {
     const subscription = form.watch(values => {
       setFormValues(values as GameScalar)
@@ -89,6 +94,8 @@ export const Scalar = ({ data }: ScalarProps) => {
           {permissions?.scalarFields.includes('EXTRA') && <ExtraInfo form={form} />}
           {permissions?.scalarFields.includes('STAFFS') && <Staffs form={form} />}
           {permissions?.scalarFields.includes('NSFW') && <NSFW form={form} />}
+
+          <EditNote onChange={e => setNote(e.target.value)} />
           <Button
             type="submit"
             className="w-full mt-12"

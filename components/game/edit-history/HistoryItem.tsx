@@ -8,7 +8,7 @@ import { cn } from '@/utils/cn'
 import { Avatar } from '@/components/common/user/Avatar'
 import { timeFromNow } from '@/utils/time-format'
 import { useLocale } from 'next-intl'
-import { Calendar } from 'lucide-react'
+import { Calendar, Info } from 'lucide-react'
 
 interface HistoryItemProps {
   history: EditRecordItemInterface
@@ -41,6 +41,12 @@ export const HistoryItem = ({ history, className }: HistoryItemProps) => {
               <Calendar className="size-3" />
               {timeFromNow(history.created, locale)}
             </Badge>
+          </div>
+        )}
+        {history.note && (
+          <div className="text-xs font-light font-mono flex items-center gap-1">
+            <Info className="size-3" />
+            {history.note}
           </div>
         )}
         <Separator />
