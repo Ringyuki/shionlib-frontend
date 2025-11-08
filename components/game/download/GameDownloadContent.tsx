@@ -24,7 +24,7 @@ export const GameDownloadContent = ({ downloadResources, className }: GameDownlo
         <AlertCircle />
         <AlertTitle>{t('alertTitle')}</AlertTitle>
         <AlertDescription>
-          <BBCodeContent content={t('alertDescription')} />
+          <BBCodeContent content={t('alertDescription', { duration: 120 })} />
         </AlertDescription>
       </Alert>
       {downloadResources.map(resource => (

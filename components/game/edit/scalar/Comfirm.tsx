@@ -28,7 +28,7 @@ export const Confirm = ({ open, setOpen, handleSubmit, changes }: ConfirmProps) 
         <AlertDialogHeader>
           <AlertDialogTitle>{t('title')}</AlertDialogTitle>
         </AlertDialogHeader>
-        <AlertDialogDescription className="lg:w-4xl" asChild>
+        <AlertDialogDescription className="lg:w-4xl text-foreground" asChild>
           <ScrollArea className="max-h-[calc(100dvh-20rem)]">
             <Changes changes={changes} />
           </ScrollArea>

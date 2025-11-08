@@ -481,7 +481,7 @@
         },
         "GameDownloadContent": {
           "alertTitle": "注意",
-          "alertDescription": "以下のリソースはすべて Shionlib ユーザーによってアップロードされたものです。ファイルの安全性はご自身で確認してください。\nダウンロードリンクの有効期間は 60 分です。有効期間内にダウンロードを完了してください。"
+          "alertDescription": "以下のリソースはすべて Shionlib ユーザーによってアップロードされたものです。ファイルの安全性はご自身で確認してください。\nダウンロードリンクの有効期間は {duration} 分です。有効期間内にダウンロードを完了してください。"
         },
         "GameDownload": {
           "noDownloadSource": "ダウンロードリソースがありません"

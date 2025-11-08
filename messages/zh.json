@@ -488,7 +488,7 @@
         },
         "GameDownloadContent": {
           "alertTitle": "注意",
-          "alertDescription": "以下资源均由 Shionlib 用户上传，请自行鉴别文件安全性。\n下载链接有效期为 60 分钟，请确保在有效期内完成下载。"
+          "alertDescription": "以下资源均由 Shionlib 用户上传，请自行鉴别文件安全性。\n下载链接有效期为 {duration} 分钟，请确保在有效期内完成下载。"
         },
         "GameDownload": {
           "noDownloadSource": "暂无下载资源"

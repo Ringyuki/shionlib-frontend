@@ -488,7 +488,7 @@
         },
         "GameDownloadContent": {
           "alertTitle": "Notice",
-          "alertDescription": "The following resources are uploaded by Shionlib users. Please verify the safety of the files yourself.\nThe download link is valid for 60 minutes, so please complete the download within the valid period."
+          "alertDescription": "The following resources are uploaded by Shionlib users. Please verify the safety of the files yourself.\nThe download link is valid for {duration} minutes, so please complete the download within the valid period."
         },
         "GameDownload": {
           "noDownloadSource": "No download source available"
