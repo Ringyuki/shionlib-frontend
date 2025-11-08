@@ -1,4 +1,10 @@
-export const check = async (port: number, auth_secret: string) => {
+export const check = async (
+  protocol: string,
+  host: string,
+  port: number,
+  path: string,
+  auth_secret: string,
+) => {
   const data = {
     jsonrpc: '2.0',
     method: 'aria2.getVersion',
@@ -7,7 +13,8 @@ export const check = async (port: number, auth_secret: string) => {
   }
 
   try {
-    const res = await fetch(`http://localhost:${port}/jsonrpc`, {
+    const url = `${protocol}://${host}:${port}${path}`
+    const res = await fetch(url, {
       method: 'POST',
       body: JSON.stringify(data),
     })
@@ -30,25 +37,32 @@ export const check = async (port: number, auth_secret: string) => {
 export const addUrl = async (
   file_url: string,
   file_name: string,
+  protocol: string,
+  host: string,
   port: number,
+  path: string,
   auth_secret: string,
+  downloadPath?: string,
 ) => {
-  const ready = await check(port, auth_secret)
+  const ready = await check(protocol, host, port, path, auth_secret)
   if (ready !== true) {
     return handleAria2Error(ready)
+  }
+
+  const options: any = {
+    out: file_name,
+  }
+
+  // if downloadPath is provided, set dir option
+  if (downloadPath && downloadPath.trim() !== '') {
+    options.dir = downloadPath
   }
 
   const data = {
     jsonrpc: '2.0',
     method: 'aria2.addUri',
     id: 'add_url_' + file_name,
-    params: [
-      'token:' + auth_secret,
-      [file_url],
-      {
-        out: file_name,
-      },
-    ],
+    params: ['token:' + auth_secret, [file_url], options],
   }
 
   // try to envoke motrix
@@ -61,7 +75,8 @@ export const addUrl = async (
   document.body.removeChild(motrixLink)
 
   try {
-    await fetch(`http://localhost:${port}/jsonrpc`, {
+    const url = `${protocol}://${host}:${port}${path}`
+    await fetch(url, {
       method: 'POST',
       body: JSON.stringify(data),
     })

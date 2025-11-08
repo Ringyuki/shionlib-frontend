@@ -21,7 +21,7 @@ export const GameDownloadFileItem = ({ file }: GameDownloadFileItemProps) => {
   const [pushToAria2Loading, setPushToAria2Loading] = useState(false)
   const [normalDownloadLoading, setNormalDownloadLoading] = useState(false)
   const { getSettings } = useAria2Store()
-  const { port, auth_secret } = getSettings()
+  const { protocol, host, port, path, auth_secret, downloadPath } = getSettings()
 
   const [downloadLink, setDownloadLink] = useState<string | null>(null)
   const getDownloadLink = async (): Promise<string | null> => {
@@ -41,7 +41,16 @@ export const GameDownloadFileItem = ({ file }: GameDownloadFileItemProps) => {
     }
     if (!url) return
 
-    const res = await addUrl(url, file.file_name, port, auth_secret)
+    const res = await addUrl(
+      url,
+      file.file_name,
+      protocol,
+      host,
+      port,
+      path,
+      auth_secret,
+      downloadPath,
+    )
     if (!res.success) {
       toast.error(t(res.message ?? 'aria2UnknownError'))
       setPushToAria2Loading(false)

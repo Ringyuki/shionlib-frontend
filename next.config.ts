@@ -66,6 +66,20 @@ const nextConfig: NextConfig = {
     ]
   },
   output: 'standalone',
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            // for Aria2 push
+            key: 'Access-Control-Allow-Private-Network',
+            value: 'true',
+          },
+        ],
+      },
+    ]
+  },
 }
 
 export default withNextIntl(withMDX(nextConfig))

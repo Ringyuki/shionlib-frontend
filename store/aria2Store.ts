@@ -9,20 +9,56 @@ interface Aria2Store {
 }
 
 const initialSettings: Aria2Settings = {
+  protocol: 'http',
+  host: 'localhost',
   port: 16800,
+  path: '/jsonrpc',
   auth_secret: '',
+  downloadPath: '',
 }
 
 export const useAria2Store = create<Aria2Store>()(
   persist(
     (set, get) => ({
       settings: initialSettings,
-      getSettings: () => get().settings,
+      getSettings: () => {
+        const settings = get().settings
+        // ensure all fields are present
+        return {
+          protocol: settings.protocol ?? initialSettings.protocol,
+          host: settings.host ?? initialSettings.host,
+          port: settings.port ?? initialSettings.port,
+          path: settings.path ?? initialSettings.path,
+          auth_secret: settings.auth_secret ?? initialSettings.auth_secret,
+          downloadPath: settings.downloadPath ?? initialSettings.downloadPath,
+        }
+      },
       setSettings: (settings: Aria2Settings) => set({ settings }),
     }),
     {
       name: 'shionlib-aria2-settings-store',
       storage: createJSONStorage(() => localStorage),
+      version: 1,
+      migrate: (persistedState: any, version: number) => {
+        // migrate old version data and fill in missing fields
+        if (version === 0 || !persistedState) {
+          return {
+            settings: initialSettings,
+          }
+        }
+
+        const oldSettings = persistedState.settings || {}
+        return {
+          settings: {
+            protocol: oldSettings.protocol ?? initialSettings.protocol,
+            host: oldSettings.host ?? initialSettings.host,
+            port: oldSettings.port ?? initialSettings.port,
+            path: oldSettings.path ?? initialSettings.path,
+            auth_secret: oldSettings.auth_secret ?? initialSettings.auth_secret,
+            downloadPath: oldSettings.downloadPath ?? initialSettings.downloadPath,
+          },
+        }
+      },
     },
   ),
 )
