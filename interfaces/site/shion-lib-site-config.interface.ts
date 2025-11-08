@@ -36,5 +36,9 @@ export interface NavBarConfig {
   links: {
     label: string
     href: string
+    external?: boolean
+    icon?: React.ReactNode
+    gradientText?: boolean
+    gradientTextColor?: string
   }[]
 }

@@ -1,4 +1,5 @@
 import { ShionlibSiteConfig, NavBarConfig } from '@/interfaces/site/shion-lib-site-config.interface'
+import { SparklesIcon } from 'lucide-react'
 
 export const shionlibSiteConfig: ShionlibSiteConfig = {
   canonical: process.env.NEXT_PUBLIC_SITE_URL || 'https://shionlib.com',
@@ -29,6 +30,13 @@ export const navBarConfig: NavBarConfig = {
     {
       label: 'about',
       href: '/docs/about/about-shionlib',
+    },
+    {
+      label: 'aiGirlFriend',
+      href: 'https://himoe.uk/T0vylK',
+      external: true,
+      icon: <SparklesIcon className="w-4 h-4" />,
+      gradientText: true,
     },
   ],
 }

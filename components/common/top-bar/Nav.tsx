@@ -5,6 +5,8 @@ import { Link } from '@/i18n/navigation'
 import { useTranslations } from 'next-intl'
 import { useSelectedLayoutSegment } from 'next/navigation'
 import { cn } from '@/utils/cn'
+import { GradientText } from '@/components/shionui/GradientText'
+import { GradientIcon } from '@/components/shionui/GradientIcon'
 
 export const Nav = () => {
   const t = useTranslations('Components.Common.TopBar.NavBar')
@@ -18,13 +20,32 @@ export const Nav = () => {
           <Link
             key={link.href}
             href={link.href}
+            target={link.external ? '_blank' : undefined}
             data-active={isActive ? 'true' : 'false'}
             className={cn(
-              'font-normal px-4 py-2 rounded-md hover:bg-primary/5 hover:text-primary cursor-pointer duration-200',
+              'font-normal px-4 py-2 rounded-md cursor-pointer duration-200',
               isActive && 'bg-primary/10 hover:bg-primary/10 text-primary',
+              link.external ? 'hover:opacity-70' : 'hover:bg-primary/5 hover:text-primary',
             )}
           >
-            {t(link.label)}
+            <span className="flex items-center gap-1">
+              {link.gradientText ? (
+                <>
+                  {link.icon && (
+                    <GradientIcon
+                      icon={link.icon as React.ReactElement<SVGSVGElement>}
+                      gradient={link.gradientTextColor}
+                    />
+                  )}
+                  <GradientText text={t(link.label)} gradient={link.gradientTextColor} />
+                </>
+              ) : (
+                <>
+                  {link.icon && link.icon}
+                  {t(link.label)}
+                </>
+              )}
+            </span>
           </Link>
         )
       })}
