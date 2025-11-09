@@ -52,7 +52,7 @@ export const Undo = ({ edit_id }: UndoProps) => {
           size="sm"
           renderIcon={<UndoIcon className="size-4" />}
           onClick={() => setOpen(true)}
-          disabled={loading}
+          loading={loading}
         >
           {t('undo')}
         </Button>
@@ -67,13 +67,16 @@ export const Undo = ({ edit_id }: UndoProps) => {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel tone="destructive" onClick={() => setOpen(false)} disabled={loading}>
+          <AlertDialogCancel tone="destructive" onClick={() => setOpen(false)}>
             {t('cancel')}
           </AlertDialogCancel>
           <AlertDialogAction
             tone="destructive"
-            onClick={() => undoEdit(edit_id)}
-            disabled={loading}
+            loading={loading}
+            onClick={e => {
+              e.preventDefault()
+              undoEdit(edit_id)
+            }}
           >
             {t('confirm')}
           </AlertDialogAction>
