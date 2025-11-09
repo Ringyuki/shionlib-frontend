@@ -714,10 +714,30 @@
         "Aria2": {
           "title": "Aria2",
           "description": "You can update your Aria2 settings here. This setting will only be saved to your local browser and will not be uploaded to Shionlib servers.",
+          "protocol": "Protocol",
+          "protocolPlaceholder": "Select protocol",
+          "host": "Host",
+          "hostPlaceholder": "e.g., localhost or 127.0.0.1",
           "port": "Port",
+          "path": "Path",
+          "pathPlaceholder": "e.g., /jsonrpc",
           "authSecret": "Auth secret",
+          "downloadPath": "Download path",
+          "downloadPathPlaceholder": "Leave empty to use Aria2 default path",
           "save": "Save",
-          "success": "Saved successfully"
+          "success": "Saved successfully",
+          "Test": {
+            "title": "Test Connection",
+            "success": "Connection successful!",
+            "failed": "Connection failed",
+            "failedToConnect": "Cannot connect to Aria2 server",
+            "unauthorized": "Authentication failed, please check your secret"
+          },
+          "Reset": {
+            "title": "Reset",
+            "reset": "Reset",
+            "success": "Reset to default settings"
+          }
         }
       },
       "Home": {

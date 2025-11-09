@@ -23,9 +23,9 @@ export const Nav = () => {
             target={link.external ? '_blank' : undefined}
             data-active={isActive ? 'true' : 'false'}
             className={cn(
+              link.external ? 'hover:opacity-70' : 'hover:bg-primary/5 hover:text-primary',
               'font-normal px-4 py-2 rounded-md cursor-pointer duration-200',
               isActive && 'bg-primary/10 hover:bg-primary/10 text-primary',
-              link.external ? 'hover:opacity-70' : 'hover:bg-primary/5 hover:text-primary',
             )}
           >
             <span className="flex items-center gap-1">
