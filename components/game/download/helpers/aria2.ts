@@ -49,20 +49,18 @@ export const addUrl = async (
     return handleAria2Error(ready)
   }
 
-  const options: any = {
-    out: file_name,
-  }
-
-  // if downloadPath is provided, set dir option
-  if (downloadPath && downloadPath.trim() !== '') {
-    options.dir = downloadPath
-  }
-
   const data = {
     jsonrpc: '2.0',
     method: 'aria2.addUri',
     id: 'add_url_' + file_name,
-    params: ['token:' + auth_secret, [file_url], options],
+    params: [
+      'token:' + auth_secret,
+      [file_url],
+      {
+        out: file_name,
+        dir: downloadPath && downloadPath.trim() !== '' ? downloadPath : undefined,
+      },
+    ],
   }
 
   // try to envoke motrix

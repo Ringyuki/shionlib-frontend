@@ -6,3 +6,5 @@ export interface Aria2Settings {
   auth_secret: string
   downloadPath: string
 }
+
+export type TestStatus = 'idle' | 'testing' | 'success' | 'error'

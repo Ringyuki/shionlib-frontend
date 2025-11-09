@@ -13,13 +13,12 @@ import {
 import { Input } from '@/components/shionui/Input'
 import { Form, FormItem, FormLabel, FormControl } from '@/components/shionui/Form'
 import { useForm, Controller } from 'react-hook-form'
-import { Zap, RotateCcw, FlaskConical, CheckCircle2, XCircle } from 'lucide-react'
+import { Zap } from 'lucide-react'
 import { InputNumber } from '@/components/shionui/InputNumber'
 import { Button } from '@/components/shionui/Button'
 import { useTranslations } from 'next-intl'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { toast } from 'react-hot-toast'
-import { check } from '@/components/game/download/helpers/aria2'
 import {
   Select,
   SelectContent,
@@ -27,35 +26,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/shionui/Select'
-
-interface Aria2FormData {
-  protocol: 'http' | 'https'
-  host: string
-  port: number
-  path: string
-  authSecret: string
-  downloadPath: string
-}
-
-const defaultSettings: Aria2FormData = {
-  protocol: 'http',
-  host: 'localhost',
-  port: 16800,
-  path: '/jsonrpc',
-  authSecret: '',
-  downloadPath: '',
-}
-
-type TestStatus = 'idle' | 'testing' | 'success' | 'error'
+import { initialSettings } from '@/store/aria2Store'
+import { Aria2Settings } from '@/interfaces/aria2/aria2.interface'
+import { Aria2Reset } from './aria2/Reset'
+import { Aria2Test } from './aria2/Test'
 
 export const Aria2 = () => {
   const t = useTranslations('Components.User.Settings.Aria2')
   const { getSettings, setSettings } = useAria2Store()
-  const [testStatus, setTestStatus] = useState<TestStatus>('idle')
-  const [testMessage, setTestMessage] = useState<string>('')
-
-  const form = useForm<Aria2FormData>({
-    defaultValues: defaultSettings,
+  const form = useForm<Aria2Settings>({
+    defaultValues: initialSettings,
   })
 
   useEffect(() => {
@@ -65,18 +45,18 @@ export const Aria2 = () => {
       host: s.host,
       port: s.port,
       path: s.path,
-      authSecret: s.auth_secret,
+      auth_secret: s.auth_secret,
       downloadPath: s.downloadPath,
     })
   }, [getSettings, form])
 
-  const onSubmit = (data: Aria2FormData) => {
+  const onSubmit = (data: Aria2Settings) => {
     setSettings({
       protocol: data.protocol,
       host: data.host,
       port: data.port,
       path: data.path,
-      auth_secret: data.authSecret,
+      auth_secret: data.auth_secret,
       downloadPath: data.downloadPath,
     })
     toast.success(t('success'))
@@ -86,53 +66,6 @@ export const Aria2 = () => {
     form.handleSubmit(onSubmit)()
   }
 
-  const onReset = () => {
-    form.reset(defaultSettings)
-    setSettings({
-      protocol: defaultSettings.protocol,
-      host: defaultSettings.host,
-      port: defaultSettings.port,
-      path: defaultSettings.path,
-      auth_secret: defaultSettings.authSecret,
-      downloadPath: defaultSettings.downloadPath,
-    })
-    setTestStatus('idle')
-    setTestMessage('')
-    toast.success(t('resetSuccess'))
-  }
-
-  const onTest = async () => {
-    const values = form.getValues()
-    setTestStatus('testing')
-    setTestMessage('')
-
-    try {
-      const result = await check(
-        values.protocol,
-        values.host,
-        values.port,
-        values.path,
-        values.authSecret,
-      )
-
-      if (result === true) {
-        setTestStatus('success')
-        setTestMessage(t('testSuccess'))
-      } else {
-        setTestStatus('error')
-        if (result.details === 'aria2FailedToFetch') {
-          setTestMessage(t('testFailedToConnect'))
-        } else if (result.details?.message === 'Unauthorized') {
-          setTestMessage(t('testUnauthorized'))
-        } else {
-          setTestMessage(t('testFailed'))
-        }
-      }
-    } catch (error) {
-      setTestStatus('error')
-      setTestMessage(t('testFailed'))
-    }
-  }
   return (
     <Card>
       <CardHeader>
@@ -203,7 +136,7 @@ export const Aria2 = () => {
               <FormLabel>{t('authSecret')}</FormLabel>
               <FormControl>
                 <Controller
-                  name="authSecret"
+                  name="auth_secret"
                   control={form.control}
                   render={({ field }) => <Input {...field} clearable type="password" />}
                 />
@@ -226,37 +159,14 @@ export const Aria2 = () => {
       </CardContent>
       <CardFooter>
         <div className="flex flex-col gap-3 w-full">
-          <div className="flex gap-2 flex-wrap items-center">
-            <Button intent="primary" onClick={onSave}>
-              {t('save')}
-            </Button>
-            <Button intent="neutral" appearance="soft" onClick={onReset} renderIcon={<RotateCcw />}>
-              {t('reset')}
-            </Button>
-            <Button
-              intent="neutral"
-              appearance="ghost"
-              onClick={onTest}
-              loading={testStatus === 'testing'}
-              renderIcon={<FlaskConical />}
-            >
-              {t('test')}
-            </Button>
-            {testStatus !== 'idle' && testStatus !== 'testing' && (
-              <div className="flex items-center gap-2 text-sm">
-                {testStatus === 'success' ? (
-                  <>
-                    <CheckCircle2 className="size-4 text-green-500" />
-                    <span className="text-green-600 dark:text-green-400">{testMessage}</span>
-                  </>
-                ) : (
-                  <>
-                    <XCircle className="size-4 text-red-500" />
-                    <span className="text-red-600 dark:text-red-400">{testMessage}</span>
-                  </>
-                )}
-              </div>
-            )}
+          <div className="flex flex-col items-start md:flex-row gap-2">
+            <div className="flex gap-2 flex-wrap">
+              <Button intent="primary" onClick={onSave}>
+                {t('save')}
+              </Button>
+              <Aria2Reset form={form} />
+            </div>
+            <Aria2Test form={form} />
           </div>
         </div>
       </CardFooter>

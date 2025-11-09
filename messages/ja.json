@@ -719,13 +719,18 @@
           "downloadPathPlaceholder": "空欄にすると Aria2 のデフォルトパスを使用",
           "save": "保存",
           "success": "保存成功",
-          "reset": "リセット",
-          "resetSuccess": "デフォルト設定にリセットしました",
-          "test": "接続テスト",
-          "testSuccess": "接続成功！",
-          "testFailed": "接続失敗",
-          "testFailedToConnect": "Aria2 サーバーに接続できません",
-          "testUnauthorized": "認証失敗、シークレットを確認してください"
+          "Test": {
+            "title": "接続テスト",
+            "success": "接続成功！",
+            "failed": "接続失敗",
+            "failedToConnect": "Aria2 サーバーに接続できません",
+            "unauthorized": "認証失敗、シークレットを確認してください"
+          },
+          "Reset": {
+            "title": "リセット",
+            "reset": "リセット",
+            "success": "デフォルト設定にリセットしました"
+          }
         }
       },
       "Home": {

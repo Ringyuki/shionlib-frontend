@@ -726,13 +726,18 @@
           "downloadPathPlaceholder": "留空使用 Aria2 默认路径",
           "save": "保存",
           "success": "已保存",
-          "reset": "复位",
-          "resetSuccess": "已复位到默认设置",
-          "test": "测试连接",
-          "testSuccess": "连接成功！",
-          "testFailed": "连接失败",
-          "testFailedToConnect": "无法连接到 Aria2 服务器",
-          "testUnauthorized": "认证失败，请检查密钥"
+          "Test": {
+            "title": "测试连接",
+            "success": "连接成功！",
+            "failed": "连接失败",
+            "failedToConnect": "无法连接到 Aria2 服务器",
+            "unauthorized": "认证失败，请检查密钥"
+          },
+          "Reset": {
+            "title": "复位",
+            "reset": "复位",
+            "success": "已复位到默认设置"
+          }
         }
       },
       "Home": {
