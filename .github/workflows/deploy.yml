@@ -2,7 +2,10 @@ name: deploy frontend
 
 on:
   push:
-    branches: [main]
+    branches: ['**']
+  pull_request:
+    branches: ['main']
+  workflow_dispatch:
 
 concurrency:
   group: shionlib-frontend-deploy
@@ -42,6 +45,7 @@ jobs:
     environment: deploy
     runs-on: ubuntu-latest
 
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'Ringyuki/shionlib-frontend'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
