@@ -9,6 +9,8 @@ import { Avatar } from '@/components/common/user/Avatar'
 import { timeFromNow } from '@/utils/time-format'
 import { useLocale } from 'next-intl'
 import { Calendar, Info, Hash } from 'lucide-react'
+import { Undo } from './Undo'
+import { useShionlibUserStore } from '@/store/userStore'
 
 interface HistoryItemProps {
   history: EditRecordItemInterface
@@ -18,24 +20,43 @@ interface HistoryItemProps {
 export const HistoryItem = ({ history, className }: HistoryItemProps) => {
   const t = useTranslations('Components.Game.EditHistory')
   const locale = useLocale()
+  const { getUser } = useShionlibUserStore()
+  const isAdmin = getUser().role !== 1
+
   return (
     <Card className={cn('py-0 overflow-hidden', className)}>
       <CardContent className="p-4 flex flex-col gap-3">
         {history.field_changes && history.field_changes.length > 0 && (
           <div className="flex items-center justify-between">
             <div className="flex gap-1 items-center">
-              <div className="flex items-center gap-2">
-                <Avatar user={history.actor!} />
-                <span className="text-sm font-medium">{history.actor!.name}</span>
+              <div className="flex gap-1 items-center">
+                <div className="flex items-center gap-2">
+                  <Avatar user={history.actor!} />
+                  <span className="text-sm font-medium">{history.actor!.name}</span>
+                </div>
+                <span className="text-sm text-muted-foreground">
+                  {history.undo_of ? t('undoneOf') : t('fieldChanges')}
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {history.undo_of ? (
+                    <div className="flex items-center gap-0.5 text-muted-foreground text-xs">
+                      <Hash className="size-3" />
+                      {history.undo_of.id}
+                    </div>
+                  ) : (
+                    history.field_changes.map((field, index) => (
+                      <Badge key={index} variant="neutral" className="font-mono! text-xs">
+                        {field}
+                      </Badge>
+                    ))
+                  )}
+                </div>
               </div>
-              <span className="text-sm text-muted-foreground">{t('fieldChanges')}</span>
-              <div className="flex flex-wrap gap-2">
-                {history.field_changes.map((field, index) => (
-                  <Badge key={index} variant="neutral" className="font-mono! text-xs">
-                    {field}
-                  </Badge>
-                ))}
-              </div>
+              {history.undone_by && (
+                <Badge variant="destructive" className="flex items-center gap-1">
+                  {t('undone')}
+                </Badge>
+              )}
             </div>
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-0.5 text-muted-foreground text-xs">
@@ -57,6 +78,15 @@ export const HistoryItem = ({ history, className }: HistoryItemProps) => {
         )}
         <Separator />
         <EditChanges changes={history.changes} />
+        {isAdmin && !history.undo && !history.undone_by && (
+          <>
+            <Separator />
+
+            <div className="flex items-center justify-end">
+              <Undo edit_id={history.id} />
+            </div>
+          </>
+        )}
       </CardContent>
     </Card>
   )

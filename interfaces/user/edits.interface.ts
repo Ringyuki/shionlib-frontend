@@ -33,46 +33,42 @@ interface Actor {
   avatar: string
 }
 
-export type EditRecordItem =
-  | {
-      id: number
-      entity: 'game'
-      target_id: number
-      action: EditActionType
-      field_changes: string[]
-      changes: any
-      relation_type: EditRelationType | null
-      entity_info: GameEntityInfo | null
-      actor: Actor | null
-      note: string | null
-      created: string
-      updated: string
-    }
-  | {
-      id: number
-      entity: 'character'
-      target_id: number
-      action: EditActionType
-      field_changes: string[]
-      changes: any
-      relation_type: EditRelationType | null
-      entity_info: CharacterEntityInfo | null
-      actor: Actor | null
-      note: string | null
-      created: string
-      updated: string
-    }
-  | {
-      id: number
-      entity: 'developer'
-      target_id: number
-      action: EditActionType
-      field_changes: string[]
-      changes: any
-      relation_type: EditRelationType | null
-      entity_info: DeveloperEntityInfo | null
-      actor: Actor | null
-      note: string | null
-      created: string
-      updated: string
-    }
+interface EditRecordBase {
+  id: number
+  entity: 'game' | 'character' | 'developer'
+  target_id: number
+  action: EditActionType
+  field_changes: string[]
+  changes: any
+  relation_type: EditRelationType | null
+  entity_info: GameEntityInfo | CharacterEntityInfo | DeveloperEntityInfo | null
+  actor: Actor | null
+  note: string | null
+  created: string
+  updated: string
+
+  undo: boolean
+  undo_of: {
+    id: number
+  }
+  undone_by: {
+    id: number
+  }
+}
+
+interface GameEditRecord extends EditRecordBase {
+  entity: 'game'
+  entity_info: GameEntityInfo
+}
+
+interface CharacterEditRecord extends EditRecordBase {
+  entity: 'character'
+  entity_info: CharacterEntityInfo
+}
+
+interface DeveloperEditRecord extends EditRecordBase {
+  entity: 'developer'
+  entity_info: DeveloperEntityInfo
+}
+
+export type EditRecordItem = GameEditRecord | CharacterEditRecord | DeveloperEditRecord

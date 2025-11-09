@@ -579,7 +579,15 @@
       },
       "EditHistory": {
         "title": "编辑历史",
-        "fieldChanges": "修改字段"
+        "fieldChanges": "修改字段",
+        "undone": "已撤销",
+        "undoneOf": "撤销了",
+        "undo": "撤销此编辑",
+        "undoDescription": "确定要撤销此编辑吗？撤销后，此编辑将会被撤回，并且无法恢复。",
+        "confirm": "确认",
+        "cancel": "取消",
+        "success": "撤销成功",
+        "forceUndo": "强制撤销"
       },
       "Filter": {
         "Header": {
