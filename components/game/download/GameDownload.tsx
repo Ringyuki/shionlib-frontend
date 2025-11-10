@@ -67,7 +67,8 @@ export const GameDownload = ({
     setDownloadResources(prev =>
       prev.map(resource => (resource.id === id ? { ...resource, ...data } : resource)),
     )
-
+  const handleDelete = (id: number) =>
+    setDownloadResources(prev => prev.filter(resource => resource.id !== id))
   return (
     <div className="hidden">
       {isMobile ? (
@@ -76,6 +77,7 @@ export const GameDownload = ({
           open={open && isReady}
           onOpenChange={onOpenChange}
           onUpdate={handleUpdate}
+          onDelete={handleDelete}
         />
       ) : (
         <GameDownloadDialog
@@ -83,6 +85,7 @@ export const GameDownload = ({
           open={open && isReady}
           onOpenChange={onOpenChange}
           onUpdate={handleUpdate}
+          onDelete={handleDelete}
         />
       )}
     </div>

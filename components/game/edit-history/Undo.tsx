@@ -61,7 +61,7 @@ export const Undo = ({ edit_id }: UndoProps) => {
           {t('undo')}
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent fitContent tone="destructive">
+      <AlertDialogContent tone="destructive">
         <AlertDialogHeader>
           <AlertDialogTitle>{t('undo')}</AlertDialogTitle>
           <AlertDialogDescription>{t('undoDescription')}</AlertDialogDescription>

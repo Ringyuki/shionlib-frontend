@@ -8,6 +8,7 @@ interface GameDownloadDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   onUpdate: (id: number, data: Partial<GameDownloadResource>) => void
+  onDelete: (id: number) => void
 }
 
 export const GameDownloadDialog = ({
@@ -15,6 +16,7 @@ export const GameDownloadDialog = ({
   open,
   onOpenChange,
   onUpdate,
+  onDelete,
 }: GameDownloadDialogProps) => {
   const t = useTranslations('Components.Game.Download.GameDownloadDialog')
   return (
@@ -27,6 +29,7 @@ export const GameDownloadDialog = ({
           className="px-0 pb-0"
           downloadResources={downloadResources}
           onUpdate={onUpdate}
+          onDelete={onDelete}
         />
       </DialogContent>
     </Dialog>

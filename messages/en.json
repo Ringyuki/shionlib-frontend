@@ -518,6 +518,13 @@
           "title": "Edit this download resource",
           "submit": "Confirm changes",
           "success": "Changes saved successfully"
+        },
+        "Delete": {
+          "title": "Delete this download resource",
+          "description": "Are you sure you want to delete this download resource? This action cannot be undone.",
+          "cancel": "Cancel",
+          "delete": "Delete",
+          "success": "Deleted successfully"
         }
       },
       "Cover": {

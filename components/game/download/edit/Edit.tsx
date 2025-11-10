@@ -44,6 +44,8 @@ export const Edit = ({ downloadResource, onSuccess }: EditProps) => {
         loginRequired
         onClick={() => setOpen(true)}
         renderIcon={<Pencil />}
+        loading={isSubmitting}
+        size="sm"
       >
         {t('title')}
       </Button>

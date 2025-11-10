@@ -24,7 +24,7 @@ export const Confirm = ({ open, setOpen, handleSubmit, changes }: ConfirmProps) 
   const t = useTranslations('Components.Game.Edit.Scalar.Comfirm')
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogContent fitContent tone="info">
+      <AlertDialogContent fitContent tone="primary">
         <AlertDialogHeader>
           <AlertDialogTitle>{t('title')}</AlertDialogTitle>
         </AlertDialogHeader>
@@ -34,8 +34,10 @@ export const Confirm = ({ open, setOpen, handleSubmit, changes }: ConfirmProps) 
           </ScrollArea>
         </AlertDialogDescription>
         <AlertDialogFooter>
-          <AlertDialogCancel onClick={() => setOpen(false)}>{t('cancel')}</AlertDialogCancel>
-          <AlertDialogAction tone="info" onClick={handleSubmit}>
+          <AlertDialogCancel tone="primary" onClick={() => setOpen(false)}>
+            {t('cancel')}
+          </AlertDialogCancel>
+          <AlertDialogAction tone="primary" onClick={handleSubmit}>
             {t('submit')}
           </AlertDialogAction>
         </AlertDialogFooter>

@@ -6,10 +6,12 @@ import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog'
 import { cn } from '@/utils/cn'
 import { Button } from '@/components/shionui/Button'
 
-type AlertDialogTone = 'neutral' | 'info' | 'success' | 'warning' | 'destructive'
+type AlertDialogTone = 'neutral' | 'primary' | 'info' | 'success' | 'warning' | 'destructive'
 
 function toneBorderClass(tone: AlertDialogTone | undefined) {
   switch (tone) {
+    case 'primary':
+      return 'border-primary/40'
     case 'info':
       return 'border-info/40'
     case 'success':
@@ -25,6 +27,8 @@ function toneBorderClass(tone: AlertDialogTone | undefined) {
 
 function toneTextClass(tone: AlertDialogTone | undefined) {
   switch (tone) {
+    case 'primary':
+      return 'text-primary'
     case 'info':
       return 'text-info'
     case 'success':
@@ -42,6 +46,8 @@ function toneToIntent(
   tone: AlertDialogTone | undefined,
 ): NonNullable<React.ComponentProps<typeof Button>['intent']> {
   switch (tone) {
+    case 'primary':
+      return 'primary'
     case 'info':
       return 'info'
     case 'success':

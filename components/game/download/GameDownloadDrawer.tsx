@@ -14,6 +14,7 @@ interface GameDownloadDrawerProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   onUpdate: (id: number, data: Partial<GameDownloadResource>) => void
+  onDelete: (id: number) => void
 }
 
 export const GameDownloadDrawer = ({
@@ -21,6 +22,7 @@ export const GameDownloadDrawer = ({
   open,
   onOpenChange,
   onUpdate,
+  onDelete,
 }: GameDownloadDrawerProps) => {
   const t = useTranslations('Components.Game.Download.GameDownloadDrawer')
   return (
@@ -30,7 +32,11 @@ export const GameDownloadDrawer = ({
           <DrawerTitle>{t('title')}</DrawerTitle>
         </DrawerHeader>
         <DrawerDescription></DrawerDescription>
-        <GameDownloadContent downloadResources={downloadResources} onUpdate={onUpdate} />
+        <GameDownloadContent
+          downloadResources={downloadResources}
+          onUpdate={onUpdate}
+          onDelete={onDelete}
+        />
       </DrawerContent>
     </Drawer>
   )

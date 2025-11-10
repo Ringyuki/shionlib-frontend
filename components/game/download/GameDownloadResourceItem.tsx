@@ -1,61 +1,33 @@
 import { GameDownloadResource } from '@/interfaces/game/game-download-resource'
-import { MdWindow, MdWeb } from 'react-icons/md'
-import { FaApple, FaAndroid, FaLinux } from 'react-icons/fa'
-import {
-  SiPlaystationvita,
-  SiNintendoswitch,
-  SiPlaystationportable,
-  SiPlaystation4,
-  SiPlaystation3,
-  SiMacos,
-  SiPlaystation2,
-  SiNintendo3Ds,
-} from 'react-icons/si'
-import { FcDvdLogo } from 'react-icons/fc'
 import { Badge } from '@/components/shionui/Badge'
 import { Avatar } from '@/components/common/user/Avatar'
-import { platformTokenMap, Platform } from '@/interfaces/game/game.interface'
-import { platformNameMap } from '@/interfaces/game/game.interface'
+import { GamePlatform } from '@/components/game/description/GamePlatform'
 import { LanguageNameMap } from '@/interfaces/game/game.interface'
 import { GameDownloadFileItem } from './GameDownloadFileItem'
 import { timeFromNow } from '@/utils/time-format'
 import { useLocale } from 'next-intl'
 import { useTranslations } from 'next-intl'
 import { Edit } from './edit/Edit'
+import { Delete } from './delete/Delete'
 import { useShionlibUserStore } from '@/store/userStore'
 
 interface GameDownloadResourceItemProps {
   resource: GameDownloadResource
   onUpdate: (id: number, data: Partial<GameDownloadResource>) => void
+  onDelete: (id: number) => void
 }
 
-const PlatformIconMap: Record<Platform, React.ElementType> = {
-  win: MdWindow,
-  ios: FaApple,
-  and: FaAndroid,
-  lin: FaLinux,
-  ps2: SiPlaystation2,
-  ps3: SiPlaystation3,
-  ps4: SiPlaystation4,
-  psp: SiPlaystationportable,
-  psv: SiPlaystationvita,
-  swi: SiNintendoswitch,
-  dvd: FcDvdLogo,
-  mac: SiMacos,
-  mob: MdWeb,
-  web: MdWeb,
-  vnd: MdWeb,
-  drc: MdWeb,
-  gba: SiNintendo3Ds,
-  nds: SiNintendo3Ds,
-}
-
-export const GameDownloadResourceItem = ({ resource, onUpdate }: GameDownloadResourceItemProps) => {
+export const GameDownloadResourceItem = ({
+  resource,
+  onUpdate,
+  onDelete,
+}: GameDownloadResourceItemProps) => {
   const locale = useLocale()
   const t = useTranslations('Components.Game.Download.GameDownloadResourceItem')
 
   const { user } = useShionlibUserStore()
   const showEdit = user.id === resource.creator.id || user.role !== 1
+  const showDelete = user.role !== 1
   return (
     <div
       key={resource.id}
@@ -64,22 +36,7 @@ export const GameDownloadResourceItem = ({ resource, onUpdate }: GameDownloadRes
       <div className="flex flex-col gap-2 w-full">
         <div className="flex justify-between items-center">
           <div className="flex flex-wrap gap-2 shrink-0">
-            {resource.platform?.map(p => {
-              const IconComponent = PlatformIconMap[p]
-              return (
-                <Badge
-                  key={p}
-                  style={{
-                    backgroundColor: platformTokenMap[p].bg,
-                    color: platformTokenMap[p].fg,
-                    userSelect: 'none',
-                  }}
-                >
-                  <IconComponent className="size-4" />
-                  {platformNameMap[p]}
-                </Badge>
-              )
-            })}
+            <GamePlatform platform={resource.platform} />
             {resource.language?.map(l => {
               return (
                 <Badge key={l} variant="neutral">
@@ -107,7 +64,10 @@ export const GameDownloadResourceItem = ({ resource, onUpdate }: GameDownloadRes
           </div>
         )}
       </div>
-      {showEdit && <Edit downloadResource={resource} onSuccess={onUpdate} />}
+      <div className="flex gap-2 items-center justify-end">
+        {showEdit && <Edit downloadResource={resource} onSuccess={onUpdate} />}
+        {showDelete && <Delete id={resource.id} onSuccess={onDelete} />}
+      </div>
     </div>
   )
 }

@@ -518,6 +518,13 @@
           "title": "编辑此下载资源",
           "submit": "确认更改",
           "success": "更改成功"
+        },
+        "Delete": {
+          "title": "删除此下载资源",
+          "description": "确定要删除此下载资源吗？此操作无法撤销。",
+          "cancel": "取消",
+          "delete": "删除",
+          "success": "删除成功"
         }
       },
       "Cover": {
