@@ -19,6 +19,13 @@ export const friendLinks: FriendLink[] = [
   },
   {
     id: 3,
+    name: 'Nysoure',
+    url: 'https://res.nyne.dev/',
+    logo: 'https://res.nyne.dev/icon-192.png',
+    description: 'Nysoure 是一个完全免费的galgame分享网站, 不接受捐赠和广告',
+  },
+  {
+    id: 4,
     name: 'UUZ导航 | ACG导航站',
     url: 'https://www.uuznav.com/',
     logo: 'https://www.uuznav.com/favicon.ico',

@@ -36,6 +36,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'res.nyne.dev',
+      },
+      {
+        protocol: 'https',
         hostname: 'www.uuznav.com',
       },
       {
