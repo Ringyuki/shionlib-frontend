@@ -161,6 +161,11 @@
           "reset": "再読み込み"
         }
       },
+      "Site": {
+        "Ad": {
+          "ad": "広告"
+        }
+      },
       "TopBar": {
         "SearchTrigger": {
           "search": "検索..."

@@ -8,6 +8,7 @@ import { Comment } from '@/interfaces/comment/comment.interface'
 import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
 import { createGenerateMetadata } from '@/libs/seo/metadata'
 import { getPreferredContent } from '@/components/game/description/helpers/getPreferredContent'
+import { Ad } from '@/components/common/site/Ad'
 
 const getGameData = async (id: string) => {
   const data = await shionlibRequest().get<GameData>(`/game/${id}`)
@@ -43,6 +44,7 @@ export default async function GamePage({ params }: GamePageProps) {
     <div className="flex flex-col gap-8">
       <GameHeader game={game} />
       <GameContent game={game} />
+      <Ad id={1} />
       <CommentContent game_id={id} comments={comments} />
     </div>
   )

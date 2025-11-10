@@ -169,6 +169,11 @@
           "reset": "重新加载"
         }
       },
+      "Site": {
+        "Ad": {
+          "ad": "广告"
+        }
+      },
       "TopBar": {
         "SearchTrigger": {
           "search": "搜索..."

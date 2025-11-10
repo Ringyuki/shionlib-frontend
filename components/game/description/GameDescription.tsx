@@ -31,7 +31,7 @@ export const GameDescription = ({ game }: GameDescriptionProps) => {
 
   useEffect(() => {
     setSelectedIntro(game[`intro_${selectedIntroLanguage}` as keyof GameData] as string)
-  }, [selectedIntroLanguage])
+  }, [selectedIntroLanguage, game])
 
   return (
     <>

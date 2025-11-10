@@ -169,6 +169,11 @@
           "reset": "Reload"
         }
       },
+      "Site": {
+        "Ad": {
+          "ad": "AD"
+        }
+      },
       "TopBar": {
         "SearchTrigger": {
           "search": "Search..."

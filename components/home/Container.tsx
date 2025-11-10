@@ -5,6 +5,7 @@ import { Head as GamesHead } from './games/Head'
 import { Games } from './games/Games'
 import { GameItem } from '@/interfaces/game/game.interface'
 import { ContentLimit } from '@/interfaces/user/user.interface'
+import { Ad } from '@/components/common/site/Ad'
 
 interface ContainerProps {
   activities: ActivityInterface[]
@@ -19,6 +20,7 @@ export const Container = ({ activities, games, content_limit }: ContainerProps) 
         <GamesHead />
         <Games games={games} content_limit={content_limit} />
       </div>
+      <Ad id={1} />
       <div className="flex flex-col gap-6">
         <ActivityHead />
         <Activity activities={activities} />
