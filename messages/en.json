@@ -586,7 +586,7 @@
         "title": "Edit history",
         "fieldChanges": "Field changes",
         "undone": "Undone",
-        "undoOf": "Undone of",
+        "undoneOf": "Undone of",
         "undo": "Undo this edit",
         "undoDescription": "Are you sure you want to undo this edit? This edit will be undone and cannot be recovered.",
         "confirm": "Confirm",
