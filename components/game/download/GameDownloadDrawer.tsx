@@ -8,18 +8,19 @@ import {
 import { GameDownloadResource } from '@/interfaces/game/game-download-resource'
 import { GameDownloadContent } from './GameDownloadContent'
 import { useTranslations } from 'next-intl'
-import { Alert, AlertDescription, AlertTitle } from '@/components/shionui/Alert'
 
 interface GameDownloadDrawerProps {
   downloadResources: GameDownloadResource[]
   open: boolean
   onOpenChange: (open: boolean) => void
+  onUpdate: (id: number, data: Partial<GameDownloadResource>) => void
 }
 
 export const GameDownloadDrawer = ({
   downloadResources,
   open,
   onOpenChange,
+  onUpdate,
 }: GameDownloadDrawerProps) => {
   const t = useTranslations('Components.Game.Download.GameDownloadDrawer')
   return (
@@ -29,7 +30,7 @@ export const GameDownloadDrawer = ({
           <DrawerTitle>{t('title')}</DrawerTitle>
         </DrawerHeader>
         <DrawerDescription></DrawerDescription>
-        <GameDownloadContent downloadResources={downloadResources} />
+        <GameDownloadContent downloadResources={downloadResources} onUpdate={onUpdate} />
       </DrawerContent>
     </Drawer>
   )

@@ -23,7 +23,7 @@ export const AvatarResize = ({ image, open, setOpen, onCrop }: AvatarResizeProps
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="sm:w-auto">
+      <DialogContent aria-describedby={undefined} className="sm:w-auto">
         <DialogHeader>
           <DialogTitle>{t('title')}</DialogTitle>
         </DialogHeader>

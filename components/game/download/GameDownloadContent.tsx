@@ -9,9 +9,14 @@ import { BBCodeContent } from '@/components/common/content/BBCode'
 interface GameDownloadContentProps {
   className?: string
   downloadResources: GameDownloadResource[]
+  onUpdate: (id: number, data: Partial<GameDownloadResource>) => void
 }
 
-export const GameDownloadContent = ({ downloadResources, className }: GameDownloadContentProps) => {
+export const GameDownloadContent = ({
+  downloadResources,
+  className,
+  onUpdate,
+}: GameDownloadContentProps) => {
   const t = useTranslations('Components.Game.Download.GameDownloadContent')
   return (
     <div
@@ -28,7 +33,7 @@ export const GameDownloadContent = ({ downloadResources, className }: GameDownlo
         </AlertDescription>
       </Alert>
       {downloadResources.map(resource => (
-        <GameDownloadResourceItem key={resource.id} resource={resource} />
+        <GameDownloadResourceItem key={resource.id} resource={resource} onUpdate={onUpdate} />
       ))}
     </div>
   )

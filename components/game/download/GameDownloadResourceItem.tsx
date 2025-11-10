@@ -21,9 +21,12 @@ import { GameDownloadFileItem } from './GameDownloadFileItem'
 import { timeFromNow } from '@/utils/time-format'
 import { useLocale } from 'next-intl'
 import { useTranslations } from 'next-intl'
+import { Edit } from './edit/Edit'
+import { useShionlibUserStore } from '@/store/userStore'
 
 interface GameDownloadResourceItemProps {
   resource: GameDownloadResource
+  onUpdate: (id: number, data: Partial<GameDownloadResource>) => void
 }
 
 const PlatformIconMap: Record<Platform, React.ElementType> = {
@@ -47,9 +50,12 @@ const PlatformIconMap: Record<Platform, React.ElementType> = {
   nds: SiNintendo3Ds,
 }
 
-export const GameDownloadResourceItem = ({ resource }: GameDownloadResourceItemProps) => {
+export const GameDownloadResourceItem = ({ resource, onUpdate }: GameDownloadResourceItemProps) => {
   const locale = useLocale()
   const t = useTranslations('Components.Game.Download.GameDownloadResourceItem')
+
+  const { user } = useShionlibUserStore()
+  const showEdit = user.id === resource.creator.id || user.role !== 1
   return (
     <div
       key={resource.id}
@@ -101,6 +107,7 @@ export const GameDownloadResourceItem = ({ resource }: GameDownloadResourceItemP
           </div>
         )}
       </div>
+      {showEdit && <Edit downloadResource={resource} onSuccess={onUpdate} />}
     </div>
   )
 }

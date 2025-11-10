@@ -25,7 +25,7 @@ export const DialogFlow = ({
   const t = useTranslations('Components.User.Settings.EmailFlow')
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent fitContent>
+      <DialogContent aria-describedby={undefined} fitContent>
         <DialogHeader>
           <DialogTitle>{t('title')}</DialogTitle>
         </DialogHeader>

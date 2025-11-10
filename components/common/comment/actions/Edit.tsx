@@ -73,7 +73,10 @@ export const Edit = ({ creator_id, comment_id, onEdited }: EditProps) => {
         {t('edit')}
       </DropdownMenuItem>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="w-full min-w-0 sm:max-w-3xl md:max-w-5xl">
+        <DialogContent
+          aria-describedby={undefined}
+          className="w-full min-w-0 sm:max-w-3xl md:max-w-5xl"
+        >
           <DialogHeader>
             <DialogTitle>{t('title')}</DialogTitle>
           </DialogHeader>

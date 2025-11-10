@@ -506,6 +506,11 @@
           "aria2Unauthorized": "未認証、設定を確認してください",
           "aria2FailedToFetch": "Aria2 に接続できません、設定を確認してください",
           "aria2UnknownError": "未知のエラー"
+        },
+        "Edit": {
+          "title": "このダウンロードリソースを編集",
+          "submit": "変更を確認",
+          "success": "変更が保存されました"
         }
       },
       "Cover": {

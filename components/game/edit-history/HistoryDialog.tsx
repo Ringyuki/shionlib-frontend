@@ -22,7 +22,7 @@ export const HistoryDialog = ({
   const t = useTranslations('Components.Game.EditHistory')
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent fitContent>
+      <DialogContent aria-describedby={undefined} fitContent>
         <DialogHeader>
           <DialogTitle>{t('title')}</DialogTitle>
         </DialogHeader>

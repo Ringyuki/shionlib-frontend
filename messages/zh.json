@@ -513,6 +513,11 @@
           "aria2Unauthorized": "未授权，请检查设置是否正确",
           "aria2FailedToFetch": "无法连接到 Aria2，请检查设置是否正确",
           "aria2UnknownError": "未知错误"
+        },
+        "Edit": {
+          "title": "编辑此下载资源",
+          "submit": "确认更改",
+          "success": "更改成功"
         }
       },
       "Cover": {

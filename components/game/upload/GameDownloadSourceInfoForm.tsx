@@ -15,7 +15,7 @@ import {
   MultiSelectValue,
 } from '@/components/shionui/MultiSelect'
 import { useTranslations } from 'next-intl'
-import { Control, useForm } from 'react-hook-form'
+import { Control, useForm, useWatch } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
@@ -40,12 +40,14 @@ interface GameDownloadSourceInfoFormProps {
   className?: string
   onSubmit: (data: z.infer<typeof gameDownloadSourceSchemaType>) => void
   loading: boolean
+  initialValues?: z.infer<typeof gameDownloadSourceSchemaType>
 }
 
 export const GameDownloadSourceInfoForm = ({
   className,
   onSubmit,
   loading,
+  initialValues,
 }: GameDownloadSourceInfoFormProps) => {
   const t = useTranslations('Components.Game.Upload.GameUploadDialog')
 
@@ -56,14 +58,14 @@ export const GameDownloadSourceInfoForm = ({
   })
   const form = useForm<z.infer<typeof gameDownloadSourceSchema>>({
     resolver: zodResolver(gameDownloadSourceSchema),
-    defaultValues: {
+    defaultValues: initialValues ?? {
       platform: [],
       language: [],
       note: '',
     },
   })
-  const platform = form.watch('platform')
-  const language = form.watch('language')
+  const platform = useWatch({ control: form.control, name: 'platform' })
+  const language = useWatch({ control: form.control, name: 'language' })
 
   const handleSubmit = async (data: z.infer<typeof gameDownloadSourceSchema>) => {
     onSubmit(data)

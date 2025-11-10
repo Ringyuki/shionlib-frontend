@@ -61,7 +61,12 @@ export const GameDownload = ({
       isCancelled = true
       onLoadingChange(false)
     }
-  }, [open, game_id])
+  }, [open, game_id, onLoadingChange, onOpenChange, t])
+
+  const handleUpdate = (id: number, data: Partial<GameDownloadResource>) =>
+    setDownloadResources(prev =>
+      prev.map(resource => (resource.id === id ? { ...resource, ...data } : resource)),
+    )
 
   return (
     <div className="hidden">
@@ -70,12 +75,14 @@ export const GameDownload = ({
           downloadResources={downloadResources}
           open={open && isReady}
           onOpenChange={onOpenChange}
+          onUpdate={handleUpdate}
         />
       ) : (
         <GameDownloadDialog
           downloadResources={downloadResources}
           open={open && isReady}
           onOpenChange={onOpenChange}
+          onUpdate={handleUpdate}
         />
       )}
     </div>

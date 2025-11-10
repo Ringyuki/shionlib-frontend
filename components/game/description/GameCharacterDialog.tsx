@@ -26,7 +26,10 @@ export const GameCharacterDialog = ({
       <DialogTrigger>
         <GameCharacterItemTrigger character={character} name={name} />
       </DialogTrigger>
-      <DialogContent className="max-h-[calc(100dvh-2rem)] overflow-auto sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
+      <DialogContent
+        aria-describedby={undefined}
+        className="max-h-[calc(100dvh-2rem)] overflow-auto sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl"
+      >
         <DialogTitle>{t('characterDetailDialogTitle')}</DialogTitle>
         <GameCharacterItemContent
           character={character}
