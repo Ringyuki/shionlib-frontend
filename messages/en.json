@@ -587,7 +587,12 @@
         "confirm": "Confirm",
         "cancel": "Cancel",
         "success": "Undo successfully",
-        "forceUndo": "Force undo"
+        "UndoOptions": {
+          "force": "Force undo",
+          "mode": "Undo mode",
+          "strict": "Strict mode",
+          "cascade": "Cascade mode"
+        }
       },
       "Filter": {
         "Header": {

@@ -587,7 +587,12 @@
         "confirm": "确认",
         "cancel": "取消",
         "success": "撤销成功",
-        "forceUndo": "强制撤销"
+        "UndoOptions": {
+          "force": "强制撤销",
+          "mode": "撤销模式",
+          "strict": "严格模式",
+          "cascade": "级联模式"
+        }
       },
       "Filter": {
         "Header": {

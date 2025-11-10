@@ -15,7 +15,7 @@ import {
 } from '@/components/shionui/AlertDialog'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
-import { Switch } from '@/components/shionui/animated/Switch'
+import { UndoOption, UndoOptionComponent } from './UndoOptions'
 
 interface UndoProps {
   edit_id: number
@@ -25,14 +25,18 @@ export const Undo = ({ edit_id }: UndoProps) => {
   const t = useTranslations('Components.Game.EditHistory')
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [forceUndo, setForceUndo] = useState(false)
+  const [undoOption, setUndoOption] = useState<UndoOption>({
+    force: false,
+    mode: 'strict',
+  })
 
   const undoEdit = async (edit_id: number) => {
     try {
       setLoading(true)
       await shionlibRequest().post(`/edit/${edit_id}/undo`, {
         data: {
-          force: forceUndo,
+          force: undoOption.force,
+          mode: undoOption.mode,
         },
       })
       setOpen(false)
@@ -61,9 +65,8 @@ export const Undo = ({ edit_id }: UndoProps) => {
         <AlertDialogHeader>
           <AlertDialogTitle>{t('undo')}</AlertDialogTitle>
           <AlertDialogDescription>{t('undoDescription')}</AlertDialogDescription>
-          <AlertDialogDescription className="flex items-center gap-2">
-            {t('forceUndo')}
-            <Switch checked={forceUndo} onCheckedChange={setForceUndo} />
+          <AlertDialogDescription asChild>
+            <UndoOptionComponent onUndoOptionChange={setUndoOption} />
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

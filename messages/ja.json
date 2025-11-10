@@ -580,7 +580,12 @@
         "confirm": "確認",
         "cancel": "キャンセル",
         "success": "元に戻しました",
-        "forceUndo": "強制的に元に戻す"
+        "UndoOptions": {
+          "force": "強制的に元に戻す",
+          "mode": "元に戻すモード",
+          "strict": "厳密モード",
+          "cascade": "級連モード"
+        }
       },
       "Filter": {
         "Header": {
