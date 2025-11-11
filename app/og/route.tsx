@@ -159,8 +159,6 @@ export async function GET(req: Request) {
                 width: 300,
                 height: 300,
                 overflow: 'hidden',
-                borderRadius: 20,
-                boxShadow: '0 12px 40px rgba(0,0,0,0.35)',
               }}
             >
               <img
