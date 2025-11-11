@@ -1,9 +1,10 @@
 import { ContentLimit } from '@/interfaces/user/user.interface'
 
 export interface GameCover {
+  id?: number
   language: Language
   url: string
-  type: string
+  type: CoverType
   dims: number[]
   sexual: number
   violence: number
@@ -165,6 +166,20 @@ export const LanguageNameMap: Record<Language, string> = {
   jp: '日本語',
   zh: '简体中文',
   en: 'English',
+}
+
+export type CoverType = 'dig' | 'pkgfront'
+export enum CoverTypeEnum {
+  dig = 'Digital',
+  pkgfront = 'Package Front',
+}
+export const CoverTypeOptions: Array<{ label: string; value: CoverType }> = [
+  { value: 'dig', label: 'Digital' },
+  { value: 'pkgfront', label: 'Package Front' },
+]
+export const CoverTypeNameMap: Record<CoverType, string> = {
+  dig: 'Digital',
+  pkgfront: 'Package Front',
 }
 
 export interface GameData {

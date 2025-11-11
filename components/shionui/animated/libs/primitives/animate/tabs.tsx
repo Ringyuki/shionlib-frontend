@@ -141,7 +141,7 @@ type TabsTriggerProps = WithAsChild<
   } & HTMLMotionProps<'button'>
 >
 
-function TabsTrigger({ ref, value, asChild = false, ...props }: TabsTriggerProps) {
+function TabsTrigger({ ref, value, asChild = false, type = 'button', ...props }: TabsTriggerProps) {
   const { activeValue, handleValueChange, registerTrigger } = useTabs()
 
   const localRef = React.useRef<HTMLButtonElement | null>(null)
@@ -159,6 +159,7 @@ function TabsTrigger({ ref, value, asChild = false, ...props }: TabsTriggerProps
       ref={localRef}
       data-slot="tabs-trigger"
       role="tab"
+      {...(asChild ? {} : { type })}
       onClick={() => handleValueChange(value)}
       data-state={activeValue === value ? 'active' : 'inactive'}
       {...props}

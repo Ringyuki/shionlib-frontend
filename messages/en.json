@@ -589,6 +589,31 @@
             "fieldChanges": "Field changes"
           }
         },
+        "Cover": {
+          "noPermission": "You don't have permission to edit covers",
+          "success": "Changes saved successfully",
+          "Edit": {
+            "title": "Edit cover"
+          },
+          "EditContent": {
+            "url": "Image",
+            "dims": "Dimensions",
+            "language": "Language",
+            "selectLanguage": "Select language",
+            "type": "Type",
+            "selectType": "Select type",
+            "sexual": "Sexual level",
+            "violence": "Violence level",
+            "submit": "Confirm changes"
+          },
+          "Image": {
+            "Upload": {
+              "select": "Select image",
+              "upload": "Upload image",
+              "success": "Upload successfully"
+            }
+          }
+        },
         "EditNote": {
           "title": "Edit Note",
           "placeholder": "Edit reason, edit content etc. (optional, e.g. Changed release date to 2025-11-10, reason: release delayed)"

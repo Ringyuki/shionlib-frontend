@@ -27,7 +27,7 @@ export const HistoryItem = ({ history, className }: HistoryItemProps) => {
     <Card className={cn('py-0 overflow-hidden', className)}>
       <CardContent className="p-4 flex flex-col gap-3">
         {history.field_changes && history.field_changes.length > 0 && (
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap">
             <div className="flex gap-1 items-center">
               <div className="flex gap-1 items-center">
                 <div className="flex items-center gap-2">

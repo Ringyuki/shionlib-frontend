@@ -589,6 +589,31 @@
             "fieldChanges": "修改字段"
           }
         },
+        "Cover": {
+          "noPermission": "你没有编辑封面的权限",
+          "success": "更改成功",
+          "Edit": {
+            "title": "编辑封面"
+          },
+          "EditContent": {
+            "url": "图片",
+            "dims": "尺寸",
+            "language": "语言",
+            "selectLanguage": "选择语言",
+            "type": "类型",
+            "selectType": "选择类型",
+            "sexual": "性描写等级",
+            "violence": "暴力描写等级",
+            "submit": "确认更改"
+          },
+          "Image": {
+            "Upload": {
+              "select": "选择图片",
+              "upload": "上传图片",
+              "success": "上传成功"
+            }
+          }
+        },
         "EditNote": {
           "title": "备注",
           "placeholder": "修改原因, 修改内容等(可选, e.g. 修改发售日期为2025年11月10日，原因：发售延期)"
