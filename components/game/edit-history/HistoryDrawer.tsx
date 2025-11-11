@@ -10,6 +10,7 @@ interface HistoryDrawerProps {
   histories: EditRecordItemInterface[]
   pagination: PaginatedMeta
   onPageChange: (page: number) => void
+  loading?: boolean
 }
 
 export const HistoryDrawer = ({
@@ -18,6 +19,7 @@ export const HistoryDrawer = ({
   histories,
   pagination,
   onPageChange,
+  loading = false,
 }: HistoryDrawerProps) => {
   const t = useTranslations('Components.Game.EditHistory')
   return (
@@ -32,6 +34,7 @@ export const HistoryDrawer = ({
             pagination={pagination}
             onPageChange={onPageChange}
             className="max-w-7xl px-3 mx-auto"
+            loading={loading}
           />
         </div>
       </DrawerContent>

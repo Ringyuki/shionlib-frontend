@@ -92,6 +92,7 @@ export const History = ({ game_id }: HistoryProps) => {
         histories={histories}
         pagination={pagination}
         onPageChange={handlePageChange}
+        loading={loading}
       />
     </>
   )

@@ -81,7 +81,6 @@ export const HistoryItem = ({ history, className }: HistoryItemProps) => {
         {isAdmin && !history.undo && !history.undone_by && (
           <>
             <Separator />
-
             <div className="flex items-center justify-end">
               <Undo edit_id={history.id} />
             </div>

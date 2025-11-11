@@ -10,6 +10,7 @@ interface HistoryDialogProps {
   histories: EditRecordItemInterface[]
   pagination: PaginatedMeta
   onPageChange: (page: number) => void
+  loading?: boolean
 }
 
 export const HistoryDialog = ({
@@ -18,6 +19,7 @@ export const HistoryDialog = ({
   histories,
   pagination,
   onPageChange,
+  loading = false,
 }: HistoryDialogProps) => {
   const t = useTranslations('Components.Game.EditHistory')
   return (
@@ -26,7 +28,12 @@ export const HistoryDialog = ({
         <DialogHeader>
           <DialogTitle>{t('title')}</DialogTitle>
         </DialogHeader>
-        <History histories={histories} pagination={pagination} onPageChange={onPageChange} />
+        <History
+          histories={histories}
+          pagination={pagination}
+          onPageChange={onPageChange}
+          loading={loading}
+        />
       </DialogContent>
     </Dialog>
   )

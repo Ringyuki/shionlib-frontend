@@ -1,7 +1,5 @@
 'use client'
 
-import * as React from 'react'
-
 import {
   Pagination as UIPagination,
   PaginationContent,
@@ -35,6 +33,7 @@ export type ContentPaginationProps = {
   className?: string
   onPageChange?: (page: number) => void
   noRouteChange?: boolean
+  loading?: boolean
 }
 
 function buildHref(
@@ -116,6 +115,7 @@ export const Pagination = (props: ContentPaginationProps) => {
     className,
     onPageChange,
     noRouteChange = false,
+    loading = false,
   } = props
 
   const basePath = usePathname()
@@ -139,7 +139,7 @@ export const Pagination = (props: ContentPaginationProps) => {
           <PaginationItem>
             <PaginationPrevious
               href={makeHref(safeCurrentPage - 1)}
-              disabled={safeCurrentPage === 1}
+              disabled={safeCurrentPage === 1 || loading}
               noRouteChange={noRouteChange}
               onClick={() => {
                 if (safeCurrentPage === 1) return
@@ -159,6 +159,7 @@ export const Pagination = (props: ContentPaginationProps) => {
               <PaginationLink
                 href={makeHref(it)}
                 isActive={it === safeCurrentPage}
+                disabled={loading}
                 size={size}
                 noRouteChange={noRouteChange}
                 onClick={() => {
@@ -176,7 +177,7 @@ export const Pagination = (props: ContentPaginationProps) => {
           <PaginationItem>
             <PaginationNext
               href={makeHref(safeCurrentPage + 1)}
-              disabled={safeCurrentPage === safeTotalPages}
+              disabled={safeCurrentPage === safeTotalPages || loading}
               noRouteChange={noRouteChange}
               onClick={() => {
                 if (safeCurrentPage === safeTotalPages) return

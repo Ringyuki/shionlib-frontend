@@ -9,9 +9,16 @@ interface HistoryProps {
   histories: EditRecordItem[]
   pagination: PaginatedMeta
   onPageChange: (page: number) => void
+  loading?: boolean
 }
 
-export const History = ({ className, histories, pagination, onPageChange }: HistoryProps) => {
+export const History = ({
+  className,
+  histories,
+  pagination,
+  onPageChange,
+  loading = false,
+}: HistoryProps) => {
   return (
     <div className={cn('flex flex-col gap-6', className)}>
       {histories.map(history => (
@@ -22,6 +29,7 @@ export const History = ({ className, histories, pagination, onPageChange }: Hist
         totalPages={pagination.totalPages}
         onPageChange={onPageChange}
         noRouteChange
+        loading={loading}
       />
     </div>
   )

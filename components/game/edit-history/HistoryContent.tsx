@@ -10,6 +10,7 @@ interface HistoryContentProps {
   histories: EditRecordItemInterface[]
   pagination: PaginatedMeta
   onPageChange: (page: number) => void
+  loading: boolean
 }
 
 export const HistoryContent = ({
@@ -18,6 +19,7 @@ export const HistoryContent = ({
   histories,
   pagination,
   onPageChange,
+  loading = false,
 }: HistoryContentProps) => {
   const isMobile = useMedia('(max-width: 1024px)', false)
   return (
@@ -29,6 +31,7 @@ export const HistoryContent = ({
           histories={histories}
           pagination={pagination}
           onPageChange={onPageChange}
+          loading={loading}
         />
       ) : (
         <HistoryDialog
@@ -37,6 +40,7 @@ export const HistoryContent = ({
           histories={histories}
           pagination={pagination}
           onPageChange={onPageChange}
+          loading={loading}
         />
       )}
     </div>
