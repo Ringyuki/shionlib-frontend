@@ -14,6 +14,10 @@ interface ImageProps {
 export const Image = ({ form }: ImageProps) => {
   const t = useTranslations('Components.Game.Edit.Cover.EditContent')
 
+  const handleUpload = (url: string, dims: number[]) => {
+    form.setValue('url', url)
+    form.setValue('dims', dims)
+  }
   return (
     <>
       <FormField
@@ -32,7 +36,7 @@ export const Image = ({ form }: ImageProps) => {
               </div>
               <div className="flex flex-col gap-2 w-full">
                 <Input readOnly value={field.value} />
-                <Upload onUpload={field.onChange} />
+                <Upload onUpload={handleUpload} />
               </div>
             </div>
           </FormItem>
