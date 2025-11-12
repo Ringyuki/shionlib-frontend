@@ -1,4 +1,4 @@
-![shionlib](https://shionlib.com/og?l=en)
+![shionlib](https://shionlib.com/og)
 
 ## Introduction
 
