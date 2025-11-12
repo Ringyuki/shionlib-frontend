@@ -588,6 +588,17 @@
           "Edit": {
             "title": "カバーを編集"
           },
+          "Create": {
+            "create": "カバーを作成",
+            "success": "作成成功"
+          },
+          "Delete": {
+            "title": "カバーを削除",
+            "description": "カバーを削除してよろしいですか？この操作は元に戻せません。",
+            "cancel": "キャンセル",
+            "delete": "削除",
+            "success": "削除成功"
+          },
           "EditContent": {
             "url": "画像",
             "dims": "サイズ",
@@ -597,7 +608,15 @@
             "selectType": "タイプを選択",
             "sexual": "性描写レベル",
             "violence": "暴力描写レベル",
-            "submit": "変更を確認"
+            "submit": "変更を確認",
+            "validation": {
+              "url": "画像を選択してください",
+              "dims": "画像を選択してください",
+              "language": "カバー言語を選択してください",
+              "type": "カバータイプを選択してください",
+              "sexual": "性描写レベルは0-2の間である必要があります",
+              "violence": "暴力描写レベルは0-2の間である必要があります"
+            }
           },
           "Image": {
             "Upload": {

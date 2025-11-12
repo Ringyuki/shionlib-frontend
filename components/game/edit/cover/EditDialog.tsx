@@ -11,6 +11,7 @@ interface EditDialogProps {
   onOpenChange: (open: boolean) => void
   onSubmit: (data: z.infer<typeof gameCoverSchemaType>) => void
   isSubmitting: boolean
+  onDelete: (id: number) => void
 }
 
 export const EditDialog = ({
@@ -19,6 +20,7 @@ export const EditDialog = ({
   onOpenChange,
   onSubmit,
   isSubmitting,
+  onDelete,
 }: EditDialogProps) => {
   const t = useTranslations('Components.Game.Edit.Cover.Edit')
 
@@ -28,7 +30,12 @@ export const EditDialog = ({
         <DialogHeader>
           <DialogTitle>{t('title')}</DialogTitle>
         </DialogHeader>
-        <EditContent cover={cover} onSubmit={onSubmit} isSubmitting={isSubmitting} />
+        <EditContent
+          cover={cover}
+          onSubmit={onSubmit}
+          isSubmitting={isSubmitting}
+          onDelete={onDelete}
+        />
       </DialogContent>
     </Dialog>
   )

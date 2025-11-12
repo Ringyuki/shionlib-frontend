@@ -595,6 +595,17 @@
           "Edit": {
             "title": "Edit cover"
           },
+          "Create": {
+            "create": "Create cover",
+            "success": "Created successfully"
+          },
+          "Delete": {
+            "title": "Delete cover",
+            "description": "Are you sure you want to delete this cover? This action cannot be undone.",
+            "cancel": "Cancel",
+            "delete": "Delete",
+            "success": "Deleted successfully"
+          },
           "EditContent": {
             "url": "Image",
             "dims": "Dimensions",
@@ -604,7 +615,15 @@
             "selectType": "Select type",
             "sexual": "Sexual level",
             "violence": "Violence level",
-            "submit": "Confirm changes"
+            "submit": "Confirm changes",
+            "validation": {
+              "url": "Please select and upload an image",
+              "dims": "Please select and upload an image",
+              "language": "Please select a cover language",
+              "type": "Please select a cover type",
+              "sexual": "Sexual level must be between 0 and 2",
+              "violence": "Violence level must be between 0 and 2"
+            }
           },
           "Image": {
             "Upload": {

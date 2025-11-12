@@ -13,7 +13,7 @@ export const SearchTrigger = () => {
   const [isApple, setIsApple] = useState(false)
   useEffect(() => {
     setIsApple(isMacOs || isIOS)
-  }, [isMacOs, isIOS])
+  }, [])
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
@@ -23,7 +23,7 @@ export const SearchTrigger = () => {
     }
     window.addEventListener('keydown', down)
     return () => window.removeEventListener('keydown', down)
-  }, [])
+  }, [openSearchDialog])
 
   return (
     <>

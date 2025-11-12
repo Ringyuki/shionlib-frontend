@@ -11,6 +11,7 @@ interface EditDrawerProps {
   onOpenChange: (open: boolean) => void
   onSubmit: (data: z.infer<typeof gameCoverSchemaType>) => void
   isSubmitting: boolean
+  onDelete: (id: number) => void
 }
 
 export const EditDrawer = ({
@@ -19,6 +20,7 @@ export const EditDrawer = ({
   onOpenChange,
   onSubmit,
   isSubmitting,
+  onDelete,
 }: EditDrawerProps) => {
   const t = useTranslations('Components.Game.Edit.Cover.Edit')
 
@@ -28,7 +30,12 @@ export const EditDrawer = ({
         <DrawerHeader>
           <DrawerTitle>{t('title')}</DrawerTitle>
         </DrawerHeader>
-        <EditContent cover={cover} onSubmit={onSubmit} isSubmitting={isSubmitting} />
+        <EditContent
+          cover={cover}
+          onSubmit={onSubmit}
+          isSubmitting={isSubmitting}
+          onDelete={onDelete}
+        />
       </DrawerContent>
     </Drawer>
   )

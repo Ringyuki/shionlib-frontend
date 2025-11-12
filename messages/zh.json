@@ -595,6 +595,17 @@
           "Edit": {
             "title": "编辑封面"
           },
+          "Create": {
+            "create": "创建封面",
+            "success": "创建成功"
+          },
+          "Delete": {
+            "title": "删除封面",
+            "description": "确定要删除此封面吗？此操作无法撤销。",
+            "cancel": "取消",
+            "delete": "删除",
+            "success": "删除成功"
+          },
           "EditContent": {
             "url": "图片",
             "dims": "尺寸",
@@ -604,7 +615,15 @@
             "selectType": "选择类型",
             "sexual": "性描写等级",
             "violence": "暴力描写等级",
-            "submit": "确认更改"
+            "submit": "确认更改",
+            "validation": {
+              "url": "请选择并上传图片",
+              "dims": "请选择并上传图片",
+              "language": "请选择封面语言",
+              "type": "请选择封面类型",
+              "sexual": "性描写等级必须在0-2之间",
+              "violence": "暴力描写等级必须在0-2之间"
+            }
           },
           "Image": {
             "Upload": {

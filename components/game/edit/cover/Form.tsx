@@ -17,7 +17,7 @@ import {
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { Image as ImageComponent } from './image/Image'
+import { Image as ImageField } from './image/Image'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/shionui/Button'
 
@@ -42,14 +42,29 @@ export const gameCoverSchemaType = z.object({
 export const CoverForm = ({ cover, onSubmit, loading }: CoverFormProps) => {
   const t = useTranslations('Components.Game.Edit.Cover.EditContent')
 
-  const form = useForm<z.infer<typeof gameCoverSchemaType>>({
-    resolver: zodResolver(gameCoverSchemaType),
+  const gameCoverSchema = z.object({
+    url: z.string().nonempty({ message: t('validation.url') }),
+    dims: z.array(z.number()).nonempty({ message: t('validation.dims') }),
+    language: z.enum(languageValues, { message: t('validation.language') }),
+    type: z.enum(coverTypeValues, { message: t('validation.type') }),
+    sexual: z
+      .number()
+      .min(0)
+      .max(2, { message: t('validation.sexual') }),
+    violence: z
+      .number()
+      .min(0)
+      .max(2, { message: t('validation.violence') }),
+  })
+
+  const form = useForm<z.infer<typeof gameCoverSchema>>({
+    resolver: zodResolver(gameCoverSchema),
     defaultValues: cover,
   })
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <ImageComponent form={form} />
+        <ImageField form={form} />
         <FormField
           control={form.control}
           name="language"
@@ -68,6 +83,7 @@ export const CoverForm = ({ cover, onSubmit, loading }: CoverFormProps) => {
                   ))}
                 </SelectContent>
               </Select>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -89,6 +105,7 @@ export const CoverForm = ({ cover, onSubmit, loading }: CoverFormProps) => {
                   ))}
                 </SelectContent>
               </Select>
+              <FormMessage />
             </FormItem>
           )}
         />

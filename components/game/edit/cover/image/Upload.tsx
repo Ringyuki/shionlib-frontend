@@ -1,7 +1,7 @@
 import { Button } from '@/components/shionui/Button'
 import { Upload as UploadIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { toast } from 'react-hot-toast'
 import { useParams } from 'next/navigation'
@@ -9,14 +9,21 @@ import { getDims } from '../helpers/getDims'
 
 interface UploadProps {
   onUpload: (url: string, dims: number[]) => void
+  onTempUrl?: (url: string) => void
 }
 
-export const Upload = ({ onUpload }: UploadProps) => {
+export const Upload = ({ onUpload, onTempUrl }: UploadProps) => {
   const t = useTranslations('Components.Game.Edit.Cover.Image.Upload')
   const [loading, setLoading] = useState(false)
   const [file, setFile] = useState<File | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const { id: game_id } = useParams()
+
+  useEffect(() => {
+    if (file && onTempUrl) {
+      onTempUrl(URL.createObjectURL(file))
+    }
+  }, [file, onTempUrl])
 
   const handleUpload = async () => {
     if (!file || loading) return
