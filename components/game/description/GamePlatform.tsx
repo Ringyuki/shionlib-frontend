@@ -16,7 +16,7 @@ import { FcDvdLogo } from 'react-icons/fc'
 import { Platform } from '@/interfaces/game/game.interface'
 import { platformNameMap, platformTokenMap } from '@/interfaces/game/game.interface'
 import { cn } from '@/utils/cn'
-import { Plus } from 'lucide-react'
+import { MoreHorizontal, Plus } from 'lucide-react'
 
 const PlatformIconMap: Record<Platform, React.ElementType> = {
   win: MdWindow,
@@ -37,6 +37,7 @@ const PlatformIconMap: Record<Platform, React.ElementType> = {
   drc: MdWeb,
   gba: SiNintendo3Ds,
   nds: SiNintendo3Ds,
+  other: MoreHorizontal,
 }
 interface GamePlatformProps {
   platform: Platform[]

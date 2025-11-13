@@ -1,11 +1,12 @@
 import { GameCover } from '@/interfaces/game/game.interface'
 import { FadeImage } from '@/components/common/shared/FadeImage'
 import { cn } from '@/utils/cn'
-import { JP, CN, US } from 'country-flag-icons/string/3x2'
+import { JP, CN, US, TW } from 'country-flag-icons/string/3x2'
 import { Languages, Proportions } from 'lucide-react'
 import { Language, LanguageNameMap } from '@/interfaces/game/game.interface'
 import { ContentLimit } from '@/interfaces/user/user.interface'
 import { Spoiler } from '@/components/shionui/Spoiler'
+import { MoreHorizontal as More } from 'lucide-react'
 
 interface GameCoverContentProps {
   className?: string
@@ -14,9 +15,10 @@ interface GameCoverContentProps {
   content_limit?: ContentLimit
 }
 
-const flagMap: Record<Language, string> = {
+const flagMap: Record<Exclude<Language, 'other'>, string> = {
   jp: JP,
   zh: CN,
+  'zh-Hant': TW,
   en: US,
 }
 
@@ -76,10 +78,14 @@ export const GameCoverContent = ({
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-1">
                 <Languages className="size-3" />
-                <svg
-                  className="size-3"
-                  dangerouslySetInnerHTML={{ __html: flagMap[cover.language] }}
-                />
+                {cover.language === 'other' ? (
+                  <More className="size-3" />
+                ) : (
+                  <svg
+                    className="size-3"
+                    dangerouslySetInnerHTML={{ __html: flagMap[cover.language] }}
+                  />
+                )}
                 <span className="text-xs font-light">{LanguageNameMap[cover.language]}</span>
               </div>
               <div className="flex items-center gap-1">
