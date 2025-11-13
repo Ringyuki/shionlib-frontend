@@ -26,8 +26,8 @@ export const PatchItem = ({ patch }: GameDownloadResourceItemProps) => {
       className="flex flex-col gap-2 rounded-lg border border-accent p-4 break-words break-all"
     >
       <div className="flex flex-col gap-2 w-full">
-        <div className="flex justify-between items-center">
-          <div className="flex flex-wrap gap-2 shrink-0">
+        <div className="flex flex-wrap gap-2 justify-between items-center">
+          <div className="flex flex-wrap gap-2">
             {patch.type?.map(p => {
               return (
                 <Badge

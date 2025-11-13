@@ -21,7 +21,7 @@ export const GameActions = ({ game }: GameActionsProps) => {
     <>
       <div className="flex gap-2 items-center flex-wrap">
         <div className="flex gap-2 md:items-center flex-col md:flex-row items-start">
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center flex-wrap">
             <Download game_id={game.id} />
             <Patch game_id={game.id} v_id={game.v_id!} />
             <Upload game_id={game.id} />

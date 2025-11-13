@@ -10,13 +10,8 @@ interface PatchContentProps {
 
 export const PatchContent = ({ patches, className }: PatchContentProps) => {
   return (
-    <div className="flex flex-col gap-4">
-      <div
-        className={cn(
-          'flex flex-col gap-2 max-w-7xl px-3 mx-auto overflow-y-auto pb-4 lg:min-w-3xl',
-          className,
-        )}
-      >
+    <div className="flex flex-col gap-4 overflow-y-auto pb-4">
+      <div className={cn('flex flex-col gap-2 max-w-7xl px-3 mx-auto lg:min-w-3xl', className)}>
         {patches
           .filter(patch => patch.type.includes('manual'))
           .sort((a, b) => new Date(a.updated).getTime() - new Date(b.updated).getTime())
