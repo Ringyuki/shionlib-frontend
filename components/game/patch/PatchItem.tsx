@@ -74,7 +74,7 @@ export const PatchItem = ({ patch }: GameDownloadResourceItemProps) => {
       <div className="flex flex-col gap-2 rounded-lg w-full">
         <PatchResourceItem patch={patch} />
         {patch.note && (
-          <div className="text-xs text-muted-foreground font-light font-mono! pl-2 space-y-2">
+          <div className="text-xs font-light font-mono! pl-2 space-y-2">
             {markdownRender(patch.note, { newlineToBr: true })}
           </div>
         )}

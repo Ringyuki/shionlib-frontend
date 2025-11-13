@@ -58,11 +58,7 @@ export const GameDownloadResourceItem = ({
         {resource.files.map(file => (
           <GameDownloadFileItem key={file.id} file={file} />
         ))}
-        {resource.note && (
-          <div className="text-xs text-muted-foreground font-light font-mono! pl-2">
-            {resource.note}
-          </div>
-        )}
+        {resource.note && <div className="text-xs font-light font-mono! pl-2">{resource.note}</div>}
       </div>
       <div className="flex gap-2 items-center justify-end">
         {showEdit && <Edit downloadResource={resource} onSuccess={onUpdate} />}
