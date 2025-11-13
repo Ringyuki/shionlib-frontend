@@ -5,7 +5,7 @@ import { FadeImage } from '@/components/common/shared/FadeImage'
 export const Moyu = () => {
   const t = useTranslations('Components.Game.Patch.PatchContent')
   return (
-    <div className="flex justify-center items-center gap-2">
+    <div className="flex justify-center items-center gap-2 pt-2">
       <span className="text-xs text-muted-foreground">{t('datafrom')}</span>
       <Link href="https://www.moyu.moe" target="_blank" className="flex items-center gap-2">
         <span className="size-4 shrink-0">
