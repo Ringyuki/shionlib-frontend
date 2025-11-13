@@ -11,6 +11,7 @@ import { GameDownloadResourceFileLink } from '@/interfaces/game/game-download-re
 import { toast } from 'react-hot-toast'
 import { addUrl } from './helpers/aria2'
 import { useAria2Store } from '@/store/aria2Store'
+import { CopyButton } from '@/components/shionui/animated/CopyButton'
 
 interface GameDownloadFileItemProps {
   file: GameDownloadResourceFile
@@ -80,7 +81,7 @@ export const GameDownloadFileItem = ({ file }: GameDownloadFileItemProps) => {
   }
 
   return (
-    <div className="flex md:flex-row flex-col gap-2 justify-between items-center border-dashed border p-2 rounded-lg">
+    <div className="flex gap-2 justify-between items-center border-dashed border p-2 rounded-lg">
       <div className="flex flex-col gap-2">
         <div className="text-sm font-medium font-mono! flex items-center gap-2 flex-wrap">
           <span className="flex items-center gap-1">
@@ -116,10 +117,11 @@ export const GameDownloadFileItem = ({ file }: GameDownloadFileItemProps) => {
         <div className="text-muted-foreground text-xs flex items-center gap-1 break-words break-all">
           <Hash className="size-3 shrink-0" />
           <span className="break-words break-all">{file.file_hash}</span>
+          <CopyButton content={file.file_hash} size="xs" variant="ghost" />
         </div>
       </div>
       {file.file_status === 3 && (
-        <div className="flex gap-2 w-full md:w-auto">
+        <div className="flex gap-2">
           <Tooltip>
             <TooltipTrigger asChild>
               <Button

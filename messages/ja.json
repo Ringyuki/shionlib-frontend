@@ -686,6 +686,12 @@
           "datafrom": "データソース",
           "moyu": "鲲 Galgame"
         },
+        "PatchDialog": {
+          "title": "補丁"
+        },
+        "PatchDrawer": {
+          "title": "補丁"
+        },
         "PatchItem": {
           "created": "アップロードされた",
           "type": {

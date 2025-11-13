@@ -35,7 +35,7 @@ export const GameDownloadResourceItem = ({
     >
       <div className="flex flex-col gap-2 w-full">
         <div className="flex justify-between items-center">
-          <div className="flex flex-wrap gap-2 shrink-0">
+          <div className="flex flex-wrap gap-2">
             <GamePlatform platform={resource.platform} />
             {resource.language?.map(l => {
               return (
@@ -45,7 +45,7 @@ export const GameDownloadResourceItem = ({
               )
             })}
           </div>
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center shrink-0">
             <Avatar user={resource.creator} className="size-6 text-xs" />
             <span className="text-muted-foreground text-xs font-light flex items-center gap-1">
               <span>{t('created')}</span>

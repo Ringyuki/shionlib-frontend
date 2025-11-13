@@ -5,6 +5,7 @@ import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/shionui/To
 import { Button } from '@/components/shionui/Button'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
+import { CopyButton } from '@/components/shionui/animated/CopyButton'
 
 interface PatchResourceItemProps {
   patch: KunPatchResourceResponse
@@ -16,12 +17,10 @@ export const PatchResourceItem = ({ patch }: PatchResourceItemProps) => {
     <div className="flex gap-2 justify-between items-center border-dashed border p-2 rounded-lg w-full">
       <div className="flex flex-col items-start gap-2">
         <div className="text-sm font-medium font-mono! flex items-center gap-2 flex-wrap">
-          {patch.name && (
-            <span className="flex items-center gap-1">
-              <FileArchive className="size-3 shrink-0" />
-              <span>{patch.name}</span>
-            </span>
-          )}
+          <span className="flex items-center gap-1">
+            <FileArchive className="size-3 shrink-0" />
+            {patch.name && <span>{patch.name}</span>}
+          </span>
           <span className="text-muted-foreground text-xs">{patch.size}</span>
           {patch.storage === 's3' && (
             <Badge size="sm" variant="success">
@@ -34,6 +33,7 @@ export const PatchResourceItem = ({ patch }: PatchResourceItemProps) => {
           <div className="text-muted-foreground text-xs flex items-center gap-1 break-words break-all">
             <Hash className="size-3 shrink-0" />
             <span className="break-words break-all">{patch.hash}</span>
+            <CopyButton content={patch.hash} size="xs" variant="ghost" />
           </div>
         )}
       </div>

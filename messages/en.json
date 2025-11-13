@@ -693,6 +693,12 @@
           "datafrom": "Data from",
           "moyu": "鲲 Galgame"
         },
+        "PatchDialog": {
+          "title": "Patch"
+        },
+        "PatchDrawer": {
+          "title": "Patch"
+        },
         "PatchItem": {
           "created": "Uploaded at",
           "type": {

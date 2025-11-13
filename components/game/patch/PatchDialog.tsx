@@ -17,7 +17,7 @@ export const PatchDialog = ({ patches, open, onOpenChange }: PatchDialogProps) =
         <DialogHeader>
           <DialogTitle>{t('title')}</DialogTitle>
         </DialogHeader>
-        <PatchContent className="px-0 pb-0" patches={patches} />
+        <PatchContent className="px-0 pb-4" patches={patches} />
       </DialogContent>
     </Dialog>
   )

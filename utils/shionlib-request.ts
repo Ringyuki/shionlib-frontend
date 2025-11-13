@@ -4,6 +4,7 @@ import { ShionlibBizError } from '@/libs/errors'
 import { SHOULD_REFRESH_CODES, IS_FATAL_AUTH_BY_CODES } from '@/constants/auth/auth-status-codes'
 import { NOT_FOUND_CODES } from '@/constants/not-found-codes'
 import { useShionlibUserStore } from '@/store/userStore'
+import { IsFatalAuthByCodeEnum } from '@/enums/auth/auth-status.enum'
 
 let refreshPromise: Promise<void> | null = null
 const shouldRefresh = (code: number) => {
@@ -56,10 +57,16 @@ export const shionlibRequest = () => {
       return data
     }
 
+    let mod
+    if (isBrowser) {
+      mod = await import('react-hot-toast')
+    }
+
     const data = await requestOnce()
     if (data && data.code === 0) return data
 
     if (isFatalAuthByCode(data.code)) {
+      if (mod) mod.toast.error(data.message)
       await doLogout(baseUrl!)
       throw new ShionlibBizError(data.code, data.message)
     }
@@ -73,13 +80,9 @@ export const shionlibRequest = () => {
       }
     }
 
-    let mod
-    if (isBrowser) {
-      mod = await import('react-hot-toast')
-    }
     if (data.code !== 0) {
       if (data.code <= 1000) {
-        if (isBrowser && mod) {
+        if (mod) {
           mod.toast.error(
             `${data.message}${
               (data as ErrorResponse).data?.errors
@@ -93,7 +96,7 @@ export const shionlibRequest = () => {
         console.error(data)
         throw new Error(data.message)
       }
-      if (isBrowser && mod) {
+      if (mod) {
         mod?.toast.error(
           `${data.message}${
             (data as ErrorResponse).data?.errors
