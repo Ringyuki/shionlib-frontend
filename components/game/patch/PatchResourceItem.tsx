@@ -13,7 +13,7 @@ interface PatchResourceItemProps {
 export const PatchResourceItem = ({ patch }: PatchResourceItemProps) => {
   const t = useTranslations('Components.Game.Patch.PatchResourceItem')
   return (
-    <div className="flex md:flex-row flex-col gap-2 justify-between items-center border-dashed border p-2 rounded-lg w-full">
+    <div className="flex gap-2 justify-between items-center border-dashed border p-2 rounded-lg w-full">
       <div className="flex flex-col items-start gap-2">
         <div className="text-sm font-medium font-mono! flex items-center gap-2 flex-wrap">
           {patch.name && (
@@ -37,7 +37,7 @@ export const PatchResourceItem = ({ patch }: PatchResourceItemProps) => {
           </div>
         )}
       </div>
-      <div className="flex gap-2 w-full md:w-auto">
+      <div className="flex gap-2">
         <Tooltip>
           <TooltipTrigger asChild>
             <Link
