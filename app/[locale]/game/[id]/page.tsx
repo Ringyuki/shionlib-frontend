@@ -37,8 +37,7 @@ export default async function GamePage({ params }: GamePageProps) {
   if (!id || isNaN(Number(id))) {
     notFound()
   }
-  const game = await getGameData(id)
-  const comments = await getComments(id)
+  const [game, comments] = await Promise.all([getGameData(id), getComments(id)])
 
   return (
     <div className="flex flex-col gap-8">

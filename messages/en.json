@@ -368,6 +368,10 @@
     "Game": {
       "Actions": {
         "download": "Download",
+        "Patch": {
+          "patch": "Patch",
+          "error": "Failed to get patches"
+        },
         "upload": "Upload",
         "edit": "Edit this game",
         "history": {
@@ -682,6 +686,30 @@
           "downloads": "Downloads",
           "asc": "Ascending",
           "desc": "Descending"
+        }
+      },
+      "Patch": {
+        "PatchContent": {
+          "datafrom": "Data from",
+          "moyu": "鲲 Galgame"
+        },
+        "PatchItem": {
+          "created": "Uploaded at",
+          "type": {
+            "all": "All types",
+            "manual": "Manual translation patch",
+            "ai": "AI translation patch",
+            "machine_polishing": "Machine polishing",
+            "machine": "Machine patch",
+            "save": "Full CG save",
+            "crack": "Crack patch",
+            "fix": "Fix patch",
+            "mod": "Mod patch",
+            "other": "Other"
+          }
+        },
+        "PatchResourceItem": {
+          "viewOnMoyu": "View on Kun Galgame Patch"
         }
       }
     },

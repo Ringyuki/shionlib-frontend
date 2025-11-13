@@ -39,7 +39,7 @@ export const UserProfile = async ({ user }: UserProfileProps) => {
       <CardContent>
         <div className="flex flex-col gap-4">
           <div className="flex gap-4">
-            <Avatar user={user} className="size-20" />
+            <Avatar clickable={false} user={user} className="size-20" />
             <div className="flex flex-col justify-center gap-3">
               <h2 className="text-xl font-bold">{user.name}</h2>
               {user.bio && <p className="text-sm text-muted-foreground">{user.bio}</p>}

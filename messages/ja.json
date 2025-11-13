@@ -361,6 +361,10 @@
     "Game": {
       "Actions": {
         "download": "ダウンロード",
+        "Patch": {
+          "patch": "パッチ",
+          "error": "パッチを取得できませんでした"
+        },
         "upload": "アップロード",
         "edit": "このゲームを編集",
         "history": {
@@ -675,6 +679,30 @@
           "downloads": "ダウンロード数",
           "asc": "昇順",
           "desc": "降順"
+        }
+      },
+      "Patch": {
+        "PatchContent": {
+          "datafrom": "データソース",
+          "moyu": "鲲 Galgame"
+        },
+        "PatchItem": {
+          "created": "アップロードされた",
+          "type": {
+            "all": "全部タイプ",
+            "manual": "人工翻訳補丁",
+            "ai": "AI 翻訳補丁",
+            "machine_polishing": "機械翻訳潤色",
+            "machine": "機械翻訳補丁",
+            "save": "全 CG 保存",
+            "crack": "破解補丁",
+            "fix": "修正補丁",
+            "mod": "魔改補丁",
+            "other": "その他"
+          }
+        },
+        "PatchResourceItem": {
+          "viewOnMoyu": "Kun Galgame Patch で表示"
         }
       }
     },

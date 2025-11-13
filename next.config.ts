@@ -36,6 +36,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'image.moyu.moe',
+      },
+      {
+        protocol: 'https',
         hostname: 'res.nyne.dev',
       },
       {

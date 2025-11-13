@@ -69,6 +69,8 @@ export type Platform =
   | 'drc'
   | 'gba'
   | 'nds'
+  | 'other'
+
 export enum PlatformEnum {
   win = 'Windows',
   ios = 'iOS',
@@ -88,6 +90,7 @@ export enum PlatformEnum {
   drc = 'DRC',
   gba = 'Game Boy Advance',
   nds = 'Nintendo DS',
+  other = 'Other',
 }
 export const PlatformOptions: Array<{ label: string; value: Platform }> = [
   { value: 'win', label: 'Windows' },
@@ -129,7 +132,9 @@ export const platformNameMap: Record<Platform, string> = {
   drc: 'DRC',
   gba: 'Game Boy Advance',
   nds: 'Nintendo DS',
+  other: 'Other',
 }
+
 export const platformTokenMap: Record<Platform, { bg: string; fg: string }> = {
   win: { bg: 'var(--platform-win)', fg: 'var(--platform-win-fg)' },
   ios: { bg: 'var(--platform-ios)', fg: 'var(--platform-ios-fg)' },
@@ -149,9 +154,10 @@ export const platformTokenMap: Record<Platform, { bg: string; fg: string }> = {
   drc: { bg: 'var(--platform-drc)', fg: 'var(--platform-drc-fg)' },
   gba: { bg: 'var(--platform-gba)', fg: 'var(--platform-gba-fg)' },
   nds: { bg: 'var(--platform-nds)', fg: 'var(--platform-nds-fg)' },
+  other: { bg: 'var(--platform-other)', fg: 'var(--platform-other-fg)' },
 }
 
-export type Language = 'jp' | 'zh' | 'en'
+export type Language = 'jp' | 'zh' | 'en' | 'zh-Hant' | 'other'
 export enum LanguageEnum {
   jp = 'Japanese',
   zh = 'Chinese',
@@ -166,6 +172,8 @@ export const LanguageNameMap: Record<Language, string> = {
   jp: '日本語',
   zh: '简体中文',
   en: 'English',
+  'zh-Hant': '繁體中文',
+  other: '其它',
 }
 
 export type CoverType = 'dig' | 'pkgfront'

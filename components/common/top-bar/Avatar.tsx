@@ -20,12 +20,12 @@ export const TopBarAvatar = ({ user, className }: AvatarProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className={className}>
-        <Avatar user={user} />
+        <Avatar clickable={false} user={user} />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-48" side="bottom" align="end">
         <DropdownMenuLabel>
           <div className="flex items-center gap-2">
-            <Avatar user={user} />
+            <Avatar clickable={false} user={user} />
             <span>{user.name}</span>
           </div>
         </DropdownMenuLabel>

@@ -368,6 +368,10 @@
     "Game": {
       "Actions": {
         "download": "下载",
+        "Patch": {
+          "patch": "补丁",
+          "error": "获取补丁失败"
+        },
         "upload": "上传",
         "edit": "编辑此游戏",
         "history": {
@@ -682,6 +686,36 @@
           "downloads": "下载量",
           "asc": "升序",
           "desc": "降序"
+        }
+      },
+      "Patch": {
+        "PatchContent": {
+          "datafrom": "数据来源",
+          "moyu": "鲲 Galgame"
+        },
+        "PatchDialog": {
+          "title": "补丁"
+        },
+        "PatchDrawer": {
+          "title": "补丁"
+        },
+        "PatchItem": {
+          "created": "上传于",
+          "type": {
+            "all": "全部类型",
+            "manual": "人工翻译补丁",
+            "ai": "AI 翻译补丁",
+            "machine_polishing": "机翻润色",
+            "machine": "机翻补丁",
+            "save": "全 CG 存档",
+            "crack": "破解补丁",
+            "fix": "修正补丁",
+            "mod": "魔改补丁",
+            "other": "其它"
+          }
+        },
+        "PatchResourceItem": {
+          "viewOnMoyu": "在鲲 Galgame 补丁中查看"
         }
       }
     },
