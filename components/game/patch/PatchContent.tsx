@@ -10,7 +10,7 @@ interface PatchContentProps {
 
 export const PatchContent = ({ patches, className }: PatchContentProps) => {
   return (
-    <div className="overflow-y-auto pb-4 max-w-7xl mx-auto lg:min-w-3xl">
+    <div className="overflow-y-auto max-w-7xl mx-auto lg:min-w-3xl">
       <div className={cn('flex flex-col gap-2 w-full', className)}>
         {patches
           .filter(patch => patch.type.includes('manual'))

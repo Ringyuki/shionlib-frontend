@@ -17,11 +17,11 @@ import { SearchTrigger } from '@/components/common/top-bar/SearchTrigger'
 const StartContent = () => {
   return (
     <>
-      <div className="hidden md:flex items-center gap-8">
+      <div className="hidden topbar:flex items-center gap-8">
         <SiteLogo />
         <Nav />
       </div>
-      <div className="block md:hidden items-center gap-8">
+      <div className="block topbar:hidden items-center gap-8">
         <MobileNav items={navBarConfig.links} />
       </div>
     </>

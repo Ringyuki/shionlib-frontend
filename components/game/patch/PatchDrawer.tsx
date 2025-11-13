@@ -17,7 +17,7 @@ export const PatchDrawer = ({ patches, open, onOpenChange }: PatchDrawerProps) =
         <DrawerHeader>
           <DrawerTitle>{t('title')}</DrawerTitle>
         </DrawerHeader>
-        <PatchContent patches={patches} />
+        <PatchContent patches={patches} className="pb-4" />
       </DrawerContent>
     </Drawer>
   )
