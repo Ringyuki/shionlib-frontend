@@ -155,44 +155,44 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
       }
     }, [isOpen, handleWheel])
 
-    React.useEffect(() => {
-      const imgElement = imageRef.current
-      if (!imgElement || !isOpen) return
+    // React.useEffect(() => {
+    //   const imgElement = imageRef.current
+    //   if (!imgElement || !isOpen) return
 
-      let initialDistance = 0
-      let initialScale = 1
+    //   let initialDistance = 0
+    //   let initialScale = 1
 
-      const getDistance = (touches: TouchList) => {
-        const dx = touches[0].clientX - touches[1].clientX
-        const dy = touches[0].clientY - touches[1].clientY
-        return Math.sqrt(dx * dx + dy * dy)
-      }
+    //   const getDistance = (touches: TouchList) => {
+    //     const dx = touches[0].clientX - touches[1].clientX
+    //     const dy = touches[0].clientY - touches[1].clientY
+    //     return Math.sqrt(dx * dx + dy * dy)
+    //   }
 
-      const handleTouchStart = (e: TouchEvent) => {
-        if (e.touches.length === 2) {
-          e.preventDefault()
-          initialDistance = getDistance(e.touches)
-          initialScale = userScale
-        }
-      }
+    //   const handleTouchStart = (e: TouchEvent) => {
+    //     if (e.touches.length === 2) {
+    //       e.preventDefault()
+    //       initialDistance = getDistance(e.touches)
+    //       initialScale = userScale
+    //     }
+    //   }
 
-      const handleTouchMove = (e: TouchEvent) => {
-        if (e.touches.length === 2) {
-          e.preventDefault()
-          const currentDistance = getDistance(e.touches)
-          const scale = (currentDistance / initialDistance) * initialScale
-          setUserScale(Math.min(Math.max(0.5, scale), 5))
-        }
-      }
+    //   const handleTouchMove = (e: TouchEvent) => {
+    //     if (e.touches.length === 2) {
+    //       e.preventDefault()
+    //       const currentDistance = getDistance(e.touches)
+    //       const scale = (currentDistance / initialDistance) * initialScale
+    //       setUserScale(Math.min(Math.max(0.5, scale), 5))
+    //     }
+    //   }
 
-      imgElement.addEventListener('touchstart', handleTouchStart, { passive: false })
-      imgElement.addEventListener('touchmove', handleTouchMove, { passive: false })
+    //   imgElement.addEventListener('touchstart', handleTouchStart, { passive: false })
+    //   imgElement.addEventListener('touchmove', handleTouchMove, { passive: false })
 
-      return () => {
-        imgElement.removeEventListener('touchstart', handleTouchStart)
-        imgElement.removeEventListener('touchmove', handleTouchMove)
-      }
-    }, [isOpen, userScale])
+    //   return () => {
+    //     imgElement.removeEventListener('touchstart', handleTouchStart)
+    //     imgElement.removeEventListener('touchmove', handleTouchMove)
+    //   }
+    // }, [isOpen, userScale])
 
     React.useEffect(() => {
       if (isOpen) {
