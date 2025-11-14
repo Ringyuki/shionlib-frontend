@@ -78,13 +78,14 @@ export const ResourceItem = async ({ resource, content_limit }: ResourceItemProp
                     </Badge>
                   ))}
                 </div>
-                <div className="flex flex-wrap gap-4 items-center text-muted-foreground font-light font-mono!">
-                  <div className="flex flex-wrap gap-1 items-center">
-                    <FileArchive className="size-4" />
-                    <span>{resource.file_name}</span>
+                <div className="flex gap-4 items-center text-muted-foreground font-light font-mono!">
+                  <div className="flex flex-1 gap-1 items-center overflow-hidden">
+                    <FileArchive className="size-4 shrink-0" />
+                    <span className="whitespace-nowrap overflow-hidden text-ellipsis">
+                      {resource.file_name}
+                    </span>
                     {resource.files_count > 1 && (
                       <span>
-                        {' '}
                         {t('moreThanOneFilePrefix')}
                         {resource.files_count}
                         {t('moreThanOneFileSuffix')}

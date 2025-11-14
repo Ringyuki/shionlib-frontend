@@ -134,7 +134,9 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
       setIsOpen(false)
     }
 
-    const handleWheel = React.useCallback((e: React.WheelEvent<HTMLImageElement>) => {
+    const imageRef = React.useRef<HTMLImageElement>(null)
+
+    const handleWheel = React.useCallback((e: WheelEvent) => {
       e.preventDefault()
       setUserScale(prev => {
         const delta = e.deltaY * -0.001
@@ -142,6 +144,55 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
         return Math.min(Math.max(0.5, newScale), 5)
       })
     }, [])
+
+    React.useEffect(() => {
+      const imgElement = imageRef.current
+      if (imgElement && isOpen) {
+        imgElement.addEventListener('wheel', handleWheel, { passive: false })
+        return () => {
+          imgElement.removeEventListener('wheel', handleWheel)
+        }
+      }
+    }, [isOpen, handleWheel])
+
+    React.useEffect(() => {
+      const imgElement = imageRef.current
+      if (!imgElement || !isOpen) return
+
+      let initialDistance = 0
+      let initialScale = 1
+
+      const getDistance = (touches: TouchList) => {
+        const dx = touches[0].clientX - touches[1].clientX
+        const dy = touches[0].clientY - touches[1].clientY
+        return Math.sqrt(dx * dx + dy * dy)
+      }
+
+      const handleTouchStart = (e: TouchEvent) => {
+        if (e.touches.length === 2) {
+          e.preventDefault()
+          initialDistance = getDistance(e.touches)
+          initialScale = userScale
+        }
+      }
+
+      const handleTouchMove = (e: TouchEvent) => {
+        if (e.touches.length === 2) {
+          e.preventDefault()
+          const currentDistance = getDistance(e.touches)
+          const scale = (currentDistance / initialDistance) * initialScale
+          setUserScale(Math.min(Math.max(0.5, scale), 5))
+        }
+      }
+
+      imgElement.addEventListener('touchstart', handleTouchStart, { passive: false })
+      imgElement.addEventListener('touchmove', handleTouchMove, { passive: false })
+
+      return () => {
+        imgElement.removeEventListener('touchstart', handleTouchStart)
+        imgElement.removeEventListener('touchmove', handleTouchMove)
+      }
+    }, [isOpen, userScale])
 
     React.useEffect(() => {
       if (isOpen) {
@@ -244,7 +295,7 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
                             pointerEvents: 'auto',
                           }}
                           onClick={e => e.stopPropagation()}
-                          onWheel={handleWheel}
+                          ref={imageRef}
                         />
                       </div>
                     </>
