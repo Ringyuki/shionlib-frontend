@@ -286,7 +286,7 @@ samp {
 }
 
 @layer utilities {
-  body[data-scroll-locked] .scroll-adjust {
+  body[data-scroll-locked] {
     margin-right: var(--removed-body-scroll-bar-size);
   }
 }

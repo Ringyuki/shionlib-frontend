@@ -4,6 +4,7 @@ import * as React from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { createPortal } from 'react-dom'
 import { FadeImage } from '@/components/common/shared/FadeImage'
+import { useScrollLock } from '@/hooks/useScrollLock'
 
 interface ImageLightboxProps {
   src: string
@@ -12,6 +13,7 @@ interface ImageLightboxProps {
   aspectRatio?: string
   children?: React.ReactNode
   lightboxMaxSize?: number
+  maxWidth?: number
   wrapElement?: 'span' | 'div'
 }
 
@@ -30,11 +32,13 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
       aspectRatio,
       children,
       lightboxMaxSize = isMobile() ? 0.9 : 0.6,
+      maxWidth = 1024,
       wrapElement = 'div',
     },
     ref,
   ) => {
     const [isOpen, setIsOpen] = React.useState(false)
+    const [shouldShow, setShouldShow] = React.useState(false)
     const [isAnimating, setIsAnimating] = React.useState(false)
     const [userScale, setUserScale] = React.useState(1)
     const [mounted, setMounted] = React.useState(false)
@@ -71,14 +75,14 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
           })
 
           const imageRatio = currentWidth / currentHeight
-          const maxWidth = window.innerWidth * lightboxMaxSize
-          const maxHeight = window.innerHeight * lightboxMaxSize
+          const maxWidthValue = Math.min(window.innerWidth * lightboxMaxSize, maxWidth)
+          const maxHeightValue = window.innerHeight * lightboxMaxSize
 
-          let finalWidth = maxWidth
+          let finalWidth = maxWidthValue
           let finalHeight = finalWidth / imageRatio
 
-          if (finalHeight > maxHeight) {
-            finalHeight = maxHeight
+          if (finalHeight > maxHeightValue) {
+            finalHeight = maxHeightValue
             finalWidth = finalHeight * imageRatio
           }
 
@@ -91,6 +95,7 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
           setDisplaySrc(optimizedSrc)
 
           setIsOpen(true)
+          setShouldShow(true)
           setIsAnimating(true)
 
           const originalSrc =
@@ -112,6 +117,7 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
         } else {
           setImageBounds(containerRef.current.getBoundingClientRect())
           setIsOpen(true)
+          setShouldShow(true)
           setIsAnimating(true)
         }
       }
@@ -119,15 +125,16 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
     }
 
     const handleClose = () => {
-      setIsOpen(false)
+      setShouldShow(false)
       setUserScale(1)
     }
 
     const handleExitComplete = () => {
       setIsAnimating(false)
+      setIsOpen(false)
     }
 
-    const handleWheel = React.useCallback((e: WheelEvent) => {
+    const handleWheel = React.useCallback((e: React.WheelEvent<HTMLImageElement>) => {
       e.preventDefault()
       setUserScale(prev => {
         const delta = e.deltaY * -0.001
@@ -149,15 +156,7 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
       }
     }, [isOpen])
 
-    React.useEffect(() => {
-      if (isOpen) {
-        document.body.style.overflow = 'hidden'
-        return () => {
-          document.body.style.overflow = ''
-        }
-      }
-    }, [isOpen])
-
+    useScrollLock(isOpen)
     const WrapElement = wrapElement
 
     return (
@@ -190,7 +189,7 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
         {mounted &&
           createPortal(
             <AnimatePresence onExitComplete={handleExitComplete}>
-              {isOpen &&
+              {shouldShow &&
                 imageBounds &&
                 imageNaturalSize &&
                 displaySrc &&
@@ -211,7 +210,7 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
                         onClick={handleClose}
                         style={{ cursor: 'zoom-out' }}
                       />
-                      <div className="fixed inset-0 z-[10000] flex items-center justify-center pointer-events-none">
+                      <div className="fixed inset-0 z-[10000] flex items-center justify-center pointer-events-none select-none">
                         <motion.img
                           src={displaySrc}
                           alt={alt}
@@ -245,7 +244,7 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
                             pointerEvents: 'auto',
                           }}
                           onClick={e => e.stopPropagation()}
-                          onWheel={handleWheel as any}
+                          onWheel={handleWheel}
                         />
                       </div>
                     </>

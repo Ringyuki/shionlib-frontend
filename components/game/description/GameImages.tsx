@@ -22,6 +22,7 @@ const _GameImage = ({ image }: { image: GameImage }) => {
       }
       alt={image.url}
       aspectRatio="16 / 9"
+      className="rounded-md overflow-hidden"
     />
   )
 }

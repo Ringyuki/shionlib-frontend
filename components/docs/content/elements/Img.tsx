@@ -1,7 +1,20 @@
-import { ZoomImage } from '@/components/common/shared/ZoomImage'
+import { ImageLightbox } from '@/components/shionui/ImageLightbox'
 
-export const Img = ({ src, alt }: { src: string; alt: string }) => {
+interface ImgProps {
+  src: string
+  alt: string
+  className?: string
+}
+
+export const Img = ({ src, alt, className }: ImgProps) => {
   return (
-    <ZoomImage wrapElement="span" src={src} alt={alt} aspectRatio="16 / 9" className="max-h-128" />
+    <ImageLightbox
+      wrapElement="span"
+      src={src}
+      alt={alt}
+      aspectRatio="1.93 / 1"
+      className={className}
+      maxWidth={1920}
+    />
   )
 }
