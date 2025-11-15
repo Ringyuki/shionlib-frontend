@@ -23,14 +23,17 @@ const slideVariants = {
   enter: ({ direction }: { direction: SlideDirection }) => ({
     x: direction === 0 ? 0 : direction * 80,
     opacity: direction === 0 ? 1 : 0,
+    pointerEvents: 'none',
   }),
   center: {
     x: 0,
     opacity: 1,
+    pointerEvents: 'auto',
   },
   exit: ({ direction }: { direction: SlideDirection }) => ({
     x: direction === 0 ? 0 : direction * -80,
     opacity: direction === 0 ? 1 : 0,
+    pointerEvents: 'none',
   }),
 }
 
@@ -246,6 +249,7 @@ const ImageLightboxGallery = ({ children }: ImageLightboxGalleryProps) => {
   const canGoPrev = currentIndex !== null && currentIndex > 0
   const canGoNext = currentIndex !== null && currentIndex < items.length - 1
   const canSwipe = items.length > 1 && userScale === 1
+  const activeImageKey = currentIndex !== null ? `image-${currentIndex}` : 'image-inactive'
 
   const contextValue = React.useMemo(
     () => ({
@@ -321,7 +325,7 @@ const ImageLightboxGallery = ({ children }: ImageLightboxGalleryProps) => {
                     >
                       <AnimatePresence initial={false} custom={{ direction: navDirection }}>
                         <motion.img
-                          key={`${currentIndex}-${displaySrc}`}
+                          key={activeImageKey}
                           ref={imageRef}
                           src={displaySrc}
                           alt={alt}
@@ -343,7 +347,6 @@ const ImageLightboxGallery = ({ children }: ImageLightboxGalleryProps) => {
                             width: '100%',
                             height: '100%',
                             cursor: canSwipe ? 'grab' : 'default',
-                            pointerEvents: 'auto',
                             userSelect: 'none',
                             touchAction: 'none',
                             scale: userScale,
