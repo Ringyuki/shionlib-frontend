@@ -5,6 +5,7 @@ import { GameImage } from '@/interfaces/game/game.interface'
 import { Spoiler } from '@/components/shionui/Spoiler'
 import { ContentLimit } from '@/interfaces/user/user.interface'
 import { ImageLightbox } from '@/components/shionui/ImageLightbox'
+import { ImageLightboxGallery } from '@/components/shionui/ImageLightboxGallery'
 
 interface GameImagesProps {
   images: GameImage[]
@@ -37,21 +38,23 @@ export const GameImages = ({ images, content_limit }: GameImagesProps) => {
           <ImageIcon />
           <span>{t('images')}</span>
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-          {images.map(image => {
-            if (image.sexual > 0) {
-              if (content_limit === ContentLimit.SHOW_WITH_SPOILER)
-                return (
-                  <Spoiler key={image.url} blur={32}>
-                    <_GameImage image={image} />
-                  </Spoiler>
-                )
-              if (content_limit === ContentLimit.JUST_SHOW)
-                return <_GameImage key={image.url} image={image} />
-            }
-            return <_GameImage image={image} key={image.url} />
-          })}
-        </div>
+        <ImageLightboxGallery>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+            {images.map(image => {
+              if (image.sexual > 0) {
+                if (content_limit === ContentLimit.SHOW_WITH_SPOILER)
+                  return (
+                    <Spoiler key={image.url} blur={32}>
+                      <_GameImage image={image} />
+                    </Spoiler>
+                  )
+                if (content_limit === ContentLimit.JUST_SHOW)
+                  return <_GameImage key={image.url} image={image} />
+              }
+              return <_GameImage image={image} key={image.url} />
+            })}
+          </div>
+        </ImageLightboxGallery>
       </>
     )
   )

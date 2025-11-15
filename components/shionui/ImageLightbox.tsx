@@ -5,6 +5,14 @@ import { motion, AnimatePresence } from 'motion/react'
 import { createPortal } from 'react-dom'
 import { FadeImage } from '@/components/common/shared/FadeImage'
 import { useScrollLock } from '@/hooks/useScrollLock'
+import { useDisableZoom } from '@/hooks/useDisableZoom'
+import { ImageLightboxGalleryContext } from './ImageLightboxGalleryContext'
+import {
+  calculateTargetSize,
+  isMobile,
+  loadImageDimensions,
+  resolveOriginalSrc,
+} from './utils/imageLightbox'
 
 interface ImageLightboxProps {
   src: string
@@ -15,12 +23,6 @@ interface ImageLightboxProps {
   lightboxMaxSize?: number
   maxWidth?: number
   wrapElement?: 'span' | 'div'
-}
-
-const isBrowser = typeof window !== 'undefined'
-const isMobile = () => {
-  if (!isBrowser) return false
-  return window.innerWidth < 1024
 }
 
 const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
@@ -53,6 +55,8 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
       width: number
       height: number
     } | null>(null)
+    const galleryContext = React.useContext(ImageLightboxGalleryContext)
+    const lightboxId = React.useId()
 
     React.useImperativeHandle(ref, () => containerRef.current as HTMLElement)
 
@@ -60,65 +64,72 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
       setMounted(true)
     }, [])
 
+    React.useEffect(() => {
+      if (!galleryContext) return
+      const unregister = galleryContext.registerItem({
+        id: lightboxId,
+        src,
+        alt,
+        aspectRatio,
+        lightboxMaxSize,
+        maxWidth,
+        getContainer: () => containerRef.current,
+        getImage: () => containerRef.current?.querySelector('img') ?? null,
+      })
+      return unregister
+    }, [galleryContext, lightboxId, src, alt, aspectRatio, lightboxMaxSize, maxWidth])
+
     const handleOpen = () => {
+      if (galleryContext) {
+        galleryContext.openItem(lightboxId)
+        return
+      }
+
       if (containerRef.current) {
         const imgElement = containerRef.current.querySelector('img')
-        if (imgElement) {
-          setImageBounds(imgElement.getBoundingClientRect())
+        const bounds =
+          imgElement?.getBoundingClientRect() ?? containerRef.current.getBoundingClientRect()
+        if (bounds) {
+          setImageBounds(bounds)
+        }
 
-          const currentWidth = imgElement.naturalWidth || imgElement.width
-          const currentHeight = imgElement.naturalHeight || imgElement.height
+        const optimizedSrc = imgElement?.src ?? resolveOriginalSrc(src)
+        setDisplaySrc(optimizedSrc)
 
-          setImageNaturalSize({
-            width: currentWidth,
-            height: currentHeight,
-          })
+        const updateSize = (width: number, height: number) => {
+          if (!width || !height) return
+          setImageNaturalSize({ width, height })
+          setTargetSize(calculateTargetSize(width, height, lightboxMaxSize, maxWidth))
+        }
 
-          const imageRatio = currentWidth / currentHeight
-          const maxWidthValue = Math.min(window.innerWidth * lightboxMaxSize, maxWidth)
-          const maxHeightValue = window.innerHeight * lightboxMaxSize
+        const currentWidth = imgElement?.naturalWidth || imgElement?.width || 0
+        const currentHeight = imgElement?.naturalHeight || imgElement?.height || 0
 
-          let finalWidth = maxWidthValue
-          let finalHeight = finalWidth / imageRatio
+        if (currentWidth && currentHeight) {
+          updateSize(currentWidth, currentHeight)
+        } else if (optimizedSrc) {
+          loadImageDimensions(optimizedSrc)
+            .then(dimensions => updateSize(dimensions.width, dimensions.height))
+            .catch(error => {
+              console.warn('[ImageLightbox] Failed to read optimized size', error)
+            })
+        }
 
-          if (finalHeight > maxHeightValue) {
-            finalHeight = maxHeightValue
-            finalWidth = finalHeight * imageRatio
-          }
+        setIsOpen(true)
+        setShouldShow(true)
+        setIsAnimating(true)
 
-          setTargetSize({
-            width: finalWidth,
-            height: finalHeight,
-          })
+        const originalSrc = resolveOriginalSrc(src)
 
-          const optimizedSrc = imgElement.src
-          setDisplaySrc(optimizedSrc)
-
-          setIsOpen(true)
-          setShouldShow(true)
-          setIsAnimating(true)
-
-          const originalSrc =
-            src.startsWith('http') || src.includes('blob:')
-              ? src
-              : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + src
-
-          if (originalSrc !== optimizedSrc) {
-            const originalImg = new Image()
-            originalImg.onload = () => {
-              setImageNaturalSize({
-                width: originalImg.naturalWidth,
-                height: originalImg.naturalHeight,
-              })
+        if (originalSrc !== optimizedSrc) {
+          loadImageDimensions(originalSrc)
+            .then(dimensions => {
+              updateSize(dimensions.width, dimensions.height)
               setDisplaySrc(originalSrc)
-            }
-            originalImg.src = originalSrc
-          }
-        } else {
-          setImageBounds(containerRef.current.getBoundingClientRect())
-          setIsOpen(true)
-          setShouldShow(true)
-          setIsAnimating(true)
+            })
+            .catch(error => {
+              console.warn('[ImageLightbox] Failed to load original image', error)
+            })
         }
       }
       setUserScale(1)
@@ -155,45 +166,6 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
       }
     }, [isOpen, handleWheel])
 
-    // React.useEffect(() => {
-    //   const imgElement = imageRef.current
-    //   if (!imgElement || !isOpen) return
-
-    //   let initialDistance = 0
-    //   let initialScale = 1
-
-    //   const getDistance = (touches: TouchList) => {
-    //     const dx = touches[0].clientX - touches[1].clientX
-    //     const dy = touches[0].clientY - touches[1].clientY
-    //     return Math.sqrt(dx * dx + dy * dy)
-    //   }
-
-    //   const handleTouchStart = (e: TouchEvent) => {
-    //     if (e.touches.length === 2) {
-    //       e.preventDefault()
-    //       initialDistance = getDistance(e.touches)
-    //       initialScale = userScale
-    //     }
-    //   }
-
-    //   const handleTouchMove = (e: TouchEvent) => {
-    //     if (e.touches.length === 2) {
-    //       e.preventDefault()
-    //       const currentDistance = getDistance(e.touches)
-    //       const scale = (currentDistance / initialDistance) * initialScale
-    //       setUserScale(Math.min(Math.max(0.5, scale), 5))
-    //     }
-    //   }
-
-    //   imgElement.addEventListener('touchstart', handleTouchStart, { passive: false })
-    //   imgElement.addEventListener('touchmove', handleTouchMove, { passive: false })
-
-    //   return () => {
-    //     imgElement.removeEventListener('touchstart', handleTouchStart)
-    //     imgElement.removeEventListener('touchmove', handleTouchMove)
-    //   }
-    // }, [isOpen, userScale])
-
     React.useEffect(() => {
       if (isOpen) {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -208,7 +180,10 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
     }, [isOpen])
 
     useScrollLock(isOpen)
+    useDisableZoom(isOpen)
     const WrapElement = wrapElement
+    const isActiveInGallery = galleryContext?.activeItemId === lightboxId
+    const shouldHideTrigger = galleryContext ? isActiveInGallery : isAnimating
 
     return (
       <>
@@ -218,7 +193,7 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
             onClick={handleOpen}
             className={className}
             style={{
-              visibility: isAnimating ? 'hidden' : 'visible',
+              visibility: shouldHideTrigger ? 'hidden' : 'visible',
             }}
           >
             {children}
@@ -230,14 +205,15 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
             className={className}
             style={{
               cursor: 'zoom-in',
-              visibility: isAnimating ? 'hidden' : 'visible',
+              visibility: shouldHideTrigger ? 'hidden' : 'visible',
             }}
           >
             <FadeImage src={src} alt={alt} aspectRatio={aspectRatio} wrapElement={wrapElement} />
           </WrapElement>
         )}
 
-        {mounted &&
+        {!galleryContext &&
+          mounted &&
           createPortal(
             <AnimatePresence onExitComplete={handleExitComplete}>
               {shouldShow &&
