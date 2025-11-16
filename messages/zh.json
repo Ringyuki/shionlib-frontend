@@ -354,7 +354,8 @@
             "trending": "热门搜索"
           },
           "Suggest": {
-            "suggest": "搜索建议"
+            "suggest": "搜索建议",
+            "search_directly": "搜索 “{query}”"
           }
         },
         "Game": {

@@ -347,7 +347,8 @@
             "trending": "人気の検索"
           },
           "Suggest": {
-            "suggest": "検索候補"
+            "suggest": "検索候補",
+            "search_directly": "「{query}」を検索"
           }
         },
         "Game": {

@@ -69,7 +69,7 @@ export const FileScaned = async ({ activity }: FileScanedProps) => {
     <div className="flex gap-2 items-center flex-wrap">
       <span>{t('scannedPrefix')}</span>
       <span className="flex items-center gap-1">
-        <FileArchive className="size-4" />
+        <FileArchive className="size-4 shrink-0" />
         <span className="font-medium font-mono!">{activity.file?.file_name} </span>
       </span>
       {t('scannedSuffix') && <span>{t('scannedSuffix')}</span>}

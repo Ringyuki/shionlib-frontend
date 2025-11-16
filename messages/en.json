@@ -354,7 +354,8 @@
             "trending": "Trending"
           },
           "Suggest": {
-            "suggest": "Suggestions"
+            "suggest": "Suggestions",
+            "search_directly": "Search \"{query}\""
           }
         },
         "Game": {
