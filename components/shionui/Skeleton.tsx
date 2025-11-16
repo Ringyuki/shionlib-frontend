@@ -1,21 +1,29 @@
+import type { ComponentPropsWithoutRef, ElementType } from 'react'
+
 import { cn } from '@/utils/cn'
 
-type SkeletonProps = React.ComponentProps<'div'> & {
+type SkeletonOwnProps<E extends ElementType = 'div'> = {
   durationMs?: number
   angleDeg?: number
   tone?: 'neutral' | 'primary'
+  as?: E
 }
 
-function Skeleton({
+type SkeletonProps<E extends ElementType = 'div'> = SkeletonOwnProps<E> &
+  Omit<ComponentPropsWithoutRef<E>, keyof SkeletonOwnProps>
+
+const Skeleton = <E extends ElementType = 'div'>({
+  as,
   className,
   style,
   durationMs = 1400,
   angleDeg = 100,
   tone = 'neutral',
   ...props
-}: SkeletonProps) {
+}: SkeletonProps<E>) => {
+  const Component = (as ?? 'div') as ElementType
   return (
-    <div
+    <Component
       data-slot="skeleton"
       className={cn(
         'skeleton rounded-md',
@@ -23,8 +31,8 @@ function Skeleton({
         className,
       )}
       style={{
-        ['--skeleton-duration' as any]: `${durationMs}ms`,
-        ['--skeleton-angle' as any]: `${angleDeg}deg`,
+        '--skeleton-duration': `${durationMs}ms`,
+        '--skeleton-angle': `${angleDeg}deg`,
         ...style,
       }}
       {...props}

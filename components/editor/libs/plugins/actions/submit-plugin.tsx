@@ -48,7 +48,7 @@ export function SubmitPlugin({
   const [isApple, setIsApple] = useState(false)
   useEffect(() => {
     setIsApple(isMacOs || isIOS)
-  }, [isMacOs, isIOS])
+  }, [])
 
   return (
     <Button
