@@ -35,7 +35,7 @@ export const Suggest = ({ q, onSelect }: SuggestProps) => {
   )
 
   const shouldShowDirectSearchItem =
-    trimmedQuery.length > 0 && trimmedQuery !== (suggestions[0]?.query ?? '')
+    trimmedQuery.length > 0 && !suggestions.some(item => item.query === trimmedQuery)
 
   return (
     <CommandGroup heading={t('suggest')} className="py-1! px-1! pb-0!">
