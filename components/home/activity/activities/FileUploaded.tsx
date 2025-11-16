@@ -13,7 +13,7 @@ export const FileUploaded = async ({ activity }: FileUploadedProps) => {
     <div className="flex gap-2 items-center flex-wrap">
       <span>{t('uploadedToServerPrefix')}</span>
       <span className="flex items-center gap-1">
-        <FileArchive className="size-4" />
+        <FileArchive className="size-4 shrink-0" />
         <span className="font-medium font-mono!">{activity.file?.file_name} </span>
       </span>
       {t('uploadedToServerSuffix') && <span>{t('uploadedToServerSuffix')}</span>}
@@ -26,7 +26,7 @@ export const FileUploaded = async ({ activity }: FileUploadedProps) => {
     <div className="flex gap-2 items-center flex-wrap">
       <span>{t('uploadedToS3Prefix')}</span>
       <span className="flex items-center gap-1">
-        <FileArchive className="size-4" />
+        <FileArchive className="size-4 shrink-0" />
         <span className="font-medium font-mono!">{activity.file?.file_name} </span>
       </span>
       {t('uploadedToS3Suffix') && <span>{t('uploadedToS3Suffix')}</span>}

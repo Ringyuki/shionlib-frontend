@@ -51,7 +51,7 @@ export const OnGoingSession = ({ onResume, phase }: OnGoingSessionProps) => {
               className="border p-2 rounded-md flex justify-between gap-2"
             >
               <div className="text-sm flex gap-2 items-center">
-                <FileArchive className="size-4" />
+                <FileArchive className="size-4 shrink-0" />
                 <span>{session.file_name}</span>
                 <span className="text-muted-foreground text-xs flex gap-1 items-center">
                   <span>{timeFromNow(session.expires_at, locale)}</span>
