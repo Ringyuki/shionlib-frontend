@@ -25,7 +25,5 @@ export const toastOptions: ToasterProps['toastOptions'] = {
 
 export const toastProps: ToasterProps = {
   toastOptions: toastOptions,
-  containerClassName:
-    'break-all [body[data-scroll-locked]_&]:pr-[var(--removed-body-scroll-bar-size,0px)] scroll-adjust',
-  containerStyle: { paddingRight: 'var(--removed-body-scroll-bar-size, 0px)' },
+  containerStyle: { marginRight: 'var(--removed-body-scroll-bar-size, 0px)' },
 }
