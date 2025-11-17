@@ -13,6 +13,7 @@ import {
 import * as React from 'react'
 import { cn } from '@/utils/cn'
 import { formatBytes } from '@/utils/bytes-format'
+import { useShionlibUserStore } from '@/store/userStore'
 
 const ROOT_NAME = 'FileUpload'
 const DROPZONE_NAME = 'FileUploadDropzone'
@@ -334,6 +335,8 @@ function FileUploadRoot(props: FileUploadRootProps) {
     ...rootProps
   } = props
 
+  const isAdmin = useShionlibUserStore(state => state.user.role !== 1)
+
   const inputId = React.useId()
   const dropzoneId = React.useId()
   const listId = React.useId()
@@ -496,14 +499,14 @@ function FileUploadRoot(props: FileUploadRootProps) {
           }
         }
 
-        if (minSize && file.size < minSize) {
+        if (minSize && file.size < minSize && !isAdmin) {
           rejectionMessage = 'File too small'
           onFileReject?.(file, rejectionMessage)
           rejected = true
           invalid = true
         }
 
-        if (maxSize && file.size > maxSize) {
+        if (maxSize && file.size > maxSize && !isAdmin) {
           rejectionMessage = 'File too large'
           onFileReject?.(file, rejectionMessage)
           rejected = true
