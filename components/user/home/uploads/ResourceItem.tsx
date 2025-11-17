@@ -36,7 +36,7 @@ export const ResourceItem = async ({ resource, content_limit }: ResourceItemProp
       <Card className="py-0 overflow-hidden">
         <CardContent className="px-0">
           <div className="flex flex-col sm:grid sm:grid-cols-12">
-            <div className="sm:col-span-4 h-40 sm:h-32 w-full">
+            <div className="sm:col-span-4 h-40 sm:h-full w-full">
               {(() => {
                 if (cover.sexual >= 1) {
                   if (

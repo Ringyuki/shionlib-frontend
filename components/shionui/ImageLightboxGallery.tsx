@@ -176,25 +176,6 @@ const ImageLightboxGallery = ({ children }: ImageLightboxGalleryProps) => {
     setNavDirection(0)
   }
 
-  const handleWheel = React.useCallback((event: WheelEvent) => {
-    event.preventDefault()
-    setUserScale(prev => {
-      const delta = event.deltaY * -0.001
-      const nextScale = prev + delta
-      return Math.min(Math.max(0.5, nextScale), 5)
-    })
-  }, [])
-
-  React.useEffect(() => {
-    const imgElement = imageRef.current
-    if (imgElement && isOpen) {
-      imgElement.addEventListener('wheel', handleWheel, { passive: false })
-      return () => {
-        imgElement.removeEventListener('wheel', handleWheel)
-      }
-    }
-  }, [isOpen, handleWheel])
-
   const handleNavigate = React.useCallback(
     (direction: 1 | -1) => {
       if (currentIndex === null) return
