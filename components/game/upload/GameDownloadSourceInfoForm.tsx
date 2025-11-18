@@ -110,17 +110,19 @@ export const GameDownloadSourceInfoForm = ({
     <div className={cn('flex flex-col', className)}>
       <Form {...form}>
         <form className="space-y-4" onSubmit={form.handleSubmit(handleSubmit)}>
-          <div className="flex items-center justify-between rounded-md border border-border px-4 py-3">
-            <div className="space-y-2 pr-4">
-              <p className="text-sm font-medium">{t('autoSubmitLabel')}</p>
-              <p className="text-xs text-muted-foreground">{t('autoSubmitDescription')}</p>
+          {autoSubmitTrigger !== undefined && (
+            <div className="flex items-center justify-between rounded-md border border-border px-4 py-3">
+              <div className="space-y-2 pr-4">
+                <p className="text-sm font-medium">{t('autoSubmitLabel')}</p>
+                <p className="text-xs text-muted-foreground">{t('autoSubmitDescription')}</p>
+              </div>
+              <Switch
+                checked={autoSubmitEnabled}
+                onCheckedChange={handleAutoSubmitSwitchChange}
+                disabled={!canToggleAutoSubmit}
+              />
             </div>
-            <Switch
-              checked={autoSubmitEnabled}
-              onCheckedChange={handleAutoSubmitSwitchChange}
-              disabled={!canToggleAutoSubmit}
-            />
-          </div>
+          )}
           <FormField
             control={form.control as Control<z.infer<typeof gameDownloadSourceSchema>>}
             name="platform"
