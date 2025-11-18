@@ -46,7 +46,7 @@ export function FileUploader({
   const [phase, setPhase] = React.useState<Phase>('idle')
   React.useEffect(() => {
     onPhaseChange?.(phase)
-  }, [phase])
+  }, [phase, onPhaseChange])
   const [bytesHashed, setBytesHashed] = React.useState(0)
   const [bytesUploaded, setBytesUploaded] = React.useState(0)
   const [totalBytes, setTotalBytes] = React.useState(0)
