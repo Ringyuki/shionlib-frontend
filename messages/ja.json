@@ -461,6 +461,8 @@
           "languagePlaceholder": "ゲームの言語を選択",
           "note": "備考",
           "notePlaceholder": "備考（任意）を入力",
+          "autoSubmitLabel": "アップロード完了時に送信",
+          "autoSubmitDescription": "プラットフォームと言語を入力したら、アップロード完了時に自動で送信します",
           "submit": "送信",
           "waitForUploadCompleted": "アップロードの完了を待機中",
           "success": "送信しました",

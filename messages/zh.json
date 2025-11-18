@@ -468,6 +468,8 @@
           "languagePlaceholder": "选择该资源的游戏语言",
           "note": "备注",
           "notePlaceholder": "输入备注信息(如果有)",
+          "autoSubmitLabel": "上传完成时提交",
+          "autoSubmitDescription": "填写平台和语言后，可在上传完成时自动提交",
           "submit": "确认提交",
           "waitForUploadCompleted": "等待文件上传完成",
           "success": "提交成功",

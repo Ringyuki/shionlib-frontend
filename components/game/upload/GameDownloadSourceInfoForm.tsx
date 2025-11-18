@@ -26,6 +26,8 @@ import {
 } from '@/interfaces/game/game.interface'
 import { Button } from '@/components/shionui/Button'
 import { cn } from '@/utils/cn'
+import { Switch } from '@/components/shionui/animated/Switch'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 const platformValues = PlatformOptions.map(option => option.value) as [Platform, ...Platform[]]
 const languageValues = LanguageOptions.map(option => option.value) as [Language, ...Language[]]
@@ -41,6 +43,7 @@ interface GameDownloadSourceInfoFormProps {
   onSubmit: (data: z.infer<typeof gameDownloadSourceSchemaType>) => void
   loading: boolean
   initialValues?: z.infer<typeof gameDownloadSourceSchemaType>
+  autoSubmitTrigger?: number
 }
 
 export const GameDownloadSourceInfoForm = ({
@@ -48,6 +51,7 @@ export const GameDownloadSourceInfoForm = ({
   onSubmit,
   loading,
   initialValues,
+  autoSubmitTrigger,
 }: GameDownloadSourceInfoFormProps) => {
   const t = useTranslations('Components.Game.Upload.GameUploadDialog')
 
@@ -67,13 +71,56 @@ export const GameDownloadSourceInfoForm = ({
   const platform = useWatch({ control: form.control, name: 'platform' })
   const language = useWatch({ control: form.control, name: 'language' })
 
-  const handleSubmit = async (data: z.infer<typeof gameDownloadSourceSchema>) => {
-    onSubmit(data)
+  const [autoSubmitTouched, setAutoSubmitTouched] = useState(false)
+  const [autoSubmitEnabled, setAutoSubmitEnabled] = useState(false)
+  const canToggleAutoSubmit = platform.length > 0 && language.length > 0
+
+  useEffect(() => {
+    if (!canToggleAutoSubmit) {
+      setAutoSubmitEnabled(false)
+      setAutoSubmitTouched(false)
+      return
+    }
+    if (!autoSubmitTouched) {
+      setAutoSubmitEnabled(true)
+    }
+  }, [canToggleAutoSubmit, autoSubmitTouched])
+
+  const handleAutoSubmitSwitchChange = (checked: boolean) => {
+    setAutoSubmitTouched(true)
+    setAutoSubmitEnabled(checked)
   }
+  const handleSubmit = useCallback(
+    async (data: z.infer<typeof gameDownloadSourceSchema>) => {
+      onSubmit(data)
+    },
+    [onSubmit],
+  )
+
+  const lastAutoSubmitTriggerRef = useRef<number | undefined>(autoSubmitTrigger)
+  useEffect(() => {
+    if (autoSubmitTrigger === undefined || lastAutoSubmitTriggerRef.current === autoSubmitTrigger)
+      return
+    lastAutoSubmitTriggerRef.current = autoSubmitTrigger
+    if (!autoSubmitEnabled || !canToggleAutoSubmit || loading) return
+    form.handleSubmit(handleSubmit)()
+  }, [autoSubmitTrigger, autoSubmitEnabled, canToggleAutoSubmit, loading, form, handleSubmit])
+
   return (
     <div className={cn('flex flex-col', className)}>
       <Form {...form}>
         <form className="space-y-4" onSubmit={form.handleSubmit(handleSubmit)}>
+          <div className="flex items-center justify-between rounded-md border border-border px-4 py-3">
+            <div className="space-y-1 pr-4">
+              <p className="text-sm font-medium">{t('autoSubmitLabel')}</p>
+              <p className="text-xs text-muted-foreground">{t('autoSubmitDescription')}</p>
+            </div>
+            <Switch
+              checked={autoSubmitEnabled}
+              onCheckedChange={handleAutoSubmitSwitchChange}
+              disabled={!canToggleAutoSubmit}
+            />
+          </div>
           <FormField
             control={form.control as Control<z.infer<typeof gameDownloadSourceSchema>>}
             name="platform"

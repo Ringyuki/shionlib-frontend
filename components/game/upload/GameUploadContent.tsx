@@ -26,10 +26,17 @@ export const GameUploadContent = ({
   const t = useTranslations('Components.Game.Upload.GameUploadDialog')
   const [phase, setPhase] = useState<Phase>('idle')
   const [closable, setClosable] = useState(false)
+  const [autoSubmitTrigger, setAutoSubmitTrigger] = useState(0)
   useEffect(() => {
     setClosable(phase === 'idle' || phase === 'error' || phase === 'aborted')
     onClosableChange(closable)
   }, [phase, onClosableChange, closable])
+
+  useEffect(() => {
+    if (phase === 'completed') {
+      setAutoSubmitTrigger(prev => prev + 1)
+    }
+  }, [phase])
 
   const [uploadSessionId, setUploadSessionId] = useState<number | null>(null)
   const [fileSize, setFileSize] = useState<number>(0)
@@ -73,7 +80,11 @@ export const GameUploadContent = ({
         onFileSelected={handleFileSelected}
         desiredChunkSize={1024 * 1024 * 5}
       />
-      <GameDownloadSourceInfoForm onSubmit={handleSubmit} loading={loading} />
+      <GameDownloadSourceInfoForm
+        onSubmit={handleSubmit}
+        loading={loading}
+        autoSubmitTrigger={autoSubmitTrigger}
+      />
     </div>
   )
 }

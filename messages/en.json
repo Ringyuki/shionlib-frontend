@@ -468,6 +468,8 @@
           "languagePlaceholder": "Select the game's language",
           "note": "Notes",
           "notePlaceholder": "Enter notes (optional)",
+          "autoSubmitLabel": "Submit when upload completes",
+          "autoSubmitDescription": "Fill in platform and language, then submit automatically when upload completes",
           "submit": "Submit",
           "waitForUploadCompleted": "Waiting for file upload to complete",
           "success": "Submitted successfully",
