@@ -116,7 +116,9 @@ export const GameDownloadFileItem = ({ file }: GameDownloadFileItemProps) => {
         </div>
         <div className="text-muted-foreground text-xs flex items-center gap-1 break-words break-all">
           <Hash className="size-3 shrink-0" />
-          <span className="break-words break-all">{file.file_hash}</span>
+          <span className="break-words break-all">
+            {file.hash_algorithm === 'blake3' ? 'BLAKE3' : 'SHA-256'} {file.file_hash}
+          </span>
           <CopyButton content={file.file_hash} size="xs" variant="ghost" />
         </div>
       </div>

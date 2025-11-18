@@ -21,6 +21,7 @@ export interface GameDownloadResourceFile {
   file_size: number
   file_url?: string
   s3_file_key?: string
+  hash_algorithm: 'sha256' | 'blake3'
   file_hash: string
   creator: Creator
 }
