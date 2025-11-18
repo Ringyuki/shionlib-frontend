@@ -1,44 +1,13 @@
 import { sha256 } from '@noble/hashes/sha2.js'
-import { createShionlibLargeFileUploadApi, LargeFileUploadApi } from './large-file-upload.api'
-
-export type Phase =
-  | 'idle'
-  | 'hashing'
-  | 'initializing'
-  | 'uploading'
-  | 'paused'
-  | 'completing'
-  | 'completed'
-  | 'aborted'
-  | 'error'
-
-export type UploaderEvents =
-  | { type: 'status'; phase: Phase }
-  | { type: 'hash-progress'; bytesHashed: number; totalBytes: number }
-  | {
-      type: 'progress'
-      bytesUploaded: number
-      totalBytes: number
-      speedBps: number
-      etaSec: number | null
-    }
-  | { type: 'chunk'; index: number }
-  | { type: 'retry'; index: number; attempt: number; delayMs: number }
-  | { type: 'error'; error: unknown }
-  | { type: 'done'; sessionId: number }
-  | { type: 'file-mismatch'; sessionId: number }
-
-export type UploaderOptions = {
-  api?: LargeFileUploadApi
-  desiredChunkSize?: number
-  concurrency?: number
-  retry?: {
-    retries: number
-    baseDelayMs: number
-    maxDelayMs: number
-  }
-  smallFileThreshold?: number
-}
+import {
+  Phase,
+  UploaderEvents,
+  UploaderOptions,
+  HashWorkerResponse,
+  LargeFileUploadApi,
+} from './types'
+import { HASH_STEP_BYTES } from './constants/constant'
+import { createShionlibLargeFileUploadApi } from './large-file-upload.api'
 
 export class ShionlibLargeFileUploader {
   private file: File
@@ -51,6 +20,7 @@ export class ShionlibLargeFileUploader {
   private chunkSize?: number
   private totalChunks?: number
   private fileSha256?: string
+  private hashWorker?: Worker
   private listeners = new Set<(e: UploaderEvents) => void>()
   private opts: Required<
     Omit<UploaderOptions, 'api' | 'desiredChunkSize' | 'smallFileThreshold'>
@@ -88,6 +58,7 @@ export class ShionlibLargeFileUploader {
   }
 
   private resetState() {
+    this.disposeHashWorker()
     this.startedAt = 0
     this.bytesUploaded = 0
     this.uploaded.clear()
@@ -95,6 +66,13 @@ export class ShionlibLargeFileUploader {
     this.chunkSize = undefined
     this.totalChunks = undefined
     this.fileSha256 = undefined
+  }
+
+  private disposeHashWorker() {
+    if (this.hashWorker) {
+      this.hashWorker.terminate()
+      this.hashWorker = undefined
+    }
   }
 
   async start() {
@@ -293,32 +271,45 @@ export class ShionlibLargeFileUploader {
     return bytes
   }
 
-  // TODO: use web worker to hash file
   private async hashFile(file: File) {
     const total = file.size
     if (total <= this.opts.smallFileThreshold) {
       return this.hashChunk(file)
     }
-    const step = 1024 * 1024 * 16
+
+    if (this.canUseHashWorker()) {
+      try {
+        return await this.hashFileWithWorker(file)
+      } catch (e: any) {
+        if (e?.name === 'AbortError') {
+          throw e
+        }
+        console.warn(
+          '[ShionlibLargeFileUploader] hash worker failed, falling back to main thread',
+          e,
+        )
+      }
+    }
+
+    return this.hashFileWithMainThread(file)
+  }
+
+  private canUseHashWorker() {
+    return typeof window !== 'undefined' && typeof Worker !== 'undefined'
+  }
+
+  private async hashFileWithMainThread(file: File) {
+    const total = file.size
+    const step = HASH_STEP_BYTES
     const hasher = sha256.create()
     let off = 0
-    // while (off < total) {
-    //   if (this.abortController?.signal.aborted) throw new DOMException('Aborted', 'AbortError')
-    //   const end = Math.min(off + step, total)
-    //   hasher.update(new Uint8Array(await file.slice(off, end).arrayBuffer()))
-    //   off = end
-    //   this.emit({ type: 'hash-progress', bytesHashed: off, totalBytes: total })
-    //   if (off % (1024 * 1024 * 64) === 0) await new Promise(r => setTimeout(r))
-    // }
     let nextPromise = file.slice(0, Math.min(step, total)).arrayBuffer()
     while (off < total) {
       if (this.abortController?.signal.aborted) throw new DOMException('Aborted', 'AbortError')
-      // wait for the previous read result
       const ab = await nextPromise
       hasher.update(new Uint8Array(ab))
       off = Math.min(off + step, total)
       this.emit({ type: 'hash-progress', bytesHashed: off, totalBytes: total })
-      // start the next read (await in the next round to implement read-compute pipeline)
       if (off < total) {
         const end = Math.min(off + step, total)
         nextPromise = file.slice(off, end).arrayBuffer()
@@ -328,6 +319,88 @@ export class ShionlibLargeFileUploader {
       }
     }
     return this.toHex(hasher.digest())
+  }
+
+  private async hashFileWithWorker(file: File) {
+    const worker = new Worker(new URL('./worker/hash.worker.ts', import.meta.url), {
+      type: 'module',
+    })
+    this.hashWorker = worker
+    const signal = this.abortController?.signal
+    const step = HASH_STEP_BYTES
+
+    return await new Promise<string>((resolve, reject) => {
+      let cleanedUp = false
+      let abortHandler: (() => void) | undefined
+
+      const cleanup = () => {
+        if (cleanedUp) return
+        cleanedUp = true
+        if (signal && abortHandler) {
+          signal.removeEventListener('abort', abortHandler)
+        }
+        worker.terminate()
+        if (this.hashWorker === worker) {
+          this.hashWorker = undefined
+        }
+      }
+
+      const rejectWithAbort = () => {
+        cleanup()
+        reject(new DOMException('Aborted', 'AbortError'))
+      }
+
+      abortHandler = () => {
+        try {
+          worker.postMessage({ type: 'abort' })
+        } catch {}
+        rejectWithAbort()
+      }
+
+      if (signal) {
+        if (signal.aborted) {
+          abortHandler()
+          return
+        }
+        signal.addEventListener('abort', abortHandler, { once: true })
+      }
+
+      worker.onmessage = event => {
+        const data = event.data as HashWorkerResponse
+        if (data.type === 'hash-progress') {
+          this.emit({
+            type: 'hash-progress',
+            bytesHashed: data.bytesHashed,
+            totalBytes: data.totalBytes,
+          })
+          return
+        }
+
+        if (data.type === 'hash-complete') {
+          cleanup()
+          resolve(data.digest)
+          return
+        }
+
+        if (data.type === 'hash-error') {
+          cleanup()
+          if (data.error?.name === 'AbortError') {
+            reject(new DOMException(data.error.message, 'AbortError'))
+            return
+          }
+          const err = new Error(data.error?.message ?? 'Hash worker error')
+          err.name = data.error?.name ?? 'Error'
+          reject(err)
+        }
+      }
+
+      worker.onerror = event => {
+        cleanup()
+        reject(event.error ?? new Error(event.message))
+      }
+
+      worker.postMessage({ type: 'hash', step, file })
+    })
   }
 
   private async hashChunk(blob: Blob) {
