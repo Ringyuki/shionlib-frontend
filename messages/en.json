@@ -282,6 +282,16 @@
           "fileTooSmall": "File size must be at least {size}MB",
           "fileMismatch": "Please select the same file to continue"
         },
+        "UploadTuning": {
+          "concurrencyLabel": "Parallel chunks",
+          "concurrencyDescription": "Higher values use more connections but can saturate unstable networks.",
+          "concurrencyRange": "{min}-{max} threads",
+          "chunkSizeLabel": "Chunk size",
+          "chunkSizeDescription": "Larger chunks reduce requests but make retries resend more data.",
+          "chunkSizeRange": "{min}-{max} MB",
+          "unitThreads": "threads",
+          "unitMB": "MB"
+        },
         "UploadController": {
           "start": "Start",
           "pause": "Pause",
@@ -469,7 +479,7 @@
           "note": "Notes",
           "notePlaceholder": "Enter notes (optional)",
           "autoSubmitLabel": "Submit when upload completes",
-          "autoSubmitDescription": "Fill in platform and language, then submit automatically when upload completes",
+          "autoSubmitDescription": "Fill in platform and language, then submit automatically when upload completes.",
           "submit": "Submit",
           "waitForUploadCompleted": "Waiting for file upload to complete",
           "success": "Submitted successfully",

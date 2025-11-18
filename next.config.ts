@@ -88,6 +88,9 @@ const nextConfig: NextConfig = {
       },
     ]
   },
+  experimental: {
+    proxyClientMaxBodySize: '50mb',
+  },
 }
 
 export default withNextIntl(withMDX(nextConfig))

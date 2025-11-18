@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import toast from 'react-hot-toast'
 import { cn } from '@/utils/cn'
+import { UploadTuning } from '@/components/common/uploader/UploadTuning'
 
 interface GameUploadContentProps {
   game_id: number
@@ -26,7 +27,10 @@ export const GameUploadContent = ({
   const t = useTranslations('Components.Game.Upload.GameUploadDialog')
   const [phase, setPhase] = useState<Phase>('idle')
   const [closable, setClosable] = useState(false)
+  const [concurrency, setConcurrency] = useState(4)
+  const [desiredChunkSize, setDesiredChunkSize] = useState(1024 * 1024 * 5)
   const [autoSubmitTrigger, setAutoSubmitTrigger] = useState(0)
+  const [settingsLocked, setSettingsLocked] = useState(false)
   useEffect(() => {
     setClosable(phase === 'idle' || phase === 'error' || phase === 'aborted')
     onClosableChange(closable)
@@ -36,7 +40,10 @@ export const GameUploadContent = ({
     if (phase === 'completed') {
       setAutoSubmitTrigger(prev => prev + 1)
     }
-  }, [phase])
+    if (!settingsLocked && phase !== 'idle') {
+      setSettingsLocked(true)
+    }
+  }, [phase, settingsLocked])
 
   const [uploadSessionId, setUploadSessionId] = useState<number | null>(null)
   const [fileSize, setFileSize] = useState<number>(0)
@@ -73,12 +80,21 @@ export const GameUploadContent = ({
   return (
     <div className={cn(className, 'flex flex-col gap-4')}>
       <UploadQuota fileSize={fileSize} />
+      <UploadTuning
+        className="max-w-3xl"
+        concurrency={concurrency}
+        desiredChunkSize={desiredChunkSize}
+        disabled={settingsLocked}
+        onConcurrencyChange={setConcurrency}
+        onDesiredChunkSizeChange={setDesiredChunkSize}
+      />
       <FileUploader
         className="max-w-3xl"
+        concurrency={concurrency}
         onPhaseChange={setPhase}
         onUploadComplete={setUploadSessionId}
         onFileSelected={handleFileSelected}
-        desiredChunkSize={1024 * 1024 * 5}
+        desiredChunkSize={desiredChunkSize}
       />
       <GameDownloadSourceInfoForm
         onSubmit={handleSubmit}

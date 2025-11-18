@@ -275,6 +275,16 @@
           "fileTooSmall": "ファイルサイズは少なくとも {size}MB でなければなりません",
           "fileMismatch": "同じファイルから続ける"
         },
+        "UploadTuning": {
+          "concurrencyLabel": "同時アップロード数",
+          "concurrencyDescription": "同時に送信するチャンク数。高すぎるとネットワークが不安定になる場合があります。",
+          "concurrencyRange": "{min}-{max} スレッド",
+          "chunkSizeLabel": "チャンクサイズ",
+          "chunkSizeDescription": "チャンクが大きいほどリクエストは減りますが、失敗時は多くのデータを再送する必要があります。",
+          "chunkSizeRange": "{min}-{max} MB",
+          "unitThreads": "スレッド",
+          "unitMB": "MB"
+        },
         "UploadController": {
           "start": "開始",
           "pause": "一時停止",
@@ -462,7 +472,7 @@
           "note": "備考",
           "notePlaceholder": "備考（任意）を入力",
           "autoSubmitLabel": "アップロード完了時に送信",
-          "autoSubmitDescription": "プラットフォームと言語を入力したら、アップロード完了時に自動で送信します",
+          "autoSubmitDescription": "プラットフォームと言語を入力したら、アップロード完了時に自動で送信します。",
           "submit": "送信",
           "waitForUploadCompleted": "アップロードの完了を待機中",
           "success": "送信しました",

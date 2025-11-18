@@ -282,6 +282,16 @@
           "fileTooSmall": "文件大小不能小于 {size}MB",
           "fileMismatch": "请选择相同文件继续"
         },
+        "UploadTuning": {
+          "concurrencyLabel": "上传并发",
+          "concurrencyDescription": "决定同时上传的分片数量，过高可能导致网络拥塞。",
+          "concurrencyRange": "{min}-{max} 线程",
+          "chunkSizeLabel": "分片大小",
+          "chunkSizeDescription": "更大的分片可以减少请求次数，但失败时需要重新上传更多数据。",
+          "chunkSizeRange": "{min}-{max} MB",
+          "unitThreads": "线程",
+          "unitMB": "MB"
+        },
         "UploadController": {
           "start": "开始",
           "pause": "暂停",
@@ -469,7 +479,7 @@
           "note": "备注",
           "notePlaceholder": "输入备注信息(如果有)",
           "autoSubmitLabel": "上传完成时提交",
-          "autoSubmitDescription": "填写平台和语言后，可在上传完成时自动提交",
+          "autoSubmitDescription": "填写平台和语言后，可在上传完成时自动提交。",
           "submit": "确认提交",
           "waitForUploadCompleted": "等待文件上传完成",
           "success": "提交成功",
