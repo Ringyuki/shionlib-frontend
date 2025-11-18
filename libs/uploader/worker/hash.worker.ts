@@ -1,6 +1,6 @@
 /// <reference lib="webworker" />
 
-import { createSHA256 } from 'hash-wasm'
+import { createBLAKE3 } from 'hash-wasm'
 import { HashWorkerRequest } from '../types/worker'
 
 const ctx = self as DedicatedWorkerGlobalScope
@@ -20,7 +20,7 @@ ctx.onmessage = async event => {
   try {
     const { file, step } = data
     const total = file.size
-    const hasher = await createSHA256()
+    const hasher = await createBLAKE3()
     hasher.init()
 
     let off = 0

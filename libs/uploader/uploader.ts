@@ -1,4 +1,4 @@
-import { sha256 } from '@noble/hashes/sha2.js'
+import { blake3 } from '@noble/hashes/blake3.js'
 import {
   Phase,
   UploaderEvents,
@@ -301,7 +301,7 @@ export class ShionlibLargeFileUploader {
   private async hashFileWithMainThread(file: File) {
     const total = file.size
     const step = HASH_STEP_BYTES
-    const hasher = sha256.create()
+    const hasher = blake3.create()
     let off = 0
     let nextPromise = file.slice(0, Math.min(step, total)).arrayBuffer()
     while (off < total) {
