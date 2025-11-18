@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
 import { PhaseMap } from './PhaseMap'
-import { Phase } from '@/libs/uploader/uploader'
+import { Phase } from '@/libs/uploader/types'
 import { Progress } from '@/components/shionui/Progress'
 
 interface UploadStatusProps {

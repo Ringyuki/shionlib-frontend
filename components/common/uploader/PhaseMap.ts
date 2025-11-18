@@ -1,4 +1,4 @@
-import { Phase } from '@/libs/uploader/uploader'
+import { Phase } from '@/libs/uploader/types'
 
 export const PhaseMap: Record<Phase, string> = {
   idle: 'Idle',

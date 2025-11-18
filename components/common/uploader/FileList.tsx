@@ -5,7 +5,7 @@ import {
   FileUploadItemDelete,
   useFileUpload as useFileUploadStore,
 } from '@/components/shionui/FileUpload'
-import { Phase } from '@/libs/uploader/uploader'
+import { Phase } from '@/libs/uploader/types'
 import { Button } from '@/components/shionui/Button'
 import { Trash2 } from 'lucide-react'
 import * as React from 'react'

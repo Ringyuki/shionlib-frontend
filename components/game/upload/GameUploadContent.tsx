@@ -1,7 +1,7 @@
 import { UploadQuota } from '@/components/game/upload/UploadQuota'
 import { FileUploader } from '@/components/common/uploader/FileUploader'
 import { GameDownloadSourceInfoForm } from './GameDownloadSourceInfoForm'
-import { Phase } from '@/libs/uploader/uploader'
+import { Phase } from '@/libs/uploader/types'
 import { z } from 'zod'
 import { gameDownloadSourceSchemaType } from '@/components/game/upload/GameDownloadSourceInfoForm'
 import { useTranslations } from 'next-intl'

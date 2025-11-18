@@ -13,7 +13,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/shionui/Tooltip'
-import { Phase } from '@/libs/uploader/uploader'
+import { Phase } from '@/libs/uploader/types'
 
 interface OnGoingSessionProps {
   onResume: (sessionId: number) => void
