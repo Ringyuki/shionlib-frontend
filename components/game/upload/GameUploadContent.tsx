@@ -81,7 +81,7 @@ export const GameUploadContent = ({
     <div className={cn(className, 'flex flex-col gap-4')}>
       <UploadQuota fileSize={fileSize} />
       <UploadTuning
-        className="max-w-3xl"
+        className="lg:max-w-5xl"
         concurrency={concurrency}
         desiredChunkSize={desiredChunkSize}
         disabled={settingsLocked}
@@ -89,7 +89,7 @@ export const GameUploadContent = ({
         onDesiredChunkSizeChange={setDesiredChunkSize}
       />
       <FileUploader
-        className="max-w-3xl"
+        className="lg:max-w-5xl"
         concurrency={concurrency}
         onPhaseChange={setPhase}
         onUploadComplete={setUploadSessionId}

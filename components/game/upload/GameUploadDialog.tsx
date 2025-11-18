@@ -24,7 +24,7 @@ export const GameUploadDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange} maskClosable={closable}>
-      <DialogContent className="max-w-3xl!" aria-describedby={undefined}>
+      <DialogContent className="lg:max-w-5xl!" aria-describedby={undefined}>
         <DialogHeader>
           <DialogTitle>{t('title')}</DialogTitle>
         </DialogHeader>

@@ -27,7 +27,7 @@ export const GameUploadDrawer = ({
 
   return (
     <Drawer open={open} onOpenChange={onOpenChange} dismissible={closable}>
-      <DrawerContent>
+      <DrawerContent aria-describedby={undefined}>
         <DrawerHeader>
           <DrawerTitle>{t('title')}</DrawerTitle>
         </DrawerHeader>
@@ -52,7 +52,7 @@ export const GameUploadDrawer = ({
             game_id={game_id}
             onClosableChange={setClosable}
             onUploadComplete={onUploadComplete}
-            className="mb-4"
+            className="mb-4 w-full"
           />
         </div>
       </DrawerContent>
