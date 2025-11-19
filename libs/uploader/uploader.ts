@@ -41,7 +41,7 @@ export class ShionlibLargeFileUploader {
         maxDelayMs: 10000,
       },
       desiredChunkSize: options.desiredChunkSize,
-      smallFileThreshold: options.smallFileThreshold ?? 1024 * 1024 * 512,
+      smallFileThreshold: options.smallFileThreshold ?? 1024 * 1024 * 100,
     }
   }
 
