@@ -15,6 +15,7 @@ export const EditContent = ({ downloadResource, onSubmit, isSubmitting }: EditCo
       onSubmit={onSubmit}
       loading={isSubmitting}
       initialValues={{
+        file_name: downloadResource.files[0].file_name,
         platform: downloadResource.platform,
         language: downloadResource.language,
         note: downloadResource.note ?? '',

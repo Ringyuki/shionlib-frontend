@@ -28,11 +28,29 @@ import { Button } from '@/components/shionui/Button'
 import { cn } from '@/utils/cn'
 import { Switch } from '@/components/shionui/animated/Switch'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { Input } from '@/components/shionui/Input'
+import isEqual from 'lodash/isEqual'
 
 const platformValues = PlatformOptions.map(option => option.value) as [Platform, ...Platform[]]
 const languageValues = LanguageOptions.map(option => option.value) as [Language, ...Language[]]
 
+interface GameDownloadSourceFormValues {
+  file_name: string
+  platform: Platform[]
+  language: Language[]
+  note: string
+}
+const normalizeInitialValues = (
+  values?: Partial<GameDownloadSourceFormValues>,
+): GameDownloadSourceFormValues => ({
+  file_name: values?.file_name ?? '',
+  platform: values?.platform ?? [],
+  language: values?.language ?? [],
+  note: values?.note ?? '',
+})
+
 export const gameDownloadSourceSchemaType = z.object({
+  file_name: z.string().nonempty().max(255),
   platform: z.enum(platformValues).array().min(1),
   language: z.enum(languageValues).array().min(1),
   note: z.string().optional(),
@@ -42,7 +60,7 @@ interface GameDownloadSourceInfoFormProps {
   className?: string
   onSubmit: (data: z.infer<typeof gameDownloadSourceSchemaType>) => void
   loading: boolean
-  initialValues?: z.infer<typeof gameDownloadSourceSchemaType>
+  initialValues?: Partial<z.infer<typeof gameDownloadSourceSchemaType>>
   autoSubmitTrigger?: number
 }
 
@@ -56,18 +74,25 @@ export const GameDownloadSourceInfoForm = ({
   const t = useTranslations('Components.Game.Upload.GameUploadDialog')
 
   const gameDownloadSourceSchema = z.object({
+    file_name: z
+      .string()
+      .nonempty({ message: t('validation.fileNameRequired') })
+      .max(255, { message: t('validation.fileNameLength', { length: 255 }) }),
     platform: z.enum(platformValues).array().min(1, t('validation.platform')),
     language: z.enum(languageValues).array().min(1, t('validation.language')),
     note: z.string().max(255, t('validation.note')),
   })
   const form = useForm<z.infer<typeof gameDownloadSourceSchema>>({
     resolver: zodResolver(gameDownloadSourceSchema),
-    defaultValues: initialValues ?? {
-      platform: [],
-      language: [],
-      note: '',
-    },
+    defaultValues: normalizeInitialValues(initialValues),
   })
+  const lastInitialValuesRef = useRef<GameDownloadSourceFormValues | undefined>(undefined)
+  useEffect(() => {
+    const normalizedValues = normalizeInitialValues(initialValues)
+    if (isEqual(lastInitialValuesRef.current, normalizedValues)) return
+    lastInitialValuesRef.current = normalizedValues
+    form.reset(normalizedValues)
+  }, [initialValues, form])
   const platform = useWatch({ control: form.control, name: 'platform' })
   const language = useWatch({ control: form.control, name: 'language' })
 
@@ -123,6 +148,19 @@ export const GameDownloadSourceInfoForm = ({
               />
             </div>
           )}
+          <FormField
+            control={form.control as Control<z.infer<typeof gameDownloadSourceSchema>>}
+            name="file_name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t('fileName')}</FormLabel>
+                <FormControl>
+                  <Input {...field} maxLength={64} placeholder={t('fileNamePlaceholder')} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          ></FormField>
           <FormField
             control={form.control as Control<z.infer<typeof gameDownloadSourceSchema>>}
             name="platform"

@@ -63,9 +63,19 @@ export const GameDownload = ({
     }
   }, [open, game_id, onLoadingChange, onOpenChange, t])
 
-  const handleUpdate = (id: number, data: Partial<GameDownloadResource>) =>
+  const handleUpdate = (id: number, data: { file_name?: string } & Partial<GameDownloadResource>) =>
     setDownloadResources(prev =>
-      prev.map(resource => (resource.id === id ? { ...resource, ...data } : resource)),
+      prev.map(resource =>
+        resource.id === id
+          ? {
+              ...resource,
+              ...data,
+              files: resource.files.map((f, i) =>
+                i === 0 ? { ...f, file_name: data.file_name ?? f.file_name } : f,
+              ),
+            }
+          : resource,
+      ),
     )
   const handleDelete = (id: number) =>
     setDownloadResources(prev => prev.filter(resource => resource.id !== id))

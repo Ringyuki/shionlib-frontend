@@ -10,6 +10,7 @@ import { shionlibRequest } from '@/utils/shionlib-request'
 import toast from 'react-hot-toast'
 import { cn } from '@/utils/cn'
 import { UploadTuning } from '@/components/common/uploader/UploadTuning'
+import { useUploadTuningStore } from '@/store/uploadTuningStore'
 
 interface GameUploadContentProps {
   game_id: number
@@ -27,8 +28,13 @@ export const GameUploadContent = ({
   const t = useTranslations('Components.Game.Upload.GameUploadDialog')
   const [phase, setPhase] = useState<Phase>('idle')
   const [closable, setClosable] = useState(false)
-  const [concurrency, setConcurrency] = useState(4)
-  const [desiredChunkSize, setDesiredChunkSize] = useState(1024 * 1024 * 5)
+  const { getUploadTuning, setUploadTuning } = useUploadTuningStore()
+  const uploadTuning = getUploadTuning()
+  const [concurrency, setConcurrency] = useState(uploadTuning.concurrency)
+  const [desiredChunkSize, setDesiredChunkSize] = useState(uploadTuning.chunkSize)
+  useEffect(() => {
+    setUploadTuning({ concurrency, chunkSize: desiredChunkSize })
+  }, [concurrency, desiredChunkSize, setUploadTuning])
   const [autoSubmitTrigger, setAutoSubmitTrigger] = useState(0)
   const [settingsLocked, setSettingsLocked] = useState(false)
   useEffect(() => {
@@ -47,12 +53,15 @@ export const GameUploadContent = ({
 
   const [uploadSessionId, setUploadSessionId] = useState<number | null>(null)
   const [fileSize, setFileSize] = useState<number>(0)
+  const [fileName, setFileName] = useState<string>('')
   const handleFileSelected = (file: File) => {
     if (!file) {
       setFileSize(0)
+      setFileName('')
       return
     }
     setFileSize(file.size)
+    setFileName(file.name)
   }
 
   const [loading, setLoading] = useState(false)
@@ -100,6 +109,9 @@ export const GameUploadContent = ({
         onSubmit={handleSubmit}
         loading={loading}
         autoSubmitTrigger={autoSubmitTrigger}
+        initialValues={{
+          file_name: fileName,
+        }}
       />
     </div>
   )

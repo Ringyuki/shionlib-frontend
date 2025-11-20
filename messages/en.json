@@ -472,6 +472,8 @@
           "alert1Description": "You can upload the game package here. Files you upload will be stored on Shionlib servers and made available for all users to download. Once the upload completes successfully, it cannot be revoked and the files stored on Shionlib servers cannot be deleted.",
           "alert2Title": "Upload Guidelines",
           "alert2Description": "Uploading files consumes your \"upload quota\". When the upload starts, quota equal to the file size will be reserved. If the upload does not finish successfully, the quota will be returned after verification.\nPackage the game into a [b]single[/b] zip/rar/7z/tar/gzip file and [b]do not set a password[/b].\nAfter the upload completes, the system will verify the file and then push it to S3. Download information will be updated when all steps finish.\nDo not refresh or close the page during the upload.",
+          "fileName": "File name",
+          "fileNamePlaceholder": "Enter file name",
           "platform": "Platform",
           "platformPlaceholder": "Select the target platform for this resource",
           "language": "Language",
@@ -484,6 +486,8 @@
           "waitForUploadCompleted": "Waiting for file upload to complete",
           "success": "Submitted successfully",
           "validation": {
+            "fileNameRequired": "File name is required",
+            "fileNameLength": "File name must be at most {length} characters",
             "platform": "Platform is required",
             "language": "Language is required",
             "note": "Notes must be at most 255 characters"
