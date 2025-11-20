@@ -155,7 +155,7 @@ export const GameDownloadSourceInfoForm = ({
               <FormItem>
                 <FormLabel>{t('fileName')}</FormLabel>
                 <FormControl>
-                  <Input {...field} maxLength={64} placeholder={t('fileNamePlaceholder')} />
+                  <Input {...field} maxLength={255} placeholder={t('fileNamePlaceholder')} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

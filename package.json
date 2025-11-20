@@ -1,7 +1,9 @@
 {
   "name": "shionlib-frontend",
-  "version": "0.1.0",
+  "version": "0.1.75",
+  "author": "Hoshimi Shion",
   "private": true,
+  "license": "AGPL-3.0",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
