@@ -233,7 +233,7 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.25, ease: 'easeOut' }}
-                        className="fixed inset-0 z-[9999] bg-black/90"
+                        className="fixed inset-0 z-[9999] bg-black/90 select-none"
                         onClick={handleClose}
                         style={{ cursor: 'zoom-out' }}
                       />

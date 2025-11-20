@@ -33,7 +33,11 @@ export const PatchItem = ({ patch }: GameDownloadResourceItemProps) => {
                 <Badge
                   key={p}
                   variant="neutral"
-                  style={{ backgroundColor: TypeTokenMap[p].bg, color: TypeTokenMap[p].fg }}
+                  style={{
+                    borderColor: TypeTokenMap[p].text,
+                    color: TypeTokenMap[p].text,
+                    backgroundColor: TypeTokenMap[p].bg,
+                  }}
                 >
                   {t(`type.${TypeMap[p]}`)}
                 </Badge>

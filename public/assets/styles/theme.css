@@ -175,24 +175,24 @@
   --platform-other: #f5f5f5;
   --platform-other-fg: #111111;
 
-  --type-manual: #4f46e5;
-  --type-manual-fg: #ffffff;
-  --type-ai: #10b981;
-  --type-ai-fg: #ffffff;
-  --type-machine_polishing: #f59e0b;
-  --type-machine_polishing-fg: #111111;
-  --type-machine: #9333ea;
-  --type-machine-fg: #ffffff;
-  --type-save: #22c55e;
-  --type-save-fg: #0a1b12;
-  --type-crack: #ef4444;
-  --type-crack-fg: #ffffff;
-  --type-fix: #06b6d4;
-  --type-fix-fg: #ffffff;
-  --type-mod: #e879f9;
-  --type-mod-fg: #111111;
-  --type-other: var(--neutral-500);
-  --type-other-fg: #ffffff;
+  --type-manual: #5a3bff;
+  --type-manual-bg: color-mix(in oklab, var(--type-manual) 18%, transparent);
+  --type-ai: #0fb5a0;
+  --type-ai-bg: color-mix(in oklab, var(--type-ai) 18%, transparent);
+  --type-machine_polishing: #f6a13b;
+  --type-machine_polishing-bg: color-mix(in oklab, var(--type-machine_polishing) 18%, transparent);
+  --type-machine: #a855f7;
+  --type-machine-bg: color-mix(in oklab, var(--type-machine) 18%, transparent);
+  --type-save: #22c376;
+  --type-save-bg: color-mix(in oklab, var(--type-save) 18%, transparent);
+  --type-crack: #ef4865;
+  --type-crack-bg: color-mix(in oklab, var(--type-crack) 18%, transparent);
+  --type-fix: #19b4e6;
+  --type-fix-bg: color-mix(in oklab, var(--type-fix) 18%, transparent);
+  --type-mod: #f07ab5;
+  --type-mod-bg: color-mix(in oklab, var(--type-mod) 18%, transparent);
+  --type-other: #6b7280;
+  --type-other-bg: color-mix(in oklab, var(--type-other) 18%, transparent);
 }
 
 .dark {
@@ -296,24 +296,24 @@
   --platform-other: #f5f5f5;
   --platform-other-fg: #111111;
 
-  --type-manual: #6366f1;
-  --type-manual-fg: #ffffff;
-  --type-ai: #34d399;
-  --type-ai-fg: #ffffff;
-  --type-machine_polishing: #fbbf24;
-  --type-machine_polishing-fg: #111111;
-  --type-machine: #a855f7;
-  --type-machine-fg: #ffffff;
-  --type-save: #34d399;
-  --type-save-fg: #0a1b12;
-  --type-crack: #f87171;
-  --type-crack-fg: #ffffff;
-  --type-fix: #22d3ee;
-  --type-fix-fg: #ffffff;
-  --type-mod: #f472b6;
-  --type-mod-fg: #111111;
-  --type-other: var(--neutral-500);
-  --type-other-fg: #111827;
+  --type-manual: #8c89ff;
+  --type-manual-bg: color-mix(in oklab, var(--type-manual) 32%, transparent);
+  --type-ai: #4fe0c2;
+  --type-ai-bg: color-mix(in oklab, var(--type-ai) 32%, transparent);
+  --type-machine_polishing: #ffd35c;
+  --type-machine_polishing-bg: color-mix(in oklab, var(--type-machine_polishing) 32%, transparent);
+  --type-machine: #c4a5ff;
+  --type-machine-bg: color-mix(in oklab, var(--type-machine) 32%, transparent);
+  --type-save: #59e28f;
+  --type-save-bg: color-mix(in oklab, var(--type-save) 32%, transparent);
+  --type-crack: #ff8fa3;
+  --type-crack-bg: color-mix(in oklab, var(--type-crack) 32%, transparent);
+  --type-fix: #5ed1ff;
+  --type-fix-bg: color-mix(in oklab, var(--type-fix) 32%, transparent);
+  --type-mod: #ff9bcb;
+  --type-mod-bg: color-mix(in oklab, var(--type-mod) 32%, transparent);
+  --type-other: #9ca5b8;
+  --type-other-bg: color-mix(in oklab, var(--type-other) 32%, transparent);
 }
 
 .skeleton-primary {

@@ -32,7 +32,7 @@ export const PatchResourceItem = ({ patch }: PatchResourceItemProps) => {
         {patch.hash && (
           <div className="text-muted-foreground text-xs flex items-center gap-1 break-words break-all">
             <Hash className="size-3 shrink-0" />
-            <span className="break-words break-all">{patch.hash}</span>
+            <span className="break-words break-all">{'BLAKE3 ' + patch.hash}</span>
             <CopyButton content={patch.hash} size="xs" variant="ghost" />
           </div>
         )}

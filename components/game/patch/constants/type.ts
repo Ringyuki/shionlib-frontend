@@ -12,19 +12,19 @@ export const TypeMap: Record<string, Partial<PatchType>> = {
   other: 'other',
 }
 
-export const TypeTokenMap: Record<PatchType, { bg: string; fg: string }> = {
-  manual: { bg: 'var(--type-manual)', fg: 'var(--type-manual-fg)' },
-  ai: { bg: 'var(--type-ai)', fg: 'var(--type-ai-fg)' },
+export const TypeTokenMap: Record<PatchType, { text: string; bg: string }> = {
+  manual: { text: 'var(--type-manual)', bg: 'var(--type-manual-bg)' },
+  ai: { text: 'var(--type-ai)', bg: 'var(--type-ai-bg)' },
   machine_polishing: {
-    bg: 'var(--type-machine_polishing)',
-    fg: 'var(--type-machine_polishing-fg)',
+    text: 'var(--type-machine_polishing)',
+    bg: 'var(--type-machine_polishing-bg)',
   },
-  machine: { bg: 'var(--type-machine)', fg: 'var(--type-machine-fg)' },
-  save: { bg: 'var(--type-save)', fg: 'var(--type-save-fg)' },
-  crack: { bg: 'var(--type-crack)', fg: 'var(--type-crack-fg)' },
-  fix: { bg: 'var(--type-fix)', fg: 'var(--type-fix-fg)' },
-  mod: { bg: 'var(--type-mod)', fg: 'var(--type-mod-fg)' },
-  other: { bg: 'var(--type-other)', fg: 'var(--type-other-fg)' },
+  machine: { text: 'var(--type-machine)', bg: 'var(--type-machine-bg)' },
+  save: { text: 'var(--type-save)', bg: 'var(--type-save-bg)' },
+  crack: { text: 'var(--type-crack)', bg: 'var(--type-crack-bg)' },
+  fix: { text: 'var(--type-fix)', bg: 'var(--type-fix-bg)' },
+  mod: { text: 'var(--type-mod)', bg: 'var(--type-mod-bg)' },
+  other: { text: 'var(--type-other)', bg: 'var(--type-other-bg)' },
 }
 
 export const SUPPORTED_TYPE_MAP: Record<string, string> = {
