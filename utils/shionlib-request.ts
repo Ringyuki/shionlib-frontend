@@ -4,7 +4,6 @@ import { ShionlibBizError } from '@/libs/errors'
 import { SHOULD_REFRESH_CODES, IS_FATAL_AUTH_BY_CODES } from '@/constants/auth/auth-status-codes'
 import { NOT_FOUND_CODES } from '@/constants/not-found-codes'
 import { useShionlibUserStore } from '@/store/userStore'
-import { IsFatalAuthByCodeEnum } from '@/enums/auth/auth-status.enum'
 
 let refreshPromise: Promise<void> | null = null
 const shouldRefresh = (code: number) => {

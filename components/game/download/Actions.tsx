@@ -31,7 +31,8 @@ export const Actions = ({
   const { user } = useShionlibUserStore()
 
   const showEdit = user.id === downloadResource.creator.id || user.role !== 1
-  const showDelete = user.role !== 1
+  const showDelete = user.role !== 1 || user.id === downloadResource.creator.id
+  const showReport = user.id !== downloadResource.creator.id
 
   const [editOpen, setEditOpen] = useState(false)
   const [deleteOpen, setDeleteOpen] = useState(false)
@@ -62,14 +63,16 @@ export const Actions = ({
               <span>{t('delete')}</span>
             </DropdownMenuItem>
           )}
-          <DropdownMenuItem
-            disabled={reportLoading}
-            onClick={() => setReportOpen(true)}
-            variant="destructive"
-          >
-            <TriangleAlert />
-            <span>{t('report')}</span>
-          </DropdownMenuItem>
+          {showReport && (
+            <DropdownMenuItem
+              disabled={reportLoading}
+              onClick={() => setReportOpen(true)}
+              variant="destructive"
+            >
+              <TriangleAlert />
+              <span>{t('report')}</span>
+            </DropdownMenuItem>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
       <Edit
