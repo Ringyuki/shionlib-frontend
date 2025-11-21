@@ -6,6 +6,7 @@ import { createPortal } from 'react-dom'
 import { FadeImage } from '@/components/common/shared/FadeImage'
 import { useScrollLock } from '@/hooks/useScrollLock'
 import { useDisableZoom } from '@/hooks/useDisableZoom'
+import { useRestoreBodyPointerEvents } from '@/hooks/useRestoreBodyPointerEvents'
 import { ImageLightboxGalleryContext } from './ImageLightboxGalleryContext'
 import {
   calculateTargetSize,
@@ -18,11 +19,14 @@ interface ImageLightboxProps {
   src: string
   alt?: string
   className?: string
+  imageClassName?: string
   aspectRatio?: string
   children?: React.ReactNode
   lightboxMaxSize?: number
   maxWidth?: number
   wrapElement?: 'span' | 'div'
+  autoAspectRatio?: boolean
+  hideTriggerWhileOpen?: boolean
 }
 
 const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
@@ -31,11 +35,14 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
       src,
       alt = '',
       className,
+      imageClassName,
       aspectRatio,
       children,
       lightboxMaxSize = isMobile() ? 0.9 : 0.6,
       maxWidth = 1024,
       wrapElement = 'div',
+      autoAspectRatio = true,
+      hideTriggerWhileOpen = true,
     },
     ref,
   ) => {
@@ -181,9 +188,11 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
 
     useScrollLock(isOpen)
     useDisableZoom(isOpen)
+    useRestoreBodyPointerEvents(isOpen)
     const WrapElement = wrapElement
     const isActiveInGallery = galleryContext?.activeItemId === lightboxId
-    const shouldHideTrigger = galleryContext ? isActiveInGallery : isAnimating
+    const shouldHideTrigger =
+      hideTriggerWhileOpen && (galleryContext ? isActiveInGallery : isAnimating)
 
     return (
       <>
@@ -208,7 +217,14 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
               visibility: shouldHideTrigger ? 'hidden' : 'visible',
             }}
           >
-            <FadeImage src={src} alt={alt} aspectRatio={aspectRatio} wrapElement={wrapElement} />
+            <FadeImage
+              src={src}
+              alt={alt}
+              aspectRatio={aspectRatio}
+              wrapElement={wrapElement}
+              className={imageClassName}
+              autoAspectRatio={autoAspectRatio}
+            />
           </WrapElement>
         )}
 

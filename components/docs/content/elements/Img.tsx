@@ -12,9 +12,10 @@ export const Img = ({ src, alt, className }: ImgProps) => {
       wrapElement="span"
       src={src}
       alt={alt}
-      aspectRatio="1.93 / 1"
+      aspectRatio="16 / 9"
       className={className}
       maxWidth={1920}
+      autoAspectRatio={true}
     />
   )
 }

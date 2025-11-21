@@ -1,15 +1,17 @@
 'use client'
 
 import Image, { ImageProps } from 'next/image'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import type { SyntheticEvent } from 'react'
 import { Skeleton } from '@/components/shionui/Skeleton'
 import { cn } from '@/utils/cn'
+import { normalizeAspectRatio } from './helpers/aspect-ratio'
 
 type Props = ImageProps & {
   aspectRatio?: string
   localFile?: boolean
   wrapElement?: 'span' | 'div'
+  autoAspectRatio?: boolean
 }
 
 export function FadeImage({
@@ -19,16 +21,24 @@ export function FadeImage({
   fill = true,
   localFile = false,
   wrapElement = 'div',
+  autoAspectRatio = false,
   ...props
 }: Props) {
+  const { onLoad: userOnLoad, onLoadingComplete: userOnLoadingComplete, ...imageProps } = props
   const [loaded, setLoaded] = useState(false)
-  const imageSrc = props.src
+  const [resolvedAspectRatio, setResolvedAspectRatio] = useState(() =>
+    normalizeAspectRatio(aspectRatio),
+  )
+  const imageSrc = imageProps.src
   const ContainerElement = wrapElement === 'span' ? 'span' : 'div'
-  useEffect(() => {
-    if (!imageSrc) return
-    setLoaded(false)
-  }, [imageSrc])
   const srcAsString = typeof imageSrc === 'string' ? imageSrc : imageSrc ? `${imageSrc}` : ''
+  useEffect(() => {
+    if (!srcAsString) return
+    setLoaded(false)
+  }, [srcAsString])
+  useEffect(() => {
+    setResolvedAspectRatio(normalizeAspectRatio(aspectRatio))
+  }, [aspectRatio, srcAsString])
   const shouldBypass =
     !srcAsString ||
     typeof imageSrc !== 'string' ||
@@ -43,10 +53,29 @@ export function FadeImage({
       ? imageSrc
       : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL! + srcAsString
 
+  const syncAspectRatioFromImage = useCallback(
+    (image?: HTMLImageElement | null) => {
+      if (!image || !aspectRatio || !autoAspectRatio) return
+      const { naturalWidth, naturalHeight } = image
+      if (!naturalWidth || !naturalHeight) return
+      setResolvedAspectRatio(`${naturalWidth} / ${naturalHeight}`)
+    },
+    [aspectRatio, autoAspectRatio],
+  )
+
   const handleLoad = (event: SyntheticEvent<HTMLImageElement>) => {
     setLoaded(true)
-    props.onLoad?.(event)
+    syncAspectRatioFromImage(event.currentTarget)
+    userOnLoad?.(event)
   }
+
+  const handleLoadingComplete = useCallback(
+    (image: HTMLImageElement) => {
+      syncAspectRatioFromImage(image)
+      userOnLoadingComplete?.(image)
+    },
+    [syncAspectRatioFromImage, userOnLoadingComplete],
+  )
   const shouldShowSkeleton = Boolean(imageSrc)
   return (
     <ContainerElement
@@ -55,7 +84,7 @@ export function FadeImage({
         wrapElement === 'span' ? 'inline-block' : '',
         className,
       )}
-      style={aspectRatio ? { aspectRatio } : {}}
+      style={resolvedAspectRatio ? { aspectRatio: resolvedAspectRatio } : {}}
     >
       {shouldShowSkeleton && (
         <Skeleton
@@ -75,13 +104,14 @@ export function FadeImage({
       )}
       {imageSrc && (
         <Image
-          {...props}
-          width={props.width}
-          height={props.height}
+          {...imageProps}
+          width={imageProps.width}
+          height={imageProps.height}
           src={resolvedSrc || imageSrc}
-          alt={props.alt ?? ''}
+          alt={imageProps.alt ?? ''}
           priority={priority}
           fill={fill}
+          onLoadingComplete={handleLoadingComplete}
           onLoad={handleLoad}
           className={cn(
             'object-cover transition-opacity duration-300 ease-out',

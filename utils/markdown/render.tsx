@@ -1,5 +1,5 @@
 import React from 'react'
-import { FadeImage } from '@/components/common/shared/FadeImage'
+import { ImageLightbox } from '@/components/shionui/ImageLightbox'
 
 export interface MarkdownOptions {
   newlineToBr?: boolean
@@ -242,12 +242,14 @@ export const markdownRender = (input: unknown, options: MarkdownOptions = {}): R
         if (src) {
           out.push(
             <span className="block py-2" key={key}>
-              <FadeImage
+              <ImageLightbox
                 wrapElement="span"
                 src={src}
                 alt={alt}
                 aspectRatio="16 / 9"
-                className="max-h-128 rounded-md overflow-hidden"
+                autoAspectRatio={true}
+                className="max-w-64 max-h-64 rounded-md overflow-hidden"
+                imageClassName="max-w-64 max-h-64 rounded-md overflow-hidden"
               />
             </span>,
           )

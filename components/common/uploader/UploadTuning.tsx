@@ -62,7 +62,7 @@ export const UploadTuning = ({
     <div
       data-disabled={disabled}
       className={cn(
-        'rounded-lg border border-border/80 bg-card/40 p-4 shadow-xs ring-1 ring-border/40',
+        'rounded-lg border border-border p-4 shadow-xs ring-1 ring-border/40',
         'flex flex-col gap-4 transition-opacity',
         disabled && 'opacity-60 pointer-events-none',
         className,

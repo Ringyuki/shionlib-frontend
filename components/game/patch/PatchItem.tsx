@@ -11,6 +11,7 @@ import { LanguageMap } from './constants/language'
 import { PatchResourceItem } from './PatchResourceItem'
 import { markdownRender } from '@/utils/markdown/render'
 import { TypeMap, TypeTokenMap } from './constants/type'
+import { ScrollArea } from '@/components/shionui/ScrollArea'
 
 interface GameDownloadResourceItemProps {
   patch: KunPatchResourceResponse
@@ -78,9 +79,9 @@ export const PatchItem = ({ patch }: GameDownloadResourceItemProps) => {
       <div className="flex flex-col gap-2 rounded-lg w-full">
         <PatchResourceItem patch={patch} />
         {patch.note && (
-          <div className="text-xs font-light font-mono! pl-2 space-y-2">
+          <ScrollArea className="text-xs font-light font-mono! pl-2 space-y-2 max-h-[200px]">
             {markdownRender(patch.note, { newlineToBr: true })}
-          </div>
+          </ScrollArea>
         )}
       </div>
     </div>

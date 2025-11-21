@@ -12,6 +12,7 @@ import { calculateTargetSize, loadImageDimensions, resolveOriginalSrc } from './
 import { Button } from './Button'
 import { isMobile } from './utils/imageLightbox'
 import { useDisableZoom } from '@/hooks/useDisableZoom'
+import { useRestoreBodyPointerEvents } from '@/hooks/useRestoreBodyPointerEvents'
 
 interface ImageLightboxGalleryProps {
   children: React.ReactNode
@@ -226,6 +227,7 @@ const ImageLightboxGallery = ({ children }: ImageLightboxGalleryProps) => {
 
   useScrollLock(isOpen)
   useDisableZoom(isOpen)
+  useRestoreBodyPointerEvents(isOpen)
 
   const canGoPrev = currentIndex !== null && currentIndex > 0
   const canGoNext = currentIndex !== null && currentIndex < items.length - 1
