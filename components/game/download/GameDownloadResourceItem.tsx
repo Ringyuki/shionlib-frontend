@@ -7,9 +7,7 @@ import { GameDownloadFileItem } from './GameDownloadFileItem'
 import { timeFromNow } from '@/utils/time-format'
 import { useLocale } from 'next-intl'
 import { useTranslations } from 'next-intl'
-import { Edit } from './edit/Edit'
-import { Delete } from './delete/Delete'
-import { useShionlibUserStore } from '@/store/userStore'
+import { Actions } from './Actions'
 
 interface GameDownloadResourceItemProps {
   resource: GameDownloadResource
@@ -24,10 +22,6 @@ export const GameDownloadResourceItem = ({
 }: GameDownloadResourceItemProps) => {
   const locale = useLocale()
   const t = useTranslations('Components.Game.Download.GameDownloadResourceItem')
-
-  const { user } = useShionlibUserStore()
-  const showEdit = user.id === resource.creator.id || user.role !== 1
-  const showDelete = user.role !== 1
   return (
     <div
       key={resource.id}
@@ -61,8 +55,12 @@ export const GameDownloadResourceItem = ({
         {resource.note && <div className="text-xs font-light font-mono! pl-2">{resource.note}</div>}
       </div>
       <div className="flex gap-2 items-center justify-end">
-        {showEdit && <Edit downloadResource={resource} onSuccess={onUpdate} />}
-        {showDelete && <Delete id={resource.id} onSuccess={onDelete} />}
+        <Actions
+          downloadResource={resource}
+          onEditSuccess={onUpdate}
+          onDeleteSuccess={onDelete}
+          onReportSuccess={() => {}}
+        />
       </div>
     </div>
   )

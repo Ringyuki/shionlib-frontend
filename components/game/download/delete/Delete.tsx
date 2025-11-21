@@ -1,6 +1,4 @@
-import { Button } from '@/components/shionui/Button'
-import { Trash } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import {
   AlertDialog,
@@ -18,19 +16,28 @@ import toast from 'react-hot-toast'
 interface DeleteProps {
   id: number
   onSuccess: (id: number) => void
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  onLoadingChange: (loading: boolean) => void
 }
 
-export const Delete = ({ id, onSuccess }: DeleteProps) => {
+export const Delete = ({ id, onSuccess, open, onOpenChange, onLoadingChange }: DeleteProps) => {
   const t = useTranslations('Components.Game.Download.Delete')
-  const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    onOpenChange(open)
+  }, [open, onOpenChange])
+  useEffect(() => {
+    onLoadingChange(loading)
+  }, [loading, onLoadingChange])
 
   const handleDelete = async () => {
     try {
       setLoading(true)
       await shionlibRequest().delete(`/game/download-source/${id}`)
       toast.success(t('success'))
-      setOpen(false)
+      onOpenChange(false)
       await new Promise(resolve => setTimeout(resolve, 500)) // wait for the animation to complete
       onSuccess(id)
     } catch {
@@ -41,23 +48,14 @@ export const Delete = ({ id, onSuccess }: DeleteProps) => {
 
   return (
     <>
-      <Button
-        intent="destructive"
-        onClick={() => setOpen(true)}
-        renderIcon={<Trash />}
-        loading={loading}
-        size="sm"
-      >
-        {t('delete')}
-      </Button>
-      <AlertDialog open={open} onOpenChange={setOpen}>
+      <AlertDialog open={open} onOpenChange={onOpenChange}>
         <AlertDialogContent tone="destructive">
           <AlertDialogHeader>
             <AlertDialogTitle>{t('title')}</AlertDialogTitle>
             <AlertDialogDescription>{t('description')}</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel tone="destructive" onClick={() => setOpen(false)}>
+            <AlertDialogCancel tone="destructive" onClick={() => onOpenChange(false)}>
               {t('cancel')}
             </AlertDialogCancel>
             <AlertDialogAction

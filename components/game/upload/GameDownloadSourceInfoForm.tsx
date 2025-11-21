@@ -86,12 +86,26 @@ export const GameDownloadSourceInfoForm = ({
     resolver: zodResolver(gameDownloadSourceSchema),
     defaultValues: normalizeInitialValues(initialValues),
   })
-  const lastInitialValuesRef = useRef<GameDownloadSourceFormValues | undefined>(undefined)
+  const syncedInitialValuesRef = useRef<Partial<GameDownloadSourceFormValues>>(initialValues ?? {})
   useEffect(() => {
-    const normalizedValues = normalizeInitialValues(initialValues)
-    if (isEqual(lastInitialValuesRef.current, normalizedValues)) return
-    lastInitialValuesRef.current = normalizedValues
-    form.reset(normalizedValues)
+    if (!initialValues) return
+    const partialInitialValues = initialValues as Partial<GameDownloadSourceFormValues>
+    const syncField = <K extends keyof GameDownloadSourceFormValues>(key: K) => {
+      if (!Object.prototype.hasOwnProperty.call(partialInitialValues, key)) return
+      const nextValue = partialInitialValues[key]
+      if (nextValue === undefined) return
+      const castNextValue = nextValue as GameDownloadSourceFormValues[K]
+      if (isEqual(syncedInitialValuesRef.current[key], castNextValue)) return
+      syncedInitialValuesRef.current[key] = castNextValue
+      form.setValue(key, castNextValue as any, {
+        shouldDirty: false,
+        shouldTouch: false,
+      })
+    }
+    syncField('file_name')
+    syncField('platform')
+    syncField('language')
+    syncField('note')
   }, [initialValues, form])
   const platform = useWatch({ control: form.control, name: 'platform' })
   const language = useWatch({ control: form.control, name: 'language' })

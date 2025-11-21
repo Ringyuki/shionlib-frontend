@@ -535,6 +535,11 @@
           "aria2FailedToFetch": "无法连接到 Aria2，请检查设置是否正确",
           "aria2UnknownError": "未知错误"
         },
+        "Actions": {
+          "report": "报告违规",
+          "edit": "编辑",
+          "delete": "删除"
+        },
         "Edit": {
           "title": "编辑此下载资源",
           "submit": "确认更改",
@@ -546,6 +551,9 @@
           "cancel": "取消",
           "delete": "删除",
           "success": "删除成功"
+        },
+        "Report": {
+          "title": "报告违规"
         }
       },
       "Cover": {

@@ -528,6 +528,11 @@
           "aria2FailedToFetch": "Aria2 に接続できません、設定を確認してください",
           "aria2UnknownError": "未知のエラー"
         },
+        "Actions": {
+          "report": "違反を報告",
+          "edit": "編集",
+          "delete": "削除"
+        },
         "Edit": {
           "title": "このダウンロードリソースを編集",
           "submit": "変更を確認",
@@ -539,6 +544,9 @@
           "cancel": "キャンセル",
           "delete": "削除",
           "success": "削除成功"
+        },
+        "Report": {
+          "title": "違反を報告"
         }
       },
       "Cover": {
