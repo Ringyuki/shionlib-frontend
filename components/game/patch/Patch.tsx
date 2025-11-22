@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useMedia } from 'react-use'
 import { PatchDialog } from './PatchDialog'
 import { PatchDrawer } from './PatchDrawer'

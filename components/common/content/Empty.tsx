@@ -23,6 +23,7 @@ export const Empty = ({ title, description }: EmptyProps) => {
             width={200}
             height={267.48}
             fill={false}
+            className="w-48 h-auto"
             src="/assets/images/empty.webp"
             alt="Empty"
             localFile

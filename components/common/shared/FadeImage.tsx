@@ -7,24 +7,25 @@ import { Skeleton } from '@/components/shionui/Skeleton'
 import { cn } from '@/utils/cn'
 import { normalizeAspectRatio } from './helpers/aspect-ratio'
 
-type Props = ImageProps & {
+type Props = Omit<ImageProps, 'onLoadingComplete'> & {
   aspectRatio?: string
   localFile?: boolean
   wrapElement?: 'span' | 'div'
   autoAspectRatio?: boolean
+  onImageLoadComplete?: (image: HTMLImageElement) => void
 }
 
 export function FadeImage({
   className,
   aspectRatio,
-  priority,
   fill = true,
   localFile = false,
   wrapElement = 'div',
   autoAspectRatio = false,
+  onImageLoadComplete,
   ...props
 }: Props) {
-  const { onLoad: userOnLoad, onLoadingComplete: userOnLoadingComplete, ...imageProps } = props
+  const { onLoad: userOnLoad, ...imageProps } = props
   const [loaded, setLoaded] = useState(false)
   const [resolvedAspectRatio, setResolvedAspectRatio] = useState(() =>
     normalizeAspectRatio(aspectRatio),
@@ -65,17 +66,11 @@ export function FadeImage({
 
   const handleLoad = (event: SyntheticEvent<HTMLImageElement>) => {
     setLoaded(true)
-    syncAspectRatioFromImage(event.currentTarget)
+    const imageElement = event.currentTarget
+    syncAspectRatioFromImage(imageElement)
     userOnLoad?.(event)
+    onImageLoadComplete?.(imageElement)
   }
-
-  const handleLoadingComplete = useCallback(
-    (image: HTMLImageElement) => {
-      syncAspectRatioFromImage(image)
-      userOnLoadingComplete?.(image)
-    },
-    [syncAspectRatioFromImage, userOnLoadingComplete],
-  )
   const shouldShowSkeleton = Boolean(imageSrc)
   return (
     <ContainerElement
@@ -109,9 +104,8 @@ export function FadeImage({
           height={imageProps.height}
           src={resolvedSrc || imageSrc}
           alt={imageProps.alt ?? ''}
-          priority={priority}
           fill={fill}
-          onLoadingComplete={handleLoadingComplete}
+          sizes={fill ? '10vw' : undefined}
           onLoad={handleLoad}
           className={cn(
             'object-cover transition-opacity duration-300 ease-out',
