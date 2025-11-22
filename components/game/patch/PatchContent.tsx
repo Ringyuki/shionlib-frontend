@@ -14,13 +14,15 @@ export const PatchContent = ({ patches, className }: PatchContentProps) => {
       <div className={cn('flex flex-col gap-2 w-full px-3', className)}>
         {patches
           .filter(patch => patch.type.includes('manual'))
-          .sort((a, b) => new Date(a.updated).getTime() - new Date(b.updated).getTime())
+          .sort((a, b) => b.download - a.download)
+          // .sort((a, b) => new Date(a.updated).getTime() - new Date(b.updated).getTime())
           .map(patch => (
             <PatchItem key={patch.id} patch={patch} />
           ))}
         {patches
           .filter(patch => !patch.type.includes('manual'))
-          .sort((a, b) => new Date(a.updated).getTime() - new Date(b.updated).getTime())
+          .sort((a, b) => b.download - a.download)
+          // .sort((a, b) => new Date(a.updated).getTime() - new Date(b.updated).getTime())
           .map(patch => (
             <PatchItem key={patch.id} patch={patch} />
           ))}

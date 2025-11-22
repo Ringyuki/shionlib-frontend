@@ -8,6 +8,7 @@ import { timeFromNow } from '@/utils/time-format'
 import { useLocale } from 'next-intl'
 import { useTranslations } from 'next-intl'
 import { Actions } from './Actions'
+import { DownloadIcon } from 'lucide-react'
 
 interface GameDownloadResourceItemProps {
   resource: GameDownloadResource
@@ -38,6 +39,10 @@ export const GameDownloadResourceItem = ({
                 </Badge>
               )
             })}
+            <Badge size="sm" variant="secondary">
+              <DownloadIcon className="size-3" />
+              {resource.downloads}
+            </Badge>
           </div>
           <div className="flex gap-2 items-center shrink-0">
             <Avatar user={resource.creator} className="size-6 text-xs" />

@@ -34,14 +34,16 @@ export const GameDownloadContent = ({
           <BBCodeContent content={t('alertDescription', { duration: 120 })} />
         </AlertDescription>
       </Alert>
-      {downloadResources.map(resource => (
-        <GameDownloadResourceItem
-          key={resource.id}
-          resource={resource}
-          onUpdate={onUpdate}
-          onDelete={onDelete}
-        />
-      ))}
+      {downloadResources
+        .sort((a, b) => b.downloads - a.downloads)
+        .map(resource => (
+          <GameDownloadResourceItem
+            key={resource.id}
+            resource={resource}
+            onUpdate={onUpdate}
+            onDelete={onDelete}
+          />
+        ))}
     </div>
   )
 }

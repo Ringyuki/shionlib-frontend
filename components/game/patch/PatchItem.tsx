@@ -12,6 +12,7 @@ import { PatchResourceItem } from './PatchResourceItem'
 import { markdownRender } from '@/utils/markdown/render'
 import { TypeMap, TypeTokenMap } from './constants/type'
 import { ScrollArea } from '@/components/shionui/ScrollArea'
+import { DownloadIcon } from 'lucide-react'
 
 interface GameDownloadResourceItemProps {
   patch: KunPatchResourceResponse
@@ -62,6 +63,10 @@ export const PatchItem = ({ patch }: GameDownloadResourceItemProps) => {
                 {patch.localization_group_name}
               </Badge>
             )}
+            <Badge size="sm" variant="secondary">
+              <DownloadIcon className="size-3" />
+              {patch.download}
+            </Badge>
           </div>
           <div className="flex gap-2 items-center shrink-0">
             <Avatar
