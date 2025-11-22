@@ -105,7 +105,7 @@ export function FadeImage({
           src={resolvedSrc || imageSrc}
           alt={imageProps.alt ?? ''}
           fill={fill}
-          sizes={fill ? '10vw' : undefined}
+          sizes={fill ? '32vw' : undefined}
           onLoad={handleLoad}
           className={cn(
             'object-cover transition-opacity duration-300 ease-out',
