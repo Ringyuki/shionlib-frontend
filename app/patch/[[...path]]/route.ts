@@ -9,12 +9,16 @@ const SHIONLIB_ORIGIN = 'https://shionlib.com'
 
 export const dynamic = 'force-dynamic'
 
-type RouteParams = {
+interface RouteParams {
   path?: string[]
 }
+interface RouteContext {
+  params: Promise<RouteParams>
+}
 
-const handler = async (request: NextRequest, { params }: { params: RouteParams }) => {
+const handler = async (request: NextRequest, context: RouteContext) => {
   try {
+    const params = await context.params
     const targetUrl = buildTargetUrl(params?.path, request.nextUrl.search)
     const upstreamResponse = await fetch(targetUrl, {
       method: request.method,
