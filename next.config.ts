@@ -40,7 +40,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'res.nyne.dev',
+        hostname: 'nysoure.com',
       },
       {
         protocol: 'https',
