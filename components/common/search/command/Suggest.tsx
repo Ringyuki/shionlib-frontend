@@ -2,7 +2,7 @@ import { SearchSuggestItem } from '@/interfaces/search/search.interface'
 import { CommandGroup, CommandItem } from '@/components/shionui/Command'
 import { useTranslations } from 'next-intl'
 import { shionlibRequest } from '@/utils/shionlib-request'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useDebounce } from 'react-use'
 
 interface SuggestProps {
@@ -15,6 +15,11 @@ export const Suggest = ({ q, onSelect }: SuggestProps) => {
   const [suggestions, setSuggestions] = useState<SearchSuggestItem[]>([])
   const trimmedQuery = q.trim()
 
+  const shouldShowDirectSearchItem = useMemo(
+    () => trimmedQuery.length > 0 && !suggestions.find(item => item.query === trimmedQuery),
+    [trimmedQuery, suggestions],
+  )
+
   const getSuggestions = async (q: string) => {
     const data = await shionlibRequest().get<SearchSuggestItem[]>(`/search/suggest`, {
       params: { prefix: q },
@@ -24,7 +29,7 @@ export const Suggest = ({ q, onSelect }: SuggestProps) => {
 
   useDebounce(
     () => {
-      if (!q) {
+      if (!trimmedQuery) {
         setSuggestions([])
         return
       }
@@ -34,11 +39,8 @@ export const Suggest = ({ q, onSelect }: SuggestProps) => {
     [q],
   )
 
-  const shouldShowDirectSearchItem =
-    trimmedQuery.length > 0 && !suggestions.some(item => item.query === trimmedQuery)
-
   return (
-    <CommandGroup heading={t('suggest')} className="py-1! px-1! pb-0!">
+    <CommandGroup heading={t('suggest')} className="py-1! px-1! pb-0!" forceMount>
       {shouldShowDirectSearchItem && (
         <CommandItem
           className="border border-transparent data-[selected=true]:border-primary/20"
