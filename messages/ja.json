@@ -1069,6 +1069,18 @@
       "Create": {
         "invalidId": "無効な VNDB ID または Bangumi ID",
         "success": "作成成功, ゲーム条目 ID は {id} です"
+      },
+      "Alert": {
+        "info": "情報",
+        "infoDescription": "VNDB ID と Bangumi ID が対応していないゲーム条目を作成したい場合は、管理者に連絡して手動で追加してください。",
+        "warning": "エラー処理",
+        "warningDescription": "可能なエラーコードと原因：",
+        "errorCodes": {
+          "400103": "Bangumi リクエストが失敗しました。Bangumi ID が存在しないか、Bangumi にアクセスできない可能性があります。",
+          "400104": "VNDB リクエストが失敗しました。VNDB ID が存在しないか、VNDB にアクセスできない可能性があります。",
+          "400105": "ゲーム条目は Shionlib のデータベースに既に存在しています。",
+          "400106": "VNDB と Bangumi から取得したゲームデータが一致性チェックに失敗しました。入力した ID が正しいか確認してください。"
+        }
       }
     }
   }

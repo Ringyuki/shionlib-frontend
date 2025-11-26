@@ -1077,6 +1077,18 @@
       "Create": {
         "invalidId": "无效的 VNDB ID 或 Bangumi ID",
         "success": "创建成功, 游戏条目 ID 为 {id}"
+      },
+      "Alert": {
+        "info": "提示",
+        "infoDescription": "如果你想要创建的游戏条目没有对应的 VNDB ID 和 Bangumi ID，请联系管理员手动添加。",
+        "warning": "错误处理",
+        "warningDescription": "可能出现的错误码及原因：",
+        "errorCodes": {
+          "400103": "Bangumi 请求失败，可能是因为 Bangumi ID 不存在或者 Bangumi 无法访问。",
+          "400104": "VNDB 请求失败，可能是因为 VNDB ID 不存在或者 VNDB 无法访问。",
+          "400105": "Shionlib 数据库中已存在该游戏条目。",
+          "400106": "从 VNDB 和 Bangumi 获取的游戏数据未通过一致性检查，请检查你填写的 ID 否正确。"
+        }
       }
     }
   }
