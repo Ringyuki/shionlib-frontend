@@ -1,20 +1,24 @@
 'use client'
 
-import { navBarConfig } from '@/config/site/shionlib'
 import { Link } from '@/i18n/navigation'
 import { useTranslations } from 'next-intl'
 import { useSelectedLayoutSegment } from 'next/navigation'
 import { cn } from '@/utils/cn'
 import { GradientText } from '@/components/shionui/GradientText'
 import { GradientIcon } from '@/components/shionui/GradientIcon'
+import { NavBarConfig } from '@/interfaces/site/shion-lib-site-config.interface'
 
-export const Nav = () => {
+interface NavProps {
+  items: NavBarConfig['links']
+}
+
+export const Nav = ({ items }: NavProps) => {
   const t = useTranslations('Components.Common.TopBar.NavBar')
   const segment = useSelectedLayoutSegment()
 
   return (
     <div className="flex items-center gap-0.5">
-      {navBarConfig.links.map(link => {
+      {items.map(link => {
         const isActive = segment === link.href.replace(/^\//, '')
         return (
           <Link

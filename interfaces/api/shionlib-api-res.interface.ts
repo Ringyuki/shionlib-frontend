@@ -40,9 +40,9 @@ export type PaginatedResponse<
 
 export interface ErrorResponse
   extends ShionlibApiRes<{
-    errors: FieldError[]
+    errors: FieldError[] | Record<string, string>
   }> {
   data: {
-    errors: FieldError[]
+    errors: FieldError[] | Record<string, string>
   }
 }

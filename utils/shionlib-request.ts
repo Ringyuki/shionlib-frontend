@@ -1,4 +1,8 @@
-import { BasicResponse, ErrorResponse } from '@/interfaces/api/shionlib-api-res.interface'
+import {
+  BasicResponse,
+  ErrorResponse,
+  FieldError,
+} from '@/interfaces/api/shionlib-api-res.interface'
 import { resolvePreferredLocale } from './language-preference'
 import { ShionlibBizError } from '@/libs/errors'
 import { SHOULD_REFRESH_CODES, IS_FATAL_AUTH_BY_CODES } from '@/constants/auth/auth-status-codes'
@@ -82,29 +86,13 @@ export const shionlibRequest = () => {
     if (data.code !== 0) {
       if (data.code <= 1000) {
         if (mod) {
-          mod.toast.error(
-            `${data.message}${
-              (data as ErrorResponse).data?.errors
-                ? `: ${(data as ErrorResponse).data.errors
-                    .map(error => error.messages.map(message => `${message}`))
-                    .join('\n')}`
-                : ''
-            } (${data.code})`,
-          )
+          mod.toast.error(formatErrors(data as ErrorResponse))
         }
         console.error(data)
         throw new Error(data.message)
       }
       if (mod) {
-        mod?.toast.error(
-          `${data.message}${
-            (data as ErrorResponse).data?.errors
-              ? `: ${(data as ErrorResponse).data.errors
-                  .map(error => error.messages.map(message => `${message}`))
-                  .join('\n')}`
-              : ''
-          } (${data.code})`,
-        )
+        mod.toast.error(formatErrors(data as ErrorResponse))
       }
       console.error(data)
       if (!NOT_FOUND_CODES.includes(data.code)) {
@@ -276,4 +264,20 @@ const doLogout = async (baseUrl: string) => {
       useShionlibUserStore.getState().logout()
     }
   })
+}
+
+const formatErrors = (data: ErrorResponse) => {
+  return `${data.message}${
+    (data as ErrorResponse).data?.errors
+      ? Array.isArray((data as ErrorResponse).data.errors)
+        ? `: ${((data as ErrorResponse).data.errors as FieldError[])
+            .flatMap(error => error.messages)
+            .map(message => `${message}`)
+            .join('\n')}`
+        : `: ${Object.entries((data as ErrorResponse).data.errors)
+            .flatMap(([key, value]) => `${key}: ${value}`)
+            .map(message => `${message}`)
+            .join('\n')}`
+      : ''
+  } (${data.code})`
 }

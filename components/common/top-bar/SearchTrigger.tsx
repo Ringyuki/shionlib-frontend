@@ -28,7 +28,7 @@ export const SearchTrigger = () => {
   return (
     <>
       <div
-        className="bg-secondary rounded-md p-2 hidden md:flex items-center justify-between gap-1 lg:gap-12 select-none cursor-pointer hover:opacity-70 transition-opacity ease-in-out"
+        className="bg-secondary rounded-md p-2 hidden search-trigger:flex items-center justify-between gap-1 lg:gap-12 select-none cursor-pointer hover:opacity-70 transition-opacity ease-in-out"
         onClick={openSearchDialog}
       >
         <div className="flex items-center gap-2">
@@ -40,13 +40,14 @@ export const SearchTrigger = () => {
           <Kbd className="text-xs font-medium bg-white border">K</Kbd>
         </div>
       </div>
-      <div
-        className="block md:hidden cursor-pointer hover:opacity-70 transition-opacity ease-in-out"
-        onClick={openSearchDialog}
-      >
-        <Button appearance="ghost" intent="secondary" size="icon">
-          <SearchIcon className="w-4 h-4" />
-        </Button>
+      <div className="block search-trigger:hidden">
+        <Button
+          appearance="ghost"
+          intent="secondary"
+          size="icon"
+          onClick={openSearchDialog}
+          renderIcon={<SearchIcon />}
+        />
       </div>
     </>
   )

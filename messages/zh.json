@@ -200,7 +200,8 @@
           "docs": "文档",
           "releases": "上传",
           "about": "关于",
-          "aiGirlFriend": "AI 女友"
+          "aiGirlFriend": "AI 女友",
+          "create": "创建"
         }
       },
       "Footer": {
@@ -1027,6 +1028,10 @@
             "game": "游戏",
             "developer": "会社/开发商",
             "character": "角色"
+          },
+          "Create": {
+            "createdPrefix": "创建了",
+            "game": "游戏"
           }
         }
       },
@@ -1041,6 +1046,37 @@
       "Head": {
         "title": "友情链接",
         "description": "Shionlib 的友情链接，我们欢迎其他 视觉小说/Galgame 相关的网站加入我们的友情链接。如果你有兴趣加入，请通过网站底部的 联系我们 按钮提供你的网站信息。"
+      }
+    },
+    "Create": {
+      "Header": {
+        "title": "创建游戏条目",
+        "description": "在 Shionlib 的数据库中新增游戏条目，通过 Visual Novel Database (VNDB) 和 Bangumi 获取基础权威信息。",
+        "descriptionPrefix": "在 Shionlib 的数据库中新增游戏条目，通过 ",
+        "vndb": "Visual Novel Database (VNDB)",
+        "descriptionMiddle": " 和 ",
+        "bangumi": "Bangumi",
+        "descriptionSuffix": " 获取基础权威信息。",
+        "guidePrefix": "如果想要了解如何通过 VNDB 检索游戏，",
+        "guideLink": "请参考这篇指南",
+        "guideSuffix": "。"
+      },
+      "Form": {
+        "vndbIdLabel": "VNDB ID",
+        "vndbIdDescription": "以字母 v 和数字组成的 ID，例如：v14018",
+        "vndbIdPlaceholder": "v14018",
+        "bangumiIdLabel": "Bangumi ID",
+        "bangumiIdDescription": "纯数字 ID，例如：88765",
+        "bangumiIdPlaceholder": "88765",
+        "validation": {
+          "vndbId": "请输入有效的 VNDB ID",
+          "bangumiId": "请输入有效的 Bangumi ID"
+        },
+        "submit": "创建游戏条目"
+      },
+      "Create": {
+        "invalidId": "无效的 VNDB ID 或 Bangumi ID",
+        "success": "创建成功, 游戏条目 ID 为 {id}"
       }
     }
   }

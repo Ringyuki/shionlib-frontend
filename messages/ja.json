@@ -193,7 +193,8 @@
           "docs": "ドキュメント",
           "releases": "アップロード",
           "about": "紹介",
-          "aiGirlFriend": "AI 女友"
+          "aiGirlFriend": "AI 女友",
+          "create": "作成"
         }
       },
       "Footer": {
@@ -1020,6 +1021,10 @@
             "game": "ゲーム",
             "developer": "開発者",
             "character": "キャラクター"
+          },
+          "Create": {
+            "createdPrefix": "作成しました",
+            "game": "ゲーム"
           }
         }
       },
@@ -1034,6 +1039,36 @@
       "Head": {
         "title": "友情リンク",
         "description": "Shionlib の友情リンク、他の 視覚小説/ガルゲーム 関連サイトを友情リンクに参加させてください。興味がある場合は、ウェブサイトの下部の 連絡 ボタンを介してあなたのウェブサイト情報を提供してください。"
+      }
+    },
+    "Create": {
+      "Header": {
+        "title": "ゲーム条目を作成",
+        "descriptionPrefix": "Shionlib のデータベースに新しいゲーム条目を追加し、",
+        "vndb": "Visual Novel Database (VNDB)",
+        "descriptionMiddle": " と ",
+        "bangumi": "Bangumi",
+        "descriptionSuffix": " を使用して基本的な権威情報を取得します。",
+        "guidePrefix": "VNDB でゲームを検索する方法を知りたい場合は、",
+        "guideLink": "このガイド",
+        "guideSuffix": "を参照してください。"
+      },
+      "Form": {
+        "vndbIdLabel": "VNDB ID",
+        "vndbIdDescription": "VNDB ID は英字 v と数字の組み合わせで、例：v14018",
+        "vndbIdPlaceholder": "v14018",
+        "bangumiIdLabel": "Bangumi ID",
+        "bangumiIdDescription": "Bangumi ID は数字のみの組み合わせで、例：88765",
+        "bangumiIdPlaceholder": "88765",
+        "validation": {
+          "vndbId": "有効な VNDB ID を入力してください",
+          "bangumiId": "有効な Bangumi ID を入力してください"
+        },
+        "submit": "ゲーム条目を作成"
+      },
+      "Create": {
+        "invalidId": "無効な VNDB ID または Bangumi ID",
+        "success": "作成成功, ゲーム条目 ID は {id} です"
       }
     }
   }

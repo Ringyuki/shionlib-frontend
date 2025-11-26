@@ -200,7 +200,8 @@
           "docs": "Docs",
           "releases": "Releases",
           "about": "About",
-          "aiGirlFriend": "AI Girlfriend"
+          "aiGirlFriend": "AI Girlfriend",
+          "create": "Create"
         }
       },
       "Footer": {
@@ -979,8 +980,8 @@
         "Header": {
           "title": "Latest Uploads",
           "description": "Latest game files uploaded by Shionlib users.",
-          "subDescriptionPrefix": "Every user can upload game files to Shionlib servers. You can follow this",
-          "subDescriptionLink": "guide",
+          "subDescriptionPrefix": "Every user can upload game files to Shionlib servers. You can follow ",
+          "subDescriptionLink": "this guide",
           "subDescriptionSuffix": "to learn how to upload game files."
         }
       },
@@ -1027,6 +1028,10 @@
             "game": "Game",
             "developer": "Developer",
             "character": "Character"
+          },
+          "Create": {
+            "createdPrefix": "Created",
+            "game": "Game"
           }
         }
       },
@@ -1041,6 +1046,37 @@
       "Head": {
         "title": "Friend Links",
         "description": "Shionlib's friend links, we welcome other Visual Novel/Galgame related websites to join our friend links. If you are interested in joining, please provide your website information through the Contact button at the bottom of the website."
+      }
+    },
+    "Create": {
+      "Header": {
+        "title": "Create Game Entry",
+        "description": "Add a new game entry to Shionlib's database, using Visual Novel Database (VNDB) and Bangumi for basic authoritative information.",
+        "descriptionPrefix": "Add a new game entry to Shionlib's database, using ",
+        "vndb": "Visual Novel Database (VNDB)",
+        "descriptionMiddle": " and ",
+        "bangumi": "Bangumi",
+        "descriptionSuffix": " for basic authoritative information.",
+        "guidePrefix": "If you want to know how to search for games using VNDB, please refer to ",
+        "guideLink": "this guide",
+        "guideSuffix": "."
+      },
+      "Form": {
+        "vndbIdLabel": "VNDB ID",
+        "vndbIdDescription": "The VNDB ID is a combination of letter v and digits, for example: v14018",
+        "vndbIdPlaceholder": "v14018",
+        "bangumiIdLabel": "Bangumi ID",
+        "bangumiIdDescription": "The Bangumi ID is a combination of digits, for example: 88765",
+        "bangumiIdPlaceholder": "88765",
+        "validation": {
+          "vndbId": "Please enter a valid VNDB ID",
+          "bangumiId": "Please enter a valid Bangumi ID"
+        },
+        "submit": "Create Game Entry"
+      },
+      "Create": {
+        "invalidId": "Invalid VNDB ID or Bangumi ID",
+        "success": "Created successfully, game entry ID is {id}"
       }
     }
   }

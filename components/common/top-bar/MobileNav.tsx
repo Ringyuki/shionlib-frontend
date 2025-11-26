@@ -8,9 +8,10 @@ import { SiteLogo } from '@/components/common/top-bar/SiteLogo'
 import { useTranslations } from 'next-intl'
 import { useWindowSize } from 'react-use'
 import { useEffect } from 'react'
+import { NavBarConfig } from '@/interfaces/site/shion-lib-site-config.interface'
 
 interface MobileNavProps {
-  items: { href: string; label: string }[]
+  items: NavBarConfig['links']
 }
 
 export const MobileNav = ({ items }: MobileNavProps) => {

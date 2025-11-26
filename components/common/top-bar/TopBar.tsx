@@ -19,7 +19,7 @@ const StartContent = () => {
     <>
       <div className="hidden topbar:flex items-center gap-8">
         <SiteLogo />
-        <Nav />
+        <Nav items={navBarConfig.links} />
       </div>
       <div className="block topbar:hidden items-center gap-8">
         <MobileNav items={navBarConfig.links} />

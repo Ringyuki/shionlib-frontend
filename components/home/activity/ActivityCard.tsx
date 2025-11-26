@@ -10,6 +10,7 @@ import { Comment } from './activities/Comment'
 import { FileUploaded } from './activities/FileUploaded'
 import { FileScaned } from './activities/FileScaned'
 import { Edit } from './activities/Edit'
+import { Create } from './activities/Create'
 
 interface ActivityCardProps {
   activity: Activity
@@ -22,6 +23,7 @@ export const ActivityCard = async ({ activity }: ActivityCardProps) => {
   const isUserActivity =
     activity.type === ActivityType.COMMENT ||
     activity.type === ActivityType.FILE_UPLOAD_TO_SERVER ||
+    activity.type === ActivityType.GAME_CREATE ||
     activity.type === ActivityType.GAME_EDIT ||
     activity.type === ActivityType.DEVELOPER_EDIT ||
     activity.type === ActivityType.CHARACTER_EDIT
@@ -72,6 +74,8 @@ export const ActivityCard = async ({ activity }: ActivityCardProps) => {
             case ActivityType.DEVELOPER_EDIT:
             case ActivityType.CHARACTER_EDIT:
               return <Edit activity={activity} />
+            case ActivityType.GAME_CREATE:
+              return <Create activity={activity} />
           }
         })()}
       </CardContent>

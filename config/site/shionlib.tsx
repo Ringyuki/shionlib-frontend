@@ -20,6 +20,10 @@ export const navBarConfig: NavBarConfig = {
       href: '/developer',
     },
     {
+      label: 'create',
+      href: '/create',
+    },
+    {
       label: 'releases',
       href: '/release',
     },
