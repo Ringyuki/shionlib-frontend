@@ -2,14 +2,15 @@ import { Button } from '@/components/shionui/Button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/shionui/Tooltip'
 import { MessageSquareMore } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { useScrollToElem } from '@/hooks/useScrollToElem'
 
 export const Comment = () => {
   const t = useTranslations('Components.Game.Actions')
-
+  const scrollToElem = useScrollToElem()
   const handleComment = () => {
     const commentContent = document.getElementById('comment-content')
     if (commentContent) {
-      commentContent.scrollIntoView({ behavior: 'smooth' })
+      scrollToElem(commentContent)
     }
   }
 

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { TextQuote } from 'lucide-react'
+import { useScrollToElem } from '@/hooks/useScrollToElem'
 
 interface TOCItem {
   id: string
@@ -10,28 +11,11 @@ interface TOCItem {
   level: number
 }
 
-const scrollToHeading = (id: string) => {
-  const headingElement = document.getElementById(id)
-  if (!headingElement) return
-
-  const rect = headingElement.getBoundingClientRect()
-  const absoluteY = rect.top + window.pageYOffset
-  const topBar = document.querySelector('div.fixed.inset-x-0') as HTMLElement | null
-  const occludedTop = topBar ? topBar.getBoundingClientRect().bottom : 0
-
-  const extraMargin = 12
-  const targetY = Math.max(absoluteY - occludedTop - extraMargin, 0)
-
-  window.scrollTo({ top: targetY, behavior: 'smooth' })
-  if (window.location.hash !== `#${id}`) {
-    history.replaceState(null, '', `#${id}`)
-  }
-}
-
 export const DocTOC = () => {
   const t = useTranslations('Components.Docs.Content.DocTOC')
   const [headings, setHeadings] = useState<TOCItem[]>([])
   const [activeId, setActiveId] = useState('')
+  const scrollToHeading = useScrollToElem()
 
   useEffect(() => {
     const elements = Array.from(

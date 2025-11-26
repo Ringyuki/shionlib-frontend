@@ -3,6 +3,7 @@ import { Avatar } from '@/components/common/user/Avatar'
 import { useTranslations } from 'next-intl'
 import { ScrollArea } from '@/components/shionui/ScrollArea'
 import { cn } from '@/utils/cn'
+import { useScrollToElem } from '@/hooks/useScrollToElem'
 
 interface CommentParentProps {
   parent: Comment['parent']
@@ -11,10 +12,11 @@ interface CommentParentProps {
 
 export const CommentParent = ({ parent, canScrollToParent = true }: CommentParentProps) => {
   const t = useTranslations('Components.Common.Comment.CommentParent')
+  const scrollToElem = useScrollToElem()
   const handleClick = () => {
     const commentContent = document.getElementById(`data-comment-id-${parent?.id}`)
     if (commentContent) {
-      commentContent.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+      scrollToElem(commentContent)
       commentContent.classList.add('bg-primary/15')
       setTimeout(() => {
         commentContent.classList.remove('bg-primary/15')

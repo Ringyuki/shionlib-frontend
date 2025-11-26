@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react'
 import { ReplyBox } from './actions/ReplyBox'
 import { useParams } from 'next/navigation'
 import { CommentParent } from './CommentParent'
+import { useScrollToElem } from '@/hooks/useScrollToElem'
 
 interface CommentItemProps {
   comment: Comment
@@ -39,23 +40,24 @@ export const CommentItem = ({
   const t = useTranslations('Components.Common.Comment.CommentItem')
   const [isReply, setIsReply] = useState(false)
   const { id: game_id } = useParams()
+  const scrollToComment = useScrollToElem({ updateHash: false, behavior: 'instant' })
 
-  const handleHighlight = () => {
-    const isBrowser = typeof window !== 'undefined'
-    const hash = window.location.hash
-    if (isBrowser && hash.includes(`#data-comment-id-${comment.id}`)) {
-      const commentElement = document.getElementById(`data-comment-id-${comment.id}`)
-      if (commentElement) {
-        commentElement.classList.add('bg-primary/15')
-        setTimeout(() => {
-          commentElement.classList.remove('bg-primary/15')
-        }, 1000)
-      }
-    }
-  }
   useEffect(() => {
-    handleHighlight()
-  }, [])
+    if (typeof window === 'undefined') return
+
+    const targetHash = `#data-comment-id-${comment.id}`
+    if (window.location.hash !== targetHash) return
+    const commentElement = document.getElementById(targetHash.slice(1))
+    if (!commentElement) return
+
+    scrollToComment(commentElement)
+    commentElement.classList.add('bg-primary/15')
+    const timeout = window.setTimeout(() => {
+      commentElement.classList.remove('bg-primary/15')
+    }, 1000)
+
+    return () => window.clearTimeout(timeout)
+  }, [comment.id, scrollToComment])
 
   return (
     <Card className="py-0 overflow-hidden">
