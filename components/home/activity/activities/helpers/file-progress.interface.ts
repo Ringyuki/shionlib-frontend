@@ -4,7 +4,7 @@ import { stageDefinitions } from '../constants/file-progress'
 import { BadgeVariant } from '@/components/shionui/Badge'
 
 export const buildStageStates = (activities: Activity[]): StageState[] => {
-  return stageDefinitions.map(stage => {
+  const states = stageDefinitions.map(stage => {
     const stageActivities = activities.filter(activity => stage.types.includes(activity.type))
 
     if (!stageActivities.length) {
@@ -26,6 +26,20 @@ export const buildStageStates = (activities: Activity[]): StageState[] => {
       latestActivity,
     }
   })
+
+  const lastSuccessfulStageIndex = states.reduce(
+    (acc, stage, index) => (stage.completed && !stage.failed ? index : acc),
+    -1,
+  )
+  if (lastSuccessfulStageIndex > -1) {
+    for (let i = 0; i <= lastSuccessfulStageIndex; i += 1) {
+      const stage = states[i]
+      if (!stage.completed) {
+        states[i] = { ...stage, completed: true, failed: false }
+      }
+    }
+  }
+  return states
 }
 
 export const getPrimaryStatus = (stages: StageState[]) => {

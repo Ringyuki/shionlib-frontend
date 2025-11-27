@@ -10,7 +10,7 @@ const getData = async () => {
     shionlibRequest().get<PaginatedResponse<ActivityInterface>>(`/activity/list`, {
       params: {
         page: 1,
-        pageSize: 30,
+        pageSize: 50,
       },
     }),
     shionlibRequest().get<PaginatedResponse<GameItem, { content_limit: ContentLimit }>>(
