@@ -18,9 +18,9 @@ Therefore, we designed an upload system that grants all users large-file upload 
 
 ### Upload workflow
 
-After you select a local file, the system slices it into chunks (each no larger than 5 MB) and computes the file’s SHA-256 hash.
+After you select a local file, the system slices it into chunks (each no larger than 5 MB) and computes the file’s BLAKE3 hash.
 
-Once the upload starts, the browser sends all chunks and the hash to Shionlib’s servers. The server merges the finished chunks, recomputes the SHA-256 hash, and compares it with the hash calculated by the browser. If they match, the upload is marked as successful.
+Once the upload starts, the browser sends all chunks and the hash to Shionlib’s servers. The server merges the finished chunks, recomputes the BLAKE3 hash, and compares it with the hash calculated by the browser. If they match, the upload is marked as successful.
 
 Next, Shionlib’s servers scan the uploaded file to check whether it meets requirements (including file integrity, corruption, encryption, and potential malware). If the scan passes, the file enters a waiting queue to be uploaded to Shionlib’s S3 bucket.
 
