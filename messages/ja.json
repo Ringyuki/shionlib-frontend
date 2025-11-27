@@ -1016,6 +1016,34 @@
             "harmfulContent": "有害な内容",
             "processAborted": "アップロードプロセス中断"
           },
+          "FileProgress": {
+            "unknownFile": "ファイル名未設定",
+            "stages": {
+              "uploadServer": "サーバーへアップロード",
+              "uploadS3": "ストレージへアップロード",
+              "scan": "ファイルスキャン"
+            },
+            "status": {
+              "completed": "完了",
+              "inProgress": "進行中",
+              "failed": "失敗",
+              "waiting": "待機中",
+              "pending": "未開始"
+            },
+            "timeline": {
+              "title": "タイムライン",
+              "empty": "まだ更新はありません"
+            },
+            "events": {
+              "FILE_UPLOAD_TO_SERVER": "サーバーにアップロードしました",
+              "FILE_UPLOAD_TO_S3": "ストレージにアップロードしました",
+              "FILE_CHECK_OK": "スキャンを通過しました",
+              "FILE_CHECK_BROKEN_OR_TRUNCATED": "スキャン失敗：破損または欠損",
+              "FILE_CHECK_BROKEN_OR_UNSUPPORTED": "スキャン失敗：破損または非対応形式",
+              "FILE_CHECK_ENCRYPTED": "スキャン失敗：暗号化ファイル",
+              "FILE_CHECK_HARMFUL": "スキャン失敗：危険なコンテンツ"
+            }
+          },
           "Edit": {
             "editedPrefix": "編集しました",
             "game": "ゲーム",

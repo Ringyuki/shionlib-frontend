@@ -57,6 +57,7 @@ export interface Activity {
     name_en: string
   }
   file?: {
+    id: number
     file_name: string
     file_size: number
     file_status: ActivityFileStatus

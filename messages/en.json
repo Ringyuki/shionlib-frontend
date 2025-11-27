@@ -1023,6 +1023,34 @@
             "harmfulContent": "Harmful content",
             "processAborted": "Upload process aborted"
           },
+          "FileProgress": {
+            "unknownFile": "Unnamed file",
+            "stages": {
+              "uploadServer": "Upload to server",
+              "uploadS3": "Upload to S3",
+              "scan": "Security scan"
+            },
+            "status": {
+              "completed": "Completed",
+              "inProgress": "In progress",
+              "failed": "Failed",
+              "waiting": "Waiting",
+              "pending": "Pending"
+            },
+            "timeline": {
+              "title": "Timeline",
+              "empty": "No updates recorded yet"
+            },
+            "events": {
+              "FILE_UPLOAD_TO_SERVER": "Uploaded to server",
+              "FILE_UPLOAD_TO_S3": "Uploaded to S3",
+              "FILE_CHECK_OK": "Scan passed",
+              "FILE_CHECK_BROKEN_OR_TRUNCATED": "Scan failed: broken or truncated",
+              "FILE_CHECK_BROKEN_OR_UNSUPPORTED": "Scan failed: broken or unsupported",
+              "FILE_CHECK_ENCRYPTED": "Scan failed: encrypted file",
+              "FILE_CHECK_HARMFUL": "Scan failed: harmful content"
+            }
+          },
           "Edit": {
             "editedPrefix": "Edited",
             "game": "Game",

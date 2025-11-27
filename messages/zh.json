@@ -1023,6 +1023,34 @@
             "harmfulContent": "有害内容",
             "processAborted": "上传流程终止"
           },
+          "FileProgress": {
+            "unknownFile": "未命名文件",
+            "stages": {
+              "uploadServer": "上传到服务器",
+              "uploadS3": "上传到 Shionlib 储存桶",
+              "scan": "文件扫描"
+            },
+            "status": {
+              "completed": "已完成",
+              "inProgress": "进行中",
+              "failed": "失败",
+              "waiting": "待开始",
+              "pending": "未开始"
+            },
+            "timeline": {
+              "title": "时间线",
+              "empty": "暂无记录"
+            },
+            "events": {
+              "FILE_UPLOAD_TO_SERVER": "上传至服务器",
+              "FILE_UPLOAD_TO_S3": "上传完成",
+              "FILE_CHECK_OK": "扫描通过",
+              "FILE_CHECK_BROKEN_OR_TRUNCATED": "扫描失败：损坏或缺失",
+              "FILE_CHECK_BROKEN_OR_UNSUPPORTED": "扫描失败：损坏或不支持",
+              "FILE_CHECK_ENCRYPTED": "扫描失败：加密文件",
+              "FILE_CHECK_HARMFUL": "扫描失败：有害内容"
+            }
+          },
           "Edit": {
             "editedPrefix": "编辑了",
             "game": "游戏",

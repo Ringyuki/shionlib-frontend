@@ -7,10 +7,9 @@ import { getLocale } from 'next-intl/server'
 import { CalendarDays, Workflow } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { Comment } from './activities/Comment'
-import { FileUploaded } from './activities/FileUploaded'
-import { FileScaned } from './activities/FileScaned'
 import { Edit } from './activities/Edit'
 import { Create } from './activities/Create'
+import { fileActivityTypes } from './activities/constants/activity-feed'
 
 interface ActivityCardProps {
   activity: Activity
@@ -35,6 +34,10 @@ export const ActivityCard = async ({ activity }: ActivityCardProps) => {
     activity.type === ActivityType.FILE_CHECK_BROKEN_OR_UNSUPPORTED ||
     activity.type === ActivityType.FILE_CHECK_ENCRYPTED ||
     activity.type === ActivityType.FILE_CHECK_HARMFUL
+
+  const isFileActivity = fileActivityTypes.has(activity.type)
+
+  if (isFileActivity) return null
 
   return (
     <Card className="py-0">
@@ -61,15 +64,6 @@ export const ActivityCard = async ({ activity }: ActivityCardProps) => {
           switch (activity.type) {
             case ActivityType.COMMENT:
               return <Comment activity={activity} />
-            case ActivityType.FILE_UPLOAD_TO_SERVER:
-            case ActivityType.FILE_UPLOAD_TO_S3:
-              return <FileUploaded activity={activity} />
-            case ActivityType.FILE_CHECK_OK:
-            case ActivityType.FILE_CHECK_BROKEN_OR_TRUNCATED:
-            case ActivityType.FILE_CHECK_BROKEN_OR_UNSUPPORTED:
-            case ActivityType.FILE_CHECK_ENCRYPTED:
-            case ActivityType.FILE_CHECK_HARMFUL:
-              return <FileScaned activity={activity} />
             case ActivityType.GAME_EDIT:
             case ActivityType.DEVELOPER_EDIT:
             case ActivityType.CHARACTER_EDIT:
