@@ -1061,6 +1061,12 @@
           "title": "最近人気のゲーム一覧",
           "description": "最近人気のゲーム一覧，閲覧数、ダウンロード数、登録時間、発売時間を総合的に並べ替えたゲーム一覧です。1時間ごとに更新されます。"
         }
+      },
+      "NewWorks": {
+        "Head": {
+          "title": "本月新作",
+          "description": "{yearName} {monthName} 発売の作品。"
+        }
       }
     },
     "FriendLink": {
