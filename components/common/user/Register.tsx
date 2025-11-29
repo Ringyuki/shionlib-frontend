@@ -20,10 +20,11 @@ import {
   FormMessage,
 } from '@/components/shionui/Form'
 import { toast } from 'react-hot-toast'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { verficationCodeUtil } from '@/utils/verification-code'
 import { resolvePreferredLocale } from '@/utils/language-preference'
+import { useCountdown } from '@/hooks/useCountdown'
 
 interface RegisterProps {
   onSuccess?: () => void
@@ -69,20 +70,7 @@ export const Register = ({ onSuccess }: RegisterProps) => {
   const [verifyCodeUuid, setVerifyCodeUuid] = useState<string | null>(null)
 
   const [verifyCodeLoading, setVerifyCodeLoading] = useState(false)
-  const [countingDown, setCoutingDown] = useState(false)
-  const [countdown, setCountdown] = useState(60)
-  const handleCountingDown = async () => {
-    setCoutingDown(true)
-    setCountdown(60)
-    await new Promise(resolve => setTimeout(resolve, 60000))
-    setCountdown(0)
-    setCoutingDown(false)
-  }
-  useEffect(() => {
-    if (countingDown) {
-      setTimeout(() => setCountdown(countdown - 1), 1000)
-    }
-  }, [countingDown, countdown])
+  const { countdown, isCountingDown, startCountdown } = useCountdown({ duration: 60 })
   const getVerifyCode = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     if (!form.getValues('email') || form.formState.errors.email) {
@@ -96,7 +84,7 @@ export const Register = ({ onSuccess }: RegisterProps) => {
       if (data.data?.uuid) {
         setVerifyCodeUuid(data.data.uuid)
         toast.success(t('verifyCodeSent'))
-        handleCountingDown()
+        startCountdown()
       } else {
         toast.error(t('verifyCodeSentError'))
       }
@@ -157,9 +145,9 @@ export const Register = ({ onSuccess }: RegisterProps) => {
                     appearance="outline"
                     onClick={getVerifyCode}
                     loading={verifyCodeLoading}
-                    disabled={countingDown}
+                    disabled={isCountingDown}
                   >
-                    {countingDown ? `${countdown}s` : t('getVerifyCode')}
+                    {isCountingDown ? `${countdown}s` : t('getVerifyCode')}
                   </Button>
                 </div>
               </FormControl>

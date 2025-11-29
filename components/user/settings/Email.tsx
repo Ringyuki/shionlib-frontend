@@ -11,7 +11,7 @@ import {
 } from '@/components/shionui/Card'
 import { Button } from '@/components/shionui/Button'
 import { useTranslations } from 'next-intl'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Mail } from 'lucide-react'
 import { Input } from '@/components/shionui/Input'
 import { User } from '@/interfaces/user/user.interface'
@@ -21,6 +21,7 @@ import { DrawerFlow } from '@/components/user/settings/email/DrawerFlow'
 import { useMedia } from 'react-use'
 import { toast } from 'react-hot-toast'
 import { useShionlibUserStore } from '@/store/userStore'
+import { useCountdown } from '@/hooks/useCountdown'
 
 interface EmailSettingsProps {
   email: User['email']
@@ -34,26 +35,13 @@ export const EmailSettings = ({ email }: EmailSettingsProps) => {
   const isMobile = useMedia('(max-width: 1024px)', false)
   const [open, setOpen] = useState(false)
 
-  const [countingDown, setCoutingDown] = useState(false)
-  const [countdown, setCountdown] = useState(0)
-  const handleCountingDown = async () => {
-    setCoutingDown(true)
-    setCountdown(60)
-    await new Promise(resolve => setTimeout(resolve, 60000))
-    setCountdown(0)
-    setCoutingDown(false)
-  }
-  useEffect(() => {
-    if (countingDown) {
-      setTimeout(() => setCountdown(countdown - 1), 1000)
-    }
-  }, [countingDown, countdown])
+  const { countdown, isCountingDown, startCountdown } = useCountdown({ duration: 60 })
   const handleGetCode = async () => {
     setIsGettingCode(true)
     try {
       const data = await shionlibRequest().post<{ uuid: string }>('/user/info/email/request')
       setCurrentCodeUuid(data.data?.uuid!)
-      handleCountingDown()
+      startCountdown()
       setOpen(true)
     } catch {
     } finally {
@@ -106,10 +94,11 @@ export const EmailSettings = ({ email }: EmailSettingsProps) => {
           <Button
             intent="primary"
             onClick={handleGetCode}
-            disabled={countingDown}
+            disabled={isCountingDown}
             loading={isGettingCode}
           >
-            {countingDown ? `${countdown}s` : t('update')}
+            {/* {isCountingDown ? `${countdown}s` : t('update')} */}
+            {t('update') + (isCountingDown ? ` (${countdown}s)` : '')}
           </Button>
         </CardFooter>
       </Card>

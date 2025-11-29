@@ -19,15 +19,16 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, Control } from 'react-hook-form'
 import { useTranslations } from 'next-intl'
-import { forwardRef, useImperativeHandle, useState, useEffect } from 'react'
+import { forwardRef, useImperativeHandle, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { verficationCodeUtil } from '@/utils/verification-code'
+import { useCountdown } from '@/hooks/useCountdown'
 
 interface VerifyNewProps {
   onSubmit: (data: z.infer<typeof verifyNewSchemaInterface>) => void
 }
 export const verifyNewSchemaInterface = z.object({
-  new_email: z.string().email(),
+  new_email: z.email(),
   verify_code: z.string().length(6),
   new_email_code_uuid: z.string(),
 })
@@ -36,7 +37,7 @@ export const VerifyNew = forwardRef(({ onSubmit }: VerifyNewProps, ref) => {
   const t = useTranslations('Components.User.Settings.EmailFlow.step2')
 
   const verifyNewSchema = z.object({
-    new_email: z.string().email(t('validation.email')),
+    new_email: z.email({ message: t('validation.email') }),
     verify_code: z.string().length(6, t('validation.verifyCode')),
     new_email_code_uuid: z.string(),
   })
@@ -51,20 +52,7 @@ export const VerifyNew = forwardRef(({ onSubmit }: VerifyNewProps, ref) => {
 
   const [isGettingCode, setIsGettingCode] = useState(false)
   const [newEmailCodeUuid, setNewEmailCodeUuid] = useState<string | null>(null)
-  const [countingDown, setCoutingDown] = useState(false)
-  const [countdown, setCountdown] = useState(0)
-  const handleCountingDown = async () => {
-    setCoutingDown(true)
-    setCountdown(60)
-    await new Promise(resolve => setTimeout(resolve, 60000))
-    setCountdown(0)
-    setCoutingDown(false)
-  }
-  useEffect(() => {
-    if (countingDown) {
-      setTimeout(() => setCountdown(countdown - 1), 1000)
-    }
-  }, [countingDown, countdown])
+  const { countdown, isCountingDown, startCountdown } = useCountdown({ duration: 60 })
   const getVerifyCode = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     if (!form.getValues('new_email') || form.formState.errors.new_email) {
@@ -78,7 +66,7 @@ export const VerifyNew = forwardRef(({ onSubmit }: VerifyNewProps, ref) => {
       if (data.data?.uuid) {
         setNewEmailCodeUuid(data.data.uuid)
         toast.success(t('verifyCodeSent'))
-        handleCountingDown()
+        startCountdown()
       }
     } catch {
     } finally {
@@ -113,9 +101,9 @@ export const VerifyNew = forwardRef(({ onSubmit }: VerifyNewProps, ref) => {
                     appearance="outline"
                     onClick={getVerifyCode}
                     loading={isGettingCode}
-                    disabled={countingDown}
+                    disabled={isCountingDown}
                   >
-                    {countingDown ? `${countdown}s` : t('getVerifyCode')}
+                    {isCountingDown ? `${countdown}s` : t('getVerifyCode')}
                   </Button>
                 </div>
               </FormControl>
