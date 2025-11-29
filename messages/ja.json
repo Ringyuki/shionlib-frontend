@@ -368,6 +368,37 @@
             "result_suffix": "{total} 件の結果"
           }
         }
+      },
+      "Auth": {
+        "Password": {
+          "Forget": {
+            "title": "パスワードを忘れた場合",
+            "signSent": "パスワードリセットリンクを送信しました",
+            "resetSuccess": "パスワードをリセットしました",
+            "GetEmail": {
+              "title": "パスワードを忘れた場合",
+              "description": "パスワードを忘れた場合は、メールアドレスを入力してください。",
+              "email": "メールアドレス",
+              "submit": "パスワードをリセットするメールを送信",
+              "validation": {
+                "email": "有効なメールアドレスを入力してください"
+              }
+            },
+            "Reset": {
+              "title": "パスワードをリセット",
+              "description": "新しいパスワードを入力してください。送信後、ログアウトされます。",
+              "password": "新しいパスワード",
+              "passwordConfirm": "確認用パスワード",
+              "submit": "パスワードをリセット",
+              "validation": {
+                "password": "パスワードは8文字以上が必要です",
+                "passwordConfirm": "確認用パスワードは8文字以上が必要です",
+                "passwordRegex": "パスワードは8文字以上で、英字・数字・大文字をそれぞれ少なくとも1文字含めてください",
+                "passwordDiff": "パスワードと確認用パスワードが一致しません"
+              }
+            }
+          }
+        }
       }
     },
     "Game": {

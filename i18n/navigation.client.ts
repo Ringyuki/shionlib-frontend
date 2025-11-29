@@ -3,6 +3,12 @@
 import { createNavigation } from 'next-intl/navigation'
 import { routing } from './routing'
 import { useRouter as useBPRouter } from '@bprogress/next'
+import { useCallback, useMemo } from 'react'
+
+type BPRouterInstance = ReturnType<typeof useBPRouter>
+type RouterHref = Parameters<BPRouterInstance['push']>[0]
+type RouterPushOptions = Parameters<BPRouterInstance['push']>[1]
+type RouterReplaceOptions = Parameters<BPRouterInstance['replace']>[1]
 
 const {
   Link,
@@ -21,32 +27,51 @@ export const useRouter = () => {
   })
   const locales = routing.locales
 
-  const stripLeadingLocale = (url: URL) => {
-    const parts = url.pathname.split('/')
-    if (parts.length > 1 && parts[1] && locales.includes(parts[1] as any)) {
-      parts.splice(1, 1)
-      url.pathname = parts.join('/') || '/'
-    }
-    return url
-  }
+  const stripLeadingLocale = useCallback(
+    (url: URL) => {
+      const parts = url.pathname.split('/')
+      if (parts.length > 1 && parts[1] && locales.includes(parts[1] as any)) {
+        parts.splice(1, 1)
+        url.pathname = parts.join('/') || '/'
+      }
+      return url
+    },
+    [locales],
+  )
 
-  const isSameIgnoringLocale = (href: string) => {
-    const current = new URL(location.href)
-    const target = new URL(href, location.href)
-    const a = stripLeadingLocale(current)
-    const b = stripLeadingLocale(target)
-    return a.pathname === b.pathname && a.search === b.search
-  }
+  const isSameIgnoringLocale = useCallback(
+    (href: RouterHref) => {
+      const current = new URL(location.href)
+      const target = new URL(typeof href === 'string' ? href : String(href), location.href)
+      const a = stripLeadingLocale(current)
+      const b = stripLeadingLocale(target)
+      return a.pathname === b.pathname && a.search === b.search
+    },
+    [stripLeadingLocale],
+  )
 
-  return {
-    ...router,
-    push: (href: string, options?: Parameters<typeof router.push>[1]) => {
+  const push = useCallback(
+    (href: RouterHref, options?: RouterPushOptions) => {
       const same = isSameIgnoringLocale(href)
       return router.push(href, same ? { ...options, showProgress: false } : options)
     },
-    replace: (href: string, options?: Parameters<typeof router.replace>[1]) => {
+    [router, isSameIgnoringLocale],
+  )
+
+  const replace = useCallback(
+    (href: RouterHref, options?: RouterReplaceOptions) => {
       const same = isSameIgnoringLocale(href)
       return router.replace(href, same ? { ...options, showProgress: false } : options)
     },
-  }
+    [router, isSameIgnoringLocale],
+  )
+
+  return useMemo(
+    () => ({
+      ...router,
+      push,
+      replace,
+    }),
+    [router, push, replace],
+  )
 }

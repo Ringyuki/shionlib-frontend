@@ -29,7 +29,7 @@ export const ShionlibFooter = async () => {
               {t('friendLink')}
             </I18nLink>
           </div>
-          <Separator orientation="vertical" className="h-4! bg-foreground" />
+          <Separator orientation="vertical" className="h-4! bg-foreground hidden md:block" />
           <div className="flex items-center gap-6 text-sm">
             <Link
               href="https://github.com/Ringyuki/shionlib-frontend"

@@ -70,7 +70,7 @@ export const PasswordSettings = () => {
         <Button
           appearance="ghost"
           intent="secondary"
-          onClick={() => router.push('/user/password/forge')}
+          onClick={() => router.push('/user/password/forget')}
         >
           {t('forget')}
         </Button>

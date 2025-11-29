@@ -375,6 +375,37 @@
             "result_suffix": "共 {total} 个结果"
           }
         }
+      },
+      "Auth": {
+        "Password": {
+          "Forget": {
+            "title": "忘记密码",
+            "signSent": "重置链接已发送",
+            "resetSuccess": "密码重置成功",
+            "GetEmail": {
+              "title": "忘记密码",
+              "description": "请输入你的邮箱来获取密码重置链接。",
+              "email": "邮箱",
+              "submit": "发送重置邮件",
+              "validation": {
+                "email": "请输入有效的邮箱地址"
+              }
+            },
+            "Reset": {
+              "title": "重置密码",
+              "description": "请输入新密码。提交后，你将会被登出。",
+              "password": "新密码",
+              "passwordConfirm": "确认密码",
+              "submit": "重置密码",
+              "validation": {
+                "password": "密码至少需要8个字符",
+                "passwordConfirm": "确认密码至少需要8个字符",
+                "passwordRegex": "密码至少需要8个字符，并且包含至少一个字母、一个数字和一个大写字母",
+                "passwordDiff": "密码和确认密码不一致"
+              }
+            }
+          }
+        }
       }
     },
     "Game": {

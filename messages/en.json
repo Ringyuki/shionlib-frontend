@@ -375,6 +375,37 @@
             "result_suffix": "{total} results found"
           }
         }
+      },
+      "Auth": {
+        "Password": {
+          "Forget": {
+            "title": "Forget Password",
+            "signSent": "Reset link sent",
+            "resetSuccess": "Password reset successfully",
+            "GetEmail": {
+              "title": "Forget Password",
+              "description": "Please enter your email to get a password reset link.",
+              "email": "Email",
+              "submit": "Send reset email",
+              "validation": {
+                "email": "Please enter a valid email address"
+              }
+            },
+            "Reset": {
+              "title": "Reset Password",
+              "description": "Please enter your new password. After submitting, you will be logged out.",
+              "password": "New password",
+              "passwordConfirm": "Confirm password",
+              "submit": "Reset password",
+              "validation": {
+                "password": "Password must be at least 8 characters",
+                "passwordConfirm": "Confirm password must be at least 8 characters",
+                "passwordRegex": "Password must be at least 8 characters and include at least one letter, one number, and one uppercase letter",
+                "passwordDiff": "Password and confirm password do not match"
+              }
+            }
+          }
+        }
       }
     },
     "Game": {
