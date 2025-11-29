@@ -3,12 +3,25 @@
 import { createNavigation } from 'next-intl/navigation'
 import { routing } from './routing'
 import { useRouter as useBPRouter } from '@bprogress/next'
+import { useRouter as useNextRouter } from 'next/navigation'
 import { useCallback, useMemo } from 'react'
 
 type BPRouterInstance = ReturnType<typeof useBPRouter>
+type IntlRouterInstance = ReturnType<typeof useIntlRouter>
+type NextRouterInstance = ReturnType<typeof useNextRouter>
 type RouterHref = Parameters<BPRouterInstance['push']>[0]
-type RouterPushOptions = Parameters<BPRouterInstance['push']>[1]
-type RouterReplaceOptions = Parameters<BPRouterInstance['replace']>[1]
+type LocaleOption = Parameters<IntlRouterInstance['push']>[1] extends infer Opt
+  ? Opt extends { locale?: infer L }
+    ? { locale?: L }
+    : { locale?: string }
+  : { locale?: string }
+type NextNavigateOptions = Parameters<NextRouterInstance['push']>[1]
+type RouterPushOptions = Parameters<BPRouterInstance['push']>[1] &
+  LocaleOption &
+  NextNavigateOptions
+type RouterReplaceOptions = Parameters<BPRouterInstance['replace']>[1] &
+  LocaleOption &
+  NextNavigateOptions
 
 const {
   Link,
