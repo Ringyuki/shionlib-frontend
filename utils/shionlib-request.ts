@@ -22,7 +22,9 @@ const baseUrl = isBrowser
   ? process.env.NEXT_PUBLIC_PROD_API_PATH
   : `http://localhost:${process.env.INTERNAL_API_PORT}`
 
-export const shionlibRequest = () => {
+export const shionlibRequest = ({
+  forceThrowError = false,
+}: { forceThrowError?: boolean } = {}) => {
   const basicFetch = async <T>(
     path: string,
     options: RequestInit,
@@ -95,7 +97,7 @@ export const shionlibRequest = () => {
         mod.toast.error(formatErrors(data as ErrorResponse))
       }
       console.error(data)
-      if (!NOT_FOUND_CODES.includes(data.code)) {
+      if (!NOT_FOUND_CODES.includes(data.code) || forceThrowError) {
         throw new ShionlibBizError(data.code, data.message)
       }
     }

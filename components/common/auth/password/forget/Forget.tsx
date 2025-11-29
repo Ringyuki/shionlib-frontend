@@ -24,7 +24,7 @@ export const Forget = () => {
   const handleGetSign = async (data: z.infer<typeof getEmailSchema>) => {
     setIsGettingSign(true)
     try {
-      await shionlibRequest().post('/auth/password/forget', {
+      await shionlibRequest({ forceThrowError: true }).post('/auth/password/forget', {
         data: {
           email: data.email,
         },
@@ -52,7 +52,7 @@ export const Forget = () => {
   const handleReset = async (data: z.infer<typeof resetSchema>) => {
     setIsResetting(true)
     try {
-      await shionlibRequest().post('/auth/password/forget/reset', {
+      await shionlibRequest({ forceThrowError: true }).post('/auth/password/forget/reset', {
         data: {
           token,
           email,
