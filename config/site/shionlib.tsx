@@ -37,7 +37,7 @@ export const navBarConfig: NavBarConfig = {
     },
     {
       label: 'aiGirlFriend',
-      href: 'https://himoe.uk/T0vylK',
+      href: 'https://s.himoe.uk/ycnbdn',
       external: true,
       icon: <SparklesIcon className="w-4 h-4" />,
       gradientText: true,
