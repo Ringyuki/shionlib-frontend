@@ -12,12 +12,12 @@ interface AdProps {
 
 export const Ad = ({ id }: AdProps) => {
   const t = useTranslations('Components.Common.Site.Ad')
-  const locale = useLocale()
+  const locale = useLocale() as SupportedLocales
   const aspect = ads.find(ad => ad.id === id)?.aspect
   const ad = ads.find(ad => ad.id === id)
-  if (!ad) return null
+  if (!ad || ad.excludeLocales?.includes(locale)) return null
 
-  const image = getLocalImageUrl(locale as SupportedLocales, ad)
+  const image = getLocalImageUrl(locale, ad)
   return (
     <Link
       href={ad.link}
