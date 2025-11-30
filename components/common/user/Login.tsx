@@ -19,7 +19,7 @@ import { toast } from 'react-hot-toast'
 import { useState } from 'react'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { User } from '@/interfaces/user/user.interface'
-import { usePathname, useRouter } from '@/i18n/navigation.client'
+import { Link, usePathname, useRouter } from '@/i18n/navigation.client'
 import { useLocale } from 'next-intl'
 
 interface LoginProps {
@@ -95,6 +95,15 @@ export const Login = ({ onSuccess }: LoginProps) => {
             </FormItem>
           )}
         />
+        <div className="text-right text-sm">
+          <Link
+            href="/user/password/forget"
+            onClick={() => onSuccess?.()}
+            className="text-primary hover:underline"
+          >
+            {t('forgetPassword')}
+          </Link>
+        </div>
         <Button type="submit" loading={loading} className="w-full">
           {t('login')}
         </Button>

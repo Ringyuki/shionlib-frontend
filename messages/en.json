@@ -232,6 +232,7 @@
           "description": "Log in",
           "identifier": "Email or username",
           "password": "Password",
+          "forgetPassword": "Forgot password?",
           "login": "Log in",
           "success": "Logged in successfully",
           "validation": {

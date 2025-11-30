@@ -225,6 +225,7 @@
           "description": "ログイン",
           "identifier": "メールアドレスまたはユーザー名",
           "password": "パスワード",
+          "forgetPassword": "パスワードを忘れた？",
           "login": "ログイン",
           "success": "ログインしました",
           "validation": {
