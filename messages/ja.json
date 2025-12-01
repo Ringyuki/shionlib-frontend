@@ -1097,7 +1097,8 @@
       "NewWorks": {
         "Head": {
           "title": "本月新作",
-          "description": "{yearName} {monthName} 発売の作品。"
+          "description": "発売日が前月の最終金曜日と今月の最終金曜日の間にある作品。現在の日付が今月の最終金曜日以降の場合は、今月の最終金曜日と来月の最終金曜日の間にある作品が表示されます。発売日で並べ替えます。",
+          "release": "{yearName} {monthName} 発売の作品。"
         }
       }
     },

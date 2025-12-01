@@ -4,8 +4,10 @@ import { Activity as ActivityInterface } from '@/interfaces/activity/activity.in
 import { GameItem } from '@/interfaces/game/game.interface'
 import { Container } from '@/components/home/Container'
 import { ContentLimit } from '@/interfaces/user/user.interface'
+import { getLastFridays } from './_helpers/getFriday'
 
 const getData = async () => {
+  const { lastFriday, thisFriday } = getLastFridays()
   const [activities, hotGames, newWorks] = await Promise.all([
     shionlibRequest().get<PaginatedResponse<ActivityInterface>>(`/activity/list`, {
       params: {
@@ -27,8 +29,8 @@ const getData = async () => {
       `/game/list`,
       {
         params: {
-          'filter[years][]': new Date().getFullYear(),
-          'filter[months][]': new Date().getMonth() + 1,
+          'filter[start_date]': lastFriday.toISOString(),
+          'filter[end_date]': thisFriday.toISOString(),
           'filter[sort_by]': 'release_date',
           'filter[sort_order]': 'desc',
           page: 1,

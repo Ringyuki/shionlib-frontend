@@ -4,22 +4,17 @@ import {
   PageHeaderDescription,
 } from '@/components/common/content/PageHeader'
 import { getTranslations, getLocale } from 'next-intl/server'
+import { getLastFridays } from '@/app/[locale]/_helpers/getFriday'
 
 export const Head = async () => {
   const t = await getTranslations('Components.Home.NewWorks.Head')
-  const locale = await getLocale()
-  const month = new Date().getMonth() + 1
-  const year = new Date().getFullYear()
-  const monthName = new Intl.DateTimeFormat(locale, { month: 'long' }).format(
-    new Date(year, month - 1),
-  )
-  const yearName = new Intl.DateTimeFormat(locale, { year: 'numeric' }).format(
-    new Date(year, month - 1),
-  )
+  const locale = (await getLocale()) as 'zh' | 'ja' | 'en'
+  const { monthName, yearName } = getLastFridays(new Date(), locale)
   return (
     <PageHeader showSeparator={false}>
       <PageHeaderTitle title={t('title')} className="text-xl" />
-      <PageHeaderDescription description={t('description', { monthName, yearName })} />
+      <PageHeaderDescription description={t('release', { monthName, yearName })} />
+      <PageHeaderDescription description={t('description')} />
     </PageHeader>
   )
 }
