@@ -30,7 +30,7 @@ const getData = async () => {
       {
         params: {
           'filter[start_date]': lastFriday.toISOString(),
-          'filter[end_date]': thisFriday.toISOString(),
+          'filter[end_date]': new Date(thisFriday.getTime() - 24 * 60 * 60 * 1000).toISOString(),
           'filter[sort_by]': 'release_date',
           'filter[sort_order]': 'desc',
           page: 1,
