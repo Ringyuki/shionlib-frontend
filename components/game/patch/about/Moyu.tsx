@@ -9,7 +9,11 @@ export const Moyu = () => {
       <span className="text-xs text-muted-foreground">{t('datafrom')}</span>
       <Link href="https://www.moyu.moe" target="_blank" className="flex items-center gap-2">
         <span className="size-4 shrink-0">
-          <FadeImage src="https://www.moyu.moe/favicon.ico" alt="moyu" className="size-full" />
+          <FadeImage
+            src="https://www.moyu.moe/favicon.ico"
+            alt="moyu"
+            className="size-full rounded-full"
+          />
         </span>
         <span className="flex items-center gap-1">
           <span className="text-xs font-medium">鲲 Galgame</span>

@@ -5,6 +5,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/shionui/Alert'
 import { useTranslations } from 'next-intl'
 import { AlertCircle } from 'lucide-react'
 import { BBCodeContent } from '@/components/common/content/BBCode'
+import { Ad } from '@/components/common/site/Ad'
 
 interface GameDownloadContentProps {
   className?: string
@@ -44,6 +45,7 @@ export const GameDownloadContent = ({
             onDelete={onDelete}
           />
         ))}
+      <Ad id={2} />
     </div>
   )
 }

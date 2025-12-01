@@ -2,6 +2,7 @@ import { KunPatchResourceResponse } from '@/interfaces/patch/patch.interface'
 import { PatchItem } from './PatchItem'
 import { cn } from '@/utils/cn'
 import { Moyu } from './about/Moyu'
+import { Ad } from '@/components/common/site/Ad'
 
 interface PatchContentProps {
   patches: KunPatchResourceResponse[]
@@ -15,17 +16,16 @@ export const PatchContent = ({ patches, className }: PatchContentProps) => {
         {patches
           .filter(patch => patch.type.includes('manual'))
           .sort((a, b) => b.download - a.download)
-          // .sort((a, b) => new Date(a.updated).getTime() - new Date(b.updated).getTime())
           .map(patch => (
             <PatchItem key={patch.id} patch={patch} />
           ))}
         {patches
           .filter(patch => !patch.type.includes('manual'))
           .sort((a, b) => b.download - a.download)
-          // .sort((a, b) => new Date(a.updated).getTime() - new Date(b.updated).getTime())
           .map(patch => (
             <PatchItem key={patch.id} patch={patch} />
           ))}
+        <Ad id={2} />
       </div>
       <Moyu />
     </div>

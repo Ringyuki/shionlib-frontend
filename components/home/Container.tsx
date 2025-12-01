@@ -32,7 +32,7 @@ export const Container = ({ activities, games, content_limit, newWorks }: Contai
         <ActivityHead />
         <Activity activities={activities} />
       </div>
-      <Ad id={1} />
+      <Ad id={2} />
     </div>
   )
 }
