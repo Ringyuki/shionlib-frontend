@@ -31,6 +31,7 @@ const _GameCover = ({
       alt={title}
       aspectRatio={aspect}
       sizes={sizes}
+      className="hover:opacity-85 transition-all duration-200"
     />
   )
 }
@@ -47,9 +48,7 @@ export const GameCard = async ({ game, content_limit }: GameCardProps) => {
   return (
     <Link
       href={`/game/${game.id}`}
-      className={cn(
-        'flex flex-col gap-2 w-full break-inside-avoid select-none cursor-pointer hover:opacity-85 transition-all duration-200',
-      )}
+      className={cn('flex flex-col gap-2 w-full break-inside-avoid select-none cursor-pointer')}
       style={{ aspectRatio: aspect }}
     >
       <div className="relative w-full overflow-hidden rounded-md" style={{ aspectRatio: aspect }}>

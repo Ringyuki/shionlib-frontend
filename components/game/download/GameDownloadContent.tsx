@@ -24,7 +24,7 @@ export const GameDownloadContent = ({
   return (
     <div
       className={cn(
-        'flex flex-col gap-2 max-w-7xl px-3 mx-auto overflow-y-auto pb-4 lg:min-w-2xl',
+        'flex flex-col gap-2 max-w-[-webkit-fill-available] px-3 mx-auto overflow-y-auto pb-4',
         className,
       )}
     >
