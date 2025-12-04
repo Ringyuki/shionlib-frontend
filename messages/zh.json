@@ -548,7 +548,7 @@
         },
         "GameDownloadContent": {
           "alertTitle": "注意",
-          "alertDescription": "以下资源均由 Shionlib 用户上传，请自行鉴别文件安全性。\n下载链接有效期为 {duration} 分钟，请确保在有效期内完成下载。"
+          "alertDescription": "以下资源均由 Shionlib 用户上传，请自行鉴别文件安全性。\n对于大小不超过 10 GB 的文件，下载链接有效期为 {duration} 分钟；对于大小超过 10 GB 和 20 GB 的文件，下载链接有效期分别为 {duration1} 分钟和 {duration2} 分钟，请确保在有效期内完成下载。"
         },
         "GameDownload": {
           "noDownloadSource": "暂无下载资源"
@@ -1156,6 +1156,18 @@
           "400105": "Shionlib 数据库中已存在该游戏条目。",
           "400106": "从 VNDB 和 Bangumi 获取的游戏数据未通过一致性检查，请检查你填写的 ID 否正确。"
         }
+      }
+    }
+  },
+  "Messages": {
+    "Comment": {
+      "Reply": {
+        "Title": "新的评论回复",
+        "Content": "你有一个新的评论回复。"
+      },
+      "Like": {
+        "Title": "新的评论点赞",
+        "Content": "你收到一个新的评论点赞。"
       }
     }
   }

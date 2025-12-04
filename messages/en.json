@@ -548,7 +548,7 @@
         },
         "GameDownloadContent": {
           "alertTitle": "Notice",
-          "alertDescription": "The following resources are uploaded by Shionlib users. Please verify the safety of the files yourself.\nThe download link is valid for {duration} minutes, so please complete the download within the valid period."
+          "alertDescription": "The following resources are uploaded by Shionlib users. Please verify the safety of the files yourself.\nFor files less than 10 GB, the download link is valid for {duration} minutes; for files between 10 GB and 20 GB, the download link is valid for {duration1} minutes; for files more than 20 GB, the download link is valid for {duration2} minutes, please complete the download within the valid period."
         },
         "GameDownload": {
           "noDownloadSource": "No download source available"
@@ -1156,6 +1156,18 @@
           "400105": "The game entry already exists in Shionlib's database.",
           "400106": "The game data obtained from VNDB and Bangumi did not pass the consistency check, please check if the ID you filled is correct."
         }
+      }
+    }
+  },
+  "Messages": {
+    "Comment": {
+      "Reply": {
+        "Title": "New comment reply",
+        "Content": "You have a new comment reply."
+      },
+      "Like": {
+        "Title": "New comment like",
+        "Content": "You have a new comment like."
       }
     }
   }
