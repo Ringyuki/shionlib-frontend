@@ -40,10 +40,7 @@ export const PatchResourceItem = ({ patch }: PatchResourceItemProps) => {
       <div className="flex gap-2">
         <Tooltip>
           <TooltipTrigger asChild>
-            <Link
-              href={`https://www.moyu.moe/patch/${patch.patch_id}/resource#kun_patch_resource_${patch.id}`}
-              target="_blank"
-            >
+            <Link href={`https://www.moyu.moe/resource/${patch.id}`} target="_blank">
               <Button
                 size="icon"
                 renderIcon={<ExternalLink className="size-4" />}
