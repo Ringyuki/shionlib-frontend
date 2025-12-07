@@ -12,7 +12,7 @@ export const SearchDialog = () => {
         if (!open) closeSearchDialog()
       }}
       showCloseButton={false}
-      className="rounded-xl"
+      className="rounded-xl p-0"
     >
       <SearchCommand />
     </CommandDialog>

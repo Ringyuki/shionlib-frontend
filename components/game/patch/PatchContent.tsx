@@ -11,7 +11,7 @@ interface PatchContentProps {
 
 export const PatchContent = ({ patches, className }: PatchContentProps) => {
   return (
-    <div className="overflow-y-auto max-w-[-webkit-fill-available] mx-auto">
+    <div className="overflow-y-auto max-w-[-webkit-fill-available] min-w-164 mx-auto">
       <div className={cn('flex flex-col gap-2 w-full px-3', className)}>
         {patches
           .filter(patch => patch.type.includes('manual'))
