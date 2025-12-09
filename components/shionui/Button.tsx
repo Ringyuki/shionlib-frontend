@@ -57,7 +57,7 @@ const shionButtonVariants = cva('', {
       intent: 'primary',
       appearance: 'solid',
       className:
-        'bg-primary text-primary-foreground shadow-xs hover:bg-primary-700 active:bg-primary-800',
+        'bg-primary text-primary-foreground shadow-xs hover:bg-primary-700 active:bg-primary-700',
     },
     {
       intent: 'secondary',
@@ -367,7 +367,7 @@ function Button({
           >
             <motion.span
               initial={false}
-              animate={{ opacity: loading ? 1 : 0, scale: loading ? 1 : 0.85 }}
+              animate={{ opacity: loading ? 1 : 0, scale: loading ? 1 : 0.98 }}
               transition={{ opacity: { duration: 0.14 }, scale: { duration: 0.18 } }}
               className="absolute inset-0 inline-flex items-center justify-center"
             >
@@ -383,7 +383,7 @@ function Button({
             </motion.span>
             <motion.span
               initial={false}
-              animate={{ opacity: loading ? 0 : 1, scale: loading ? 0.85 : 1 }}
+              animate={{ opacity: loading ? 0 : 1, scale: loading ? 0.98 : 1 }}
               transition={{ opacity: { duration: 0.14 }, scale: { duration: 0.18 } }}
               className="inline-flex items-center justify-center"
             >
@@ -504,7 +504,7 @@ function Button({
         {ripples.map(({ id, x, y, size }) => (
           <motion.span
             key={id}
-            initial={{ opacity: 0.35, scale: 0 }}
+            initial={{ opacity: 0.35, scale: 0, filter: 'blur(16px)' }}
             animate={{ opacity: 0, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.65, ease: 'easeOut' }}
