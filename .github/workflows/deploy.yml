@@ -207,19 +207,16 @@ jobs:
       - name: Deploy on server
         env:
           SSH_PROXY_COMMAND: '/tmp/cloudflared/cloudflared access ssh --id ${{ secrets.SSH_CLOUDFLARED_ID }} --secret ${{ secrets.SSH_CLOUDFLARED_SECRET }} --hostname %h'
-          GITHUB_SHA: ${{ github.sha }}
-          DEPLOY_DIR: ${{ secrets.DEPLOY_DIR }}
         run: |
           ssh \
             -i ~/.ssh/id_ed25519 \
             -o StrictHostKeyChecking=no \
             -o ProxyCommand="$SSH_PROXY_COMMAND" \
             -p ${{ secrets.SSH_PORT }} \
-            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST_TEST }}" bash -s << 'EOF'
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST_TEST }}" \
+            "DEPLOY_DIR='${{ secrets.DEPLOY_DIR }}' GITHUB_SHA='${{ github.sha }}' bash -s" << 'EOF'
           set -euo pipefail
 
-          DEPLOY_DIR="${DEPLOY_DIR}"
-          GITHUB_SHA="${GITHUB_SHA}"
           KEEP_RELEASES=5
 
           mkdir -p "$DEPLOY_DIR/releases" "$DEPLOY_DIR/current"
