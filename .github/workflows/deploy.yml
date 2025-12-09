@@ -215,6 +215,8 @@ jobs:
             -p ${{ secrets.SSH_PORT }} \
             "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST_TEST }}" \
             "DEPLOY_DIR='${{ secrets.DEPLOY_DIR }}' GITHUB_SHA='${{ github.sha }}' bash -s" << 'EOF'
+          [ -f ~/.bashrc ] && . ~/.bashrc
+          [ -f ~/.profile ] && . ~/.profile
           set -euo pipefail
 
           KEEP_RELEASES=5
