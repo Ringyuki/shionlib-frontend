@@ -13,7 +13,7 @@ function ScrollArea({
   return (
     <ScrollAreaPrimitive.Root
       data-slot="scroll-area"
-      className={cn('relative isolate rounded-[inherit] bg-transparent', className)}
+      className={cn('relative isolate rounded-[inherit] bg-transparent overflow-hidden', className)}
       onWheelCapture={e => {
         e.stopPropagation()
       }}
@@ -21,7 +21,7 @@ function ScrollArea({
     >
       <ScrollAreaPrimitive.Viewport
         data-slot="scroll-area-viewport"
-        className="focus-visible:ring-ring/50 h-full w-full max-h-[inherit] overflow-auto rounded-[inherit] bg-transparent transition-[color,box-shadow,background-color] outline-none focus-visible:ring-[3px] focus-visible:outline-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        className="focus-visible:ring-ring/50 h-full w-full max-h-[inherit] overflow-auto overscroll-contain rounded-[inherit] bg-transparent transition-[color,box-shadow,background-color] outline-none focus-visible:ring-[3px] focus-visible:outline-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       >
         {children}
       </ScrollAreaPrimitive.Viewport>
