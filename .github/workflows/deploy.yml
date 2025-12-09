@@ -189,14 +189,15 @@ jobs:
       - name: Setup SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_KEY_TEST }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          printf '%s\n' "${{ secrets.SSH_KEY_TEST }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
 
       - name: Upload to server
         env:
           SSH_PROXY_COMMAND: '/tmp/cloudflared/cloudflared access ssh --id ${{ secrets.SSH_CLOUDFLARED_ID }} --secret ${{ secrets.SSH_CLOUDFLARED_SECRET }} --hostname %h'
         run: |
           scp \
+            -i ~/.ssh/id_ed25519 \
             -o StrictHostKeyChecking=no \
             -o ProxyCommand="$SSH_PROXY_COMMAND" \
             -P ${{ secrets.SSH_PORT }} \
@@ -210,6 +211,7 @@ jobs:
           DEPLOY_DIR: ${{ secrets.DEPLOY_DIR }}
         run: |
           ssh \
+            -i ~/.ssh/id_ed25519 \
             -o StrictHostKeyChecking=no \
             -o ProxyCommand="$SSH_PROXY_COMMAND" \
             -p ${{ secrets.SSH_PORT }} \
