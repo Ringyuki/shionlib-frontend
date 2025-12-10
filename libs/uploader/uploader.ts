@@ -1,4 +1,5 @@
 import { blake3 } from '@noble/hashes/blake3.js'
+import { sha256 as nobleSha256 } from '@noble/hashes/sha2.js'
 import {
   Phase,
   UploaderEvents,
@@ -405,8 +406,20 @@ export class ShionlibLargeFileUploader {
 
   private async hashChunk(blob: Blob) {
     const ab = await blob.arrayBuffer()
-    const digest = await crypto.subtle.digest('SHA-256', ab)
-    return this.toHex(new Uint8Array(digest))
+    const bytes = new Uint8Array(ab)
+
+    try {
+      if (typeof crypto !== 'undefined' && crypto.subtle?.digest) {
+        const digest = await crypto.subtle.digest('SHA-256', bytes)
+        return this.toHex(new Uint8Array(digest))
+      }
+    } catch (e) {
+      // crypto.subtle is not available in non-secure contexts (e.g. local network http)
+      console.warn('[ShionlibLargeFileUploader] crypto.subtle.digest failed, falling back', e)
+    }
+
+    const digest = nobleSha256(bytes)
+    return this.toHex(digest)
   }
 
   private toHex(arr: Uint8Array) {
