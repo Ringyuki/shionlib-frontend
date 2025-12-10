@@ -222,7 +222,7 @@ jobs:
           export PATH="/root/.nvm/versions/node/v23.11.1/bin:$PATH"
           KEEP_RELEASES=5
 
-          mkdir -p "$DEPLOY_DIR/releases" "$DEPLOY_DIR/current"
+          mkdir -p "$DEPLOY_DIR/releases"
 
           SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
           TS_UTC=$(date -u +%Y%m%d%H%M%S)
@@ -238,6 +238,7 @@ jobs:
           ln -sfn "$SHARED_DIR/.env" "$RELEASE_DIR/.env"
           ln -sfn "$SHARED_DIR/.env" "$RELEASE_DIR/.next/standalone/.env"
           ln -sfn "$SHARED_DIR/ecosystem.config.cjs" "$RELEASE_DIR/ecosystem.config.cjs"
+          rm -rf "$DEPLOY_DIR/current"
           ln -sfn "$RELEASE_DIR" "$DEPLOY_DIR/current"
 
           cd "$DEPLOY_DIR/current"
