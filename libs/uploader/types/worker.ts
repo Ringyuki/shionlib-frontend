@@ -31,3 +31,30 @@ export type HashWorkerRequest =
   | {
       type: 'abort'
     }
+
+export type ChunkHashWorkerRequest =
+  | {
+      type: 'chunk-hash'
+      id: number
+      buffer: ArrayBuffer
+    }
+  | {
+      type: 'abort'
+    }
+
+type ChunkHashWorkerCompleteMessage = {
+  type: 'chunk-hash-complete'
+  id: number
+  digest: string
+}
+
+type ChunkHashWorkerErrorMessage = {
+  type: 'chunk-hash-error'
+  id: number
+  error: {
+    name: string
+    message: string
+  }
+}
+
+export type ChunkHashWorkerResponse = ChunkHashWorkerCompleteMessage | ChunkHashWorkerErrorMessage

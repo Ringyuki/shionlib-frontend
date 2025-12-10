@@ -5,6 +5,7 @@ import {
   UploaderEvents,
   UploaderOptions,
   HashWorkerResponse,
+  ChunkHashWorkerResponse,
   LargeFileUploadApi,
 } from './types'
 import { HASH_STEP_BYTES } from './constants/constant'
@@ -22,6 +23,12 @@ export class ShionlibLargeFileUploader {
   private totalChunks?: number
   private fileSha256?: string
   private hashWorker?: Worker
+  private chunkHashWorker?: Worker
+  private chunkHashRequestId = 0
+  private chunkHashPending = new Map<
+    number,
+    { resolve: (digest: string) => void; reject: (error: any) => void }
+  >()
   private listeners = new Set<(e: UploaderEvents) => void>()
   private opts: Required<
     Omit<UploaderOptions, 'api' | 'desiredChunkSize' | 'smallFileThreshold'>
@@ -60,6 +67,7 @@ export class ShionlibLargeFileUploader {
 
   private resetState() {
     this.disposeHashWorker()
+    this.disposeChunkHashWorker()
     this.startedAt = 0
     this.bytesUploaded = 0
     this.uploaded.clear()
@@ -404,13 +412,122 @@ export class ShionlibLargeFileUploader {
     })
   }
 
+  private getChunkHashWorker() {
+    if (this.chunkHashWorker) return this.chunkHashWorker
+
+    const worker = new Worker(new URL('./worker/chunk-hash.worker.ts', import.meta.url), {
+      type: 'module',
+    })
+    worker.onmessage = event => {
+      const data = event.data as ChunkHashWorkerResponse
+      if (data.type === 'chunk-hash-complete') {
+        const pending = this.chunkHashPending.get(data.id)
+        if (pending) {
+          pending.resolve(data.digest)
+          this.chunkHashPending.delete(data.id)
+        }
+        return
+      }
+      if (data.type === 'chunk-hash-error') {
+        const pending = this.chunkHashPending.get(data.id)
+        if (pending) {
+          const err = new Error(data.error.message)
+          err.name = data.error.name
+          pending.reject(err)
+          this.chunkHashPending.delete(data.id)
+        }
+      }
+    }
+    worker.onerror = event => {
+      const err = event.error ?? new Error(event.message)
+      this.disposeChunkHashWorker(err)
+    }
+    worker.onmessageerror = () => {
+      this.disposeChunkHashWorker(new Error('Chunk hash worker message error'))
+    }
+
+    this.chunkHashWorker = worker
+    return worker
+  }
+
+  private async hashChunkWithWorker(bytes: Uint8Array) {
+    const signal = this.abortController?.signal
+    if (signal?.aborted) throw new DOMException('Aborted', 'AbortError')
+
+    const buffer =
+      bytes.byteOffset === 0 && bytes.byteLength === bytes.buffer.byteLength
+        ? bytes.buffer
+        : bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength)
+
+    const worker = this.getChunkHashWorker()
+    const id = ++this.chunkHashRequestId
+
+    return await new Promise<string>((resolve, reject) => {
+      let abortHandler: (() => void) | undefined
+      const cleanup = () => {
+        if (abortHandler && signal) {
+          signal.removeEventListener('abort', abortHandler)
+        }
+        this.chunkHashPending.delete(id)
+      }
+
+      const rejectWithAbort = () => {
+        cleanup()
+        reject(new DOMException('Aborted', 'AbortError'))
+      }
+      abortHandler = rejectWithAbort
+
+      if (signal) {
+        if (signal.aborted) {
+          rejectWithAbort()
+          return
+        }
+        signal.addEventListener('abort', abortHandler, { once: true })
+      }
+
+      this.chunkHashPending.set(id, {
+        resolve: digest => {
+          cleanup()
+          resolve(digest)
+        },
+        reject: err => {
+          cleanup()
+          reject(err)
+        },
+      })
+
+      try {
+        worker.postMessage({ type: 'chunk-hash', id, buffer }, [buffer])
+      } catch (e) {
+        cleanup()
+        reject(e)
+      }
+    })
+  }
+
   private async hashChunk(blob: Blob) {
-    const ab = await blob.arrayBuffer()
-    const bytes = new Uint8Array(ab)
+    const signal = this.abortController?.signal
+    if (signal?.aborted) throw new DOMException('Aborted', 'AbortError')
+
+    let bytes: Uint8Array | null = null
+    const loadBytes = async () => {
+      if (!bytes) {
+        const ab = await blob.arrayBuffer()
+        bytes = new Uint8Array(ab)
+      }
+      return bytes
+    }
 
     try {
       if (typeof crypto !== 'undefined' && crypto.subtle?.digest) {
-        const digest = await crypto.subtle.digest('SHA-256', bytes)
+        const b = await loadBytes()
+        const arrayBuffer = (
+          b.byteOffset === 0 && b.byteLength === b.buffer.byteLength
+            ? b.buffer
+            : b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength)
+        ) as ArrayBuffer
+
+        const digest = await crypto.subtle.digest('SHA-256', arrayBuffer)
         return this.toHex(new Uint8Array(digest))
       }
     } catch (e) {
@@ -418,7 +535,18 @@ export class ShionlibLargeFileUploader {
       console.warn('[ShionlibLargeFileUploader] crypto.subtle.digest failed, falling back', e)
     }
 
-    const digest = nobleSha256(bytes)
+    if (this.canUseHashWorker()) {
+      try {
+        const b = await loadBytes()
+        return await this.hashChunkWithWorker(b)
+      } catch (e: any) {
+        if (e?.name === 'AbortError') throw e
+        console.warn('[ShionlibLargeFileUploader] chunk hash worker failed, falling back', e)
+      }
+    }
+
+    const b = await loadBytes()
+    const digest = nobleSha256(b)
     return this.toHex(digest)
   }
 
@@ -430,5 +558,23 @@ export class ShionlibLargeFileUploader {
 
   async getSessionId() {
     return this.sessionId
+  }
+
+  private disposeChunkHashWorker(error?: Error) {
+    this.failAllChunkHashRequests(
+      error ?? new Error('Chunk hash worker disposed before completion'),
+    )
+    if (this.chunkHashWorker) {
+      this.chunkHashWorker.terminate()
+      this.chunkHashWorker = undefined
+    }
+  }
+
+  private failAllChunkHashRequests(error: Error) {
+    if (!this.chunkHashPending.size) return
+    for (const [, { reject }] of this.chunkHashPending) {
+      reject(error)
+    }
+    this.chunkHashPending.clear()
   }
 }
