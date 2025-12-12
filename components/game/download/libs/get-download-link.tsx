@@ -15,7 +15,7 @@ export interface GetDownloadLinkHandle {
 export const GetDownloadLink = forwardRef<GetDownloadLinkHandle, GetDownloadLinkProps>(
   ({ fileId, onLink }, ref) => {
     const [downloadLink, setDownloadLink] = useState<string | null>(null)
-    const [, setShowTurnstile] = useState(false)
+    const [showTurnstile, setShowTurnstile] = useState(false)
     const pendingResolver = useRef<((url: string | null) => void) | null>(null)
 
     const fetchDownloadLink = async (token: string): Promise<string | null> => {
@@ -44,10 +44,10 @@ export const GetDownloadLink = forwardRef<GetDownloadLinkHandle, GetDownloadLink
     }))
 
     const handleTurnstileVerify = async (token: string) => {
-      setShowTurnstile(false)
       const url = await fetchDownloadLink(token)
       pendingResolver.current?.(url)
       pendingResolver.current = null
+      setShowTurnstile(false)
     }
 
     const handleTurnstileError = () => {
@@ -56,14 +56,14 @@ export const GetDownloadLink = forwardRef<GetDownloadLinkHandle, GetDownloadLink
       setShowTurnstile(false)
     }
 
-    return (
+    return showTurnstile ? (
       <Turnstile
         onVerify={handleTurnstileVerify}
         onLoad={() => setShowTurnstile(true)}
         onError={handleTurnstileError}
         onExpire={handleTurnstileError}
       />
-    )
+    ) : null
   },
 )
 
