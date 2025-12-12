@@ -14,12 +14,14 @@ interface GameDownloadResourceItemProps {
   resource: GameDownloadResource
   onUpdate: (id: number, data: Partial<GameDownloadResource>) => void
   onDelete: (id: number) => void
+  onTurnstileOpenChange: (open: boolean) => void
 }
 
 export const GameDownloadResourceItem = ({
   resource,
   onUpdate,
   onDelete,
+  onTurnstileOpenChange,
 }: GameDownloadResourceItemProps) => {
   const locale = useLocale()
   const t = useTranslations('Components.Game.Download.GameDownloadResourceItem')
@@ -55,7 +57,11 @@ export const GameDownloadResourceItem = ({
       </div>
       <div className="flex flex-col gap-2 rounded-lg w-full">
         {resource.files.map(file => (
-          <GameDownloadFileItem key={file.id} file={file} />
+          <GameDownloadFileItem
+            key={file.id}
+            file={file}
+            onTurnstileOpenChange={onTurnstileOpenChange}
+          />
         ))}
         {resource.note && <div className="text-xs font-light font-mono! pl-2">{resource.note}</div>}
       </div>

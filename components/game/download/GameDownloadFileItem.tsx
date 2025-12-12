@@ -2,45 +2,54 @@ import { GameDownloadResourceFile } from '@/interfaces/game/game-download-resour
 import { useTranslations } from 'next-intl'
 import { FileArchive, CloudCheck, Hash, Zap, Globe, CloudUpload } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/shionui/Tooltip'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/shionui/Popover'
 import { Button } from '@/components/shionui/Button'
 import { Badge } from '@/components/shionui/Badge'
 import { formatBytes } from '@/utils/bytes-format'
-import { shionlibRequest } from '@/utils/shionlib-request'
-import { useState } from 'react'
-import { GameDownloadResourceFileLink } from '@/interfaces/game/game-download-resource'
+import { useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { addUrl } from './helpers/aria2'
 import { useAria2Store } from '@/store/aria2Store'
 import { CopyButton } from '@/components/shionui/animated/CopyButton'
+import { GetDownloadLink, GetDownloadLinkHandle } from './libs/get-download-link'
 
 interface GameDownloadFileItemProps {
   file: GameDownloadResourceFile
+  onTurnstileOpenChange: (open: boolean) => void
 }
 
-export const GameDownloadFileItem = ({ file }: GameDownloadFileItemProps) => {
+export const GameDownloadFileItem = ({
+  file,
+  onTurnstileOpenChange,
+}: GameDownloadFileItemProps) => {
   const t = useTranslations('Components.Game.Download.GameDownloadFileItem')
   const [pushToAria2Loading, setPushToAria2Loading] = useState(false)
   const [normalDownloadLoading, setNormalDownloadLoading] = useState(false)
+  const [downloadLink, setDownloadLink] = useState<string | null>(null)
   const { getSettings } = useAria2Store()
   const { protocol, host, port, path, auth_secret, downloadPath } = getSettings()
 
-  const [downloadLink, setDownloadLink] = useState<string | null>(null)
-  const getDownloadLink = async (): Promise<string | null> => {
-    const res = await shionlibRequest().get<GameDownloadResourceFileLink>(
-      `/game/download/${file.id}/link`,
-    )
-    const url = res.data?.file_url ?? null
-    setDownloadLink(url)
-    return url
+  const downloadLinkRef = useRef<GetDownloadLinkHandle>(null)
+  const [turnstileOpen, setTurnstileOpen] = useState(false)
+
+  const requestDownloadLink = async () => {
+    if (downloadLink) return downloadLink
+    setTurnstileOpen(true)
+    onTurnstileOpenChange(true)
+    const url = await downloadLinkRef.current?.requestLink()
+    setTurnstileOpen(false)
+    onTurnstileOpenChange(false)
+    setDownloadLink(url ?? null)
+    return url ?? null
   }
 
   const handlePushToAria2 = async () => {
-    let url = downloadLink
     setPushToAria2Loading(true)
+    const url = await requestDownloadLink()
     if (!url) {
-      url = await getDownloadLink()
+      setPushToAria2Loading(false)
+      return
     }
-    if (!url) return
 
     const res = await addUrl(
       url,
@@ -62,12 +71,9 @@ export const GameDownloadFileItem = ({ file }: GameDownloadFileItemProps) => {
     setPushToAria2Loading(false)
   }
   const handleNormalDownload = async () => {
-    let url = downloadLink
-    if (!url) {
-      setNormalDownloadLoading(true)
-      url = await getDownloadLink()
-      setNormalDownloadLoading(false)
-    }
+    setNormalDownloadLoading(true)
+    const url = await requestDownloadLink()
+    setNormalDownloadLoading(false)
     if (!url) return
 
     const a = document.createElement('a')
@@ -123,40 +129,51 @@ export const GameDownloadFileItem = ({ file }: GameDownloadFileItemProps) => {
         </div>
       </div>
       {file.file_status === 3 && (
-        <div className="flex gap-2">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                intent="primary"
-                appearance="soft"
-                size="icon"
-                className="size-8"
-                loading={pushToAria2Loading}
-                onClick={handlePushToAria2}
-                renderIcon={<Zap />}
-              />
-            </TooltipTrigger>
-            <TooltipContent>
-              <span>{t('pushToAria2')}</span>
-            </TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                intent="neutral"
-                appearance="ghost"
-                size="icon"
-                className="size-8 text-secondary-foreground/50"
-                loading={normalDownloadLoading}
-                onClick={handleNormalDownload}
-                renderIcon={<Globe />}
-              />
-            </TooltipTrigger>
-            <TooltipContent>
-              <span>{t('normalDownload')}</span>
-            </TooltipContent>
-          </Tooltip>
-        </div>
+        <Popover open={turnstileOpen}>
+          <PopoverTrigger asChild>
+            <div className="flex gap-2">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    intent="primary"
+                    appearance="soft"
+                    size="icon"
+                    className="size-8"
+                    loading={pushToAria2Loading}
+                    onClick={handlePushToAria2}
+                    renderIcon={<Zap />}
+                  />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <span>{t('pushToAria2')}</span>
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    intent="neutral"
+                    appearance="ghost"
+                    size="icon"
+                    className="size-8 text-secondary-foreground/50"
+                    loading={normalDownloadLoading}
+                    onClick={handleNormalDownload}
+                    renderIcon={<Globe />}
+                  />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <span>{t('normalDownload')}</span>
+                </TooltipContent>
+              </Tooltip>
+            </div>
+          </PopoverTrigger>
+          <PopoverContent forceMount className="w-[318px] h-[84px]">
+            <GetDownloadLink
+              fileId={file.id}
+              ref={downloadLinkRef}
+              onLink={url => setDownloadLink(url)}
+            />
+          </PopoverContent>
+        </Popover>
       )}
     </div>
   )

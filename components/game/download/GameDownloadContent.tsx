@@ -12,6 +12,7 @@ interface GameDownloadContentProps {
   downloadResources: GameDownloadResource[]
   onUpdate: (id: number, data: Partial<GameDownloadResource>) => void
   onDelete: (id: number) => void
+  onTurnstileOpenChange: (open: boolean) => void
 }
 
 export const GameDownloadContent = ({
@@ -19,6 +20,7 @@ export const GameDownloadContent = ({
   className,
   onUpdate,
   onDelete,
+  onTurnstileOpenChange,
 }: GameDownloadContentProps) => {
   const t = useTranslations('Components.Game.Download.GameDownloadContent')
   return (
@@ -45,6 +47,7 @@ export const GameDownloadContent = ({
             resource={resource}
             onUpdate={onUpdate}
             onDelete={onDelete}
+            onTurnstileOpenChange={onTurnstileOpenChange}
           />
         ))}
       <Ad id={2} />

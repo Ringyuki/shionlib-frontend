@@ -2,6 +2,7 @@ import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@/components/s
 import { GameDownloadResource } from '@/interfaces/game/game-download-resource'
 import { GameDownloadContent } from './GameDownloadContent'
 import { useTranslations } from 'next-intl'
+import { useState } from 'react'
 
 interface GameDownloadDrawerProps {
   downloadResources: GameDownloadResource[]
@@ -19,8 +20,9 @@ export const GameDownloadDrawer = ({
   onDelete,
 }: GameDownloadDrawerProps) => {
   const t = useTranslations('Components.Game.Download.GameDownloadDrawer')
+  const [turnstileOpen, setTurnstileOpen] = useState(false)
   return (
-    <Drawer open={open} onOpenChange={onOpenChange}>
+    <Drawer open={open} onOpenChange={onOpenChange} dismissible={!turnstileOpen}>
       <DrawerContent className="min-h-[50vh]" aria-describedby={undefined}>
         <DrawerHeader>
           <DrawerTitle>{t('title')}</DrawerTitle>
@@ -29,6 +31,7 @@ export const GameDownloadDrawer = ({
           downloadResources={downloadResources}
           onUpdate={onUpdate}
           onDelete={onDelete}
+          onTurnstileOpenChange={setTurnstileOpen}
         />
       </DrawerContent>
     </Drawer>

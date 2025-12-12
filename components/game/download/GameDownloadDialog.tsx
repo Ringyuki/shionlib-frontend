@@ -2,6 +2,7 @@ import { GameDownloadResource } from '@/interfaces/game/game-download-resource'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/shionui/Dialog'
 import { GameDownloadContent } from './GameDownloadContent'
 import { useTranslations } from 'next-intl'
+import { useState } from 'react'
 
 interface GameDownloadDialogProps {
   downloadResources: GameDownloadResource[]
@@ -19,8 +20,9 @@ export const GameDownloadDialog = ({
   onDelete,
 }: GameDownloadDialogProps) => {
   const t = useTranslations('Components.Game.Download.GameDownloadDialog')
+  const [turnstileOpen, setTurnstileOpen] = useState(false)
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={onOpenChange} maskClosable={!turnstileOpen}>
       <DialogContent aria-describedby={undefined} fitContent>
         <DialogHeader>
           <DialogTitle>{t('title')}</DialogTitle>
@@ -30,6 +32,7 @@ export const GameDownloadDialog = ({
           downloadResources={downloadResources}
           onUpdate={onUpdate}
           onDelete={onDelete}
+          onTurnstileOpenChange={setTurnstileOpen}
         />
       </DialogContent>
     </Dialog>
