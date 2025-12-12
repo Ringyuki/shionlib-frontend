@@ -21,7 +21,6 @@ export interface TurnstileProps {
   appearance?: 'always' | 'execute' | 'interaction-only'
   execution?: 'render' | 'execute'
   cData?: string
-  language?: string
   sandbox?: 'pass' | 'block' | 'pass-invisible' | 'block-invisible' | boolean
   feedbackEnabled?: boolean
 }

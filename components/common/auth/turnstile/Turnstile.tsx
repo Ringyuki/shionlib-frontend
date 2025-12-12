@@ -3,6 +3,7 @@ import { TurnstileProps, TURNSTILE_CONSTANTS } from './types/types'
 import { toast } from 'react-hot-toast'
 import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
+import { useLocale } from 'next-intl'
 
 declare global {
   interface Window {
@@ -39,7 +40,6 @@ export const Turnstile: React.FC<TurnstileProps> = ({
   appearance = TURNSTILE_CONSTANTS.DEFAULT_APPEARANCE,
   execution = TURNSTILE_CONSTANTS.DEFAULT_EXECUTION,
   cData,
-  language,
   sandbox = false,
   feedbackEnabled = TURNSTILE_CONSTANTS.DEFAULT_FEEDBACK_ENABLED,
 }) => {
@@ -47,6 +47,8 @@ export const Turnstile: React.FC<TurnstileProps> = ({
   const widgetRef = useRef<string | undefined>(undefined)
   const containerRef = useRef<HTMLDivElement>(null)
   const { resolvedTheme } = useTheme()
+  const locale = useLocale()
+  const lang = locale === 'zh' ? 'zh-CN' : locale
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
   if (!siteKey) {
     toast.error(t('siteKeyNotSet'))
@@ -83,7 +85,6 @@ export const Turnstile: React.FC<TurnstileProps> = ({
     }
 
     return cleanup
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [siteKey, sandbox])
 
   const sandboxDummyKey = () => {
@@ -137,10 +138,16 @@ export const Turnstile: React.FC<TurnstileProps> = ({
       appearance,
       execution,
       cdata: cData,
-      language,
+      language: lang,
       'feedback-enabled': feedbackEnabled,
     })
   }
 
-  return <div ref={containerRef} id={id} className={className} />
+  return (
+    <div className="flex flex-col gap-2">
+      <h3 className="text-sm font-medium">{t('turnstileTitle')}</h3>
+      <div ref={containerRef} id={id} className={className} />
+      <p className="text-xs text-secondary-foreground/50">{t('turnstileDescription')}</p>
+    </div>
+  )
 }

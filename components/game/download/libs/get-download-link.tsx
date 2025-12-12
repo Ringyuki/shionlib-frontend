@@ -57,14 +57,12 @@ export const GetDownloadLink = forwardRef<GetDownloadLinkHandle, GetDownloadLink
     }
 
     return (
-      showTurnstile && (
-        <Turnstile
-          onVerify={handleTurnstileVerify}
-          onLoad={() => setShowTurnstile(true)}
-          onError={handleTurnstileError}
-          onExpire={handleTurnstileError}
-        />
-      )
+      <Turnstile
+        onVerify={handleTurnstileVerify}
+        onLoad={() => setShowTurnstile(true)}
+        onError={handleTurnstileError}
+        onExpire={handleTurnstileError}
+      />
     )
   },
 )

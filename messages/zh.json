@@ -410,7 +410,9 @@
         "Turnstile": {
           "error": "验证失败，请重试",
           "timeout": "验证超时，请重试",
-          "siteKeyNotSet": "站点密钥未设置"
+          "siteKeyNotSet": "站点密钥未设置",
+          "turnstileTitle": "正在验证你的请求",
+          "turnstileDescription": "如果验证码无法加载或长时间未响应，请刷新页面重试，或者检查你的网络连接。"
         }
       }
     },

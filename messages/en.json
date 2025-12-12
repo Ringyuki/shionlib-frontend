@@ -410,7 +410,9 @@
         "Turnstile": {
           "error": "Verification failed, please try again",
           "timeout": "Verification timed out, please try again",
-          "siteKeyNotSet": "Site key not set"
+          "siteKeyNotSet": "Site key not set",
+          "turnstileTitle": "Verifying your request",
+          "turnstileDescription": "If the verification code cannot be loaded or does not respond for a long time, please refresh the page or check your network connection."
         }
       }
     },

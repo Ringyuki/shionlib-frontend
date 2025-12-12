@@ -166,7 +166,7 @@ export const GameDownloadFileItem = ({
               </Tooltip>
             </div>
           </PopoverTrigger>
-          <PopoverContent forceMount className="w-[318px] h-[84px]">
+          <PopoverContent forceMount className="w-[320px] h-[170px]" sideOffset={8}>
             <GetDownloadLink
               fileId={file.id}
               ref={downloadLinkRef}
