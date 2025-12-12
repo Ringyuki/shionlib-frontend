@@ -59,7 +59,6 @@ export const GetDownloadLink = forwardRef<GetDownloadLinkHandle, GetDownloadLink
     return (
       showTurnstile && (
         <Turnstile
-          siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ''}
           onVerify={handleTurnstileVerify}
           onLoad={() => setShowTurnstile(true)}
           onError={handleTurnstileError}

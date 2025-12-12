@@ -409,7 +409,8 @@
         },
         "Turnstile": {
           "error": "Verification failed, please try again",
-          "timeout": "Verification timed out, please try again"
+          "timeout": "Verification timed out, please try again",
+          "siteKeyNotSet": "Site key not set"
         }
       }
     },

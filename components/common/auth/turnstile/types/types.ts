@@ -1,5 +1,4 @@
 export interface TurnstileProps {
-  siteKey: string
   onVerify?: (token: string) => void
   onError?: (error: unknown) => void
   onExpire?: () => void
@@ -11,7 +10,6 @@ export interface TurnstileProps {
   action?: string
   id?: string
   className?: string
-  theme?: 'light' | 'dark' | 'auto'
   tabIndex?: number
   responseField?: boolean
   responseFieldName?: string

@@ -17,7 +17,6 @@ declare global {
 }
 
 export const Turnstile: React.FC<TurnstileProps> = ({
-  siteKey,
   onVerify,
   onError,
   onExpire,
@@ -29,7 +28,6 @@ export const Turnstile: React.FC<TurnstileProps> = ({
   action,
   id = TURNSTILE_CONSTANTS.DEFAULT_ID,
   className,
-  theme = TURNSTILE_CONSTANTS.DEFAULT_THEME,
   tabIndex,
   responseField = TURNSTILE_CONSTANTS.DEFAULT_RESPONSE_FIELD,
   responseFieldName = TURNSTILE_CONSTANTS.DEFAULT_RESPONSE_FIELD_NAME,
@@ -49,6 +47,11 @@ export const Turnstile: React.FC<TurnstileProps> = ({
   const widgetRef = useRef<string | undefined>(undefined)
   const containerRef = useRef<HTMLDivElement>(null)
   const { resolvedTheme } = useTheme()
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+  if (!siteKey) {
+    toast.error(t('siteKeyNotSet'))
+    onError?.('Site key not set')
+  }
 
   const cleanup = useCallback(() => {
     if (widgetRef.current) {

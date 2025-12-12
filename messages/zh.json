@@ -409,7 +409,8 @@
         },
         "Turnstile": {
           "error": "验证失败，请重试",
-          "timeout": "验证超时，请重试"
+          "timeout": "验证超时，请重试",
+          "siteKeyNotSet": "站点密钥未设置"
         }
       }
     },
