@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast'
 import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 import { useLocale } from 'next-intl'
+import { cn } from '@/utils/cn'
 
 declare global {
   interface Window {
@@ -146,7 +147,7 @@ export const Turnstile: React.FC<TurnstileProps> = ({
   return (
     <div className="flex flex-col gap-2">
       <h3 className="text-sm font-medium">{t('turnstileTitle')}</h3>
-      <div ref={containerRef} id={id} className={className} />
+      <div ref={containerRef} id={id} className={cn('min-h-[71px]', className)} />
       <p className="text-xs text-secondary-foreground/50">{t('turnstileDescription')}</p>
     </div>
   )

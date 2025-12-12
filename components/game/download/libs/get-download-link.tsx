@@ -15,7 +15,7 @@ export interface GetDownloadLinkHandle {
 export const GetDownloadLink = forwardRef<GetDownloadLinkHandle, GetDownloadLinkProps>(
   ({ fileId, onLink }, ref) => {
     const [downloadLink, setDownloadLink] = useState<string | null>(null)
-    const [showTurnstile, setShowTurnstile] = useState(false)
+    const [, setShowTurnstile] = useState(false)
     const pendingResolver = useRef<((url: string | null) => void) | null>(null)
 
     const fetchDownloadLink = async (token: string): Promise<string | null> => {
