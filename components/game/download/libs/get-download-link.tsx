@@ -10,6 +10,7 @@ interface GetDownloadLinkProps {
 
 export interface GetDownloadLinkHandle {
   requestLink: () => Promise<string | null>
+  cancelRequest: () => void
 }
 
 export const GetDownloadLink = forwardRef<GetDownloadLinkHandle, GetDownloadLinkProps>(
@@ -33,6 +34,15 @@ export const GetDownloadLink = forwardRef<GetDownloadLinkHandle, GetDownloadLink
       }
     }
 
+    const resolvePending = (url: string | null) => {
+      pendingResolver.current?.(url)
+      pendingResolver.current = null
+    }
+    const closeTurnstile = (url: string | null = null) => {
+      resolvePending(url)
+      setShowTurnstile(false)
+    }
+
     useImperativeHandle(ref, () => ({
       requestLink: () => {
         if (downloadLink) return Promise.resolve(downloadLink)
@@ -41,19 +51,17 @@ export const GetDownloadLink = forwardRef<GetDownloadLinkHandle, GetDownloadLink
           pendingResolver.current = resolve
         })
       },
+      cancelRequest: () => closeTurnstile(null),
     }))
 
     const handleTurnstileVerify = async (token: string) => {
       const url = await fetchDownloadLink(token)
-      pendingResolver.current?.(url)
-      pendingResolver.current = null
+      resolvePending(url)
       setShowTurnstile(false)
     }
 
     const handleTurnstileError = () => {
-      pendingResolver.current?.(null)
-      pendingResolver.current = null
-      setShowTurnstile(false)
+      closeTurnstile(null)
     }
 
     return showTurnstile ? (

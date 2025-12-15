@@ -7,6 +7,7 @@ import { Button } from '@/components/shionui/Button'
 import { Badge } from '@/components/shionui/Badge'
 import { formatBytes } from '@/utils/bytes-format'
 import { useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { toast } from 'react-hot-toast'
 import { addUrl } from './helpers/aria2'
 import { useAria2Store } from '@/store/aria2Store'
@@ -86,95 +87,123 @@ export const GameDownloadFileItem = ({
     toast.success(t('downloadStarted'))
   }
 
+  const handleTurnstileCancel = () => {
+    console.log('handleTurnstileCancel')
+    downloadLinkRef.current?.cancelRequest?.()
+    setTurnstileOpen(false)
+    onTurnstileOpenChange(false)
+    setPushToAria2Loading(false)
+    setNormalDownloadLoading(false)
+  }
+
+  const overlay =
+    turnstileOpen && typeof document !== 'undefined'
+      ? createPortal(
+          <div
+            className="fixed left-0 top-0 w-screen h-dvh z-90 pointer-events-auto bg-transparent"
+            onClick={handleTurnstileCancel}
+            aria-label="turnstile overlay"
+          />,
+          document.body,
+        )
+      : null
+
   return (
-    <div className="flex gap-2 justify-between items-center border-dashed border p-2 rounded-lg">
-      <div className="flex flex-col gap-2">
-        <div className="text-sm font-medium font-mono! flex items-center gap-2 flex-wrap">
-          <span className="flex items-center gap-1">
-            <FileArchive className="size-3 shrink-0" />
-            <span>{file.file_name}</span>
-          </span>
-          <span className="text-muted-foreground text-xs">{formatBytes(file.file_size)}</span>
-          {file.type === 1 && (
-            <Badge
-              size="sm"
-              variant={
-                file.file_status === 3 ? 'success' : file.file_status === 2 ? 'warning' : 'neutral'
-              }
-            >
-              {file.file_status === 3 ? (
-                <CloudCheck className="size-3" />
-              ) : (
-                <CloudUpload className="size-3" />
-              )}
-              {file.file_status === 3
-                ? 'S3'
-                : file.file_status === 2
-                  ? t('processing')
-                  : t('pending')}
-            </Badge>
-          )}
-          {file.file_status !== 3 && (
-            <Badge size="sm" variant="neutral">
-              {t('onlyVisibleForYourself')}
-            </Badge>
-          )}
+    <>
+      {overlay}
+      <div className="flex gap-2 justify-between items-center border-dashed border p-2 rounded-lg">
+        <div className="flex flex-col gap-2">
+          <div className="text-sm font-medium font-mono! flex items-center gap-2 flex-wrap">
+            <span className="flex items-center gap-1">
+              <FileArchive className="size-3 shrink-0" />
+              <span>{file.file_name}</span>
+            </span>
+            <span className="text-muted-foreground text-xs">{formatBytes(file.file_size)}</span>
+            {file.type === 1 && (
+              <Badge
+                size="sm"
+                variant={
+                  file.file_status === 3
+                    ? 'success'
+                    : file.file_status === 2
+                      ? 'warning'
+                      : 'neutral'
+                }
+              >
+                {file.file_status === 3 ? (
+                  <CloudCheck className="size-3" />
+                ) : (
+                  <CloudUpload className="size-3" />
+                )}
+                {file.file_status === 3
+                  ? 'S3'
+                  : file.file_status === 2
+                    ? t('processing')
+                    : t('pending')}
+              </Badge>
+            )}
+            {file.file_status !== 3 && (
+              <Badge size="sm" variant="neutral">
+                {t('onlyVisibleForYourself')}
+              </Badge>
+            )}
+          </div>
+          <div className="text-muted-foreground text-xs flex items-center gap-1 break-words break-all">
+            <Hash className="size-3 shrink-0" />
+            <span className="break-words break-all">
+              {file.hash_algorithm === 'blake3' ? 'BLAKE3' : 'SHA-256'} {file.file_hash}
+            </span>
+            <CopyButton content={file.file_hash} size="xs" variant="ghost" />
+          </div>
         </div>
-        <div className="text-muted-foreground text-xs flex items-center gap-1 break-words break-all">
-          <Hash className="size-3 shrink-0" />
-          <span className="break-words break-all">
-            {file.hash_algorithm === 'blake3' ? 'BLAKE3' : 'SHA-256'} {file.file_hash}
-          </span>
-          <CopyButton content={file.file_hash} size="xs" variant="ghost" />
-        </div>
+        {file.file_status === 3 && (
+          <Popover open={turnstileOpen}>
+            <PopoverTrigger asChild>
+              <div className="flex gap-2">
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      intent="primary"
+                      appearance="soft"
+                      size="icon"
+                      className="size-8"
+                      loading={pushToAria2Loading}
+                      onClick={handlePushToAria2}
+                      renderIcon={<Zap />}
+                    />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <span>{t('pushToAria2')}</span>
+                  </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      intent="neutral"
+                      appearance="ghost"
+                      size="icon"
+                      className="size-8 text-secondary-foreground/50"
+                      loading={normalDownloadLoading}
+                      onClick={handleNormalDownload}
+                      renderIcon={<Globe />}
+                    />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <span>{t('normalDownload')}</span>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+            </PopoverTrigger>
+            <PopoverContent forceMount className="w-[320px] h-[170px] z-[70]" sideOffset={8}>
+              <GetDownloadLink
+                fileId={file.id}
+                ref={downloadLinkRef}
+                onLink={url => setDownloadLink(url)}
+              />
+            </PopoverContent>
+          </Popover>
+        )}
       </div>
-      {file.file_status === 3 && (
-        <Popover open={turnstileOpen}>
-          <PopoverTrigger asChild>
-            <div className="flex gap-2">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    intent="primary"
-                    appearance="soft"
-                    size="icon"
-                    className="size-8"
-                    loading={pushToAria2Loading}
-                    onClick={handlePushToAria2}
-                    renderIcon={<Zap />}
-                  />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <span>{t('pushToAria2')}</span>
-                </TooltipContent>
-              </Tooltip>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    intent="neutral"
-                    appearance="ghost"
-                    size="icon"
-                    className="size-8 text-secondary-foreground/50"
-                    loading={normalDownloadLoading}
-                    onClick={handleNormalDownload}
-                    renderIcon={<Globe />}
-                  />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <span>{t('normalDownload')}</span>
-                </TooltipContent>
-              </Tooltip>
-            </div>
-          </PopoverTrigger>
-          <PopoverContent forceMount className="w-[320px] h-[170px]" sideOffset={8}>
-            <GetDownloadLink
-              fileId={file.id}
-              ref={downloadLinkRef}
-              onLink={url => setDownloadLink(url)}
-            />
-          </PopoverContent>
-        </Popover>
-      )}
-    </div>
+    </>
   )
 }
