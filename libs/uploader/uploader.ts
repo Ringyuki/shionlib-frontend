@@ -281,11 +281,6 @@ export class ShionlibLargeFileUploader {
   }
 
   private async hashFile(file: File) {
-    const total = file.size
-    if (total <= this.opts.smallFileThreshold) {
-      return this.hashChunk(file)
-    }
-
     if (this.canUseHashWorker()) {
       try {
         return await this.hashFileWithWorker(file)
