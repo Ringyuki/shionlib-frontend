@@ -1,11 +1,12 @@
+'use client'
+
 import { Activity, ActivityType } from '@/interfaces/activity/activity.interface'
 import { Card, CardContent } from '@/components/shionui/Card'
 import { Avatar } from '@/components/common/user/Avatar'
 import { Badge } from '@/components/shionui/Badge'
 import { timeFromNow } from '@/utils/time-format'
-import { getLocale } from 'next-intl/server'
 import { CalendarDays, Workflow } from 'lucide-react'
-import { getTranslations } from 'next-intl/server'
+import { useLocale, useTranslations } from 'next-intl'
 import { Comment } from './activities/Comment'
 import { Edit } from './activities/Edit'
 import { Create } from './activities/Create'
@@ -15,9 +16,9 @@ interface ActivityCardProps {
   activity: Activity
 }
 
-export const ActivityCard = async ({ activity }: ActivityCardProps) => {
-  const locale = await getLocale()
-  const t = await getTranslations('Components.Home.Activity.ActivityCard')
+export const ActivityCard = ({ activity }: ActivityCardProps) => {
+  const locale = useLocale()
+  const t = useTranslations('Components.Home.Activity.ActivityCard')
 
   const isUserActivity =
     activity.type === ActivityType.COMMENT ||

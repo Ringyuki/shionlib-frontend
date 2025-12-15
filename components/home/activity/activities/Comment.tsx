@@ -1,7 +1,8 @@
+'use client'
+
 import { Activity } from '@/interfaces/activity/activity.interface'
-import { getTranslations } from 'next-intl/server'
 import { getPreferredContent } from '@/components/game/description/helpers/getPreferredContent'
-import { getLocale } from 'next-intl/server'
+import { useTranslations, useLocale } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import { GameData } from '@/interfaces/game/game.interface'
 import { Badge } from '@/components/shionui/Badge'
@@ -11,9 +12,9 @@ interface CommentProps {
   activity: Activity
 }
 
-export const Comment = async ({ activity }: CommentProps) => {
-  const locale = await getLocale()
-  const t = await getTranslations('Components.Home.Activity.Activities.Comment')
+export const Comment = ({ activity }: CommentProps) => {
+  const locale = useLocale()
+  const t = useTranslations('Components.Home.Activity.Activities.Comment')
   const langMap = { en: 'en', ja: 'jp', zh: 'zh' } as const
   const lang = langMap[locale as keyof typeof langMap] ?? 'jp'
   const { title } = getPreferredContent(activity.game as unknown as GameData, 'title', lang)

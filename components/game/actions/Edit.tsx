@@ -35,15 +35,28 @@ export const Edit = ({ game_id }: EditProps) => {
   }
 
   return (
-    <Button
-      intent="primary"
-      appearance="ghost"
-      loginRequired
-      loading={editLoading}
-      onClick={getPermissions}
-      renderIcon={<Pencil />}
-    >
-      <span className="hidden md:block">{t('edit')}</span>
-    </Button>
+    <>
+      <Button
+        intent="primary"
+        appearance="ghost"
+        loginRequired
+        loading={editLoading}
+        onClick={getPermissions}
+        renderIcon={<Pencil />}
+        className="hidden md:block"
+      >
+        {t('edit')}
+      </Button>
+      <Button
+        intent="primary"
+        appearance="ghost"
+        size="icon"
+        loginRequired
+        loading={editLoading}
+        onClick={getPermissions}
+        renderIcon={<Pencil />}
+        className="flex md:hidden"
+      />
+    </>
   )
 }

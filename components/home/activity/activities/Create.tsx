@@ -1,3 +1,5 @@
+'use client'
+
 import { Activity } from '@/interfaces/activity/activity.interface'
 import { Link } from '@/i18n/navigation'
 import { useTranslations } from 'next-intl'

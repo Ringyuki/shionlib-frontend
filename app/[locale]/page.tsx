@@ -8,7 +8,7 @@ import { getLastFridays } from './_helpers/getFriday'
 
 const getData = async () => {
   const { lastFriday, thisFriday } = getLastFridays()
-  const [activities, hotGames, newWorks] = await Promise.all([
+  const [activitiesRes, hotGames, newWorks] = await Promise.all([
     shionlibRequest().get<PaginatedResponse<ActivityInterface>>(`/activity/list`, {
       params: {
         page: 1,
@@ -39,20 +39,26 @@ const getData = async () => {
       },
     ),
   ])
+
+  const activitiesItems = activitiesRes.data?.items!
+  const activitiesMeta = activitiesRes.data?.meta!
+
   return {
-    activities: activities.data?.items ?? [],
-    hotGames: hotGames.data?.items ?? [],
+    activities: activitiesItems,
+    activitiesMeta,
+    hotGames: hotGames.data?.items!,
     content_limit: hotGames.data?.meta.content_limit ?? 0,
-    newWorks: newWorks.data?.items ?? [],
+    newWorks: newWorks.data?.items!,
   }
 }
 
 export default async function HomePage() {
-  const { activities, hotGames, content_limit, newWorks } = await getData()
+  const { activities, activitiesMeta, hotGames, content_limit, newWorks } = await getData()
   return (
     <div className="container mx-auto my-4">
       <Container
         activities={activities}
+        activitiesMeta={activitiesMeta}
         games={hotGames}
         content_limit={content_limit}
         newWorks={newWorks}

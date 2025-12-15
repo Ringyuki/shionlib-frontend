@@ -1,7 +1,8 @@
+'use client'
+
 import { Activity } from '@/interfaces/activity/activity.interface'
 import { Card, CardContent } from '@/components/shionui/Card'
 import { Badge, BadgeVariant } from '@/components/shionui/Badge'
-import { getLocale, getTranslations } from 'next-intl/server'
 import { timeFromNow } from '@/utils/time-format'
 import { FileArchive, CircleCheck, CircleX, Loader } from 'lucide-react'
 import { Avatar } from '@/components/common/user/Avatar'
@@ -9,17 +10,16 @@ import { formatBytes } from '@/utils/bytes-format'
 import { eventBadgeVariantMap, systemFileActivityTypes } from './constants/file-progress'
 import { buildStageStates, getPrimaryStatus } from './helpers/file-progress.interface'
 import { StageState } from './interfaces/file-progress.interface'
+import { useLocale, useTranslations } from 'next-intl'
 
 interface FileProgressProps {
   activities: Activity[]
 }
 
-export const FileProgress = async ({ activities }: FileProgressProps) => {
-  const [locale, t, tCard] = await Promise.all([
-    getLocale(),
-    getTranslations('Components.Home.Activity.Activities.FileProgress'),
-    getTranslations('Components.Home.Activity.ActivityCard'),
-  ])
+export const FileProgress = ({ activities }: FileProgressProps) => {
+  const locale = useLocale()
+  const t = useTranslations('Components.Home.Activity.Activities.FileProgress')
+  const tCard = useTranslations('Components.Home.Activity.ActivityCard')
 
   const sortedActivities = [...activities].sort(
     (a, b) => new Date(a.created).getTime() - new Date(b.created).getTime(),

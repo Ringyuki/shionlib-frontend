@@ -6,17 +6,25 @@ import { Head as NewWorksHead } from './new-works/Head'
 import { Games } from './games/Games'
 import { GameItem } from '@/interfaces/game/game.interface'
 import { ContentLimit } from '@/interfaces/user/user.interface'
+import { PaginatedMeta } from '@/interfaces/api/shionlib-api-res.interface'
 import { Ad } from '@/components/common/site/Ad'
 import { NewWorks } from './new-works/NewWorks'
 
 interface ContainerProps {
   activities: ActivityInterface[]
+  activitiesMeta: PaginatedMeta
   games: GameItem[]
   content_limit: ContentLimit
   newWorks: GameItem[]
 }
 
-export const Container = ({ activities, games, content_limit, newWorks }: ContainerProps) => {
+export const Container = ({
+  activities,
+  activitiesMeta,
+  games,
+  content_limit,
+  newWorks,
+}: ContainerProps) => {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-6">
@@ -30,7 +38,7 @@ export const Container = ({ activities, games, content_limit, newWorks }: Contai
       <Ad id={1} />
       <div className="flex flex-col gap-6">
         <ActivityHead />
-        <Activity activities={activities} />
+        <Activity activities={activities} meta={activitiesMeta} />
       </div>
       <Ad id={2} />
     </div>
