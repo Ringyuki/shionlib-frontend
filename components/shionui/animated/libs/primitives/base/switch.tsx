@@ -95,6 +95,16 @@ function SwitchThumb({
           layout
           transition={transition}
           animate={isPressed ? pressedAnimation : undefined}
+          transformTemplate={(_t, generated) => {
+            let s = generated
+            s = s.replace(/translateY\(\s*[^)]*\)/g, 'translateY(0px)')
+            s = s.replace(
+              /translate3d\(\s*([^,]+),\s*([^,]+),\s*([^\)]+)\)/g,
+              (_m, x, _y, z) => `translate3d(${x}, 0px, ${z})`,
+            )
+            s = s.replace(/translate\(\s*([^,]+),\s*([^\)]+)\)/g, (_m, x) => `translate(${x}, 0px)`)
+            return s
+          }}
           {...props}
         />
       }
