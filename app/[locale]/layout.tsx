@@ -16,6 +16,7 @@ import { Noto_Sans, Noto_Sans_SC, Noto_Sans_JP, Noto_Sans_Mono } from 'next/font
 import { ShionlibFooter } from '@/components/common/footer/Footer'
 import { Cinzel } from 'next/font/google'
 import { UmamiProvider } from '@/components/common/site/UmamiProvider'
+import { OpenPanelProvider } from '@/components/common/site/OpenPanelProvider'
 
 const cinzel = Cinzel({
   subsets: ['latin'],
@@ -58,6 +59,7 @@ export default async function ShionlibLayout({ children, params }: Readonly<Prop
     >
       <head>
         <UmamiProvider />
+        <OpenPanelProvider />
       </head>
       <body>
         <TokenRefresh />

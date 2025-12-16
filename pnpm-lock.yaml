@@ -96,6 +96,9 @@ importers:
       '@noble/hashes':
         specifier: ^2.0.1
         version: 2.0.1
+      '@openpanel/nextjs':
+        specifier: ^1.1.2
+        version: 1.1.2(next@16.0.10(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.92.1))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@radix-ui/react-alert-dialog':
         specifier: ^1.1.15
         version: 1.1.15(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -982,6 +985,19 @@ packages:
   '@nolyfill/is-core-module@1.0.39':
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
+
+  '@openpanel/nextjs@1.1.2':
+    resolution: {integrity: sha512-dt4DpXLRgj06nM6IQIYj0WV6YtPnNypGB74mhjcwMk9F26RMrdA2q3c8oj3gK6Mnc7sjkV9ZouFDEKTUFuPRpQ==}
+    peerDependencies:
+      next: ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  '@openpanel/sdk@1.0.3':
+    resolution: {integrity: sha512-VzxHN4wfMd6iP7Amq572plQKvj6bnsp+KgVK/7sbqEvzJ2N505a3Sn/wCwectBYiJ0QPRi2djeqU5tdacm6hhg==}
+
+  '@openpanel/web@1.0.6':
+    resolution: {integrity: sha512-82D/pP6SIpHrQn2Q9JshlU4cg8LLx+we/DdrXNBdy1qLXuty1jhA2TqIH7UAG4pJrHvG4se+hhlNUYclRDD7MQ==}
 
   '@parcel/watcher-android-arm64@2.5.1':
     resolution: {integrity: sha512-KF8+j9nNbUN8vzOFDpRMsaKBHZ/mcjEjMToVMJOhTozkDonQFFrRcfdLWn6yWKCmJKmdVxSgHiYvTCef4/qcBA==}
@@ -5234,6 +5250,19 @@ snapshots:
       fastq: 1.19.1
 
   '@nolyfill/is-core-module@1.0.39': {}
+
+  '@openpanel/nextjs@1.1.2(next@16.0.10(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.92.1))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+    dependencies:
+      '@openpanel/web': 1.0.6
+      next: 16.0.10(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.92.1)
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
+
+  '@openpanel/sdk@1.0.3': {}
+
+  '@openpanel/web@1.0.6':
+    dependencies:
+      '@openpanel/sdk': 1.0.3
 
   '@parcel/watcher-android-arm64@2.5.1':
     optional: true
