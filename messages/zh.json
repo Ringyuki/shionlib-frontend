@@ -1142,11 +1142,13 @@
       },
       "Form": {
         "vndbIdLabel": "VNDB ID",
-        "vndbIdDescription": "以字母 v 和数字组成的 ID，例如：v14018",
+        "vndbIdDescription": "以字母 v 和数字组成的 ID，例如：v14018。",
         "vndbIdPlaceholder": "v14018",
         "bangumiIdLabel": "Bangumi ID",
-        "bangumiIdDescription": "纯数字 ID，例如：88765",
+        "bangumiIdDescription": "纯数字 ID，例如：88765。",
         "bangumiIdPlaceholder": "88765",
+        "skipConsistencyCheckLabel": "跳过一致性检查",
+        "skipConsistencyCheckDescription": "跳过一致性检查，如果跳过，则不会检查 VNDB 和 Bangumi 的数据是否一致。",
         "validation": {
           "vndbId": "请输入有效的 VNDB ID",
           "bangumiId": "请输入有效的 Bangumi ID"

@@ -1142,11 +1142,13 @@
       },
       "Form": {
         "vndbIdLabel": "VNDB ID",
-        "vndbIdDescription": "The VNDB ID is a combination of letter v and digits, for example: v14018",
+        "vndbIdDescription": "The VNDB ID is a combination of letter v and digits, for example: v14018.",
         "vndbIdPlaceholder": "v14018",
         "bangumiIdLabel": "Bangumi ID",
-        "bangumiIdDescription": "The Bangumi ID is a combination of digits, for example: 88765",
+        "bangumiIdDescription": "The Bangumi ID is a combination of digits, for example: 88765.",
         "bangumiIdPlaceholder": "88765",
+        "skipConsistencyCheckLabel": "Skip Consistency Check",
+        "skipConsistencyCheckDescription": "Skip consistency check, if skipped, will not check if the data from VNDB and Bangumi is consistent.",
         "validation": {
           "vndbId": "Please enter a valid VNDB ID",
           "bangumiId": "Please enter a valid Bangumi ID"

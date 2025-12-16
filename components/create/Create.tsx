@@ -27,6 +27,7 @@ export const CreateGame = () => {
         data: {
           v_id,
           b_id,
+          skip_consistency_check: data.skipConsistencyCheck,
         },
       })
       toast.success(t('success', { id: res.data! }), { duration: 10000 })

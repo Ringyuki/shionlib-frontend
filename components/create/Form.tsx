@@ -15,10 +15,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useTranslations } from 'next-intl'
 import { Button } from '../shionui/Button'
+import { Switch } from '../shionui/animated/Switch'
 
 export const createGameFormSchema = z.object({
   vndbId: z.string().min(1),
   bangumiId: z.string().min(1),
+  skipConsistencyCheck: z.boolean().optional(),
 })
 
 interface CreateGameFormProps {
@@ -32,12 +34,14 @@ export const CreateGameForm = ({ onSubmit, loading }: CreateGameFormProps) => {
   const createGameFormSchema = z.object({
     vndbId: z.string().min(1, { message: t('validation.vndbId') }),
     bangumiId: z.string().min(1, { message: t('validation.bangumiId') }),
+    skipConsistencyCheck: z.boolean().optional(),
   })
   const form = useForm<z.infer<typeof createGameFormSchema>>({
     resolver: zodResolver(createGameFormSchema),
     defaultValues: {
       vndbId: '',
       bangumiId: '',
+      skipConsistencyCheck: false,
     },
   })
 
@@ -92,6 +96,22 @@ export const CreateGameForm = ({ onSubmit, loading }: CreateGameFormProps) => {
                     pattern="[0-9]*"
                     placeholder={t('bangumiIdPlaceholder')}
                   />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )
+          }}
+        />
+        <FormField
+          control={form.control as Control<z.infer<typeof createGameFormSchema>>}
+          name="skipConsistencyCheck"
+          render={({ field }) => {
+            return (
+              <FormItem>
+                <FormLabel>{t('skipConsistencyCheckLabel')}</FormLabel>
+                <FormDescription>{t('skipConsistencyCheckDescription')}</FormDescription>
+                <FormControl>
+                  <Switch checked={field.value} onCheckedChange={field.onChange} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

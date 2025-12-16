@@ -1134,11 +1134,13 @@
       },
       "Form": {
         "vndbIdLabel": "VNDB ID",
-        "vndbIdDescription": "VNDB ID は英字 v と数字の組み合わせで、例：v14018",
+        "vndbIdDescription": "VNDB ID は英字 v と数字の組み合わせで、例：v14018。",
         "vndbIdPlaceholder": "v14018",
         "bangumiIdLabel": "Bangumi ID",
-        "bangumiIdDescription": "Bangumi ID は数字のみの組み合わせで、例：88765",
+        "bangumiIdDescription": "Bangumi ID は数字のみの組み合わせで、例：88765。",
         "bangumiIdPlaceholder": "88765",
+        "skipConsistencyCheckLabel": "一致性チェックをスキップ",
+        "skipConsistencyCheckDescription": "一致性チェックをスキップすると、VNDB と Bangumi のデータが一致しているかどうかをチェックしません。",
         "validation": {
           "vndbId": "有効な VNDB ID を入力してください",
           "bangumiId": "有効な Bangumi ID を入力してください"
