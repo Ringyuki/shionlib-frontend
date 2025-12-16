@@ -100,7 +100,7 @@ export const GameDownloadFileItem = ({
     turnstileOpen && typeof document !== 'undefined'
       ? createPortal(
           <div
-            className="fixed left-0 top-0 w-screen h-dvh z-90 pointer-events-auto bg-transparent"
+            className="fixed left-0 top-0 w-screen h-dvh z-60 pointer-events-auto bg-transparent"
             onClick={handleTurnstileCancel}
             aria-label="turnstile overlay"
           />,
