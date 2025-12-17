@@ -68,6 +68,7 @@ jobs:
           NEXT_PUBLIC_SHIONLIB_IMAGE_BED_HOST: ${{ vars.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_HOST }}
           NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL: ${{ vars.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL }}
           NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
+          NEXT_PUBLIC_TRACKING_URL: ${{ vars.NEXT_PUBLIC_TRACKING_URL }}
         run: pnpm build
 
       - name: Compose standalone bundle
