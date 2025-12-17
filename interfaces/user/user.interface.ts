@@ -38,8 +38,14 @@ export enum ContentLimit {
   JUST_SHOW = 3,
 }
 
+export enum UserRole {
+  USER = 1,
+  ADMIN = 2,
+  SUPER_ADMIN = 3,
+}
+
 export const userRoleMap: { [key in User['role']]: string } = {
-  1: 'user',
-  2: 'admin',
-  3: 'super_admin',
+  [UserRole.USER]: 'user',
+  [UserRole.ADMIN]: 'admin',
+  [UserRole.SUPER_ADMIN]: 'super_admin',
 }

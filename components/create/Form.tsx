@@ -16,6 +16,8 @@ import { z } from 'zod'
 import { useTranslations } from 'next-intl'
 import { Button } from '../shionui/Button'
 import { Switch } from '../shionui/animated/Switch'
+import { useShionlibUserStore } from '@/store/userStore'
+import { UserRole } from '@/interfaces/user/user.interface'
 
 export const createGameFormSchema = z.object({
   vndbId: z.string().min(1),
@@ -30,6 +32,7 @@ interface CreateGameFormProps {
 
 export const CreateGameForm = ({ onSubmit, loading }: CreateGameFormProps) => {
   const t = useTranslations('Components.Create.Form')
+  const { user } = useShionlibUserStore()
 
   const createGameFormSchema = z.object({
     vndbId: z.string().min(1, { message: t('validation.vndbId') }),
@@ -102,22 +105,24 @@ export const CreateGameForm = ({ onSubmit, loading }: CreateGameFormProps) => {
             )
           }}
         />
-        <FormField
-          control={form.control as Control<z.infer<typeof createGameFormSchema>>}
-          name="skipConsistencyCheck"
-          render={({ field }) => {
-            return (
-              <FormItem>
-                <FormLabel>{t('skipConsistencyCheckLabel')}</FormLabel>
-                <FormDescription>{t('skipConsistencyCheckDescription')}</FormDescription>
-                <FormControl>
-                  <Switch checked={field.value} onCheckedChange={field.onChange} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )
-          }}
-        />
+        {user.role >= UserRole.ADMIN && (
+          <FormField
+            control={form.control as Control<z.infer<typeof createGameFormSchema>>}
+            name="skipConsistencyCheck"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormLabel>{t('skipConsistencyCheckLabel')}</FormLabel>
+                  <FormDescription>{t('skipConsistencyCheckDescription')}</FormDescription>
+                  <FormControl>
+                    <Switch checked={field.value} onCheckedChange={field.onChange} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )
+            }}
+          />
+        )}
         <Button type="submit" loading={loading} loginRequired>
           {t('submit')}
         </Button>

@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { SupportedLocales, supportedLocalesEnum } from '@/config/i18n/supported'
+import { UserRole } from '@/interfaces/user/user.interface'
 
 interface ShionlibUserInfo {
   id: number
@@ -8,7 +9,7 @@ interface ShionlibUserInfo {
   avatar: string
   cover: string
   bio: string
-  role: number
+  role: UserRole
   lang: SupportedLocales
 }
 
@@ -18,7 +19,7 @@ const initialUser: ShionlibUserInfo = {
   avatar: '',
   cover: '',
   bio: '',
-  role: 1,
+  role: UserRole.USER,
   lang: supportedLocalesEnum.EN,
 }
 
