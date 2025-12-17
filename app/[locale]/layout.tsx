@@ -17,6 +17,7 @@ import { ShionlibFooter } from '@/components/common/footer/Footer'
 import { Cinzel } from 'next/font/google'
 import { UmamiProvider } from '@/components/common/site/UmamiProvider'
 import { OpenPanelProvider } from '@/components/common/site/OpenPanelProvider'
+import { RybbitProvider } from '@/components/common/site/RybbitProvider'
 
 const cinzel = Cinzel({
   subsets: ['latin'],
@@ -60,6 +61,7 @@ export default async function ShionlibLayout({ children, params }: Readonly<Prop
       <head>
         <UmamiProvider />
         <OpenPanelProvider />
+        <RybbitProvider />
       </head>
       <body>
         <TokenRefresh />
