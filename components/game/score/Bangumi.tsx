@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react'
 import { Skeleton } from '@/components/shionui/Skeleton'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
-import { cn } from '@/utils/cn'
 
 interface BangumiScoreCardProps {
   score?: BangumiScore | null
@@ -40,7 +39,6 @@ export const BangumiScoreCard = ({
 
   const isOverlay = variant === 'overlay'
 
-  // 紧凑的叠加模式
   if (isOverlay) {
     return (
       <Link href={`https://bgm.tv/subject/${score?.id}`} target="_blank">
@@ -63,7 +61,6 @@ export const BangumiScoreCard = ({
     )
   }
 
-  // 默认完整卡片模式
   return (
     <Link href={`https://bangumi.tv/subject/${score?.id}`} target="_blank">
       <div className="relative w-42 md:w-48 h-20 md:h-24 rounded-xl overflow-hidden shadow-lg group select-none">

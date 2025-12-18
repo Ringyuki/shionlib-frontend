@@ -14,8 +14,8 @@ export const Upload = ({ game_id }: UploadProps) => {
   return (
     <>
       <Button
-        intent="neutral"
-        appearance="outline"
+        intent="secondary"
+        appearance="ghost"
         loginRequired
         onClick={() => setUploadOpen(true)}
         renderIcon={<UploadIcon />}

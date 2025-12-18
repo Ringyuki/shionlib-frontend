@@ -50,13 +50,13 @@ export const GameHeader = async ({ game }: GameHeaderProps) => {
             />
             {vertical && <GameScores className="hidden lg:flex" />}
           </div>
-          <div className="flex gap-8 mt-2 flex-wrap items-center">
+          <div className="flex gap-8 lg:mt-2 flex-wrap items-center">
             <GameDeveloper developers={game.developers} />
             <GameReleaseTime release_date={game.release_date} />
           </div>
-          <GamePlatform platform={game.platform} className="mt-2" />
+          <GamePlatform platform={game.platform} className="lg:mt-2" />
         </div>
-        <GameScores className="flex lg:hidden justify-start w-full mt-2" />
+        <GameScores className="flex lg:hidden justify-start w-full lg:mt-2" variant="overlay" />
         <Separator />
         <GameActions game={game} />
       </div>

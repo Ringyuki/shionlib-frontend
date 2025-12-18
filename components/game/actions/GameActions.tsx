@@ -22,14 +22,20 @@ export const GameActions = ({ game }: GameActionsProps) => {
       <div className="flex gap-2 items-center flex-wrap">
         <div className="flex gap-2 md:items-center flex-col md:flex-row items-start">
           <div className="flex gap-2 items-center flex-wrap">
-            <Download game_id={game.id} />
-            <Patch game_id={game.id} v_id={game.v_id!} />
-            <Upload game_id={game.id} />
-            <Edit game_id={game.id} />
-            <History game_id={game.id} />
+            <div className="flex gap-2 items-center">
+              <Download game_id={game.id} />
+              <Patch game_id={game.id} v_id={game.v_id!} />
+              <Upload game_id={game.id} />
+            </div>
+            <div className="flex gap-2 items-center">
+              <Edit game_id={game.id} />
+              <History game_id={game.id} />
+              <Favorite isFavorite={game.is_favorite} gameId={game.id} className="lg:hidden flex" />
+              <Comment className="lg:hidden flex" />
+            </div>
           </div>
-          <Separator orientation="vertical" className="h-4! hidden md:block" />
-          <div className="flex gap-2 items-center">
+          <div className="lg:flex hidden items-center gap-2">
+            <Separator orientation="vertical" className="h-4! hidden md:block" />
             <Favorite isFavorite={game.is_favorite} gameId={game.id} />
             <Comment />
           </div>

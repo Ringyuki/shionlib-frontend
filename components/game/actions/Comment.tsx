@@ -4,7 +4,11 @@ import { MessageSquareMore } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useScrollToElem } from '@/hooks/useScrollToElem'
 
-export const Comment = () => {
+interface CommentProps {
+  className?: string
+}
+
+export const Comment = ({ className }: CommentProps) => {
   const t = useTranslations('Components.Game.Actions')
   const scrollToElem = useScrollToElem()
   const handleComment = () => {
@@ -16,7 +20,7 @@ export const Comment = () => {
 
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
+      <TooltipTrigger asChild className={className}>
         <Button
           size="icon"
           intent="success"

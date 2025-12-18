@@ -11,9 +11,10 @@ import { useTranslations } from 'next-intl'
 interface FavoriteProps {
   isFavorite: boolean
   gameId: number
+  className?: string
 }
 
-export const Favorite = ({ isFavorite, gameId }: FavoriteProps) => {
+export const Favorite = ({ isFavorite, gameId, className }: FavoriteProps) => {
   const t = useTranslations('Components.Game.Actions')
   const [isFavorite_, setIsFavorite_] = useState(isFavorite)
 
@@ -35,7 +36,7 @@ export const Favorite = ({ isFavorite, gameId }: FavoriteProps) => {
   }
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
+      <TooltipTrigger asChild className={className}>
         <Button
           size="icon"
           intent="destructive"
