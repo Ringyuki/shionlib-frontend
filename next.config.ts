@@ -86,15 +86,15 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      {
-        // for tracking site to access font files
-        source: '/_next/static/:path*',
-        headers: [
-          { key: 'Access-Control-Allow-Origin', value: process.env.NEXT_PUBLIC_TRACKING_URL! },
-          { key: 'Access-Control-Allow-Methods', value: 'GET,OPTIONS' },
-          { key: 'Access-Control-Allow-Headers', value: 'Content-Type' },
-        ],
-      },
+      // {
+      //   // for tracking site to access font files
+      //   source: '/_next/static/:path*',
+      //   headers: [
+      //     { key: 'Access-Control-Allow-Origin', value: process.env.NEXT_PUBLIC_TRACKING_URL! },
+      //     { key: 'Access-Control-Allow-Methods', value: 'GET,OPTIONS' },
+      //     { key: 'Access-Control-Allow-Headers', value: 'Content-Type' },
+      //   ],
+      // },
     ]
   },
   experimental: {
