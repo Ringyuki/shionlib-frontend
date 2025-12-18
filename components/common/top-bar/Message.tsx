@@ -48,8 +48,8 @@ export const Message = () => {
           content={unreadCount > 99 ? '99+' : unreadCount.toString()}
           shape="circular"
           className={cn(
-            'text-[11px] z-10 pointer-events-none',
-            unreadCount > 9 && 'text-[10px] px-[2px] py-[1px]',
+            'text-[0.75rem] z-10 pointer-events-none',
+            unreadCount > 9 && 'text-[0.625rem] px-[2px] py-[1px]',
           )}
           offsetClassName="top-[10px] right-[10px]"
         >

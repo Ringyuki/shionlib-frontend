@@ -32,7 +32,7 @@ export const SearchTrigger = () => {
         onClick={openSearchDialog}
       >
         <div className="flex items-center gap-2">
-          <SearchIcon className="w-4 h-4" />
+          <SearchIcon className="size-4" />
           <span className="text-sm font-medium text-foreground/70">{t('search')}</span>
         </div>
         <div className="flex items-center gap-1">
@@ -46,7 +46,7 @@ export const SearchTrigger = () => {
           intent="secondary"
           size="icon"
           onClick={openSearchDialog}
-          renderIcon={<SearchIcon />}
+          renderIcon={<SearchIcon className="size-4.5" />}
         />
       </div>
     </>
