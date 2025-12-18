@@ -1,4 +1,5 @@
 import { Separator } from '@/components/shionui/Separator'
+import { cn } from '@/utils/cn'
 
 interface GameTitleProps {
   title: string
@@ -10,7 +11,7 @@ interface GameTitleProps {
 
 export const GameTitle = ({ title, excess_titles, aliases, type, className }: GameTitleProps) => {
   return (
-    <div className={className}>
+    <div className={cn('flex flex-col', className)}>
       <div className="text-3xl font-bold flex gap-2">
         <h1>{title}</h1>
       </div>

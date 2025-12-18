@@ -21,7 +21,8 @@ export const BasicInfos = async ({ developer, works_count }: BasicInfosProps) =>
           height={200}
           width={200}
           fill={false}
-          className="rounded-md w-32 h-32 object-contain bg-muted"
+          className="rounded-md w-32 h-32 bg-muted"
+          imageClassName="object-contain h-full w-full"
         />
       ) : (
         <div className="rounded-md w-32 h-32 bg-muted flex items-center justify-center">

@@ -23,7 +23,7 @@ export const DeveloperItem = async ({ developer }: DeveloperItemProps) => {
                 height={50}
                 width={50}
                 fill={false}
-                className="object-contain h-full w-full"
+                imageClassName="object-contain h-full w-full"
               />
             )}
           </div>
