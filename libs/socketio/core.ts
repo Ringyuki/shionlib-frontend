@@ -2,7 +2,7 @@ import { io, Socket } from 'socket.io-client'
 import { Event, MessageNewEvent, MessageUnreadEvent } from '@/interfaces/socketio/event.interface'
 import { useEffect, useMemo } from 'react'
 
-const socketUrl = process.env.NEXT_PUBLIC_SOCKETIO_URL
+const socketUrl = process.env.NEXT_PUBLIC_SOCKETIO_URL || ''
 const isBrowser = typeof window !== 'undefined'
 
 const createSocket = (): Socket =>
