@@ -8,9 +8,13 @@ import Link from 'next/link'
 
 interface VNDBScoreCardProps {
   score?: VNDBScore | null
+  variant?: 'default' | 'overlay'
 }
 
-export const VNDBScoreCard = ({ score: initialScore = null }: VNDBScoreCardProps) => {
+export const VNDBScoreCard = ({
+  score: initialScore = null,
+  variant = 'default',
+}: VNDBScoreCardProps) => {
   const t = useTranslations('Components.Game.Score.VNDB')
 
   const [loading, setLoading] = useState(true)
@@ -32,6 +36,30 @@ export const VNDBScoreCard = ({ score: initialScore = null }: VNDBScoreCardProps
   }, [id])
 
   if (!loading && !score) return null
+
+  const isOverlay = variant === 'overlay'
+
+  if (isOverlay) {
+    return (
+      <Link href={`https://vndb.org/${score?.id}`} target="_blank">
+        <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-black/50 backdrop-blur-sm hover:bg-black/60 transition-colors select-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/images/game/The_Visual_Novel_Database_logo.svg"
+            alt="VNDB"
+            className="h-3 w-auto brightness-0 invert"
+          />
+          {loading ? (
+            <Skeleton className="h-6 w-10" />
+          ) : (
+            <span className="text-base font-bold text-white">
+              {score?.rating?.toFixed(2) ?? '-'}
+            </span>
+          )}
+        </div>
+      </Link>
+    )
+  }
 
   return (
     <Link href={`https://vndb.org/${score?.id}`} target="_blank">

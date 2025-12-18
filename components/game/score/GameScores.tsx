@@ -6,13 +6,14 @@ import { cn } from '@/utils/cn'
 
 interface GameScoresProps {
   className?: string
+  variant?: 'default' | 'overlay'
 }
 
-export const GameScores = ({ className }: GameScoresProps) => {
+export const GameScores = ({ className, variant = 'default' }: GameScoresProps) => {
   return (
     <div className={cn('flex gap-2', className)}>
-      <BangumiScoreCard />
-      <VNDBScoreCard />
+      <BangumiScoreCard variant={variant} />
+      <VNDBScoreCard variant={variant} />
     </div>
   )
 }

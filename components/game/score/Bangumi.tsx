@@ -5,12 +5,17 @@ import { useState, useEffect } from 'react'
 import { Skeleton } from '@/components/shionui/Skeleton'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
+import { cn } from '@/utils/cn'
 
 interface BangumiScoreCardProps {
   score?: BangumiScore | null
+  variant?: 'default' | 'overlay'
 }
 
-export const BangumiScoreCard = ({ score: initialScore = null }: BangumiScoreCardProps) => {
+export const BangumiScoreCard = ({
+  score: initialScore = null,
+  variant = 'default',
+}: BangumiScoreCardProps) => {
   const t = useTranslations('Components.Game.Score.Bangumi')
 
   const [loading, setLoading] = useState(true)
@@ -33,6 +38,32 @@ export const BangumiScoreCard = ({ score: initialScore = null }: BangumiScoreCar
 
   if (!loading && !score) return null
 
+  const isOverlay = variant === 'overlay'
+
+  // 紧凑的叠加模式
+  if (isOverlay) {
+    return (
+      <Link href={`https://bgm.tv/subject/${score?.id}`} target="_blank">
+        <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-black/50 backdrop-blur-sm hover:bg-black/60 transition-colors select-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/images/game/Bangumi_Logo.png"
+            alt="Bangumi"
+            className="h-3.5 w-auto brightness-0 invert"
+          />
+          {loading ? (
+            <Skeleton className="h-6 w-8" />
+          ) : (
+            <span className="text-base font-bold text-white">
+              {score?.rating?.score?.toFixed(1) ?? '-'}
+            </span>
+          )}
+        </div>
+      </Link>
+    )
+  }
+
+  // 默认完整卡片模式
   return (
     <Link href={`https://bangumi.tv/subject/${score?.id}`} target="_blank">
       <div className="relative w-42 md:w-48 h-20 md:h-24 rounded-xl overflow-hidden shadow-lg group select-none">

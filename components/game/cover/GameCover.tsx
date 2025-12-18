@@ -67,7 +67,7 @@ export const GameCover = ({ covers, preferredCoverInfo, title, content_limit }: 
           return _GameCover({ cover: preferredCover.url, title, width })
         })()}
         {covers.length > 0 && (
-          <div className="absolute bottom-2 right-2 md:right-auto md:left-1/2 md:-translate-x-1/2 opacity-100 md:opacity-0 group-hover/cover:opacity-100 transition-all duration-200">
+          <div className="absolute top-2 right-2 md:right-auto md:left-1/2 md:-translate-x-1/2 opacity-100 md:opacity-0 group-hover/cover:opacity-100 transition-all duration-200">
             <Button
               intent="secondary"
               className="text-xs hover:bg-neutral-content active:bg-neutral-content dark:hover:bg-neutral/85 dark:active:bg-neutral/95"
