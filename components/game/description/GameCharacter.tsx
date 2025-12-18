@@ -1,11 +1,14 @@
 import { GameCharacterItem } from './GameCharacterItem'
 import { GameCharacterRelation, GameCharacterRole } from '@/interfaces/game/game.interface'
+import { Empty } from '@/components/common/content/Empty'
+import { useTranslations } from 'next-intl'
 
 interface GameCharacterProps {
   characters: GameCharacterRelation[]
 }
 
 export const GameCharacter = ({ characters }: GameCharacterProps) => {
+  const t = useTranslations('Components.Game.Description.GameCharacter')
   const priority: Record<GameCharacterRole, number> = {
     main: 0,
     primary: 1,
@@ -18,11 +21,13 @@ export const GameCharacter = ({ characters }: GameCharacterProps) => {
     if (aPriority !== bPriority) return aPriority - bPriority
     return a.character.id - b.character.id
   })
-  return (
+  return sorted.length > 0 ? (
     <div className="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 md:gap-4">
       {sorted.map(character => (
         <GameCharacterItem key={character.character.id} character={character} />
       ))}
     </div>
+  ) : (
+    <Empty title={t('noCharacters')} />
   )
 }

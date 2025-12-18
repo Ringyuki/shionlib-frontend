@@ -435,6 +435,9 @@
         "goToDiscussion": "Go to discussion"
       },
       "Description": {
+        "GameCharacter": {
+          "noCharacters": "No characters found"
+        },
         "GameCharacterItem": {
           "noImage": "No image",
           "gender": "Gender",
@@ -781,6 +784,15 @@
         },
         "PatchResourceItem": {
           "viewOnMoyu": "View on Kun Galgame Patch"
+        }
+      },
+      "Score": {
+        "Bangumi": {
+          "rank": "Rank",
+          "votes": "votes"
+        },
+        "VNDB": {
+          "votes": "votes"
         }
       }
     },

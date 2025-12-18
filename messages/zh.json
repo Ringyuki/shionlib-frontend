@@ -435,6 +435,9 @@
         "goToDiscussion": "前往讨论"
       },
       "Description": {
+        "GameCharacter": {
+          "noCharacters": "暂时没有角色信息"
+        },
         "GameCharacterItem": {
           "noImage": "无图片",
           "gender": "性别",
@@ -781,6 +784,15 @@
         },
         "PatchResourceItem": {
           "viewOnMoyu": "在鲲 Galgame 补丁中查看"
+        }
+      },
+      "Score": {
+        "Bangumi": {
+          "rank": "排名",
+          "votes": "人评分"
+        },
+        "VNDB": {
+          "votes": "人评分"
         }
       }
     },

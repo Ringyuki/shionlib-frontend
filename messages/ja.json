@@ -428,6 +428,9 @@
         "goToDiscussion": "ディスカッションへ"
       },
       "Description": {
+        "GameCharacter": {
+          "noCharacters": "キャラクター情報がありません"
+        },
         "GameCharacterItem": {
           "noImage": "画像なし",
           "gender": "性別",
@@ -774,6 +777,15 @@
         },
         "PatchResourceItem": {
           "viewOnMoyu": "Kun Galgame Patch で表示"
+        }
+      },
+      "Score": {
+        "Bangumi": {
+          "rank": "ランキング",
+          "votes": "人が評価"
+        },
+        "VNDB": {
+          "votes": "人が評価"
         }
       }
     },

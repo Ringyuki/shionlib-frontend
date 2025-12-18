@@ -19,6 +19,7 @@ const Skeleton = <E extends ElementType = 'div'>({
   durationMs = 1400,
   angleDeg = 100,
   tone = 'neutral',
+  bg,
   ...props
 }: SkeletonProps<E>) => {
   const Component = (as ?? 'div') as ElementType

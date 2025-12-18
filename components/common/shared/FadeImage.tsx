@@ -13,6 +13,7 @@ type Props = Omit<ImageProps, 'onLoadingComplete'> & {
   wrapElement?: 'span' | 'div'
   autoAspectRatio?: boolean
   onImageLoadComplete?: (image: HTMLImageElement) => void
+  showSkeleton?: boolean
 }
 
 export function FadeImage({
@@ -23,6 +24,7 @@ export function FadeImage({
   wrapElement = 'div',
   autoAspectRatio = false,
   onImageLoadComplete,
+  showSkeleton = true,
   ...props
 }: Props) {
   const { onLoad: userOnLoad, ...imageProps } = props
@@ -81,7 +83,7 @@ export function FadeImage({
       )}
       style={resolvedAspectRatio ? { aspectRatio: resolvedAspectRatio } : {}}
     >
-      {shouldShowSkeleton && (
+      {showSkeleton && shouldShowSkeleton && (
         <Skeleton
           as={wrapElement}
           aria-hidden="true"

@@ -46,7 +46,7 @@ export const GameCover = ({ covers, preferredCoverInfo, title, content_limit }: 
   return (
     <>
       <div
-        className="w-full md:w-fit overflow-hidden h-[200px] md:h-[300px] relative group/cover"
+        className="w-full lg:w-fit overflow-hidden h-[200px] lg:h-[300px] relative group/cover"
         style={{ aspectRatio: aspect }}
       >
         {(() => {

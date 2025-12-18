@@ -5,11 +5,12 @@ interface GameTitleProps {
   excess_titles: string[]
   aliases: string[]
   type: string
+  className?: string
 }
 
-export const GameTitle = ({ title, excess_titles, aliases, type }: GameTitleProps) => {
+export const GameTitle = ({ title, excess_titles, aliases, type, className }: GameTitleProps) => {
   return (
-    <>
+    <div className={className}>
       <div className="text-3xl font-bold flex gap-2">
         <h1>{title}</h1>
       </div>
@@ -33,6 +34,6 @@ export const GameTitle = ({ title, excess_titles, aliases, type }: GameTitleProp
           {type && <h1>{type}</h1>}
         </div>
       )}
-    </>
+    </div>
   )
 }

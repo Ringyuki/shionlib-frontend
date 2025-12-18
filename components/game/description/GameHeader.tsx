@@ -8,6 +8,7 @@ import { GameActions } from '../actions/GameActions'
 import { getPreferredContent } from './helpers/getPreferredContent'
 import { GameCover } from '../cover/GameCover'
 import { getLocale } from 'next-intl/server'
+import { GameScores } from '../score/GameScores'
 
 interface GameHeaderProps {
   game: GameData
@@ -24,7 +25,7 @@ export const GameHeader = async ({ game }: GameHeaderProps) => {
 
   const { cover, vertical, aspect } = getPreferredContent(game, 'cover', lang)
   return (
-    <div className="flex flex-col md:flex-row overflow-hidden md:gap-4 gap-2 shadow-content-strong bg-card-soft w-full rounded-md items-center">
+    <div className="flex flex-col lg:flex-row overflow-hidden md:gap-4 gap-2 shadow-content-strong bg-card-soft w-full rounded-md items-center">
       <GameCover
         covers={game.covers}
         preferredCoverInfo={{ cover, vertical, aspect }}
@@ -33,18 +34,22 @@ export const GameHeader = async ({ game }: GameHeaderProps) => {
       />
       <div className="p-4 pt-2 md:p-6 md:pl-2 flex flex-1 h-auto justify-between gap-2 flex-col w-full">
         <div className="flex flex-col gap-2">
-          <GameTitle
-            title={title}
-            excess_titles={excess_titles}
-            aliases={game.aliases}
-            type={game.type}
-          />
+          <div className="flex justify-between gap-3">
+            <GameTitle
+              title={title}
+              excess_titles={excess_titles}
+              aliases={game.aliases}
+              type={game.type}
+            />
+            {vertical && <GameScores className="hidden lg:flex" />}
+          </div>
           <div className="flex gap-8 mt-2 flex-wrap items-center">
             <GameDeveloper developers={game.developers} />
             <GameReleaseTime release_date={game.release_date} />
           </div>
           <GamePlatform platform={game.platform} className="mt-2" />
         </div>
+        <GameScores className="flex lg:hidden justify-start w-full mt-2" />
         <Separator />
         <GameActions game={game} />
       </div>
