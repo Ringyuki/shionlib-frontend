@@ -13,6 +13,7 @@ import { Nav } from '@/components/common/top-bar/Nav'
 import { MobileNav } from '@/components/common/top-bar/MobileNav'
 import { navBarConfig } from '@/config/site/shionlib'
 import { SearchTrigger } from '@/components/common/top-bar/SearchTrigger'
+import { Message } from '@/components/common/top-bar/Message'
 
 const StartContent = () => {
   return (
@@ -46,7 +47,10 @@ const EndContent = () => {
       {isLoading ? (
         <Skeleton className="w-[60px] h-[28px] rounded-md" />
       ) : isLoggedIn ? (
-        <TopBarAvatar user={user} className="cursor-pointer" />
+        <>
+          <Message />
+          <TopBarAvatar user={user} className="cursor-pointer" />
+        </>
       ) : (
         <Button size="sm" onClick={() => openAuthDialog('login')}>
           {t('button')}

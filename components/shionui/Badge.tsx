@@ -26,31 +26,72 @@ const badgeVariants = cva(
         md: 'px-2 py-0.5 text-xs',
         lg: 'px-3 py-1 text-sm',
       },
+      shape: {
+        rounded: '',
+        circular: 'rounded-full px-0 py-0 min-w-[1.5em] h-[1.5em]',
+      },
     },
     defaultVariants: {
       variant: 'default',
       size: 'md',
+      shape: 'rounded',
     },
   },
 )
 
 export type BadgeVariant = VariantProps<typeof badgeVariants>['variant']
 
+type BadgeProps = React.ComponentProps<'span'> &
+  VariantProps<typeof badgeVariants> & {
+    asChild?: boolean
+    content?: React.ReactNode
+    containerClassName?: string
+    offsetClassName?: string
+  }
+
 function Badge({
   className,
+  containerClassName,
+  offsetClassName,
   variant,
   size,
+  shape,
   asChild = false,
+  content,
+  children,
   ...props
-}: React.ComponentProps<'span'> & VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
+}: BadgeProps) {
   const Comp = asChild ? Slot : 'span'
+  const shouldAnchor = content !== undefined && React.Children.count(children) > 0
+
+  if (shouldAnchor) {
+    return (
+      <span className={cn('relative inline-flex w-fit', containerClassName)}>
+        {children}
+        <span
+          data-slot="badge"
+          className={cn(
+            badgeVariants({ variant, size, shape }),
+            'absolute -top-1 -right-1 translate-x-1/2 -translate-y-1/2',
+            offsetClassName,
+            className,
+          )}
+          {...props}
+        >
+          {content}
+        </span>
+      </span>
+    )
+  }
 
   return (
     <Comp
       data-slot="badge"
-      className={cn(badgeVariants({ variant, size }), className)}
+      className={cn(badgeVariants({ variant, size, shape }), className)}
       {...props}
-    />
+    >
+      {children}
+    </Comp>
   )
 }
 
