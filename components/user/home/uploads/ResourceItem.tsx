@@ -45,7 +45,7 @@ export const ResourceItem = async ({ resource, content_limit }: ResourceItemProp
                     !content_limit
                   )
                     return (
-                      <Spoiler showHint={true} blur={16} className="!rounded-none !h-full">
+                      <Spoiler showHint={true} blur={32} className="!rounded-none !h-full">
                         <FadeImage src={cover.url} alt={title} />
                       </Spoiler>
                     )

@@ -14,10 +14,11 @@ type Props = Omit<ImageProps, 'onLoadingComplete'> & {
   autoAspectRatio?: boolean
   onImageLoadComplete?: (image: HTMLImageElement) => void
   showSkeleton?: boolean
+  className?: string
+  imageClassName?: string
 }
 
 export function FadeImage({
-  className,
   aspectRatio,
   fill = true,
   localFile = false,
@@ -25,6 +26,8 @@ export function FadeImage({
   autoAspectRatio = false,
   onImageLoadComplete,
   showSkeleton = true,
+  className,
+  imageClassName,
   ...props
 }: Props) {
   const { onLoad: userOnLoad, ...imageProps } = props
@@ -112,7 +115,7 @@ export function FadeImage({
           className={cn(
             'object-cover transition-opacity duration-300 ease-out',
             loaded ? 'opacity-100' : 'opacity-0',
-            className,
+            imageClassName,
           )}
         />
       )}

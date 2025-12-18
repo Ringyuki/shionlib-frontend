@@ -60,7 +60,7 @@ export const GameCard = async ({ game, content_limit }: GameCardProps) => {
               !content_limit
             )
               return (
-                <Spoiler showHint={false} open={false} blur={16} className="!rounded-none !h-full">
+                <Spoiler showHint={false} open={false} blur={32} className="!rounded-none !h-full">
                   <_GameCover cover={cover.url} title={title} sizes={sizes} aspect={aspect} />
                 </Spoiler>
               )

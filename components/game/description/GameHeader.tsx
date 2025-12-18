@@ -25,7 +25,7 @@ export const GameHeader = async ({ game }: GameHeaderProps) => {
 
   const { cover, vertical, aspect } = getPreferredContent(game, 'cover', lang)
   return (
-    <div className="flex flex-col lg:flex-row overflow-hidden md:gap-4 gap-2 shadow-content-strong bg-card-soft w-full rounded-md items-center">
+    <div className="flex flex-col lg:flex-row overflow-hidden lg:gap-4 gap-2 shadow-content-strong bg-card-soft w-full rounded-md items-center">
       <div className="relative w-full lg:w-fit">
         <GameCover
           covers={game.covers}
@@ -39,7 +39,7 @@ export const GameHeader = async ({ game }: GameHeaderProps) => {
           </div>
         )}
       </div>
-      <div className="p-4 pt-2 md:p-6 md:pl-2 flex flex-1 h-auto justify-between gap-2 flex-col w-full">
+      <div className="p-4 pt-2 lg:p-6 lg:pl-2 flex flex-1 h-auto justify-between gap-2 flex-col w-full">
         <div className="flex flex-col gap-2">
           <div className="flex justify-between gap-3">
             <GameTitle

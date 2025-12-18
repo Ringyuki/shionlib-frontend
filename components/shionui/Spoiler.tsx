@@ -10,10 +10,8 @@ type SpoilerProps = React.ComponentProps<'div'> & {
   open?: boolean
   onOpenChange?: (open: boolean) => void
   blur?: number
-  overlayColor?: string
   showHint?: boolean
   hintText?: string
-  showStroke?: boolean
 }
 
 function Spoiler({
@@ -23,20 +21,14 @@ function Spoiler({
   open,
   onOpenChange,
   blur = 10,
-  overlayColor = 'rgba(0,0,0,0.25)',
   showHint = false,
   hintText,
-  showStroke = false,
   ...props
 }: SpoilerProps) {
   const t = useTranslations('Components.ShionUI.Spoiler')
   const isControlled = open !== undefined
   const [internalOpen, setInternalOpen] = React.useState<boolean>(defaultOpen)
   const actualOpen = isControlled ? (open as boolean) : internalOpen
-
-  const containerRef = React.useRef<HTMLDivElement>(null)
-  const canvasRef = React.useRef<HTMLCanvasElement>(null)
-  const resizeObserverRef = React.useRef<ResizeObserver | null>(null)
 
   const setOpen = React.useCallback(
     (next: boolean) => {
@@ -46,66 +38,10 @@ function Spoiler({
     [isControlled, onOpenChange],
   )
 
-  const drawOverlay = React.useCallback(() => {
-    const canvas = canvasRef.current
-    const container = containerRef.current
-    if (!canvas || !container) return
-
-    const { width, height } = container.getBoundingClientRect()
-    const dpr = Math.max(1, Math.floor(window.devicePixelRatio || 1))
-    const w = Math.max(1, Math.floor(width))
-    const h = Math.max(1, Math.floor(height))
-
-    canvas.width = w * dpr
-    canvas.height = h * dpr
-    canvas.style.width = `${w}px`
-    canvas.style.height = `${h}px`
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    ctx.setTransform(1, 0, 0, 1, 0, 0)
-    ctx.scale(dpr, dpr)
-
-    ctx.fillStyle = overlayColor
-    ctx.fillRect(0, 0, w, h)
-
-    ctx.strokeStyle = showStroke ? 'rgba(255,255,255,0.06)' : 'transparent'
-    ctx.lineWidth = 1
-    for (let i = -h; i < w; i += 16) {
-      ctx.beginPath()
-      ctx.moveTo(i, 0)
-      ctx.lineTo(i + h, h)
-      ctx.stroke()
-    }
-  }, [overlayColor])
-
-  React.useEffect(() => {
-    if (!actualOpen) {
-      drawOverlay()
-    }
-
-    const container = containerRef.current
-    if (!container) return
-
-    if (!resizeObserverRef.current) {
-      resizeObserverRef.current = new ResizeObserver(() => {
-        if (!actualOpen) drawOverlay()
-      })
-    }
-
-    resizeObserverRef.current.observe(container)
-    return () => resizeObserverRef.current?.unobserve(container)
-  }, [actualOpen, drawOverlay])
-
   const handleReveal = () => setOpen(true)
 
   return (
-    <div
-      ref={containerRef}
-      className={cn('relative overflow-hidden h-full rounded-md', className)}
-      {...props}
-    >
+    <div className={cn('relative overflow-hidden h-full rounded-md', className)} {...props}>
       <motion.div
         className={cn('h-full', className)}
         data-slot="spoiler-content"
@@ -135,8 +71,6 @@ function Spoiler({
             exit={{ opacity: 0 }}
             transition={{ type: 'spring', stiffness: 260, damping: 24 }}
           >
-            <canvas ref={canvasRef} className="absolute inset-0 block w-full h-full" />
-
             {showHint && (
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <motion.div
