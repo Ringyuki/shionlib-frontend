@@ -38,7 +38,7 @@ export const GameCharacterItemContent = ({
             }
             alt={name}
             aspectRatio="3 / 4"
-            className="w-full h-full object-contain"
+            imageClassName="object-contain h-full w-full"
           />
         ) : (
           <div className="h-full w-full flex items-center justify-center text-sm text-muted-foreground bg-muted/30">

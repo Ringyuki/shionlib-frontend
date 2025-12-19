@@ -30,7 +30,7 @@ export const GameCharacterItemTrigger = ({ character, name }: GameCharacterItemT
             }
             alt={name}
             aspectRatio="3 / 4"
-            className="object-cover object-top"
+            imageClassName="object-cover object-top"
           />
         )}
         <div className="h-full w-full flex items-center justify-center text-sm text-muted-foreground">

@@ -83,64 +83,51 @@ const ImageLightboxGallery = ({ children }: ImageLightboxGalleryProps) => {
     }
   }, [])
 
-  const prepareImage = React.useCallback(async (item: LightboxGroupItem) => {
+  const prepareImage = React.useCallback((item: LightboxGroupItem) => {
     const loadId = ++loadIdRef.current
 
     const imageElement = item.getImage()
     const bounds =
       imageElement?.getBoundingClientRect() ?? item.getContainer()?.getBoundingClientRect() ?? null
 
-    if (bounds) {
+    const optimizedSrc = imageElement?.currentSrc || imageElement?.src || item.src
+
+    const naturalWidth = imageElement?.naturalWidth || imageElement?.width || bounds?.width || 0
+    const naturalHeight = imageElement?.naturalHeight || imageElement?.height || bounds?.height || 0
+
+    if (bounds && naturalWidth && naturalHeight) {
       setImageBounds(bounds)
-    }
-
-    const optimizedSrc = imageElement?.src ?? item.src
-    setDisplaySrc(optimizedSrc)
-    setAlt(item.alt ?? '')
-
-    let naturalWidth = imageElement?.naturalWidth ?? 0
-    let naturalHeight = imageElement?.naturalHeight ?? 0
-
-    if ((!naturalWidth || !naturalHeight) && optimizedSrc) {
-      try {
-        const optimizedDimensions = await loadImageDimensions(optimizedSrc)
-        if (loadId !== loadIdRef.current) return
-        naturalWidth = optimizedDimensions.width
-        naturalHeight = optimizedDimensions.height
-      } catch (error) {
-        console.warn('[ImageLightboxGallery] Failed to read optimized size', error)
-      }
-    }
-
-    if (naturalWidth && naturalHeight) {
-      if (loadId !== loadIdRef.current) return
+      setDisplaySrc(optimizedSrc)
+      setAlt(item.alt ?? '')
       setImageNaturalSize({ width: naturalWidth, height: naturalHeight })
       setTargetSize(
         calculateTargetSize(naturalWidth, naturalHeight, item.lightboxMaxSize, item.maxWidth),
       )
     }
 
+    // load original image in background
     const originalSrc = resolveOriginalSrc(item.src)
     if (originalSrc !== optimizedSrc) {
-      try {
-        const originalDimensions = await loadImageDimensions(originalSrc)
-        if (loadId !== loadIdRef.current) return
-        setImageNaturalSize({
-          width: originalDimensions.width,
-          height: originalDimensions.height,
+      loadImageDimensions(originalSrc)
+        .then(dimensions => {
+          if (loadId !== loadIdRef.current) return
+          setImageNaturalSize({
+            width: dimensions.width,
+            height: dimensions.height,
+          })
+          setTargetSize(
+            calculateTargetSize(
+              dimensions.width,
+              dimensions.height,
+              item.lightboxMaxSize,
+              item.maxWidth,
+            ),
+          )
+          setDisplaySrc(originalSrc)
         })
-        setTargetSize(
-          calculateTargetSize(
-            originalDimensions.width,
-            originalDimensions.height,
-            item.lightboxMaxSize,
-            item.maxWidth,
-          ),
-        )
-        setDisplaySrc(originalSrc)
-      } catch (error) {
-        console.warn('[ImageLightboxGallery] Failed to load original image', error)
-      }
+        .catch(error => {
+          console.warn('[ImageLightboxGallery] Failed to load original image', error)
+        })
     }
   }, [])
 

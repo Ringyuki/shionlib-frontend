@@ -96,42 +96,36 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
         const imgElement = containerRef.current.querySelector('img')
         const bounds =
           imgElement?.getBoundingClientRect() ?? containerRef.current.getBoundingClientRect()
-        if (bounds) {
+
+        // get optimized src (loaded image on the page)
+        // use currentSrc instead of src, because Next.js Image will generate different w= parameters based on the viewport
+        // currentSrc returns the current actual rendered image URL, which can hit browser cache
+        const optimizedSrc = imgElement?.currentSrc || imgElement?.src || resolveOriginalSrc(src)
+
+        const currentWidth = imgElement?.naturalWidth || imgElement?.width || bounds?.width || 0
+        const currentHeight = imgElement?.naturalHeight || imgElement?.height || bounds?.height || 0
+
+        if (bounds && currentWidth && currentHeight) {
           setImageBounds(bounds)
+          setDisplaySrc(optimizedSrc)
+          setImageNaturalSize({ width: currentWidth, height: currentHeight })
+          setTargetSize(calculateTargetSize(currentWidth, currentHeight, lightboxMaxSize, maxWidth))
+          setIsOpen(true)
+          setShouldShow(true)
+          setIsAnimating(true)
         }
 
-        const optimizedSrc = imgElement?.src ?? resolveOriginalSrc(src)
-        setDisplaySrc(optimizedSrc)
+        setUserScale(1)
 
-        const updateSize = (width: number, height: number) => {
-          if (!width || !height) return
-          setImageNaturalSize({ width, height })
-          setTargetSize(calculateTargetSize(width, height, lightboxMaxSize, maxWidth))
-        }
-
-        const currentWidth = imgElement?.naturalWidth || imgElement?.width || 0
-        const currentHeight = imgElement?.naturalHeight || imgElement?.height || 0
-
-        if (currentWidth && currentHeight) {
-          updateSize(currentWidth, currentHeight)
-        } else if (optimizedSrc) {
-          loadImageDimensions(optimizedSrc)
-            .then(dimensions => updateSize(dimensions.width, dimensions.height))
-            .catch(error => {
-              console.warn('[ImageLightbox] Failed to read optimized size', error)
-            })
-        }
-
-        setIsOpen(true)
-        setShouldShow(true)
-        setIsAnimating(true)
-
+        // load original image in background
         const originalSrc = resolveOriginalSrc(src)
-
         if (originalSrc !== optimizedSrc) {
           loadImageDimensions(originalSrc)
             .then(dimensions => {
-              updateSize(dimensions.width, dimensions.height)
+              setImageNaturalSize({ width: dimensions.width, height: dimensions.height })
+              setTargetSize(
+                calculateTargetSize(dimensions.width, dimensions.height, lightboxMaxSize, maxWidth),
+              )
               setDisplaySrc(originalSrc)
             })
             .catch(error => {
@@ -139,7 +133,6 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
             })
         }
       }
-      setUserScale(1)
     }
 
     const handleClose = () => {
@@ -222,7 +215,7 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
               alt={alt}
               aspectRatio={aspectRatio}
               wrapElement={wrapElement}
-              className={imageClassName}
+              imageClassName={imageClassName}
               autoAspectRatio={autoAspectRatio}
             />
           </WrapElement>
