@@ -8,7 +8,12 @@ export const isMobile = () => {
 }
 
 export const resolveOriginalSrc = (src: string) => {
-  if (src.startsWith('http') || src.includes('blob:')) {
+  if (
+    src.startsWith('http') ||
+    src.includes('blob:') ||
+    src.includes('data:image') ||
+    src.includes('assets')
+  ) {
     return src
   }
 

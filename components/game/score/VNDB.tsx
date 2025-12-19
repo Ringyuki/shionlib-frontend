@@ -1,39 +1,28 @@
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { VNDBScore } from '@/interfaces/game/score/vndb.interface'
 import { useParams } from 'next/navigation'
-import { useState, useEffect } from 'react'
 import { Skeleton } from '@/components/shionui/Skeleton'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
+import useSWR from 'swr'
 
 interface VNDBScoreCardProps {
-  score?: VNDBScore | null
   variant?: 'default' | 'overlay'
 }
 
-export const VNDBScoreCard = ({
-  score: initialScore = null,
-  variant = 'default',
-}: VNDBScoreCardProps) => {
+const fetcher = (url: string) =>
+  shionlibRequest()
+    .get<VNDBScore>(url)
+    .then(res => res.data)
+
+export const VNDBScoreCard = ({ variant = 'default' }: VNDBScoreCardProps) => {
   const t = useTranslations('Components.Game.Score.VNDB')
-
-  const [loading, setLoading] = useState(true)
   const { id } = useParams()
-  const [score, setScore] = useState<VNDBScore | null>(initialScore)
 
-  useEffect(() => {
-    const fetchScore = async () => {
-      try {
-        setLoading(true)
-        const res = await shionlibRequest().get<VNDBScore>(`/game/score/vndb/${id}`)
-        setScore(res.data)
-      } catch {
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchScore()
-  }, [id])
+  const { data: score, isLoading: loading } = useSWR<VNDBScore | null>(
+    id ? `/game/score/vndb/${id}` : null,
+    fetcher,
+  )
 
   if (!loading && !score) return null
 

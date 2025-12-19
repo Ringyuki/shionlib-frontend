@@ -29,6 +29,7 @@ interface ImageLightboxProps {
   wrapElement?: 'span' | 'div'
   autoAspectRatio?: boolean
   hideTriggerWhileOpen?: boolean
+  sizes?: string
 }
 
 const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
@@ -45,6 +46,7 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
       wrapElement = 'div',
       autoAspectRatio = true,
       hideTriggerWhileOpen = true,
+      sizes,
     },
     ref,
   ) => {
@@ -225,7 +227,7 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
               wrapElement={wrapElement}
               imageClassName={imageClassName}
               autoAspectRatio={autoAspectRatio}
-              sizes="16vw"
+              sizes={sizes}
             />
           </WrapElement>
         )}

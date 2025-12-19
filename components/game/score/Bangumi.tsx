@@ -1,39 +1,28 @@
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { BangumiScore } from '@/interfaces/game/score/bangumi.interface'
 import { useParams } from 'next/navigation'
-import { useState, useEffect } from 'react'
 import { Skeleton } from '@/components/shionui/Skeleton'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
+import useSWR from 'swr'
 
 interface BangumiScoreCardProps {
-  score?: BangumiScore | null
   variant?: 'default' | 'overlay'
 }
 
-export const BangumiScoreCard = ({
-  score: initialScore = null,
-  variant = 'default',
-}: BangumiScoreCardProps) => {
+const fetcher = (url: string) =>
+  shionlibRequest()
+    .get<BangumiScore>(url)
+    .then(res => res.data)
+
+export const BangumiScoreCard = ({ variant = 'default' }: BangumiScoreCardProps) => {
   const t = useTranslations('Components.Game.Score.Bangumi')
-
-  const [loading, setLoading] = useState(true)
   const { id } = useParams()
-  const [score, setScore] = useState<BangumiScore | null>(initialScore)
 
-  useEffect(() => {
-    const fetchScore = async () => {
-      try {
-        setLoading(true)
-        const res = await shionlibRequest().get<BangumiScore>(`/game/score/bangumi/${id}`)
-        setScore(res.data)
-      } catch {
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchScore()
-  }, [id])
+  const { data: score, isLoading: loading } = useSWR<BangumiScore | null>(
+    id ? `/game/score/bangumi/${id}` : null,
+    fetcher,
+  )
 
   if (!loading && !score) return null
 

@@ -16,6 +16,7 @@ export const Img = ({ src, alt, className }: ImgProps) => {
       className={className}
       maxWidth={1920}
       autoAspectRatio={true}
+      sizes="32vw"
     />
   )
 }

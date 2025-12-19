@@ -4,6 +4,7 @@ import { shionlibRequest } from '@/utils/shionlib-request'
 import { Results } from '@/components/common/search/game/Results'
 import { createGenerateMetadata } from '@/libs/seo/metadata'
 import { getTranslations } from 'next-intl/server'
+import { notFound } from 'next/navigation'
 
 interface SearchGamePageProps {
   searchParams: Promise<{
@@ -25,6 +26,7 @@ const getData = async (page: string, q: string) => {
 
 export default async function SearchGamePage({ searchParams }: SearchGamePageProps) {
   const { page, q } = await searchParams
+  if (!q) return notFound()
   const data = await getData(page, q)
   return (
     <div className="container mx-auto my-4 space-y-6">
