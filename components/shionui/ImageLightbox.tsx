@@ -225,6 +225,7 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
               wrapElement={wrapElement}
               imageClassName={imageClassName}
               autoAspectRatio={autoAspectRatio}
+              sizes="16vw"
             />
           </WrapElement>
         )}

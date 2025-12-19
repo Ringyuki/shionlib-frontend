@@ -16,6 +16,7 @@ type Props = Omit<ImageProps, 'onLoadingComplete'> & {
   showSkeleton?: boolean
   className?: string
   imageClassName?: string
+  sizes?: string
 }
 
 export function FadeImage({
@@ -28,6 +29,7 @@ export function FadeImage({
   showSkeleton = true,
   className,
   imageClassName,
+  sizes,
   ...props
 }: Props) {
   const { onLoad: userOnLoad, ...imageProps } = props
@@ -110,7 +112,7 @@ export function FadeImage({
           src={resolvedSrc || imageSrc}
           alt={imageProps.alt ?? ''}
           fill={fill}
-          sizes={fill ? '32vw' : undefined}
+          sizes={sizes || (fill ? '16vw' : undefined)}
           onLoad={handleLoad}
           className={cn(
             'object-cover transition-opacity duration-300 ease-out',

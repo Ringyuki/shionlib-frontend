@@ -34,7 +34,7 @@ export const Image = ({ form }: ImageProps) => {
                 <FadeImage
                   src={tempUrl ?? field.value}
                   alt={t('url')}
-                  className="w-full h-full object-contain"
+                  imageClassName="object-contain h-full w-full"
                 />
               </div>
               <div className="flex flex-col gap-2 w-full">
