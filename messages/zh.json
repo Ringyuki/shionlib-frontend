@@ -91,6 +91,9 @@
       "AsyncMultiSelect": {
         "placeholder": "搜索...",
         "emptyMessage": "没有找到结果"
+      },
+      "ImageLightbox": {
+        "loadingHD": "加载原图..."
       }
     },
     "Editor": {

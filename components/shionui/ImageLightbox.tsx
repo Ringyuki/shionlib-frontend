@@ -3,6 +3,8 @@
 import * as React from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { createPortal } from 'react-dom'
+import { Loader2 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { FadeImage } from '@/components/common/shared/FadeImage'
 import { useScrollLock } from '@/hooks/useScrollLock'
 import { useDisableZoom } from '@/hooks/useDisableZoom'
@@ -62,8 +64,10 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
       width: number
       height: number
     } | null>(null)
+    const [isLoadingOriginal, setIsLoadingOriginal] = React.useState(false)
     const galleryContext = React.useContext(ImageLightboxGalleryContext)
     const lightboxId = React.useId()
+    const t = useTranslations('Components.ShionUI.ImageLightbox')
 
     React.useImperativeHandle(ref, () => containerRef.current as HTMLElement)
 
@@ -120,6 +124,7 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
         // load original image in background
         const originalSrc = resolveOriginalSrc(src)
         if (originalSrc !== optimizedSrc) {
+          setIsLoadingOriginal(true)
           loadImageDimensions(originalSrc)
             .then(dimensions => {
               setImageNaturalSize({ width: dimensions.width, height: dimensions.height })
@@ -130,6 +135,9 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
             })
             .catch(error => {
               console.warn('[ImageLightbox] Failed to load original image', error)
+            })
+            .finally(() => {
+              setIsLoadingOriginal(false)
             })
         }
       }
@@ -247,9 +255,7 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
                         style={{ cursor: 'zoom-out' }}
                       />
                       <div className="fixed inset-0 z-[10000] flex items-center justify-center pointer-events-none select-none">
-                        <motion.img
-                          src={displaySrc}
-                          alt={alt}
+                        <motion.div
                           initial={{
                             x: imageBounds.left + imageBounds.width / 2 - window.innerWidth / 2,
                             y: imageBounds.top + imageBounds.height / 2 - window.innerHeight / 2,
@@ -276,12 +282,37 @@ const ImageLightbox = React.forwardRef<HTMLElement, ImageLightboxProps>(
                           style={{
                             width: targetWidth,
                             height: targetHeight,
-                            cursor: 'default',
                             pointerEvents: 'auto',
+                            position: 'relative',
                           }}
-                          onClick={e => e.stopPropagation()}
-                          ref={imageRef}
-                        />
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={displaySrc}
+                            alt={alt}
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                              cursor: 'default',
+                            }}
+                            onClick={e => e.stopPropagation()}
+                            ref={imageRef}
+                          />
+                          <AnimatePresence>
+                            {isLoadingOriginal && (
+                              <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.2 }}
+                                className="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 text-white/90 text-xs px-2.5 py-1.5 rounded-full pointer-events-none"
+                              >
+                                <Loader2 className="size-3 animate-spin" />
+                                <span>{t('loadingHD')}</span>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </motion.div>
                       </div>
                     </>
                   )

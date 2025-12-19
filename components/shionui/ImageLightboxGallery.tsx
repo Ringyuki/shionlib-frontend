@@ -3,7 +3,8 @@
 import * as React from 'react'
 import { motion, AnimatePresence, type PanInfo } from 'motion/react'
 import { createPortal } from 'react-dom'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Loader2 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 import { useScrollLock } from '@/hooks/useScrollLock'
 
@@ -60,8 +61,10 @@ const ImageLightboxGallery = ({ children }: ImageLightboxGalleryProps) => {
   const [alt, setAlt] = React.useState('')
   const [navDirection, setNavDirection] = React.useState<SlideDirection>(0)
   const [mounted, setMounted] = React.useState(false)
+  const [isLoadingOriginal, setIsLoadingOriginal] = React.useState(false)
   const loadIdRef = React.useRef(0)
   const imageRef = React.useRef<HTMLImageElement>(null)
+  const t = useTranslations('Components.ShionUI.ImageLightbox')
 
   React.useEffect(() => {
     setMounted(true)
@@ -108,6 +111,7 @@ const ImageLightboxGallery = ({ children }: ImageLightboxGalleryProps) => {
     // load original image in background
     const originalSrc = resolveOriginalSrc(item.src)
     if (originalSrc !== optimizedSrc) {
+      setIsLoadingOriginal(true)
       loadImageDimensions(originalSrc)
         .then(dimensions => {
           if (loadId !== loadIdRef.current) return
@@ -127,6 +131,11 @@ const ImageLightboxGallery = ({ children }: ImageLightboxGalleryProps) => {
         })
         .catch(error => {
           console.warn('[ImageLightboxGallery] Failed to load original image', error)
+        })
+        .finally(() => {
+          if (loadId === loadIdRef.current) {
+            setIsLoadingOriginal(false)
+          }
         })
     }
   }, [])
@@ -327,6 +336,20 @@ const ImageLightboxGallery = ({ children }: ImageLightboxGalleryProps) => {
                           }}
                           onClick={event => event.stopPropagation()}
                         />
+                      </AnimatePresence>
+                      <AnimatePresence>
+                        {isLoadingOriginal && (
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="absolute top-3 right-3 z-10 flex items-center gap-1.5 bg-black/60 text-white/90 text-xs px-2.5 py-1.5 rounded-full pointer-events-none"
+                          >
+                            <Loader2 className="size-3 animate-spin" />
+                            <span>{t('loadingHD')}</span>
+                          </motion.div>
+                        )}
                       </AnimatePresence>
                     </motion.div>
                   </div>

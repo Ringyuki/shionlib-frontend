@@ -91,6 +91,9 @@
       "AsyncMultiSelect": {
         "placeholder": "Search...",
         "emptyMessage": "No results found"
+      },
+      "ImageLightbox": {
+        "loadingHD": "Loading HD..."
       }
     },
     "Editor": {
