@@ -1186,6 +1186,29 @@
           "400106": "The game data obtained from VNDB and Bangumi did not pass the consistency check, please check if the ID you filled is correct."
         }
       }
+    },
+    "Message": {
+      "Sidebar": {
+        "Sidebar": {
+          "title": "Messages"
+        },
+        "Item": {
+          "all": "All messages",
+          "system": "System messages",
+          "reply": "Comment replies",
+          "like": "Comment likes"
+        }
+      },
+      "Message": {
+        "Box": {
+          "title": "Messages"
+        },
+        "Switch": {
+          "all": "All",
+          "read": "Read",
+          "unread": "Unread"
+        }
+      }
     }
   },
   "Messages": {

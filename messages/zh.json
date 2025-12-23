@@ -1186,6 +1186,29 @@
           "400106": "从 VNDB 和 Bangumi 获取的游戏数据未通过一致性检查，请检查你填写的 ID 否正确。"
         }
       }
+    },
+    "Message": {
+      "Sidebar": {
+        "Sidebar": {
+          "title": "消息中心"
+        },
+        "Item": {
+          "all": "全部消息",
+          "system": "系统消息",
+          "reply": "评论回复",
+          "like": "评论点赞"
+        }
+      },
+      "Message": {
+        "Box": {
+          "title": "消息"
+        },
+        "Switch": {
+          "all": "全部",
+          "read": "已读",
+          "unread": "未读"
+        }
+      }
     }
   },
   "Messages": {

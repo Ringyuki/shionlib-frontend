@@ -41,8 +41,7 @@ export const Message = () => {
   useSocketEvent(socket, 'message:unread', handleMessageUnread)
 
   return (
-    // <Link href="/messages">
-    <Link href="">
+    <Link href="/message">
       {unreadCount > 0 ? (
         <Badge
           content={unreadCount > 99 ? '99+' : unreadCount.toString()}

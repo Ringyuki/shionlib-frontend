@@ -1,5 +1,15 @@
-import { Bell } from 'lucide-react'
+import { Sidebar } from './sidebar/Sidebar'
+import { Box } from './message/Box'
 
-export const Message = () => {
-  return <div>Message</div>
+interface MessageProps {
+  children: React.ReactNode
+}
+
+export const Message = ({ children }: MessageProps) => {
+  return (
+    <div className="w-full h-full flex flex-col md:flex-row gap-6">
+      <Sidebar />
+      <Box>{children}</Box>
+    </div>
+  )
 }
