@@ -24,7 +24,6 @@ export const Messages = ({ messages, meta }: MessagesProps) => {
   }, [])
 
   const handleRead = useCallback((id: number) => {
-    console.log('handleRead', id)
     setLocalMessages(prev => prev.map(msg => (msg.id === id ? { ...msg, read: true } : msg)))
   }, [])
 

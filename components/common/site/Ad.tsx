@@ -28,7 +28,7 @@ export const Ad = ({ id }: AdProps) => {
       )}
       style={{ aspectRatio: aspect }}
     >
-      <FadeImage src={image} alt={ad.id.toString()} fill={true} />
+      <FadeImage src={image} alt={ad.id.toString()} fill={true} sizes="100vw" />
       <div className="absolute flex items-center justify-center right-2 top-2 p-0.5 px-1 md:p-0.5 md:px-1.5 bg-black/50 rounded-md">
         <span className="text-white text-xs md:text-sm">{t('ad')}</span>
       </div>
