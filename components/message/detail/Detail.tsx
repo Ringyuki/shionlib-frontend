@@ -1,6 +1,6 @@
 'use client'
 
-import { Message, MessageType } from '@/interfaces/message/message.interface'
+import { Message } from '@/interfaces/message/message.interface'
 import { Avatar } from '@/components/common/user/Avatar'
 import { Card, CardContent } from '@/components/shionui/Card'
 import { Button } from '@/components/shionui/Button'
@@ -10,6 +10,8 @@ import { cn } from '@/utils/cn'
 import { typeConfig } from '../constants/message-item'
 import { ExternalLink, Gamepad2 } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
+import { getPreferredContent } from '@/components/game/description/helpers/getPreferredContent'
+import { GameData } from '@/interfaces/game/game.interface'
 
 interface DetailProps {
   message: Message
@@ -20,10 +22,9 @@ export const Detail = ({ message }: DetailProps) => {
   const locale = useLocale()
   const config = typeConfig[message.type]
 
-  const gameTitle =
-    message.game?.[`title_${locale}` as keyof typeof message.game] ||
-    message.game?.title_zh ||
-    message.game?.title_en
+  const langMap = { en: 'en', ja: 'jp', zh: 'zh' } as const
+  const lang = langMap[locale as keyof typeof langMap] ?? 'jp'
+  const { title } = getPreferredContent(message.game as GameData, 'title', lang)
 
   return (
     <div className="space-y-6 max-w-2xl mx-auto">
@@ -63,7 +64,7 @@ export const Detail = ({ message }: DetailProps) => {
               <span className="text-muted-foreground">
                 {t('Components.Message.Detail.Detail.relatedGame')}
               </span>
-              <span className="font-medium">{gameTitle}</span>
+              <span className="font-medium">{title}</span>
             </Link>
           </CardContent>
         </Card>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { Message as MessageInterface } from '@/interfaces/message/message.interface'
 import { PaginatedMeta } from '@/interfaces/api/shionlib-api-res.interface'
 import { Item } from './Item'
@@ -17,6 +17,10 @@ export const Messages = ({ messages, meta }: MessagesProps) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [selectedMessageId, setSelectedMessageId] = useState<number | null>(null)
   const [localMessages, setLocalMessages] = useState(messages)
+
+  useEffect(() => {
+    setLocalMessages(messages)
+  }, [messages])
 
   const handleItemClick = useCallback((id: number) => {
     setSelectedMessageId(id)
