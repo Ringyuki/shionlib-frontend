@@ -6,6 +6,7 @@ import { DeveloperContent } from '@/components/developer/DeveloperContent'
 import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
 import { createGenerateMetadata } from '@/libs/seo/metadata'
 import { getPreferredDeveloperContent } from '@/components/game/description/helpers/getPreferredContent'
+import { ContentLimit } from '@/interfaces/user/user.interface'
 
 interface DeveloperPageProps {
   params: Promise<{
@@ -19,13 +20,16 @@ interface DeveloperPageProps {
 const getData = async (id: string, page: string) => {
   const [developer, games] = await Promise.all([
     shionlibRequest().get<Developer>(`/developer/${id}`),
-    shionlibRequest().get<PaginatedResponse<GameItem>>(`/game/list`, {
-      params: {
-        page: page,
-        pageSize: 15,
-        developer_id: id,
+    shionlibRequest().get<PaginatedResponse<GameItem, { content_limit: ContentLimit }>>(
+      `/game/list`,
+      {
+        params: {
+          page: page,
+          pageSize: 15,
+          developer_id: id,
+        },
       },
-    }),
+    ),
   ])
   return { developer: developer.data, games: games.data?.items ?? [], meta: games.data?.meta }
 }
@@ -47,6 +51,7 @@ export default async function DeveloperPage({ params, searchParams }: DeveloperP
         games={games}
         meta={meta!}
         works_count={meta?.totalItems ?? 0}
+        content_limit={meta?.content_limit!}
       />
     </div>
   )

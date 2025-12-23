@@ -45,6 +45,13 @@ export const GameCard = async ({ game, content_limit }: GameCardProps) => {
   const sizes =
     '((min-width: 1280px) 280px), ((min-width: 1024px) 240px), ((min-width: 768px) 200px), ((min-width: 640px) 180px), 160px'
 
+  const isNsfw = cover.sexual >= 1
+  const shouldBlur =
+    isNsfw &&
+    (content_limit === ContentLimit.SHOW_WITH_SPOILER ||
+      content_limit === ContentLimit.NEVER_SHOW_NSFW_CONTENT ||
+      !content_limit)
+
   return (
     <Link
       href={`/game/${game.id}`}
@@ -53,20 +60,12 @@ export const GameCard = async ({ game, content_limit }: GameCardProps) => {
     >
       <div className="relative w-full overflow-hidden rounded-md" style={{ aspectRatio: aspect }}>
         {(() => {
-          if (cover.sexual >= 1) {
-            if (
-              content_limit === ContentLimit.SHOW_WITH_SPOILER ||
-              content_limit === ContentLimit.NEVER_SHOW_NSFW_CONTENT ||
-              !content_limit
+          if (shouldBlur)
+            return (
+              <Spoiler showHint={false} open={false} blur={32} className="!rounded-none !h-full">
+                <_GameCover cover={cover.url} title={title} sizes={sizes} aspect={aspect} />
+              </Spoiler>
             )
-              return (
-                <Spoiler showHint={false} open={false} blur={32} className="!rounded-none !h-full">
-                  <_GameCover cover={cover.url} title={title} sizes={sizes} aspect={aspect} />
-                </Spoiler>
-              )
-            if (content_limit === ContentLimit.JUST_SHOW)
-              return <_GameCover cover={cover.url} title={title} sizes={sizes} aspect={aspect} />
-          }
           return <_GameCover cover={cover.url} title={title} sizes={sizes} aspect={aspect} />
         })()}
       </div>

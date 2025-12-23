@@ -5,6 +5,7 @@ import { Results } from '@/components/common/search/game/Results'
 import { createGenerateMetadata } from '@/libs/seo/metadata'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
+import { ContentLimit } from '@/interfaces/user/user.interface'
 
 interface SearchGamePageProps {
   searchParams: Promise<{
@@ -14,7 +15,9 @@ interface SearchGamePageProps {
 }
 
 const getData = async (page: string, q: string) => {
-  const data = await shionlibRequest().get<PaginatedResponse<GameSearchItem>>(`/search/games`, {
+  const data = await shionlibRequest().get<
+    PaginatedResponse<GameSearchItem, { content_limit: ContentLimit }>
+  >(`/search/games`, {
     params: {
       page: page ?? '1',
       pageSize: 15,
@@ -30,7 +33,12 @@ export default async function SearchGamePage({ searchParams }: SearchGamePagePro
   const data = await getData(page, q)
   return (
     <div className="container mx-auto my-4 space-y-6">
-      <Results games={data.data?.items ?? []} pagination={data.data?.meta as PaginatedMeta} q={q} />
+      <Results
+        games={data.data?.items ?? []}
+        pagination={data.data?.meta as PaginatedMeta}
+        q={q}
+        content_limit={data.data?.meta?.content_limit!}
+      />
     </div>
   )
 }
