@@ -1208,6 +1208,17 @@
           "read": "已读",
           "unread": "未读"
         }
+      },
+      "Detail": {
+        "DetailDrawer": {
+          "title": "消息详情"
+        },
+        "DetailDialog": {
+          "title": "消息详情"
+        },
+        "Detail": {
+          "relatedGame": "来自游戏"
+        }
       }
     }
   },

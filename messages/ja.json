@@ -1200,6 +1200,17 @@
           "read": "既読",
           "unread": "未読"
         }
+      },
+      "Detail": {
+        "DetailDrawer": {
+          "title": "メッセージ詳細"
+        },
+        "DetailDialog": {
+          "title": "メッセージ詳細"
+        },
+        "Detail": {
+          "relatedGame": "ゲームから"
+        }
       }
     }
   },

@@ -1208,6 +1208,17 @@
           "read": "Read",
           "unread": "Unread"
         }
+      },
+      "Detail": {
+        "DetailDrawer": {
+          "title": "Message Details"
+        },
+        "DetailDialog": {
+          "title": "Message Details"
+        },
+        "Detail": {
+          "relatedGame": "From Game"
+        }
       }
     }
   },

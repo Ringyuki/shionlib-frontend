@@ -11,9 +11,10 @@ import { useTranslations } from 'next-intl'
 
 interface ItemProps {
   message: MessageInterface
+  onClick?: (id: number) => void
 }
 
-export const Item = ({ message }: ItemProps) => {
+export const Item = ({ message, onClick }: ItemProps) => {
   const t = useTranslations()
   const locale = useLocale()
   const config = typeConfig[message.type]
@@ -25,6 +26,7 @@ export const Item = ({ message }: ItemProps) => {
         'hover:bg-primary/10 active:bg-primary/20',
         !message.read && 'bg-primary/5',
       )}
+      onClick={() => onClick?.(message.id)}
     >
       <CardContent className="p-4">
         <div className="flex gap-3">

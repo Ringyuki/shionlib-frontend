@@ -1,8 +1,12 @@
+'use client'
+
+import { useState, useCallback } from 'react'
 import { Message as MessageInterface } from '@/interfaces/message/message.interface'
 import { PaginatedMeta } from '@/interfaces/api/shionlib-api-res.interface'
 import { Item } from './Item'
 import { Pagination } from '@/components/common/content/Pagination'
 import { Empty } from '@/components/common/content/Empty'
+import { DetailModal } from '../detail/DetailModal'
 
 interface MessagesProps {
   messages: MessageInterface[]
@@ -10,15 +14,38 @@ interface MessagesProps {
 }
 
 export const Messages = ({ messages, meta }: MessagesProps) => {
-  if (messages.length === 0) return <Empty />
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [selectedMessageId, setSelectedMessageId] = useState<number | null>(null)
+  const [localMessages, setLocalMessages] = useState(messages)
+
+  const handleItemClick = useCallback((id: number) => {
+    setSelectedMessageId(id)
+    setDrawerOpen(true)
+  }, [])
+
+  const handleRead = useCallback((id: number) => {
+    console.log('handleRead', id)
+    setLocalMessages(prev => prev.map(msg => (msg.id === id ? { ...msg, read: true } : msg)))
+  }, [])
+
+  if (localMessages.length === 0) return <Empty />
+
   return (
-    <div className="flex flex-col gap-4">
-      {messages.map(message => (
-        <Item key={message.id} message={message} />
-      ))}
-      {meta.totalPages > 1 && (
-        <Pagination currentPage={meta.currentPage} totalPages={meta.totalPages} />
-      )}
-    </div>
+    <>
+      <div className="flex flex-col gap-4">
+        {localMessages.map(message => (
+          <Item key={message.id} message={message} onClick={handleItemClick} />
+        ))}
+        {meta.totalPages > 1 && (
+          <Pagination currentPage={meta.currentPage} totalPages={meta.totalPages} />
+        )}
+      </div>
+      <DetailModal
+        messageId={selectedMessageId}
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        onRead={handleRead}
+      />
+    </>
   )
 }
