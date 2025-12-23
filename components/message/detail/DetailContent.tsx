@@ -6,6 +6,7 @@ import { shionlibRequest } from '@/utils/shionlib-request'
 import { Detail } from './Detail'
 import { DetailSkeleton } from './DetailSkeleton'
 import { cn } from '@/utils/cn'
+import { useSocket, useSocketEvent } from '@/libs/socketio/core'
 
 interface DetailContentProps {
   messageId: number | null
@@ -18,6 +19,7 @@ export const DetailContent = ({ messageId, open, onRead, className }: DetailCont
   const [message, setMessage] = useState<Message | null>(null)
   const [loading, setLoading] = useState(false)
 
+  const socket = useSocket()
   const fetchData = async (id: number) => {
     try {
       setLoading(true)
@@ -25,12 +27,13 @@ export const DetailContent = ({ messageId, open, onRead, className }: DetailCont
       const res = await shionlibRequest().get<Message>(`/message/${id}`)
       setMessage(res.data)
       onRead?.(id)
+      socket?.emit('message:unread:pull')
     } catch {
     } finally {
       setLoading(false)
     }
   }
-  const fetchMessage = useCallback(fetchData, [onRead])
+  const fetchMessage = useCallback(fetchData, [onRead, socket])
 
   useEffect(() => {
     if (open && messageId) {

@@ -2,6 +2,7 @@
 
 import { ThemeProvider } from 'next-themes'
 import { AppProgressProvider as ProgressProvider } from '@bprogress/next'
+import { SocketProvider } from '@/libs/socketio/core'
 
 export default function ShionlibProvider({ children }: { children: React.ReactNode }) {
   return (
@@ -19,7 +20,7 @@ export default function ShionlibProvider({ children }: { children: React.ReactNo
         shallowRouting
         disableSameURL
       >
-        {children}
+        <SocketProvider>{children}</SocketProvider>
       </ProgressProvider>
     </ThemeProvider>
   )
