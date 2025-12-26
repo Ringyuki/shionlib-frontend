@@ -6,7 +6,7 @@ export const supportedLocales = [
 ]
 
 // prettier-ignore
-export type SupportedLocales = 
+export type SupportedLocales =
 | 'en'
 | 'zh'
 | 'ja'

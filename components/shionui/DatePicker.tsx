@@ -102,6 +102,9 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
           <Calendar
             mode="single"
             selected={selectedDate || undefined}
+            defaultMonth={selectedDate || new Date()}
+            startMonth={new Date(1970, 0)}
+            endMonth={new Date(new Date().getFullYear() + 2, 11)}
             captionLayout="dropdown"
             onSelect={handleSelect}
             autoFocus
