@@ -1,10 +1,15 @@
 import { Avatar } from '@/components/common/user/Avatar'
 import { Card, CardContent } from '@/components/shionui/Card'
-import { User, userRoleMap, UserProfile as UserProfileType } from '@/interfaces/user/user.interface'
+import {
+  User,
+  userRoleMap,
+  UserProfile as UserProfileType,
+  UserStatus,
+} from '@/interfaces/user/user.interface'
 import { Badge } from '@/components/shionui/Badge'
 import { getTranslations, getLocale } from 'next-intl/server'
 import { cn } from '@/utils/cn'
-import { IdCard, CalendarDays } from 'lucide-react'
+import { IdCard, CalendarDays, Ban } from 'lucide-react'
 import { timeFromNow } from '@/utils/time-format'
 import { Datas } from './Datas'
 
@@ -43,9 +48,17 @@ export const UserProfile = async ({ user }: UserProfileProps) => {
             <div className="flex flex-col justify-center gap-3">
               <h2 className="text-xl font-bold">{user.name}</h2>
               {user.bio && <p className="text-sm text-muted-foreground">{user.bio}</p>}
-              <Badge className={cn(badgeColor.bg, badgeColor.fg, badgeColor.border)}>
-                <span className="font-bold">{t(`role.${role}`)}</span>
-              </Badge>
+              <div className="flex gap-2 items-center">
+                <Badge className={cn(badgeColor.bg, badgeColor.fg, badgeColor.border)}>
+                  <span className="font-bold">{t(`role.${role}`)}</span>
+                </Badge>
+                {user.status === UserStatus.BANNED && (
+                  <Badge variant="neutral">
+                    <Ban className="size-4" />
+                    <span className="font-bold">{t('banned')}</span>
+                  </Badge>
+                )}
+              </div>
             </div>
           </div>
           <div className="flex justify-between text-sm font-medium">

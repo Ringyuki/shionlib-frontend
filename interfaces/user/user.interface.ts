@@ -10,6 +10,7 @@ export interface User {
   email?: string
   lang: SupportedLocales
   content_limit?: ContentLimit
+  status: UserStatus
 }
 
 export interface UserProfile {
@@ -24,6 +25,7 @@ export interface UserProfile {
   comment_count: number
   favorite_count: number
   edit_count: number
+  status: UserStatus
 }
 
 export interface UserAvatar {
@@ -48,4 +50,10 @@ export const userRoleMap: { [key in User['role']]: string } = {
   [UserRole.USER]: 'user',
   [UserRole.ADMIN]: 'admin',
   [UserRole.SUPER_ADMIN]: 'super_admin',
+}
+
+// user status: 1 -> active, 2 -> banned
+export enum UserStatus {
+  ACTIVE = 1,
+  BANNED = 2,
 }

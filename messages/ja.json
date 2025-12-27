@@ -929,7 +929,8 @@
               "admin": "管理者",
               "super_admin": "スーパー管理者"
             },
-            "joined": "参加于"
+            "joined": "参加于",
+            "banned": "封禁中"
           },
           "Datas": {
             "upload": "アップロード",

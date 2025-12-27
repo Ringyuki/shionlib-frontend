@@ -936,7 +936,8 @@
               "admin": "Admin",
               "super_admin": "Super Admin"
             },
-            "joined": "Joined at"
+            "joined": "Joined at",
+            "banned": "Banned"
           },
           "Datas": {
             "upload": "Uploads",

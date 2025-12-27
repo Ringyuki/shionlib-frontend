@@ -936,7 +936,8 @@
               "admin": "管理员",
               "super_admin": "超级管理员"
             },
-            "joined": "加入于"
+            "joined": "加入于",
+            "banned": "封禁中"
           },
           "Datas": {
             "upload": "上传的游戏",
