@@ -10,7 +10,7 @@ export interface User {
   email?: string
   lang: SupportedLocales
   content_limit?: ContentLimit
-  status: UserStatus
+  status?: UserStatus
 }
 
 export interface UserProfile {
