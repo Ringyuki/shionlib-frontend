@@ -1,6 +1,6 @@
 'use client'
 
-import { Message } from '@/interfaces/message/message.interface'
+import { Message, MessageType } from '@/interfaces/message/message.interface'
 import { Avatar } from '@/components/common/user/Avatar'
 import { Card, CardContent } from '@/components/shionui/Card'
 import { Button } from '@/components/shionui/Button'
@@ -37,6 +37,11 @@ export const Detail = ({ message }: DetailProps) => {
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
             {message.sender && <span className="font-medium truncate">{message.sender.name}</span>}
+            {message.type === MessageType.SYSTEM && (
+              <span className="font-medium text-sm truncate">
+                {t('Components.Message.Message.Item.system')}
+              </span>
+            )}
             <span className={cn('shrink-0', config.color)}>{config.icon}</span>
           </div>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -50,7 +55,7 @@ export const Detail = ({ message }: DetailProps) => {
       <h2 className="text-xl font-semibold">{t(message.title)}</h2>
 
       <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
-        {t(message.content)}
+        {t(message.content, message.meta as Record<string, string | number | Date>)}
       </p>
 
       {message.game && (

@@ -1208,6 +1208,9 @@
           "all": "全部",
           "read": "已读",
           "unread": "未读"
+        },
+        "Item": {
+          "system": "系统消息"
         }
       },
       "Detail": {
@@ -1232,6 +1235,17 @@
       "Like": {
         "Title": "新的评论点赞",
         "Content": "你收到一个新的评论点赞。"
+      }
+    },
+    "System": {
+      "File": {
+        "Upload": {
+          "FileUploadSuccessTitle": "文件上传完成",
+          "FileUploadSuccessContent": "你上传的文件 {file_name} 已成功储存至 Shionlib 储存桶，感谢你的分享。",
+          "FileUploadFailedTitle": "文件上传失败",
+          "FileCheckFailedContent": "你上传的文件 {file_name} 未通过扫描，原因：{reason} (文件状态代号：{file_check_status})。请检查后重试。",
+          "FileHarmfulContent": "你上传的文件 {file_name} 中检测到有害内容 (文件状态代号：{file_check_status})。请注意，如果系统连续 3 次检测到你上传的文件中包含有害内容，你的账号将会被封禁。当前次数：{upload_injected_file_times}。请仔细检查文件内容后重试。"
+        }
       }
     }
   }

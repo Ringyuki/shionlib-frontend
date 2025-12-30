@@ -4,6 +4,13 @@ export enum MessageType {
   SYSTEM = 'SYSTEM',
 }
 
+export interface MessageMeta {
+  file_id?: number
+  file_name?: string
+  file_size?: number
+  [key: string]: unknown
+}
+
 export interface Message {
   id: number
   type: MessageType
@@ -32,6 +39,8 @@ export interface Message {
     name: string
     avatar: string
   }
+
+  meta: MessageMeta | null
 
   read: boolean
   read_at: Date | null

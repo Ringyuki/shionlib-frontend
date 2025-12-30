@@ -54,6 +54,11 @@ export const Item = ({ message, onClick }: ItemProps) => {
                 {message.sender && (
                   <span className="font-medium text-sm truncate">{message.sender.name}</span>
                 )}
+                {message.type === MessageType.SYSTEM && (
+                  <span className="font-medium text-sm truncate">
+                    {t('Components.Message.Message.Item.system')}
+                  </span>
+                )}
                 <span className={cn('shrink-0', config.color)}>{config.icon}</span>
               </div>
               <div className="flex items-center gap-2 shrink-0">
