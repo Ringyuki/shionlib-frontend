@@ -11,7 +11,7 @@ export const ads: Ad[] = [
   },
   {
     id: 2,
-    image_zh: 'https://images.yurari.moe/admin/6740325e87e2312f66fa3f58/1nhzl7eo_2.webp',
+    image_zh: 'https://images.yurari.moe/admin/6740325e87e2312f66fa3f58/r80vtlci_2.webp',
     aspect: '6 / 1',
     link: 'https://s.himoe.uk/g4mfg8',
     excludeLocales: [supportedLocalesEnum.EN, supportedLocalesEnum.JP],
