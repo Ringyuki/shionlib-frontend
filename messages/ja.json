@@ -1238,6 +1238,15 @@
           "FileCheckStatusInvalidContent": "あなたがアップロードしたファイル {file_name} はスキャンに失敗しました。原因：{reason} (ファイルスキャン状態：{file_check_status})。確認してから再度お試しください。",
           "FileHarmfulContent": "あなたがアップロードしたファイル {file_name} は有害な内容を含んでいます (ファイルスキャン状態：{file_check_status})。システムが連続して3回有害な内容を検出した場合、あなたのアカウントは封禁されます。現在の回数：{upload_injected_file_times}。ファイル内容をよく確認してから再度お試しください。"
         }
+      },
+      "Moderation": {
+        "Comment": {
+          "Block": {
+            "Title": "コメント未通過審査",
+            "Content": "あなたのコメントは審査に不合格でした。原因：{top_category}。コメント内容を修正してから再度お試しください。",
+            "ReviewContent": "あなたのコメントは審査に不合格でした。原因：{top_category}, {reason}, 重要な部分：{evidence}。コメント内容を修正してから再度お試しください。"
+          }
+        }
       }
     }
   }

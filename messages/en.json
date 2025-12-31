@@ -1246,6 +1246,15 @@
           "FileCheckStatusInvalidContent": "You uploaded the file {file_name} failed to scan, reason: {reason} (file check status: {file_check_status}). Please check and try again.",
           "FileHarmfulContent": "You uploaded the file {file_name} contains harmful content (file check status: {file_check_status}). Please note that if the system detects harmful content 3 times in a row, your account will be banned. Current times: {upload_injected_file_times}. Please check the file content carefully and try again."
         }
+      },
+      "Moderation": {
+        "Comment": {
+          "Block": {
+            "Title": "Comment not passed moderation",
+            "Content": "Your comment was not passed moderation, reason: {top_category}. Please modify the comment content and try again.",
+            "ReviewContent": "Your comment was not passed moderation, reason: {top_category}, {reason}, key fragment: {evidence}. Please modify the comment content and try again."
+          }
+        }
       }
     }
   }

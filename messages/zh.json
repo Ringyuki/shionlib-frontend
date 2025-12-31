@@ -1246,6 +1246,15 @@
           "FileCheckFailedContent": "你上传的文件 {file_name} 未通过扫描，原因：{reason} (文件状态代号：{file_check_status})。请检查后重试。",
           "FileHarmfulContent": "你上传的文件 {file_name} 中检测到有害内容 (文件状态代号：{file_check_status})。请注意，如果系统连续 3 次检测到你上传的文件中包含有害内容，你的账号将会被封禁。当前次数：{upload_injected_file_times}。请仔细检查文件内容后重试。"
         }
+      },
+      "Moderation": {
+        "Comment": {
+          "Block": {
+            "Title": "评论未通过审核",
+            "Content": "你发布的评论未通过审核，原因：{top_category}。请修改评论内容后重试。",
+            "ReviewContent": "你发布的评论未通过审核，原因：{top_category}, {reason}, 关键片段：{evidence}。请修改评论内容后重试。"
+          }
+        }
       }
     }
   }
