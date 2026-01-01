@@ -318,7 +318,9 @@
         },
         "CommentItem": {
           "edited": "编辑于",
-          "source": "评论在"
+          "source": "评论在",
+          "hidden": "仅自己可见",
+          "pending": "审核中"
         },
         "CommentParent": {
           "parent": "回复给"

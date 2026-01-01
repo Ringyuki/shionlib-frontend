@@ -1,7 +1,7 @@
 'use client'
 
 import { Card, CardContent } from '@/components/shionui/Card'
-import { Comment } from '@/interfaces/comment/comment.interface'
+import { Comment, CommentStatus } from '@/interfaces/comment/comment.interface'
 import { Avatar } from '@/components/common/user/Avatar'
 import { timeFromNow } from '@/utils/time-format'
 import { useLocale } from 'next-intl'
@@ -12,6 +12,8 @@ import { ReplyBox } from './actions/ReplyBox'
 import { useParams } from 'next/navigation'
 import { CommentParent } from './CommentParent'
 import { useScrollToElem } from '@/hooks/useScrollToElem'
+import { Badge } from '@/components/shionui/Badge'
+import { EyeOff } from 'lucide-react'
 
 interface CommentItemProps {
   comment: Comment
@@ -87,6 +89,15 @@ export const CommentItem = ({
               )}
             </span>
           </div>
+          {comment.status === CommentStatus.HIDDEN && (
+            <div className="flex items-center gap-2">
+              <Badge variant="warning">{t('pending')}</Badge>
+              <Badge variant="neutral">
+                <EyeOff className="size-4" />
+                {t('hidden')}
+              </Badge>
+            </div>
+          )}
         </div>
         {comment.parent?.id && (
           <CommentParent parent={comment.parent} canScrollToParent={canScrollToParent} />

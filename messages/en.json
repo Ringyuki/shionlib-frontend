@@ -318,7 +318,9 @@
         },
         "CommentItem": {
           "edited": "edited at",
-          "source": "commented on"
+          "source": "commented on",
+          "hidden": "Only visible to you",
+          "pending": "Pending review"
         },
         "CommentParent": {
           "parent": "Reply to"

@@ -311,7 +311,9 @@
         },
         "CommentItem": {
           "edited": "編集于",
-          "source": "コメントした"
+          "source": "コメントした",
+          "hidden": "自分のみ可視",
+          "pending": "審査中"
         },
         "CommentParent": {
           "parent": "返信"

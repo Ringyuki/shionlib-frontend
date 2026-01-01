@@ -1,3 +1,9 @@
+export enum CommentStatus {
+  VISIBLE = 1,
+  HIDDEN = 2,
+  DELETED = 3,
+}
+
 export interface Comment {
   id: number
   html: string
@@ -27,6 +33,7 @@ export interface Comment {
     avatar: string
   }
   edited: boolean
+  status: CommentStatus
   created: string
   updated: string
 }
