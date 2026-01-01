@@ -8,7 +8,7 @@ import { getLastFridays } from './_helpers/getFriday'
 
 const getData = async () => {
   const { lastFriday, thisFriday } = getLastFridays()
-  const [activitiesRes, hotGames, newWorks] = await Promise.all([
+  const [activitiesRes, hotGames, newWorks, recentUpdates] = await Promise.all([
     shionlibRequest().get<PaginatedResponse<ActivityInterface>>(`/activity/list`, {
       params: {
         page: 1,
@@ -38,6 +38,15 @@ const getData = async () => {
         },
       },
     ),
+    shionlibRequest().get<PaginatedResponse<GameItem, { content_limit: ContentLimit }>>(
+      `/game/recent-update`,
+      {
+        params: {
+          page: 1,
+          pageSize: 40,
+        },
+      },
+    ),
   ])
 
   const activitiesItems = activitiesRes.data?.items!
@@ -49,11 +58,13 @@ const getData = async () => {
     hotGames: hotGames.data?.items!,
     content_limit: hotGames.data?.meta.content_limit ?? 0,
     newWorks: newWorks.data?.items!,
+    recentUpdates: recentUpdates.data?.items!,
   }
 }
 
 export default async function HomePage() {
-  const { activities, activitiesMeta, hotGames, content_limit, newWorks } = await getData()
+  const { activities, activitiesMeta, hotGames, content_limit, newWorks, recentUpdates } =
+    await getData()
   return (
     <div className="container mx-auto my-4">
       <Container
@@ -62,6 +73,7 @@ export default async function HomePage() {
         games={hotGames}
         content_limit={content_limit}
         newWorks={newWorks}
+        recentUpdates={recentUpdates}
       />
     </div>
   )

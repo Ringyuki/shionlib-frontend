@@ -437,7 +437,28 @@
         "addToFavorites": "添加到收藏",
         "favorited": "已收藏",
         "removeFromFavorites": "取消收藏",
-        "goToDiscussion": "前往讨论"
+        "goToDiscussion": "前往讨论",
+        "More": {
+          "MoreActions": {
+            "more": "更多",
+            "addToRecentUpdate": "添加到最近更新",
+            "removeFromRecentUpdate": "从最近更新中移除"
+          },
+          "AddToRecentUpdate": {
+            "addToRecentUpdate": "添加到最近更新",
+            "description": "确定要添加到最近更新吗？",
+            "cancel": "取消",
+            "confirm": "添加",
+            "success": "添加成功"
+          },
+          "RemoveFromRecentUpdate": {
+            "removeFromRecentUpdate": "从最近更新中移除",
+            "description": "确定要从最近更新中移除吗？",
+            "cancel": "取消",
+            "confirm": "移除",
+            "success": "移除成功"
+          }
+        }
       },
       "Description": {
         "GameCharacter": {
@@ -1129,6 +1150,12 @@
         "Head": {
           "title": "近期热门",
           "description": "近期热门的游戏，按照浏览量、下载量、条目创建时间和游戏发售时间综合排序。每小时更新一次。"
+        }
+      },
+      "RecentUpdate": {
+        "Head": {
+          "title": "最近更新",
+          "description": "最近更新的游戏，包括新的民间翻译、官方翻译版本、新的补丁、新的 DLC 等。"
         }
       },
       "NewWorks": {

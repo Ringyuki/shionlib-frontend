@@ -1,6 +1,5 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { GameData } from '@/interfaces/game/game.interface'
 import { Separator } from '@/components/shionui/Separator'
 import { Download } from './Download'
@@ -10,13 +9,17 @@ import { Favorite } from './Favorite'
 import { Edit } from './Edit'
 import { History } from './History'
 import { Patch } from './Patch'
+import { MoreActions } from './more/MoreActions'
+import { useShionlibUserStore } from '@/store/userStore'
+import { UserRole } from '@/interfaces/user/user.interface'
 
 interface GameActionsProps {
   game: GameData
 }
 
 export const GameActions = ({ game }: GameActionsProps) => {
-  const t = useTranslations('Components.Game.Actions')
+  const user = useShionlibUserStore(state => state.user)
+  const isAdmin = user.role >= UserRole.ADMIN
   return (
     <>
       <div className="flex gap-2 items-center flex-wrap">
@@ -38,6 +41,7 @@ export const GameActions = ({ game }: GameActionsProps) => {
             <Separator orientation="vertical" className="h-4! hidden md:block" />
             <Favorite isFavorite={game.is_favorite} gameId={game.id} />
             <Comment />
+            {isAdmin && <MoreActions game_id={game.id} />}
           </div>
         </div>
       </div>

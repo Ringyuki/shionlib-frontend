@@ -430,7 +430,28 @@
         "addToFavorites": "お気に入りに追加",
         "favorited": "お気に入りに追加済み",
         "removeFromFavorites": "お気に入りから削除",
-        "goToDiscussion": "ディスカッションへ"
+        "goToDiscussion": "ディスカッションへ",
+        "More": {
+          "MoreActions": {
+            "more": "その他",
+            "addToRecentUpdate": "最近の更新に追加",
+            "removeFromRecentUpdate": "最近の更新から削除"
+          },
+          "AddToRecentUpdate": {
+            "addToRecentUpdate": "最近の更新に追加",
+            "description": "最近の更新に追加してよろしいですか？",
+            "cancel": "キャンセル",
+            "confirm": "追加",
+            "success": "追加成功"
+          },
+          "RemoveFromRecentUpdate": {
+            "removeFromRecentUpdate": "最近の更新から削除",
+            "description": "最近の更新から削除してよろしいですか？",
+            "cancel": "キャンセル",
+            "confirm": "削除",
+            "success": "削除成功"
+          }
+        }
       },
       "Description": {
         "GameCharacter": {
@@ -1122,6 +1143,12 @@
         "Head": {
           "title": "最近人気のゲーム一覧",
           "description": "最近人気のゲーム一覧，閲覧数、ダウンロード数、登録時間、発売時間を総合的に並べ替えたゲーム一覧です。1時間ごとに更新されます。"
+        }
+      },
+      "RecentUpdate": {
+        "Head": {
+          "title": "最近の更新",
+          "description": "最近更新のゲーム，新しい民間翻訳、公式翻訳バージョン、新しいパッチ、新しい DLC などが含まれています。"
         }
       },
       "NewWorks": {

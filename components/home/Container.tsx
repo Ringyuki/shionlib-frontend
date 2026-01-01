@@ -9,6 +9,8 @@ import { ContentLimit } from '@/interfaces/user/user.interface'
 import { PaginatedMeta } from '@/interfaces/api/shionlib-api-res.interface'
 import { Ad } from '@/components/common/site/Ad'
 import { NewWorks } from './new-works/NewWorks'
+import { RecentUpdates } from './recent-update/RecentUpdates'
+import { Head as RecentUpdateHead } from './recent-update/Head'
 
 interface ContainerProps {
   activities: ActivityInterface[]
@@ -16,6 +18,7 @@ interface ContainerProps {
   games: GameItem[]
   content_limit: ContentLimit
   newWorks: GameItem[]
+  recentUpdates: GameItem[]
 }
 
 export const Container = ({
@@ -24,12 +27,17 @@ export const Container = ({
   games,
   content_limit,
   newWorks,
+  recentUpdates,
 }: ContainerProps) => {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-6">
         <NewWorksHead />
         <NewWorks newWorks={newWorks} content_limit={content_limit} />
+      </div>
+      <div className="flex flex-col gap-6">
+        <RecentUpdateHead />
+        <RecentUpdates recentUpdates={recentUpdates} content_limit={content_limit} />
       </div>
       <div className="flex flex-col gap-6">
         <GamesHead />

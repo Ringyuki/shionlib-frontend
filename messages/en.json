@@ -437,7 +437,28 @@
         "addToFavorites": "Add to favorites",
         "favorited": "Added to favorites",
         "removeFromFavorites": "Remove from favorites",
-        "goToDiscussion": "Go to discussion"
+        "goToDiscussion": "Go to discussion",
+        "More": {
+          "MoreActions": {
+            "more": "More",
+            "addToRecentUpdate": "Add to recent update",
+            "removeFromRecentUpdate": "Remove from recent update"
+          },
+          "AddToRecentUpdate": {
+            "addToRecentUpdate": "Add to recent update",
+            "description": "Are you sure you want to add this game to the recent update?",
+            "cancel": "Cancel",
+            "confirm": "Add",
+            "success": "Added successfully"
+          },
+          "RemoveFromRecentUpdate": {
+            "removeFromRecentUpdate": "Remove from recent update",
+            "description": "Are you sure you want to remove this game from the recent update?",
+            "cancel": "Cancel",
+            "confirm": "Remove",
+            "success": "Removed successfully"
+          }
+        }
       },
       "Description": {
         "GameCharacter": {
@@ -1129,6 +1150,12 @@
         "Head": {
           "title": "Recent Hot Games",
           "description": "Recent hot games, sorted by views, downloads, creation time and release time. Updated every hour."
+        }
+      },
+      "RecentUpdate": {
+        "Head": {
+          "title": "Recent Updates",
+          "description": "Recent updates, including new fan translations, official translations, new patches, new DLCs, etc."
         }
       },
       "NewWorks": {
