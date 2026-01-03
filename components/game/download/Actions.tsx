@@ -10,8 +10,9 @@ import { GameDownloadResource } from '@/interfaces/game/game-download-resource'
 import { Edit } from './edit/Edit'
 import { Delete } from './delete/Delete'
 import { Report } from './report/Report'
+import { Reupload } from './reupload/Reupload'
 import { useShionlibUserStore } from '@/store/userStore'
-import { Ellipsis, Pencil, Trash, TriangleAlert } from 'lucide-react'
+import { Ellipsis, Pencil, RefreshCw, Trash, TriangleAlert } from 'lucide-react'
 import { useState } from 'react'
 
 interface ActionsProps {
@@ -19,6 +20,7 @@ interface ActionsProps {
   onEditSuccess: (id: number, data: { file_name?: string } & Partial<GameDownloadResource>) => void
   onDeleteSuccess: (id: number) => void
   onReportSuccess: (id: number) => void
+  onReuploadSuccess?: (id: number) => void
 }
 
 export const Actions = ({
@@ -26,6 +28,7 @@ export const Actions = ({
   onEditSuccess,
   onDeleteSuccess,
   onReportSuccess,
+  onReuploadSuccess,
 }: ActionsProps) => {
   const t = useTranslations('Components.Game.Download.Actions')
   const { user } = useShionlibUserStore()
@@ -33,10 +36,15 @@ export const Actions = ({
   const showEdit = user.id === downloadResource.creator.id || user.role !== 1
   const showDelete = user.role !== 1 || user.id === downloadResource.creator.id
   const showReport = user.id !== downloadResource.creator.id
+  const showReupload =
+    downloadResource.files.length === 1 &&
+    downloadResource.files[0].type === 1 &&
+    (user.id === downloadResource.creator.id || user.role !== 1)
 
   const [editOpen, setEditOpen] = useState(false)
   const [deleteOpen, setDeleteOpen] = useState(false)
   const [reportOpen, setReportOpen] = useState(false)
+  const [reuploadOpen, setReuploadOpen] = useState(false)
   const [editLoading, setEditLoading] = useState(false)
   const [deleteLoading, setDeleteLoading] = useState(false)
   const [reportLoading, setReportLoading] = useState(false)
@@ -51,6 +59,12 @@ export const Actions = ({
             <DropdownMenuItem disabled={editLoading} onClick={() => setEditOpen(true)}>
               <Pencil />
               <span>{t('edit')}</span>
+            </DropdownMenuItem>
+          )}
+          {showReupload && (
+            <DropdownMenuItem onClick={() => setReuploadOpen(true)}>
+              <RefreshCw />
+              <span>{t('reupload')}</span>
             </DropdownMenuItem>
           )}
           {showDelete && (
@@ -96,6 +110,14 @@ export const Actions = ({
         onOpenChange={setReportOpen}
         onLoadingChange={setReportLoading}
       />
+      {showReupload && (
+        <Reupload
+          file={downloadResource.files[0]}
+          open={reuploadOpen}
+          onOpenChange={setReuploadOpen}
+          onSuccess={() => onReuploadSuccess?.(downloadResource.id)}
+        />
+      )}
     </>
   )
 }

@@ -607,7 +607,20 @@
         "Actions": {
           "report": "Report violation",
           "edit": "Edit",
-          "delete": "Delete"
+          "delete": "Delete",
+          "reupload": "Reupload"
+        },
+        "Reupload": {
+          "title": "Reupload File",
+          "currentFile": "Current File",
+          "warningTitle": "Warning",
+          "warningDescription": "Reuploading will replace the current file. The old file will be deleted and this action cannot be undone. After uploading, users who have favorited this game will be notified.",
+          "reason": "Update Reason (optional)",
+          "reasonPlaceholder": "e.g., version update, bug fix, merged patches, etc.",
+          "reasonHint": "Providing a reason will help other users understand what changed and will be shown in the notification.",
+          "success": "Reupload successful, pending review",
+          "error": "Reupload failed",
+          "submitting": "Submitting..."
         },
         "Edit": {
           "title": "Edit this download resource",
@@ -1131,7 +1144,8 @@
               "FILE_CHECK_BROKEN_OR_TRUNCATED": "Scan failed: broken or truncated",
               "FILE_CHECK_BROKEN_OR_UNSUPPORTED": "Scan failed: broken or unsupported",
               "FILE_CHECK_ENCRYPTED": "Scan failed: encrypted file",
-              "FILE_CHECK_HARMFUL": "Scan failed: harmful content"
+              "FILE_CHECK_HARMFUL": "Scan failed: harmful content",
+              "FILE_REUPLOAD": "Reuploaded"
             }
           },
           "Edit": {
@@ -1274,6 +1288,10 @@
           "FileUploadFailedTitle": "File upload failed",
           "FileCheckStatusInvalidContent": "You uploaded the file {file_name} failed to scan, reason: {reason} (file check status: {file_check_status}). Please check and try again.",
           "FileHarmfulContent": "You uploaded the file {file_name} contains harmful content (file check status: {file_check_status}). Please note that if the system detects harmful content 3 times in a row, your account will be banned. Current times: {upload_injected_file_times}. Please check the file content carefully and try again."
+        },
+        "Reupload": {
+          "FileReuploadedTitle": "A file in your favorited game has been updated",
+          "FileReuploadedContent": "The file {file_name} in your favorited game {game_title_en, select, other {{game_title_en}} undefined {{game_title_jp, select, other {{game_title_jp}} undefined {{game_title_zh}}}}} has been updated.{reason, select, undefined {} other { Reason: {reason}}}"
         }
       },
       "Moderation": {

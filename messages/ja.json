@@ -600,7 +600,20 @@
         "Actions": {
           "report": "違反を報告",
           "edit": "編集",
-          "delete": "削除"
+          "delete": "削除",
+          "reupload": "再アップロード"
+        },
+        "Reupload": {
+          "title": "ファイルを再アップロード",
+          "currentFile": "現在のファイル",
+          "warningTitle": "注意",
+          "warningDescription": "再アップロードすると現在のファイルが置き換えられます。古いファイルは削除され、この操作は取り消すことができません。アップロード後、新しいファイルはダウンロード可能になる前にセキュリティ審査を通過する必要があります。このゲームをお気に入りに登録したユーザーには通知が送信されます。",
+          "reason": "更新理由（任意）",
+          "reasonPlaceholder": "例：バージョンアップデート、バグ修正、パッチ統合など",
+          "reasonHint": "更新理由を記載すると、他のユーザーが変更内容を理解しやすくなり、通知にも表示されます。",
+          "success": "再アップロードが完了しました。審査待ちです",
+          "error": "再アップロードに失敗しました",
+          "submitting": "送信中..."
         },
         "Edit": {
           "title": "このダウンロードリソースを編集",
@@ -1124,7 +1137,8 @@
               "FILE_CHECK_BROKEN_OR_TRUNCATED": "スキャン失敗：破損または欠損",
               "FILE_CHECK_BROKEN_OR_UNSUPPORTED": "スキャン失敗：破損または非対応形式",
               "FILE_CHECK_ENCRYPTED": "スキャン失敗：暗号化ファイル",
-              "FILE_CHECK_HARMFUL": "スキャン失敗：危険なコンテンツ"
+              "FILE_CHECK_HARMFUL": "スキャン失敗：危険なコンテンツ",
+              "FILE_REUPLOAD": "再アップロード"
             }
           },
           "Edit": {
@@ -1266,6 +1280,10 @@
           "FileUploadFailedTitle": "ファイルアップロード失敗",
           "FileCheckStatusInvalidContent": "あなたがアップロードしたファイル {file_name} はスキャンに失敗しました。原因：{reason} (ファイルスキャン状態：{file_check_status})。確認してから再度お試しください。",
           "FileHarmfulContent": "あなたがアップロードしたファイル {file_name} は有害な内容を含んでいます (ファイルスキャン状態：{file_check_status})。システムが連続して3回有害な内容を検出した場合、あなたのアカウントは封禁されます。現在の回数：{upload_injected_file_times}。ファイル内容をよく確認してから再度お試しください。"
+        },
+        "Reupload": {
+          "FileReuploadedTitle": "お気に入りのゲームのファイルが更新されました",
+          "FileReuploadedContent": "お気に入りのゲーム {game_title_jp, select, other {{game_title_jp}} undefined {{game_title_en, select, other {{game_title_en}} undefined {{game_title_zh}}}}} のファイル {file_name} が更新されました。{reason, select, undefined {} other {理由：{reason}}}"
         }
       },
       "Moderation": {

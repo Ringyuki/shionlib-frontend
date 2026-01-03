@@ -56,6 +56,11 @@ export function FileUploader({
   const uploaderRef = React.useRef<ShionlibLargeFileUploader | null>(null)
   const [pendingSessionId, setPendingSessionId] = React.useState<number | null>(null)
 
+  const onUploadCompleteRef = React.useRef<typeof onUploadComplete>(onUploadComplete)
+  React.useEffect(() => {
+    onUploadCompleteRef.current = onUploadComplete
+  }, [onUploadComplete])
+
   const resetProgress = (f: File | null) => {
     setBytesUploaded(0)
     setBytesHashed(0)
@@ -183,7 +188,7 @@ export function FileUploader({
     setPhase('completed')
     const sessionId = await uploaderRef.current?.getSessionId()
     if (sessionId) {
-      onUploadComplete?.(sessionId)
+      onUploadCompleteRef.current?.(sessionId)
     }
     uploaderRef.current = null
   }

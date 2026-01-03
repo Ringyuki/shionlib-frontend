@@ -8,4 +8,5 @@ export const fileActivityTypes = new Set<ActivityType>([
   ActivityType.FILE_CHECK_BROKEN_OR_UNSUPPORTED,
   ActivityType.FILE_CHECK_ENCRYPTED,
   ActivityType.FILE_CHECK_HARMFUL,
+  ActivityType.FILE_REUPLOAD,
 ])

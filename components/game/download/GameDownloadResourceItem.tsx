@@ -14,6 +14,7 @@ interface GameDownloadResourceItemProps {
   resource: GameDownloadResource
   onUpdate: (id: number, data: Partial<GameDownloadResource>) => void
   onDelete: (id: number) => void
+  onReupload?: (id: number) => void
   onTurnstileOpenChange: (open: boolean) => void
 }
 
@@ -21,6 +22,7 @@ export const GameDownloadResourceItem = ({
   resource,
   onUpdate,
   onDelete,
+  onReupload,
   onTurnstileOpenChange,
 }: GameDownloadResourceItemProps) => {
   const locale = useLocale()
@@ -50,7 +52,7 @@ export const GameDownloadResourceItem = ({
             <Avatar user={resource.creator} className="size-6 text-xs" />
             <span className="text-muted-foreground text-xs font-light flex items-center gap-1">
               <span>{t('created')}</span>
-              {timeFromNow(resource.created, locale)}
+              {timeFromNow(resource.updated, locale)}
             </span>
           </div>
         </div>
@@ -71,6 +73,7 @@ export const GameDownloadResourceItem = ({
           onEditSuccess={onUpdate}
           onDeleteSuccess={onDelete}
           onReportSuccess={() => {}}
+          onReuploadSuccess={onReupload}
         />
       </div>
     </div>

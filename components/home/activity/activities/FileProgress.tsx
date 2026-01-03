@@ -11,6 +11,7 @@ import { eventBadgeVariantMap, systemFileActivityTypes } from './constants/file-
 import { buildStageStates, getPrimaryStatus } from './helpers/file-progress.interface'
 import { StageState } from './interfaces/file-progress.interface'
 import { useLocale, useTranslations } from 'next-intl'
+import { ScrollBar } from '@/components/shionui/ScrollBar'
 
 interface FileProgressProps {
   activities: Activity[]
@@ -103,37 +104,41 @@ export const FileProgress = ({ activities }: FileProgressProps) => {
           <div className="text-xs uppercase tracking-wide text-muted-foreground">
             {t('timeline.title')}
           </div>
-          {timelineActivities.length === 0 ? (
-            <span className="text-sm text-muted-foreground">{t('timeline.empty')}</span>
-          ) : (
-            <ol className="space-y-2">
-              {timelineActivities.map(activity => {
-                const variant = eventBadgeVariantMap[activity.type] ?? ('neutral' as BadgeVariant)
-                const eventLabel = t(`events.${activity.type}`)
-                const actor = systemFileActivityTypes.has(activity.type) ? (
-                  tCard('system')
-                ) : (
-                  <span className="flex items-center gap-2">
-                    <Avatar user={activity.user} className="size-6" />
-                    <span className="text-sm font-medium leading-tight">{activity.user.name}</span>
-                  </span>
-                )
-                return (
-                  <li key={activity.id} className="flex items-center gap-3">
-                    <Badge variant={variant} className="shrink-0" size="sm">
-                      {eventLabel}
-                    </Badge>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-medium leading-tight">{actor}</span>
-                      <span className="text-xs text-muted-foreground">
-                        {timeFromNow(activity.created, locale)}
+          <ScrollBar className="max-h-22">
+            {timelineActivities.length === 0 ? (
+              <span className="text-sm text-muted-foreground">{t('timeline.empty')}</span>
+            ) : (
+              <ol className="space-y-2">
+                {timelineActivities.map(activity => {
+                  const variant = eventBadgeVariantMap[activity.type] ?? ('neutral' as BadgeVariant)
+                  const eventLabel = t(`events.${activity.type}`)
+                  const actor = systemFileActivityTypes.has(activity.type) ? (
+                    tCard('system')
+                  ) : (
+                    <span className="flex items-center gap-2">
+                      <Avatar user={activity.user} className="size-6" />
+                      <span className="text-sm font-medium leading-tight">
+                        {activity.user.name}
                       </span>
-                    </div>
-                  </li>
-                )
-              })}
-            </ol>
-          )}
+                    </span>
+                  )
+                  return (
+                    <li key={activity.id} className="flex items-center gap-3">
+                      <Badge variant={variant} className="shrink-0" size="sm">
+                        {eventLabel}
+                      </Badge>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-medium leading-tight">{actor}</span>
+                        <span className="text-xs text-muted-foreground">
+                          {timeFromNow(activity.created, locale)}
+                        </span>
+                      </div>
+                    </li>
+                  )
+                })}
+              </ol>
+            )}
+          </ScrollBar>
         </div>
       </CardContent>
     </Card>

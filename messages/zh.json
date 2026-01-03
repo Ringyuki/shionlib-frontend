@@ -607,7 +607,20 @@
         "Actions": {
           "report": "报告违规",
           "edit": "编辑",
-          "delete": "删除"
+          "delete": "删除",
+          "reupload": "重新上传"
+        },
+        "Reupload": {
+          "title": "重新上传文件",
+          "currentFile": "当前文件",
+          "warningTitle": "注意",
+          "warningDescription": "重新上传将替换当前文件，替换后旧文件将被删除，此操作无法撤销。上传完成后，收藏了此游戏的用户将收到更新通知。",
+          "reason": "更新理由（可选）",
+          "reasonPlaceholder": "例如：版本更新、修复bug、合并补丁等",
+          "reasonHint": "填写更新理由将帮助其他用户了解此次更新的内容，并会在通知中显示。",
+          "success": "重新上传成功，等待审核",
+          "error": "重新上传失败",
+          "submitting": "正在提交..."
         },
         "Edit": {
           "title": "编辑此下载资源",
@@ -1131,7 +1144,8 @@
               "FILE_CHECK_BROKEN_OR_TRUNCATED": "扫描失败：损坏或缺失",
               "FILE_CHECK_BROKEN_OR_UNSUPPORTED": "扫描失败：损坏或不支持",
               "FILE_CHECK_ENCRYPTED": "扫描失败：加密文件",
-              "FILE_CHECK_HARMFUL": "扫描失败：有害内容"
+              "FILE_CHECK_HARMFUL": "扫描失败：有害内容",
+              "FILE_REUPLOAD": "重新上传"
             }
           },
           "Edit": {
@@ -1274,6 +1288,10 @@
           "FileUploadFailedTitle": "文件上传失败",
           "FileCheckFailedContent": "你上传的文件 {file_name} 未通过扫描，原因：{reason} (文件状态代号：{file_check_status})。请检查后重试。",
           "FileHarmfulContent": "你上传的文件 {file_name} 中检测到有害内容 (文件状态代号：{file_check_status})。请注意，如果系统连续 3 次检测到你上传的文件中包含有害内容，你的账号将会被封禁。当前次数：{upload_injected_file_times}。请仔细检查文件内容后重试。"
+        },
+        "Reupload": {
+          "FileReuploadedTitle": "你收藏的游戏有文件更新",
+          "FileReuploadedContent": "你收藏的游戏 {game_title_zh, select, other {{game_title_zh}} undefined {{game_title_jp, select, other {{game_title_jp}} undefined {{game_title_en}}}}} 的文件 {file_name} 已更新。{reason, select, undefined {} other {更新理由：{reason}}}"
         }
       },
       "Moderation": {

@@ -4,8 +4,27 @@ import { stageDefinitions } from '../constants/file-progress'
 import { BadgeVariant } from '@/components/shionui/Badge'
 
 export const buildStageStates = (activities: Activity[]): StageState[] => {
+  const reuploadActivities = activities.filter(
+    activity => activity.type === ActivityType.FILE_REUPLOAD,
+  )
+  const latestReupload = reuploadActivities.reduce<Activity | null>((latest, current) => {
+    if (!latest) return current
+    const latestTime = new Date(latest.created).getTime()
+    const currentTime = new Date(current.created).getTime()
+    return currentTime > latestTime ? current : latest
+  }, null)
+
+  const relevantActivities = latestReupload
+    ? activities.filter(
+        activity =>
+          new Date(activity.created).getTime() >= new Date(latestReupload.created).getTime(),
+      )
+    : activities
+
   const states = stageDefinitions.map(stage => {
-    const stageActivities = activities.filter(activity => stage.types.includes(activity.type))
+    const stageActivities = relevantActivities.filter(activity =>
+      stage.types.includes(activity.type),
+    )
 
     if (!stageActivities.length) {
       return { ...stage, completed: false, failed: false }
