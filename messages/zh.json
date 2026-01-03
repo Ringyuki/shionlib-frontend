@@ -608,7 +608,8 @@
           "report": "报告违规",
           "edit": "编辑",
           "delete": "删除",
-          "reupload": "重新上传"
+          "reupload": "重新上传",
+          "history": "更新历史"
         },
         "Reupload": {
           "title": "重新上传文件",
@@ -626,6 +627,20 @@
           "title": "编辑此下载资源",
           "submit": "确认更改",
           "success": "更改成功"
+        },
+        "History": {
+          "title": "文件更新历史",
+          "loading": "加载中...",
+          "noHistory": "暂无更新历史",
+          "version": "版本",
+          "current": "当前",
+          "fileInfo": "文件信息",
+          "fileSize": "文件大小",
+          "hash": "哈希值",
+          "s3Key": "S3 键",
+          "operator": "操作者",
+          "reason": "更新理由",
+          "loadError": "加载历史记录失败"
         },
         "Delete": {
           "title": "删除此下载资源",

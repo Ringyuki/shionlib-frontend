@@ -601,7 +601,8 @@
           "report": "違反を報告",
           "edit": "編集",
           "delete": "削除",
-          "reupload": "再アップロード"
+          "reupload": "再アップロード",
+          "history": "更新履歴"
         },
         "Reupload": {
           "title": "ファイルを再アップロード",
@@ -619,6 +620,20 @@
           "title": "このダウンロードリソースを編集",
           "submit": "変更を確認",
           "success": "変更が保存されました"
+        },
+        "History": {
+          "title": "ファイル更新履歴",
+          "loading": "読み込み中...",
+          "noHistory": "更新履歴がありません",
+          "version": "バージョン",
+          "current": "現在",
+          "fileInfo": "ファイル情報",
+          "fileSize": "ファイルサイズ",
+          "hash": "ハッシュ値",
+          "s3Key": "S3 キー",
+          "operator": "操作者",
+          "reason": "更新理由",
+          "loadError": "履歴の読み込みに失敗しました"
         },
         "Delete": {
           "title": "このダウンロードリソースを削除",

@@ -26,6 +26,17 @@ export interface GameDownloadResourceFile {
   creator: Creator
 }
 
+export interface GameDownloadResourceFileHistory {
+  id: number
+  file_size: number
+  hash_algorithm: string
+  file_hash: string
+  s3_file_key: string | null
+  reason: string | null
+  operator: Creator
+  created: string
+}
+
 export interface Creator {
   id: number
   name: string

@@ -11,9 +11,19 @@ import { Edit } from './edit/Edit'
 import { Delete } from './delete/Delete'
 import { Report } from './report/Report'
 import { Reupload } from './reupload/Reupload'
+import { History } from './history/History'
 import { useShionlibUserStore } from '@/store/userStore'
-import { Ellipsis, Pencil, RefreshCw, Trash, TriangleAlert } from 'lucide-react'
+import {
+  Ellipsis,
+  Pencil,
+  RefreshCw,
+  Trash,
+  TriangleAlert,
+  History as HistoryIcon,
+} from 'lucide-react'
 import { useState } from 'react'
+import { shionlibRequest } from '@/utils/shionlib-request'
+import { GameDownloadResourceFileHistory } from '@/interfaces/game/game-download-resource'
 
 interface ActionsProps {
   downloadResource: GameDownloadResource
@@ -45,9 +55,26 @@ export const Actions = ({
   const [deleteOpen, setDeleteOpen] = useState(false)
   const [reportOpen, setReportOpen] = useState(false)
   const [reuploadOpen, setReuploadOpen] = useState(false)
+  const [historyOpen, setHistoryOpen] = useState(false)
   const [editLoading, setEditLoading] = useState(false)
   const [deleteLoading, setDeleteLoading] = useState(false)
   const [reportLoading, setReportLoading] = useState(false)
+  const [historyLoading, setHistoryLoading] = useState(false)
+  const [historyData, setHistoryData] = useState<GameDownloadResourceFileHistory[]>([])
+
+  const handleHistoryClick = async () => {
+    setHistoryLoading(true)
+    try {
+      const res = await shionlibRequest().get<GameDownloadResourceFileHistory[]>(
+        `/game/download-source/file/${downloadResource.files[0].id}/history`,
+      )
+      setHistoryData(res.data ?? [])
+      setHistoryOpen(true)
+    } catch {
+    } finally {
+      setHistoryLoading(false)
+    }
+  }
   return (
     <>
       <DropdownMenu>
@@ -55,6 +82,16 @@ export const Actions = ({
           <Button intent="secondary" size="icon" appearance="ghost" renderIcon={<Ellipsis />} />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
+          <DropdownMenuItem
+            disabled={historyLoading}
+            onClick={e => {
+              e.preventDefault()
+              handleHistoryClick()
+            }}
+          >
+            <HistoryIcon />
+            <span>{t('history')}</span>
+          </DropdownMenuItem>
           {showEdit && (
             <DropdownMenuItem disabled={editLoading} onClick={() => setEditOpen(true)}>
               <Pencil />
@@ -118,6 +155,18 @@ export const Actions = ({
           onSuccess={() => onReuploadSuccess?.(downloadResource.id)}
         />
       )}
+      <History
+        open={historyOpen}
+        onOpenChange={open => {
+          setHistoryOpen(open)
+          if (!open) {
+            setTimeout(() => {
+              setHistoryData([])
+            }, 300)
+          }
+        }}
+        histories={historyData}
+      />
     </>
   )
 }

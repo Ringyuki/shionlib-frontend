@@ -608,7 +608,8 @@
           "report": "Report violation",
           "edit": "Edit",
           "delete": "Delete",
-          "reupload": "Reupload"
+          "reupload": "Reupload",
+          "history": "Update History"
         },
         "Reupload": {
           "title": "Reupload File",
@@ -626,6 +627,20 @@
           "title": "Edit this download resource",
           "submit": "Confirm changes",
           "success": "Changes saved successfully"
+        },
+        "History": {
+          "title": "File Update History",
+          "loading": "Loading...",
+          "noHistory": "No update history",
+          "version": "Version",
+          "current": "Current",
+          "fileInfo": "File Information",
+          "fileSize": "File Size",
+          "hash": "Hash",
+          "s3Key": "S3 Key",
+          "operator": "Operator",
+          "reason": "Update Reason",
+          "loadError": "Failed to load history"
         },
         "Delete": {
           "title": "Delete this download resource",
