@@ -11,7 +11,7 @@ interface Aria2Store {
 export const initialSettings: Aria2Settings = {
   protocol: 'http',
   host: 'localhost',
-  port: 16800,
+  port: 6800,
   path: '/jsonrpc',
   auth_secret: '',
   downloadPath: '',
