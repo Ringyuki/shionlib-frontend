@@ -38,7 +38,12 @@
     "User": {
       "Settings": {
         "title": "编辑设置",
-        "description": "你可以在此页面管理你的个人信息和站点设置。"
+        "description": "你可以在此页面管理你的个人信息和站点设置。",
+        "loginRequired": {
+          "title": "请先登录",
+          "description": "你需要登录后才能访问设置页面。",
+          "login": "登录"
+        }
       }
     },
     "Game": {
@@ -602,7 +607,8 @@
           "aria2NotReady": "无法连接到 Aria2，请检查设置是否正确",
           "aria2Unauthorized": "未授权，请检查设置是否正确",
           "aria2FailedToFetch": "无法连接到 Aria2，请检查设置是否正确",
-          "aria2UnknownError": "未知错误"
+          "aria2UnknownError": "未知错误",
+          "goToSettings": "前往设置"
         },
         "Actions": {
           "report": "报告违规",
