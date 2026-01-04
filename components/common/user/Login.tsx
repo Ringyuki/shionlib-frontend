@@ -52,6 +52,7 @@ export const Login = ({ onSuccess }: LoginProps) => {
       try {
         const data = await shionlibRequest().get<User>('/user/me')
         setUser(data.data!)
+        router.refresh()
         onSuccess?.()
         toast.success(t('success'))
         const targetLocale = data.data?.lang || 'en'
