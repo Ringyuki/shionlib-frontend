@@ -69,6 +69,8 @@ export const shionlibRequest = ({
 
     const data = await requestOnce()
     if (data && data.code === 0) return data
+    // 未登录时也正常返回，让页面处理（如显示 LoginRequired）
+    if (data && data.code === 200101) return data
 
     if (isFatalAuthByCode(data.code)) {
       if (mod) mod.toast.error(data.message)

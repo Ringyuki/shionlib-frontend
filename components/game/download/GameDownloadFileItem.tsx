@@ -13,6 +13,7 @@ import { addUrl } from './helpers/aria2'
 import { useAria2Store } from '@/store/aria2Store'
 import { CopyButton } from '@/components/shionui/animated/CopyButton'
 import { GetDownloadLink, GetDownloadLinkHandle } from './libs/get-download-link'
+import { Link } from '@/i18n/navigation.client'
 
 interface GameDownloadFileItemProps {
   file: GameDownloadResourceFile
@@ -63,7 +64,14 @@ export const GameDownloadFileItem = ({
       downloadPath,
     )
     if (!res.success) {
-      toast.error(t(res.message ?? 'aria2UnknownError'))
+      toast.error(
+        <div className="flex flex-col gap-1">
+          <span>{t(res.message ?? 'aria2UnknownError')}</span>
+          <Link href="/user/settings/site" className="text-primary underline text-sm">
+            {t('goToSettings')}
+          </Link>
+        </div>,
+      )
       setPushToAria2Loading(false)
       return
     }

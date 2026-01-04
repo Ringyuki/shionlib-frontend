@@ -30,7 +30,12 @@
     "User": {
       "Settings": {
         "title": "設定を編集",
-        "description": "このページではあなたの個人情報とサイト設定を管理できます。"
+        "description": "このページではあなたの個人情報とサイト設定を管理できます。",
+        "loginRequired": {
+          "title": "ログインが必要です",
+          "description": "設定ページにアクセスするにはログインが必要です。",
+          "login": "ログイン"
+        }
       }
     },
     "Game": {
@@ -595,7 +600,8 @@
           "aria2NotReady": "Aria2 に接続できません、設定を確認してください",
           "aria2Unauthorized": "未認証、設定を確認してください",
           "aria2FailedToFetch": "Aria2 に接続できません、設定を確認してください",
-          "aria2UnknownError": "未知のエラー"
+          "aria2UnknownError": "未知のエラー",
+          "goToSettings": "設定へ"
         },
         "Actions": {
           "report": "違反を報告",
