@@ -69,8 +69,6 @@ export const shionlibRequest = ({
 
     const data = await requestOnce()
     if (data && data.code === 0) return data
-    // 未登录时也正常返回，让页面处理（如显示 LoginRequired）
-    if (data && data.code === 200101) return data
 
     if (isFatalAuthByCode(data.code)) {
       if (mod) mod.toast.error(data.message)
@@ -83,22 +81,26 @@ export const shionlibRequest = ({
         const retried = await requestOnce()
         if (retried.code === 0) return retried
       } catch {
+        // return data when code is 200101 to handle login required
+        // @/components/user/settings/LoginRequired.tsx
+        // @/app/[locale]/user/settings/site/page.tsx
+        if (data.code === 200101) return data
         throw new ShionlibBizError(data.code, data.message)
       }
     }
 
     if (data.code !== 0) {
+      // ref: line 87
+      if (data.code === 200101) return data
       if (data.code <= 1000) {
         if (mod) {
           mod.toast.error(formatErrors(data as ErrorResponse))
         }
-        console.error(data)
         throw new Error(data.message)
       }
       if (mod) {
         mod.toast.error(formatErrors(data as ErrorResponse))
       }
-      console.error(data)
       if (!NOT_FOUND_CODES.includes(data.code) || forceThrowError) {
         throw new ShionlibBizError(data.code, data.message)
       }
