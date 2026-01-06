@@ -7,8 +7,10 @@ interface CoverItemProps {
 }
 
 export const CoverItem = ({ cover, onClick }: CoverItemProps) => {
-  const vertical = cover.dims[0] / cover.dims[1] < 1
-  const aspect = vertical ? '1 / 1.5' : '1.5 / 1'
+  const [w, h] = cover.dims ?? [0, 0]
+  const ratio = w && h ? w / h : 0
+  const aspect =
+    !w || !h ? '1.5 / 1' : Math.abs(ratio - 1) < 0.1 ? '1 / 1' : ratio < 1 ? '1 / 1.5' : '1.5 / 1'
   const url = cover.url.startsWith('http')
     ? cover.url
     : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + cover.url

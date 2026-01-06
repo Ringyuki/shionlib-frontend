@@ -7,7 +7,7 @@ type Lang = 'en' | 'jp' | 'zh'
 export interface PreferredCover {
   cover: GameCover
   vertical: boolean
-  aspect: '1 / 1.5' | '1.5 / 1'
+  aspect: '1 / 1.5' | '1.5 / 1' | '1 / 1'
 }
 
 export interface PreferredIntro {
@@ -53,8 +53,22 @@ export function getPreferredContent(
         }
       }
       const [w, h] = cover.dims ?? [0, 0]
-      const vertical = w / h < 1
-      const aspect = vertical ? '1 / 1.5' : '1.5 / 1'
+      const ratio = w && h ? w / h : 0
+      let vertical = false
+      let aspect: PreferredCover['aspect'] = '1.5 / 1'
+      if (!w || !h) {
+        vertical = false
+        aspect = '1.5 / 1'
+      } else if (Math.abs(ratio - 1) < 0.1) {
+        vertical = false
+        aspect = '1 / 1'
+      } else if (ratio < 1) {
+        vertical = true
+        aspect = '1 / 1.5'
+      } else {
+        vertical = false
+        aspect = '1.5 / 1'
+      }
       return {
         cover,
         vertical,

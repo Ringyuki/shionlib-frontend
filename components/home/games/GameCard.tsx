@@ -21,13 +21,18 @@ export const GameCard = async ({ game, content_limit }: GameCardProps) => {
     '(min-width: 1280px) 240px, (min-width: 1024px) 200px, (min-width: 768px) 180px, (min-width: 640px) 160px, 45vw'
 
   const { title } = getPreferredContent(game as unknown as GameData, 'title', lang)
-  const { cover, vertical } = getPreferredContent(game as unknown as GameData, 'cover', lang)
+  const { cover, vertical, aspect } = getPreferredContent(
+    game as unknown as GameData,
+    'cover',
+    lang,
+  )
   if (!cover)
     return (
       <GameCardContent
         game={game}
         title={title}
         vertical={vertical}
+        aspect={aspect}
         sizes={sizes}
         shouldBlur={false}
       />
@@ -40,7 +45,7 @@ export const GameCard = async ({ game, content_limit }: GameCardProps) => {
       content_limit === ContentLimit.NEVER_SHOW_NSFW_CONTENT ||
       !content_limit)
 
-  return GameCardContent({ game, cover, title, vertical, sizes, shouldBlur })
+  return GameCardContent({ game, cover, title, vertical, aspect, sizes, shouldBlur })
 }
 
 interface GameCardContentProps {
@@ -48,6 +53,7 @@ interface GameCardContentProps {
   cover?: GameCover
   title: string
   vertical: boolean
+  aspect?: string
   sizes: string
   shouldBlur: boolean
 }
@@ -56,6 +62,7 @@ const GameCardContent = ({
   cover,
   title,
   vertical,
+  aspect,
   sizes,
   shouldBlur,
 }: GameCardContentProps) => {
@@ -77,6 +84,7 @@ const GameCardContent = ({
             alt=""
             sizes={sizes}
             className="scale-110"
+            aspectRatio={aspect}
             imageClassName="object-cover blur-2xl brightness-90 dark:brightness-75 saturate-150"
             showSkeleton={false}
           />
@@ -91,7 +99,7 @@ const GameCardContent = ({
                 vertical ? 'w-auto h-full' : 'w-full h-auto',
               )}
             >
-              <CoverImage src={cover?.url ?? ''} alt={title} vertical={vertical} sizes={sizes} />
+              <CoverImage src={cover?.url ?? ''} alt={title} aspect={aspect} sizes={sizes} />
             </div>
           )}
         </div>
@@ -124,12 +132,12 @@ const GameCardContent = ({
 const CoverImage = ({
   src,
   alt,
-  vertical,
+  aspect,
   sizes,
 }: {
   src: string
   alt: string
-  vertical: boolean
+  aspect?: string
   sizes: string
 }) => {
   return (
@@ -137,7 +145,7 @@ const CoverImage = ({
       src={src}
       alt={alt}
       sizes={sizes}
-      aspectRatio={vertical ? '2/3' : '3/2'}
+      aspectRatio={aspect}
       imageClassName="object-cover"
     />
   )

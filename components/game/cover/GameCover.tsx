@@ -10,14 +10,11 @@ import { GameCoverDrawer } from './GameCoverDrawer'
 import { useState } from 'react'
 import { ContentLimit } from '@/interfaces/user/user.interface'
 import { Spoiler } from '@/components/shionui/Spoiler'
+import { PreferredCover } from '../description/helpers/getPreferredContent'
 
 interface GameCoverProps {
   covers: GameCoverInterface[]
-  preferredCoverInfo: {
-    cover: GameCoverInterface
-    vertical: boolean
-    aspect: string
-  }
+  preferredCoverInfo: PreferredCover
   title: string
   content_limit?: ContentLimit
 }
@@ -51,8 +48,8 @@ export const GameCover = ({ covers, preferredCoverInfo, title, content_limit }: 
       />
     )
 
-  const { cover: preferredCover, vertical, aspect } = preferredCoverInfo
-  const width = vertical ? 200 : 450
+  const { cover: preferredCover, aspect } = preferredCoverInfo
+  const width = aspect === '1 / 1' ? 300 : aspect === '1 / 1.5' ? 200 : 450
 
   return (
     <>
