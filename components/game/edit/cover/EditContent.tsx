@@ -12,7 +12,7 @@ interface EditContentProps {
 }
 
 export const EditContent = ({ cover, onSubmit, isSubmitting, onDelete }: EditContentProps) => (
-  <div className="flex flex-col gap-2 overflow-y-auto">
+  <div className="flex flex-col gap-2">
     <CoverForm cover={cover} onSubmit={onSubmit} loading={isSubmitting} />
     <Delete id={cover.id!} onSuccess={onDelete} />
   </div>

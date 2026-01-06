@@ -11,6 +11,7 @@ export interface GameCover {
 }
 
 export interface GameImage {
+  id?: number
   url: string
   dims: number[]
   sexual: number

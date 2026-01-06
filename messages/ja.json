@@ -759,6 +759,44 @@
             }
           }
         },
+        "Image": {
+          "noPermission": "画像を編集する権限がありません",
+          "success": "変更が保存されました",
+          "Edit": {
+            "title": "画像を編集"
+          },
+          "Create": {
+            "create": "画像を作成",
+            "success": "作成成功"
+          },
+          "Delete": {
+            "title": "画像を削除",
+            "description": "画像を削除してよろしいですか？この操作は元に戻せません。",
+            "cancel": "キャンセル",
+            "delete": "削除",
+            "success": "削除成功"
+          },
+          "EditContent": {
+            "url": "画像",
+            "dims": "サイズ",
+            "sexual": "性描写レベル",
+            "violence": "暴力描写レベル",
+            "submit": "変更を確認",
+            "validation": {
+              "url": "画像を選択してください",
+              "dims": "画像を選択してください",
+              "sexual": "性描写レベルは0-2の間である必要があります",
+              "violence": "暴力描写レベルは0-2の間である必要があります"
+            }
+          },
+          "Image": {
+            "Upload": {
+              "select": "画像を選択",
+              "upload": "画像をアップロード",
+              "success": "アップロード成功"
+            }
+          }
+        },
         "EditNote": {
           "title": "編集備考",
           "placeholder": "編集理由, 編集内容等(任意, e.g. 発売日を2025年11月10日に変更, 理由：発売延期)"

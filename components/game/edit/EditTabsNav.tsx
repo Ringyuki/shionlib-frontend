@@ -12,7 +12,7 @@ const tabs = [
   { name: 'scalar', href: 'scalar' },
   { name: 'link', href: 'link', disabled: true },
   { name: 'cover', href: 'cover' },
-  { name: 'image', href: 'image', disabled: true },
+  { name: 'image', href: 'image' },
   { name: 'developer', href: 'developer', disabled: true },
   { name: 'character', href: 'character', disabled: true },
 ]

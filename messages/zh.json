@@ -766,6 +766,44 @@
             }
           }
         },
+        "Image": {
+          "noPermission": "你没有编辑图片的权限",
+          "success": "更改成功",
+          "Edit": {
+            "title": "编辑图片"
+          },
+          "Create": {
+            "create": "创建图片",
+            "success": "创建成功"
+          },
+          "Delete": {
+            "title": "删除图片",
+            "description": "确定要删除此图片吗？此操作无法撤销。",
+            "cancel": "取消",
+            "delete": "删除",
+            "success": "删除成功"
+          },
+          "EditContent": {
+            "url": "图片",
+            "dims": "尺寸",
+            "sexual": "性描写等级",
+            "violence": "暴力描写等级",
+            "submit": "确认更改",
+            "validation": {
+              "url": "请选择并上传图片",
+              "dims": "请选择并上传图片",
+              "sexual": "性描写等级必须在0-2之间",
+              "violence": "暴力描写等级必须在0-2之间"
+            }
+          },
+          "Image": {
+            "Upload": {
+              "select": "选择图片",
+              "upload": "上传图片",
+              "success": "上传成功"
+            }
+          }
+        },
         "EditNote": {
           "title": "备注",
           "placeholder": "修改原因, 修改内容等(可选, e.g. 修改发售日期为2025年11月10日，原因：发售延期)"

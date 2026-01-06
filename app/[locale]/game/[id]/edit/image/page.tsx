@@ -1,5 +1,6 @@
-import { Image } from '@/components/game/edit/Image'
+import { Image as GameImageEditComponent } from '@/components/game/edit/Image'
 import { shionlibRequest } from '@/utils/shionlib-request'
+import { GameImage } from '@/interfaces/game/game.interface'
 
 interface ImagePageProps {
   params: Promise<{ id: string }>
@@ -7,7 +8,7 @@ interface ImagePageProps {
 
 export default async function ImagePage({ params }: ImagePageProps) {
   const { id } = await params
-  const data = await shionlibRequest().get(`/edit/game/${id}/image`)
+  const data = await shionlibRequest().get<GameImage[]>(`/edit/game/${id}/image`)
 
-  return <Image />
+  return <GameImageEditComponent images={data?.data ?? []} />
 }
