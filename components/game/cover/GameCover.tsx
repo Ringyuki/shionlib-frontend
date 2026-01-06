@@ -39,10 +39,21 @@ const _GameCover = ({ cover, title, width }: { cover: string; title: string; wid
 
 export const GameCover = ({ covers, preferredCoverInfo, title, content_limit }: GameCoverProps) => {
   const t = useTranslations('Components.Game.Cover.GameCover')
-  const { cover: preferredCover, vertical, aspect } = preferredCoverInfo
-  const width = vertical ? 200 : 450
+
   const isMobile = useMedia('(max-width: 768px)', false)
   const [open, setOpen] = useState(false)
+
+  if (!preferredCoverInfo.cover)
+    return (
+      <div
+        className="w-full lg:w-fit overflow-hidden h-[200px] lg:h-[300px] relative group/cover"
+        style={{ aspectRatio: '1 / 1.5' }}
+      />
+    )
+
+  const { cover: preferredCover, vertical, aspect } = preferredCoverInfo
+  const width = vertical ? 200 : 450
+
   return (
     <>
       <div

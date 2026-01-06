@@ -68,7 +68,7 @@ export const generateMetadata = createGenerateMetadata(
       og: {
         title: title,
         description: intro,
-        image: cover.url,
+        image: cover?.url ?? '',
         aspect: aspect === '1 / 1.5' ? '2:3' : '3:2',
       },
     }

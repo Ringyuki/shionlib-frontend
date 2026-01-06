@@ -1,5 +1,5 @@
 import { Card } from '@/components/shionui/Card'
-import { GameData, GameItem } from '@/interfaces/game/game.interface'
+import { GameCover, GameData, GameItem } from '@/interfaces/game/game.interface'
 import { Link } from '@/i18n/navigation'
 import { getPreferredContent } from '@/components/game/description/helpers/getPreferredContent'
 import { getLocale } from 'next-intl/server'
@@ -17,8 +17,21 @@ export const GameCard = async ({ game, content_limit }: GameCardProps) => {
   const langMap = { en: 'en', ja: 'jp', zh: 'zh' } as const
   const lang = langMap[locale as keyof typeof langMap] ?? 'jp'
 
+  const sizes =
+    '(min-width: 1280px) 240px, (min-width: 1024px) 200px, (min-width: 768px) 180px, (min-width: 640px) 160px, 45vw'
+
   const { title } = getPreferredContent(game as unknown as GameData, 'title', lang)
   const { cover, vertical } = getPreferredContent(game as unknown as GameData, 'cover', lang)
+  if (!cover)
+    return (
+      <GameCardContent
+        game={game}
+        title={title}
+        vertical={vertical}
+        sizes={sizes}
+        shouldBlur={false}
+      />
+    )
 
   const isNsfw = cover.sexual >= 1
   const shouldBlur =
@@ -27,9 +40,25 @@ export const GameCard = async ({ game, content_limit }: GameCardProps) => {
       content_limit === ContentLimit.NEVER_SHOW_NSFW_CONTENT ||
       !content_limit)
 
-  const sizes =
-    '(min-width: 1280px) 240px, (min-width: 1024px) 200px, (min-width: 768px) 180px, (min-width: 640px) 160px, 45vw'
+  return GameCardContent({ game, cover, title, vertical, sizes, shouldBlur })
+}
 
+interface GameCardContentProps {
+  game: GameItem
+  cover?: GameCover
+  title: string
+  vertical: boolean
+  sizes: string
+  shouldBlur: boolean
+}
+const GameCardContent = ({
+  game,
+  cover,
+  title,
+  vertical,
+  sizes,
+  shouldBlur,
+}: GameCardContentProps) => {
   return (
     <Link href={`/game/${game.id}`} className="block group">
       <Card
@@ -44,7 +73,7 @@ export const GameCard = async ({ game, content_limit }: GameCardProps) => {
       >
         <div className="absolute inset-0 overflow-hidden">
           <FadeImage
-            src={cover.url}
+            src={cover?.url ?? ''}
             alt=""
             sizes={sizes}
             className="scale-110"
@@ -62,7 +91,7 @@ export const GameCard = async ({ game, content_limit }: GameCardProps) => {
                 vertical ? 'w-auto h-full' : 'w-full h-auto',
               )}
             >
-              <CoverImage src={cover.url} alt={title} vertical={vertical} sizes={sizes} />
+              <CoverImage src={cover?.url ?? ''} alt={title} vertical={vertical} sizes={sizes} />
             </div>
           )}
         </div>

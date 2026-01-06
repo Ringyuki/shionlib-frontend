@@ -45,7 +45,14 @@ export function getPreferredContent(
   switch (contentType) {
     case 'cover':
       const cover = game.covers?.find(c => c.language === lang) ?? (game.covers?.[0]! as GameCover)
-      const [w, h] = cover.dims
+      if (!cover) {
+        return {
+          cover: game.covers?.[0]! as GameCover,
+          vertical: false,
+          aspect: '1.5 / 1',
+        }
+      }
+      const [w, h] = cover.dims ?? [0, 0]
       const vertical = w / h < 1
       const aspect = vertical ? '1 / 1.5' : '1.5 / 1'
       return {
