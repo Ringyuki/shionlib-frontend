@@ -1,5 +1,6 @@
 import { GameCover } from '@/interfaces/game/game.interface'
 import { FadeImage } from '@/components/common/shared/FadeImage'
+import { getAspectRatio } from '../../description/helpers/getPreferredContent'
 
 interface CoverItemProps {
   cover: GameCover
@@ -7,10 +8,7 @@ interface CoverItemProps {
 }
 
 export const CoverItem = ({ cover, onClick }: CoverItemProps) => {
-  const [w, h] = cover.dims ?? [0, 0]
-  const ratio = w && h ? w / h : 0
-  const aspect =
-    !w || !h ? '1.5 / 1' : Math.abs(ratio - 1) < 0.1 ? '1 / 1' : ratio < 1 ? '1 / 1.5' : '1.5 / 1'
+  const aspect = getAspectRatio(cover.dims as [number, number])
   const url = cover.url.startsWith('http')
     ? cover.url
     : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + cover.url

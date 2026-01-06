@@ -1,5 +1,6 @@
 import { GameImage } from '@/interfaces/game/game.interface'
 import { FadeImage } from '@/components/common/shared/FadeImage'
+import { getAspectRatio } from '../../description/helpers/getPreferredContent'
 
 interface ImageItemProps {
   image: GameImage
@@ -7,10 +8,7 @@ interface ImageItemProps {
 }
 
 export const ImageItem = ({ image, onClick }: ImageItemProps) => {
-  const [w, h] = image.dims ?? [0, 0]
-  const ratio = w && h ? w / h : 0
-  const aspect =
-    !w || !h ? '1.5 / 1' : Math.abs(ratio - 1) < 0.1 ? '1 / 1' : ratio < 1 ? '1 / 1.5' : '1.5 / 1'
+  const aspect = getAspectRatio(image.dims as [number, number])
   const url = image.url.startsWith('http')
     ? image.url
     : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + image.url

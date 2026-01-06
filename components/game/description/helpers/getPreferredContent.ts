@@ -53,25 +53,10 @@ export function getPreferredContent(
         }
       }
       const [w, h] = cover.dims ?? [0, 0]
-      const ratio = w && h ? w / h : 0
-      let vertical = false
-      let aspect: PreferredCover['aspect'] = '1.5 / 1'
-      if (!w || !h) {
-        vertical = false
-        aspect = '1.5 / 1'
-      } else if (Math.abs(ratio - 1) < 0.1) {
-        vertical = false
-        aspect = '1 / 1'
-      } else if (ratio < 1) {
-        vertical = true
-        aspect = '1 / 1.5'
-      } else {
-        vertical = false
-        aspect = '1.5 / 1'
-      }
+      const aspect = getAspectRatio([w, h])
       return {
         cover,
-        vertical,
+        vertical: aspect === '1 / 1.5',
         aspect,
       }
     case 'title':
@@ -213,4 +198,16 @@ export function getPreferredDeveloperContent(developer: Developer, lang: Lang): 
       .filter(k => k.startsWith('intro_') && !developer[k as keyof Developer])
       .map(k => k.replace('intro_', '')),
   }
+}
+
+export function getAspectRatio(dims: [number, number]): '1 / 1' | '1 / 1.5' | '1.5 / 1' {
+  const [w, h] = dims ?? [0, 0]
+  const ratio = w && h ? w / h : 0
+  return !w || !h
+    ? '1.5 / 1'
+    : Math.abs(ratio - 1) < 0.15
+      ? '1 / 1'
+      : ratio < 1
+        ? '1 / 1.5'
+        : '1.5 / 1'
 }

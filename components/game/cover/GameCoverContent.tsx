@@ -7,6 +7,7 @@ import { Language, LanguageNameMap } from '@/interfaces/game/game.interface'
 import { ContentLimit } from '@/interfaces/user/user.interface'
 import { Spoiler } from '@/components/shionui/Spoiler'
 import { MoreHorizontal as More } from 'lucide-react'
+import { getAspectRatio } from '../description/helpers/getPreferredContent'
 
 interface GameCoverContentProps {
   className?: string
@@ -46,16 +47,7 @@ export const GameCoverContent = ({
   return (
     <div className={cn('grid grid-cols-1 md:grid-cols-2 gap-3', 'w-full', className)}>
       {covers.map(cover => {
-        const [w, h] = cover.dims ?? [0, 0]
-        const ratio = w && h ? w / h : 0
-        const aspect =
-          !w || !h
-            ? '1.5 / 1'
-            : Math.abs(ratio - 1) < 0.1
-              ? '1 / 1'
-              : ratio < 1
-                ? '1 / 1.5'
-                : '1.5 / 1'
+        const aspect = getAspectRatio(cover.dims as [number, number])
         const sizes = '(max-width: 768px) 100vw, 50vw'
         const url = cover.url.startsWith('http')
           ? cover.url
