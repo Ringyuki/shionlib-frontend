@@ -28,7 +28,7 @@ export const GameHeader = async ({ game }: GameHeaderProps) => {
     <div className="flex flex-col lg:flex-row overflow-hidden lg:gap-4 gap-2 shadow-content-strong bg-card-soft w-full rounded-md items-center">
       <div className="relative w-full lg:w-fit">
         <GameCover
-          covers={game.covers}
+          covers={game.covers ?? []}
           preferredCoverInfo={{ cover, vertical, aspect }}
           title={title}
           content_limit={game.content_limit}

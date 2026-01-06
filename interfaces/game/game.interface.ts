@@ -204,7 +204,7 @@ export interface GameData {
   intro_jp: string
   intro_zh: string
   intro_en: string
-  covers: GameCover[]
+  covers?: GameCover[]
   images: GameImage[]
   release_date: Date
   extra_info: ExtraInfo[]
