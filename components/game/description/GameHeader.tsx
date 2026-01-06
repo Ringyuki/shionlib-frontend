@@ -52,7 +52,10 @@ export const GameHeader = async ({ game }: GameHeaderProps) => {
           </div>
           <div className="flex gap-8 lg:mt-2 flex-wrap items-center">
             <GameDeveloper developers={game.developers} />
-            <GameReleaseTime release_date={game.release_date} />
+            <GameReleaseTime
+              release_date={game.release_date}
+              release_date_tba={game.release_date_tba}
+            />
           </div>
           <GamePlatform platform={game.platform} className="lg:mt-2" />
         </div>

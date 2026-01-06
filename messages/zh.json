@@ -697,6 +697,7 @@
           "intro_en": "介绍（英语）",
           "intro_jp": "介绍（日语）",
           "release_date": "发行日期",
+          "release_date_tba": "发行日期待定",
           "extra_info": "其他信息",
           "extra_info_key": "键",
           "extra_info_key_placeholder": "输入键",

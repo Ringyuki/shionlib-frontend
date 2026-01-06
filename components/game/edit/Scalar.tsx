@@ -26,6 +26,7 @@ import { pick } from './helper/pick'
 import { pickChanges, ChangesResult } from '@/utils/pick-changes'
 import { Confirm } from './scalar/Comfirm'
 import { EditNote } from './EditNote'
+import { ReleaseDateTBA } from './scalar/ReleaseDateTBA'
 
 interface ScalarProps {
   data: GameScalar
@@ -91,6 +92,7 @@ export const Scalar = ({ data }: ScalarProps) => {
           {permissions?.scalarFields.includes('TAGS') && <Tags form={form} />}
           {permissions?.scalarFields.includes('INTROS') && <Intros form={form} />}
           {permissions?.scalarFields.includes('RELEASE') && <ReleaseDate form={form} />}
+          {permissions?.scalarFields.includes('RELEASE') && <ReleaseDateTBA form={form} />}
           {permissions?.scalarFields.includes('EXTRA') && <ExtraInfo form={form} />}
           {permissions?.scalarFields.includes('STAFFS') && <Staffs form={form} />}
           {permissions?.scalarFields.includes('NSFW') && <NSFW form={form} />}

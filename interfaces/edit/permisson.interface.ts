@@ -18,6 +18,7 @@ export type PermissionFields =
   | 'intro_en'
   | 'aliases'
   | 'release_date'
+  | 'release_date_tba'
   | 'type'
   | 'platform'
   | 'extra_info'
@@ -43,6 +44,7 @@ export const permissionFieldsArray: PermissionFields[] = [
   'intro_en',
   'aliases',
   'release_date',
+  'release_date_tba',
   'type',
   'platform',
   'extra_info',

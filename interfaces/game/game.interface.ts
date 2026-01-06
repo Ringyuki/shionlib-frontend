@@ -207,6 +207,7 @@ export interface GameData {
   covers?: GameCover[]
   images: GameImage[]
   release_date: Date
+  release_date_tba: boolean
   extra_info: ExtraInfo[]
   link: GameLink[]
 

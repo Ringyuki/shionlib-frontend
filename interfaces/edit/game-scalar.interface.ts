@@ -13,6 +13,7 @@ export interface GameScalar {
   intro_zh: string
   intro_en: string
   release_date: string
+  release_date_tba: boolean
   extra_info: ExtraInfo[]
   tags: string[]
   staffs: Staff[]
