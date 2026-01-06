@@ -24,7 +24,7 @@ export interface GameItem {
   title_en: string
   aliases: string[]
   type: string
-  covers: GameCover[]
+  covers?: GameCover[]
   views: number
 }
 
