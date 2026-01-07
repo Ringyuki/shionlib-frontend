@@ -205,7 +205,7 @@ export function getAspectRatio(dims: [number, number]): '1 / 1' | '1 / 1.5' | '1
   const ratio = w && h ? w / h : 0
   return !w || !h
     ? '1.5 / 1'
-    : Math.abs(ratio - 1) < 0.15
+    : Math.abs(ratio - 1) < 0.2
       ? '1 / 1'
       : ratio < 1
         ? '1 / 1.5'
