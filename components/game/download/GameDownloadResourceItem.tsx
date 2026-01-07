@@ -9,6 +9,7 @@ import { useLocale } from 'next-intl'
 import { useTranslations } from 'next-intl'
 import { Actions } from './Actions'
 import { DownloadIcon } from 'lucide-react'
+import { BBCodeContent } from '@/components/common/content/BBCode'
 
 interface GameDownloadResourceItemProps {
   resource: GameDownloadResource
@@ -65,7 +66,9 @@ export const GameDownloadResourceItem = ({
             onTurnstileOpenChange={onTurnstileOpenChange}
           />
         ))}
-        {resource.note && <div className="text-xs font-light font-mono! pl-2">{resource.note}</div>}
+        {resource.note && (
+          <BBCodeContent content={resource.note} className="text-xs font-light font-mono! pl-2" />
+        )}
       </div>
       <div className="flex gap-2 items-center justify-end">
         <Actions
