@@ -622,9 +622,9 @@
           "currentFile": "当前文件",
           "warningTitle": "注意",
           "warningDescription": "重新上传将替换当前文件，替换后旧文件将被删除，此操作无法撤销。上传完成后，收藏了此游戏的用户将收到更新通知。",
-          "reason": "更新理由（可选）",
+          "reason": "更新原因（可选）",
           "reasonPlaceholder": "例如：版本更新、修复bug、合并补丁等",
-          "reasonHint": "填写更新理由将帮助其他用户了解此次更新的内容，并会在通知中显示。",
+          "reasonHint": "填写更新原因来帮助其他用户了解此次更新的内容，更新原因会在通知中显示。",
           "success": "重新上传成功，等待审核",
           "error": "重新上传失败",
           "submitting": "正在提交..."
@@ -645,7 +645,7 @@
           "hash": "哈希值",
           "s3Key": "S3 键",
           "operator": "操作者",
-          "reason": "更新理由",
+          "reason": "更新原因",
           "loadError": "加载历史记录失败"
         },
         "Delete": {
@@ -1351,7 +1351,7 @@
         },
         "Reupload": {
           "FileReuploadedTitle": "你收藏的游戏有文件更新",
-          "FileReuploadedContent": "你收藏的游戏 {game_title_zh, select, other {{game_title_zh}} undefined {{game_title_jp, select, other {{game_title_jp}} undefined {{game_title_en}}}}} 的文件 {file_name} 已更新。{reason, select, undefined {} other {更新理由：{reason}}}"
+          "FileReuploadedContent": "你收藏的游戏 {game_title_zh, select, other {{game_title_zh}} undefined {{game_title_jp, select, other {{game_title_jp}} undefined {{game_title_en}}}}} 的文件 {file_name} 已更新。{reason, select, undefined {} other {更新原因：{reason}}}"
         }
       },
       "Moderation": {
