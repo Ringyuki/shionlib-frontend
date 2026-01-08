@@ -87,20 +87,19 @@ export const ReuploadContent = ({
 
   return (
     <div className={cn(className, 'flex flex-col gap-4')}>
-      <Alert intent="info" appearance="soft">
+      <Alert intent="info" appearance="solid">
         <FileArchive />
         <AlertTitle>{t('currentFile')}</AlertTitle>
         <AlertDescription>
           <div className="flex flex-col gap-1 text-sm">
             <span className="font-mono">{file.file_name}</span>
-            <span className="text-muted-foreground">
-              {formatBytes(file.file_size)} | {file.hash_algorithm.toUpperCase()}:{' '}
-              {file.file_hash.slice(0, 16)}...
+            <span className="font-mono">
+              {formatBytes(file.file_size)} | {file.hash_algorithm.toUpperCase()}: {file.file_hash}
             </span>
           </div>
         </AlertDescription>
       </Alert>
-      <Alert intent="warning" appearance="soft">
+      <Alert intent="warning" appearance="solid">
         <AlertCircle />
         <AlertTitle>{t('warningTitle')}</AlertTitle>
         <AlertDescription>{t('warningDescription')}</AlertDescription>

@@ -19,19 +19,21 @@ export const Ad = ({ id }: AdProps) => {
 
   const image = getLocalImageUrl(locale, ad)
   return (
-    <Link
-      href={ad.link}
-      target="_blank"
-      className={cn(
-        'w-full h-auto hover:opacity-80 transition-opacity duration-200',
-        'rounded-md overflow-hidden bg-card-soft relative',
-      )}
-      style={{ aspectRatio: aspect }}
-    >
-      <FadeImage src={image} alt={ad.id.toString()} fill={true} sizes="100vw" />
-      <div className="absolute flex items-center justify-center right-2 top-2 p-0.5 px-1 md:p-0.5 md:px-1.5 bg-black/50 rounded-md">
-        <span className="text-white text-xs md:text-sm">{t('ad')}</span>
-      </div>
-    </Link>
+    <div className="w-full">
+      <Link
+        href={ad.link}
+        target="_blank"
+        className={cn(
+          'w-full h-auto hover:opacity-80 transition-opacity duration-200',
+          'rounded-md overflow-hidden bg-card-soft relative block',
+        )}
+        style={{ aspectRatio: aspect }}
+      >
+        <FadeImage src={image} alt={ad.id.toString()} fill={true} sizes="100vw" />
+        <div className="absolute flex items-center justify-center right-2 top-2 p-0.5 px-1 md:p-0.5 md:px-1.5 bg-black/50 rounded-md">
+          <span className="text-white text-xs md:text-sm">{t('ad')}</span>
+        </div>
+      </Link>
+    </div>
   )
 }
