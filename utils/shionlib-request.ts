@@ -24,7 +24,8 @@ const baseUrl = isBrowser
 
 export const shionlibRequest = ({
   forceThrowError = false,
-}: { forceThrowError?: boolean } = {}) => {
+  forceNotThrowError = false,
+}: { forceThrowError?: boolean; forceNotThrowError?: boolean } = {}) => {
   const basicFetch = async <T>(
     path: string,
     options: RequestInit,
@@ -81,17 +82,13 @@ export const shionlibRequest = ({
         const retried = await requestOnce()
         if (retried.code === 0) return retried
       } catch {
-        // return data when code is 200101 to handle login required
-        // @/components/user/settings/LoginRequired.tsx
-        // @/app/[locale]/user/settings/site/page.tsx
-        if (data.code === 200101) return data
+        if (forceNotThrowError) return data
         throw new ShionlibBizError(data.code, data.message)
       }
     }
 
     if (data.code !== 0) {
-      // ref: line 87
-      if (data.code === 200101) return data
+      if (forceNotThrowError) return data
       if (data.code <= 1000) {
         if (mod) {
           mod.toast.error(formatErrors(data as ErrorResponse))

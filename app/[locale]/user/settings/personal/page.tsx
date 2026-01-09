@@ -4,7 +4,7 @@ import { UserSettings } from '@/components/user/settings/UserSettings'
 import { LoginRequired } from '@/components/user/settings/LoginRequired'
 
 export default async function UserPersonalSettingsPage() {
-  const data = await shionlibRequest().get<User>('/user/me')
+  const data = await shionlibRequest({ forceNotThrowError: true }).get<User>('/user/me')
   if (!data.data) {
     return <LoginRequired />
   }
