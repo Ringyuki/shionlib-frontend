@@ -12,7 +12,7 @@ const getMe = async () => {
 
 export const TokenRefresh = () => {
   const isBrowser = typeof window !== 'undefined'
-  const isLogin = useShionlibUserStore(state => !!state.user.id)
+  const isLogin = useShionlibUserStore(state => !!state.user?.id)
   useEffect(() => {
     if (!isBrowser) return
     if (isLogin) {
