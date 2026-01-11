@@ -3,7 +3,7 @@
 import { FormLabel } from '@/components/shionui/Form'
 import { useTranslations } from 'next-intl'
 import { UseFormReturn } from 'react-hook-form'
-import { GameScalar } from '@/interfaces/edit/game-scalar.interface'
+import { GameScalar } from '@/interfaces/edit/scalar.interface'
 import { KeyValueArrayInput } from '@/components/common/form/KeyValueArrayInput'
 
 interface StaffsProps {

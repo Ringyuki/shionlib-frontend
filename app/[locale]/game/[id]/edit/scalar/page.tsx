@@ -1,6 +1,6 @@
 import { Scalar } from '@/components/game/edit/Scalar'
 import { shionlibRequest } from '@/utils/shionlib-request'
-import { GameScalar } from '@/interfaces/edit/game-scalar.interface'
+import { GameScalar } from '@/interfaces/edit/scalar.interface'
 
 interface ScalarPageProps {
   params: Promise<{ id: string }>

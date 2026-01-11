@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 import { UseFormReturn } from 'react-hook-form'
-import { GameScalar } from '@/interfaces/edit/game-scalar.interface'
+import { GameScalar } from '@/interfaces/edit/scalar.interface'
 import { FormField, FormItem, FormLabel, FormControl } from '@/components/shionui/Form'
 import { Switch } from '@/components/shionui/animated/Switch'
 

@@ -2,7 +2,7 @@ import { FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/comp
 import { DatePicker } from '@/components/shionui/DatePicker'
 import { useTranslations } from 'next-intl'
 import { UseFormReturn } from 'react-hook-form'
-import { GameScalar } from '@/interfaces/edit/game-scalar.interface'
+import { GameScalar } from '@/interfaces/edit/scalar.interface'
 
 interface ReleaseDateProps {
   form: UseFormReturn<GameScalar>

@@ -2,7 +2,7 @@ import { FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/comp
 import { Textarea } from '@/components/shionui/Textarea'
 import { useTranslations } from 'next-intl'
 import { UseFormReturn } from 'react-hook-form'
-import { GameScalar } from '@/interfaces/edit/game-scalar.interface'
+import { GameScalar } from '@/interfaces/edit/scalar.interface'
 import { BBCodeSupported } from '@/components/common/content/BBCodeSupported'
 
 interface IntrosProps {

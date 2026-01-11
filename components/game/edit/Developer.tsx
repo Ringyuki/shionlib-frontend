@@ -25,7 +25,7 @@ export const Developer = ({ initRelations, id }: DeveloperEditProps) => {
     } catch {}
   }, [id])
 
-  const { permissions } = useEditPermissionStore()
+  const { gamePermissions: permissions } = useEditPermissionStore()
   if (!permissions?.relationFields.includes('MANAGE_DEVELOPERS')) {
     return <Empty title={t('noPermission')} />
   }

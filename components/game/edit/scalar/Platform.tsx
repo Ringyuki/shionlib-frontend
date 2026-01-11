@@ -10,7 +10,7 @@ import {
 } from '@/components/shionui/MultiSelect'
 import { useTranslations } from 'next-intl'
 import { UseFormReturn } from 'react-hook-form'
-import { GameScalar } from '@/interfaces/edit/game-scalar.interface'
+import { GameScalar } from '@/interfaces/edit/scalar.interface'
 import { Platform as GamePlatform, PlatformOptions } from '@/interfaces/game/game.interface'
 
 interface PlatformProps {

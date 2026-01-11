@@ -26,7 +26,7 @@ export const EditTabsNav = () => {
     [segment],
   )
 
-  const { permissions } = useEditPermissionStore()
+  const { gamePermissions: permissions } = useEditPermissionStore()
   if (!permissions) {
     redirect(`/game/${id}`)
   }

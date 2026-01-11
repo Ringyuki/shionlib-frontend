@@ -14,7 +14,7 @@ interface ImageProps {
 
 export const Image = ({ images: initialImages }: ImageProps) => {
   const [images, setImages] = useState(initialImages)
-  const { permissions } = useEditPermissionStore()
+  const { gamePermissions: permissions } = useEditPermissionStore()
   const t = useTranslations('Components.Game.Edit.Image')
   if (!permissions?.relationFields.includes('MANAGE_IMAGES')) {
     return <Empty title={t('noPermission')} />

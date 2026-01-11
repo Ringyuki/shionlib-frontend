@@ -1,6 +1,6 @@
 'use client'
 
-import { GameScalar } from '@/interfaces/edit/game-scalar.interface'
+import { GameScalar } from '@/interfaces/edit/scalar.interface'
 import { Form } from '@/components/shionui/Form'
 import { Titles } from './scalar/Titles'
 import { Aliases } from './scalar/Aliases'
@@ -34,7 +34,7 @@ interface ScalarProps {
 
 export const Scalar = ({ data }: ScalarProps) => {
   const t = useTranslations('Components.Game.Edit.Scalar')
-  const { permissions } = useEditPermissionStore()
+  const { gamePermissions: permissions } = useEditPermissionStore()
   const [loading, setLoading] = useState(false)
   const { id } = useParams()
   const router = useRouter()

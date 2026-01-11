@@ -14,7 +14,7 @@ interface CoverProps {
 
 export const Cover = ({ covers: initialCovers }: CoverProps) => {
   const [covers, setCovers] = useState(initialCovers)
-  const { permissions } = useEditPermissionStore()
+  const { gamePermissions: permissions } = useEditPermissionStore()
   const t = useTranslations('Components.Game.Edit.Cover')
   if (!permissions?.relationFields.includes('MANAGE_COVERS')) {
     return <Empty title={t('noPermission')} />

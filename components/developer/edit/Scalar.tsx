@@ -22,6 +22,7 @@ import { pickChanges, ChangesResult } from '@/utils/pick-changes'
 import { Confirm } from './scalar/Confirm'
 import { EditNote } from './EditNote'
 import { redirect } from 'next/navigation'
+import { pick } from './helper/pick'
 
 interface ScalarProps {
   data: DeveloperScalar
@@ -29,7 +30,7 @@ interface ScalarProps {
 
 export const DeveloperScalarEdit = ({ data }: ScalarProps) => {
   const t = useTranslations('Components.Developer.Edit.Scalar')
-  const { permissions } = useEditPermissionStore()
+  const { developerPermissions: permissions } = useEditPermissionStore()
   const { id } = useParams()
   if (!permissions) {
     redirect(`/developer/${id}`)
@@ -41,22 +42,12 @@ export const DeveloperScalarEdit = ({ data }: ScalarProps) => {
     defaultValues: data,
   })
 
-  const pick = (formData: DeveloperScalar, fields: Record<string, boolean>) => {
-    const result: Partial<DeveloperScalar> = {}
-    for (const key of Object.keys(formData) as (keyof DeveloperScalar)[]) {
-      if (fields[key]) {
-        ;(result as Record<string, unknown>)[key] = formData[key]
-      }
-    }
-    return result
-  }
-
-  const onSubmit = async (formData: DeveloperScalar) => {
+  const onSubmit = async (data: DeveloperScalar) => {
     try {
       setLoading(true)
       await shionlibRequest().patch(`/developer/${id}/edit/scalar`, {
         data: {
-          ...pick(formData, permissions!.fields),
+          ...pick(data, permissions.fields),
           note,
         },
       })
@@ -100,8 +91,7 @@ export const DeveloperScalarEdit = ({ data }: ScalarProps) => {
           {permissions?.scalarFields.includes('INTROS') && <Intros form={form} />}
           {permissions?.scalarFields.includes('EXTRA') && <ExtraInfo form={form} />}
           {permissions?.scalarFields.includes('LOGO') && <Logo form={form} />}
-
-          <Website form={form} />
+          {permissions?.scalarFields.includes('WEBSITE') && <Website form={form} />}
 
           <EditNote onChange={e => setNote(e.target.value)} />
           <Button

@@ -1,13 +1,20 @@
-export interface Permission {
+export interface Permission<F, S, R> {
   allowMask: string
   fields: {
-    [key in PermissionFields]: boolean
+    [key in keyof F]: boolean
   }
-  scalarFields: scalarFields[]
-  relationFields: relationFields[]
+  scalarFields: S[]
+  relationFields: R[]
 }
 
-export type PermissionFields =
+export interface GamePermission
+  extends Permission<GameFields, GameScalarFields, GameRelationFields> {}
+export interface DeveloperPermission
+  extends Permission<DeveloperFields, DeveloperScalarFields, DeveloperRelationFields> {}
+export interface CharacterPermission
+  extends Permission<CharacterFields, CharacterScalarFields, CharacterRelationFields> {}
+
+export type GamePermissionFields =
   | 'v_id'
   | 'b_id'
   | 'title_jp'
@@ -32,8 +39,40 @@ export type PermissionFields =
   | 'status'
   | 'nsfw'
   | 'views'
+export type DeveloperPermissionFields =
+  | 'v_id'
+  | 'b_id'
+  | 'name'
+  | 'aliases'
+  | 'intro_jp'
+  | 'intro_zh'
+  | 'intro_en'
+  | 'extra_info'
+  | 'logo'
+  | 'website'
+export type CharacterPermissionFields =
+  | 'v_id'
+  | 'b_id'
+  | 'name_jp'
+  | 'name_zh'
+  | 'name_en'
+  | 'intro_jp'
+  | 'intro_zh'
+  | 'intro_en'
+  | 'aliases'
+  | 'image'
+  | 'blood_type'
+  | 'height'
+  | 'weight'
+  | 'bust'
+  | 'waist'
+  | 'hips'
+  | 'cup'
+  | 'age'
+  | 'birthday'
+  | 'gender'
 
-export const permissionFieldsArray: PermissionFields[] = [
+export const GamePermissionFieldsArray: Array<GamePermissionFields> = [
   'v_id',
   'b_id',
   'title_jp',
@@ -59,8 +98,42 @@ export const permissionFieldsArray: PermissionFields[] = [
   'nsfw',
   'views',
 ]
+export const DeveloperPermissionFieldsArray: Array<DeveloperPermissionFields> = [
+  'v_id',
+  'b_id',
+  'name',
+  'aliases',
+  'intro_jp',
+  'intro_zh',
+  'intro_en',
+  'extra_info',
+  'logo',
+  'website',
+]
+export const CharacterPermissionFieldsArray: Array<CharacterPermissionFields> = [
+  'v_id',
+  'b_id',
+  'name_jp',
+  'name_zh',
+  'name_en',
+  'intro_jp',
+  'intro_zh',
+  'intro_en',
+  'aliases',
+  'image',
+  'blood_type',
+  'height',
+  'weight',
+  'bust',
+  'waist',
+  'hips',
+  'cup',
+  'age',
+  'birthday',
+  'gender',
+]
 
-export type scalarFields =
+export type GameScalarFields =
   | 'IDS'
   | 'TITLES'
   | 'INTROS'
@@ -74,62 +147,34 @@ export type scalarFields =
   | 'STATUS'
   | 'NSFW'
   | 'VIEWS'
+export type DeveloperScalarFields =
+  | 'IDS'
   | 'NAME'
+  | 'ALIASES'
+  | 'INTROS'
+  | 'EXTRA'
   | 'LOGO'
+  | 'WEBSITE'
+export type CharacterScalarFields =
+  | 'IDS'
+  | 'NAMES'
+  | 'INTROS'
+  | 'ALIASES'
+  | 'IMAGE'
+  | 'BODY_METRICS'
+  | 'AGE_BIRTHDAY'
+  | 'BLOOD_TYPE'
+  | 'GENDER'
 
-export type relationFields =
+export type GameRelationFields =
   | 'MANAGE_LINKS'
   | 'MANAGE_COVERS'
   | 'MANAGE_IMAGES'
   | 'MANAGE_DEVELOPERS'
   | 'MANAGE_CHARACTERS'
+export type DeveloperRelationFields = []
+export type CharacterRelationFields = []
 
-export type Fields = Record<PermissionFields, boolean>
-// "allowMask": "262143",
-// "fields": {
-//     "v_id": true,
-//     "b_id": true,
-//     "title_jp": true,
-//     "title_zh": true,
-//     "title_en": true,
-//     "intro_jp": true,
-//     "intro_zh": true,
-//     "intro_en": true,
-//     "aliases": true,
-//     "release_date": true,
-//     "type": true,
-//     "platform": true,
-//     "extra_info": true,
-//     "tags": true,
-//     "staffs": true,
-//     "links": true,
-//     "covers": true,
-//     "images": true,
-//     "developers": true,
-//     "characters": true,
-//     "status": true,
-//     "nsfw": true,
-//     "views": true
-// },
-// "scalarFields": [
-//     "IDS",
-//     "TITLES",
-//     "INTROS",
-//     "ALIASES",
-//     "RELEASE",
-//     "TYPE",
-//     "PLATFORMS",
-//     "EXTRA",
-//     "TAGS",
-//     "STAFFS",
-//     "STATUS",
-//     "NSFW",
-//     "VIEWS"
-// ],
-// "relationFields": [
-//     "MANAGE_LINKS",
-//     "MANAGE_COVERS",
-//     "MANAGE_IMAGES",
-//     "MANAGE_DEVELOPERS",
-//     "MANAGE_CHARACTERS"
-// ]
+export type GameFields = Record<GamePermissionFields, boolean>
+export type DeveloperFields = Record<DeveloperPermissionFields, boolean>
+export type CharacterFields = Record<CharacterPermissionFields, boolean>
