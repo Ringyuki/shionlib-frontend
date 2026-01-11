@@ -45,7 +45,7 @@ export const Details = async ({ developer }: DetailsProps) => {
                       className="flex items-center gap-1 hover:underline"
                     >
                       {info.value}
-                      <ExternalLink className="size-3" />
+                      <ExternalLink className="size-3 shrink-0" />
                     </Link>
                   ) : (
                     info.value

@@ -13,7 +13,7 @@ const tabs = [
   { name: 'link', href: 'link', disabled: true },
   { name: 'cover', href: 'cover' },
   { name: 'image', href: 'image' },
-  { name: 'developer', href: 'developer', disabled: true },
+  { name: 'developer', href: 'developer' },
   { name: 'character', href: 'character', disabled: true },
 ]
 

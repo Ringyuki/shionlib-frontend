@@ -237,10 +237,11 @@ export interface Developer {
 }
 
 export interface DeveloperRelation {
+  id: number
   role: string
+  developer_id: number
   developer: Developer
 }
-
 export interface GameCharacter {
   b_id?: string
   v_id?: string

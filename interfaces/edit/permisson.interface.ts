@@ -74,6 +74,8 @@ export type scalarFields =
   | 'STATUS'
   | 'NSFW'
   | 'VIEWS'
+  | 'NAME'
+  | 'LOGO'
 
 export type relationFields =
   | 'MANAGE_LINKS'

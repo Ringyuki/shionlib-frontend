@@ -45,6 +45,13 @@
         }
       }
     },
+    "Developer": {
+      "Edit": {
+        "EditLayout": {
+          "title": "会社情報を編集"
+        }
+      }
+    },
     "Search": {
       "Game": {
         "title": "検索結果 {q}"
@@ -797,6 +804,24 @@
             }
           }
         },
+        "Developer": {
+          "noPermission": "開発者を編集する権限がありません",
+          "removed": "削除成功",
+          "updated": "更新成功",
+          "Item": {
+            "current_developers": "現在の開発者",
+            "no_developers": "開発者なし",
+            "role_placeholder": "役割",
+            "no_role": "役割なし"
+          },
+          "Search": {
+            "title": "開発者を追加",
+            "placeholder": "開発者名を検索...",
+            "search": "検索",
+            "add": "追加",
+            "already_added": "追加済み"
+          }
+        },
         "EditNote": {
           "title": "編集備考",
           "placeholder": "編集理由, 編集内容等(任意, e.g. 発売日を2025年11月10日に変更, 理由：発売延期)"
@@ -1090,6 +1115,47 @@
         },
         "Details": {
           "no_intro": "紹介がありません"
+        }
+      },
+      "Actions": {
+        "edit": "編集",
+        "history": {
+          "history": "編集履歴",
+          "noHistory": "編集履歴がありません"
+        }
+      },
+      "Edit": {
+        "EditLayout": {
+          "edit": "会社情報を編集",
+          "description": "このページで会社情報を編集できます。編集可能なフィールドのみが表示されます。"
+        },
+        "Scalar": {
+          "name": "名前",
+          "aliases": "別名",
+          "intro_info_description": "以下のフィールド [b]紹介（中国語）[/b]、[b]紹介（英語）[/b]、[b]紹介（日本語）[/b] は BBCode をサポートしています。",
+          "intro_zh": "紹介（中国語）",
+          "intro_en": "紹介（英語）",
+          "intro_jp": "紹介（日本語）",
+          "extra_info": "その他の情報",
+          "extra_info_key": "キー",
+          "extra_info_value": "値",
+          "add_extra_info": "その他の情報を追加",
+          "logo": "ロゴ",
+          "select_file": "ファイルを選択",
+          "upload": "アップロード",
+          "upload_success": "アップロード成功",
+          "website": "ウェブサイト",
+          "submit": "変更を送信",
+          "success": "送信成功",
+          "Confirm": {
+            "title": "変更を確認",
+            "cancel": "キャンセル",
+            "submit": "送信"
+          }
+        },
+        "EditNote": {
+          "title": "備考",
+          "placeholder": "変更理由（任意）"
         }
       },
       "List": {

@@ -53,6 +53,13 @@
         }
       }
     },
+    "Developer": {
+      "Edit": {
+        "EditLayout": {
+          "title": "Edit developer information"
+        }
+      }
+    },
     "Search": {
       "Game": {
         "title": "Search results {q}"
@@ -804,6 +811,24 @@
             }
           }
         },
+        "Developer": {
+          "noPermission": "You don't have permission to edit developers",
+          "removed": "Removed successfully",
+          "updated": "Updated successfully",
+          "Item": {
+            "current_developers": "Current Developers",
+            "no_developers": "No developers associated",
+            "role_placeholder": "Role",
+            "no_role": "No role set"
+          },
+          "Search": {
+            "title": "Add Developer",
+            "placeholder": "Search developer name...",
+            "search": "Search",
+            "add": "Add",
+            "already_added": "Already added"
+          }
+        },
         "EditNote": {
           "title": "Edit Note",
           "placeholder": "Edit reason, edit content etc. (optional, e.g. Changed release date to 2025-11-10, reason: release delayed)"
@@ -1097,6 +1122,47 @@
         },
         "Details": {
           "no_intro": "No introduction"
+        }
+      },
+      "Actions": {
+        "edit": "Edit",
+        "history": {
+          "history": "Edit History",
+          "noHistory": "No edit history"
+        }
+      },
+      "Edit": {
+        "EditLayout": {
+          "edit": "Edit Developer Information",
+          "description": "You can edit developer information on this page. Only fields you have permission to edit are shown."
+        },
+        "Scalar": {
+          "name": "Name",
+          "aliases": "Aliases",
+          "intro_info_description": "The following fields [b]Introduction (Chinese)[/b], [b]Introduction (English)[/b], [b]Introduction (Japanese)[/b] support BBCode.",
+          "intro_zh": "Introduction (Chinese)",
+          "intro_en": "Introduction (English)",
+          "intro_jp": "Introduction (Japanese)",
+          "extra_info": "Extra Info",
+          "extra_info_key": "Key",
+          "extra_info_value": "Value",
+          "add_extra_info": "Add Extra Info",
+          "logo": "Logo",
+          "select_file": "Select File",
+          "upload": "Upload",
+          "upload_success": "Upload successful",
+          "website": "Website",
+          "submit": "Submit Changes",
+          "success": "Submitted successfully",
+          "Confirm": {
+            "title": "Confirm Changes",
+            "cancel": "Cancel",
+            "submit": "Submit"
+          }
+        },
+        "EditNote": {
+          "title": "Notes",
+          "placeholder": "Reason for changes (optional)"
         }
       },
       "List": {

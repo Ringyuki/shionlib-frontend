@@ -1,10 +1,10 @@
 'use client'
 
+import { FormLabel } from '@/components/shionui/Form'
 import { useTranslations } from 'next-intl'
 import { UseFormReturn } from 'react-hook-form'
-import { GameScalar, Staff } from '@/interfaces/edit/game-scalar.interface'
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/shionui/Form'
-import { JsonArrayInput } from '@/components/shionui/JsonArrayInput'
+import { GameScalar } from '@/interfaces/edit/game-scalar.interface'
+import { KeyValueArrayInput } from '@/components/common/form/KeyValueArrayInput'
 
 interface StaffsProps {
   form: UseFormReturn<GameScalar>
@@ -14,34 +14,18 @@ export const Staffs = ({ form }: StaffsProps) => {
   const t = useTranslations('Components.Game.Edit.Scalar')
 
   return (
-    <FormField
-      control={form.control}
-      name="staffs"
-      render={({ field }) => (
-        <FormItem>
-          <FormLabel>{t('staffs')}</FormLabel>
-          <FormControl>
-            <JsonArrayInput<Staff>
-              {...field}
-              fields={[
-                {
-                  key: 'name',
-                  label: t('staff_name'),
-                  placeholder: t('staff_name_placeholder'),
-                },
-                {
-                  key: 'role',
-                  label: t('staff_role'),
-                  placeholder: t('staff_role_placeholder'),
-                },
-              ]}
-              emptyItem={{ name: '', role: '' }}
-              addButtonText={t('add_staff')}
-            />
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      )}
-    />
+    <div className="flex flex-col gap-2">
+      <FormLabel>{t('staffs')}</FormLabel>
+      <KeyValueArrayInput
+        form={form}
+        name="staffs"
+        fields={[
+          { fieldKey: 'name', placeholder: t('staff_name_placeholder') },
+          { fieldKey: 'role', placeholder: t('staff_role_placeholder') },
+        ]}
+        emptyItem={{ name: '', role: '' }}
+        addButtonText={t('add_staff')}
+      />
+    </div>
   )
 }

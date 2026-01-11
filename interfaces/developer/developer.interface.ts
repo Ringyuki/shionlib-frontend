@@ -17,3 +17,9 @@ export interface Developer {
   }
   works_count: number
 }
+
+export interface DeveloperSearchResult {
+  id: number
+  name: string
+  aliases: string[]
+}

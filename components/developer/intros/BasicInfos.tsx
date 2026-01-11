@@ -31,7 +31,7 @@ export const BasicInfos = async ({ developer, works_count }: BasicInfosProps) =>
       )}
       <div className="flex flex-col flex-1 gap-2 items-center md:items-start">
         <div className="flex flex-col md:flex-row justify-between items-center w-full">
-          <h2 className="text-2xl font-normal flex items-center gap-2">
+          <h2 className="text-2xl font-normal flex items-center gap-2 flex-wrap justify-center">
             {developer.name}
             <Badge variant="secondary">{t('works_count', { count: works_count })}</Badge>
           </h2>

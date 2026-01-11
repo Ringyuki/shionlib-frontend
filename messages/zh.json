@@ -53,6 +53,13 @@
         }
       }
     },
+    "Developer": {
+      "Edit": {
+        "EditLayout": {
+          "title": "编辑会社信息"
+        }
+      }
+    },
     "Search": {
       "Game": {
         "title": "搜索结果 {q}"
@@ -680,7 +687,7 @@
           "cover": "封面",
           "image": "图片",
           "link": "相关链接",
-          "developer": "制作人员",
+          "developer": "会社/开发商",
           "character": "出场角色"
         },
         "Scalar": {
@@ -802,6 +809,25 @@
               "upload": "上传图片",
               "success": "上传成功"
             }
+          }
+        },
+        "Developer": {
+          "noPermission": "你没有编辑会社的权限",
+          "removed": "移除成功",
+          "updated": "更新成功",
+          "Item": {
+            "current_developers": "当前关联会社",
+            "no_developers": "暂无关联会社",
+            "add_developer": "添加会社",
+            "role_placeholder": "角色/职责",
+            "no_role": "未设定角色"
+          },
+          "Search": {
+            "title": "添加会社",
+            "placeholder": "搜索会社名称...",
+            "search": "搜索",
+            "add": "添加",
+            "already_added": "已添加"
           }
         },
         "EditNote": {
@@ -1097,6 +1123,47 @@
         },
         "Details": {
           "no_intro": "暂无介绍"
+        }
+      },
+      "Actions": {
+        "edit": "编辑",
+        "history": {
+          "history": "编辑历史",
+          "noHistory": "暂无编辑历史"
+        }
+      },
+      "Edit": {
+        "EditLayout": {
+          "edit": "编辑会社信息",
+          "description": "你可以在此页面编辑会社信息，仅展示你有权限编辑的字段。"
+        },
+        "Scalar": {
+          "name": "名称",
+          "aliases": "别名",
+          "intro_info_description": "以下字段 [b]介绍（中文）[/b]、[b]介绍（英语）[/b]、[b]介绍（日语）[/b] 支持 BBCode。",
+          "intro_zh": "介绍（中文）",
+          "intro_en": "介绍（英语）",
+          "intro_jp": "介绍（日语）",
+          "extra_info": "其他信息",
+          "extra_info_key": "键",
+          "extra_info_value": "值",
+          "add_extra_info": "添加其他信息",
+          "logo": "Logo 图片",
+          "select_file": "选择文件",
+          "upload": "上传",
+          "upload_success": "上传成功",
+          "website": "官方网站",
+          "submit": "提交更改",
+          "success": "提交成功",
+          "Confirm": {
+            "title": "确认更改",
+            "cancel": "取消",
+            "submit": "提交"
+          }
+        },
+        "EditNote": {
+          "title": "备注",
+          "placeholder": "修改原因, 修改内容等(可选)"
         }
       },
       "List": {
