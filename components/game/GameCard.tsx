@@ -25,9 +25,7 @@ const _GameCover = ({
 }) => {
   return (
     <FadeImage
-      src={
-        cover.startsWith('http') ? cover : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + cover
-      }
+      src={cover}
       alt={title}
       aspectRatio={aspect}
       sizes={sizes}

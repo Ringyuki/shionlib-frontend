@@ -52,6 +52,29 @@
         }
       }
     },
+    "Character": {
+      "Edit": {
+        "EditLayout": {
+          "title": "キャラクター情報を編集"
+        }
+      },
+      "Intros": {
+        "BasicInfos": {
+          "age": "年齢",
+          "birthday": "誕生日",
+          "blood_type": "血液型",
+          "height": "身長",
+          "weight": "体重",
+          "male": "男性",
+          "female": "女性",
+          "non_binary": "ノンバイナリー",
+          "ambiguous": "不明"
+        },
+        "Details": {
+          "no_intro": "紹介なし"
+        }
+      }
+    },
     "Search": {
       "Game": {
         "title": "検索結果 {q}"
@@ -471,6 +494,7 @@
         },
         "GameCharacterItem": {
           "noImage": "画像なし",
+          "viewDetails": "詳細を見る",
           "gender": "性別",
           "roleMain": "主人公",
           "rolePrimary": "主要キャラクター",
@@ -808,11 +832,27 @@
           "noPermission": "開発者を編集する権限がありません",
           "removed": "削除成功",
           "updated": "更新成功",
+          "added": "追加成功",
           "Item": {
-            "current_developers": "現在の開発者",
             "no_developers": "開発者なし",
             "role_placeholder": "役割",
             "no_role": "役割なし"
+          },
+          "Form": {
+            "role": "役割",
+            "role_placeholder": "例：発行、開発など",
+            "submit": "変更を確認"
+          },
+          "Edit": {
+            "title": "開発者関連を編集",
+            "view_developer": "開発者を見る"
+          },
+          "Delete": {
+            "delete": "開発者を削除",
+            "title": "削除の確認",
+            "description": "この開発者関連をゲームから削除してもよろしいですか？",
+            "cancel": "キャンセル",
+            "success": "削除成功"
           },
           "Search": {
             "title": "開発者を追加",
@@ -820,6 +860,69 @@
             "search": "検索",
             "add": "追加",
             "already_added": "追加済み"
+          }
+        },
+        "Character": {
+          "noPermission": "キャラクターを編集する権限がありません",
+          "removed": "削除成功",
+          "updated": "更新成功",
+          "added": "追加成功",
+          "Item": {
+            "no_characters": "キャラクターなし",
+            "role_placeholder": "役割タイプを選択",
+            "actor_placeholder": "声優",
+            "no_role": "役割なし",
+            "role_main": "主人公",
+            "role_primary": "主要キャラクター",
+            "role_side": "サブキャラクター",
+            "role_appears": "カメオ"
+          },
+          "Form": {
+            "image": "キャラクター画像",
+            "role": "役割タイプ",
+            "role_placeholder": "役割タイプを選択",
+            "role_main": "主人公",
+            "role_primary": "主要キャラクター",
+            "role_side": "サブキャラクター",
+            "role_appears": "カメオ",
+            "actor": "声優",
+            "actor_placeholder": "声優名を入力",
+            "submit": "保存"
+          },
+          "Edit": {
+            "title": "キャラクター関連を編集",
+            "view_character": "キャラクターを見る"
+          },
+          "Delete": {
+            "delete": "キャラクターを削除",
+            "title": "削除の確認",
+            "description": "このキャラクター関連をゲームから削除してもよろしいですか？",
+            "cancel": "キャンセル",
+            "success": "削除成功"
+          },
+          "Image": {
+            "Upload": {
+              "select": "画像を選択",
+              "upload": "画像をアップロード",
+              "success": "画像をアップロードしました",
+              "error": "画像のアップロードに失敗しました"
+            },
+            "Image": {
+              "image": "キャラクター画像",
+              "image_question": "現在のゲーム条目にのみ有効"
+            }
+          },
+          "Search": {
+            "title": "キャラクターを追加",
+            "placeholder": "キャラクター名を検索...",
+            "search": "検索",
+            "add": "追加",
+            "already_added": "追加済み",
+            "role_placeholder": "役割タイプ",
+            "role_main": "主人公",
+            "role_primary": "メインキャラ",
+            "role_side": "サブキャラ",
+            "role_appears": "登場キャラ"
           }
         },
         "EditNote": {
@@ -1168,6 +1271,87 @@
         },
         "DeveloperItem": {
           "works_count": "合計 {count} 作品"
+        }
+      }
+    },
+    "Character": {
+      "Actions": {
+        "edit": "編集",
+        "history": "編集履歴",
+        "history_title": "編集履歴",
+        "history_description": "このキャラクターの編集履歴を表示",
+        "no_history": "編集履歴なし"
+      },
+      "Edit": {
+        "EditLayout": {
+          "edit": "キャラクター編集",
+          "description": "このページでキャラクター情報を編集できます。編集可能なフィールドのみが表示されます。"
+        },
+        "Scalar": {
+          "name_jp": "日本語名",
+          "name_zh": "中国語名",
+          "name_en": "英語名",
+          "aliases": "別名",
+          "intro_info_description": "以下のフィールド [b]紹介（中国語）[/b]、[b]紹介（英語）[/b]、[b]紹介（日本語）[/b] は BBCode をサポートしています。",
+          "intro_zh": "紹介（中国語）",
+          "intro_en": "紹介（英語）",
+          "intro_jp": "紹介（日本語）",
+          "image": "キャラクター画像",
+          "select_file": "ファイルを選択",
+          "upload": "アップロード",
+          "upload_success": "アップロード成功",
+          "body_metrics": "身体データ",
+          "height": "身長 (cm)",
+          "weight": "体重 (kg)",
+          "bust": "バスト (cm)",
+          "waist": "ウエスト (cm)",
+          "hips": "ヒップ (cm)",
+          "cup": "カップ",
+          "age": "年齢",
+          "birthday": "誕生日",
+          "birthday_month": "月",
+          "birthday_day": "日",
+          "gender": "性別",
+          "non-spoiler-gender": "非劇透性別",
+          "actual-gender": "実際の性別",
+          "gender_m": "男性",
+          "gender_f": "女性",
+          "gender_o": "その他",
+          "gender_a": "無性別",
+          "blood_type": "血液型",
+          "blood_type_placeholder": "血液型を選択",
+          "blood_type_a": "A型",
+          "blood_type_b": "B型",
+          "blood_type_ab": "AB型",
+          "blood_type_o": "O型",
+          "submit": "変更を送信",
+          "success": "送信成功",
+          "Confirm": {
+            "title": "変更を確認",
+            "cancel": "キャンセル",
+            "submit": "送信"
+          }
+        },
+        "EditNote": {
+          "title": "備考",
+          "placeholder": "変更理由（任意）"
+        }
+      },
+      "Intros": {
+        "BasicInfos": {
+          "appearances_count": "{count} 登場作品",
+          "age": "年齢",
+          "birthday": "誕生日",
+          "blood_type": "血液型",
+          "height": "身長",
+          "weight": "体重",
+          "male": "男性",
+          "female": "女性",
+          "non_binary": "ノンバイナリー",
+          "ambiguous": "不明"
+        },
+        "Details": {
+          "no_intro": "紹介なし"
         }
       }
     },

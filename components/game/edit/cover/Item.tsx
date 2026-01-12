@@ -9,9 +9,6 @@ interface CoverItemProps {
 
 export const CoverItem = ({ cover, onClick }: CoverItemProps) => {
   const aspect = getAspectRatio(cover.dims as [number, number])
-  const url = cover.url.startsWith('http')
-    ? cover.url
-    : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + cover.url
 
   return (
     <div
@@ -19,7 +16,7 @@ export const CoverItem = ({ cover, onClick }: CoverItemProps) => {
       style={{ aspectRatio: aspect }}
       onClick={onClick}
     >
-      <FadeImage src={url} alt={cover.language} />
+      <FadeImage src={cover.url} alt={cover.language} />
     </div>
   )
 }

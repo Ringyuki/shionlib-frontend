@@ -60,6 +60,29 @@
         }
       }
     },
+    "Character": {
+      "Edit": {
+        "EditLayout": {
+          "title": "Edit character information"
+        }
+      },
+      "Intros": {
+        "BasicInfos": {
+          "age": "Age",
+          "birthday": "Birthday",
+          "blood_type": "Blood Type",
+          "height": "Height",
+          "weight": "Weight",
+          "male": "Male",
+          "female": "Female",
+          "non_binary": "Non-binary",
+          "ambiguous": "Ambiguous"
+        },
+        "Details": {
+          "no_intro": "No introduction"
+        }
+      }
+    },
     "Search": {
       "Game": {
         "title": "Search results {q}"
@@ -478,6 +501,7 @@
         },
         "GameCharacterItem": {
           "noImage": "No image",
+          "viewDetails": "View Details",
           "gender": "Gender",
           "roleMain": "Protagonist",
           "rolePrimary": "Primary character",
@@ -815,11 +839,27 @@
           "noPermission": "You don't have permission to edit developers",
           "removed": "Removed successfully",
           "updated": "Updated successfully",
+          "added": "Added successfully",
           "Item": {
-            "current_developers": "Current Developers",
             "no_developers": "No developers associated",
             "role_placeholder": "Role",
             "no_role": "No role set"
+          },
+          "Form": {
+            "role": "Role",
+            "role_placeholder": "e.g., Publisher, Developer",
+            "submit": "Confirm Changes"
+          },
+          "Edit": {
+            "title": "Edit Developer Relation",
+            "view_developer": "View Developer"
+          },
+          "Delete": {
+            "delete": "Remove Developer",
+            "title": "Confirm Removal",
+            "description": "Are you sure you want to remove this developer relation from the game?",
+            "cancel": "Cancel",
+            "success": "Removed successfully"
           },
           "Search": {
             "title": "Add Developer",
@@ -827,6 +867,69 @@
             "search": "Search",
             "add": "Add",
             "already_added": "Already added"
+          }
+        },
+        "Character": {
+          "noPermission": "You don't have permission to edit characters",
+          "removed": "Removed successfully",
+          "updated": "Updated successfully",
+          "added": "Added successfully",
+          "Item": {
+            "no_characters": "No characters associated",
+            "role_placeholder": "Select role type",
+            "actor_placeholder": "Voice Actor",
+            "no_role": "No role set",
+            "role_main": "Protagonist",
+            "role_primary": "Primary Character",
+            "role_side": "Supporting character",
+            "role_appears": "Cameo"
+          },
+          "Form": {
+            "image": "Character Image",
+            "role": "Role Type",
+            "role_placeholder": "Select role type",
+            "role_main": "Protagonist",
+            "role_primary": "Primary Character",
+            "role_side": "Supporting character",
+            "role_appears": "Cameo",
+            "actor": "Voice Actor",
+            "actor_placeholder": "Enter voice actor name",
+            "submit": "Save"
+          },
+          "Edit": {
+            "title": "Edit Character Relation",
+            "view_character": "View Character"
+          },
+          "Delete": {
+            "delete": "Remove Character",
+            "title": "Confirm Removal",
+            "description": "Are you sure you want to remove this character relation from the game?",
+            "cancel": "Cancel",
+            "success": "Removed successfully"
+          },
+          "Image": {
+            "Upload": {
+              "select": "Select Image",
+              "upload": "Upload",
+              "success": "Image uploaded successfully",
+              "error": "Image upload failed"
+            },
+            "Image": {
+              "image": "Character Image",
+              "image_question": "Only effective in the current game entry"
+            }
+          },
+          "Search": {
+            "title": "Add Character",
+            "placeholder": "Search character name...",
+            "search": "Search",
+            "add": "Add",
+            "already_added": "Already added",
+            "role_placeholder": "Role type",
+            "role_main": "Main",
+            "role_primary": "Primary",
+            "role_side": "Side",
+            "role_appears": "Appears"
           }
         },
         "EditNote": {
@@ -1175,6 +1278,87 @@
         },
         "DeveloperItem": {
           "works_count": "{count} works in total"
+        }
+      }
+    },
+    "Character": {
+      "Actions": {
+        "edit": "Edit",
+        "history": "Edit History",
+        "history_title": "Edit History",
+        "history_description": "View the edit history of this character",
+        "no_history": "No edit history"
+      },
+      "Edit": {
+        "EditLayout": {
+          "edit": "Edit Character",
+          "description": "You can edit character information on this page. Only editable fields are shown."
+        },
+        "Scalar": {
+          "name_jp": "Japanese Name",
+          "name_zh": "Chinese Name",
+          "name_en": "English Name",
+          "aliases": "Aliases",
+          "intro_info_description": "The following fields [b]Introduction (Chinese)[/b], [b]Introduction (English)[/b], [b]Introduction (Japanese)[/b] support BBCode.",
+          "intro_zh": "Introduction (Chinese)",
+          "intro_en": "Introduction (English)",
+          "intro_jp": "Introduction (Japanese)",
+          "image": "Character Image",
+          "select_file": "Select File",
+          "upload": "Upload",
+          "upload_success": "Upload successful",
+          "body_metrics": "Body Metrics",
+          "height": "Height (cm)",
+          "weight": "Weight (kg)",
+          "bust": "Bust (cm)",
+          "waist": "Waist (cm)",
+          "hips": "Hips (cm)",
+          "cup": "Cup",
+          "age": "Age",
+          "birthday": "Birthday",
+          "birthday_month": "Month",
+          "birthday_day": "Day",
+          "gender": "Gender",
+          "non-spoiler-gender": "Non-spoiler gender",
+          "actual-gender": "Actual gender",
+          "gender_m": "Male",
+          "gender_f": "Female",
+          "gender_o": "Other",
+          "gender_a": "Asexual",
+          "blood_type": "Blood Type",
+          "blood_type_placeholder": "Select blood type",
+          "blood_type_a": "Type A",
+          "blood_type_b": "Type B",
+          "blood_type_ab": "Type AB",
+          "blood_type_o": "Type O",
+          "submit": "Submit Changes",
+          "success": "Submitted successfully",
+          "Confirm": {
+            "title": "Confirm Changes",
+            "cancel": "Cancel",
+            "submit": "Submit"
+          }
+        },
+        "EditNote": {
+          "title": "Notes",
+          "placeholder": "Reason for changes (optional)"
+        }
+      },
+      "Intros": {
+        "BasicInfos": {
+          "appearances_count": "{count} Appearances",
+          "age": "Age",
+          "birthday": "Birthday",
+          "blood_type": "Blood Type",
+          "height": "Height",
+          "weight": "Weight",
+          "male": "Male",
+          "female": "Female",
+          "non_binary": "Non-binary",
+          "ambiguous": "Ambiguous"
+        },
+        "Details": {
+          "no_intro": "No introduction"
         }
       }
     },

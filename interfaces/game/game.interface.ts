@@ -234,11 +234,12 @@ export interface Developer {
   id: number
   name: string
   aliases?: string[]
+  logo?: string
 }
 
 export interface DeveloperRelation {
   id: number
-  role: string
+  role: string | null
   developer_id: number
   developer: Developer
 }
@@ -278,6 +279,8 @@ export const GameCharacterGenderMap: { [key in GameCharacterGender]: string } = 
 export type GameCharacterRole = 'main' | 'primary' | 'side' | 'appears'
 
 export interface GameCharacterRelation {
+  id: number
+  character_id: number
   image?: string
   actor?: string
   role?: GameCharacterRole

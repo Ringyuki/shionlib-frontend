@@ -1,115 +1,40 @@
-import { DeveloperRelation } from '@/interfaces/game/game.interface'
-import { Button } from '@/components/shionui/Button'
-import { Input } from '@/components/shionui/Input'
-import { Link } from '@/i18n/navigation.client'
-import { Pencil, Save, Trash2 } from 'lucide-react'
-import { useTranslations } from 'next-intl'
-import { useState } from 'react'
-import { shionlibRequest } from '@/utils/shionlib-request'
+'use client'
 
-interface DeveloperItemProps {
-  relations: DeveloperRelation[]
-  game_id: number
-  onRemove: (id: number) => void
-  onEdit: (id: number, role: string) => void
+import { DeveloperRelation } from '@/interfaces/game/game.interface'
+import { FadeImage } from '@/components/common/shared/FadeImage'
+import { Badge } from '@/components/shionui/Badge'
+import { Building2 } from 'lucide-react'
+
+interface DeveloperRelationItemProps {
+  relation: DeveloperRelation
+  onClick?: () => void
 }
 
-export const DeveloperItem = ({ relations, game_id, onRemove, onEdit }: DeveloperItemProps) => {
-  const t = useTranslations('Components.Game.Edit.Developer.Item')
-  const [editingId, setEditingId] = useState<number | null>(null)
-  const [editRole, setEditRole] = useState('')
-  const [removeLoading, setRemoveLoading] = useState(false)
-  const [editLoading, setEditLoading] = useState(false)
-
-  const handleRemove = async (relationId: number) => {
-    try {
-      setRemoveLoading(true)
-      await shionlibRequest().delete(`/game/${game_id}/edit/developers`, {
-        data: { ids: [relationId] },
-      })
-      onRemove(relationId)
-    } catch {
-    } finally {
-      setRemoveLoading(false)
-    }
-  }
-
-  const handleEditStart = (relation: DeveloperRelation) => {
-    setEditingId(relation.id)
-    setEditRole(relation.role || '')
-  }
-
-  const handleEditSave = async (relationId: number, developerId: number) => {
-    try {
-      setEditLoading(true)
-      await shionlibRequest().patch(`/game/${game_id}/edit/developers`, {
-        data: {
-          developers: [{ id: relationId, developer_id: developerId, role: editRole || null }],
-        },
-      })
-      setEditingId(null)
-      onEdit(relationId, editRole)
-    } catch {
-    } finally {
-      setEditLoading(false)
-    }
-  }
+export const DeveloperRelationItem = ({ relation, onClick }: DeveloperRelationItemProps) => {
   return (
-    <div className="space-y-2">
-      <h3 className="text-lg font-semibold">{t('current_developers')}</h3>
-      {relations.length === 0 ? (
-        <p className="text-muted-foreground">{t('no_developers')}</p>
-      ) : (
-        <div className="space-y-2">
-          {relations.map(relation => (
-            <div
-              key={relation.id}
-              className="flex items-center gap-4 bg-background-soft rounded-md"
-            >
-              <Link href={`/developer/${relation.developer.id}`}>
-                <Button appearance="outline">{relation.developer.name}</Button>
-              </Link>
-              {editingId === relation.id ? (
-                <>
-                  <Input
-                    value={editRole}
-                    onChange={e => setEditRole(e.target.value)}
-                    placeholder={t('role_placeholder')}
-                    className="w-32"
-                  />
-                  <Button
-                    size="icon"
-                    appearance="ghost"
-                    renderIcon={<Save className="size-4" />}
-                    loading={editLoading}
-                    onClick={() => handleEditSave(relation.id, relation.developer_id)}
-                  />
-                </>
-              ) : (
-                <>
-                  <span className="text-muted-foreground text-sm">
-                    {relation.role || t('no_role')}
-                  </span>
-                  <Button
-                    size="icon"
-                    appearance="ghost"
-                    renderIcon={<Pencil className="size-4" />}
-                    onClick={() => handleEditStart(relation)}
-                  />
-                </>
-              )}
-              <Button
-                size="icon"
-                appearance="ghost"
-                intent="destructive"
-                renderIcon={<Trash2 className="size-4" />}
-                loading={removeLoading}
-                onClick={() => handleRemove(relation.id)}
-              />
-            </div>
-          ))}
-        </div>
-      )}
+    <div className="relative flex flex-col gap-1 cursor-pointer group" onClick={onClick}>
+      <div
+        className="relative rounded-md overflow-hidden bg-muted w-full group-hover:opacity-80 transition-opacity flex items-center justify-center"
+        style={{ aspectRatio: '1 / 1' }}
+      >
+        {relation.developer.logo ? (
+          <FadeImage
+            src={relation.developer.logo}
+            alt={relation.developer.name}
+            imageClassName="object-contain"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <Building2 className="size-10 text-muted-foreground" />
+          </div>
+        )}
+        {relation.role && (
+          <Badge variant="secondary" className="absolute top-1 right-1 text-xs">
+            {relation.role}
+          </Badge>
+        )}
+      </div>
+      <span className="text-sm font-medium truncate text-center">{relation.developer.name}</span>
     </div>
   )
 }

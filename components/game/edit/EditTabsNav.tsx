@@ -14,7 +14,7 @@ const tabs = [
   { name: 'cover', href: 'cover' },
   { name: 'image', href: 'image' },
   { name: 'developer', href: 'developer' },
-  { name: 'character', href: 'character', disabled: true },
+  { name: 'character', href: 'character' },
 ]
 
 export const EditTabsNav = () => {

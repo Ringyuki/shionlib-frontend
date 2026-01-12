@@ -6,7 +6,7 @@ import { shionlibRequest } from '@/utils/shionlib-request'
 import { toast } from 'react-hot-toast'
 import { DeveloperRelation } from '@/interfaces/game/game.interface'
 import { SearchDeveloper } from './developer/Search'
-import { DeveloperItem } from './developer/Item'
+import { Edit } from './developer/Edit'
 import { useEditPermissionStore } from '@/store/editPermissionStore'
 import { Empty } from '@/components/common/content/Empty'
 
@@ -18,6 +18,7 @@ interface DeveloperEditProps {
 export const Developer = ({ initRelations, id }: DeveloperEditProps) => {
   const t = useTranslations('Components.Game.Edit.Developer')
   const [relations, setRelations] = useState(initRelations)
+
   const fetchRelations = useCallback(async () => {
     try {
       const res = await shionlibRequest().get<DeveloperRelation[]>(`/edit/game/${id}/developers`)
@@ -34,26 +35,20 @@ export const Developer = ({ initRelations, id }: DeveloperEditProps) => {
     toast.success(t('added'))
     await fetchRelations()
   }
-  const handleRemove = async (id: number) => {
-    setRelations(relations.filter(relation => relation.id !== id))
-    toast.success(t('removed'))
-    await fetchRelations()
-  }
-  const handleEditSave = async (id: number, role: string) => {
-    setRelations(relations.map(relation => (relation.id === id ? { ...relation, role } : relation)))
-    toast.success(t('updated'))
+
+  const handleDelete = async (relationId: number) => {
+    setRelations(relations.filter(relation => relation.id !== relationId))
     await fetchRelations()
   }
 
   return (
     <div className="space-y-6">
-      <DeveloperItem
-        relations={relations}
-        game_id={id}
-        onRemove={handleRemove}
-        onEdit={handleEditSave}
-      />
-
+      <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-4">
+        {relations.map(relation => (
+          <Edit key={relation.id} relation={relation} game_id={id} onDelete={handleDelete} />
+        ))}
+      </div>
+      {relations.length === 0 && <Empty title={t('Item.no_developers')} />}
       <SearchDeveloper relations={relations} onAdd={handleAdd} game_id={id} />
     </div>
   )

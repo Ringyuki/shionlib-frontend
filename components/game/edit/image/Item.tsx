@@ -9,9 +9,6 @@ interface ImageItemProps {
 
 export const ImageItem = ({ image, onClick }: ImageItemProps) => {
   const aspect = getAspectRatio(image.dims as [number, number])
-  const url = image.url.startsWith('http')
-    ? image.url
-    : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + image.url
 
   return (
     <div
@@ -19,7 +16,7 @@ export const ImageItem = ({ image, onClick }: ImageItemProps) => {
       style={{ aspectRatio: aspect }}
       onClick={onClick}
     >
-      <FadeImage src={url} alt="game image" />
+      <FadeImage src={image.url} alt="game image" />
     </div>
   )
 }

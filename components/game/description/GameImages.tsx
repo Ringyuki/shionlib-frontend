@@ -16,11 +16,7 @@ const _GameImage = ({ image }: { image: GameImage }) => {
   return (
     <ImageLightbox
       key={image.url}
-      src={
-        image.url.startsWith('http')
-          ? image.url
-          : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + image.url
-      }
+      src={image.url}
       alt={image.url}
       aspectRatio="16 / 9"
       className="rounded-md overflow-hidden"

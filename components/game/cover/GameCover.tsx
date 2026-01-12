@@ -22,9 +22,7 @@ interface GameCoverProps {
 const _GameCover = ({ cover, title, width }: { cover: string; title: string; width: number }) => {
   return (
     <FadeImage
-      src={
-        cover.startsWith('http') ? cover : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + cover
-      }
+      src={cover}
       alt={title}
       height={300}
       fill={false}

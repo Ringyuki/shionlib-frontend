@@ -60,6 +60,29 @@
         }
       }
     },
+    "Character": {
+      "Edit": {
+        "EditLayout": {
+          "title": "编辑角色信息"
+        }
+      },
+      "Intros": {
+        "BasicInfos": {
+          "age": "年龄",
+          "birthday": "生日",
+          "blood_type": "血型",
+          "height": "身高",
+          "weight": "体重",
+          "male": "男性",
+          "female": "女性",
+          "non_binary": "非二元",
+          "ambiguous": "不明"
+        },
+        "Details": {
+          "no_intro": "暂无介绍"
+        }
+      }
+    },
     "Search": {
       "Game": {
         "title": "搜索结果 {q}"
@@ -478,6 +501,7 @@
         },
         "GameCharacterItem": {
           "noImage": "无图片",
+          "viewDetails": "查看详情",
           "gender": "性别",
           "roleMain": "主角",
           "rolePrimary": "主要角色",
@@ -815,12 +839,27 @@
           "noPermission": "你没有编辑会社的权限",
           "removed": "移除成功",
           "updated": "更新成功",
+          "added": "添加成功",
           "Item": {
-            "current_developers": "当前关联会社",
             "no_developers": "暂无关联会社",
-            "add_developer": "添加会社",
             "role_placeholder": "角色/职责",
             "no_role": "未设定角色"
+          },
+          "Form": {
+            "role": "角色/职责",
+            "role_placeholder": "例如：发行、开发等",
+            "submit": "确认更改"
+          },
+          "Edit": {
+            "title": "编辑会社关联",
+            "view_developer": "查看会社"
+          },
+          "Delete": {
+            "delete": "移除会社",
+            "title": "确认移除",
+            "description": "确定要从游戏中移除此会社关联吗？",
+            "cancel": "取消",
+            "success": "移除成功"
           },
           "Search": {
             "title": "添加会社",
@@ -828,6 +867,69 @@
             "search": "搜索",
             "add": "添加",
             "already_added": "已添加"
+          }
+        },
+        "Character": {
+          "noPermission": "你没有编辑角色的权限",
+          "removed": "移除成功",
+          "updated": "更新成功",
+          "added": "添加成功",
+          "Item": {
+            "no_characters": "暂无关联角色",
+            "role_placeholder": "选择角色类型",
+            "actor_placeholder": "输入CV名称",
+            "no_role": "未设定类型",
+            "role_main": "主角",
+            "role_primary": "主要角色",
+            "role_side": "配角",
+            "role_appears": "客串"
+          },
+          "Form": {
+            "image": "角色图片",
+            "role": "角色类型",
+            "role_placeholder": "选择角色类型",
+            "role_main": "主角",
+            "role_primary": "主要角色",
+            "role_side": "配角",
+            "role_appears": "客串",
+            "actor": "CV",
+            "actor_placeholder": "输入CV名称",
+            "submit": "确认更改"
+          },
+          "Edit": {
+            "title": "编辑角色关联",
+            "view_character": "查看角色"
+          },
+          "Delete": {
+            "delete": "移除角色",
+            "title": "确认移除",
+            "description": "确定要从游戏中移除此角色关联吗？",
+            "cancel": "取消",
+            "success": "移除成功"
+          },
+          "Image": {
+            "Upload": {
+              "select": "选择图片",
+              "upload": "上传",
+              "success": "图片上传成功",
+              "error": "图片上传失败"
+            },
+            "Image": {
+              "image": "角色图片",
+              "image_question": "仅在当前游戏条目中生效"
+            }
+          },
+          "Search": {
+            "title": "添加角色",
+            "placeholder": "搜索角色名称...",
+            "search": "搜索",
+            "add": "添加",
+            "already_added": "已添加",
+            "role_placeholder": "角色类型",
+            "role_main": "主角",
+            "role_primary": "主要角色",
+            "role_side": "次要角色",
+            "role_appears": "登场角色"
           }
         },
         "EditNote": {
@@ -1176,6 +1278,87 @@
         },
         "DeveloperItem": {
           "works_count": "共 {count} 部作品"
+        }
+      }
+    },
+    "Character": {
+      "Actions": {
+        "edit": "编辑",
+        "history": "编辑历史",
+        "history_title": "编辑历史",
+        "history_description": "查看此角色的编辑历史记录",
+        "no_history": "暂无编辑历史"
+      },
+      "Edit": {
+        "EditLayout": {
+          "edit": "编辑角色信息",
+          "description": "你可以在此页面编辑角色信息，仅展示你有权限编辑的字段。"
+        },
+        "Scalar": {
+          "name_jp": "日文名",
+          "name_zh": "中文名",
+          "name_en": "英文名",
+          "aliases": "别名",
+          "intro_info_description": "以下字段 [b]介绍（中文）[/b]、[b]介绍（英语）[/b]、[b]介绍（日语）[/b] 支持 BBCode。",
+          "intro_zh": "介绍（中文）",
+          "intro_en": "介绍（英语）",
+          "intro_jp": "介绍（日语）",
+          "image": "角色图片",
+          "select_file": "选择文件",
+          "upload": "上传",
+          "upload_success": "上传成功",
+          "body_metrics": "身体数据",
+          "height": "身高 (cm)",
+          "weight": "体重 (kg)",
+          "bust": "胸围 (cm)",
+          "waist": "腰围 (cm)",
+          "hips": "臀围 (cm)",
+          "cup": "罩杯",
+          "age": "年龄",
+          "birthday": "生日",
+          "birthday_month": "月",
+          "birthday_day": "日",
+          "gender": "性别",
+          "non-spoiler-gender": "无剧透性别",
+          "actual-gender": "真实性别",
+          "gender_m": "男性",
+          "gender_f": "女性",
+          "gender_o": "其他",
+          "gender_a": "无性别",
+          "blood_type": "血型",
+          "blood_type_placeholder": "选择血型",
+          "blood_type_a": "A型",
+          "blood_type_b": "B型",
+          "blood_type_ab": "AB型",
+          "blood_type_o": "O型",
+          "submit": "提交更改",
+          "success": "提交成功",
+          "Confirm": {
+            "title": "确认更改",
+            "cancel": "取消",
+            "submit": "提交"
+          }
+        },
+        "EditNote": {
+          "title": "备注",
+          "placeholder": "修改原因, 修改内容等(可选)"
+        }
+      },
+      "Intros": {
+        "BasicInfos": {
+          "appearances_count": "{count} 出场作品",
+          "age": "年龄",
+          "birthday": "生日",
+          "blood_type": "血型",
+          "height": "身高",
+          "weight": "体重",
+          "male": "男性",
+          "female": "女性",
+          "non_binary": "非二元",
+          "ambiguous": "不明"
+        },
+        "Details": {
+          "no_intro": "暂无介绍"
         }
       }
     },
