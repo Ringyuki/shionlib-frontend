@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/utils/cn'
 import { cva as createVariants } from 'class-variance-authority'
 import { motion, AnimatePresence } from 'motion/react'
-import { useState, Children, isValidElement } from 'react'
+import { useState, Children, isValidElement, useRef, forwardRef, useImperativeHandle } from 'react'
 import { Loader2, LoaderCircle } from 'lucide-react'
 import { useAuthDialogStore } from '@/store/authDialogStore'
 import { useShionlibUserStore } from '@/store/userStore'
@@ -265,6 +265,50 @@ interface Ripple {
   size: number
 }
 
+interface RippleRef {
+  addRipple: (e: React.MouseEvent<HTMLElement>) => void
+}
+
+const RippleEffect = forwardRef<RippleRef, {}>((_, ref) => {
+  const [ripples, setRipples] = useState<Ripple[]>([])
+
+  useImperativeHandle(ref, () => ({
+    addRipple: (e: React.MouseEvent<HTMLElement>) => {
+      const rect = e.currentTarget.getBoundingClientRect()
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
+      const size = Math.max(rect.width, rect.height) * 2
+      const id = Date.now() + Math.random()
+      setRipples(prev => [...prev, { id, x, y, size }])
+    },
+  }))
+
+  return (
+    <AnimatePresence>
+      {ripples.map(({ id, x, y, size }) => (
+        <motion.span
+          key={id}
+          initial={{ opacity: 0.35, scale: 0, filter: 'blur(16px)' }}
+          animate={{ opacity: 0, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.65, ease: 'easeOut' }}
+          onAnimationComplete={() => setRipples(prev => prev.filter(r => r.id !== id))}
+          className="pointer-events-none absolute z-0 rounded-full"
+          style={{
+            width: size,
+            height: size,
+            left: x - size / 2,
+            top: y - size / 2,
+            background: 'currentColor',
+            filter: 'blur(0.5px)',
+          }}
+        />
+      ))}
+    </AnimatePresence>
+  )
+})
+RippleEffect.displayName = 'RippleEffect'
+
 type ShionButtonProps = React.ComponentProps<'button'> &
   VariantProps<typeof shionButtonVariants> & {
     asChild?: boolean
@@ -288,15 +332,7 @@ function Button({
   iconPosition = 'left',
   ...props
 }: ShionButtonProps) {
-  const [ripples, setRipples] = useState<Ripple[]>([])
-  const addRipple = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    const size = Math.max(rect.width, rect.height) * 2
-    const id = Date.now() + Math.random()
-    setRipples(prev => [...prev, { id, x, y, size }])
-  }
+  const rippleRef = useRef<RippleRef>(null)
 
   const Comp = asChild ? Slot : 'button'
   const base = baseButton({ size })
@@ -317,7 +353,7 @@ function Button({
       disabled={isDisabled}
       onPointerDown={e => {
         if (!isDisabled) {
-          addRipple(e)
+          rippleRef.current?.addRipple(e)
         }
         props.onMouseDown?.(e)
       }}
@@ -500,27 +536,7 @@ function Button({
           </motion.span>
         )
       })()}
-      <AnimatePresence>
-        {ripples.map(({ id, x, y, size }) => (
-          <motion.span
-            key={id}
-            initial={{ opacity: 0.35, scale: 0, filter: 'blur(16px)' }}
-            animate={{ opacity: 0, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.65, ease: 'easeOut' }}
-            onAnimationComplete={() => setRipples(prev => prev.filter(r => r.id !== id))}
-            className="pointer-events-none absolute z-0 rounded-full"
-            style={{
-              width: size,
-              height: size,
-              left: x - size / 2,
-              top: y - size / 2,
-              background: 'currentColor',
-              filter: 'blur(0.5px)',
-            }}
-          />
-        ))}
-      </AnimatePresence>
+      <RippleEffect ref={rippleRef} />
     </Comp>
   )
 }
