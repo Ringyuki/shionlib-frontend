@@ -28,7 +28,15 @@ export const Avatar = React.forwardRef<React.ComponentRef<typeof ShionlibAvatar>
         {...props}
         onClick={handleClick}
       >
-        <AvatarImage src={user.avatar} />
+        <AvatarImage
+          src={
+            user.avatar
+              ? user.avatar.startsWith('http')
+                ? user.avatar
+                : process.env.NEXT_PUBLIC_SHIONLIB_IMAGE_BED_URL + user.avatar
+              : ''
+          }
+        />
         {!user.avatar && (
           <AvatarFallback className="bg-primary/20">
             {isCJK(user.name) ? user.name.slice(0, 1) : user.name.slice(0, 2).toUpperCase()}
