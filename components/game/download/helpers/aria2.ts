@@ -57,7 +57,7 @@ export const addUrl = async (
       'token:' + auth_secret,
       [file_url],
       {
-        out: file_name,
+        out: sanitizeFilename(file_name),
         dir: downloadPath && downloadPath.trim() !== '' ? downloadPath : undefined,
       },
     ],
@@ -108,4 +108,26 @@ const handleAria2Error = (error: any) => {
       message: 'aria2UnknownError',
     }
   }
+}
+
+export function sanitizeFilename(input: string): string {
+  let s = (input ?? '').trim()
+  s = s.replace(/[<>:"/\\|?*]/g, '_')
+  s = s.replace(/[\u0000-\u001F\u007F]/g, '_')
+  s = s.replace(/[. ]+$/g, '_')
+  if (!s || s === '.' || s === '..') s = 'untitled'
+  const base =
+    s
+      .replace(/[. ]+$/g, '')
+      .split('.')[0]
+      ?.toUpperCase() ?? ''
+  const isReserved =
+    base === 'CON' ||
+    base === 'PRN' ||
+    base === 'AUX' ||
+    base === 'NUL' ||
+    /^COM[1-9]$/.test(base) ||
+    /^LPT[1-9]$/.test(base)
+  if (isReserved) s = s + '_'
+  return s
 }

@@ -58,7 +58,6 @@ export const ImageUpload = ({ onUpload, onTempUrl }: ImageUploadProps) => {
           type="button"
           intent="neutral"
           appearance="outline"
-          size="sm"
           onClick={() => inputRef.current?.click()}
         >
           {t('select')}
@@ -66,7 +65,6 @@ export const ImageUpload = ({ onUpload, onTempUrl }: ImageUploadProps) => {
         <Button
           type="button"
           intent="primary"
-          size="sm"
           disabled={!file}
           loading={loading}
           renderIcon={<UploadIcon className="size-4" />}
