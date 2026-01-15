@@ -20,7 +20,7 @@ export function useAdminGameList(query: AdminGameListQuery = {}) {
     try {
       const params = new URLSearchParams()
       if (query.page) params.set('page', query.page.toString())
-      if (query.limit) params.set('limit', query.limit.toString())
+      if (query.limit) params.set('pageSize', query.limit.toString())
       if (query.search) params.set('search', query.search)
       if (query.sortBy) params.set('sortBy', query.sortBy)
       if (query.sortOrder) params.set('sortOrder', query.sortOrder)
@@ -60,7 +60,7 @@ export function useAdminCharacterList(query: AdminCharacterListQuery = {}) {
     try {
       const params = new URLSearchParams()
       if (query.page) params.set('page', query.page.toString())
-      if (query.limit) params.set('limit', query.limit.toString())
+      if (query.limit) params.set('pageSize', query.limit.toString())
       if (query.search) params.set('search', query.search)
       if (query.sortBy) params.set('sortBy', query.sortBy)
       if (query.sortOrder) params.set('sortOrder', query.sortOrder)
@@ -93,7 +93,7 @@ export function useAdminDeveloperList(query: AdminDeveloperListQuery = {}) {
     try {
       const params = new URLSearchParams()
       if (query.page) params.set('page', query.page.toString())
-      if (query.limit) params.set('limit', query.limit.toString())
+      if (query.limit) params.set('pageSize', query.limit.toString())
       if (query.search) params.set('search', query.search)
       if (query.sortBy) params.set('sortBy', query.sortBy)
       if (query.sortOrder) params.set('sortOrder', query.sortOrder)

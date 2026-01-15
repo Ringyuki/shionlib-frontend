@@ -11,7 +11,7 @@ async function getAdminStats() {
       params: { days: 30 },
     }),
     shionlibRequest().get<TopGame[]>('/admin/stats/top-games', {
-      params: { limit: 10 },
+      params: { pageSize: 10 },
     }),
   ])
 
