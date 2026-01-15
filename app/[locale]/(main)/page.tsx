@@ -4,7 +4,7 @@ import { Activity as ActivityInterface } from '@/interfaces/activity/activity.in
 import { GameItem } from '@/interfaces/game/game.interface'
 import { Container } from '@/components/home/Container'
 import { ContentLimit } from '@/interfaces/user/user.interface'
-import { getLastFridays } from './_helpers/getFriday'
+import { getLastFridays } from '../_helpers/getFriday'
 
 const getData = async () => {
   const { lastFriday, thisFriday } = getLastFridays()

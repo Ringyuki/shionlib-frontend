@@ -220,8 +220,10 @@
           "settings": "情報とサイト設定"
         },
         "Profile": {
-          "profile": "プロフィール",
-          "joined": "参加"
+          "profile": "プロフィール"
+        },
+        "Admin": {
+          "admin": "管理サイト"
         },
         "NavBar": {
           "menu": "メニュー",
@@ -1605,6 +1607,34 @@
           }
         }
       }
+    }
+  },
+  "Admin": {
+    "Sidebar": {
+      "dashboard": "ダッシュボード",
+      "games": "ゲーム",
+      "characters": "キャラクター",
+      "developers": "開発者",
+      "settings": "設定",
+      "backToSite": "サイトに戻る"
+    },
+    "Dashboard": {
+      "activityTrends": "活動トレンド",
+      "topGames": "人気のゲーム",
+      "noTrendData": "トレンドデータがありません",
+      "noGamesData": "ゲームデータがありません",
+      "views": "閲覧数",
+      "downloads": "ダウンロード数",
+      "score": "評価",
+      "totalGames": "ゲーム総数",
+      "totalUsers": "ユーザー総数",
+      "totalDownloads": "ダウンロード総数",
+      "totalViews": "閲覧総数",
+      "totalCharacters": "キャラクター総数",
+      "totalDevelopers": "開発者総数",
+      "totalComments": "コメント総数",
+      "newGamesToday": "今日の新作ゲーム",
+      "newUsersToday": "今日の新規ユーザー"
     }
   }
 }

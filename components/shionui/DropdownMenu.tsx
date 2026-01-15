@@ -53,7 +53,7 @@ function DropdownMenuItem({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Item> & {
   inset?: boolean
-  variant?: 'default' | 'destructive'
+  variant?: 'default' | 'destructive' | 'warning' | 'info' | 'success' | 'neutral'
 }) {
   return (
     <DropdownMenuPrimitive.Item
@@ -61,7 +61,13 @@ function DropdownMenuItem({
       data-inset={inset}
       data-variant={variant}
       className={cn(
-        "transition-all duration-200 focus:bg-primary/10 focus:text-primary data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        'transition-all duration-200 focus:bg-primary/10 focus:text-primary',
+        'data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive',
+        'data-[variant=warning]:text-warning data-[variant=warning]:focus:bg-warning/10 dark:data-[variant=warning]:focus:bg-warning/20 data-[variant=warning]:focus:text-warning data-[variant=warning]:*:[svg]:!text-warning',
+        'data-[variant=info]:text-info data-[variant=info]:focus:bg-info/10 dark:data-[variant=info]:focus:bg-info/20 data-[variant=info]:focus:text-info data-[variant=info]:*:[svg]:!text-info',
+        'data-[variant=success]:text-success data-[variant=success]:focus:bg-success/10 dark:data-[variant=success]:focus:bg-success/20 data-[variant=success]:focus:text-success data-[variant=success]:*:[svg]:!text-success',
+        'data-[variant=neutral]:text-neutral data-[variant=neutral]:focus:bg-neutral/10 dark:data-[variant=neutral]:focus:bg-neutral/20 data-[variant=neutral]:focus:text-neutral data-[variant=neutral]:*:[svg]:!text-neutral',
+        "[&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className,
       )}
       {...props}

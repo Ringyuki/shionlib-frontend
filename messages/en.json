@@ -230,6 +230,9 @@
         "Profile": {
           "profile": "Profile"
         },
+        "Admin": {
+          "admin": "Admin"
+        },
         "NavBar": {
           "menu": "Menu",
           "home": "Home",
@@ -1613,6 +1616,34 @@
           }
         }
       }
+    }
+  },
+  "Admin": {
+    "Sidebar": {
+      "dashboard": "Dashboard",
+      "games": "Games",
+      "characters": "Characters",
+      "developers": "Developers",
+      "settings": "Settings",
+      "backToSite": "Back to Site"
+    },
+    "Dashboard": {
+      "activityTrends": "Activity Trends",
+      "topGames": "Top Games",
+      "noTrendData": "No trend data available",
+      "noGamesData": "No games data available",
+      "views": "views",
+      "downloads": "downloads",
+      "score": "score",
+      "totalGames": "Total Games",
+      "totalUsers": "Total Users",
+      "totalDownloads": "Total Downloads",
+      "totalViews": "Total Views",
+      "totalCharacters": "Total Characters",
+      "totalDevelopers": "Total Developers",
+      "totalComments": "Total Comments",
+      "newGamesToday": "New Games Today",
+      "newUsersToday": "New Users Today"
     }
   }
 }

@@ -9,11 +9,8 @@ import { SupportedLocales } from '@/config/i18n/supported'
 export { generateMetadata } from './metadata'
 import '@/public/assets/styles/globals.css'
 import { toastProps } from './toastOption'
-import ShionlibTopBar from '@/components/common/top-bar/TopBar'
-import { GlobalDialogs } from '@/components/common/user/GlobalDialogs'
 import { TokenRefresh } from '@/components/common/auth/TokenRefresh'
 import { Noto_Sans, Noto_Sans_SC, Noto_Sans_JP, Noto_Sans_Mono } from 'next/font/google'
-import { ShionlibFooter } from '@/components/common/footer/Footer'
 import { Cinzel } from 'next/font/google'
 import { UmamiProvider } from '@/components/common/site/UmamiProvider'
 import { OpenPanelProvider } from '@/components/common/site/OpenPanelProvider'
@@ -46,7 +43,7 @@ const notoSans_Mono = Noto_Sans_Mono({
   subsets: ['latin'],
 })
 
-export default async function ShionlibLayout({ children, params }: Readonly<Props>) {
+export default async function RootLayout({ children, params }: Readonly<Props>) {
   const { locale } = await params
   if (!hasLocale(routing.locales, locale)) {
     notFound()
@@ -66,20 +63,10 @@ export default async function ShionlibLayout({ children, params }: Readonly<Prop
       <body>
         <TokenRefresh />
         <NextIntlClientProvider>
-          <div className="relative flex flex-col items-center justify-center min-h-screen bg-radial">
-            <ShionlibProvider>
-              <ShionlibTopBar />
-              <div
-                data-vaul-drawer-wrapper
-                className="flex min-h-[calc(100dvh-24rem)] w-full max-w-7xl grow px-3 pt-16 topbar:pt-20"
-              >
-                {children}
-              </div>
-              <ShionlibFooter />
-              <GlobalDialogs />
-              <Toaster {...toastProps} />
-            </ShionlibProvider>
-          </div>
+          <ShionlibProvider>
+            {children}
+            <Toaster {...toastProps} />
+          </ShionlibProvider>
         </NextIntlClientProvider>
       </body>
     </html>

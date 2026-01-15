@@ -10,6 +10,7 @@ import {
 import { Logout } from '@/components/common/top-bar/Logout'
 import { Settings } from '@/components/common/top-bar/Settings'
 import { Profile } from '@/components/common/top-bar/Profile'
+import { Admin } from '@/components/common/top-bar/Admin'
 
 interface AvatarProps {
   user: User
@@ -30,6 +31,7 @@ export const TopBarAvatar = ({ user, className }: AvatarProps) => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <Admin />
         <Profile />
         <Settings />
         <Logout />
