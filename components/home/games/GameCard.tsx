@@ -6,6 +6,7 @@ import { getLocale } from 'next-intl/server'
 import { ContentLimit } from '@/interfaces/user/user.interface'
 import { FadeImage } from '@/components/common/shared/FadeImage'
 import { cn } from '@/utils/cn'
+import { GameSearchItem } from '@/interfaces/game/game.interface'
 
 interface GameCardProps {
   game: GameItem
@@ -20,7 +21,7 @@ export const GameCard = async ({ game, content_limit }: GameCardProps) => {
   const sizes =
     '(min-width: 1280px) 240px, (min-width: 1024px) 200px, (min-width: 768px) 180px, (min-width: 640px) 160px, 45vw'
 
-  const { title } = getPreferredContent(game as unknown as GameData, 'title', lang)
+  const { title, language } = getPreferredContent(game as unknown as GameData, 'title', lang)
   const { cover, vertical, aspect } = getPreferredContent(
     game as unknown as GameData,
     'cover',
@@ -35,6 +36,7 @@ export const GameCard = async ({ game, content_limit }: GameCardProps) => {
         aspect={aspect}
         sizes={sizes}
         shouldBlur={false}
+        language={language}
       />
     )
 
@@ -45,7 +47,7 @@ export const GameCard = async ({ game, content_limit }: GameCardProps) => {
       content_limit === ContentLimit.NEVER_SHOW_NSFW_CONTENT ||
       !content_limit)
 
-  return GameCardContent({ game, cover, title, vertical, aspect, sizes, shouldBlur })
+  return GameCardContent({ game, cover, title, vertical, aspect, sizes, shouldBlur, language })
 }
 
 interface GameCardContentProps {
@@ -56,6 +58,7 @@ interface GameCardContentProps {
   aspect?: string
   sizes: string
   shouldBlur: boolean
+  language: string
 }
 const GameCardContent = ({
   game,
@@ -65,6 +68,7 @@ const GameCardContent = ({
   aspect,
   sizes,
   shouldBlur,
+  language,
 }: GameCardContentProps) => {
   return (
     <Link href={`/game/${game.id}`} className="block group">
@@ -113,16 +117,35 @@ const GameCardContent = ({
         />
 
         <div className="absolute inset-x-0 bottom-0 p-3">
-          <h3
-            className={cn(
-              'text-white font-medium text-sm leading-tight',
-              'line-clamp-2',
-              'drop-shadow-md',
-              'transition-colors duration-200',
+          <div className="flex flex-col gap-2">
+            {typeof game === 'object' && '_formatted' in game ? (
+              <h3
+                className={cn(
+                  'text-white font-medium text-sm leading-tight',
+                  'line-clamp-2',
+                  'drop-shadow-md',
+                  'transition-colors duration-200',
+                )}
+                dangerouslySetInnerHTML={{
+                  __html:
+                    (game as GameSearchItem)._formatted?.[
+                      `title_${language}` as keyof GameSearchItem['_formatted']
+                    ] || title,
+                }}
+              />
+            ) : (
+              <h3
+                className={cn(
+                  'text-white font-medium text-sm leading-tight',
+                  'line-clamp-2',
+                  'drop-shadow-md',
+                  'transition-colors duration-200',
+                )}
+              >
+                {title}
+              </h3>
             )}
-          >
-            {title}
-          </h3>
+          </div>
         </div>
       </Card>
     </Link>

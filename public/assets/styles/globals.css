@@ -282,7 +282,7 @@ samp {
     @apply text-primary hover:text-primary/80 transition-all duration-200;
   }
   .search-highlight {
-    @apply bg-primary/10 text-primary rounded-sm p-0.5;
+    @apply bg-primary/50 rounded-sm p-0.5;
   }
 }
 
