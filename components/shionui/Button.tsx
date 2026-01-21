@@ -316,10 +316,12 @@ type ShionButtonProps = React.ComponentProps<'button'> &
     loginRequired?: boolean
     renderIcon?: React.ReactNode | (() => React.ReactNode)
     iconPosition?: 'left' | 'right'
+    innerClassName?: string
   }
 
 function Button({
   className,
+  innerClassName,
   intent,
   appearance,
   size,
@@ -492,7 +494,7 @@ function Button({
               return s
             }}
             transition={{ duration: 0.2, ease: [0.05, 0.7, 0.1, 1] }}
-            className="flex items-center"
+            className={cn('flex items-center', innerClassName)}
           >
             {contentChildren}
           </motion.span>
@@ -500,7 +502,7 @@ function Button({
 
         return (
           <motion.span
-            className="relative z-10 flex items-center"
+            className={cn('relative z-10 flex items-center', innerClassName)}
             layout="position"
             transformTemplate={(_t, generated) => {
               // remove all animations on y-axis
