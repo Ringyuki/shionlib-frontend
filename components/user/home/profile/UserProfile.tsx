@@ -40,7 +40,7 @@ export const UserProfile = async ({ user }: UserProfileProps) => {
   }
   const badgeColor = roleBadgeTokenMap[user.role]
   return (
-    <Card className="sticky top-24">
+    <Card>
       <CardContent>
         <div className="flex flex-col gap-4">
           <div className="flex gap-4">

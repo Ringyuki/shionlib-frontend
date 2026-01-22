@@ -1,5 +1,4 @@
 import { FavoriteContent } from '@/components/user/home/favorites/FavoriteContent'
-import { FavoriteList } from '@/components/user/home/favorites/FavoriteList'
 import { FavoriteItemsHeader } from '@/components/user/home/favorites/FavoriteItemsHeader'
 import { Empty } from '@/components/common/content/Empty'
 import { shionlibRequest } from '@/utils/shionlib-request'
@@ -50,27 +49,24 @@ export default async function UserFavoritesPage({ params, searchParams }: UserFa
 
   const itemsData = await getFavoriteItems(selectedFavorite.id, { page })
   return (
-    <div className="grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start">
-      <FavoriteList favorites={favorites} selectedId={selectedFavorite.id} userId={id} />
-      <div className="flex flex-col gap-4">
-        <FavoriteItemsHeader favorite={selectedFavorite} />
-        {itemsData.data?.items?.length ? (
-          <>
-            <FavoriteContent
-              favorites={itemsData.data?.items ?? []}
-              content_limit={itemsData.data?.meta?.content_limit}
-            />
-            <Pagination
-              className="mt-4"
-              currentPage={itemsData.data?.meta?.currentPage ?? 1}
-              totalPages={itemsData.data?.meta?.totalPages ?? 1}
-              extraQuery={{ folder: selectedFavorite.id }}
-            />
-          </>
-        ) : (
-          <Empty />
-        )}
-      </div>
+    <div className="flex flex-col gap-6">
+      <FavoriteItemsHeader favorite={selectedFavorite} />
+      {itemsData.data?.items?.length ? (
+        <>
+          <FavoriteContent
+            favorites={itemsData.data?.items ?? []}
+            content_limit={itemsData.data?.meta?.content_limit}
+          />
+          <Pagination
+            className="mt-4"
+            currentPage={itemsData.data?.meta?.currentPage ?? 1}
+            totalPages={itemsData.data?.meta?.totalPages ?? 1}
+            extraQuery={{ folder: selectedFavorite.id }}
+          />
+        </>
+      ) : (
+        <Empty />
+      )}
     </div>
   )
 }
