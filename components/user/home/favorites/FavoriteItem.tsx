@@ -1,4 +1,4 @@
-import { FavoriteItem as FavoriteItemInterface } from '@/interfaces/user/favorites.interface'
+import { FavoriteItem as FavoriteItemInterface } from '@/interfaces/favorite/favorite-item.interface'
 import { Link } from '@/i18n/navigation'
 import { Card, CardContent } from '@/components/shionui/Card'
 import { ContentLimit } from '@/interfaces/user/user.interface'

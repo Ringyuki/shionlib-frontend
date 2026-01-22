@@ -1,20 +1,32 @@
 import { FavoriteContent } from '@/components/user/home/favorites/FavoriteContent'
+import { FavoriteList } from '@/components/user/home/favorites/FavoriteList'
+import { FavoriteItemsHeader } from '@/components/user/home/favorites/FavoriteItemsHeader'
 import { Empty } from '@/components/common/content/Empty'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
-import { FavoriteItem } from '@/interfaces/user/favorites.interface'
+import { FavoriteItem } from '@/interfaces/favorite/favorite-item.interface'
 import { ContentLimit } from '@/interfaces/user/user.interface'
 import { Pagination } from '@/components/common/content/Pagination'
+import { Favorite } from '@/interfaces/favorite/favorite.interface'
 
 interface UserFavoritesPageProps {
   params: Promise<{ id: string }>
-  searchParams: Promise<{ page: string }>
+  searchParams: Promise<{ page?: string; folder?: string }>
 }
 
-const getData = async (id: string, searchParams: { page: string }) => {
+const getFavorites = async (userId: string) => {
+  const data = await shionlibRequest().get<Favorite[]>('/favorites', {
+    params: {
+      user_id: userId,
+    },
+  })
+  return data
+}
+
+const getFavoriteItems = async (favoriteId: number, searchParams: { page?: string }) => {
   const data = await shionlibRequest().get<
-    PaginatedResponse<FavoriteItem, { content_limit: ContentLimit }>
-  >(`/user/datas/${id}/favorites`, {
+    PaginatedResponse<FavoriteItem, { content_limit?: ContentLimit }>
+  >(`/favorites/${favoriteId}/items`, {
     params: {
       page: searchParams.page ?? '1',
     },
@@ -24,21 +36,41 @@ const getData = async (id: string, searchParams: { page: string }) => {
 
 export default async function UserFavoritesPage({ params, searchParams }: UserFavoritesPageProps) {
   const { id } = await params
-  const { page } = await searchParams
-  const data = await getData(id, { page })
-  return (data.data?.items?.length ?? 0 > 0) ? (
-    <div>
-      <FavoriteContent
-        favorites={data.data?.items ?? []}
-        content_limit={data.data?.meta.content_limit}
-      />
-      <Pagination
-        className="mt-4"
-        currentPage={data.data?.meta.currentPage!}
-        totalPages={data.data?.meta.totalPages!}
-      />
+  const { page, folder } = await searchParams
+  const favoritesData = await getFavorites(id)
+  const { data: favorites } = favoritesData ?? {}
+
+  if (!favorites?.length) return <Empty />
+
+  const parsedFolderId = folder ? Number(folder) : NaN
+  const selectedFavorite =
+    favorites.find(favorite => favorite.id === parsedFolderId) ||
+    favorites.find(favorite => favorite.default) ||
+    favorites[0]
+
+  const itemsData = await getFavoriteItems(selectedFavorite.id, { page })
+  return (
+    <div className="grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start">
+      <FavoriteList favorites={favorites} selectedId={selectedFavorite.id} userId={id} />
+      <div className="flex flex-col gap-4">
+        <FavoriteItemsHeader favorite={selectedFavorite} />
+        {itemsData.data?.items?.length ? (
+          <>
+            <FavoriteContent
+              favorites={itemsData.data?.items ?? []}
+              content_limit={itemsData.data?.meta?.content_limit}
+            />
+            <Pagination
+              className="mt-4"
+              currentPage={itemsData.data?.meta?.currentPage ?? 1}
+              totalPages={itemsData.data?.meta?.totalPages ?? 1}
+              extraQuery={{ folder: selectedFavorite.id }}
+            />
+          </>
+        ) : (
+          <Empty />
+        )}
+      </div>
     </div>
-  ) : (
-    <Empty />
   )
 }

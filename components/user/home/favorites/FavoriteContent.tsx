@@ -1,4 +1,4 @@
-import { FavoriteItem } from '@/interfaces/user/favorites.interface'
+import { FavoriteItem } from '@/interfaces/favorite/favorite-item.interface'
 import { FavoriteItem as FavoriteItemComponent } from './FavoriteItem'
 import { ContentLimit } from '@/interfaces/user/user.interface'
 
