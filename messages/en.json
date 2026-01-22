@@ -1229,6 +1229,23 @@
               "cancel": "Cancel",
               "delete": "Delete",
               "success": "Delete successfully"
+            },
+            "Edit": {
+              "edit": "Edit favorites",
+              "title": "Edit favorites",
+              "description": "Update favorites info.",
+              "Content": {
+                "name": "Favorites name",
+                "description": "Favorites description",
+                "is_private": "Private favorites",
+                "submit": "Save",
+                "success": "Saved successfully",
+                "validation": {
+                  "nameMinLength": "Favorites name must be at least {length} characters",
+                  "nameMaxLength": "Favorites name must be at most {length} characters",
+                  "descriptionMaxLength": "Favorites description must be at most {length} characters"
+                }
+              }
             }
           }
         }
@@ -1623,23 +1640,6 @@
           "is_private": "Private favorites",
           "submit": "Create",
           "success": "Created successfully",
-          "validation": {
-            "nameMinLength": "Favorites name must be at least {length} characters",
-            "nameMaxLength": "Favorites name must be at most {length} characters",
-            "descriptionMaxLength": "Favorites description must be at most {length} characters"
-          }
-        }
-      },
-      "Edit": {
-        "edit": "Edit favorites",
-        "title": "Edit favorites",
-        "description": "Update favorites info.",
-        "Content": {
-          "name": "Favorites name",
-          "description": "Favorites description",
-          "is_private": "Private favorites",
-          "submit": "Save",
-          "success": "Saved successfully",
           "validation": {
             "nameMinLength": "Favorites name must be at least {length} characters",
             "nameMaxLength": "Favorites name must be at most {length} characters",

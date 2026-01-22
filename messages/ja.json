@@ -1221,6 +1221,23 @@
               "cancel": "キャンセル",
               "delete": "削除",
               "success": "削除成功"
+            },
+            "Edit": {
+              "edit": "お気に入りを編集",
+              "title": "お気に入りを編集",
+              "description": "お気に入り情報を更新します。",
+              "Content": {
+                "name": "お気に入り名称",
+                "description": "お気に入り説明",
+                "is_private": "私有お気に入り",
+                "submit": "保存",
+                "success": "保存成功",
+                "validation": {
+                  "nameMinLength": "お気に入り名称は少なくとも {length} 文字以上必要です",
+                  "nameMaxLength": "お気に入り名称は最大 {length} 文字まで許可されています",
+                  "descriptionMaxLength": "お気に入り説明は最大 {length} 文字まで許可されています"
+                }
+              }
             }
           }
         }
@@ -1614,23 +1631,6 @@
           "is_private": "私有お気に入り",
           "submit": "作成",
           "success": "作成成功",
-          "validation": {
-            "nameMinLength": "お気に入り名称は少なくとも {length} 文字以上必要です",
-            "nameMaxLength": "お気に入り名称は最大 {length} 文字まで許可されています",
-            "descriptionMaxLength": "お気に入り説明は最大 {length} 文字まで許可されています"
-          }
-        }
-      },
-      "Edit": {
-        "edit": "お気に入りを編集",
-        "title": "お気に入りを編集",
-        "description": "お気に入り情報を更新します。",
-        "Content": {
-          "name": "お気に入り名称",
-          "description": "お気に入り説明",
-          "is_private": "私有お気に入り",
-          "submit": "保存",
-          "success": "保存成功",
           "validation": {
             "nameMinLength": "お気に入り名称は少なくとも {length} 文字以上必要です",
             "nameMaxLength": "お気に入り名称は最大 {length} 文字まで許可されています",
