@@ -1596,6 +1596,8 @@
       },
       "Create": {
         "create": "Create favorites",
+        "title": "Create favorites",
+        "description": "Create a favorites. You can view and manage your favorites in your personal center.",
         "Content": {
           "name": "Favorites name",
           "description": "Favorites description",
