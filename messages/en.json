@@ -1583,7 +1583,8 @@
         "addToFavorites": "Add to favorites",
         "favorited": "Added to favorites",
         "removeFromFavorites": "Remove from favorites",
-        "favorite": "Add to favorites",
+        "title": "Add to favorites",
+        "description": "Add this game to your favorites. Favorites are created for personal use and other users cannot view them.",
         "Content": {
           "Item": {
             "gameCount": "Total {count} games",

@@ -1574,7 +1574,8 @@
         "addToFavorites": "お気に入りに追加",
         "favorited": "お気に入りに追加済み",
         "removeFromFavorites": "お気に入りから削除",
-        "favorite": "お気に入りに追加",
+        "title": "お気に入りに追加",
+        "description": "このゲームをお気に入りに追加します。お気に入りは個人用に作成され、他のユーザーは表示できません。",
         "Content": {
           "Item": {
             "gameCount": "合計 {count} 作品",
