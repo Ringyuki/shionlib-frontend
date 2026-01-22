@@ -21,7 +21,7 @@ export const FavoriteList = ({ favorites, selectedId, userId }: FavoriteListProp
   }
   return (
     <div className="flex flex-col gap-4">
-      <ScrollArea className="h-64 md:h-[clamp(64px,calc(100vh-32rem),9999px)]">
+      <ScrollArea className="h-64 md:min-h-16 md:max-h-[calc(100vh-32rem)] md:h-auto">
         <div className="flex flex-col gap-4">
           {favoritesList.map(favorite => (
             <FavoriteListItem
