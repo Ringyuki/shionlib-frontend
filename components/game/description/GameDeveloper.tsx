@@ -9,21 +9,23 @@ interface GameDeveloperProps {
 
 export const GameDeveloper = async ({ developers }: GameDeveloperProps) => {
   return (
-    <div className="flex gap-2 items-center text-gray-500 font-light">
-      <Building2 className="size-4" />
-      {developers.map(d => (
-        <Button
-          key={d.developer.id}
-          className="hover:text-primary p-0 pl-1 pr-1 h-auto"
-          appearance="ghost"
-          intent="neutral"
-          size="sm"
-        >
-          <Link href={`/developer/${d.developer.id}`}>
-            {d.developer.name || d.developer.aliases?.[0]}
-          </Link>
-        </Button>
-      ))}
-    </div>
+    developers.length > 0 && (
+      <div className="flex gap-2 items-center text-gray-500 font-light">
+        <Building2 className="size-4" />
+        {developers.map(d => (
+          <Button
+            key={d.developer.id}
+            className="hover:text-primary p-0 pl-1 pr-1 h-auto"
+            appearance="ghost"
+            intent="neutral"
+            size="sm"
+          >
+            <Link href={`/developer/${d.developer.id}`}>
+              {d.developer.name || d.developer.aliases?.[0]}
+            </Link>
+          </Button>
+        ))}
+      </div>
+    )
   )
 }
