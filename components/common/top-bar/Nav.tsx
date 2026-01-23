@@ -20,6 +20,7 @@ export const Nav = ({ items }: NavProps) => {
     <div className="flex items-center gap-0.5">
       {items.map(link => {
         const isActive = segment === link.href.replace(/^\//, '')
+        const gradientId = `nav-gradient-${link.href.replace(/[^a-zA-Z0-9_-]/g, '-')}`
         return (
           <Link
             key={link.href}
@@ -39,6 +40,7 @@ export const Nav = ({ items }: NavProps) => {
                     <GradientIcon
                       icon={link.icon as React.ReactElement<SVGSVGElement>}
                       gradient={link.gradientTextColor}
+                      gradientId={gradientId}
                     />
                   )}
                   <GradientText text={t(link.label)} gradient={link.gradientTextColor} />

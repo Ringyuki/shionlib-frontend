@@ -5,6 +5,7 @@ import * as React from 'react'
 type GradientIconProps = {
   icon: React.ReactElement<SVGSVGElement>
   gradient?: string
+  gradientId?: string
 }
 
 function parseGradient(gradient?: string): {
@@ -27,8 +28,8 @@ function parseGradient(gradient?: string): {
   return { from, to }
 }
 
-export function GradientIcon({ icon, gradient }: GradientIconProps) {
-  const id = React.useId().replace(/:/g, '')
+export function GradientIcon({ icon, gradient, gradientId }: GradientIconProps) {
+  const id = gradientId?.replace(/:/g, '') ?? ''
   const { from, to } = parseGradient(gradient)
 
   return React.cloneElement(
