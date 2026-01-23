@@ -14,6 +14,11 @@ async function getUser(id: string) {
   return data.data
 }
 
+async function getCurrentUser() {
+  const data = await shionlibRequest({ forceNotThrowError: true }).get<UserProfileType>(`/user/me`)
+  return data.data
+}
+
 async function getFavorites(id: string) {
   const data = await shionlibRequest().get<Favorite[]>(`/favorites`, {
     params: {
@@ -36,8 +41,11 @@ export default async function UserLayout({ children, params }: Readonly<UserLayo
   if (!hasLocale(routing.locales, locale)) {
     notFound()
   }
-  const user = await getUser(id)
-  const favorites = await getFavorites(id)
+  const [user, currentUser, favorites] = await Promise.all([
+    getUser(id),
+    getCurrentUser(),
+    getFavorites(id),
+  ])
   if (!user) {
     notFound()
   }
@@ -47,7 +55,7 @@ export default async function UserLayout({ children, params }: Readonly<UserLayo
         <div className="lg:col-span-1">
           <div className="sticky top-24 space-y-4">
             <UserProfile user={user} />
-            <FavoriteSidebar userId={id} favorites={favorites ?? []} />
+            <FavoriteSidebar userId={id} currentUser={currentUser} favorites={favorites ?? []} />
           </div>
         </div>
         <div className="space-y-6 lg:col-span-2">

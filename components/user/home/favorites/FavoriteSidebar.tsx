@@ -4,13 +4,15 @@ import { useMemo } from 'react'
 import { useSearchParams, useSelectedLayoutSegment } from 'next/navigation'
 import { Favorite } from '@/interfaces/favorite/favorite.interface'
 import { FavoriteList } from './FavoriteList'
+import { UserProfile } from '@/interfaces/user/user.interface'
 
 interface FavoriteSidebarProps {
   userId: string
   favorites: Favorite[]
+  currentUser: UserProfile | null
 }
 
-export const FavoriteSidebar = ({ userId, favorites }: FavoriteSidebarProps) => {
+export const FavoriteSidebar = ({ userId, currentUser, favorites }: FavoriteSidebarProps) => {
   const segment = useSelectedLayoutSegment()
   const searchParams = useSearchParams()
 
@@ -31,5 +33,12 @@ export const FavoriteSidebar = ({ userId, favorites }: FavoriteSidebarProps) => 
 
   if (segment !== 'favorites') return null
 
-  return <FavoriteList favorites={sortedFavorites} selectedId={selectedId} userId={userId} />
+  return (
+    <FavoriteList
+      favorites={sortedFavorites}
+      selectedId={selectedId}
+      userId={userId}
+      currentUser={currentUser}
+    />
+  )
 }

@@ -4,17 +4,17 @@ import { Favorite } from '@/interfaces/favorite/favorite.interface'
 import { FavoriteListItem } from './FavoriteListItem'
 import { FavoriteCreate } from '@/components/favorite/create/Create'
 import { useState } from 'react'
-import { useShionlibUserStore } from '@/store/userStore'
 import { ScrollArea } from '@/components/shionui/ScrollArea'
+import { UserProfile } from '@/interfaces/user/user.interface'
 
 interface FavoriteListProps {
   favorites: Favorite[]
   selectedId?: number
   userId: string
+  currentUser: UserProfile | null
 }
 
-export const FavoriteList = ({ favorites, selectedId, userId }: FavoriteListProps) => {
-  const { user } = useShionlibUserStore()
+export const FavoriteList = ({ favorites, selectedId, userId, currentUser }: FavoriteListProps) => {
   const [favoritesList, setFavoritesList] = useState(favorites)
   const handleSuccess = (favorite: Favorite) => {
     setFavoritesList(prev => [...prev, favorite])
@@ -33,7 +33,7 @@ export const FavoriteList = ({ favorites, selectedId, userId }: FavoriteListProp
           ))}
         </div>
       </ScrollArea>
-      {user.id === Number(userId) && <FavoriteCreate onSuccess={handleSuccess} />}
+      {currentUser?.id === Number(userId) && <FavoriteCreate onSuccess={handleSuccess} />}
     </div>
   )
 }
