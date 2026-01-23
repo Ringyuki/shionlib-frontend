@@ -29,7 +29,7 @@ export const FavoriteListItem = ({ favorite, selected = false, userId }: Favorit
     >
       <Card
         className={cn(
-          'py-0 transition-colors',
+          'py-0 transition-colors shadow-none',
           selected ? 'border-primary/50 bg-primary/5' : 'hover:bg-accent/30',
         )}
       >

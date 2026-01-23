@@ -3,7 +3,6 @@
 import { Favorite } from '@/interfaces/favorite/favorite.interface'
 import { FavoriteListItem } from './FavoriteListItem'
 import { FavoriteCreate } from '@/components/favorite/create/Create'
-import { useState } from 'react'
 import { ScrollArea } from '@/components/shionui/ScrollArea'
 import { UserProfile } from '@/interfaces/user/user.interface'
 
@@ -12,18 +11,21 @@ interface FavoriteListProps {
   selectedId?: number
   userId: string
   currentUser: UserProfile | null
+  onCreateSuccess: (favorite: Favorite) => void
 }
 
-export const FavoriteList = ({ favorites, selectedId, userId, currentUser }: FavoriteListProps) => {
-  const [favoritesList, setFavoritesList] = useState(favorites)
-  const handleSuccess = (favorite: Favorite) => {
-    setFavoritesList(prev => [...prev, favorite])
-  }
+export const FavoriteList = ({
+  favorites,
+  selectedId,
+  userId,
+  currentUser,
+  onCreateSuccess,
+}: FavoriteListProps) => {
   return (
     <div className="flex flex-col gap-4">
-      <ScrollArea className="h-64 md:min-h-12 md:max-h-[calc(100vh-32rem)] md:h-auto">
+      <ScrollArea className="max-h-64 md:min-h-12 md:max-h-[calc(100vh-32rem)] md:h-auto">
         <div className="flex flex-col gap-4">
-          {favoritesList.map(favorite => (
+          {favorites.map(favorite => (
             <FavoriteListItem
               key={favorite.id}
               favorite={favorite}
@@ -33,7 +35,7 @@ export const FavoriteList = ({ favorites, selectedId, userId, currentUser }: Fav
           ))}
         </div>
       </ScrollArea>
-      {currentUser?.id === Number(userId) && <FavoriteCreate onSuccess={handleSuccess} />}
+      {currentUser?.id === Number(userId) && <FavoriteCreate onSuccess={onCreateSuccess} />}
     </div>
   )
 }

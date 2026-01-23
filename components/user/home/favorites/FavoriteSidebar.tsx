@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useSearchParams, useSelectedLayoutSegment } from 'next/navigation'
 import { Favorite } from '@/interfaces/favorite/favorite.interface'
 import { FavoriteList } from './FavoriteList'
@@ -15,23 +15,28 @@ interface FavoriteSidebarProps {
 export const FavoriteSidebar = ({ userId, currentUser, favorites }: FavoriteSidebarProps) => {
   const segment = useSelectedLayoutSegment()
   const searchParams = useSearchParams()
+  const [favoritesList, setFavoritesList] = useState(favorites)
 
   const selectedId = useMemo(() => {
-    if (!favorites?.length) return undefined
+    if (!favoritesList?.length) return undefined
     const folder = searchParams.get('folder')
     const parsedFolderId = folder ? Number(folder) : NaN
     return (
-      favorites.find(favorite => favorite.id === parsedFolderId)?.id ||
-      favorites.find(favorite => favorite.default)?.id ||
-      favorites[0]?.id
+      favoritesList.find(favorite => favorite.id === parsedFolderId)?.id ||
+      favoritesList.find(favorite => favorite.default)?.id ||
+      favoritesList[0]?.id
     )
-  }, [favorites, searchParams])
+  }, [favoritesList, searchParams])
 
   const sortedFavorites = useMemo(() => {
-    return [...favorites].sort((a, b) => Number(b.default) - Number(a.default))
-  }, [favorites])
+    return [...favoritesList].sort((a, b) => Number(b.default) - Number(a.default))
+  }, [favoritesList])
 
   if (segment !== 'favorites') return null
+
+  const handleCreateSuccess = (favorite: Favorite) => {
+    setFavoritesList(prev => [...prev, favorite])
+  }
 
   return (
     <FavoriteList
@@ -39,6 +44,7 @@ export const FavoriteSidebar = ({ userId, currentUser, favorites }: FavoriteSide
       selectedId={selectedId}
       userId={userId}
       currentUser={currentUser}
+      onCreateSuccess={handleCreateSuccess}
     />
   )
 }
