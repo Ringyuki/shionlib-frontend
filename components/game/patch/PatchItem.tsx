@@ -84,8 +84,8 @@ export const PatchItem = ({ patch }: GameDownloadResourceItemProps) => {
       <div className="flex flex-col gap-2 rounded-lg w-full">
         <PatchResourceItem patch={patch} />
         {patch.note && (
-          <ScrollArea className="text-xs font-light font-mono! pl-2 space-y-2 max-h-[200px]">
-            {markdownRender(patch.note, { newlineToBr: true })}
+          <ScrollArea className="text-xs font-light font-mono! pl-2 max-h-[200px]">
+            <span className="space-y-2">{markdownRender(patch.note, { newlineToBr: true })}</span>
           </ScrollArea>
         )}
       </div>
