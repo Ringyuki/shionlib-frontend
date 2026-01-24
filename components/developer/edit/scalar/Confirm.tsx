@@ -24,11 +24,11 @@ export const Confirm = ({ open, setOpen, handleSubmit, changes }: ConfirmProps) 
   const t = useTranslations('Components.Developer.Edit.Scalar.Confirm')
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogContent fitContent tone="primary">
+      <AlertDialogContent tone="primary">
         <AlertDialogHeader>
           <AlertDialogTitle>{t('title')}</AlertDialogTitle>
         </AlertDialogHeader>
-        <AlertDialogDescription className="lg:w-4xl text-foreground" asChild>
+        <AlertDialogDescription className="text-foreground" asChild>
           <ScrollArea className="max-h-[calc(100dvh-20rem)]">
             <Changes changes={changes} />
           </ScrollArea>

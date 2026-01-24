@@ -48,9 +48,9 @@ export const EditChanges = ({ changes }: EditChangesProps) => {
               {added.map((item: any, index: number) => (
                 <div
                   key={index}
-                  className="text-sm bg-green-50 dark:bg-green-950/20 p-2 rounded-md border border-green-200 dark:border-green-800"
+                  className="text-sm bg-green-50 dark:bg-green-950/20 rounded-md border border-green-200 dark:border-green-800"
                 >
-                  <pre className="whitespace-pre-wrap break-words font-mono! text-xs">
+                  <pre className="whitespace-pre-wrap break-words font-mono! text-xs p-2">
                     {formatValue(item)}
                   </pre>
                 </div>
@@ -71,9 +71,9 @@ export const EditChanges = ({ changes }: EditChangesProps) => {
               {removed.map((item: any, index: number) => (
                 <div
                   key={index}
-                  className="text-sm bg-red-50 dark:bg-red-950/20 p-2 rounded-md border border-red-200 dark:border-red-800"
+                  className="text-sm bg-red-50 dark:bg-red-950/20 rounded-md border border-red-200 dark:border-red-800"
                 >
-                  <pre className="whitespace-pre-wrap break-words font-mono! text-xs">
+                  <pre className="whitespace-pre-wrap break-words font-mono! text-xs p-2">
                     {formatValue(item)}
                   </pre>
                 </div>
@@ -115,9 +115,9 @@ export const EditChanges = ({ changes }: EditChangesProps) => {
 
               <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-2 items-start">
                 <div className="flex flex-col gap-1">
-                  <div className="text-sm bg-red-50 dark:bg-red-950/20 p-2 rounded-md border border-red-200 dark:border-red-800">
+                  <div className="text-sm bg-red-50 dark:bg-red-950/20 rounded-md border border-red-200 dark:border-red-800">
                     <ScrollArea className="max-h-40">
-                      <pre className="whitespace-pre-wrap break-words font-mono! text-xs overflow-y-auto break-all">
+                      <pre className="whitespace-pre-wrap break-words font-mono! text-xs overflow-y-auto break-all p-2">
                         {formatValue(beforeValue)}
                       </pre>
                     </ScrollArea>
@@ -130,9 +130,9 @@ export const EditChanges = ({ changes }: EditChangesProps) => {
                 </div>
 
                 <div className="flex flex-col gap-1">
-                  <div className="text-sm bg-green-50 dark:bg-green-950/20 p-2 rounded-md border border-green-200 dark:border-green-800">
+                  <div className="text-sm bg-green-50 dark:bg-green-950/20 rounded-md border border-green-200 dark:border-green-800">
                     <ScrollArea className="max-h-40">
-                      <pre className="whitespace-pre-wrap break-words font-mono! text-xs overflow-y-auto break-all">
+                      <pre className="whitespace-pre-wrap break-words font-mono! text-xs overflow-y-auto break-all p-2">
                         {formatValue(afterValue)}
                       </pre>
                     </ScrollArea>

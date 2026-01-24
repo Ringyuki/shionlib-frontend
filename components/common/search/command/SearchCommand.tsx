@@ -48,7 +48,7 @@ export const SearchCommand = () => {
           }}
         />
         <CommandList className="max-h-[400px] mt-2 my-1">
-          <ScrollArea className="h-[400px]">
+          <ScrollArea className="h-[400px]" showScrollHint={false}>
             {q ? (
               <Suggest q={q} onSelect={handleSelectItem} />
             ) : (

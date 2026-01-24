@@ -5,11 +5,11 @@ import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area'
 
 import { cn } from '@/utils/cn'
 
-function ScrollArea({
-  className,
-  children,
-  ...props
-}: React.ComponentProps<typeof ScrollAreaPrimitive.Root>) {
+interface ScrollAreaProps extends React.ComponentProps<typeof ScrollAreaPrimitive.Root> {
+  showScrollHint?: boolean
+}
+
+function ScrollArea({ className, children, showScrollHint = true, ...props }: ScrollAreaProps) {
   const viewportRef = React.useRef<HTMLDivElement | null>(null)
   const [canScrollUp, setCanScrollUp] = React.useState(false)
   const [canScrollDown, setCanScrollDown] = React.useState(false)
@@ -61,8 +61,8 @@ function ScrollArea({
       <div
         data-slot="scroll-area-shadow-top"
         className={cn(
-          'pointer-events-none absolute inset-x-0 top-0 z-10 h-6 bg-gradient-to-b from-foreground/15 to-transparent transition-opacity',
-          canScrollUp ? 'opacity-100' : 'opacity-0',
+          'pointer-events-none absolute inset-x-0 top-0 z-10 h-3 bg-gradient-to-b from-foreground/15 to-transparent transition-opacity',
+          canScrollUp && showScrollHint ? 'opacity-100' : 'opacity-0',
         )}
       />
       <ScrollAreaPrimitive.Viewport
@@ -76,8 +76,8 @@ function ScrollArea({
       <div
         data-slot="scroll-area-shadow-bottom"
         className={cn(
-          'pointer-events-none absolute inset-x-0 bottom-0 z-10 h-6 bg-gradient-to-t from-foreground/15 to-transparent transition-opacity',
-          canScrollDown ? 'opacity-100' : 'opacity-0',
+          'pointer-events-none absolute inset-x-0 bottom-0 z-10 h-3 bg-gradient-to-t from-foreground/15 to-transparent transition-opacity',
+          canScrollDown && showScrollHint ? 'opacity-100' : 'opacity-0',
         )}
       />
       <ScrollBar />

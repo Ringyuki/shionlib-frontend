@@ -11,7 +11,7 @@ interface ChangesProps {
 export const Changes = ({ changes }: ChangesProps) => {
   const t = useTranslations('Components.Game.Edit.Scalar.Changes')
   return (
-    <div className="space-y-2 w-[80vw] md:w-auto">
+    <div className="space-y-2">
       {changes && changes.field_changes && changes.field_changes.length > 0 && (
         <div className="flex gap-1 items-center">
           <span className="text-sm text-muted-foreground">{t('fieldChanges')}</span>

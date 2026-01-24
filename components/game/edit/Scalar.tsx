@@ -24,7 +24,7 @@ import { toast } from 'react-hot-toast'
 import { useRouter } from '@/i18n/navigation.client'
 import { pick } from './helper/pick'
 import { pickChanges, ChangesResult } from '@/utils/pick-changes'
-import { Confirm } from './scalar/Comfirm'
+import { Confirm } from './scalar/Confirm'
 import { EditNote } from './EditNote'
 import { ReleaseDateTBA } from './scalar/ReleaseDateTBA'
 
