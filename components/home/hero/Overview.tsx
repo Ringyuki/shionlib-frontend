@@ -15,14 +15,14 @@ export const Overview = async () => {
           <h3 className="text-base text-muted-foreground">{t('games')}</h3>
           <Gamepad2 className="size-8 text-primary ml-auto" />
         </div>
-        <span className="text-3xl font-bold">{data?.games}</span>
+        <span className="text-3xl font-bold">{formatNumber(data?.games ?? 0)}</span>
       </div>
       <div className="flex flex-col justify-around shadow-card border rounded-md p-4 bg-[radial-gradient(ellipse_at_top_right,_var(--purple-200)_0%,_transparent_50%)] dark:bg-[radial-gradient(ellipse_at_top_right,_var(--purple-950)_0%,_transparent_50%)]">
         <div className="flex items-center gap-2">
           <h3 className="text-base text-muted-foreground">{t('files')}</h3>
           <FileArchive className="size-8 text-purple-600 ml-auto" />
         </div>
-        <span className="text-3xl font-bold">{data?.files}</span>
+        <span className="text-3xl font-bold">{formatNumber(data?.files ?? 0)}</span>
       </div>
       <Tooltip>
         <TooltipTrigger asChild>
