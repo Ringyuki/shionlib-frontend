@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 export const Shionlib = () => {
   const t = useTranslations('Components.Home.Hero.Shionlib')
   return (
-    <div className="h-72 rounded-md overflow-hidden relative select-none shadow-card border">
+    <div className="h-60 md:h-72 rounded-md overflow-hidden relative select-none shadow-card border">
       <FadeImage
         className="object-cover w-full h-full mt-[-10px] ml-[40px] scale-120"
         src="/assets/images/hero/shion-hero-left.webp"
