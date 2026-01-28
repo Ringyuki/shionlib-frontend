@@ -1,6 +1,6 @@
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { OverviewData } from '@/interfaces/analysis/data.interface'
-import { File, Gamepad2, HardDrive, Download } from 'lucide-react'
+import { Gamepad2, HardDrive, Download, FileArchive } from 'lucide-react'
 import { formatBytes } from '@/utils/bytes-format'
 import { getTranslations } from 'next-intl/server'
 
@@ -16,10 +16,10 @@ export const Overview = async () => {
         </div>
         <span className="text-3xl font-bold">{data?.games}</span>
       </div>
-      <div className="flex flex-col justify-around shadow-card border rounded-md p-4 bg-[radial-gradient(ellipse_at_top_right,_var(--info-200)_0%,_transparent_50%)] dark:bg-[radial-gradient(ellipse_at_top_right,_var(--info-950)_0%,_transparent_50%)]">
+      <div className="flex flex-col justify-around shadow-card border rounded-md p-4 bg-[radial-gradient(ellipse_at_top_right,_var(--purple-200)_0%,_transparent_50%)] dark:bg-[radial-gradient(ellipse_at_top_right,_var(--purple-950)_0%,_transparent_50%)]">
         <div className="flex items-center gap-2">
           <h3 className="text-base text-muted-foreground">{t('files')}</h3>
-          <File className="size-8 text-info ml-auto" />
+          <FileArchive className="size-8 text-purple-600 ml-auto" />
         </div>
         <span className="text-3xl font-bold">{data?.files}</span>
       </div>
