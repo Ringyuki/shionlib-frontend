@@ -9,28 +9,28 @@ export const Overview = async () => {
   const t = await getTranslations('Components.Home.Hero.Overview')
   return (
     <div className="grid-cols-2 gap-4 hidden md:grid">
-      <div className="flex flex-col justify-around shadow-card border rounded-md p-4">
+      <div className="flex flex-col justify-around shadow-card border rounded-md p-4 bg-[radial-gradient(ellipse_at_top_right,_var(--primary-200)_0%,_transparent_50%)] dark:bg-[radial-gradient(ellipse_at_top_right,_var(--primary-950)_0%,_transparent_50%)]">
         <div className="flex items-center gap-2">
           <h3 className="text-base text-muted-foreground">{t('games')}</h3>
           <Gamepad2 className="size-8 text-primary ml-auto" />
         </div>
         <span className="text-3xl font-bold">{data?.games}</span>
       </div>
-      <div className="flex flex-col justify-around shadow-card border rounded-md p-4">
+      <div className="flex flex-col justify-around shadow-card border rounded-md p-4 bg-[radial-gradient(ellipse_at_top_right,_var(--info-200)_0%,_transparent_50%)] dark:bg-[radial-gradient(ellipse_at_top_right,_var(--info-950)_0%,_transparent_50%)]">
         <div className="flex items-center gap-2">
           <h3 className="text-base text-muted-foreground">{t('files')}</h3>
           <File className="size-8 text-info ml-auto" />
         </div>
         <span className="text-3xl font-bold">{data?.files}</span>
       </div>
-      <div className="flex flex-col justify-around shadow-card border rounded-md p-4">
+      <div className="flex flex-col justify-around shadow-card border rounded-md p-4 bg-[radial-gradient(ellipse_at_top_right,_var(--success-200)_0%,_transparent_50%)] dark:bg-[radial-gradient(ellipse_at_top_right,_var(--success-950)_0%,_transparent_50%)]">
         <div className="flex items-center gap-2">
           <h3 className="text-base text-muted-foreground">{t('storage')}</h3>
           <HardDrive className="size-8 text-success ml-auto" />
         </div>
         <span className="text-3xl font-bold">{formatBytes(data?.storage ?? 0)}</span>
       </div>
-      <div className="flex flex-col justify-around shadow-card border rounded-md p-4">
+      <div className="flex flex-col justify-around shadow-card border rounded-md p-4 bg-[radial-gradient(ellipse_at_top_right,_var(--warning-200)_0%,_transparent_50%)] dark:bg-[radial-gradient(ellipse_at_top_right,_var(--warning-950)_0%,_transparent_50%)]">
         <div className="flex items-center gap-2">
           <h3 className="text-base text-muted-foreground">{t('24-hour-traffic')}</h3>
           <Download className="size-8 text-warning ml-auto" />
