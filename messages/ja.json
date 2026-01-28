@@ -1519,6 +1519,12 @@
       "Hero": {
         "Shionlib": {
           "description": "無料・オープンソース・気軽に使える ビジュアルノベル／ギャルゲー アーカイブ"
+        },
+        "Overview": {
+          "games": "ゲーム",
+          "files": "ファイル",
+          "storage": "ストレージ",
+          "24-hour-traffic": "24時間流量"
         }
       }
     },

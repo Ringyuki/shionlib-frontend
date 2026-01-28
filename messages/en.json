@@ -1527,6 +1527,12 @@
       "Hero": {
         "Shionlib": {
           "description": "Free, open-source, zero-threshold visual novel/Galgame archive"
+        },
+        "Overview": {
+          "games": "Games",
+          "files": "Files",
+          "storage": "Storage",
+          "24-hour-traffic": "24-hour traffic"
         }
       }
     },
