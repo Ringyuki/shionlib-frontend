@@ -1523,6 +1523,11 @@
           "description": "New works released between the last Friday of the previous month and the last Friday of the current month. If the current date is later than the last Friday of the current month, the works released between the last Friday of the current month and the last Friday of the next month will be displayed. Sorted by release date.",
           "release": "New works released in {monthName} {yearName}."
         }
+      },
+      "Hero": {
+        "Shionlib": {
+          "description": "Free, open-source, zero-threshold visual novel/Galgame archive"
+        }
       }
     },
     "FriendLink": {
