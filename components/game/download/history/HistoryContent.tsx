@@ -2,7 +2,7 @@
 
 import { GameDownloadResourceFileHistory } from '@/interfaces/game/game-download-resource'
 import { useTranslations } from 'next-intl'
-import { formatBytes } from '@/utils/bytes-format'
+import { formatBytes } from '@/utils/format'
 import { timeFromNow } from '@/utils/time-format'
 import { useLocale } from 'next-intl'
 import { Avatar } from '@/components/common/user/Avatar'

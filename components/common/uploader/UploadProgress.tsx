@@ -4,7 +4,7 @@ import * as React from 'react'
 import { cn } from '@/utils/cn'
 import { Progress } from '@/components/shionui/Progress'
 import { useTranslations } from 'next-intl'
-import { formatBytes, formatSpeed, formatEta } from '@/utils/bytes-format'
+import { formatBytes, formatSpeed, formatEta } from '@/utils/format'
 
 type UploadProgressProps = {
   className?: string

@@ -5,7 +5,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/shionui/To
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/shionui/Popover'
 import { Button } from '@/components/shionui/Button'
 import { Badge } from '@/components/shionui/Badge'
-import { formatBytes } from '@/utils/bytes-format'
+import { formatBytes } from '@/utils/format'
 import { useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { toast } from 'react-hot-toast'

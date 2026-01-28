@@ -12,7 +12,7 @@ import {
 } from 'lucide-react'
 import * as React from 'react'
 import { cn } from '@/utils/cn'
-import { formatBytes } from '@/utils/bytes-format'
+import { formatBytes } from '@/utils/format'
 import { useShionlibUserStore } from '@/store/userStore'
 
 const ROOT_NAME = 'FileUpload'

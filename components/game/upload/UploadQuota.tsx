@@ -6,7 +6,7 @@ import { Progress } from '@/components/shionui/Progress'
 import { UploadQuota as UploadQuotaType } from '@/interfaces/upload/upload-quota.interface'
 import { useEffect, useState, useRef } from 'react'
 import { cn } from '@/utils/cn'
-import { formatBytes } from '@/utils/bytes-format'
+import { formatBytes } from '@/utils/format'
 
 interface UploadQuotaProps {
   fileSize: number
