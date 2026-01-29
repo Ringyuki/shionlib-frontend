@@ -102,7 +102,10 @@ export const CommentItem = ({
         {comment.parent?.id && (
           <CommentParent parent={comment.parent} canScrollToParent={canScrollToParent} />
         )}
-        <div dangerouslySetInnerHTML={{ __html: comment.html || '' }} />
+        <div
+          className="[&_a]:text-primary [&_a]:hover:text-primary/80 [&_a]:transition-colors [&_a]:duration-200 [&_a]:hover:underline [&_a]:underline-offset-2 [&_a]:decoration-2 [&_a]:decoration-primary"
+          dangerouslySetInnerHTML={{ __html: comment.html || '' }}
+        />
         <CommentActions
           comment_id={comment.id}
           creator_id={comment.creator.id}

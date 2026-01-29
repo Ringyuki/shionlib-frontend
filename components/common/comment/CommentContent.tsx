@@ -19,10 +19,7 @@ export const CommentContent = ({ game_id, comments }: CommentContentProps) => {
   const commentLength = getLength() || comments.length
 
   return (
-    <div
-      className="flex flex-col gap-4 w-full p-4 bg-card rounded-lg shadow-content-strong"
-      id="comment-content"
-    >
+    <div className="flex flex-col gap-4 w-full mt-6" id="comment-content">
       <div className="flex flex-col gap-2">
         <h2 className="flex items-center gap-2 text-lg font-bold">
           <MessageSquareMore />

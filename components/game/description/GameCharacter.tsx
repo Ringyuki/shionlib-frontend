@@ -2,6 +2,7 @@ import { GameCharacterItem } from './GameCharacterItem'
 import { GameCharacterRelation, GameCharacterRole } from '@/interfaces/game/game.interface'
 import { Empty } from '@/components/common/content/Empty'
 import { useTranslations } from 'next-intl'
+import { User } from 'lucide-react'
 
 interface GameCharacterProps {
   characters: GameCharacterRelation[]
@@ -21,13 +22,24 @@ export const GameCharacter = ({ characters }: GameCharacterProps) => {
     if (aPriority !== bPriority) return aPriority - bPriority
     return a.character.id - b.character.id
   })
-  return sorted.length > 0 ? (
-    <div className="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 md:gap-4">
-      {sorted.map(character => (
-        <GameCharacterItem key={character.character.id} character={character} />
-      ))}
+
+  return (
+    <div className="flex flex-col gap-4 w-full mt-6">
+      <div className="flex flex-col gap-2">
+        <h2 className="flex items-center gap-2 text-lg font-bold">
+          <User />
+          {t('characters')}
+        </h2>
+      </div>
+      {sorted.length > 0 ? (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 md:gap-4">
+          {sorted.map(character => (
+            <GameCharacterItem key={character.character.id} character={character} />
+          ))}
+        </div>
+      ) : (
+        <Empty title={t('noCharacters')} />
+      )}
     </div>
-  ) : (
-    <Empty title={t('noCharacters')} />
   )
 }

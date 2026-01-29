@@ -177,7 +177,7 @@ function TabsContents({
   transition = {
     type: 'spring',
     stiffness: 300,
-    damping: 30,
+    damping: 32,
     bounce: 0,
     restDelta: 0.01,
   },
@@ -266,6 +266,7 @@ function TabsContents({
     >
       <motion.div
         className="flex -mx-2"
+        initial={false}
         animate={{ x: activeIndex * -100 + '%' }}
         transition={transition}
       >

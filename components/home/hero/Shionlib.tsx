@@ -7,7 +7,7 @@ export const Shionlib = () => {
   return (
     <div className="h-60 md:h-72 rounded-md overflow-hidden relative select-none shadow-card border">
       <FadeImage
-        className="object-cover w-full h-full mt-[-10px] ml-[40px] scale-120"
+        className="object-cover w-full h-full mt-[-10px] ml-[10px] md:ml-[40px] scale-120"
         src="/assets/images/hero/shion-hero-left.webp"
         alt="Shion Hero Left"
         aspectRatio="16 / 9"

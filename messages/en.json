@@ -497,6 +497,7 @@
       },
       "Description": {
         "GameCharacter": {
+          "characters": "Characters",
           "noCharacters": "No characters found"
         },
         "GameCharacterItem": {
@@ -527,7 +528,8 @@
         },
         "GameContent": {
           "gameDetail": "Game details",
-          "gameCharacter": "Characters"
+          "gameCharacter": "Characters",
+          "gameComment": "Game comments"
         },
         "GameDetail": {
           "tags": "Tags",

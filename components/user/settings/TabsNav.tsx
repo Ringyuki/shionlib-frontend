@@ -20,8 +20,8 @@ export const UserSettingsTabsNav = () => {
   )
 
   return (
-    <Tabs value={active} className="w-full!">
-      <TabsList className="w-full!">
+    <Tabs value={active}>
+      <TabsList>
         {tabs.map(tab => (
           <TabsTrigger key={tab.href} value={tab.href} asChild>
             <Link href={tab.href}>{t(tab.name)}</Link>

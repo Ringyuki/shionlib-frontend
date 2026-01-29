@@ -30,10 +30,12 @@ const getComments = async (game_id: string) => {
 
 interface GamePageProps {
   params: Promise<{ id: string }>
+  searchParams: Promise<{ tab?: string }>
 }
 
-export default async function GamePage({ params }: GamePageProps) {
+export default async function GamePage({ params, searchParams }: GamePageProps) {
   const { id } = await params
+  const { tab } = await searchParams
   if (!id || isNaN(Number(id))) {
     notFound()
   }
@@ -42,9 +44,8 @@ export default async function GamePage({ params }: GamePageProps) {
   return (
     <div className="flex flex-col gap-8">
       <GameHeader game={game} />
-      <GameContent game={game} />
+      <GameContent game={game} comments={comments} initialTab={tab} />
       <Ad id={1} />
-      <CommentContent game_id={id} comments={comments} />
     </div>
   )
 }

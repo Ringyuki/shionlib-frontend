@@ -489,6 +489,7 @@
       },
       "Description": {
         "GameCharacter": {
+          "characters": "キャラクター",
           "noCharacters": "キャラクター情報がありません"
         },
         "GameCharacterItem": {
@@ -519,7 +520,8 @@
         },
         "GameContent": {
           "gameDetail": "ゲーム詳細",
-          "gameCharacter": "キャラクター"
+          "gameCharacter": "キャラクター",
+          "gameComment": "ゲームコメント"
         },
         "GameDetail": {
           "tags": "タグ",

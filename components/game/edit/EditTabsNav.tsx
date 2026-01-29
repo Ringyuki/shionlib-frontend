@@ -31,8 +31,8 @@ export const EditTabsNav = () => {
     redirect(`/game/${id}`)
   }
   return (
-    <Tabs value={active} className="w-full!">
-      <TabsList className="w-full!">
+    <Tabs value={active}>
+      <TabsList>
         {tabs.map(
           tab =>
             !tab.disabled && (

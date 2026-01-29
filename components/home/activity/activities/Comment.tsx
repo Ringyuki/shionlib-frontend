@@ -33,10 +33,10 @@ export const Comment = ({ activity }: CommentProps) => {
         {t('commentedSuffix') && <span>{t('commentedSuffix')}</span>}
       </div>
       <Link href={`/game/${activity.game?.id}#data-comment-id-${activity.comment?.id}`}>
-        <ScrollArea className="max-h-24">
+        <ScrollArea className="max-h-24 rounded-lg border">
           <div
             dangerouslySetInnerHTML={{ __html: activity.comment?.html || '' }}
-            className="p-2 bg-card hover:bg-card-hover transition-colors rounded-lg border"
+            className="p-2 bg-card hover:bg-card-hover transition-colors"
           />
         </ScrollArea>
       </Link>
