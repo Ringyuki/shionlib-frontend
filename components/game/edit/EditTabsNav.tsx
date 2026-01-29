@@ -36,7 +36,7 @@ export const EditTabsNav = () => {
         {tabs.map(
           tab =>
             !tab.disabled && (
-              <TabsTrigger key={tab.href} value={tab.href} asChild>
+              <TabsTrigger key={tab.href} value={tab.href} asChild className="py-1 px-8">
                 <Link href={tab.href}>{t(tab.name)}</Link>
               </TabsTrigger>
             ),

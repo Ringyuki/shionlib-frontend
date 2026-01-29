@@ -13,7 +13,7 @@ import { GameCharacter } from './GameCharacter'
 import { useTranslations } from 'next-intl'
 import { CommentContent } from '@/components/common/comment/CommentContent'
 import { Comment } from '@/interfaces/comment/comment.interface'
-import { useRouter } from '@/i18n/navigation.client'
+import { useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
 
 interface GameContentProps {
@@ -47,9 +47,9 @@ export const GameContent = ({ game, comments, initialTab }: GameContentProps) =>
     <div className="flex flex-col gap-4 shadow-content-strong bg-card-soft w-full rounded-md p-4">
       <div className="w-full">
         <Tabs value={activeTab} onValueChange={handleChange}>
-          <TabsList>
+          <TabsList variant="underlined" intent="primary">
             {Object.keys(TABS_MAP).map(tab => (
-              <TabsTrigger key={tab} value={tab}>
+              <TabsTrigger key={tab} value={tab} className="py-2! px-8!">
                 {t(TABS_MAP[tab as keyof typeof TABS_MAP])}
               </TabsTrigger>
             ))}
