@@ -53,6 +53,7 @@ function ScrollArea({ className, children, showScrollHint = true, ...props }: Sc
     <ScrollAreaPrimitive.Root
       data-slot="scroll-area"
       className={cn('relative isolate rounded-[inherit] bg-transparent overflow-hidden', className)}
+      suppressHydrationWarning
       onWheelCapture={e => {
         e.stopPropagation()
       }}

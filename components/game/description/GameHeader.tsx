@@ -33,7 +33,7 @@ export const GameHeader = async ({ game }: GameHeaderProps) => {
           title={title}
           content_limit={game.content_limit}
         />
-        {!vertical && (
+        {aspect === '1.5 / 1' && (
           <div className="absolute bottom-2 left-2 hidden lg:block">
             <GameScores variant="overlay" />
           </div>
@@ -48,7 +48,9 @@ export const GameHeader = async ({ game }: GameHeaderProps) => {
               aliases={game.aliases}
               type={game.type}
             />
-            {vertical && <GameScores className="hidden lg:flex" />}
+            {(aspect === '1 / 1.5' || aspect === '1 / 1') && (
+              <GameScores className="hidden lg:flex" />
+            )}
           </div>
           <div className="flex gap-8 lg:mt-2 flex-wrap items-center">
             <GameDeveloper developers={game.developers} />
