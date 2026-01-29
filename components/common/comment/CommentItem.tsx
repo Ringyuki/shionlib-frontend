@@ -62,7 +62,7 @@ export const CommentItem = ({
   }, [comment.id, scrollToComment])
 
   return (
-    <Card className="py-0 overflow-hidden">
+    <Card className="py-0 overflow-hidden shadow-none">
       <CardContent
         className="flex flex-col gap-4 p-4 transition-colors duration-200 scroll-mt-20"
         id={`data-comment-id-${comment.id}`}
