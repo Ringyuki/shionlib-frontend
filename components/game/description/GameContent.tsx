@@ -13,13 +13,11 @@ import { GameCharacter } from './GameCharacter'
 import { useTranslations } from 'next-intl'
 import { CommentContent } from '@/components/common/comment/CommentContent'
 import { Comment } from '@/interfaces/comment/comment.interface'
-import { useRouter } from 'next/navigation'
-import { useCallback, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 
 interface GameContentProps {
   game: GameData
   comments: Comment[]
-  initialTab?: string
 }
 
 const TABS_MAP = {
@@ -28,25 +26,14 @@ const TABS_MAP = {
   comments: 'gameComment',
 }
 
-export const GameContent = ({ game, comments, initialTab }: GameContentProps) => {
+export const GameContent = ({ game, comments }: GameContentProps) => {
   const t = useTranslations('Components.Game.Description.GameContent')
-  const router = useRouter()
-  const [activeTab, setActiveTab] = useState(() => {
-    const validTabs = Object.keys(TABS_MAP)
-    return initialTab && validTabs.includes(initialTab) ? initialTab : 'detail'
-  })
-
-  const handleChange = useCallback(
-    (value: string) => {
-      setActiveTab(value)
-      router.push(`/game/${game.id}?tab=${value}`, { scroll: false })
-    },
-    [game.id, router],
-  )
+  const searchParams = useSearchParams()
+  const tab = searchParams.get('tab') || 'detail'
   return (
     <div className="flex flex-col gap-4 shadow-content-strong bg-card-soft w-full rounded-md p-4">
       <div className="w-full">
-        <Tabs value={activeTab} onValueChange={handleChange}>
+        <Tabs defaultValue={tab}>
           <TabsList variant="underlined" intent="primary" showBaseline={false} className="gap-2">
             {Object.keys(TABS_MAP).map(tab => (
               <TabsTrigger key={tab} value={tab}>

@@ -44,7 +44,7 @@ export default async function GamePage({ params, searchParams }: GamePageProps) 
   return (
     <div className="flex flex-col gap-8">
       <GameHeader game={game} />
-      <GameContent game={game} comments={comments} initialTab={tab} />
+      <GameContent game={game} comments={comments} />
       <Ad id={1} />
     </div>
   )
