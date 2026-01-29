@@ -76,7 +76,7 @@ export const Detail = ({ message }: DetailProps) => {
       )}
 
       {message.comment && (
-        <Link href={`/game/${message.game?.id}#data-comment-id-${message.comment.id}`}>
+        <Link href={`/game/${message.game?.id}?tab=comments#data-comment-id-${message.comment.id}`}>
           <Card className="py-0 bg-card-soft shadow-none hover:bg-primary/10 hover:border-primary/30 transition-colors duration-200">
             <CardContent className="p-2">
               <div

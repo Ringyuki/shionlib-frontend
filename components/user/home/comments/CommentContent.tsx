@@ -23,7 +23,7 @@ export const CommentContent = ({ comments, is_current_user }: CommentContentProp
         const { title } = getPreferredContent(comment.game as unknown as GameData, 'title', lang)
         return (
           <Link
-            href={`/game/${comment.game?.id}#data-comment-id-${comment.id}`}
+            href={`/game/${comment.game?.id}?tab=comments#data-comment-id-${comment.id}`}
             key={comment.id}
             className="hover:opacity-85 transition-all duration-200"
           >

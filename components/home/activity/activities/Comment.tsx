@@ -32,7 +32,9 @@ export const Comment = ({ activity }: CommentProps) => {
         </Link>
         {t('commentedSuffix') && <span>{t('commentedSuffix')}</span>}
       </div>
-      <Link href={`/game/${activity.game?.id}#data-comment-id-${activity.comment?.id}`}>
+      <Link
+        href={`/game/${activity.game?.id}?tab=comments#data-comment-id-${activity.comment?.id}`}
+      >
         <ScrollArea className="max-h-24 rounded-lg border">
           <div
             dangerouslySetInnerHTML={{ __html: activity.comment?.html || '' }}
