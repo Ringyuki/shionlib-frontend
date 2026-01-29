@@ -30,7 +30,7 @@ const tabsListVariants = cva(
         solid: 'h-9 rounded-lg bg-muted p-[3px]',
         bordered: 'h-9 rounded-lg border border-border/70 bg-transparent p-[3px]',
         light: 'h-9 rounded-lg bg-muted/40 p-[3px]',
-        underlined: 'h-9 rounded-none border-b border-border bg-transparent px-0',
+        underlined: 'h-9 rounded-none bg-transparent px-0',
       },
       intent: {
         neutral: '',
@@ -134,11 +134,20 @@ const tabsTriggerIntentClasses = [
 type TabsListProps = TabsListPrimitiveProps &
   VariantProps<typeof tabsListVariants> & {
     highlightClassName?: string
+    showBaseline?: boolean
   }
 
-function TabsList({ className, highlightClassName, variant, intent, ...props }: TabsListProps) {
+function TabsList({
+  className,
+  highlightClassName,
+  variant,
+  intent,
+  showBaseline,
+  ...props
+}: TabsListProps) {
   const resolvedVariant = variant ?? 'solid'
   const resolvedIntent = intent ?? 'neutral'
+  const resolvedShowBaseline = showBaseline ?? true
 
   return (
     <div className={cn('relative z-0', className)}>
@@ -154,6 +163,7 @@ function TabsList({ className, highlightClassName, variant, intent, ...props }: 
           className={cn(
             className,
             tabsListVariants({ variant: resolvedVariant, intent: resolvedIntent }),
+            resolvedVariant === 'underlined' && resolvedShowBaseline && 'border-b border-border',
           )}
           {...props}
         />
@@ -169,7 +179,7 @@ function TabsTrigger({ className, ...props }: TabsTriggerProps) {
     <TabsHighlightItemPrimitive value={props.value} className="flex-1">
       <TabsTriggerPrimitive
         className={cn(
-          "cursor-pointer hover:opacity-90 active:opacity-80 transition-all data-[state=active]:cursor-default data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md w-full px-2 py-1 text-sm font-medium whitespace-nowrap duration-200 ease-in-out focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 group-data-[variant=underlined]/tabs-list:rounded-none group-data-[variant=underlined]/tabs-list:px-2 group-data-[variant=underlined]/tabs-list:py-2",
+          "cursor-pointer hover:data-[state=inactive]:opacity-70 active:data-[state=inactive]:opacity-60 transition-all data-[state=active]:cursor-default data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md w-full px-2 py-1 text-sm font-medium whitespace-nowrap duration-200 ease-in-out focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 group-data-[variant=underlined]/tabs-list:rounded-none group-data-[variant=underlined]/tabs-list:px-2 group-data-[variant=underlined]/tabs-list:py-2",
           tabsTriggerIntentClasses,
           className,
         )}
