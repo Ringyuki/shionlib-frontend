@@ -10,6 +10,7 @@ import {
   PaginationEllipsis,
 } from '@/components/shionui/Pagination'
 import { usePathname } from '@/i18n/navigation.client'
+import { useEffect, useRef } from 'react'
 import qs from 'qs'
 
 export type ExtraQuery = Record<
@@ -34,6 +35,9 @@ export type ContentPaginationProps = {
   onPageChange?: (page: number) => void
   noRouteChange?: boolean
   loading?: boolean
+  scrollToTop?: boolean
+  scrollContainerSelector?: string
+  smoothScroll?: boolean
 }
 
 function buildHref(
@@ -116,9 +120,26 @@ export const Pagination = (props: ContentPaginationProps) => {
     onPageChange,
     noRouteChange = false,
     loading = false,
+    scrollToTop = false,
+    scrollContainerSelector,
+    smoothScroll = true,
   } = props
 
   const basePath = usePathname()
+  const rootRef = useRef<HTMLElement>(null)
+  const didMountRef = useRef(false)
+  useEffect(() => {
+    if (!scrollToTop || !noRouteChange) return
+    if (!didMountRef.current) {
+      didMountRef.current = true
+      return
+    }
+    const raf = requestAnimationFrame(() => {
+      scrollTopIfNeeded()
+    })
+    return () => cancelAnimationFrame(raf)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage, scrollToTop, noRouteChange])
 
   if (!totalPages || totalPages < 1) {
     if (hideIfSinglePage) return null
@@ -132,8 +153,47 @@ export const Pagination = (props: ContentPaginationProps) => {
   const makeHref = (page: number) =>
     buildHref(basePath, page, { pageParam, pageSizeParam, pageSize, extraQuery, needQsParse })
 
+  const isScrollable = (el: Element | null) => {
+    if (!el) return false
+    const element = el as HTMLElement
+    if (element.scrollHeight <= element.clientHeight) return false
+    const style = window.getComputedStyle(element)
+    return ['auto', 'scroll', 'overlay'].includes(style.overflowY)
+  }
+
+  const findScrollableAncestor = (el: Element | null) => {
+    let current = el?.parentElement ?? null
+    while (current) {
+      if (isScrollable(current)) return current
+      current = current.parentElement
+    }
+    return null
+  }
+
+  const scrollTopIfNeeded = () => {
+    if (!scrollToTop || !noRouteChange) return
+    let target: Element | null = null
+    if (scrollContainerSelector) {
+      const candidates = Array.from(document.querySelectorAll(scrollContainerSelector))
+      target = candidates.find(isScrollable) ?? candidates[0] ?? null
+      if (target && !isScrollable(target)) {
+        target = findScrollableAncestor(target)
+      }
+    } else {
+      target = findScrollableAncestor(rootRef.current)
+    }
+
+    if (target && 'scrollTo' in target) {
+      ;(target as HTMLElement).scrollTo({ top: 0, behavior: smoothScroll ? 'smooth' : 'auto' })
+      return
+    }
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: smoothScroll ? 'smooth' : 'auto' })
+    }
+  }
+
   return (
-    <UIPagination className={className}>
+    <UIPagination className={className} ref={rootRef}>
       <PaginationContent>
         {showPrevNext && (
           <PaginationItem>

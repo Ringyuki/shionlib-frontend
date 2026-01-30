@@ -30,6 +30,7 @@ export const History = ({
         onPageChange={onPageChange}
         noRouteChange
         loading={loading}
+        scrollToTop
       />
     </div>
   )

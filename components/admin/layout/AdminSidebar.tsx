@@ -24,6 +24,7 @@ interface SidebarItem {
 
 const sidebarItems: SidebarItem[] = [
   { key: 'dashboard', icon: LayoutDashboard, href: '/admin' },
+  { key: 'users', icon: Users, href: '/admin/users' },
   // { key: 'games', icon: Gamepad2, href: '/admin/games' },
   // { key: 'characters', icon: Users, href: '/admin/characters' },
   // { key: 'developers', icon: Building2, href: '/admin/developers' },

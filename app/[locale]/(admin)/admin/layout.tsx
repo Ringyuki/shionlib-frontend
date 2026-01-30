@@ -23,7 +23,7 @@ export default async function AdminLayout({ children, params }: AdminLayoutProps
   }
 
   return (
-    <SidebarProvider>
+    <SidebarProvider className="overflow-hidden">
       <div className="flex h-screen w-full bg-gray-50 dark:bg-gray-950">
         <AdminSidebar />
         <SidebarInset className="flex flex-col">
