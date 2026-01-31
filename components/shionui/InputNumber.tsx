@@ -28,6 +28,8 @@ type InputNumberProps = Omit<
   parser?: (input: string) => number | null
   allowWheel?: boolean
   clampOnBlur?: boolean
+  showIncrement?: boolean
+  showDecrement?: boolean
 }
 
 const sizeClasses: Record<InputSize, string> = {
@@ -94,6 +96,8 @@ const InputNumber = React.forwardRef<HTMLInputElement, InputNumberProps>(
       clampOnBlur = true,
       disabled,
       readOnly,
+      showIncrement = true,
+      showDecrement = true,
       ...props
     },
     ref,
@@ -224,30 +228,36 @@ const InputNumber = React.forwardRef<HTMLInputElement, InputNumberProps>(
         onClear={handleClear}
         rightSlot={
           <div className="flex gap-1 items-center justify-center">
-            <Button
-              size="icon"
-              appearance="ghost"
-              intent="secondary"
-              aria-label="Increment"
-              className="h-4 w-4 p-0"
-              onClick={() => stepBy(1)}
-              disabled={disabled || readOnly || (max !== undefined && (currentNumber ?? 0) >= max)}
-              tabIndex={-1}
-            >
-              <PlusIcon className="h-3 w-3" />
-            </Button>
-            <Button
-              size="icon"
-              appearance="ghost"
-              intent="secondary"
-              aria-label="Decrement"
-              className="h-4 w-4 p-0"
-              onClick={() => stepBy(-1)}
-              disabled={disabled || readOnly || (min !== undefined && (currentNumber ?? 0) <= min)}
-              tabIndex={-1}
-            >
-              <MinusIcon className="h-3 w-3" />
-            </Button>
+            {showIncrement && (
+              <Button
+                size="icon"
+                appearance="ghost"
+                intent="secondary"
+                aria-label="Increment"
+                className="h-4 w-4 p-0"
+                onClick={() => stepBy(1)}
+                disabled={
+                  disabled || readOnly || (max !== undefined && (currentNumber ?? 0) >= max)
+                }
+                tabIndex={-1}
+                renderIcon={<PlusIcon className="h-3 w-3" />}
+              />
+            )}
+            {showDecrement && (
+              <Button
+                size="icon"
+                appearance="ghost"
+                intent="secondary"
+                aria-label="Decrement"
+                className="h-4 w-4 p-0"
+                onClick={() => stepBy(-1)}
+                disabled={
+                  disabled || readOnly || (min !== undefined && (currentNumber ?? 0) <= min)
+                }
+                tabIndex={-1}
+                renderIcon={<MinusIcon className="h-3 w-3" />}
+              />
+            )}
           </div>
         }
         value={inputString}
