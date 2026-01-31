@@ -15,9 +15,10 @@ import { UserRole } from '@/interfaces/user/user.interface'
 
 interface GameActionsProps {
   game: GameData
+  is_favorite: boolean
 }
 
-export const GameActions = ({ game }: GameActionsProps) => {
+export const GameActions = ({ game, is_favorite }: GameActionsProps) => {
   const user = useShionlibUserStore(state => state.user)
   const isAdmin = user.role >= UserRole.ADMIN
   return (
@@ -33,13 +34,13 @@ export const GameActions = ({ game }: GameActionsProps) => {
             <div className="flex gap-2 items-center">
               <Edit game_id={game.id} />
               <History game_id={game.id} />
-              <Favorite isFavorite={game.is_favorite} gameId={game.id} className="lg:hidden flex" />
+              <Favorite isFavorite={is_favorite} gameId={game.id} className="lg:hidden flex" />
               <Comment className="lg:hidden flex" />
             </div>
           </div>
           <div className="lg:flex hidden items-center gap-2">
             <Separator orientation="vertical" className="h-4! hidden md:block" />
-            <Favorite isFavorite={game.is_favorite} gameId={game.id} />
+            <Favorite isFavorite={is_favorite} gameId={game.id} />
             <Comment />
             {isAdmin && <MoreActions game_id={game.id} />}
           </div>

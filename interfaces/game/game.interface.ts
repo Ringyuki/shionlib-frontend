@@ -221,7 +221,6 @@ export interface GameData {
   type: string
   platform: Platform[]
 
-  is_favorite: boolean
   content_limit: ContentLimit
 }
 

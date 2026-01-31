@@ -12,9 +12,10 @@ import { GameScores } from '../score/GameScores'
 
 interface GameHeaderProps {
   game: GameData
+  is_favorite: boolean
 }
 
-export const GameHeader = async ({ game }: GameHeaderProps) => {
+export const GameHeader = async ({ game, is_favorite }: GameHeaderProps) => {
   const locale = await getLocale()
   const langMap = { en: 'en', ja: 'jp', zh: 'zh' } as const
   const lang = langMap[locale as keyof typeof langMap] ?? 'jp'
@@ -63,7 +64,7 @@ export const GameHeader = async ({ game }: GameHeaderProps) => {
         </div>
         <GameScores className="flex lg:hidden justify-start w-full lg:mt-2" variant="overlay" />
         <Separator />
-        <GameActions game={game} />
+        <GameActions game={game} is_favorite={is_favorite} />
       </div>
     </div>
   )

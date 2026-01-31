@@ -17,7 +17,6 @@ const getGameData = async (id: string) => {
   }
   return data.data
 }
-
 const getComments = async (game_id: string) => {
   const data = await shionlibRequest().get<PaginatedResponse<Comment>>(`/comment/game/${game_id}`, {
     params: {
@@ -27,6 +26,12 @@ const getComments = async (game_id: string) => {
   })
   return data.data?.items as Comment[]
 }
+const getFavoriteStatus = async (game_id: string) => {
+  const data = await shionlibRequest({ forceNotThrowError: true }).get<{ is_favorite: boolean }>(
+    `/favorites/game/${game_id}/stats`,
+  )
+  return data.data
+}
 
 interface GamePageProps {
   params: Promise<{ id: string }>
@@ -35,15 +40,18 @@ interface GamePageProps {
 
 export default async function GamePage({ params, searchParams }: GamePageProps) {
   const { id } = await params
-  const { tab } = await searchParams
   if (!id || isNaN(Number(id))) {
     notFound()
   }
-  const [game, comments] = await Promise.all([getGameData(id), getComments(id)])
+  const [game, comments, favoriteStatus] = await Promise.all([
+    getGameData(id),
+    getComments(id),
+    getFavoriteStatus(id),
+  ])
 
   return (
     <div className="flex flex-col gap-8">
-      <GameHeader game={game} />
+      <GameHeader game={game} is_favorite={favoriteStatus?.is_favorite ?? false} />
       <GameContent game={game} comments={comments} />
       <Ad id={1} />
     </div>
