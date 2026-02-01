@@ -159,14 +159,10 @@ export const platformTokenMap: Record<Platform, { bg: string; fg: string }> = {
 }
 
 export type Language = 'jp' | 'zh' | 'en' | 'zh-Hant' | 'other'
-export enum LanguageEnum {
-  jp = 'Japanese',
-  zh = 'Chinese',
-  en = 'English',
-}
-export const LanguageOptions: Array<{ label: string; value: Language }> = [
-  { value: 'jp', label: 'Japanese' },
-  { value: 'zh', label: 'Chinese' },
+export const LanguageOptions: Array<{ label: string; value: Partial<Language> }> = [
+  { value: 'jp', label: '日本語' },
+  { value: 'zh', label: '简体中文' },
+  { value: 'zh-Hant', label: '繁體中文' },
   { value: 'en', label: 'English' },
 ]
 export const LanguageNameMap: Record<Language, string> = {

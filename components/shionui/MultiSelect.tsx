@@ -185,16 +185,16 @@ function MultiSelectContent({
     [itemValues, highlightedValue, setHighlightedValue, toggleValue],
   )
 
-  React.useEffect(() => {
-    if (highlightedValue && contentRef.current) {
-      const highlightedElement = contentRef.current.querySelector(
-        `[data-value="${highlightedValue}"]`,
-      ) as HTMLElement
-      if (highlightedElement) {
-        highlightedElement.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
-      }
-    }
-  }, [highlightedValue])
+  // React.useEffect(() => {
+  //   if (highlightedValue && contentRef.current) {
+  //     const highlightedElement = contentRef.current.querySelector(
+  //       `[data-value="${highlightedValue}"]`,
+  //     ) as HTMLElement
+  //     if (highlightedElement) {
+  //       highlightedElement.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+  //     }
+  //   }
+  // }, [highlightedValue])
 
   return (
     <PopoverPrimitive.Portal>
