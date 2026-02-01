@@ -158,18 +158,18 @@ export const platformTokenMap: Record<Platform, { bg: string; fg: string }> = {
   other: { bg: 'var(--platform-other)', fg: 'var(--platform-other-fg)' },
 }
 
-export type Language = 'jp' | 'zh' | 'en' | 'zh-Hant' | 'other'
+export type Language = 'jp' | 'zh' | 'en' | 'zh-hant' | 'other'
 export const LanguageOptions: Array<{ label: string; value: Partial<Language> }> = [
   { value: 'jp', label: '日本語' },
   { value: 'zh', label: '简体中文' },
-  { value: 'zh-Hant', label: '繁體中文' },
+  { value: 'zh-hant', label: '繁體中文' },
   { value: 'en', label: 'English' },
 ]
 export const LanguageNameMap: Record<Language, string> = {
   jp: '日本語',
   zh: '简体中文',
   en: 'English',
-  'zh-Hant': '繁體中文',
+  'zh-hant': '繁體中文',
   other: '其它',
 }
 
