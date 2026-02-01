@@ -19,7 +19,7 @@ interface GameCoverContentProps {
 const flagMap: Record<Exclude<Language, 'other'>, string> = {
   jp: JP,
   zh: CN,
-  'zh-Hant': TW,
+  'zh-hant': TW,
   en: US,
 }
 
