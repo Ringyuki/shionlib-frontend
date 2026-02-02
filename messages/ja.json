@@ -681,7 +681,26 @@
           "success": "削除成功"
         },
         "Report": {
-          "title": "違反を報告"
+          "title": "違反を報告",
+          "description": "できるだけ具体的な理由を記載してください。悪意のある通報には制限やペナルティが適用されます。",
+          "reason": "通報理由",
+          "reasonPlaceholder": "通報理由を選択",
+          "detail": "詳細（任意）",
+          "detailPlaceholder": "ファイル名、症状、食い違いなどの詳細を補足できます",
+          "cancel": "キャンセル",
+          "submit": "通報を送信",
+          "success": "通報を送信しました。ご協力ありがとうございます。",
+          "validation": {
+            "reason": "通報理由を選択してください",
+            "detailMaxLength": "詳細は {length} 文字以内で入力してください"
+          },
+          "reasons": {
+            "MALWARE": "ウイルス/マルウェアを含む",
+            "IRRELEVANT": "このゲームと無関係なリソース",
+            "BROKEN_LINK": "リンク切れ・ファイル利用不可",
+            "MISLEADING_CONTENT": "タイトル/説明と内容が一致しない",
+            "OTHER": "その他の違反"
+          }
         }
       },
       "Cover": {
@@ -1686,6 +1705,20 @@
             "ReviewContent": "あなたのコメントは審査に不合格でした。原因：{top_category}, {reason}, 重要な部分：{evidence}。コメント内容を修正してから再度お試しください。"
           }
         }
+      },
+      "Report": {
+        "Valid": {
+          "Title": "通報が承認されました",
+          "Content": "あなたの通報は承認されました。理由：{reason}、悪質度：{malicious_level}。{process_note, select, undefined {} other {備考：{process_note}}}"
+        },
+        "Invalid": {
+          "Title": "通報が却下されました",
+          "Content": "あなたの通報は却下されました。直近30日間の無効通報回数：{false_report_count}。{quota_sub_gb, select, 0 {} other {アップロード枠を {quota_sub_gb} GB 減算しました。}}{ban_days, select, 0 {} other {アカウントを {ban_days} 日間停止しました。}}{process_note, select, undefined {} other {備考：{process_note}}}"
+        },
+        "Penalty": {
+          "Title": "リソース違反処理のお知らせ",
+          "Content": "あなたがアップロードしたリソースは違反と判定されました。理由：{reason}、悪質度：{malicious_level}。{quota_sub_gb, select, 0 {} other {アップロード枠を {quota_sub_gb} GB 減算しました。}}{ban_days, select, 0 {} other {アカウントを {ban_days} 日間停止しました。}}{process_note, select, undefined {} other {備考：{process_note}}}"
+        }
       }
     }
   },
@@ -1694,6 +1727,7 @@
       "dashboard": "ダッシュボード",
       "users": "ユーザー管理",
       "comments": "コメント管理",
+      "reports": "通報管理",
       "games": "ゲーム",
       "characters": "キャラクター",
       "developers": "開発者",
@@ -1909,6 +1943,69 @@
       "confirmDeleteDesc": "コメントを削除済みにします。後で復元できます。",
       "confirm": "確認",
       "cancel": "キャンセル"
+    },
+    "Reports": {
+      "status": "状態",
+      "allStatus": "すべての状態",
+      "statuses": {
+        "PENDING": "未処理",
+        "VALID": "有効通報",
+        "INVALID": "無効通報"
+      },
+      "reason": "通報理由",
+      "allReasons": "すべての理由",
+      "reasons": {
+        "MALWARE": "ウイルス/マルウェアを含む",
+        "IRRELEVANT": "このゲームと無関係なリソース",
+        "BROKEN_LINK": "リンク切れ・ファイル利用不可",
+        "MISLEADING_CONTENT": "タイトル/説明と内容が一致しない",
+        "OTHER": "その他の違反"
+      },
+      "maliciousLevel": "悪質度",
+      "allLevels": "すべての悪質度",
+      "levels": {
+        "LOW": "低",
+        "MEDIUM": "中",
+        "HIGH": "高",
+        "CRITICAL": "重大"
+      },
+      "resourceId": "リソースID",
+      "reporterId": "通報者ID",
+      "reportedUserId": "被通報ユーザーID",
+      "sortBy": "並び替え",
+      "asc": "昇順",
+      "desc": "降順",
+      "created": "作成日",
+      "updated": "更新日",
+      "processedAt": "処理日時",
+      "refresh": "更新",
+      "noReports": "通報はありません",
+      "reportId": "通報ID",
+      "reporter": "通報者",
+      "reportedUser": "被通報ユーザー",
+      "processedBy": "処理者",
+      "viewDetail": "詳細",
+      "gameId": "ゲームID",
+      "game": "ゲーム",
+      "noDetail": "補足説明なし",
+      "detailTitle": "通報詳細",
+      "detailDescription": "通報内容を確認し、審査を実行します。",
+      "reportedPenaltyApplied": "アップロード者に処分適用済み",
+      "reporterPenaltyApplied": "通報者に処分適用済み",
+      "reportDetail": "通報内容",
+      "resourceNote": "リソースメモ",
+      "filesTitle": "リソースファイル",
+      "noFiles": "ファイル情報がありません",
+      "fileSize": "ファイルサイズ",
+      "processNote": "処理メモ",
+      "reviewTitle": "審査処理",
+      "verdict": "審査結果",
+      "verdictValid": "有効にする",
+      "verdictInvalid": "無効にする",
+      "processNotePlaceholder": "審査メモを入力（任意）",
+      "notifyUser": "システム通知を送信",
+      "submitReview": "審査を保存",
+      "reviewSaved": "審査結果を保存しました"
     }
   }
 }

@@ -689,7 +689,26 @@
           "success": "Deleted successfully"
         },
         "Report": {
-          "title": "Report violation"
+          "title": "Report violation",
+          "description": "Please provide a clear reason whenever possible. Malicious reporting may result in restrictions or penalties.",
+          "reason": "Reason",
+          "reasonPlaceholder": "Select a reason",
+          "detail": "Details (optional)",
+          "detailPlaceholder": "Add more context such as file name, symptoms, or mismatch details",
+          "cancel": "Cancel",
+          "submit": "Submit report",
+          "success": "Report submitted. Thanks for your feedback.",
+          "validation": {
+            "reason": "Please select a reason",
+            "detailMaxLength": "Details must be at most {length} characters"
+          },
+          "reasons": {
+            "MALWARE": "Contains malware/virus",
+            "IRRELEVANT": "Resource is unrelated to this game",
+            "BROKEN_LINK": "Broken link or unavailable file",
+            "MISLEADING_CONTENT": "Title/description is misleading",
+            "OTHER": "Other policy issue"
+          }
         }
       },
       "Cover": {
@@ -1695,6 +1714,20 @@
             "ReviewContent": "Your comment was not passed moderation, reason: {top_category}, {reason}, key fragment: {evidence}. Please modify the comment content and try again."
           }
         }
+      },
+      "Report": {
+        "Valid": {
+          "Title": "Report confirmed",
+          "Content": "Your report has been accepted. Reason: {reason}, malicious level: {malicious_level}.{process_note, select, undefined {} other { Note: {process_note}}}"
+        },
+        "Invalid": {
+          "Title": "Report rejected",
+          "Content": "Your report was rejected. Invalid report count in the last 30 days: {false_report_count}.{quota_sub_gb, select, 0 {} other { Upload quota reduced: {quota_sub_gb} GB.}}{ban_days, select, 0 {} other { Account banned for {ban_days} day(s).}}{process_note, select, undefined {} other { Note: {process_note}}}"
+        },
+        "Penalty": {
+          "Title": "Resource violation notice",
+          "Content": "Your uploaded resource was confirmed as violating policy. Reason: {reason}, malicious level: {malicious_level}.{quota_sub_gb, select, 0 {} other { Upload quota reduced: {quota_sub_gb} GB.}}{ban_days, select, 0 {} other { Account banned for {ban_days} day(s).}}{process_note, select, undefined {} other { Note: {process_note}}}"
+        }
       }
     }
   },
@@ -1703,6 +1736,7 @@
       "dashboard": "Dashboard",
       "users": "Users",
       "comments": "Comments",
+      "reports": "Reports",
       "games": "Games",
       "characters": "Characters",
       "developers": "Developers",
@@ -1918,6 +1952,69 @@
       "confirmDeleteDesc": "This will mark the comment as deleted. You can restore it later.",
       "confirm": "Confirm",
       "cancel": "Cancel"
+    },
+    "Reports": {
+      "status": "Status",
+      "allStatus": "All Status",
+      "statuses": {
+        "PENDING": "Pending",
+        "VALID": "Valid",
+        "INVALID": "Invalid"
+      },
+      "reason": "Reason",
+      "allReasons": "All Reasons",
+      "reasons": {
+        "MALWARE": "Contains malware/virus",
+        "IRRELEVANT": "Resource is unrelated to this game",
+        "BROKEN_LINK": "Broken link or unavailable file",
+        "MISLEADING_CONTENT": "Title/description is misleading",
+        "OTHER": "Other policy issue"
+      },
+      "maliciousLevel": "Malicious Level",
+      "allLevels": "All Levels",
+      "levels": {
+        "LOW": "Low",
+        "MEDIUM": "Medium",
+        "HIGH": "High",
+        "CRITICAL": "Critical"
+      },
+      "resourceId": "Resource ID",
+      "reporterId": "Reporter ID",
+      "reportedUserId": "Reported User ID",
+      "sortBy": "Sort By",
+      "asc": "Asc",
+      "desc": "Desc",
+      "created": "Created",
+      "updated": "Updated",
+      "processedAt": "Processed At",
+      "refresh": "Refresh",
+      "noReports": "No reports found",
+      "reportId": "Report ID",
+      "reporter": "Reporter",
+      "reportedUser": "Reported User",
+      "processedBy": "Processed By",
+      "viewDetail": "View Details",
+      "gameId": "Game ID",
+      "game": "Game",
+      "noDetail": "No extra detail",
+      "detailTitle": "Report Details",
+      "detailDescription": "Review report evidence and moderation actions.",
+      "reportedPenaltyApplied": "Uploader Penalty Applied",
+      "reporterPenaltyApplied": "Reporter Penalty Applied",
+      "reportDetail": "Report Detail",
+      "resourceNote": "Resource Note",
+      "filesTitle": "Resource Files",
+      "noFiles": "No file records",
+      "fileSize": "File Size",
+      "processNote": "Process Note",
+      "reviewTitle": "Moderation Review",
+      "verdict": "Verdict",
+      "verdictValid": "Mark as Valid",
+      "verdictInvalid": "Mark as Invalid",
+      "processNotePlaceholder": "Add moderation note (optional)",
+      "notifyUser": "Send system notification",
+      "submitReview": "Submit Review",
+      "reviewSaved": "Review saved"
     }
   }
 }

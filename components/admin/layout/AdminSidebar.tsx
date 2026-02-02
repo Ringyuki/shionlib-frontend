@@ -3,15 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
-import {
-  LayoutDashboard,
-  Gamepad2,
-  Users,
-  Building2,
-  Settings,
-  ChevronLeft,
-  MessageSquare,
-} from 'lucide-react'
+import { LayoutDashboard, Users, ChevronLeft, MessageSquare, ShieldAlert } from 'lucide-react'
 import {
   Sidebar,
   SidebarContent,
@@ -34,6 +26,7 @@ const sidebarItems: SidebarItem[] = [
   { key: 'dashboard', icon: LayoutDashboard, href: '/admin' },
   { key: 'users', icon: Users, href: '/admin/users' },
   { key: 'comments', icon: MessageSquare, href: '/admin/comments' },
+  { key: 'reports', icon: ShieldAlert, href: '/admin/reports' },
   // { key: 'games', icon: Gamepad2, href: '/admin/games' },
   // { key: 'characters', icon: Users, href: '/admin/characters' },
   // { key: 'developers', icon: Building2, href: '/admin/developers' },

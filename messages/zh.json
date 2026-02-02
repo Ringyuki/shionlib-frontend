@@ -689,7 +689,26 @@
           "success": "删除成功"
         },
         "Report": {
-          "title": "报告违规"
+          "title": "报告违规",
+          "description": "请尽量提供清晰的举报理由，恶意举报会受到限制或处罚。",
+          "reason": "举报理由",
+          "reasonPlaceholder": "请选择举报理由",
+          "detail": "补充说明（可选）",
+          "detailPlaceholder": "你可以补充更多细节，例如文件名、问题现象等",
+          "cancel": "取消",
+          "submit": "提交举报",
+          "success": "举报已提交，感谢你的反馈",
+          "validation": {
+            "reason": "请选择举报理由",
+            "detailMaxLength": "补充说明不能超过 {length} 个字符"
+          },
+          "reasons": {
+            "MALWARE": "资源包含病毒/木马",
+            "IRRELEVANT": "资源与当前游戏无关",
+            "BROKEN_LINK": "链接失效或文件不可用",
+            "MISLEADING_CONTENT": "标题/描述与内容严重不符",
+            "OTHER": "其他违规问题"
+          }
         }
       },
       "Cover": {
@@ -1695,6 +1714,20 @@
             "ReviewContent": "你发布的评论未通过审核，原因：{top_category}, {reason}, 关键片段：{evidence}。请修改评论内容后重试。"
           }
         }
+      },
+      "Report": {
+        "Valid": {
+          "Title": "举报已处理",
+          "Content": "你提交的举报已完成处理。违规类型：{reason}。{process_note, select, undefined {} other {处理说明：{process_note}}}"
+        },
+        "Invalid": {
+          "Title": "举报未通过",
+          "Content": "你提交的举报未通过审核。当前30天内无效举报次数：{false_report_count}。请注意，如果你多次发起无效举报，系统将对你进行处罚。{quota_sub_gb, select, 0 {} other {由于你多次发起无效举报，系统已扣减你的上传额度：{quota_sub_gb} GB。}}{ban_days, select, 0 {} other {由于你多次发起无效举报，系统已封禁你的账号：{ban_days} 天。}}{process_note, select, null {} other {处理说明：{process_note}}}"
+        },
+        "Penalty": {
+          "Title": "资源违规处理通知",
+          "Content": "你上传的资源被判定违规。违规类型：{reason}。{quota_sub_gb, select, 0 {} other {由于你上传的资源被判定违规，系统已扣减你的上传额度：{quota_sub_gb} GB。}}{ban_days, select, 0 {} other {由于你上传的资源被判定违规，系统已封禁你的账号：{ban_days} 天。}}{process_note, select, undefined {} other {处理说明：{process_note}}}"
+        }
       }
     }
   },
@@ -1703,6 +1736,7 @@
       "dashboard": "数据看板",
       "users": "用户管理",
       "comments": "评论管理",
+      "reports": "举报管理",
       "games": "游戏管理",
       "characters": "角色管理",
       "developers": "开发商管理",
@@ -1918,6 +1952,69 @@
       "confirmDeleteDesc": "此操作会将评论标记为删除，可后续恢复。",
       "confirm": "确认",
       "cancel": "取消"
+    },
+    "Reports": {
+      "status": "状态",
+      "allStatus": "全部状态",
+      "statuses": {
+        "PENDING": "待处理",
+        "VALID": "有效举报",
+        "INVALID": "无效举报"
+      },
+      "reason": "举报理由",
+      "allReasons": "全部理由",
+      "reasons": {
+        "MALWARE": "资源包含病毒/木马",
+        "IRRELEVANT": "资源与当前游戏无关",
+        "BROKEN_LINK": "链接失效或文件不可用",
+        "MISLEADING_CONTENT": "标题/描述与内容严重不符",
+        "OTHER": "其他违规问题"
+      },
+      "maliciousLevel": "恶意等级",
+      "allLevels": "全部等级",
+      "levels": {
+        "LOW": "低",
+        "MEDIUM": "中",
+        "HIGH": "高",
+        "CRITICAL": "严重"
+      },
+      "resourceId": "资源ID",
+      "reporterId": "举报人ID",
+      "reportedUserId": "被举报用户ID",
+      "sortBy": "排序",
+      "asc": "升序",
+      "desc": "降序",
+      "created": "创建时间",
+      "updated": "更新时间",
+      "processedAt": "处理时间",
+      "refresh": "刷新",
+      "noReports": "暂无举报记录",
+      "reportId": "举报ID",
+      "reporter": "举报人",
+      "reportedUser": "被举报用户",
+      "processedBy": "处理人",
+      "viewDetail": "查看详情",
+      "gameId": "游戏ID",
+      "game": "游戏",
+      "noDetail": "无补充说明",
+      "detailTitle": "举报详情",
+      "detailDescription": "查看举报证据并执行审核处理。",
+      "reportedPenaltyApplied": "已处罚上传者",
+      "reporterPenaltyApplied": "已处罚举报人",
+      "reportDetail": "举报说明",
+      "resourceNote": "资源备注",
+      "filesTitle": "资源文件",
+      "noFiles": "暂无文件信息",
+      "fileSize": "文件大小",
+      "processNote": "处理说明",
+      "reviewTitle": "审核处理",
+      "verdict": "审核结论",
+      "verdictValid": "判定有效",
+      "verdictInvalid": "判定无效",
+      "processNotePlaceholder": "填写审核备注（可选）",
+      "notifyUser": "发送系统通知",
+      "submitReview": "提交审核",
+      "reviewSaved": "审核结果已保存"
     }
   }
 }
