@@ -91,16 +91,21 @@ export const Detail = ({ message }: DetailProps) => {
       {message.link_url && message.link_text && (
         <div>
           {message.external_link ? (
-            <Button asChild intent="primary" appearance="outline">
-              <a href={message.link_url} target="_blank" rel="noopener noreferrer">
-                {message.link_text}
-                <ExternalLink className="size-4 ml-1" />
-              </a>
-            </Button>
+            <a href={message.link_url} target="_blank" rel="noopener noreferrer">
+              <Button
+                intent="primary"
+                appearance="outline"
+                renderIcon={<ExternalLink className="size-4" />}
+              >
+                {t(message.link_text)}
+              </Button>
+            </a>
           ) : (
-            <Button asChild intent="primary" appearance="outline">
-              <Link href={message.link_url}>{message.link_text}</Link>
-            </Button>
+            <Link href={message.link_url}>
+              <Button intent="primary" appearance="outline">
+                {t(message.link_text)}
+              </Button>
+            </Link>
           )}
         </div>
       )}
