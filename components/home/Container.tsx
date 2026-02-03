@@ -43,6 +43,7 @@ export const Container = ({
           <RecentUpdates recentUpdates={recentUpdates} content_limit={content_limit} />
         </div>
       )}
+      <Ad id={3} />
       <div className="flex flex-col gap-6">
         <GamesHead />
         <Games games={games} content_limit={content_limit} />

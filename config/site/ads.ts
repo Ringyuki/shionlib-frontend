@@ -16,4 +16,11 @@ export const ads: Ad[] = [
     link: 'https://s.himoe.uk/g4mfg8',
     excludeLocales: [supportedLocalesEnum.EN, supportedLocalesEnum.JP],
   },
+  {
+    id: 3,
+    image_zh: 'https://images.yurari.moe/admin/6740325e87e2312f66fa3f58/ywyc75rw_2.webp',
+    aspect: '6.4 / 1',
+    link: 'https://s.himoe.uk/z37r3y',
+    excludeLocales: [supportedLocalesEnum.EN, supportedLocalesEnum.JP],
+  },
 ]
