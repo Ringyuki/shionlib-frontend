@@ -34,7 +34,7 @@ export const GameContent = ({ game, comments }: GameContentProps) => {
     <div className="flex flex-col gap-4 shadow-content-strong bg-card-soft w-full rounded-md p-4">
       <div className="w-full">
         <Tabs defaultValue={tab}>
-          <TabsList variant="underlined" intent="primary" showBaseline={false} className="gap-2">
+          <TabsList variant="light" intent="primary" className="w-full!">
             {Object.keys(TABS_MAP).map(tab => (
               <TabsTrigger key={tab} value={tab} className="text-base font-medium">
                 {t(TABS_MAP[tab as keyof typeof TABS_MAP])}
