@@ -1708,9 +1708,9 @@
           "FileVirusReviewRequiredContent": "用户 {uploader_name} 上传的文件 {file_name} 被病毒扫描流程标记（案例 #{malware_case_id}），检测结果：{detected_viruses}，请在 {review_deadline} 前处理。",
           "FileVirusReviewRequiredLinkText": "处理报毒案例",
           "FileVirusFalsePositiveReleasedTitle": "误报已放行",
-          "FileVirusFalsePositiveReleasedContent": "你的文件 {file_name}（案例 #{malware_case_id}）已判定为误报并放行。{review_note, select, undefined {} other {备注：{review_note}}}",
+          "FileVirusFalsePositiveReleasedContent": "你的文件 {file_name}（案例 #{malware_case_id}）已判定为误报并放行。{review_note, select, null {} other {备注：{review_note}}}",
           "FileVirusConfirmedDeletedTitle": "文件已在报毒审核后删除",
-          "FileVirusConfirmedDeletedContent": "你的文件 {file_name}（案例 #{malware_case_id}）已被判定为有害并删除。当前有害文件上传次数：{upload_injected_file_times}。{review_note, select, undefined {} other {备注：{review_note}}}"
+          "FileVirusConfirmedDeletedContent": "你的文件 {file_name}（案例 #{malware_case_id}）已被判定为有害并删除。当前有害文件上传次数：{upload_injected_file_times}。{review_note, select, null {} other {备注：{review_note}}}"
         },
         "Reupload": {
           "FileReuploadedTitle": "你收藏的游戏有文件更新",

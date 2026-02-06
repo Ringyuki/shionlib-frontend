@@ -1708,9 +1708,9 @@
           "FileVirusReviewRequiredContent": "File {file_name} uploaded by {uploader_name} was flagged by malware scan (Case #{malware_case_id}). Detected: {detected_viruses}. Review before {review_deadline}.",
           "FileVirusReviewRequiredLinkText": "Review malware case",
           "FileVirusFalsePositiveReleasedTitle": "False positive released",
-          "FileVirusFalsePositiveReleasedContent": "Your file {file_name} (Case #{malware_case_id}) was reviewed as false positive and has been released.{review_note, select, undefined {} other { Note: {review_note}}}",
+          "FileVirusFalsePositiveReleasedContent": "Your file {file_name} (Case #{malware_case_id}) was reviewed as false positive and has been released.{review_note, select, null {} other { Note: {review_note}}}",
           "FileVirusConfirmedDeletedTitle": "File removed after malware review",
-          "FileVirusConfirmedDeletedContent": "Your file {file_name} (Case #{malware_case_id}) was confirmed as harmful and removed. Current harmful upload count: {upload_injected_file_times}.{review_note, select, undefined {} other { Note: {review_note}}}"
+          "FileVirusConfirmedDeletedContent": "Your file {file_name} (Case #{malware_case_id}) was confirmed as harmful and removed. Current harmful upload count: {upload_injected_file_times}.{review_note, select, null {} other { Note: {review_note}}}"
         },
         "Reupload": {
           "FileReuploadedTitle": "A file in your favorited game has been updated",
