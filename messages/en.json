@@ -641,7 +641,9 @@
           "aria2Unauthorized": "Unauthorized, please check your settings",
           "aria2FailedToFetch": "Cannot connect to Aria2, please check your settings",
           "aria2UnknownError": "Unknown error",
-          "goToSettings": "Go to settings"
+          "goToSettings": "Go to settings",
+          "virusFalsePositiveFlag": "Possible virus detected",
+          "virusFalsePositiveFlagDescription": "Virus scanning process flagged this file, but the administrator has allowed it. Detected viruses: {detected_viruses}."
         },
         "Actions": {
           "report": "Report violation",
@@ -1699,7 +1701,16 @@
           "FileUploadSuccessContent": "You uploaded the file {file_name} successfully, thank you for your sharing.",
           "FileUploadFailedTitle": "File upload failed",
           "FileCheckStatusInvalidContent": "You uploaded the file {file_name} failed to scan, reason: {reason} (file check status: {file_check_status}). Please check and try again.",
-          "FileHarmfulContent": "You uploaded the file {file_name} contains harmful content (file check status: {file_check_status}). Please note that if the system detects harmful content 3 times in a row, your account will be banned. Current times: {upload_injected_file_times}. Please check the file content carefully and try again."
+          "FileHarmfulContent": "You uploaded the file {file_name} contains harmful content (file check status: {file_check_status}). Please note that if the system detects harmful content 3 times in a row, your account will be banned. Current times: {upload_injected_file_times}. Please check the file content carefully and try again.",
+          "FileVirusReviewPendingTitle": "File is pending malware review",
+          "FileVirusReviewPendingContent": "Your file {file_name} was flagged by malware scan and has entered admin review (Case #{malware_case_id}). Review deadline: {review_deadline}.",
+          "FileVirusReviewRequiredTitle": "Malware review required",
+          "FileVirusReviewRequiredContent": "File {file_name} uploaded by {uploader_name} was flagged by malware scan (Case #{malware_case_id}). Detected: {detected_viruses}. Review before {review_deadline}.",
+          "FileVirusReviewRequiredLinkText": "Review malware case",
+          "FileVirusFalsePositiveReleasedTitle": "False positive released",
+          "FileVirusFalsePositiveReleasedContent": "Your file {file_name} (Case #{malware_case_id}) was reviewed as false positive and has been released.{review_note, select, undefined {} other { Note: {review_note}}}",
+          "FileVirusConfirmedDeletedTitle": "File removed after malware review",
+          "FileVirusConfirmedDeletedContent": "Your file {file_name} (Case #{malware_case_id}) was confirmed as harmful and removed. Current harmful upload count: {upload_injected_file_times}.{review_note, select, undefined {} other { Note: {review_note}}}"
         },
         "Reupload": {
           "FileReuploadedTitle": "A file in your favorited game has been updated",
@@ -1746,7 +1757,8 @@
       "characters": "Characters",
       "developers": "Developers",
       "settings": "Settings",
-      "backToSite": "Back to Site"
+      "backToSite": "Back to Site",
+      "malwareScans": "Malware Cases"
     },
     "Dashboard": {
       "activityTrends": "Activity Trends",
@@ -2018,6 +2030,58 @@
       "verdictInvalid": "Mark as Invalid",
       "processNotePlaceholder": "Add moderation note (optional)",
       "notifyUser": "Send system notification",
+      "submitReview": "Submit Review",
+      "reviewSaved": "Review saved"
+    },
+    "MalwareScans": {
+      "status": "Status",
+      "allStatus": "All Status",
+      "statuses": {
+        "PENDING": "Pending review",
+        "RELEASED_FALSE_POSITIVE": "Released (false positive)",
+        "DELETED": "Deleted"
+      },
+      "decisionSource": "Decision Source",
+      "allDecisionSources": "All Decision Sources",
+      "decisionSources": {
+        "ADMIN_ALLOW": "Admin allow",
+        "ADMIN_DELETE": "Admin delete",
+        "TIMEOUT_AUTO_DELETE": "Timeout auto delete"
+      },
+      "fileId": "File ID",
+      "resourceId": "Resource ID",
+      "uploaderId": "Uploader ID",
+      "reviewerId": "Reviewer ID",
+      "sortBy": "Sort By",
+      "asc": "Asc",
+      "desc": "Desc",
+      "created": "Created",
+      "updated": "Updated",
+      "reviewedAt": "Reviewed At",
+      "reviewDeadline": "Review Deadline",
+      "refresh": "Refresh",
+      "noCases": "No malware cases found",
+      "caseId": "Case ID",
+      "uploader": "Uploader",
+      "reviewer": "Reviewer",
+      "gameId": "Game ID",
+      "game": "Game",
+      "viewDetail": "View Details",
+      "fileName": "File Name",
+      "fileSize": "File Size",
+      "detectedViruses": "Detected Viruses",
+      "noDetectedViruses": "No detected virus names",
+      "detailTitle": "Malware Case Details",
+      "detailDescription": "Review scan evidence and choose allow or delete.",
+      "falsePositiveBadge": "False Positive Released",
+      "scanLogExcerpt": "Scan Log Excerpt",
+      "reviewNote": "Review Note",
+      "reviewTitle": "Case Review",
+      "decision": "Decision",
+      "decisionAllow": "Allow and continue upload",
+      "decisionDelete": "Delete file and resource",
+      "reviewNotePlaceholder": "Add review note (optional)",
+      "notifyUploader": "Send system notification to uploader",
       "submitReview": "Submit Review",
       "reviewSaved": "Review saved"
     }

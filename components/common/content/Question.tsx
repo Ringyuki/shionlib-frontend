@@ -7,6 +7,7 @@ interface QuestionProps {
   icon?: React.ElementType
   iconClassName?: string
   tooltipClassName?: string
+  triggerClassName?: string
 }
 
 export const Question = ({
@@ -14,12 +15,15 @@ export const Question = ({
   icon = HelpCircle,
   iconClassName,
   tooltipClassName,
+  triggerClassName,
 }: QuestionProps) => {
   const IconComponent = icon
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <IconComponent className={cn('size-4 text-muted-foreground', iconClassName)} />
+        <span className={cn('inline-flex items-center', triggerClassName)}>
+          <IconComponent className={cn('size-4 text-muted-foreground', iconClassName)} />
+        </span>
       </TooltipTrigger>
       <TooltipContent className={tooltipClassName}>{content}</TooltipContent>
     </Tooltip>

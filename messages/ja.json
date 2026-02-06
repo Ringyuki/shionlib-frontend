@@ -633,7 +633,9 @@
           "aria2Unauthorized": "未認証、設定を確認してください",
           "aria2FailedToFetch": "Aria2 に接続できません、設定を確認してください",
           "aria2UnknownError": "未知のエラー",
-          "goToSettings": "設定へ"
+          "goToSettings": "設定へ",
+          "virusFalsePositiveFlag": "ウイルスが検出された可能性があります",
+          "virusFalsePositiveFlagDescription": "ウイルス検査でこのファイルが検出されましたが、管理者によって許可されました。検出されたウイルス: {detected_viruses}。"
         },
         "Actions": {
           "report": "違反を報告",
@@ -1690,7 +1692,16 @@
           "FileUploadSuccessContent": "あなたがアップロードしたファイル {file_name} は Shionlib ストレージシステムに成功しました。ありがとうございます。",
           "FileUploadFailedTitle": "ファイルアップロード失敗",
           "FileCheckStatusInvalidContent": "あなたがアップロードしたファイル {file_name} はスキャンに失敗しました。原因：{reason} (ファイルスキャン状態：{file_check_status})。確認してから再度お試しください。",
-          "FileHarmfulContent": "あなたがアップロードしたファイル {file_name} は有害な内容を含んでいます (ファイルスキャン状態：{file_check_status})。システムが連続して3回有害な内容を検出した場合、あなたのアカウントは封禁されます。現在の回数：{upload_injected_file_times}。ファイル内容をよく確認してから再度お試しください。"
+          "FileHarmfulContent": "あなたがアップロードしたファイル {file_name} は有害な内容を含んでいます (ファイルスキャン状態：{file_check_status})。システムが連続して3回有害な内容を検出した場合、あなたのアカウントは封禁されます。現在の回数：{upload_injected_file_times}。ファイル内容をよく確認してから再度お試しください。",
+          "FileVirusReviewPendingTitle": "ファイルがマルウェア審査待ちです",
+          "FileVirusReviewPendingContent": "アップロードしたファイル {file_name} がウイルス検査で検出され、管理者審査に入りました（ケース #{malware_case_id}）。審査期限: {review_deadline}。",
+          "FileVirusReviewRequiredTitle": "新しいマルウェア審査があります",
+          "FileVirusReviewRequiredContent": "ユーザー {uploader_name} のファイル {file_name} がウイルス検査で検出されました（ケース #{malware_case_id}）。検出: {detected_viruses}。{review_deadline} までに対応してください。",
+          "FileVirusReviewRequiredLinkText": "マルウェアケースを審査",
+          "FileVirusFalsePositiveReleasedTitle": "誤検知として許可されました",
+          "FileVirusFalsePositiveReleasedContent": "あなたのファイル {file_name}（ケース #{malware_case_id}）は誤検知として許可されました。{review_note, select, undefined {} other {メモ: {review_note}}}",
+          "FileVirusConfirmedDeletedTitle": "マルウェア審査後にファイルを削除しました",
+          "FileVirusConfirmedDeletedContent": "あなたのファイル {file_name}（ケース #{malware_case_id}）は有害と判定され削除されました。現在の有害ファイルアップロード回数: {upload_injected_file_times}。{review_note, select, undefined {} other {メモ: {review_note}}}"
         },
         "Reupload": {
           "FileReuploadedTitle": "お気に入りのゲームのファイルが更新されました",
@@ -1737,7 +1748,8 @@
       "characters": "キャラクター",
       "developers": "開発者",
       "settings": "設定",
-      "backToSite": "サイトに戻る"
+      "backToSite": "サイトに戻る",
+      "malwareScans": "マルウェア審査"
     },
     "Dashboard": {
       "activityTrends": "活動トレンド",
@@ -2010,6 +2022,58 @@
       "processNotePlaceholder": "審査メモを入力（任意）",
       "notifyUser": "システム通知を送信",
       "submitReview": "審査を保存",
+      "reviewSaved": "審査結果を保存しました"
+    },
+    "MalwareScans": {
+      "status": "状態",
+      "allStatus": "すべての状態",
+      "statuses": {
+        "PENDING": "審査待ち",
+        "RELEASED_FALSE_POSITIVE": "許可済み（誤検知）",
+        "DELETED": "削除済み"
+      },
+      "decisionSource": "処理元",
+      "allDecisionSources": "すべての処理元",
+      "decisionSources": {
+        "ADMIN_ALLOW": "管理者が許可",
+        "ADMIN_DELETE": "管理者が削除",
+        "TIMEOUT_AUTO_DELETE": "タイムアウト自動削除"
+      },
+      "fileId": "ファイル ID",
+      "resourceId": "リソース ID",
+      "uploaderId": "アップロード者 ID",
+      "reviewerId": "審査者 ID",
+      "sortBy": "並び替え",
+      "asc": "昇順",
+      "desc": "降順",
+      "created": "作成日時",
+      "updated": "更新日時",
+      "reviewedAt": "審査日時",
+      "reviewDeadline": "審査期限",
+      "refresh": "更新",
+      "noCases": "マルウェアケースはありません",
+      "caseId": "ケース ID",
+      "uploader": "アップロード者",
+      "reviewer": "審査者",
+      "gameId": "ゲーム ID",
+      "game": "ゲーム",
+      "viewDetail": "詳細を見る",
+      "fileName": "ファイル名",
+      "fileSize": "ファイルサイズ",
+      "detectedViruses": "検出されたウイルス",
+      "noDetectedViruses": "ウイルス名は取得されていません",
+      "detailTitle": "マルウェアケース詳細",
+      "detailDescription": "スキャン結果を確認して、許可または削除を選択してください。",
+      "falsePositiveBadge": "誤検知で許可済み",
+      "scanLogExcerpt": "スキャンログ抜粋",
+      "reviewNote": "審査メモ",
+      "reviewTitle": "ケース審査",
+      "decision": "判定",
+      "decisionAllow": "許可してアップロード継続",
+      "decisionDelete": "ファイルとリソースを削除",
+      "reviewNotePlaceholder": "審査メモを入力（任意）",
+      "notifyUploader": "アップロード者へシステム通知を送信",
+      "submitReview": "審査を確定",
       "reviewSaved": "審査結果を保存しました"
     }
   }

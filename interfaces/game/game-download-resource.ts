@@ -23,6 +23,11 @@ export interface GameDownloadResourceFile {
   s3_file_key?: string
   hash_algorithm: 'sha256' | 'blake3'
   file_hash: string
+  is_virus_false_positive?: boolean
+  malware_scan_cases: {
+    id: number
+    detected_viruses: string[]
+  }[]
   creator: Creator
 }
 

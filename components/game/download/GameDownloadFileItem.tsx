@@ -14,6 +14,7 @@ import { useAria2Store } from '@/store/aria2Store'
 import { CopyButton } from '@/components/shionui/animated/CopyButton'
 import { GetDownloadLink, GetDownloadLinkHandle } from './libs/get-download-link'
 import { Link } from '@/i18n/navigation.client'
+import { Question } from '@/components/common/content/Question'
 
 interface GameDownloadFileItemProps {
   file: GameDownloadResourceFile
@@ -153,6 +154,19 @@ export const GameDownloadFileItem = ({
             {file.file_status !== 3 && (
               <Badge size="sm" variant="neutral">
                 {t('onlyVisibleForYourself')}
+              </Badge>
+            )}
+            {file.is_virus_false_positive && (
+              <Badge size="sm" variant="destructive">
+                {t('virusFalsePositiveFlag')}
+                <Question
+                  content={t('virusFalsePositiveFlagDescription', {
+                    detected_viruses: file.malware_scan_cases
+                      .map(c => c.detected_viruses)
+                      .join(', '),
+                  })}
+                  iconClassName="text-white size-3"
+                />
               </Badge>
             )}
           </div>
