@@ -10,6 +10,7 @@ import { GameCover } from '../cover/GameCover'
 import { getLocale } from 'next-intl/server'
 import { GameScores } from '../score/GameScores'
 import { FadeImage } from '@/components/common/shared/FadeImage'
+import { cn } from '@/utils/cn'
 
 interface GameHeaderProps {
   game: GameData
@@ -32,7 +33,10 @@ export const GameHeader = async ({ game, is_favorite }: GameHeaderProps) => {
         <FadeImage
           src={cover.url}
           alt={title}
-          className="w-full h-full opacity-20 object-cover blur-sm"
+          className={cn(
+            'w-full h-full opacity-20 object-cover blur-xs',
+            (cover.sexual >= 1 || cover.violence >= 1) && 'blur-2xl',
+          )}
           showSkeleton={false}
         />
       </div>
