@@ -14,6 +14,7 @@ import { MobileNav } from '@/components/common/top-bar/MobileNav'
 import { navBarConfig } from '@/config/site/shionlib'
 import { SearchTrigger } from '@/components/common/top-bar/SearchTrigger'
 import { Message } from '@/components/common/top-bar/Message'
+import { RandomGame } from '@/components/common/top-bar/Random'
 
 const StartContent = () => {
   return (
@@ -42,6 +43,7 @@ const EndContent = () => {
 
   return (
     <div className="max-h-full flex items-center gap-2">
+      <RandomGame className="flex topbar:hidden" />
       <SearchTrigger />
       <ThemeSwitcher />
       {isLoading ? (

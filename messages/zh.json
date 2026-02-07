@@ -214,6 +214,7 @@
       },
       "TopBar": {
         "RandomGame": {
+          "random": "随机",
           "loading": "Shion 祈祷中...",
           "retry": "没有任何结果呢，再试一次吧"
         },

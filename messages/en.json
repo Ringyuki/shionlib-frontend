@@ -214,6 +214,7 @@
       },
       "TopBar": {
         "RandomGame": {
+          "random": "Random",
           "loading": "Now loading...",
           "retry": "No results found, try again!"
         },
