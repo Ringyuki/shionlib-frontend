@@ -13,16 +13,21 @@ function ScrollArea({ className, children, showScrollHint = true, ...props }: Sc
   const viewportRef = React.useRef<HTMLDivElement | null>(null)
   const [canScrollUp, setCanScrollUp] = React.useState(false)
   const [canScrollDown, setCanScrollDown] = React.useState(false)
+  const [canScrollLeft, setCanScrollLeft] = React.useState(false)
+  const [canScrollRight, setCanScrollRight] = React.useState(false)
 
   const updateScrollState = React.useCallback(() => {
     const viewport = viewportRef.current
     if (!viewport) return
 
-    const { scrollTop, scrollHeight, clientHeight } = viewport
+    const { scrollTop, scrollHeight, clientHeight, scrollLeft, scrollWidth, clientWidth } = viewport
     const maxScrollTop = scrollHeight - clientHeight
+    const maxScrollLeft = scrollWidth - clientWidth
 
     setCanScrollUp(scrollTop > 0)
     setCanScrollDown(scrollTop < maxScrollTop - 1)
+    setCanScrollLeft(scrollLeft > 0)
+    setCanScrollRight(scrollLeft < maxScrollLeft - 1)
   }, [])
 
   React.useEffect(() => {
@@ -66,6 +71,27 @@ function ScrollArea({ className, children, showScrollHint = true, ...props }: Sc
           canScrollUp && showScrollHint ? 'opacity-100' : 'opacity-0',
         )}
       />
+      <div
+        data-slot="scroll-area-shadow-bottom"
+        className={cn(
+          'pointer-events-none absolute inset-x-0 bottom-0 z-10 h-3 bg-gradient-to-t from-foreground/15 to-transparent transition-opacity',
+          canScrollDown && showScrollHint ? 'opacity-100' : 'opacity-0',
+        )}
+      />
+      <div
+        data-slot="scroll-area-shadow-left"
+        className={cn(
+          'pointer-events-none absolute inset-y-0 left-0 z-10 w-3 bg-gradient-to-r from-foreground/15 to-transparent transition-opacity',
+          canScrollLeft && showScrollHint ? 'opacity-100' : 'opacity-0',
+        )}
+      />
+      <div
+        data-slot="scroll-area-shadow-right"
+        className={cn(
+          'pointer-events-none absolute inset-y-0 right-0 z-10 w-3 bg-gradient-to-l from-foreground/15 to-transparent transition-opacity',
+          canScrollRight && showScrollHint ? 'opacity-100' : 'opacity-0',
+        )}
+      />
       <ScrollAreaPrimitive.Viewport
         data-slot="scroll-area-viewport"
         className="focus-visible:ring-ring/50 h-full w-full max-h-[inherit] overflow-auto overscroll-contain rounded-[inherit] bg-transparent transition-[color,box-shadow,background-color] outline-none focus-visible:ring-[3px] focus-visible:outline-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
@@ -74,13 +100,6 @@ function ScrollArea({ className, children, showScrollHint = true, ...props }: Sc
       >
         {children}
       </ScrollAreaPrimitive.Viewport>
-      <div
-        data-slot="scroll-area-shadow-bottom"
-        className={cn(
-          'pointer-events-none absolute inset-x-0 bottom-0 z-10 h-3 bg-gradient-to-t from-foreground/15 to-transparent transition-opacity',
-          canScrollDown && showScrollHint ? 'opacity-100' : 'opacity-0',
-        )}
-      />
       <ScrollBar />
       <ScrollAreaPrimitive.Corner />
     </ScrollAreaPrimitive.Root>
