@@ -53,6 +53,7 @@ export const GameDownloadContent = ({
             onTurnstileOpenChange={onTurnstileOpenChange}
           />
         ))}
+      <Ad id={1} />
       <Ad id={2} />
     </div>
   )

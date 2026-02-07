@@ -36,7 +36,7 @@ export const GameContent = ({ game, comments }: GameContentProps) => {
         <Tabs defaultValue={tab}>
           <TabsList variant="light" intent="primary" className="w-full!">
             {Object.keys(TABS_MAP).map(tab => (
-              <TabsTrigger key={tab} value={tab} className="text-base font-medium">
+              <TabsTrigger key={tab} value={tab}>
                 {t(TABS_MAP[tab as keyof typeof TABS_MAP])}
               </TabsTrigger>
             ))}

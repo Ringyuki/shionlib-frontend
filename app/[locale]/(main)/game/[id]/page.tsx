@@ -54,7 +54,6 @@ export default async function GamePage({ params, searchParams }: GamePageProps) 
       <GameHeader game={game} is_favorite={favoriteStatus?.is_favorite ?? false} />
       <GameContent game={game} comments={comments} />
       <Ad id={3} />
-      <Ad id={1} />
     </div>
   )
 }

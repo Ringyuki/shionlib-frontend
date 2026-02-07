@@ -9,6 +9,7 @@ import { getPreferredContent } from './helpers/getPreferredContent'
 import { GameCover } from '../cover/GameCover'
 import { getLocale } from 'next-intl/server'
 import { GameScores } from '../score/GameScores'
+import { FadeImage } from '@/components/common/shared/FadeImage'
 
 interface GameHeaderProps {
   game: GameData
@@ -27,6 +28,14 @@ export const GameHeader = async ({ game, is_favorite }: GameHeaderProps) => {
   const { cover, vertical, aspect } = getPreferredContent(game, 'cover', lang)
   return (
     <div className="flex flex-col lg:flex-row overflow-hidden lg:gap-4 gap-2 shadow-content-strong bg-card-soft w-full rounded-md items-center">
+      <div className="fixed top-0 left-0 w-full h-full z-[-1]">
+        <FadeImage
+          src={cover.url}
+          alt={title}
+          className="w-full h-full opacity-20 object-cover blur-sm"
+          showSkeleton={false}
+        />
+      </div>
       <div className="relative w-full lg:w-fit">
         <GameCover
           covers={game.covers ?? []}

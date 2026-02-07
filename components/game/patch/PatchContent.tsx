@@ -25,6 +25,7 @@ export const PatchContent = ({ patches, className }: PatchContentProps) => {
           .map(patch => (
             <PatchItem key={patch.id} patch={patch} />
           ))}
+        <Ad id={1} />
         <Ad id={2} />
       </div>
       <Moyu />

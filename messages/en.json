@@ -213,6 +213,10 @@
         }
       },
       "TopBar": {
+        "RandomGame": {
+          "loading": "Now loading...",
+          "retry": "No results found, try again!"
+        },
         "SearchTrigger": {
           "search": "Search..."
         },

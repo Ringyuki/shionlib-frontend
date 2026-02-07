@@ -7,6 +7,7 @@ import { cn } from '@/utils/cn'
 import { GradientText } from '@/components/shionui/GradientText'
 import { GradientIcon } from '@/components/shionui/GradientIcon'
 import { NavBarConfig } from '@/interfaces/site/shion-lib-site-config.interface'
+import { RandomGame } from './Random'
 
 interface NavProps {
   items: NavBarConfig['links']
@@ -18,6 +19,7 @@ export const Nav = ({ items }: NavProps) => {
 
   return (
     <div className="flex items-center gap-0.5">
+      <RandomGame />
       {items.map(link => {
         const isActive = segment === link.href.replace(/^\//, '')
         const gradientId = `nav-gradient-${link.href.replace(/[^a-zA-Z0-9_-]/g, '-')}`

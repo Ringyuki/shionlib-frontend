@@ -32,10 +32,6 @@ export const navBarConfig: NavBarConfig = {
       href: '/docs',
     },
     {
-      label: 'about',
-      href: '/docs/about/about-shionlib',
-    },
-    {
       label: 'aiGirlFriend',
       href: 'https://s.himoe.uk/ycnbdn',
       external: true,
