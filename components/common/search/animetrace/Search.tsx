@@ -1,5 +1,5 @@
 import { FileUpload, FileUploadDropzone, FileUploadTrigger } from '@/components/shionui/FileUpload'
-import { Upload as UploadIcon, LoaderCircle } from 'lucide-react'
+import { Upload as UploadIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import {
   ANIMETRACE_API_URL,
@@ -9,9 +9,8 @@ import {
 import { toast } from 'react-hot-toast'
 import { AnimeTraceResponse } from '@/interfaces/search/anime-trace.interface'
 import { useCallback, useEffect, useState } from 'react'
-import { cn } from '@/utils/cn'
 import { AnimeTraceResult } from './Result'
-import { prepareBitmap } from './constant/get-target-box'
+import { prepareBitmap } from './helper/get-target-box'
 
 export const AnimeTraceSearch = () => {
   const t = useTranslations('Components.Common.Search.AnimeTrace.Search')
@@ -99,16 +98,9 @@ export const AnimeTraceSearch = () => {
         accept={ALLOWED_ANIMETRACE_FILE_EXTENSIONS.join(',')}
         maxFiles={1}
         onAccept={handleFileAccept}
+        disabled={loading}
       >
         <FileUploadDropzone className="relative">
-          <div
-            className={cn(
-              'absolute inset-0 flex items-center justify-center bg-black/50 rounded-md transition-opacity duration-300',
-              loading ? 'opacity-100' : 'opacity-0 pointer-events-none',
-            )}
-          >
-            <LoaderCircle className="size-6 animate-spin text-white" />
-          </div>
           <div className="text-muted-foreground text-sm flex flex-col items-center gap-2">
             <UploadIcon className="size-4" />
             <span>{t('dropzone')}</span>

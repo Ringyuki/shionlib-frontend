@@ -1,6 +1,6 @@
 import { AnimeTraceResponse } from '@/interfaces/search/anime-trace.interface'
 import { FadeImage } from '@/components/common/shared/FadeImage'
-import { getTargetBox } from './constant/get-target-box'
+import { getTargetBox } from './helper/get-target-box'
 import { Badge } from '@/components/shionui/Badge'
 import { Card, CardContent } from '@/components/shionui/Card'
 import { useTranslations } from 'next-intl'

@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl'
 import { cn } from '@/utils/cn'
 import { useRouter } from '@/i18n/navigation.client'
 import { Button } from '@/components/shionui/Button'
+import { useMinDuration } from '@/hooks/useMinDuration'
 
 interface RandomGameProps {
   className?: string
@@ -15,18 +16,21 @@ export const RandomGame = ({ className }: RandomGameProps) => {
   const t = useTranslations('Components.Common.TopBar.RandomGame')
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const { runWithMinDuration } = useMinDuration(1000)
 
   const getRandomGame = async () => {
     let toastId: string | undefined
     try {
       setLoading(true)
       toastId = toast.loading(t('loading'))
-      const { data } = await shionlibRequest().get<number | null>('/game/random')
-      if (!data) {
-        toast.error(t('retry'))
-        return
-      }
-      router.push(`/game/${data}`)
+      await runWithMinDuration(async () => {
+        const { data } = await shionlibRequest().get<number | null>('/game/random')
+        if (!data) {
+          toast.error(t('retry'))
+          return
+        }
+        router.push(`/game/${data}`)
+      })
     } catch {
     } finally {
       setLoading(false)
