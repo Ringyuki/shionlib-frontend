@@ -44,6 +44,12 @@ export const useSearchStore = create<SearchStore>()(
     {
       name: 'shionlib-search-store',
       storage: createJSONStorage(() => localStorage),
+      // Only persist the search history and trending here.
+      // Avoid AnimeTrace dialog and search dialog to reopen after navigation.
+      partialize: state => ({
+        history: state.history,
+        trending: state.trending,
+      }),
     },
   ),
 )
