@@ -40,11 +40,13 @@ export const Results = async ({ games, pagination, q, content_limit }: ResultsPr
           <GameCard key={game.id} game={game} content_limit={content_limit} />
         ))}
       </div>
-      <Pagination
-        currentPage={pagination.currentPage}
-        totalPages={pagination.totalPages}
-        extraQuery={{ q }}
-      />
+      {pagination.totalPages > 1 && (
+        <Pagination
+          currentPage={pagination.currentPage}
+          totalPages={pagination.totalPages}
+          extraQuery={{ q }}
+        />
+      )}
     </div>
   ) : (
     <Empty />

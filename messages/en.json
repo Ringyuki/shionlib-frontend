@@ -423,6 +423,28 @@
             "result_prefix": "Search for",
             "result_suffix": "{total} results found"
           }
+        },
+        "AnimeTrace": {
+          "Trigger": {
+            "trace": "Search by image"
+          },
+          "Dialog": {
+            "title": "Search by image",
+            "description": "Powered by AnimeTrace."
+          },
+          "Result": {
+            "candidates": "{count} candidates",
+            "lowConfidence": "Low confidence",
+            "unknownCharacter": "Unknown character",
+            "unknownWork": "Unknown work"
+          },
+          "Search": {
+            "dropzone": "Paste image, or click, drag, and drop image here",
+            "dropzoneSupportFileFormat": "Supported file formats: jpg/jpeg/png/gif/webp",
+            "loading": "Now loading...",
+            "noResult": "No results found",
+            "invalidFileFormat": "Invalid image format"
+          }
         }
       },
       "Auth": {

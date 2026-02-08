@@ -423,6 +423,28 @@
             "result_prefix": "搜索",
             "result_suffix": "共 {total} 个结果"
           }
+        },
+        "AnimeTrace": {
+          "Trigger": {
+            "trace": "以图搜Gal"
+          },
+          "Dialog": {
+            "title": "以图搜Gal",
+            "description": "由 AnimeTrace 提供支持"
+          },
+          "Result": {
+            "candidates": "{count} 个结果",
+            "lowConfidence": "置信度较低",
+            "unknownCharacter": "未知角色",
+            "unknownWork": "未知作品"
+          },
+          "Search": {
+            "dropzone": "粘贴图片，或点击、拖拽图片到此处",
+            "dropzoneSupportFileFormat": "支持的文件格式：jpg/jpeg/png/gif/webp",
+            "loading": "Shion 祈祷中...",
+            "noResult": "没有找到结果",
+            "invalidFileFormat": "图片格式不支持"
+          }
         }
       },
       "Auth": {

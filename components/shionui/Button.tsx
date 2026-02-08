@@ -317,6 +317,7 @@ type ShionButtonProps = React.ComponentProps<'button'> &
     renderIcon?: React.ReactNode | (() => React.ReactNode)
     iconPosition?: 'left' | 'right'
     innerClassName?: string
+    showRipple?: boolean
   }
 
 function Button({
@@ -332,6 +333,7 @@ function Button({
   loginRequired = false,
   renderIcon,
   iconPosition = 'left',
+  showRipple = true,
   ...props
 }: ShionButtonProps) {
   const rippleRef = useRef<RippleRef>(null)
@@ -538,7 +540,7 @@ function Button({
           </motion.span>
         )
       })()}
-      <RippleEffect ref={rippleRef} />
+      {showRipple && <RippleEffect ref={rippleRef} />}
     </Comp>
   )
 }

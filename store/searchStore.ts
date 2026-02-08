@@ -13,6 +13,9 @@ interface SearchStore {
   searchDialogOpen: boolean
   openSearchDialog: () => void
   closeSearchDialog: () => void
+  animeTraceDialogOpen: boolean
+  openAnimeTraceDialog: () => void
+  closeAnimeTraceDialog: () => void
 }
 
 export const useSearchStore = create<SearchStore>()(
@@ -34,6 +37,9 @@ export const useSearchStore = create<SearchStore>()(
       searchDialogOpen: false,
       openSearchDialog: () => set({ searchDialogOpen: true }),
       closeSearchDialog: () => set({ searchDialogOpen: false }),
+      animeTraceDialogOpen: false,
+      openAnimeTraceDialog: () => set({ animeTraceDialogOpen: true }),
+      closeAnimeTraceDialog: () => set({ animeTraceDialogOpen: false }),
     }),
     {
       name: 'shionlib-search-store',

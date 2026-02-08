@@ -3,6 +3,7 @@
 import * as React from 'react'
 import { Command as CommandPrimitive } from 'cmdk'
 import { SearchIcon } from 'lucide-react'
+import { AnimeTraceTrigger } from '@/components/common/search/animetrace/Trigger'
 
 import { cn } from '@/utils/cn'
 import {
@@ -72,6 +73,7 @@ function CommandInput({
         className="placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
         {...props}
       />
+      <AnimeTraceTrigger />
     </div>
   )
 }
