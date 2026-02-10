@@ -31,7 +31,7 @@ export function AdminGameScalarEditor({ gameId, data }: AdminGameScalarEditorPro
   const [parseError, setParseError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const hasChanges = jsonText !== initialText
-  const { theme } = useTheme()
+  const { systemTheme } = useTheme()
 
   const parsePayload = (source: string) => {
     const parsed = JSON.parse(source) as unknown
@@ -105,7 +105,7 @@ export function AdminGameScalarEditor({ gameId, data }: AdminGameScalarEditorPro
 
       <div className="w-full min-w-0 max-w-full overflow-hidden rounded-lg border border-border [&_.cm-editor]:w-full [&_.cm-editor]:max-w-full [&_.cm-editor]:min-w-0 [&_.cm-content]:max-w-full [&_.cm-line]:[overflow-wrap:anywhere] [&_.cm-scroller]:overflow-x-hidden [&_.cm-scroller]:overflow-y-auto">
         <CodeMirror
-          theme={theme === 'dark' ? 'dark' : 'light'}
+          theme={systemTheme}
           value={jsonText}
           height="62vh"
           className="w-full max-w-full min-w-0"
