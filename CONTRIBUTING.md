@@ -49,7 +49,7 @@ Keep commits small and focused. Write in imperative mood.
 ### Code Style & Quality
 
 - Language: TypeScript (strict). Prefer explicit types for public APIs; avoid `any`.
-- Framework: Next.js 15 (App Router), React 19.
+- Framework: Next.js 16 (App Router), React 19.
 - UI: Tailwind CSS 4, Radix UI, DaisyUI. Prefer shared components under `components/shionui`.
 - Accessibility: Use semantic elements and ARIA where appropriate.
 - Linting/Formatting: ESLint 9 + Prettier 3 are enforced. Run `pnpm lint` and `pnpm format` before committing.
