@@ -23,16 +23,14 @@ export default async function AdminLayout({ children, params }: AdminLayoutProps
   }
 
   return (
-    <SidebarProvider className="overflow-hidden">
-      <div className="flex h-screen w-full bg-gray-50 dark:bg-gray-950">
-        <AdminSidebar />
-        <SidebarInset className="flex flex-col">
-          <header className="flex h-12 shrink-0 items-center gap-2 border-b border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm px-4">
-            <SidebarTrigger className="-ml-1" />
-          </header>
-          <main className="flex-1 overflow-auto p-6">{children}</main>
-        </SidebarInset>
-      </div>
+    <SidebarProvider>
+      <AdminSidebar />
+      <SidebarInset className="flex flex-col bg-gray-50 dark:bg-gray-950">
+        <header className="sticky top-0 z-20 flex h-12 shrink-0 items-center gap-2 border-b border-gray-200 bg-white/50 px-4 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-900/50">
+          <SidebarTrigger />
+        </header>
+        <main className="flex-1 overflow-auto p-6">{children}</main>
+      </SidebarInset>
     </SidebarProvider>
   )
 }
