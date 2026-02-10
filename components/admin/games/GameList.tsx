@@ -10,9 +10,19 @@ interface GameListProps {
   items?: AdminGameListItem[]
   isLoading?: boolean
   onStatusChange?: (gameId: number, status: number) => void
+  onDelete?: (gameId: number) => Promise<void>
+  onAddRecentUpdate?: (gameId: number) => Promise<void>
+  onRemoveRecentUpdate?: (gameId: number) => Promise<void>
 }
 
-export function GameList({ items, isLoading, onStatusChange }: GameListProps) {
+export function GameList({
+  items,
+  isLoading,
+  onStatusChange,
+  onDelete,
+  onAddRecentUpdate,
+  onRemoveRecentUpdate,
+}: GameListProps) {
   const t = useTranslations('Admin.Games')
 
   if (isLoading) {
@@ -42,7 +52,14 @@ export function GameList({ items, isLoading, onStatusChange }: GameListProps) {
   return (
     <div className="space-y-3">
       {items.map(game => (
-        <GameListItem key={game.id} game={game} onStatusChange={onStatusChange} />
+        <GameListItem
+          key={game.id}
+          game={game}
+          onStatusChange={onStatusChange}
+          onDelete={onDelete}
+          onAddRecentUpdate={onAddRecentUpdate}
+          onRemoveRecentUpdate={onRemoveRecentUpdate}
+        />
       ))}
     </div>
   )

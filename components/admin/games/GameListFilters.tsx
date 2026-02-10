@@ -36,18 +36,15 @@ export function GameListFilters({
 
   return (
     <div className="flex flex-wrap items-center gap-3">
-      {/* Search */}
       <div className="relative flex-1 min-w-[200px]">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
         <Input
           value={search}
           onChange={e => onSearchChange(e.target.value)}
           placeholder={t('searchPlaceholder')}
-          className="pl-9"
+          prefix={<Search className="size-4" />}
         />
       </div>
 
-      {/* Status Filter */}
       <Select
         value={status?.toString() ?? 'all'}
         onValueChange={v => onStatusChange(v === 'all' ? undefined : parseInt(v))}
@@ -62,7 +59,6 @@ export function GameListFilters({
         </SelectContent>
       </Select>
 
-      {/* Sort By */}
       <Select value={sortBy} onValueChange={onSortByChange}>
         <SelectTrigger className="w-[140px]">
           <SelectValue placeholder={t('sortBy')} />
@@ -77,7 +73,6 @@ export function GameListFilters({
         </SelectContent>
       </Select>
 
-      {/* Sort Order */}
       <Select value={sortOrder} onValueChange={v => onSortOrderChange(v as 'asc' | 'desc')}>
         <SelectTrigger className="w-[100px]">
           <SelectValue />

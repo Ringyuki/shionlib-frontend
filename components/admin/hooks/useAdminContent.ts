@@ -51,6 +51,27 @@ export async function updateGameStatus(gameId: number, status: number): Promise<
   })
 }
 
+export async function updateGameScalar(
+  gameId: number,
+  payload: Record<string, any>,
+): Promise<void> {
+  await shionlibRequest().patch<void>(`/admin/content/games/${gameId}/edit/scalar`, {
+    data: payload,
+  })
+}
+
+export async function deleteGame(gameId: number): Promise<void> {
+  await shionlibRequest().delete<void>(`/admin/content/games/${gameId}`)
+}
+
+export async function addGameToRecentUpdate(gameId: number): Promise<void> {
+  await shionlibRequest().put<void>(`/admin/content/games/${gameId}/recent-update`)
+}
+
+export async function removeGameFromRecentUpdate(gameId: number): Promise<void> {
+  await shionlibRequest().delete<void>(`/admin/content/games/${gameId}/recent-update`)
+}
+
 export function useAdminCharacterList(query: AdminCharacterListQuery = {}) {
   const [data, setData] = useState<AdminCharacterListResult | null>(null)
   const [isLoading, setIsLoading] = useState(true)

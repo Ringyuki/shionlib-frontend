@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import {
   AdminDownloadResourceReportReason,
@@ -14,9 +14,14 @@ import { Pagination } from '@/components/common/content/Pagination'
 import { Button } from '@/components/shionui/Button'
 import { RotateCcw } from 'lucide-react'
 
-export function AdminReportsClient() {
+interface AdminReportsClientProps {
+  initialPage: number
+}
+
+export function AdminReportsClient({ initialPage }: AdminReportsClientProps) {
   const t = useTranslations('Admin.Reports')
-  const [page, setPage] = useState(1)
+  const isFirstFilterSync = useRef(true)
+  const [page, setPage] = useState(initialPage)
   const [pageSize] = useState(20)
   const [status, setStatus] = useState<AdminDownloadResourceReportStatus | undefined>(undefined)
   const [reason, setReason] = useState<AdminDownloadResourceReportReason | undefined>(undefined)
@@ -59,6 +64,10 @@ export function AdminReportsClient() {
   const { data, isLoading, refetch } = useAdminReportList(query)
 
   useEffect(() => {
+    if (isFirstFilterSync.current) {
+      isFirstFilterSync.current = false
+      return
+    }
     setPage(1)
   }, [status, reason, maliciousLevel, resourceId, reporterId, reportedUserId, sortBy, sortOrder])
 
@@ -102,7 +111,6 @@ export function AdminReportsClient() {
       <Pagination
         currentPage={data?.meta.currentPage ?? 1}
         totalPages={totalPages}
-        noRouteChange
         onPageChange={setPage}
         loading={isLoading}
         scrollToTop

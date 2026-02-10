@@ -17,14 +17,3 @@ export interface StatsTrend {
   downloads: number
   views: number
 }
-
-export interface TopGame {
-  id: number
-  title_jp: string
-  title_zh: string
-  title_en: string
-  cover?: string
-  views: number
-  downloads: number
-  hot_score: number
-}

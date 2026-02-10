@@ -34,7 +34,7 @@ export enum TimeFormatEnum {
 export const timeFormat = (
   date: Date | number | string,
   locale: string,
-  formatPattern: TimeFormatEnum,
+  formatPattern: TimeFormatEnum = TimeFormatEnum.YYYY_MM_DD_HH_MM_SS,
 ) => {
   return format(date, formatPattern, { locale: localeMap[locale as SupportedLocales] })
 }

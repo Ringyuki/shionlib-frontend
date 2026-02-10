@@ -1,3 +1,5 @@
+import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
+
 export interface AdminGameListItem {
   id: number
   title_jp: string
@@ -16,13 +18,7 @@ export interface AdminGameListItem {
   }
 }
 
-export interface AdminGameListResult {
-  items: AdminGameListItem[]
-  total: number
-  page: number
-  limit: number
-  totalPages: number
-}
+export type AdminGameListResult = PaginatedResponse<AdminGameListItem>
 
 export interface AdminGameListQuery {
   page?: number
@@ -45,13 +41,7 @@ export interface AdminCharacterListItem {
   updated: string
 }
 
-export interface AdminCharacterListResult {
-  items: AdminCharacterListItem[]
-  total: number
-  page: number
-  limit: number
-  totalPages: number
-}
+export type AdminCharacterListResult = PaginatedResponse<AdminCharacterListItem>
 
 export interface AdminCharacterListQuery {
   page?: number
@@ -70,13 +60,7 @@ export interface AdminDeveloperListItem {
   updated: string
 }
 
-export interface AdminDeveloperListResult {
-  items: AdminDeveloperListItem[]
-  total: number
-  page: number
-  limit: number
-  totalPages: number
-}
+export type AdminDeveloperListResult = PaginatedResponse<AdminDeveloperListItem>
 
 export interface AdminDeveloperListQuery {
   page?: number

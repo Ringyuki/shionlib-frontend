@@ -31,7 +31,7 @@ export const AddToRecentUpdate = ({ game_id }: AddToRecentUpdateProps) => {
   const handleAddToRecentUpdate = async () => {
     try {
       setLoading(true)
-      await shionlibRequest().put(`/game/${game_id}/recent-update`)
+      await shionlibRequest().put(`/admin/content/games/${game_id}/recent-update`)
       toast.success(t('success'))
       setOpen(false)
     } catch {

@@ -31,7 +31,7 @@ export const RemoveFromRecentUpdate = ({ game_id }: RemoveFromRecentUpdateProps)
   const handleRemoveFromRecentUpdate = async () => {
     try {
       setLoading(true)
-      await shionlibRequest().delete(`/game/${game_id}/recent-update`)
+      await shionlibRequest().delete(`/admin/content/games/${game_id}/recent-update`)
       toast.success(t('success'))
       setOpen(false)
     } catch {

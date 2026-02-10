@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useDebounce } from 'react-use'
 import { useTranslations } from 'next-intl'
 import { useAdminCommentList } from '@/components/admin/hooks/useAdminComments'
@@ -10,9 +10,14 @@ import { Pagination } from '@/components/common/content/Pagination'
 import { Button } from '@/components/shionui/Button'
 import { RotateCcw } from 'lucide-react'
 
-export function AdminCommentsClient() {
+interface AdminCommentsClientProps {
+  initialPage: number
+}
+
+export function AdminCommentsClient({ initialPage }: AdminCommentsClientProps) {
   const t = useTranslations('Admin.Comments')
-  const [page, setPage] = useState(1)
+  const isFirstFilterSync = useRef(true)
+  const [page, setPage] = useState(initialPage)
   const [pageSize] = useState(20)
   const [search, setSearch] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState('')
@@ -41,6 +46,10 @@ export function AdminCommentsClient() {
   const { data, isLoading, refetch } = useAdminCommentList(query)
 
   useEffect(() => {
+    if (isFirstFilterSync.current) {
+      isFirstFilterSync.current = false
+      return
+    }
     setPage(1)
   }, [debouncedSearch, status, sortBy, sortOrder, creatorId, gameId])
 
@@ -79,7 +88,6 @@ export function AdminCommentsClient() {
       <Pagination
         currentPage={data?.meta.currentPage ?? 1}
         totalPages={totalPages}
-        noRouteChange
         onPageChange={setPage}
         loading={isLoading}
         scrollToTop

@@ -10,6 +10,7 @@ import {
   MessageSquare,
   ShieldAlert,
   Biohazard,
+  Gamepad2,
 } from 'lucide-react'
 import {
   Sidebar,
@@ -32,10 +33,10 @@ interface SidebarItem {
 const sidebarItems: SidebarItem[] = [
   { key: 'dashboard', icon: LayoutDashboard, href: '/admin' },
   { key: 'users', icon: Users, href: '/admin/users' },
+  { key: 'games', icon: Gamepad2, href: '/admin/games' },
   { key: 'comments', icon: MessageSquare, href: '/admin/comments' },
   { key: 'reports', icon: ShieldAlert, href: '/admin/reports' },
   { key: 'malwareScans', icon: Biohazard, href: '/admin/malware-scans' },
-  // { key: 'games', icon: Gamepad2, href: '/admin/games' },
   // { key: 'characters', icon: Users, href: '/admin/characters' },
   // { key: 'developers', icon: Building2, href: '/admin/developers' },
   // { key: 'settings', icon: Settings, href: '/admin/settings' },
@@ -55,7 +56,7 @@ export function AdminSidebar() {
   }
 
   return (
-    <Sidebar collapsible="icon" className="border-r-0">
+    <Sidebar collapsible="icon" className="border-r-0 z-1">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
