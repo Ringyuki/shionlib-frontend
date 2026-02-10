@@ -56,11 +56,12 @@ export const shionlibRequest = ({
     const reqUrl = () =>
       `${baseUrl}${path}${params ? `?${new URLSearchParams(params).toString()}` : ''}`
 
-    const requestOnce = async (): Promise<BasicResponse<T>> => {
+    const requestOnce = async (): Promise<{ data: BasicResponse<T>; headers: Headers }> => {
       const opt = await init()
       const res = await fetch(reqUrl(), opt)
       const data = (await res.json().catch(() => ({}))) as BasicResponse<T>
-      return data
+      const headers = res.headers
+      return { data, headers }
     }
 
     let mod
@@ -68,7 +69,7 @@ export const shionlibRequest = ({
       mod = await import('react-hot-toast')
     }
 
-    const data = await requestOnce()
+    const { data, headers } = await requestOnce()
     if (data && data.code === 0) return data
 
     if (isFatalAuthByCode(data.code)) {
@@ -79,7 +80,7 @@ export const shionlibRequest = ({
     if (shouldRefresh(data.code)) {
       try {
         await doRefresh(baseUrl!)
-        const retried = await requestOnce()
+        const { data: retried } = await requestOnce()
         if (retried.code === 0) return retried
       } catch {
         if (forceNotThrowError) return data
@@ -91,7 +92,12 @@ export const shionlibRequest = ({
       if (forceNotThrowError) return data
       if (data.code <= 1000) {
         if (mod) {
-          mod.toast.error(formatErrors(data as ErrorResponse))
+          if (data.code === 429) {
+            const retryAfter = headers.get('retry-after-download') || headers.get('retry-after')
+            mod.toast.error(formatErrors(data as ErrorResponse, retryAfter || undefined))
+          } else {
+            mod.toast.error(formatErrors(data as ErrorResponse))
+          }
         }
         throw new Error(data.message)
       }
@@ -269,8 +275,8 @@ const doLogout = async (baseUrl: string) => {
   })
 }
 
-const formatErrors = (data: ErrorResponse) => {
-  return `${data.message}${
+const formatErrors = (data: ErrorResponse, retryAfter?: string) => {
+  return `${data.message}${retryAfter ? ` Retry after ${retryAfter} seconds` : ''}${
     (data as ErrorResponse).data?.errors
       ? Array.isArray((data as ErrorResponse).data.errors)
         ? `: ${((data as ErrorResponse).data.errors as FieldError[])

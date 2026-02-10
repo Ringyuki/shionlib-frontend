@@ -22,7 +22,9 @@ export const CommentListClient = ({ initial }: { initial: Comment[] }) => {
   return (
     <div className="flex flex-col gap-4">
       {sorted.map(comment => {
-        return <CommentItem key={comment.id} comment={comment} />
+        return (
+          <CommentItem key={comment.id} comment={comment} className="shadow-none overflow-hidden" />
+        )
       })}
     </div>
   )

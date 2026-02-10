@@ -14,6 +14,7 @@ import { CommentParent } from './CommentParent'
 import { useScrollToElem } from '@/hooks/useScrollToElem'
 import { Badge } from '@/components/shionui/Badge'
 import { EyeOff } from 'lucide-react'
+import { cn } from '@/utils/cn'
 
 interface CommentItemProps {
   comment: Comment
@@ -25,6 +26,7 @@ interface CommentItemProps {
   onEdited?: () => void
   showSource?: boolean
   sourceTitle?: string
+  className?: string
 }
 
 export const CommentItem = ({
@@ -37,6 +39,7 @@ export const CommentItem = ({
   onEdited,
   showSource = false,
   sourceTitle,
+  className,
 }: CommentItemProps) => {
   const locale = useLocale()
   const t = useTranslations('Components.Common.Comment.CommentItem')
@@ -62,7 +65,7 @@ export const CommentItem = ({
   }, [comment.id, scrollToComment])
 
   return (
-    <Card className="py-0 overflow-hidden shadow-none">
+    <Card className={cn('py-0', className)}>
       <CardContent
         className="flex flex-col gap-4 p-4 transition-colors duration-200 scroll-mt-20"
         id={`data-comment-id-${comment.id}`}
