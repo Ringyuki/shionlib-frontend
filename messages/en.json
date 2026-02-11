@@ -1261,6 +1261,12 @@
             "changes": "Changes",
             "added": "Added",
             "removed": "Removed",
+            "updated": "Updated",
+            "before": "Before",
+            "after": "After",
+            "path": "Path",
+            "root": "(Root)",
+            "noDifferences": "No differences",
             "empty": "(Empty)"
           }
         },

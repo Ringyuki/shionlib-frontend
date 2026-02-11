@@ -1,150 +1,74 @@
 'use client'
 
+import { ArrowRightLeft } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { Badge } from '@/components/shionui/Badge'
-import { ArrowRight, Plus, Minus, ArrowDown } from 'lucide-react'
-import { ScrollArea } from '@/components/shionui/ScrollArea'
+import { FieldDiffItem, FieldDiffLabels } from './components/FieldDiffItem'
+import { RelationListSection } from './components/RelationListSection'
+import { formatPath, parseEditChanges } from './helpers/edit-changes'
 
 interface EditChangesProps {
-  changes: any
+  changes: unknown
 }
 
 export const EditChanges = ({ changes }: EditChangesProps) => {
   const t = useTranslations('Components.User.Home.Edits.EditChanges')
+  const { added, removed, diffs } = parseEditChanges(changes)
 
-  if (!changes || typeof changes !== 'object') {
-    return null
+  const labels: FieldDiffLabels = {
+    empty: t('empty'),
+    path: t('path'),
+    root: t('root'),
+    before: t('before'),
+    after: t('after'),
+    added: t('added'),
+    removed: t('removed'),
+    updated: t('updated'),
   }
 
-  const formatValue = (value: any): string => {
-    if (value === null || value === undefined || value === '') {
-      return t('empty')
-    }
-    if (typeof value === 'object') {
-      return JSON.stringify(value, null, 2)
-    }
-    if (typeof value === 'boolean') {
-      return value ? 'true' : 'false'
-    }
-    return String(value)
-  }
-
-  if ('added' in changes || 'removed' in changes) {
-    const added = changes.added || []
-    const removed = changes.removed || []
-
+  if (added.length === 0 && removed.length === 0 && diffs.length === 0) {
     return (
-      <div className="flex flex-col gap-3">
-        <span className="text-sm text-muted-foreground">{t('changes')}:</span>
-        {added.length > 0 && (
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-2">
-              <Plus className="size-4 text-green-600 dark:text-green-400" />
-              <span className="text-sm font-medium text-green-600 dark:text-green-400">
-                {t('added')}
-              </span>
-            </div>
-            <div className="pl-6 flex flex-col gap-1">
-              {added.map((item: any, index: number) => (
-                <div
-                  key={index}
-                  className="text-sm bg-green-50 dark:bg-green-950/20 rounded-md border border-green-200 dark:border-green-800"
-                >
-                  <pre className="whitespace-pre-wrap break-words font-mono! text-xs p-2">
-                    {formatValue(item)}
-                  </pre>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {removed.length > 0 && (
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-2">
-              <Minus className="size-4 text-red-600 dark:text-red-400" />
-              <span className="text-sm font-medium text-red-600 dark:text-red-400">
-                {t('removed')}
-              </span>
-            </div>
-            <div className="pl-6 flex flex-col gap-1">
-              {removed.map((item: any, index: number) => (
-                <div
-                  key={index}
-                  className="text-sm bg-red-50 dark:bg-red-950/20 rounded-md border border-red-200 dark:border-red-800"
-                >
-                  <pre className="whitespace-pre-wrap break-words font-mono! text-xs p-2">
-                    {formatValue(item)}
-                  </pre>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+      <div className="text-sm text-muted-foreground border rounded-md p-3">
+        {t('noDifferences')}
       </div>
     )
   }
 
-  if ('before' in changes && 'after' in changes) {
-    const before = changes.before || {}
-    const after = changes.after || {}
-
-    const allKeys = new Set([...Object.keys(before), ...Object.keys(after)])
-
-    if (allKeys.size === 0) {
-      return null
-    }
-
-    return (
-      <div className="flex flex-col gap-3">
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="flex items-center gap-2">
+        <ArrowRightLeft className="size-4 text-muted-foreground" />
         <span className="text-sm text-muted-foreground">{t('changes')}:</span>
-
-        {Array.from(allKeys).map(key => {
-          const beforeValue = before[key]
-          const afterValue = after[key]
-
-          if (JSON.stringify(beforeValue) === JSON.stringify(afterValue)) {
-            return null
-          }
-
-          return (
-            <div key={key} className="flex flex-col gap-2">
-              <Badge variant="neutral" className="font-mono! text-xs w-fit">
-                {key}
-              </Badge>
-
-              <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-2 items-start">
-                <div className="flex flex-col gap-1">
-                  <div className="text-sm bg-red-50 dark:bg-red-950/20 rounded-md border border-red-200 dark:border-red-800">
-                    <ScrollArea className="max-h-40">
-                      <pre className="whitespace-pre-wrap break-words font-mono! text-xs overflow-y-auto break-all p-2">
-                        {formatValue(beforeValue)}
-                      </pre>
-                    </ScrollArea>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-center">
-                  <ArrowRight className="size-4 text-muted-foreground md:block hidden" />
-                  <ArrowDown className="size-4 text-muted-foreground md:hidden block" />
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <div className="text-sm bg-green-50 dark:bg-green-950/20 rounded-md border border-green-200 dark:border-green-800">
-                    <ScrollArea className="max-h-40">
-                      <pre className="whitespace-pre-wrap break-words font-mono! text-xs overflow-y-auto break-all p-2">
-                        {formatValue(afterValue)}
-                      </pre>
-                    </ScrollArea>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )
-        })}
       </div>
-    )
-  }
 
-  return null
+      {added.length > 0 && (
+        <RelationListSection
+          title={t('added')}
+          items={added}
+          tone="add"
+          emptyLabel={labels.empty}
+        />
+      )}
+
+      {removed.length > 0 && (
+        <RelationListSection
+          title={t('removed')}
+          items={removed}
+          tone="remove"
+          emptyLabel={labels.empty}
+        />
+      )}
+
+      {diffs.length > 0 && (
+        <div className="flex flex-col gap-2">
+          {diffs.map((entry, index) => (
+            <FieldDiffItem
+              key={`${entry.type}-${formatPath(entry.path, labels.root)}-${index}`}
+              entry={entry}
+              labels={labels}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  )
 }

@@ -1261,6 +1261,12 @@
             "changes": "变更详情",
             "added": "添加",
             "removed": "移除",
+            "updated": "更新",
+            "before": "变更前",
+            "after": "变更后",
+            "path": "位置",
+            "root": "（根）",
+            "noDifferences": "无差异",
             "empty": "（空）"
           }
         },

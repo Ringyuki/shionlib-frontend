@@ -1253,6 +1253,12 @@
             "changes": "変更の詳細",
             "added": "追加",
             "removed": "削除",
+            "updated": "更新",
+            "before": "変更前",
+            "after": "変更後",
+            "path": "パス",
+            "root": "（ルート）",
+            "noDifferences": "差分はありません",
             "empty": "（空）"
           }
         },
