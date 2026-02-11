@@ -3,12 +3,12 @@ import { shionlibRequest } from '@/utils/shionlib-request'
 import { GameData } from '@/interfaces/game/game.interface'
 import { GameHeader } from '@/components/game/description/GameHeader'
 import { GameContent } from '@/components/game/description/GameContent'
-import { CommentContent } from '@/components/common/comment/CommentContent'
 import { Comment } from '@/interfaces/comment/comment.interface'
 import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
 import { createGenerateMetadata } from '@/libs/seo/metadata'
 import { getPreferredContent } from '@/components/game/description/helpers/getPreferredContent'
 import { Ad } from '@/components/common/site/Ad'
+import { ViewPing } from '@/components/game/ViewPing'
 
 const getGameData = async (id: string) => {
   const data = await shionlibRequest().get<GameData>(`/game/${id}`)
@@ -35,10 +35,9 @@ const getFavoriteStatus = async (game_id: string) => {
 
 interface GamePageProps {
   params: Promise<{ id: string }>
-  searchParams: Promise<{ tab?: string }>
 }
 
-export default async function GamePage({ params, searchParams }: GamePageProps) {
+export default async function GamePage({ params }: GamePageProps) {
   const { id } = await params
   if (!id || isNaN(Number(id))) {
     notFound()
@@ -50,11 +49,14 @@ export default async function GamePage({ params, searchParams }: GamePageProps) 
   ])
 
   return (
-    <div className="flex flex-col gap-8">
-      <GameHeader game={game} is_favorite={favoriteStatus?.is_favorite ?? false} />
-      <GameContent game={game} comments={comments} />
-      <Ad id={3} />
-    </div>
+    <>
+      <ViewPing />
+      <div className="flex flex-col gap-8">
+        <GameHeader game={game} is_favorite={favoriteStatus?.is_favorite ?? false} />
+        <GameContent game={game} comments={comments} />
+        <Ad id={3} />
+      </div>
+    </>
   )
 }
 

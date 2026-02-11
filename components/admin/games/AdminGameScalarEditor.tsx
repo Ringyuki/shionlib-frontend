@@ -96,7 +96,7 @@ export function AdminGameScalarEditor({ gameId, data }: AdminGameScalarEditorPro
             intent="neutral"
             appearance="ghost"
             renderIcon={<ArrowLeft className="size-4" />}
-            onClick={() => router.push('/admin/games')}
+            onClick={() => router.back()}
           >
             {t('backToList')}
           </Button>
