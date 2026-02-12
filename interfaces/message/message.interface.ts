@@ -4,6 +4,16 @@ export enum MessageType {
   SYSTEM = 'SYSTEM',
 }
 
+export enum MessageTone {
+  PRIMARY = 'PRIMARY',
+  SECONDARY = 'SECONDARY',
+  SUCCESS = 'SUCCESS',
+  WARNING = 'WARNING',
+  INFO = 'INFO',
+  DESTRUCTIVE = 'DESTRUCTIVE',
+  NEUTRAL = 'NEUTRAL',
+}
+
 export interface MessageMeta {
   file_id?: number
   file_name?: string
@@ -14,6 +24,7 @@ export interface MessageMeta {
 export interface Message {
   id: number
   type: MessageType
+  tone: MessageTone
   title: string
   content: string
   link_text: string | null

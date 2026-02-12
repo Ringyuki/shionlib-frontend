@@ -6,7 +6,7 @@ import { Avatar } from '@/components/common/user/Avatar'
 import { timeFromNow } from '@/utils/time-format'
 import { useLocale } from 'next-intl'
 import { cn } from '@/utils/cn'
-import { typeConfig } from '../constants/message-item'
+import { toneConfig, typeConfig } from '../constants/message-item'
 import { useTranslations } from 'next-intl'
 
 interface ItemProps {
@@ -17,7 +17,8 @@ interface ItemProps {
 export const Item = ({ message, onClick }: ItemProps) => {
   const t = useTranslations()
   const locale = useLocale()
-  const config = typeConfig[message.type]
+  const type = typeConfig[message.type]
+  const tone = toneConfig[message.tone]
 
   return (
     <Card
@@ -37,13 +38,10 @@ export const Item = ({ message, onClick }: ItemProps) => {
               <div
                 className={cn(
                   'size-10 rounded-full flex items-center justify-center bg-gradient-to-br',
-                  message.type === MessageType.SYSTEM && 'from-blue-500/20 to-blue-600/20',
-                  message.type === MessageType.COMMENT_REPLY &&
-                    'from-emerald-500/20 to-emerald-600/20',
-                  message.type === MessageType.COMMENT_LIKE && 'from-rose-500/20 to-rose-600/20',
+                  tone.iconBg,
                 )}
               >
-                <span className={config.color}>{config.icon}</span>
+                <span className={tone.color}>{type.icon}</span>
               </div>
             )}
           </div>
@@ -59,7 +57,7 @@ export const Item = ({ message, onClick }: ItemProps) => {
                     {t('Components.Message.Message.Item.system')}
                   </span>
                 )}
-                <span className={cn('shrink-0', config.color)}>{config.icon}</span>
+                <span className={cn('shrink-0', tone.color)}>{type.icon}</span>
               </div>
               <div className="flex items-center gap-2 shrink-0">
                 {!message.read && <span className="size-2 rounded-full bg-primary animate-pulse" />}

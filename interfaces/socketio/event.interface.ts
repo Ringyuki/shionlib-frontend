@@ -7,7 +7,7 @@ export interface SocketEvent {
 
 export type Event = 'connect' | 'message:new' | 'message:unread'
 
-export type MessageNewEvent = Pick<Message, 'id' | 'type' | 'title' | 'created'>
+export type MessageNewEvent = Pick<Message, 'id' | 'type' | 'tone' | 'title' | 'created'>
 export interface MessageUnreadEvent {
   unread: number
 }

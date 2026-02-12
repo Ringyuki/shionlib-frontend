@@ -7,7 +7,7 @@ import { Button } from '@/components/shionui/Button'
 import { timeFromNow, timeFormat, TimeFormatEnum } from '@/utils/time-format'
 import { useLocale, useTranslations } from 'next-intl'
 import { cn } from '@/utils/cn'
-import { typeConfig } from '../constants/message-item'
+import { toneConfig, typeConfig } from '../constants/message-item'
 import { ExternalLink, Gamepad2 } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
 import { getPreferredContent } from '@/components/game/description/helpers/getPreferredContent'
@@ -20,7 +20,8 @@ interface DetailProps {
 export const Detail = ({ message }: DetailProps) => {
   const t = useTranslations()
   const locale = useLocale()
-  const config = typeConfig[message.type]
+  const type = typeConfig[message.type]
+  const tone = toneConfig[message.tone]
 
   const langMap = { en: 'en', ja: 'jp', zh: 'zh' } as const
   const lang = langMap[locale as keyof typeof langMap] ?? 'jp'
@@ -32,7 +33,7 @@ export const Detail = ({ message }: DetailProps) => {
         {message.sender ? (
           <Avatar user={message.sender} className="size-12" />
         ) : (
-          <span className={cn(config.color, 'scale-125')}>{config.icon}</span>
+          <span className={cn(tone.color, 'scale-125')}>{type.icon}</span>
         )}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
@@ -42,7 +43,7 @@ export const Detail = ({ message }: DetailProps) => {
                 {t('Components.Message.Message.Item.system')}
               </span>
             )}
-            <span className={cn('shrink-0', config.color)}>{config.icon}</span>
+            <span className={cn('shrink-0', tone.color)}>{type.icon}</span>
           </div>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span>{timeFromNow(message.created, locale)}</span>
