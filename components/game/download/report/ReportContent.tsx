@@ -22,7 +22,7 @@ export const ReportContent = ({ form, loading, onSubmit, Footer }: ReportContent
     <>
       <ReportForm form={form} />
       <Footer>
-        <Button intent="destructive" loading={loading} onClick={handleSubmit}>
+        <Button intent="destructive" loading={loading} onClick={handleSubmit} loginRequired>
           {t('submit')}
         </Button>
       </Footer>

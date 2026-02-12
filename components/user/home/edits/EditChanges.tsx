@@ -37,7 +37,7 @@ export const EditChanges = ({ changes }: EditChangesProps) => {
     <div className="flex flex-col gap-3">
       <div className="flex items-center gap-2">
         <ArrowRightLeft className="size-4 text-muted-foreground" />
-        <span className="text-sm text-muted-foreground">{t('changes')}:</span>
+        <span className="text-sm text-muted-foreground">{t('changes')}</span>
       </div>
 
       {added.length > 0 && (

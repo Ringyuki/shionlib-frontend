@@ -7,6 +7,7 @@ import { FavoriteItem } from '@/interfaces/favorite/favorite-item.interface'
 import { ContentLimit } from '@/interfaces/user/user.interface'
 import { Pagination } from '@/components/common/content/Pagination'
 import { Favorite } from '@/interfaces/favorite/favorite.interface'
+import { UserProfile } from '@/interfaces/user/user.interface'
 
 interface UserFavoritesPageProps {
   params: Promise<{ id: string }>
@@ -20,6 +21,11 @@ const getFavorites = async (userId: string) => {
     },
   })
   return data
+}
+
+async function getCurrentUser() {
+  const data = await shionlibRequest({ forceNotThrowError: true }).get<UserProfile>(`/user/me`)
+  return data.data
 }
 
 const getFavoriteItems = async (favoriteId: number, searchParams: { page?: string }) => {
@@ -36,8 +42,8 @@ const getFavoriteItems = async (favoriteId: number, searchParams: { page?: strin
 export default async function UserFavoritesPage({ params, searchParams }: UserFavoritesPageProps) {
   const { id } = await params
   const { page, folder } = await searchParams
-  const favoritesData = await getFavorites(id)
-  const { data: favorites } = favoritesData ?? {}
+  const [favoritesData, currentUser] = await Promise.all([getFavorites(id), getCurrentUser()])
+  const { data: favorites } = favoritesData
 
   if (!favorites?.length) return <Empty />
 
@@ -50,7 +56,7 @@ export default async function UserFavoritesPage({ params, searchParams }: UserFa
   const itemsData = await getFavoriteItems(selectedFavorite.id, { page })
   return (
     <div className="flex flex-col gap-6">
-      <FavoriteItemsHeader favorite={selectedFavorite} />
+      <FavoriteItemsHeader favorite={selectedFavorite} currentUser={currentUser} userId={id} />
       {itemsData.data?.items?.length ? (
         <>
           <FavoriteContent
