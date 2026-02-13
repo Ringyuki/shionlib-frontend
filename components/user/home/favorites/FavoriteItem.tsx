@@ -40,7 +40,12 @@ export const FavoriteItem = async ({ favorite, content_limit }: FavoriteItemProp
                     !content_limit
                   )
                     return (
-                      <Spoiler showHint={true} blur={32} className="!rounded-none !h-full">
+                      <Spoiler
+                        showHint={false}
+                        open={false}
+                        blur={32}
+                        className="!rounded-none !h-full"
+                      >
                         <FadeImage src={cover.url} alt={title} />
                       </Spoiler>
                     )

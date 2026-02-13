@@ -1,3 +1,4 @@
+import { ScrollArea } from '@/components/shionui/ScrollArea'
 import { cn } from '@/utils/cn'
 import { StringDiffTone, STRING_DIFF_SEGMENT_CLASSNAME } from '../constants/edit-changes'
 import { createStringDiff, StringDiffSegment } from '../helpers/edit-changes'
@@ -49,19 +50,23 @@ export const StringDiffPanel = ({
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 items-start">
       <div className="flex flex-col gap-1">
         <span className="text-xs text-muted-foreground">{beforeLabel}</span>
-        <div className="rounded-md border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950/20 p-2">
-          <pre className="whitespace-pre-wrap break-all font-mono! text-xs">
-            <DiffTextLine segments={segments.before} tone="remove" emptyLabel={emptyLabel} />
-          </pre>
+        <div className="rounded-md border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950/20">
+          <ScrollArea className="max-h-40 p-2">
+            <pre className="whitespace-pre-wrap break-all font-mono! text-xs">
+              <DiffTextLine segments={segments.before} tone="remove" emptyLabel={emptyLabel} />
+            </pre>
+          </ScrollArea>
         </div>
       </div>
 
       <div className="flex flex-col gap-1">
         <span className="text-xs text-muted-foreground">{afterLabel}</span>
-        <div className="rounded-md border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950/20 p-2">
-          <pre className="whitespace-pre-wrap break-all font-mono! text-xs">
-            <DiffTextLine segments={segments.after} tone="add" emptyLabel={emptyLabel} />
-          </pre>
+        <div className="rounded-md border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950/20">
+          <ScrollArea className="max-h-40 p-2">
+            <pre className="whitespace-pre-wrap break-all font-mono! text-xs">
+              <DiffTextLine segments={segments.after} tone="add" emptyLabel={emptyLabel} />
+            </pre>
+          </ScrollArea>
         </div>
       </div>
     </div>

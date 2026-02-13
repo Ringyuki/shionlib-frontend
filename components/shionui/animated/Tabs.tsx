@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 import {
@@ -14,6 +15,7 @@ import {
   type TabsContentProps as TabsContentPrimitiveProps,
   type TabsContentsProps as TabsContentsPrimitiveProps,
 } from '@/components/shionui/animated/libs/primitives/animate/tabs'
+import { ScrollArea } from '@/components/shionui/ScrollArea'
 import { cn } from '@/utils/cn'
 
 type TabsProps = TabsPrimitiveProps
@@ -135,6 +137,9 @@ type TabsListProps = TabsListPrimitiveProps &
   VariantProps<typeof tabsListVariants> & {
     highlightClassName?: string
     showBaseline?: boolean
+    scrollable?: boolean
+    scrollAreaClassName?: string
+    showScrollHint?: boolean
   }
 
 function TabsList({
@@ -143,31 +148,157 @@ function TabsList({
   variant,
   intent,
   showBaseline,
+  scrollable,
+  scrollAreaClassName,
+  showScrollHint,
   ...props
 }: TabsListProps) {
   const resolvedVariant = variant ?? 'solid'
   const resolvedIntent = intent ?? 'neutral'
   const resolvedShowBaseline = showBaseline ?? true
+  const resolvedScrollable = scrollable ?? true
+  const resolvedShowScrollHint = showScrollHint ?? true
+  const touchStateRef = React.useRef<{
+    startX: number
+    startY: number
+    startScrollLeft: number
+    isHorizontal: boolean
+  } | null>(null)
+
+  const handleHorizontalWheelCapture = React.useCallback(
+    (event: React.WheelEvent<HTMLDivElement>) => {
+      if (event.ctrlKey) return
+
+      const viewport = event.currentTarget.querySelector<HTMLDivElement>(
+        '[data-slot="scroll-area-viewport"]',
+      )
+      if (!viewport) return
+
+      const hasOverflowX = viewport.scrollWidth > viewport.clientWidth + 1
+      if (!hasOverflowX || event.deltaX === 0) return
+
+      const normalizedDelta =
+        event.deltaMode === 1 // line
+          ? event.deltaX * 16
+          : event.deltaMode === 2
+            ? event.deltaX * viewport.clientWidth
+            : event.deltaX
+
+      const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth
+      if (maxScrollLeft <= 0) return
+
+      const nextScrollLeft = Math.min(
+        maxScrollLeft,
+        Math.max(0, viewport.scrollLeft + normalizedDelta),
+      )
+
+      if (nextScrollLeft === viewport.scrollLeft) return
+
+      viewport.scrollLeft = nextScrollLeft
+      event.preventDefault()
+      event.stopPropagation()
+    },
+    [],
+  )
+
+  const handleTouchStartCapture = React.useCallback((event: React.TouchEvent<HTMLDivElement>) => {
+    if (event.touches.length !== 1) {
+      touchStateRef.current = null
+      return
+    }
+
+    const viewport = event.currentTarget.querySelector<HTMLDivElement>(
+      '[data-slot="scroll-area-viewport"]',
+    )
+    if (!viewport) {
+      touchStateRef.current = null
+      return
+    }
+
+    const touch = event.touches[0]
+    touchStateRef.current = {
+      startX: touch.clientX,
+      startY: touch.clientY,
+      startScrollLeft: viewport.scrollLeft,
+      isHorizontal: false,
+    }
+  }, [])
+
+  const handleTouchMoveCapture = React.useCallback((event: React.TouchEvent<HTMLDivElement>) => {
+    const state = touchStateRef.current
+    if (!state || event.touches.length !== 1) return
+
+    const viewport = event.currentTarget.querySelector<HTMLDivElement>(
+      '[data-slot="scroll-area-viewport"]',
+    )
+    if (!viewport) return
+
+    const hasOverflowX = viewport.scrollWidth > viewport.clientWidth + 1
+    if (!hasOverflowX) return
+
+    const touch = event.touches[0]
+    const deltaX = touch.clientX - state.startX
+    const deltaY = touch.clientY - state.startY
+
+    if (!state.isHorizontal) {
+      const activationThreshold = 6
+      if (Math.abs(deltaX) < activationThreshold) return
+      if (Math.abs(deltaX) <= Math.abs(deltaY)) return
+      state.isHorizontal = true
+    }
+
+    const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth
+    if (maxScrollLeft <= 0) return
+
+    const nextScrollLeft = Math.min(maxScrollLeft, Math.max(0, state.startScrollLeft - deltaX))
+    if (nextScrollLeft === viewport.scrollLeft) return
+
+    viewport.scrollLeft = nextScrollLeft
+    event.preventDefault()
+    event.stopPropagation()
+  }, [])
+
+  const resetTouchState = React.useCallback(() => {
+    touchStateRef.current = null
+  }, [])
+
+  const tabsList = (
+    <TabsHighlightPrimitive
+      className={cn(
+        tabsHighlightVariants({ variant: resolvedVariant, intent: resolvedIntent }),
+        highlightClassName,
+      )}
+    >
+      <TabsListPrimitive
+        data-variant={resolvedVariant}
+        data-intent={resolvedIntent}
+        className={cn(
+          tabsListVariants({ variant: resolvedVariant, intent: resolvedIntent }),
+          resolvedVariant === 'underlined' && resolvedShowBaseline && 'border-b border-border',
+          className,
+        )}
+        {...props}
+      />
+    </TabsHighlightPrimitive>
+  )
 
   return (
-    <div className={cn('relative z-0', className)}>
-      <TabsHighlightPrimitive
-        className={cn(
-          tabsHighlightVariants({ variant: resolvedVariant, intent: resolvedIntent }),
-          highlightClassName,
-        )}
-      >
-        <TabsListPrimitive
-          data-variant={resolvedVariant}
-          data-intent={resolvedIntent}
-          className={cn(
-            className,
-            tabsListVariants({ variant: resolvedVariant, intent: resolvedIntent }),
-            resolvedVariant === 'underlined' && resolvedShowBaseline && 'border-b border-border',
-          )}
-          {...props}
-        />
-      </TabsHighlightPrimitive>
+    <div className="relative z-0 min-w-0">
+      {resolvedScrollable ? (
+        <ScrollArea
+          className={cn('w-full max-w-full touch-pan-x rounded-md', scrollAreaClassName)}
+          showScrollHint={resolvedShowScrollHint}
+          onWheelCapture={handleHorizontalWheelCapture}
+          onTouchStartCapture={handleTouchStartCapture}
+          onTouchMoveCapture={handleTouchMoveCapture}
+          onTouchEndCapture={resetTouchState}
+          onTouchCancelCapture={resetTouchState}
+        >
+          {tabsList}
+        </ScrollArea>
+      ) : (
+        tabsList
+      )}
     </div>
   )
 }

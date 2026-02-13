@@ -19,6 +19,7 @@ export const DocHeader = ({ frontmatter }: DocHeaderProps) => {
           alt={frontmatter.title}
           aspectRatio="16 / 9"
           className="w-full h-full object-cover"
+          sizes="100vw"
         />
       </div>
       <h1 className="text-3xl font-bold">{frontmatter.title}</h1>

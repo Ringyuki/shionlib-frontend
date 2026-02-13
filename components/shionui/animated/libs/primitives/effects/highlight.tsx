@@ -191,16 +191,48 @@ function Highlight<T extends React.ElementType = 'div'>({ ref, ...props }: Highl
     const container = localRef.current
     if (!container) return
 
-    const onScroll = () => {
-      if (!activeValue) return
-      const activeEl = container.querySelector<HTMLElement>(
+    const selectActiveElement = () => {
+      if (!activeValue) return null
+      return container.querySelector<HTMLElement>(
         `[data-value="${activeValue}"][data-highlight="true"]`,
       )
-      if (activeEl) safeSetBounds(activeEl.getBoundingClientRect())
     }
 
+    const updateBounds = () => {
+      const activeEl = selectActiveElement()
+      if (!activeEl) return
+      safeSetBounds(activeEl.getBoundingClientRect())
+    }
+
+    const onScroll = () => updateBounds()
+
+    updateBounds()
     container.addEventListener('scroll', onScroll, { passive: true })
-    return () => container.removeEventListener('scroll', onScroll)
+
+    const onWindowResize = () => updateBounds()
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', onWindowResize)
+    }
+
+    const resizeObserver =
+      typeof ResizeObserver !== 'undefined'
+        ? new ResizeObserver(() => {
+            updateBounds()
+          })
+        : null
+
+    resizeObserver?.observe(container)
+
+    const activeEl = selectActiveElement()
+    if (activeEl) resizeObserver?.observe(activeEl)
+
+    return () => {
+      container.removeEventListener('scroll', onScroll)
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', onWindowResize)
+      }
+      resizeObserver?.disconnect()
+    }
   }, [mode, activeValue, safeSetBounds])
 
   const render = React.useCallback(

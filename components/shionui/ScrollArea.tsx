@@ -9,6 +9,8 @@ interface ScrollAreaProps extends React.ComponentProps<typeof ScrollAreaPrimitiv
   showScrollHint?: boolean
 }
 
+const HOVER_DWELL_THRESHOLD = 150
+
 function ScrollArea({ className, children, showScrollHint = true, ...props }: ScrollAreaProps) {
   const viewportRef = React.useRef<HTMLDivElement | null>(null)
   const [canScrollUp, setCanScrollUp] = React.useState(false)
@@ -16,19 +18,36 @@ function ScrollArea({ className, children, showScrollHint = true, ...props }: Sc
   const [canScrollLeft, setCanScrollLeft] = React.useState(false)
   const [canScrollRight, setCanScrollRight] = React.useState(false)
 
-  const updateScrollState = React.useCallback(() => {
+  const enterTimeRef = React.useRef(0)
+  const isHoveringRef = React.useRef(false)
+
+  const getScrollState = React.useCallback(() => {
     const viewport = viewportRef.current
-    if (!viewport) return
+    if (!viewport) return null
 
     const { scrollTop, scrollHeight, clientHeight, scrollLeft, scrollWidth, clientWidth } = viewport
     const maxScrollTop = scrollHeight - clientHeight
     const maxScrollLeft = scrollWidth - clientWidth
 
-    setCanScrollUp(scrollTop > 0)
-    setCanScrollDown(scrollTop < maxScrollTop - 1)
-    setCanScrollLeft(scrollLeft > 0)
-    setCanScrollRight(scrollLeft < maxScrollLeft - 1)
+    return {
+      hasOverflowY: scrollHeight > clientHeight + 1,
+      hasOverflowX: scrollWidth > clientWidth + 1,
+      canUp: scrollTop > 0,
+      canDown: scrollTop < maxScrollTop - 1,
+      canLeft: scrollLeft > 0,
+      canRight: scrollLeft < maxScrollLeft - 1,
+    }
   }, [])
+
+  const updateScrollState = React.useCallback(() => {
+    const state = getScrollState()
+    if (!state) return
+
+    setCanScrollUp(state.canUp)
+    setCanScrollDown(state.canDown)
+    setCanScrollLeft(state.canLeft)
+    setCanScrollRight(state.canRight)
+  }, [getScrollState])
 
   React.useEffect(() => {
     updateScrollState()
@@ -54,14 +73,49 @@ function ScrollArea({ className, children, showScrollHint = true, ...props }: Sc
     }
   }, [updateScrollState])
 
+  const handleWheel = React.useCallback(
+    (e: React.WheelEvent) => {
+      const state = getScrollState()
+      if (!state) return
+
+      const isVertical = Math.abs(e.deltaY) >= Math.abs(e.deltaX)
+      const hasOverflow = isVertical ? state.hasOverflowY : state.hasOverflowX
+
+      if (!hasOverflow) return
+
+      if (isVertical) {
+        if (e.deltaY > 0 && !state.canDown) return
+        if (e.deltaY < 0 && !state.canUp) return
+      } else {
+        if (e.deltaX > 0 && !state.canRight) return
+        if (e.deltaX < 0 && !state.canLeft) return
+      }
+
+      const dwellTime = Date.now() - enterTimeRef.current
+      if (dwellTime < HOVER_DWELL_THRESHOLD) return
+
+      e.stopPropagation()
+    },
+    [getScrollState],
+  )
+
+  const handlePointerEnter = React.useCallback(() => {
+    enterTimeRef.current = Date.now()
+    isHoveringRef.current = true
+  }, [])
+
+  const handlePointerLeave = React.useCallback(() => {
+    isHoveringRef.current = false
+  }, [])
+
   return (
     <ScrollAreaPrimitive.Root
       data-slot="scroll-area"
       className={cn('relative isolate rounded-[inherit] bg-transparent overflow-hidden', className)}
       suppressHydrationWarning
-      onWheelCapture={e => {
-        e.stopPropagation()
-      }}
+      onWheelCapture={handleWheel}
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={handlePointerLeave}
       {...props}
     >
       <div
@@ -94,7 +148,7 @@ function ScrollArea({ className, children, showScrollHint = true, ...props }: Sc
       />
       <ScrollAreaPrimitive.Viewport
         data-slot="scroll-area-viewport"
-        className="focus-visible:ring-ring/50 h-full w-full max-h-[inherit] overflow-auto overscroll-contain rounded-[inherit] bg-transparent transition-[color,box-shadow,background-color] outline-none focus-visible:ring-[3px] focus-visible:outline-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        className="focus-visible:ring-ring/50 h-full w-full max-h-[inherit] overflow-auto rounded-[inherit] bg-transparent transition-[color,box-shadow,background-color] outline-none focus-visible:ring-[3px] focus-visible:outline-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         ref={viewportRef}
         onScroll={updateScrollState}
       >

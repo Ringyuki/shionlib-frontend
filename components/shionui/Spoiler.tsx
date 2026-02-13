@@ -13,6 +13,7 @@ type SpoilerProps = React.ComponentProps<'div'> & {
   blur?: number
   showHint?: boolean
   hintText?: string
+  showHidden?: boolean
 }
 
 function Spoiler({
@@ -24,6 +25,7 @@ function Spoiler({
   blur = 10,
   showHint = false,
   hintText,
+  showHidden = true,
   ...props
 }: SpoilerProps) {
   const t = useTranslations('Components.ShionUI.Spoiler')
@@ -72,23 +74,27 @@ function Spoiler({
             exit={{ opacity: 0 }}
             transition={{ type: 'spring', stiffness: 260, damping: 24 }}
           >
-            {showHint && (
+            {(showHint || showHidden) && (
               <div className="absolute inset-0 flex items-center justify-center flex-col gap-3 pointer-events-none">
-                <Hidden
-                  vertical={true}
-                  className="w-fit h-fit"
-                  iconClassName="size-6"
-                  showText={false}
-                />
-                <motion.div
-                  className="rounded-md bg-background/70 px-3 py-1 text-sm text-foreground shadow"
-                  initial={{ scale: 0.96, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.96, opacity: 0 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 18 }}
-                >
-                  {hintText || t('hintText')}
-                </motion.div>
+                {showHidden && (
+                  <Hidden
+                    vertical={true}
+                    className="w-fit h-fit"
+                    iconClassName="size-6"
+                    showText={false}
+                  />
+                )}
+                {showHint && (
+                  <motion.div
+                    className="rounded-md bg-background/70 px-3 py-1 text-sm text-foreground shadow"
+                    initial={{ scale: 0.96, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.96, opacity: 0 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 18 }}
+                  >
+                    {hintText || t('hintText')}
+                  </motion.div>
+                )}
               </div>
             )}
           </motion.div>
