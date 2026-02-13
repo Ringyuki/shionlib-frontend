@@ -105,7 +105,11 @@ export const Plugins: Plugin<PluginsProps> = ({
     <div className="relative w-full min-w-0">
       <ToolbarPlugin>
         {({ blockType }) => (
-          <ScrollArea className="vertical-align-middle sticky top-0 z-10 flex items-center gap-2 border-b p-1">
+          <ScrollArea
+            className="vertical-align-middle sticky top-0 z-10 flex items-center gap-2 border-b "
+            scrollbarOrientation="horizontal"
+            showScrollbar={false}
+          >
             <div className="flex w-max gap-2 py-1 px-1 overflow-visible">
               <HistoryToolbarPlugin />
               <Separator orientation="vertical" className="!h-7" />
@@ -142,7 +146,6 @@ export const Plugins: Plugin<PluginsProps> = ({
                 </>
               )}
             </div>
-            <ScrollBar orientation="horizontal" />
           </ScrollArea>
         )}
       </ToolbarPlugin>

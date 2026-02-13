@@ -32,7 +32,7 @@ export const EditTabsNav = () => {
   }
   return (
     <Tabs value={active}>
-      <TabsList>
+      <TabsList scrollAreaClassName="bg-muted w-fit">
         {tabs.map(
           tab =>
             !tab.disabled && (

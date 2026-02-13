@@ -7,11 +7,20 @@ import { cn } from '@/utils/cn'
 
 interface ScrollAreaProps extends React.ComponentProps<typeof ScrollAreaPrimitive.Root> {
   showScrollHint?: boolean
+  scrollbarOrientation?: 'vertical' | 'horizontal' | 'both'
+  showScrollbar?: boolean
 }
 
 const HOVER_DWELL_THRESHOLD = 150
 
-function ScrollArea({ className, children, showScrollHint = true, ...props }: ScrollAreaProps) {
+function ScrollArea({
+  className,
+  children,
+  showScrollHint = true,
+  scrollbarOrientation = 'vertical',
+  showScrollbar = true,
+  ...props
+}: ScrollAreaProps) {
   const viewportRef = React.useRef<HTMLDivElement | null>(null)
   const [canScrollUp, setCanScrollUp] = React.useState(false)
   const [canScrollDown, setCanScrollDown] = React.useState(false)
@@ -154,7 +163,12 @@ function ScrollArea({ className, children, showScrollHint = true, ...props }: Sc
       >
         {children}
       </ScrollAreaPrimitive.Viewport>
-      <ScrollBar />
+      {(scrollbarOrientation === 'vertical' || scrollbarOrientation === 'both') && (
+        <ScrollBar orientation="vertical" show={showScrollbar} />
+      )}
+      {(scrollbarOrientation === 'horizontal' || scrollbarOrientation === 'both') && (
+        <ScrollBar orientation="horizontal" show={showScrollbar} />
+      )}
       <ScrollAreaPrimitive.Corner />
     </ScrollAreaPrimitive.Root>
   )
@@ -163,8 +177,9 @@ function ScrollArea({ className, children, showScrollHint = true, ...props }: Sc
 function ScrollBar({
   className,
   orientation = 'vertical',
+  show = true,
   ...props
-}: React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>) {
+}: React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar> & { show?: boolean }) {
   return (
     <ScrollAreaPrimitive.ScrollAreaScrollbar
       data-slot="scroll-area-scrollbar"
@@ -174,13 +189,17 @@ function ScrollBar({
         'group/scrollbar flex touch-none select-none p-[2px] transition-opacity duration-200 ease-out data-[state=visible]:opacity-100 data-[state=hidden]:opacity-0 data-[state=hidden]:pointer-events-none',
         orientation === 'vertical' && 'h-full w-3 border-l border-l-transparent pl-1',
         orientation === 'horizontal' && 'h-3 flex-col border-t border-t-transparent pt-1',
+        !show && 'hidden',
         className,
       )}
       {...props}
     >
       <ScrollAreaPrimitive.ScrollAreaThumb
         data-slot="scroll-area-thumb"
-        className="relative flex-1 rounded-full bg-[rgba(0,0,0,0.44)] transition-[background-color,opacity,height,width] before:absolute before:inset-[-6px] before:rounded-full before:bg-transparent group-hover/scrollbar:bg-[rgba(0,0,0,0.55)] group-active/scrollbar:bg-[rgba(0,0,0,0.66)]"
+        className={cn(
+          'relative flex-1 rounded-full bg-[rgba(0,0,0,0.44)] transition-[background-color,opacity,height,width] before:absolute before:inset-[-6px] before:rounded-full before:bg-transparent group-hover/scrollbar:bg-[rgba(0,0,0,0.55)] group-active/scrollbar:bg-[rgba(0,0,0,0.66)]',
+          !show && '!opacity-0',
+        )}
       />
     </ScrollAreaPrimitive.ScrollAreaScrollbar>
   )

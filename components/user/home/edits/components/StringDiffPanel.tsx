@@ -51,8 +51,8 @@ export const StringDiffPanel = ({
       <div className="flex flex-col gap-1">
         <span className="text-xs text-muted-foreground">{beforeLabel}</span>
         <div className="rounded-md border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950/20">
-          <ScrollArea className="max-h-40 p-2">
-            <pre className="whitespace-pre-wrap break-all font-mono! text-xs">
+          <ScrollArea className="max-h-40">
+            <pre className="whitespace-pre-wrap break-all font-mono! text-xs p-2">
               <DiffTextLine segments={segments.before} tone="remove" emptyLabel={emptyLabel} />
             </pre>
           </ScrollArea>
@@ -62,8 +62,8 @@ export const StringDiffPanel = ({
       <div className="flex flex-col gap-1">
         <span className="text-xs text-muted-foreground">{afterLabel}</span>
         <div className="rounded-md border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950/20">
-          <ScrollArea className="max-h-40 p-2">
-            <pre className="whitespace-pre-wrap break-all font-mono! text-xs">
+          <ScrollArea className="max-h-40">
+            <pre className="whitespace-pre-wrap break-all font-mono! text-xs p-2">
               <DiffTextLine segments={segments.after} tone="add" emptyLabel={emptyLabel} />
             </pre>
           </ScrollArea>
