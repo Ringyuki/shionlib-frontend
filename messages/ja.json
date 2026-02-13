@@ -383,6 +383,9 @@
         }
       },
       "Content": {
+        "Hidden": {
+          "hidden": "非表示コンテンツ"
+        },
         "Empty": {
           "title": "何もありません..."
         },

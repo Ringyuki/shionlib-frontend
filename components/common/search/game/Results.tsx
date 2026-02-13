@@ -1,8 +1,6 @@
 import { GameSearchItem } from '@/interfaces/game/game.interface'
 import { Pagination } from '@/components/common/content/Pagination'
-// import { GameCard } from '@/components/game/GameCard'
-import { GameCard } from '@/components/home/games/GameCard'
-// import { Masonry } from '@/components/common/shared/Masonry'
+import { GameCard } from '@/components/game/GameCard'
 import { Empty } from '@/components/common/content/Empty'
 import { PaginatedMeta } from '@/interfaces/api/shionlib-api-res.interface'
 import { SearchIcon } from 'lucide-react'
@@ -28,14 +26,7 @@ export const Results = async ({ games, pagination, q, content_limit }: ResultsPr
         </span>
         <span>{t('result_suffix', { total: pagination.totalItems })}</span>
       </h1>
-      {/* <Masonry>
-        {games.map(item => (
-          <div key={item.id} className="break-inside-avoid">
-            <GameCard game={item} />
-          </div>
-        ))}
-      </Masonry> */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+      <div className="game-grid">
         {games.map(game => (
           <GameCard key={game.id} game={game} content_limit={content_limit} />
         ))}

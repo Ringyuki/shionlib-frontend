@@ -391,6 +391,9 @@
         }
       },
       "Content": {
+        "Hidden": {
+          "hidden": "隐藏内容"
+        },
         "Empty": {
           "title": "什么都没有..."
         },

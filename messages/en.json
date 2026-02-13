@@ -391,6 +391,9 @@
         }
       },
       "Content": {
+        "Hidden": {
+          "hidden": "Hidden content"
+        },
         "Empty": {
           "title": "Nothing here..."
         },

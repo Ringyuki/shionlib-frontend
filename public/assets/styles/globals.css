@@ -284,6 +284,9 @@ samp {
   .search-highlight {
     @apply bg-primary/50 rounded-sm p-0.5;
   }
+  .game-grid {
+    @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6;
+  }
 }
 
 @layer utilities {

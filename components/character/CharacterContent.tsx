@@ -1,6 +1,6 @@
 import { GameCharacter, GameItem } from '@/interfaces/game/game.interface'
 import { CharacterIntro } from './intros/CharacterIntro'
-import { GameCard } from '@/components/home/games/GameCard'
+import { GameCard } from '@/components/game/GameCard'
 import { PaginatedMeta } from '@/interfaces/api/shionlib-api-res.interface'
 import { Pagination } from '../common/content/Pagination'
 import { Empty } from '../common/content/Empty'
@@ -26,7 +26,7 @@ export const CharacterContent = ({
       <CharacterIntro character={character} appearances_count={appearances_count} />
       {games.length > 0 ? (
         <>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div className="game-grid">
             {games.map(game => (
               <GameCard key={game.id} game={game} content_limit={content_limit} />
             ))}

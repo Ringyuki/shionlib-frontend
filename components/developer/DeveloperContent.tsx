@@ -2,7 +2,7 @@ import { Developer } from '@/interfaces/developer/developer.interface'
 import { DeveloperIntro } from './intros/DeveloperIntro'
 import { GameItem } from '@/interfaces/game/game.interface'
 // import { GameCard } from '../game/GameCard'
-import { GameCard } from '@/components/home/games/GameCard'
+import { GameCard } from '@/components/game/GameCard'
 // import { Masonry } from '../common/shared/Masonry'
 import { PaginatedMeta } from '@/interfaces/api/shionlib-api-res.interface'
 import { Pagination } from '../common/content/Pagination'
@@ -36,7 +36,7 @@ export const DeveloperContent = ({
               </div>
             ))}
           </Masonry> */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div className="game-grid">
             {games.map(game => (
               <GameCard key={game.id} game={game} content_limit={content_limit} />
             ))}

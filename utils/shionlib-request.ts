@@ -276,7 +276,8 @@ const doLogout = async (baseUrl: string) => {
 }
 
 const formatErrors = (data: ErrorResponse, retryAfter?: string) => {
-  return `${data.message}${retryAfter ? ` Retry after ${retryAfter} seconds` : ''}${
+  if (!data.message) return 'Network error'
+  const msg = `${data.message}${retryAfter ? ` Retry after ${retryAfter} seconds` : ''}${
     (data as ErrorResponse).data?.errors
       ? Array.isArray((data as ErrorResponse).data.errors)
         ? `: ${((data as ErrorResponse).data.errors as FieldError[])
@@ -288,5 +289,7 @@ const formatErrors = (data: ErrorResponse, retryAfter?: string) => {
             .map(message => `${message}`)
             .join('\n')}`
       : ''
-  } (${data.code})`
+  }`
+  const code = `${data.code}`
+  return `${msg} ${code ? `(${code})` : ''}`
 }

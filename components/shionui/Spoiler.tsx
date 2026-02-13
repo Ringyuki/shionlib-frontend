@@ -4,6 +4,7 @@ import * as React from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { cn } from '@/utils/cn'
 import { useTranslations } from 'next-intl'
+import { Hidden } from '@/components/common/content/Hidden'
 
 type SpoilerProps = React.ComponentProps<'div'> & {
   defaultOpen?: boolean
@@ -72,7 +73,13 @@ function Spoiler({
             transition={{ type: 'spring', stiffness: 260, damping: 24 }}
           >
             {showHint && (
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="absolute inset-0 flex items-center justify-center flex-col gap-3 pointer-events-none">
+                <Hidden
+                  vertical={true}
+                  className="w-fit h-fit"
+                  iconClassName="size-6"
+                  showText={false}
+                />
                 <motion.div
                   className="rounded-md bg-background/70 px-3 py-1 text-sm text-foreground shadow"
                   initial={{ scale: 0.96, opacity: 0 }}

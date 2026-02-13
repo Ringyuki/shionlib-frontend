@@ -20,7 +20,7 @@ const getData = async (page: string, q: string) => {
   >(`/search/games`, {
     params: {
       page: page ?? '1',
-      pageSize: 15,
+      pageSize: 20,
       q,
     },
   })

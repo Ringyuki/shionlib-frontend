@@ -20,7 +20,7 @@ export const AnimeTraceResult = ({ result, image }: AnimeTraceResultProps) => {
         const candidates = item.character || []
         return (
           <Card key={item.box_id} className="overflow-hidden py-0 px-0">
-            <CardContent className="py-4 px-4 space-y-2 w-full">
+            <CardContent className="py-4 px-4 space-y-4 w-full">
               <div className="flex flex-wrap items-center gap-2">
                 <div className="w-12 h-12 shrink-0">
                   <FadeImage
@@ -31,7 +31,10 @@ export const AnimeTraceResult = ({ result, image }: AnimeTraceResultProps) => {
                   />
                 </div>
                 <div className="flex flex-col flex-wrap gap-1">
-                  <span className="text-xs text-muted-foreground">#{index + 1}</span>
+                  <span className="flex items-center gap-1">
+                    <span className="text-sm font-medium">{candidates[0].character}</span>
+                    <span className="text-xs text-muted-foreground">#{index + 1}</span>
+                  </span>
                   <Badge variant="neutral" size="sm">
                     {t('candidates', { count: candidates.length })}
                   </Badge>
@@ -43,7 +46,7 @@ export const AnimeTraceResult = ({ result, image }: AnimeTraceResultProps) => {
                 </div>
               </div>
               {candidates.length > 0 && (
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-4">
                   {candidates.map((candidate, candidateIndex) => (
                     <Link
                       key={`${item.box_id}-${candidateIndex}`}

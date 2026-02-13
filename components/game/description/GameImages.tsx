@@ -41,7 +41,7 @@ export const GameImages = ({ images, content_limit }: GameImagesProps) => {
               if (image.sexual > 0) {
                 if (content_limit === ContentLimit.SHOW_WITH_SPOILER)
                   return (
-                    <Spoiler key={image.url} blur={32}>
+                    <Spoiler key={image.url} blur={32} showHint={true}>
                       <_GameImage image={image} />
                     </Spoiler>
                   )
