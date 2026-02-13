@@ -130,7 +130,7 @@ function MultiSelectTrigger({
       data-slot="select-trigger"
       data-size={size}
       className={cn(
-        "transition-all duration-200 bg-input/30 text-sm border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive not-disabled:hover:bg-input/50 flex w-fit items-center justify-between gap-2 rounded-md border px-3 py-2 whitespace-nowrap shadow-xs outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 data-[size=default]:h-9 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "transition-all duration-200 bg-input/30 text-sm border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive not-disabled:hover:bg-input/50 flex w-fit max-w-full min-w-0 items-center justify-between gap-2 rounded-md border px-3 py-2 whitespace-nowrap shadow-xs outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 data-[size=default]:h-9 data-[size=sm]:h-8 [&>[data-slot=select-value]]:min-w-0 [&>[data-slot=select-value]]:flex-1 [&>[data-slot=select-value]]:overflow-hidden [&>[data-slot=select-value]]:text-left [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className,
       )}
       {...props}
@@ -232,9 +232,12 @@ function MultiSelectValue({
   const labels = selectedValues.map(v => resolveLabel?.(v) ?? getLabel(v))
   const hasValue = labels.length > 0
   return (
-    <span data-slot="select-value" className={cn('truncate', className)}>
+    <span
+      data-slot="select-value"
+      className={cn('block min-w-0 overflow-hidden text-ellipsis whitespace-nowrap', className)}
+    >
       {hasValue ? (
-        <span className="inline-flex items-center gap-1">
+        <span className="inline min-w-0">
           {labels.map((l, idx) => (
             <React.Fragment key={String(idx)}>
               {idx > 0 && <span className="text-muted-foreground/70">{separator}</span>}
@@ -267,7 +270,7 @@ function MultiSelectItem({
 
   React.useEffect(() => {
     registerItem(value, children)
-  }, [value, registerItem])
+  }, [value, children, registerItem])
 
   React.useEffect(() => {
     return () => unregisterItem(value)

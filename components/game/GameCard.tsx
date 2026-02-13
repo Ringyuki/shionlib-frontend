@@ -97,7 +97,7 @@ const GameCardContent = ({
 
         <div className="absolute inset-0 flex items-center justify-center p-3 pb-16">
           {shouldBlur ? (
-            <Hidden vertical={vertical} />
+            <Hidden vertical={vertical} className="absolute inset-0" />
           ) : (
             <div
               className={cn(
