@@ -1473,6 +1473,9 @@
         "DocNav": {
           "prev": "上一篇",
           "next": "下一篇"
+        },
+        "DocFooter": {
+          "edit": "在 GitHub 上编辑此页面"
         }
       }
     },

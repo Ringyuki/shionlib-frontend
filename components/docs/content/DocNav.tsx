@@ -16,7 +16,7 @@ export const DocNav = ({ prev, next }: DocNavProps) => {
   const t = useTranslations('Components.Docs.Content.DocNav')
 
   return (
-    <div className="flex justify-between flex-wrap">
+    <div className="flex min-w-0 flex-wrap justify-between gap-2 border-t border-border pt-4">
       <Button
         intent="primary"
         appearance="ghost"
@@ -24,7 +24,7 @@ export const DocNav = ({ prev, next }: DocNavProps) => {
         renderIcon={<ChevronLeftIcon />}
         disabled={!prev}
       >
-        <span className="max-w-50 truncate">{prev?.title || t('prev')}</span>
+        <span className="inline-block max-w-50 truncate">{prev?.title || t('prev')}</span>
       </Button>
       <Button
         intent="primary"
@@ -34,7 +34,7 @@ export const DocNav = ({ prev, next }: DocNavProps) => {
         iconPosition="right"
         disabled={!next}
       >
-        <span className="max-w-50 truncate">{next?.title || t('next')}</span>
+        <span className="inline-block max-w-50 truncate">{next?.title || t('next')}</span>
       </Button>
     </div>
   )

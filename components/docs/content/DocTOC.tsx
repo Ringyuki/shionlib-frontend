@@ -60,7 +60,7 @@ export const DocTOC = () => {
                 e.preventDefault()
                 scrollToHeading(heading.id)
               }}
-              className={`block py-1 text-sm hover:text-primary-500 ${
+              className={`block py-1 text-sm transition-all duration-200 hover:text-primary-500 ${
                 activeId === heading.id
                   ? 'font-medium text-primary-500'
                   : 'text-default-600 dark:text-default-400'
