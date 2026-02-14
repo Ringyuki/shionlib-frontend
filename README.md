@@ -1,4 +1,8 @@
-![shionlib](/public/assets/images/readme/shionlib.webp)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./public/assets/images/readme/shionlib-light.webp">
+  <source media="(prefers-color-scheme: light)" srcset="./public/assets/images/readme/shionlib-dark.webp">
+  <img alt="shionlib" src="./public/assets/images/readme/shionlib-light.webp">
+</picture>
 
 ## Introduction
 
