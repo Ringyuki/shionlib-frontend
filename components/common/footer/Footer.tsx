@@ -48,7 +48,7 @@ export const ShionlibFooter = async () => {
               Telegram
             </Link>
             <Link
-              href="mailto:arisakayuki@ringyuki.moe"
+              href="mailto:admin@shionlib.com"
               target="_blank"
               className="flex items-center gap-1 hover:opacity-80 transition-opacity"
             >
