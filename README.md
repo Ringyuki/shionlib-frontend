@@ -1,4 +1,4 @@
-![shionlib](https://shionlib.com/og)
+![shionlib](/public/assets/images/readme/shionlib.webp)
 
 ## Introduction
 
