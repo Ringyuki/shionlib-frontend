@@ -7,7 +7,8 @@ import { ImageItem } from './Item'
 import { z } from 'zod'
 import { gameImageSchemaType } from './Form'
 import { shionlibRequest } from '@/utils/shionlib-request'
-import toast from 'react-hot-toast'
+// import toast from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { useTranslations } from 'next-intl'
 import { useParams } from 'next/navigation'
 
@@ -63,7 +64,8 @@ export const Edit = forwardRef<EditRef, EditProps>(
             ...data,
           },
         })
-        toast.success(t('success'))
+        // toast.success(t('success'))
+        sileo.success({ title: t('success') })
         onSuccess?.(data, image.id!)
         setOpen(false)
         onOpenChange?.(false)

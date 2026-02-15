@@ -11,7 +11,8 @@ import {
   AlertDialogCancel,
 } from '@/components/shionui/AlertDialog'
 import { useTranslations } from 'next-intl'
-import toast from 'react-hot-toast'
+// import toast from 'react-hot-toast'
+import { sileo } from 'sileo'
 
 interface DeleteProps {
   id: number
@@ -36,7 +37,8 @@ export const Delete = ({ id, onSuccess, open, onOpenChange, onLoadingChange }: D
     try {
       setLoading(true)
       await shionlibRequest().delete(`/game/download-source/${id}`)
-      toast.success(t('success'))
+      // toast.success(t('success'))
+      sileo.success({ title: t('success') })
       onOpenChange(false)
       await new Promise(resolve => setTimeout(resolve, 500)) // wait for the animation to complete
       onSuccess(id)

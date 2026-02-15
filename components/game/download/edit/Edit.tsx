@@ -7,7 +7,8 @@ import { z } from 'zod'
 import { useEffect, useState } from 'react'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { useTranslations } from 'next-intl'
-import toast from 'react-hot-toast'
+// import toast from 'react-hot-toast'
+import { sileo } from 'sileo'
 
 interface EditProps {
   downloadResource: GameDownloadResource
@@ -42,7 +43,8 @@ export const Edit = ({
         data: data,
       })
       onOpenChange(false)
-      toast.success(t('success'))
+      // toast.success(t('success'))
+      sileo.success({ title: t('success') })
       onSuccess(downloadResource.id, data as Partial<GameDownloadResource>)
     } catch {
     } finally {

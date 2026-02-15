@@ -5,7 +5,8 @@ import { Phase } from '@/libs/uploader/types'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { shionlibRequest } from '@/utils/shionlib-request'
-import toast from 'react-hot-toast'
+// import toast from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { cn } from '@/utils/cn'
 import { UploadTuning } from '@/components/common/uploader/UploadTuning'
 import { useUploadTuningStore } from '@/store/uploadTuningStore'
@@ -65,23 +66,36 @@ export const ReuploadContent = ({
   }
 
   const handleUploadComplete = async (sessionId: number) => {
-    let toastId: string | undefined
+    // let toastId: string | undefined
     try {
       setSubmitting(true)
-      toastId = toast.loading(t('submitting'))
-      await shionlibRequest().put(`/game/download-source/file/${file.id}/reupload`, {
-        data: {
-          upload_session_id: sessionId,
-          reason: reason || undefined,
+      // toastId = toast.loading(t('submitting'))
+      await sileo.promise(
+        shionlibRequest().put(`/game/download-source/file/${file.id}/reupload`, {
+          data: {
+            upload_session_id: sessionId,
+            reason: reason || undefined,
+          },
+        }),
+        {
+          loading: {
+            title: t('submitting'),
+          },
+          success: {
+            title: t('success'),
+          },
+          error: {
+            title: t('error'),
+          },
         },
-      })
-      toast.success(t('success'))
+      )
+      // toast.success(t('success'))
       onReuploadComplete()
     } catch {
-      toast.error(t('error'))
+      // toast.error(t('error'))
     } finally {
       setSubmitting(false)
-      toastId && toast.dismiss(toastId)
+      // toastId && toast.dismiss(toastId)
     }
   }
 

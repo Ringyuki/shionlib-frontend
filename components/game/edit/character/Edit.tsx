@@ -9,7 +9,8 @@ import { CharacterRelationItem } from './Item'
 import { z } from 'zod'
 import { characterRelationSchemaType } from './Form'
 import { shionlibRequest } from '@/utils/shionlib-request'
-import toast from 'react-hot-toast'
+// import toast from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { useTranslations } from 'next-intl'
 
 export interface EditRef {
@@ -65,7 +66,8 @@ export const Edit = forwardRef<EditRef, EditProps>(
             ],
           },
         })
-        toast.success(t('updated'))
+        // toast.success(t('updated'))
+        sileo.success({ title: t('updated') })
         const updatedRelation: GameCharacterRelation = {
           ...currentRelation,
           role: data.role ?? undefined,
