@@ -64,16 +64,20 @@ export const shionlibRequest = ({
       return { data, headers }
     }
 
-    let mod
+    let rht
+    let sileo
     if (isBrowser) {
-      mod = await import('react-hot-toast')
+      // rht = await import('react-hot-toast')
+      rht = { toast: { error: (message: string) => {} } }
+      sileo = await import('sileo')
     }
 
     const { data, headers } = await requestOnce()
     if (data && data.code === 0) return data
 
     if (isFatalAuthByCode(data.code)) {
-      if (mod) mod.toast.error(data.message)
+      if (rht) rht.toast.error(data.message)
+      if (sileo) sileo.sileo.error({ title: data.message })
       await doLogout(baseUrl!)
       throw new ShionlibBizError(data.code, data.message)
     }
@@ -91,19 +95,22 @@ export const shionlibRequest = ({
     if (data.code !== 0) {
       if (forceNotThrowError) return data
       if (data.code <= 1000) {
-        if (mod) {
-          if (data.code === 429) {
-            const retryAfter = headers.get('retry-after-download') || headers.get('retry-after')
-            mod.toast.error(formatErrors(data as ErrorResponse, retryAfter || undefined))
-          } else {
-            mod.toast.error(formatErrors(data as ErrorResponse))
-          }
+        if (data.code === 429) {
+          const retryAfter = headers.get('retry-after-download') || headers.get('retry-after')
+          rht && rht.toast.error(formatErrors(data as ErrorResponse, retryAfter || undefined))
+          sileo &&
+            sileo.sileo.error({
+              title: formatErrors(data as ErrorResponse, retryAfter || undefined),
+            })
+        } else {
+          rht && rht.toast.error(formatErrors(data as ErrorResponse))
+          sileo && sileo.sileo.error({ title: formatErrors(data as ErrorResponse) })
         }
+
         throw new Error(data.message)
       }
-      if (mod) {
-        mod.toast.error(formatErrors(data as ErrorResponse))
-      }
+      rht && rht.toast.error(formatErrors(data as ErrorResponse))
+      sileo && sileo.sileo.error({ title: formatErrors(data as ErrorResponse) })
       if (!NOT_FOUND_CODES.includes(data.code) || forceThrowError) {
         throw new ShionlibBizError(data.code, data.message)
       }

@@ -1,6 +1,7 @@
 import { Dices } from 'lucide-react'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/utils/cn'
@@ -19,22 +20,36 @@ export const RandomGame = ({ className }: RandomGameProps) => {
   const { runWithMinDuration } = useMinDuration(1000)
 
   const getRandomGame = async () => {
-    let toastId: string | undefined
     try {
       setLoading(true)
-      toastId = toast.loading(t('loading'))
-      await runWithMinDuration(async () => {
-        const { data } = await shionlibRequest().get<number | null>('/game/random')
-        if (!data) {
-          toast.error(t('retry'))
-          return
-        }
-        router.push(`/game/${data}`)
-      })
+      await sileo.promise(
+        async () => {
+          const { data } = await runWithMinDuration(() =>
+            shionlibRequest()
+              .get<number | null>('/game/random')
+              .then(res => {
+                if (!res.data) {
+                  throw new Error(t('retry'))
+                }
+                return res
+              }),
+          )
+          if (!data) return
+          router.push(`/game/${data}`)
+        },
+        {
+          loading: {
+            title: t('loading'),
+          },
+          success: {},
+          error: {
+            title: t('retry'),
+          },
+        },
+      )
     } catch {
     } finally {
       setLoading(false)
-      toastId && toast.dismiss(toastId)
     }
   }
   return (
