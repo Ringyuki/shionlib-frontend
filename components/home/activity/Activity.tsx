@@ -9,7 +9,6 @@ import { FileProgress } from './activities/FileProgress'
 import { buildActivityFeed } from './activities/helpers/activity-feed.helper'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { ActivityLoadMore } from './LoadMore'
-import { toast } from 'react-hot-toast'
 import { useTranslations } from 'next-intl'
 
 interface ActivityProps {
@@ -64,8 +63,7 @@ export const Activity = ({ activities: initialActivities, meta: initialMeta }: A
           itemCount: prev.itemCount + nextItems.length,
         }))
       }
-    } catch (error) {
-      toast.error(t('error'))
+    } catch {
     } finally {
       setLoading(false)
     }

@@ -4,7 +4,8 @@ import { useTranslations } from 'next-intl'
 import { initialSettings, useAria2Store } from '@/store/aria2Store'
 import { UseFormReturn } from 'react-hook-form'
 import { Aria2Settings } from '@/interfaces/aria2/aria2.interface'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { useAria2TestStore } from '@/store/aria2Store'
 
 interface Aria2ResetProps {
@@ -27,7 +28,8 @@ export const Aria2Reset = ({ form }: Aria2ResetProps) => {
     })
     setTestStatus('idle')
     setTestMessage('')
-    toast.success(t('success'))
+    // toast.success(t('success'))
+    sileo.success({ title: t('success') })
   }
 
   return (

@@ -9,13 +9,8 @@ import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
 import { EditRecordItem } from '@/interfaces/user/edits.interface'
 import { HistoryContent } from '@/components/game/edit-history/HistoryContent'
 import { PaginatedMeta } from '@/interfaces/api/shionlib-api-res.interface'
-import {
-  TooltipProvider,
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/shionui/Tooltip'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 
 interface HistoryProps {
   developer_id: number
@@ -52,7 +47,8 @@ export const History = ({ developer_id }: HistoryProps) => {
       setLoading(true)
       const res = await getHistories(developer_id, page)
       if (!res?.items.length) {
-        toast.error(t('noHistory'))
+        // toast.error(t('noHistory'))
+        sileo.error({ title: t('noHistory') })
         return
       }
       setHistories(res.items)

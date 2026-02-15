@@ -19,7 +19,8 @@ import { shionlibRequest } from '@/utils/shionlib-request'
 import { DialogFlow } from '@/components/user/settings/email/DialogFlow'
 import { DrawerFlow } from '@/components/user/settings/email/DrawerFlow'
 import { useMedia } from 'react-use'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { useShionlibUserStore } from '@/store/userStore'
 import { useCountdown } from '@/hooks/useCountdown'
 
@@ -68,7 +69,8 @@ export const EmailSettings = ({ email }: EmailSettingsProps) => {
         },
       })
       setOpen(false)
-      toast.success(t('success'))
+      // toast.success(t('success'))
+      sileo.success({ title: t('success') })
       logout()
     } catch {
     } finally {

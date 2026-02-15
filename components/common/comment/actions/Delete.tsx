@@ -14,7 +14,8 @@ import { useTranslations } from 'next-intl'
 import { useShionlibUserStore } from '@/store/userStore'
 import { useCommentListStore } from '@/store/commentListStore'
 import { shionlibRequest } from '@/utils/shionlib-request'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { useState } from 'react'
 
 interface DeleteProps {
@@ -34,7 +35,8 @@ export const Delete = ({ comment_id, creator_id }: DeleteProps) => {
       setLoading(true)
       await shionlibRequest().delete(`/comment/${comment_id}`)
       removeComment(comment_id)
-      toast.success(t('success'))
+      // toast.success(t('success'))
+      sileo.success({ title: t('success') })
       setOpen(false)
     } catch {
     } finally {

@@ -1,6 +1,5 @@
 import { Dices } from 'lucide-react'
 import { shionlibRequest } from '@/utils/shionlib-request'
-import { toast } from 'react-hot-toast'
 import { sileo } from 'sileo'
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'

@@ -677,6 +677,7 @@
           "aria2FailedToFetch": "Cannot connect to Aria2, please check your settings",
           "aria2UnknownError": "Unknown error",
           "goToSettings": "Go to settings",
+          "goToSettingsDescription": "Go to settings page, check if Aria2 settings are correct.",
           "virusFalsePositiveFlag": "Possible virus detected",
           "virusFalsePositiveFlagDescription": "Virus scanning process flagged this file, but the administrator has allowed it. Detected viruses: {detected_viruses}."
         },
@@ -1642,7 +1643,9 @@
       },
       "Create": {
         "invalidId": "Invalid VNDB ID or Bangumi ID",
-        "success": "Created successfully, game entry ID is {id}"
+        "success": "Created successfully, game entry ID is {id}",
+        "successDescription": "Click the button below to open the game entry page in a new window.",
+        "view": "View Game Entry"
       },
       "Alert": {
         "info": "Info",

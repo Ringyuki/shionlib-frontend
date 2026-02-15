@@ -6,7 +6,8 @@ import {
   ANIMETRACE_MODEL,
   ALLOWED_ANIMETRACE_FILE_EXTENSIONS,
 } from './constant/animetrace.constant'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { AnimeTraceResponse } from '@/interfaces/search/anime-trace.interface'
 import { useCallback, useEffect, useState } from 'react'
 import { AnimeTraceResult } from './Result'
@@ -25,33 +26,46 @@ export const AnimeTraceSearch = () => {
       formData.append('file', file)
       formData.append('model', ANIMETRACE_MODEL)
       setLoading(true)
-      const loadingToast = toast.loading(t('loading'))
-      await fetch(ANIMETRACE_API_URL, {
-        method: 'POST',
-        body: formData,
-      })
-        .then(res => res.json())
-        .then(async (data: AnimeTraceResponse) => {
-          console.log(data)
-          setResult(data)
-          if (data.code !== 0) throw new Error(data.zh_message)
+      // const loadingToast = toast.loading(t('loading'))
+      try {
+        await sileo.promise(
+          fetch(ANIMETRACE_API_URL, {
+            method: 'POST',
+            body: formData,
+          })
+            .then(res => res.json())
+            .then(async (data: AnimeTraceResponse) => {
+              console.log(data)
+              setResult(data)
+              if (data.code !== 0) throw new Error(data.zh_message)
 
-          if (!data.data.length) {
-            toast.error(t('noResult'))
-            setImage(null)
-          } else {
-            const bmp = await prepareBitmap(file)
-            console.log(bmp)
-            setImage(bmp)
-          }
-        })
-        .catch(error => {
-          toast.error(error.message)
-        })
-        .finally(() => {
-          setLoading(false)
-          toast.dismiss(loadingToast)
-        })
+              if (!data.data.length) {
+                // toast.error(t('noResult'))
+                setImage(null)
+                throw new Error(t('noResult'))
+              }
+              const bmp = await prepareBitmap(file)
+              console.log(bmp)
+              setImage(bmp)
+            }),
+          {
+            loading: {
+              title: t('loading'),
+            },
+            success: {},
+            error: err => {
+              const message = err instanceof Error ? err.message : String(err)
+              return {
+                title: message === t('noResult') ? t('noResult') : message,
+              }
+            },
+          },
+        )
+      } catch {
+      } finally {
+        setLoading(false)
+        // toast.dismiss(loadingToast)
+      }
     },
     [t],
   )
@@ -79,7 +93,8 @@ export const AnimeTraceSearch = () => {
       const ext = pastedFile.name.split('.').pop()?.toLowerCase()
       const allowedExts = ALLOWED_ANIMETRACE_FILE_EXTENSIONS.map(e => e.replace('.', ''))
       if (!ext || !allowedExts.includes(ext)) {
-        toast.error(t('invalidFileFormat'))
+        // toast.error(t('invalidFileFormat'))
+        sileo.error({ title: t('invalidFileFormat') })
         return
       }
       setFile(pastedFile)

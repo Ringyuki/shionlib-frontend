@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useDebounce } from 'react-use'
 import { useTranslations } from 'next-intl'
 import { RotateCcw } from 'lucide-react'
-import { toast } from 'sonner'
+import { toast } from 'react-hot-toast'
 import {
   useAdminGameList,
   updateGameStatus,

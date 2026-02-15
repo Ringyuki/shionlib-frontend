@@ -5,7 +5,8 @@ import { CommentEditor } from './CommentEditor'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { SerializedEditorState } from 'lexical'
 import { useTranslations } from 'next-intl'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { Comment } from '@/interfaces/comment/comment.interface'
 import { useCommentListStore } from '@/store/commentListStore'
 
@@ -30,7 +31,8 @@ export const CommentBox = ({ game_id, parent_id, onSubmitSuccess }: CommentBoxPr
           parent_id: parent_id ? Number(parent_id) : null,
         },
       })
-      toast.success(t('success'))
+      // toast.success(t('success'))
+      sileo.success({ title: t('success') })
       addComment(data.data!)
       editorRef.current?.clearEditor()
       onSubmitSuccess?.()

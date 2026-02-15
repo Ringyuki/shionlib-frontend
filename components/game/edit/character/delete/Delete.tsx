@@ -4,7 +4,8 @@ import { Button } from '@/components/shionui/Button'
 import { Trash } from 'lucide-react'
 import { useState } from 'react'
 import { shionlibRequest } from '@/utils/shionlib-request'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { useTranslations } from 'next-intl'
 import {
   AlertDialog,
@@ -38,7 +39,8 @@ export const Delete = ({ id, game_id, onSuccess }: DeleteProps) => {
           ids: [id],
         },
       })
-      toast.success(t('success'))
+      // toast.success(t('success'))
+      sileo.success({ title: t('success') })
       setOpen(false)
       onSuccess(id)
     } catch {

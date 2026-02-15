@@ -17,7 +17,8 @@ import { FileList } from './FileList'
 import { UploadStatus } from './UploadStatus'
 import { useTranslations } from 'next-intl'
 import { AllowedLargeArchiveFileExtensions } from '@/enums/upload/allowed-large-file.enum'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { Upload as UploadIcon } from 'lucide-react'
 import { OnGoingSession } from '@/components/game/upload/OnGoingSession'
 
@@ -88,7 +89,8 @@ export function FileUploader({
       }
       if (e.type === 'done') handleComplete()
       if (e.type === 'file-mismatch') {
-        toast.error(t('fileMismatch'))
+        // toast.error(t('fileMismatch'))
+        sileo.error({ title: t('fileMismatch') })
         setPhase('idle')
         resetProgress(null)
         setFile(null)
@@ -146,10 +148,12 @@ export function FileUploader({
     console.log('file reject', message)
     console.log('file mime type', f.type)
     if (message === 'File too small') {
-      toast.error(t('fileTooSmall', { size: 200 }))
+      // toast.error(t('fileTooSmall', { size: 200 }))
+      sileo.error({ title: t('fileTooSmall', { size: 200 }) })
       return
     }
-    toast.error(t('invalidFileFormat'))
+    // toast.error(t('invalidFileFormat'))
+    sileo.error({ title: t('invalidFileFormat') })
   }
   React.useEffect(() => {
     if (file) {

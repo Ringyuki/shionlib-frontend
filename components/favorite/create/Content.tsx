@@ -18,7 +18,8 @@ import { Checkbox } from '@/components/shionui/Checkbox'
 import { useState } from 'react'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { Favorite } from '@/interfaces/favorite/favorite.interface'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { cn } from '@/utils/cn'
 
 interface FavoriteCreateContentProps {
@@ -62,7 +63,8 @@ export const FavoriteCreateContent = ({ onSuccess, className }: FavoriteCreateCo
         game_count: 0,
         is_favorite: false,
       })
-      toast.success(t('success'))
+      // toast.success(t('success'))
+      sileo.success({ title: t('success') })
     } catch {
     } finally {
       setLoading(false)

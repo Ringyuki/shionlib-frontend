@@ -13,7 +13,8 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/shionui/Tooltip'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 
 interface HistoryProps {
   game_id: number
@@ -50,7 +51,8 @@ export const History = ({ game_id }: HistoryProps) => {
       setLoading(true)
       const res = await getHistories(game_id, page)
       if (!res?.items.length) {
-        toast.error(t('noHistory'))
+        // toast.error(t('noHistory'))
+        sileo.error({ title: t('noHistory') })
         return
       }
       setHistories(res.items)

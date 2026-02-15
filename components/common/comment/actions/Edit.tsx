@@ -8,7 +8,8 @@ import { CommentEditor } from '../CommentEditor'
 import { SerializedEditorState } from 'lexical'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { RawComment } from '@/interfaces/comment/raw.interface'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { useCommentListStore } from '@/store/commentListStore'
 import { Comment } from '@/interfaces/comment/comment.interface'
 
@@ -54,7 +55,8 @@ export const Edit = ({ creator_id, comment_id, onEdited }: EditProps) => {
         },
       })
       updateComment(date.data!)
-      toast.success(t('success'))
+      // toast.success(t('success'))
+      sileo.success({ title: t('success') })
       setOpen(false)
       onEdited?.()
     } catch {

@@ -293,6 +293,9 @@ samp {
   body[data-scroll-locked] {
     margin-right: var(--removed-body-scroll-bar-size);
   }
+  [data-sileo-viewport] {
+    z-index: 999 !important;
+  }
 }
 
 @utility drag-none {

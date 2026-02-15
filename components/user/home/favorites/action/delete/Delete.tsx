@@ -11,7 +11,8 @@ import {
 } from '@/components/shionui/AlertDialog'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { useTranslations } from 'next-intl'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { Button } from '@/components/shionui/Button'
 import { Trash } from 'lucide-react'
 
@@ -29,7 +30,8 @@ export const FavoriteDelete = ({ id, onSuccess }: FavoriteDeleteProps) => {
     try {
       setLoading(true)
       await shionlibRequest().delete(`/favorites/${id}`)
-      toast.success(t('success'))
+      // toast.success(t('success'))
+      sileo.success({ title: t('success') })
       setOpen(false)
       onSuccess(id)
     } catch {

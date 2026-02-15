@@ -1,14 +1,14 @@
 import { Button } from '@/components/shionui/Button'
 import { useTranslations } from 'next-intl'
 import { Shapes } from 'lucide-react'
-import { shionlibRequest } from '@/utils/shionlib-request'
 import { useState } from 'react'
 import {
   KunPatchResourceResponse,
   HikariResponse,
   KunResponseError,
 } from '@/interfaces/patch/patch.interface'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { Patch as PatchComponent } from '../patch/Patch'
 
 interface PatchProps {
@@ -41,9 +41,11 @@ export const Patch = ({ v_id }: PatchProps) => {
       setOpen(true)
     } catch (error: any) {
       if (error instanceof KunResponseError) {
-        toast.error(error.message)
+        // toast.error(error.message)
+        sileo.error({ title: error.message })
       } else {
-        toast.error(t('error'))
+        // toast.error(t('error'))
+        sileo.error({ title: t('error') })
       }
     } finally {
       setLoading(false)

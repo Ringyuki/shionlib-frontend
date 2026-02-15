@@ -1,7 +1,8 @@
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { shionlibRequest } from '@/utils/shionlib-request'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { Plus } from 'lucide-react'
 import {
   DropdownMenuItem,
@@ -32,7 +33,8 @@ export const AddToRecentUpdate = ({ game_id }: AddToRecentUpdateProps) => {
     try {
       setLoading(true)
       await shionlibRequest().put(`/admin/content/games/${game_id}/recent-update`)
-      toast.success(t('success'))
+      // toast.success(t('success'))
+      sileo.success({ title: t('success') })
       setOpen(false)
     } catch {
     } finally {

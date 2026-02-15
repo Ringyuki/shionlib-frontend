@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { toast } from 'sonner'
+import { toast } from 'react-hot-toast'
 import { ArrowLeft, Save, WandSparkles } from 'lucide-react'
 import { useRouter } from '@/i18n/navigation.client'
 import { Button } from '@/components/shionui/Button'

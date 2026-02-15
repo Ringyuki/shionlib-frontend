@@ -5,7 +5,8 @@ import { FolderCheck, Folder, CheckCircle2, Lock } from 'lucide-react'
 import { Badge } from '@/components/shionui/Badge'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { useTranslations } from 'next-intl'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 
 interface FavoriteContentItemProps {
   game_id: number
@@ -28,7 +29,8 @@ export const FavoriteContentItem = ({ game_id, favorite }: FavoriteContentItemPr
       })
       setIsFavorite(true)
       setGameCount(gameCount + 1)
-      toast.success(t('added'))
+      // toast.success(t('added'))
+      sileo.success({ title: t('added') })
     } catch {
     } finally {
       setLoading(false)
@@ -40,7 +42,8 @@ export const FavoriteContentItem = ({ game_id, favorite }: FavoriteContentItemPr
       await shionlibRequest().delete(`/favorites/${favorite.id}/games/${game_id}`)
       setIsFavorite(false)
       setGameCount(gameCount - 1)
-      toast.success(t('removed'))
+      // toast.success(t('removed'))
+      sileo.success({ title: t('removed') })
     } catch {
     } finally {
       setLoading(false)

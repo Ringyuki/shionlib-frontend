@@ -15,7 +15,8 @@ import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { useShionlibUserStore } from '@/store/userStore'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { Input } from '@/components/shionui/Input'
 import { TextCursorInput } from 'lucide-react'
 
@@ -38,7 +39,8 @@ export const NameSettings = ({ name }: NameSettingsProps) => {
         data: { name: inputName.trim() },
       })
       updateUser({ name: data.data?.name ?? '' })
-      toast.success(t('success'))
+      // toast.success(t('success'))
+      sileo.success({ title: t('success') })
     } catch {
     } finally {
       setIsUpdating(false)

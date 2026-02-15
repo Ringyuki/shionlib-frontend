@@ -3,7 +3,8 @@ import { Upload as UploadIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState, useRef, useEffect } from 'react'
 import { shionlibRequest } from '@/utils/shionlib-request'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { useParams } from 'next/navigation'
 import { getDims } from '../helpers/getDims'
 
@@ -41,7 +42,8 @@ export const Upload = ({ onUpload, onTempUrl }: UploadProps) => {
       const dims = await getDims(file)
       onUpload(response.data?.key ?? '', dims)
       setFile(null)
-      toast.success(t('success'))
+      // toast.success(t('success'))
+      sileo.success({ title: t('success') })
     } catch (error) {
       console.error(error)
     } finally {

@@ -10,7 +10,8 @@ import { useState, useRef } from 'react'
 import { Button } from '@/components/shionui/Button'
 import { Upload as UploadIcon, Building2 } from 'lucide-react'
 import { shionlibRequest } from '@/utils/shionlib-request'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { useParams } from 'next/navigation'
 
 interface LogoProps {
@@ -49,7 +50,8 @@ export const Logo = ({ form }: LogoProps) => {
       form.setValue('logo', response.data?.key ?? '')
       setFile(null)
       setTempUrl(null)
-      toast.success(t('upload_success'))
+      // toast.success(t('upload_success'))
+      sileo.success({ title: t('upload_success') })
     } catch {
     } finally {
       setLoading(false)

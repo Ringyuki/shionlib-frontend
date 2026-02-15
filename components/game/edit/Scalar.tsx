@@ -20,7 +20,8 @@ import { useTranslations } from 'next-intl'
 import { Check } from 'lucide-react'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { useParams } from 'next/navigation'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { useRouter } from '@/i18n/navigation.client'
 import { pick } from './helper/pick'
 import { pickChanges, ChangesResult } from '@/utils/pick-changes'
@@ -50,7 +51,8 @@ export const Scalar = ({ data }: ScalarProps) => {
           note,
         },
       })
-      toast.success(t('success'))
+      // toast.success(t('success'))
+      sileo.success({ title: t('success') })
       router.push(`/game/${id}`, { scroll: true })
     } catch {
     } finally {

@@ -18,7 +18,8 @@ import { InputNumber } from '@/components/shionui/InputNumber'
 import { Button } from '@/components/shionui/Button'
 import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import {
   Select,
   SelectContent,
@@ -59,7 +60,8 @@ export const Aria2 = () => {
       auth_secret: data.auth_secret,
       downloadPath: data.downloadPath,
     })
-    toast.success(t('success'))
+    // toast.success(t('success'))
+    sileo.success({ title: t('success') })
   }
 
   const onSave = () => {

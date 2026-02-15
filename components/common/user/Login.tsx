@@ -15,7 +15,8 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/shionui/Form'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { useState } from 'react'
 import { shionlibRequest } from '@/utils/shionlib-request'
 import { User } from '@/interfaces/user/user.interface'
@@ -54,7 +55,8 @@ export const Login = ({ onSuccess }: LoginProps) => {
         setUser(data.data!)
         router.refresh()
         onSuccess?.()
-        toast.success(t('success'))
+        // toast.success(t('success'))
+        sileo.success({ title: t('success') })
         const targetLocale = data.data?.lang || 'en'
         if (targetLocale === locale) return
         router.replace(pathname, { locale: targetLocale })

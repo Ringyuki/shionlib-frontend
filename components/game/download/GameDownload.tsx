@@ -4,7 +4,8 @@ import { GameDownloadResource } from '@/interfaces/game/game-download-resource'
 import { GameDownloadDrawer } from './GameDownloadDrawer'
 import { GameDownloadDialog } from './GameDownloadDialog'
 import { useMedia } from 'react-use'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { useTranslations } from 'next-intl'
 
 interface GameDownloadDrawerProps {
@@ -42,7 +43,8 @@ export const GameDownload = ({
           setIsReady(false)
           onLoadingChange(false)
           onOpenChange(false)
-          toast.error(t('noDownloadSource'))
+          // toast.error(t('noDownloadSource'))
+          sileo.error({ title: t('noDownloadSource') })
           return
         }
         if (!isCancelled) {

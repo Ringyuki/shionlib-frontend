@@ -8,12 +8,13 @@ import { Badge } from '@/components/shionui/Badge'
 import { formatBytes } from '@/utils/format'
 import { useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 import { addUrl } from './helpers/aria2'
 import { useAria2Store } from '@/store/aria2Store'
 import { CopyButton } from '@/components/shionui/animated/CopyButton'
 import { GetDownloadLink, GetDownloadLinkHandle } from './libs/get-download-link'
-import { Link } from '@/i18n/navigation.client'
+import { Link, useRouter } from '@/i18n/navigation.client'
 import { Question } from '@/components/common/content/Question'
 
 interface GameDownloadFileItemProps {
@@ -31,7 +32,7 @@ export const GameDownloadFileItem = ({
   const [downloadLink, setDownloadLink] = useState<string | null>(null)
   const { getSettings } = useAria2Store()
   const { protocol, host, port, path, auth_secret, downloadPath } = getSettings()
-
+  const router = useRouter()
   const downloadLinkRef = useRef<GetDownloadLinkHandle>(null)
   const [turnstileOpen, setTurnstileOpen] = useState(false)
 
@@ -65,19 +66,31 @@ export const GameDownloadFileItem = ({
       downloadPath,
     )
     if (!res.success) {
-      toast.error(
-        <div className="flex flex-col gap-1">
-          <span>{t(res.message ?? 'aria2UnknownError')}</span>
-          <Link href="/user/settings/site" className="text-primary underline text-sm">
-            {t('goToSettings')}
-          </Link>
-        </div>,
-      )
+      // toast.error(
+      //   <div className="flex flex-col gap-1">
+      //     <span>{t(res.message ?? 'aria2UnknownError')}</span>
+      //     <Link href="/user/settings/site" className="text-primary underline text-sm">
+      //       {t('goToSettings')}
+      //     </Link>
+      //   </div>,
+      // )
+      sileo.error({
+        title: t(res.message ?? 'aria2UnknownError'),
+        description: t('goToSettingsDescription'),
+        styles: {
+          description: 'dark:text-background',
+        },
+        button: {
+          title: t('goToSettings'),
+          onClick: () => router.push('/user/settings/site'),
+        },
+      })
       setPushToAria2Loading(false)
       return
     }
 
-    toast.success(t('downloadStarted'))
+    // toast.success(t('downloadStarted'))
+    sileo.success({ title: t('downloadStarted') })
     setPushToAria2Loading(false)
   }
   const handleNormalDownload = async () => {
@@ -93,7 +106,8 @@ export const GameDownloadFileItem = ({
     a.click()
     document.body.removeChild(a)
 
-    toast.success(t('downloadStarted'))
+    // toast.success(t('downloadStarted'))
+    sileo.success({ title: t('downloadStarted') })
   }
 
   const handleTurnstileCancel = () => {

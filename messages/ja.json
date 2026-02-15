@@ -663,6 +663,7 @@
           "aria2FailedToFetch": "Aria2 に接続できません、設定を確認してください",
           "aria2UnknownError": "未知のエラー",
           "goToSettings": "設定へ",
+          "goToSettingsDescription": "設定ページに移動し、Aria2 の設定を確認してください。",
           "virusFalsePositiveFlag": "ウイルスが検出された可能性があります",
           "virusFalsePositiveFlagDescription": "ウイルス検査でこのファイルが検出されましたが、管理者によって許可されました。検出されたウイルス: {detected_viruses}。"
         },
@@ -1627,7 +1628,9 @@
       },
       "Create": {
         "invalidId": "無効な VNDB ID または Bangumi ID",
-        "success": "作成成功, ゲーム条目 ID は {id} です"
+        "success": "作成成功, ゲーム条目 ID は {id} です",
+        "successDescription": "下のボタンをクリックすると、新しいウィンドウでゲーム条目ページを開きます。",
+        "view": "ゲーム条目を表示"
       },
       "Alert": {
         "info": "情報",

@@ -9,7 +9,8 @@ import { gameImageSchemaType } from '../Form'
 import { GameImage } from '@/interfaces/game/game.interface'
 import { useParams } from 'next/navigation'
 import { shionlibRequest } from '@/utils/shionlib-request'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
+import { sileo } from 'sileo'
 
 interface CreateProps {
   onSuccess?: (data: z.infer<typeof gameImageSchemaType>) => void
@@ -37,7 +38,8 @@ export const Create = ({ onSuccess }: CreateProps) => {
           images,
         },
       })
-      toast.success(t('success'))
+      // toast.success(t('success'))
+      sileo.success({ title: t('success') })
       onSuccess?.(data)
       editRef.current?.close()
     } catch {
