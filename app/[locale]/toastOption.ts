@@ -34,5 +34,6 @@ type SileoToasterProps = ComponentProps<typeof SileoToaster>
 export const sileoToastProps: Omit<SileoToasterProps, 'children'> = {
   options: {
     styles: {},
+    duration: 3000,
   },
 }
