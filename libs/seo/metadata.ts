@@ -49,7 +49,6 @@ export async function buildPageMetadata(
       description: input.description,
       url: localePath,
       images: ogUrl,
-      siteName: shionlibSiteConfig ? undefined : undefined,
     },
     twitter: {
       card: 'summary_large_image',

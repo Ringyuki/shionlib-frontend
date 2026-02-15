@@ -31,6 +31,10 @@ export async function generateMetadata({
       template: t('template'),
     },
     description: t('description'),
+    icons: {
+      icon: '/favicon.ico',
+      apple: '/favicon.ico',
+    },
     keywords: t.raw('keywords'),
     alternates: {
       canonical: `/${locale}`,
