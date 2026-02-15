@@ -39,6 +39,10 @@ export async function buildPageMetadata(
   return {
     title: input.title,
     description: input.description,
+    icons: {
+      icon: '/favicon.ico',
+      apple: '/favicon.ico',
+    },
     alternates,
     openGraph: {
       title: input.title,
