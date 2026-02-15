@@ -39,10 +39,10 @@ export const ContentLimit = ({ initialContentLimit }: ContentLimitProps) => {
   const [contentLimit, setContentLimit] = useState<ContentLimitEnum>(initialContentLimit)
   const [isUpdating, setIsUpdating] = useState(false)
   const { logout } = useShionlibUserStore()
-  const { openLogoutDialog } = useAuthDialogStore()
+  const { openAuthDialog } = useAuthDialogStore()
   const relogin = () => {
     logout()
-    openLogoutDialog()
+    openAuthDialog()
   }
 
   const handleUpdate = async () => {

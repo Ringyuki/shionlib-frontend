@@ -82,7 +82,7 @@ export const GameDownloadFileItem = ({
         },
         button: {
           title: t('goToSettings'),
-          onClick: () => router.push('/user/settings/site'),
+          onClick: () => router.push('/user/settings/download'),
         },
       })
       setPushToAria2Loading(false)
