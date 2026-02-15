@@ -1678,6 +1678,9 @@
           "read": "Read",
           "unread": "Unread"
         },
+        "ReadAll": {
+          "markAllRead": "Mark all as read"
+        },
         "Item": {
           "system": "System messages"
         }

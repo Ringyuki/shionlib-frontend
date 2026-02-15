@@ -1678,6 +1678,9 @@
           "read": "已读",
           "unread": "未读"
         },
+        "ReadAll": {
+          "markAllRead": "全部已读"
+        },
         "Item": {
           "system": "系统消息"
         }
