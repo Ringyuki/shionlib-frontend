@@ -20,7 +20,7 @@ export const Comment = ({ activity }: CommentProps) => {
   const langMap = { en: 'en', ja: 'jp', zh: 'zh' } as const
   const lang = langMap[locale as keyof typeof langMap] ?? 'jp'
   const { title } = getPreferredContent(activity.game as unknown as GameData, 'title', lang)
-  const commentHref = `/game/${activity.game?.id}?tab=comments#data-comment-id-${activity.comment?.id}`
+  const commentHref = `/game/${activity.game?.id}/comments#data-comment-id-${activity.comment?.id}`
 
   const handleCommentClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target as HTMLElement | null

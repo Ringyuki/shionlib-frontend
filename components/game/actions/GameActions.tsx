@@ -1,6 +1,6 @@
 'use client'
 
-import { GameData } from '@/interfaces/game/game.interface'
+import { GameHeader } from '@/interfaces/game/game.interface'
 import { Separator } from '@/components/shionui/Separator'
 import { Download } from './Download'
 import { Upload } from './Upload'
@@ -14,7 +14,7 @@ import { useShionlibUserStore } from '@/store/userStore'
 import { UserRole } from '@/interfaces/user/user.interface'
 
 interface GameActionsProps {
-  game: GameData
+  game: GameHeader
   is_favorite: boolean
 }
 

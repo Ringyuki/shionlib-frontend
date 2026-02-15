@@ -1,12 +1,13 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useSelectedLayoutSegment } from 'next/navigation'
 import { Tabs, TabsList, TabsTrigger } from '@/components/shionui/animated/Tabs'
 import { useEditPermissionStore } from '@/store/editPermissionStore'
 import { useParams, redirect } from 'next/navigation'
 import { Link } from '@/i18n/navigation.client'
 import { useTranslations } from 'next-intl'
+import { useScrollToElem } from '@/hooks/useScrollToElem'
 
 const tabs = [
   { name: 'scalar', href: 'scalar' },
@@ -25,7 +26,15 @@ export const EditTabsNav = () => {
     () => (segment && tabs.some(t => t.href === segment) ? segment : 'scalar'),
     [segment],
   )
-
+  const scrollToElem = useScrollToElem()
+  useEffect(() => {
+    if (active) {
+      const gameContent = document.getElementById('game-content')
+      if (gameContent) {
+        scrollToElem(gameContent)
+      }
+    }
+  }, [active, scrollToElem])
   const { gamePermissions: permissions } = useEditPermissionStore()
   if (!permissions) {
     redirect(`/game/${id}`)

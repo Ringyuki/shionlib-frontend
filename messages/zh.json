@@ -496,6 +496,11 @@
       }
     },
     "Game": {
+      "TabsNav": {
+        "description": "游戏详情",
+        "characters": "出场角色",
+        "comments": "游戏评论"
+      },
       "Actions": {
         "download": "下载",
         "Patch": {
@@ -533,7 +538,6 @@
       },
       "Description": {
         "GameCharacter": {
-          "characters": "出场角色",
           "noCharacters": "暂时没有角色信息"
         },
         "GameCharacterItem": {
@@ -569,11 +573,6 @@
           "images": "游戏图片",
           "staff": "制作人员",
           "extraInfo": "其他信息"
-        },
-        "GameContent": {
-          "gameDetail": "游戏详情",
-          "gameCharacter": "出场角色",
-          "gameComment": "游戏评论"
         },
         "BangumiExtraInfoKeyMap": {
           "birthday": "生日",

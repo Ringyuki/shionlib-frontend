@@ -482,6 +482,11 @@
       }
     },
     "Game": {
+      "TabsNav": {
+        "description": "ゲーム詳細",
+        "characters": "キャラクター",
+        "comments": "ゲームコメント"
+      },
       "Actions": {
         "download": "ダウンロード",
         "Patch": {
@@ -519,7 +524,6 @@
       },
       "Description": {
         "GameCharacter": {
-          "characters": "キャラクター",
           "noCharacters": "キャラクター情報がありません"
         },
         "GameCharacterItem": {
@@ -547,11 +551,6 @@
         },
         "GameLinks": {
           "links": "関連リンク"
-        },
-        "GameContent": {
-          "gameDetail": "ゲーム詳細",
-          "gameCharacter": "キャラクター",
-          "gameComment": "ゲームコメント"
         },
         "GameDetail": {
           "tags": "タグ",

@@ -496,6 +496,11 @@
       }
     },
     "Game": {
+      "TabsNav": {
+        "description": "Game details",
+        "characters": "Characters",
+        "comments": "Game comments"
+      },
       "Actions": {
         "download": "Download",
         "Patch": {
@@ -533,7 +538,6 @@
       },
       "Description": {
         "GameCharacter": {
-          "characters": "Characters",
           "noCharacters": "No characters found"
         },
         "GameCharacterItem": {
@@ -561,11 +565,6 @@
         },
         "GameLinks": {
           "links": "Related links"
-        },
-        "GameContent": {
-          "gameDetail": "Game details",
-          "gameCharacter": "Characters",
-          "gameComment": "Game comments"
         },
         "GameDetail": {
           "tags": "Tags",

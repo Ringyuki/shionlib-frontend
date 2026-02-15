@@ -1,4 +1,4 @@
-import { GameData } from '@/interfaces/game/game.interface'
+import { GameDetail as GameDetailType } from '@/interfaces/game/game.interface'
 import { BookOpenText } from 'lucide-react'
 import { getPreferredContent } from './helpers/getPreferredContent'
 import { useTranslations, useLocale } from 'next-intl'
@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react'
 import { BBCodeContent } from '@/components/common/content/BBCode'
 
 interface GameDescriptionProps {
-  game: GameData
+  game: GameDetailType
 }
 
 export const GameDescription = ({ game }: GameDescriptionProps) => {
@@ -30,7 +30,7 @@ export const GameDescription = ({ game }: GameDescriptionProps) => {
   const [selectedIntro, setSelectedIntro] = useState(intro)
 
   useEffect(() => {
-    setSelectedIntro(game[`intro_${selectedIntroLanguage}` as keyof GameData] as string)
+    setSelectedIntro(game[`intro_${selectedIntroLanguage}` as keyof GameDetailType] as string)
   }, [selectedIntroLanguage, game])
 
   return (

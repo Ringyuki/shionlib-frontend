@@ -1,4 +1,4 @@
-import { GameData } from '@/interfaces/game/game.interface'
+import { GameHeader as GameHeaderType } from '@/interfaces/game/game.interface'
 import { Separator } from '@/components/shionui/Separator'
 import { GameTitle } from './GameTitle'
 import { GameDeveloper } from './GameDeveloper'
@@ -10,14 +10,23 @@ import { GameCover } from '../cover/GameCover'
 import { getLocale } from 'next-intl/server'
 import { GameScores } from '../score/GameScores'
 import { GameBackground } from './GameBackground'
+import { shionlibRequest } from '@/utils/shionlib-request'
 
 interface GameHeaderProps {
-  game: GameData
-  is_favorite: boolean
+  game: GameHeaderType
 }
 
-export const GameHeader = async ({ game, is_favorite }: GameHeaderProps) => {
+const getFavoriteStatus = async (game_id: number) => {
+  const data = await shionlibRequest({ forceNotThrowError: true }).get<{ is_favorite: boolean }>(
+    `/favorites/game/${game_id}/stats`,
+  )
+  return data.data?.is_favorite ?? false
+}
+
+export const GameHeader = async ({ game }: GameHeaderProps) => {
   const locale = await getLocale()
+  const is_favorite = await getFavoriteStatus(game.id)
+
   const langMap = { en: 'en', ja: 'jp', zh: 'zh' } as const
   const lang = langMap[locale as keyof typeof langMap] ?? 'jp'
 

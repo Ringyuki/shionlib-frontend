@@ -22,32 +22,39 @@ export interface PreferredTitle {
   disable_languages: string[]
 }
 
+type GameCoverSource = Pick<GameData, 'covers'>
+type GameTitleSource = Pick<GameData, 'title_jp' | 'title_zh' | 'title_en'>
+type GameIntroSource = Pick<GameData, 'intro_jp' | 'intro_zh' | 'intro_en'>
+
 export function getPreferredContent(
-  game: GameData,
+  game: GameCoverSource,
   contentType: 'cover',
   lang: Lang,
 ): PreferredCover
 export function getPreferredContent(
-  game: GameData,
+  game: GameTitleSource,
   contentType: 'title',
   lang: Lang,
 ): PreferredTitle
 export function getPreferredContent(
-  game: GameData,
+  game: GameIntroSource,
   contentType: 'intro',
   lang: Lang,
 ): PreferredIntro
 export function getPreferredContent(
-  game: GameData,
+  game: GameCoverSource | GameTitleSource | GameIntroSource,
   contentType: ContentType,
   lang: Lang,
 ): PreferredCover | PreferredTitle | PreferredIntro {
   switch (contentType) {
     case 'cover':
-      const cover = game.covers?.find(c => c.language === lang) ?? (game.covers?.[0]! as GameCover)
+      const coverSource = game as GameCoverSource
+      const cover =
+        coverSource.covers?.find(c => c.language === lang) ??
+        (coverSource.covers?.[0]! as GameCover)
       if (!cover) {
         return {
-          cover: game.covers?.[0]! as GameCover,
+          cover: coverSource.covers?.[0]! as GameCover,
           vertical: false,
           aspect: '1.5 / 1',
         }
@@ -60,43 +67,45 @@ export function getPreferredContent(
         aspect,
       }
     case 'title':
+      const titleSource = game as GameTitleSource
       const title =
-        (game[`title_${lang}` as keyof GameData] as string) ||
-        game.title_jp ||
-        game.title_en ||
-        game.title_zh
+        titleSource[`title_${lang}` as keyof GameTitleSource] ||
+        titleSource.title_jp ||
+        titleSource.title_en ||
+        titleSource.title_zh
       return {
         title: title,
         language:
-          game[`title_${lang}`] === title
+          titleSource[`title_${lang}` as keyof GameTitleSource] === title
             ? lang
-            : title === game.title_en
+            : title === titleSource.title_en
               ? 'en'
-              : title === game.title_zh
+              : title === titleSource.title_zh
                 ? 'zh'
                 : 'jp',
-        disable_languages: Object.keys(game)
-          .filter(k => k.startsWith('title_') && !game[k as keyof GameData])
+        disable_languages: Object.keys(titleSource)
+          .filter(k => k.startsWith('title_') && !titleSource[k as keyof GameTitleSource])
           .map(k => k.replace('title_', '')),
       }
     case 'intro':
+      const introSource = game as GameIntroSource
       const intro =
-        (game[`intro_${lang}` as keyof GameData] as string) ||
-        game.intro_jp ||
-        game.intro_en ||
-        game.intro_zh
+        introSource[`intro_${lang}` as keyof GameIntroSource] ||
+        introSource.intro_jp ||
+        introSource.intro_en ||
+        introSource.intro_zh
       return {
         intro: intro,
         language:
-          game[`intro_${lang}`] === intro
+          introSource[`intro_${lang}` as keyof GameIntroSource] === intro
             ? lang
-            : intro === game.intro_en
+            : intro === introSource.intro_en
               ? 'en'
-              : intro === game.intro_zh
+              : intro === introSource.intro_zh
                 ? 'zh'
                 : 'jp',
-        disable_languages: Object.keys(game)
-          .filter(k => k.startsWith('intro_') && !game[k as keyof GameData])
+        disable_languages: Object.keys(introSource)
+          .filter(k => k.startsWith('intro_') && !introSource[k as keyof GameIntroSource])
           .map(k => k.replace('intro_', '')),
       }
   }

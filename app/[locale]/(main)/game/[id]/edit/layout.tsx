@@ -14,15 +14,13 @@ export default async function EditLayout({ children, params }: Readonly<Props>) 
   }
 
   return (
-    <div className="w-full">
-      <div className="w-full flex flex-col gap-4 shadow-content-strong bg-card-soft rounded-md p-4">
-        <div className="w-full flex flex-col gap-4">
-          <h2 className="text-2xl font-bold">{t('edit')}</h2>
-          <p className="text-sm text-muted-foreground">{t('description')}</p>
-        </div>
-        <EditTabsNav />
-        {children}
+    <div className="w-full flex flex-col gap-4">
+      <div className="w-full flex flex-col gap-2">
+        <h2 className="text-2xl font-bold">{t('edit')}</h2>
+        <p className="text-sm text-muted-foreground">{t('description')}</p>
       </div>
+      <EditTabsNav />
+      {children}
     </div>
   )
 }

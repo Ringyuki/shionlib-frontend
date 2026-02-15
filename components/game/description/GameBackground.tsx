@@ -1,9 +1,9 @@
 import { FadeImage } from '@/components/common/shared/FadeImage'
-import { GameData } from '@/interfaces/game/game.interface'
+import { GameHeader } from '@/interfaces/game/game.interface'
 import { cn } from '@/utils/cn'
 
 interface GameBackgroundProps {
-  game: GameData
+  game: GameHeader
   title: string
 }
 
