@@ -1,6 +1,8 @@
-import { ToasterProps } from 'react-hot-toast'
+import { ToasterProps as ReactHotToastProps } from 'react-hot-toast'
+import type { ComponentProps } from 'react'
+import { Toaster as SileoToaster } from 'sileo'
 
-export const toastOptions: ToasterProps['toastOptions'] = {
+export const reactHotToastOptions: ReactHotToastProps['toastOptions'] = {
   success: {
     iconTheme: {
       primary: 'var(--toast-text-success)',
@@ -23,7 +25,15 @@ export const toastOptions: ToasterProps['toastOptions'] = {
   },
 }
 
-export const toastProps: ToasterProps = {
-  toastOptions: toastOptions,
+export const reactHotToastProps: Omit<ReactHotToastProps, 'children'> = {
+  toastOptions: reactHotToastOptions,
   containerStyle: { marginRight: 'var(--removed-body-scroll-bar-size, 0px)' },
+}
+
+type SileoToasterProps = ComponentProps<typeof SileoToaster>
+export const sileoToastProps: Omit<SileoToasterProps, 'children'> = {
+  position: 'bottom-center',
+  options: {
+    styles: {},
+  },
 }

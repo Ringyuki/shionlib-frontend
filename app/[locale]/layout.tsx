@@ -1,5 +1,4 @@
 import ShionlibProvider from './provider'
-import { Toaster } from 'react-hot-toast'
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
 import { Props } from '@/i18n/types/props'
 import { notFound } from 'next/navigation'
@@ -8,7 +7,6 @@ import { langMap } from './metadata'
 import { SupportedLocales } from '@/config/i18n/supported'
 export { generateMetadata } from './metadata'
 import '@/public/assets/styles/globals.css'
-import { toastProps } from './toastOption'
 import { TokenRefresh } from '@/components/common/auth/TokenRefresh'
 import { Noto_Sans, Noto_Sans_SC, Noto_Sans_JP, Noto_Sans_Mono } from 'next/font/google'
 import { Cinzel } from 'next/font/google'
@@ -63,10 +61,7 @@ export default async function RootLayout({ children, params }: Readonly<Props>) 
       <body>
         <TokenRefresh />
         <NextIntlClientProvider>
-          <ShionlibProvider>
-            {children}
-            <Toaster {...toastProps} />
-          </ShionlibProvider>
+          <ShionlibProvider>{children}</ShionlibProvider>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -294,6 +294,9 @@ importers:
       shiki:
         specifier: ^1.29.2
         version: 1.29.2
+      sileo:
+        specifier: ^0.0.7
+        version: 0.0.7(lucide-react@0.544.0(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       socket.io-client:
         specifier: ^4.8.1
         version: 4.8.1
@@ -4421,6 +4424,13 @@ packages:
   signal-exit@4.1.0:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
+
+  sileo@0.0.7:
+    resolution: {integrity: sha512-AqWpkmNi6rfoyediBrSmhHgfGLEi3P9c1BjeWXpy2fXbt8WKxNR5AkRuwOq6GoVAI/uoMbFE4f5hAEk2pOJPzg==}
+    peerDependencies:
+      lucide-react: '>=0.300'
+      react: '>=18'
+      react-dom: '>=18'
 
   slice-ansi@7.1.2:
     resolution: {integrity: sha512-iOBWFgUX7caIZiuutICxVgX1SdxwAVFFKwt1EvMYYec/NWO5meOJ6K5uQxhrYBdQJne4KxiqZc+KptFOWFSI9w==}
@@ -9748,6 +9758,12 @@ snapshots:
       side-channel-weakmap: 1.0.2
 
   signal-exit@4.1.0: {}
+
+  sileo@0.0.7(lucide-react@0.544.0(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
+    dependencies:
+      lucide-react: 0.544.0(react@19.2.3)
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
 
   slice-ansi@7.1.2:
     dependencies:
