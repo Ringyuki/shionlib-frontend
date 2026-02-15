@@ -1087,7 +1087,8 @@
       "Settings": {
         "TabsNav": {
           "personal": "Personal information",
-          "site": "Site settings"
+          "site": "Site settings",
+          "download": "Download settings"
         },
         "Avatar": {
           "title": "Avatar",
@@ -1180,12 +1181,33 @@
           "neverShowNsfwContent": "Never show NSFW content",
           "tipsTitle": "Tips",
           "tipsDescription": "This setting will take effect in 30 minutes. You can also log in again to make the changes take effect immediately.",
+          "relogin": "Relogin",
           "update": "Update content limit",
           "success": "Updated successfully"
         },
+        "ToastPosition": {
+          "title": "Toast position",
+          "description": "You can set where global toast notifications appear.",
+          "selectPosition": "Select toast position",
+          "choosePosition": "Select toast position",
+          "top-left": "Top left",
+          "top-center": "Top center",
+          "top-right": "Top right",
+          "bottom-left": "Bottom left",
+          "bottom-center": "Bottom center",
+          "bottom-right": "Bottom right",
+          "tipsTitle": "Tips",
+          "tipsDescription": "This setting will only be saved to your local browser and will not be uploaded to Shionlib servers.",
+          "update": "Update toast position",
+          "reset": "Reset default",
+          "success": "Updated successfully",
+          "resetSuccess": "Reset to default"
+        },
         "Aria2": {
           "title": "Aria2",
-          "description": "You can update your Aria2 settings here. This setting will only be saved to your local browser and will not be uploaded to Shionlib servers.",
+          "description": "You can update your Aria2 settings here.",
+          "tipsTitle": "Tips",
+          "tipsDescription": "This setting will only be saved to your local browser and will not be uploaded to Shionlib servers.",
           "protocol": "Protocol",
           "protocolPlaceholder": "Select protocol",
           "host": "Host",

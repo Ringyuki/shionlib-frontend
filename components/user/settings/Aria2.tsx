@@ -1,6 +1,6 @@
 'use client'
 
-import { useAria2Store } from '@/store/aria2Store'
+import { initialSettings, useAria2Store } from '@/store/localSettingsStore'
 import {
   Card,
   CardHeader,
@@ -16,6 +16,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { Zap } from 'lucide-react'
 import { InputNumber } from '@/components/shionui/InputNumber'
 import { Button } from '@/components/shionui/Button'
+import { Alert, AlertDescription, AlertTitle } from '@/components/shionui/Alert'
 import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 // import { toast } from 'react-hot-toast'
@@ -27,7 +28,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/shionui/Select'
-import { initialSettings } from '@/store/aria2Store'
 import { Aria2Settings } from '@/interfaces/aria2/aria2.interface'
 import { Aria2Reset } from './aria2/Reset'
 import { Aria2Test } from './aria2/Test'
@@ -77,7 +77,7 @@ export const Aria2 = () => {
           <Zap className="size-12 text-yellow-500" />
         </CardAction>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col gap-4">
         <Form {...form}>
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
             <FormItem>
@@ -158,6 +158,10 @@ export const Aria2 = () => {
             </FormItem>
           </form>
         </Form>
+        <Alert intent="info" appearance="soft" size="sm">
+          <AlertTitle className="text-base">{t('tipsTitle')}</AlertTitle>
+          <AlertDescription>{t('tipsDescription')}</AlertDescription>
+        </Alert>
       </CardContent>
       <CardFooter>
         <div className="flex flex-col gap-3 w-full">

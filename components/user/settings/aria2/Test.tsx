@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import { UseFormReturn } from 'react-hook-form'
 import { Aria2Settings } from '@/interfaces/aria2/aria2.interface'
 import { check } from '@/components/game/download/helpers/aria2'
-import { useAria2TestStore } from '@/store/aria2Store'
+import { useAria2TestStore } from '@/store/localSettingsStore'
 
 interface Aria2TestProps {
   form: UseFormReturn<Aria2Settings>

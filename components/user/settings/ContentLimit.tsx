@@ -27,6 +27,8 @@ import { shionlibRequest } from '@/utils/shionlib-request'
 // import { toast } from 'react-hot-toast'
 import { sileo } from 'sileo'
 import { VenusAndMars } from 'lucide-react'
+import { useShionlibUserStore } from '@/store/userStore'
+import { useAuthDialogStore } from '@/store/authDialogStore'
 
 interface ContentLimitProps {
   initialContentLimit: ContentLimitEnum
@@ -36,6 +38,12 @@ export const ContentLimit = ({ initialContentLimit }: ContentLimitProps) => {
   const t = useTranslations('Components.User.Settings.ContentLimit')
   const [contentLimit, setContentLimit] = useState<ContentLimitEnum>(initialContentLimit)
   const [isUpdating, setIsUpdating] = useState(false)
+  const { logout } = useShionlibUserStore()
+  const { openLogoutDialog } = useAuthDialogStore()
+  const relogin = () => {
+    logout()
+    openLogoutDialog()
+  }
 
   const handleUpdate = async () => {
     try {
@@ -44,7 +52,14 @@ export const ContentLimit = ({ initialContentLimit }: ContentLimitProps) => {
         data: { content_limit: Number(contentLimit) },
       })
       // toast.success(t('success'))
-      sileo.success({ title: t('success') })
+      sileo.success({
+        title: t('success'),
+        description: t('tipsDescription'),
+        styles: {
+          description: 'dark:text-background',
+        },
+        button: { title: t('relogin'), onClick: relogin },
+      })
     } catch {
     } finally {
       setIsUpdating(false)

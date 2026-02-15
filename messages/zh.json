@@ -47,7 +47,7 @@
         "description": "你可以在此页面管理你的个人信息和站点设置。",
         "loginRequired": {
           "title": "请先登录",
-          "description": "你需要登录后才能访问设置页面。",
+          "description": "你需要登录后才能访问此设置页面。",
           "login": "登录"
         }
       }
@@ -1087,7 +1087,8 @@
       "Settings": {
         "TabsNav": {
           "personal": "个人信息",
-          "site": "站点设置"
+          "site": "站点设置",
+          "download": "下载设置"
         },
         "Avatar": {
           "title": "头像",
@@ -1180,12 +1181,33 @@
           "neverShowNsfwContent": "不显示 NSFW 内容",
           "tipsTitle": "提示",
           "tipsDescription": "此项设置会在变更后的30分钟内生效。你也可以重新登录来使变更立即生效。",
+          "relogin": "重新登录",
           "update": "更新内容限制",
           "success": "更新成功"
         },
+        "ToastPosition": {
+          "title": "Toast 位置",
+          "description": "你可以在此设置全局 Toast 通知出现的位置。",
+          "selectPosition": "选择 Toast 位置",
+          "choosePosition": "选择 Toast 位置",
+          "top-left": "左上",
+          "top-center": "上方居中",
+          "top-right": "右上",
+          "bottom-left": "左下",
+          "bottom-center": "下方居中",
+          "bottom-right": "右下",
+          "tipsTitle": "提示",
+          "tipsDescription": "此项设置仅会保存到你的本地浏览器中，不会上传到 Shionlib 服务器。",
+          "update": "更新 Toast 位置",
+          "reset": "恢复默认",
+          "success": "更新成功",
+          "resetSuccess": "已恢复默认"
+        },
         "Aria2": {
           "title": "Aria2",
-          "description": "你可以在此更新你的 Aria2 设置。此项设置仅会保存到你的本地浏览器中，不会上传到 Shionlib 服务器。",
+          "description": "你可以在此更新你的 Aria2 设置。",
+          "tipsTitle": "提示",
+          "tipsDescription": "此项设置仅会保存到你的本地浏览器中，不会上传到 Shionlib 服务器。",
           "protocol": "协议",
           "protocolPlaceholder": "选择协议",
           "host": "地址",

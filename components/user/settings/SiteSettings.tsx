@@ -1,6 +1,6 @@
 import { ContentLimit } from '@/components/user/settings/ContentLimit'
 import { LanguageSettings } from '@/components/user/settings/Language'
-import { Aria2 } from '@/components/user/settings/Aria2'
+import { ToastPositionSettings } from '@/components/user/settings/ToastPosition'
 import { User } from '@/interfaces/user/user.interface'
 
 interface SiteSettingsProps {
@@ -12,7 +12,7 @@ export const SiteSettings = ({ user }: SiteSettingsProps) => {
     <div className="w-full flex flex-col gap-4">
       <ContentLimit initialContentLimit={user.content_limit!} />
       <LanguageSettings initialLanguage={user.lang} />
-      <Aria2 />
+      <ToastPositionSettings />
     </div>
   )
 }

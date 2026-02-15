@@ -32,7 +32,6 @@ export const reactHotToastProps: Omit<ReactHotToastProps, 'children'> = {
 
 type SileoToasterProps = ComponentProps<typeof SileoToaster>
 export const sileoToastProps: Omit<SileoToasterProps, 'children'> = {
-  position: 'bottom-center',
   options: {
     styles: {},
   },

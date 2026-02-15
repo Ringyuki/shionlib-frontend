@@ -1,12 +1,11 @@
 import { Button } from '@/components/shionui/Button'
 import { RotateCcw } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { initialSettings, useAria2Store } from '@/store/aria2Store'
 import { UseFormReturn } from 'react-hook-form'
 import { Aria2Settings } from '@/interfaces/aria2/aria2.interface'
 // import { toast } from 'react-hot-toast'
 import { sileo } from 'sileo'
-import { useAria2TestStore } from '@/store/aria2Store'
+import { initialSettings, useAria2Store, useAria2TestStore } from '@/store/localSettingsStore'
 
 interface Aria2ResetProps {
   form: UseFormReturn<Aria2Settings>

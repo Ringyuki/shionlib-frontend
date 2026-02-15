@@ -1073,7 +1073,8 @@
       "Settings": {
         "TabsNav": {
           "personal": "個人情報",
-          "site": "サイト設定"
+          "site": "サイト設定",
+          "download": "ダウンロード設定"
         },
         "Avatar": {
           "title": "アバター",
@@ -1166,12 +1167,33 @@
           "neverShowNsfwContent": "NSFW 内容を表示しない",
           "tipsTitle": "提示",
           "tipsDescription": "この設定は30分後に有効になります。変更を即時に反映させるには再ログインしてください。",
+          "relogin": "再ログイン",
           "update": "内容限制を更新",
           "success": "更新成功"
         },
+        "ToastPosition": {
+          "title": "Toast の表示位置",
+          "description": "グローバル Toast 通知の表示位置を設定できます。",
+          "selectPosition": "Toast の位置を選択",
+          "choosePosition": "Toast の位置を選択",
+          "top-left": "左上",
+          "top-center": "上中央",
+          "top-right": "右上",
+          "bottom-left": "左下",
+          "bottom-center": "下中央",
+          "bottom-right": "右下",
+          "tipsTitle": "ヒント",
+          "tipsDescription": "この設定はローカルブラウザにのみ保存され、Shionlib サーバーにはアップロードされません。",
+          "update": "Toast の位置を更新",
+          "reset": "デフォルトに戻す",
+          "success": "更新成功",
+          "resetSuccess": "デフォルトに戻しました"
+        },
         "Aria2": {
           "title": "Aria2",
-          "description": "このページではあなたの Aria2 設定を更新できます。この設定はローカルブラウザにのみ保存され、Shionlib サーバーにはアップロードされません。",
+          "description": "このページではあなたの Aria2 設定を更新できます。",
+          "tipsTitle": "ヒント",
+          "tipsDescription": "この設定はローカルブラウザにのみ保存され、Shionlib サーバーにはアップロードされません。",
           "protocol": "プロトコル",
           "protocolPlaceholder": "プロトコルを選択",
           "host": "ホスト",

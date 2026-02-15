@@ -27,6 +27,7 @@ import { useLocale } from 'next-intl'
 import { Languages } from 'lucide-react'
 import { Button } from '@/components/shionui/Button'
 import { SupportedLocales } from '@/config/i18n/supported'
+import { sileo } from 'sileo'
 
 interface LanguageSettingsProps {
   initialLanguage: SupportedLocales
@@ -49,6 +50,7 @@ export const LanguageSettings = ({ initialLanguage }: LanguageSettingsProps) => 
       })
       updateUser({ lang: language })
       const targetLocale = language
+      sileo.success({ title: t('success') })
       if (targetLocale === locale) return
       router.replace(pathname, { locale: targetLocale })
     } catch {
