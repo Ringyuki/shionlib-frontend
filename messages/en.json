@@ -762,7 +762,8 @@
       "Edit": {
         "EditLayout": {
           "edit": "Edit game information",
-          "description": "You can edit the game information on this page, only the fields you have permission to edit are displayed. You can apply to the administrator to get more fields editing permission. Your edits will be recorded, and everyone can view them."
+          "description": "You can edit the game information on this page, only the fields you have permission to edit are displayed. You can apply to the administrator to get more fields editing permission. Your edits will be recorded, and everyone can view them.",
+          "backToGame": "Back to game page"
         },
         "EditTabsNav": {
           "scalar": "Basic Information",
@@ -1336,7 +1337,8 @@
       "Edit": {
         "EditLayout": {
           "edit": "Edit Developer Information",
-          "description": "You can edit developer information on this page. Only fields you have permission to edit are shown."
+          "description": "You can edit developer information on this page. Only fields you have permission to edit are shown.",
+          "backToDeveloper": "Back to developer page"
         },
         "Scalar": {
           "name": "Name",
@@ -1391,7 +1393,8 @@
       "Edit": {
         "EditLayout": {
           "edit": "Edit Character",
-          "description": "You can edit character information on this page. Only editable fields are shown."
+          "description": "You can edit character information on this page. Only editable fields are shown.",
+          "backToCharacter": "Back to character page"
         },
         "Scalar": {
           "name_jp": "Japanese Name",
