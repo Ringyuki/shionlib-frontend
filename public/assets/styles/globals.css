@@ -296,6 +296,16 @@ samp {
   [data-sileo-viewport] {
     z-index: 999 !important;
   }
+  [data-sileo-viewport][data-position$='center'] {
+    left: calc(50% - var(--removed-body-scroll-bar-size, 0px) / 2) !important;
+    transform: translateX(-50%) !important;
+  }
+  html {
+    --topbar-top-offset: 0px;
+    @media (min-width: 870px) {
+      --topbar-top-offset: 1rem;
+    }
+  }
 }
 
 @utility drag-none {

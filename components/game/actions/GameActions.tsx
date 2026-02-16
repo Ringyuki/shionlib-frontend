@@ -35,13 +35,13 @@ export const GameActions = ({ game, is_favorite }: GameActionsProps) => {
               <Edit game_id={game.id} />
               <History game_id={game.id} />
               <Favorite isFavorite={is_favorite} gameId={game.id} className="lg:hidden flex" />
-              <Comment className="lg:hidden flex" />
+              <Comment className="lg:hidden flex" gameId={game.id} />
             </div>
           </div>
           <div className="lg:flex hidden items-center gap-2">
             <Separator orientation="vertical" className="h-4! hidden md:block" />
             <Favorite isFavorite={is_favorite} gameId={game.id} />
-            <Comment />
+            <Comment gameId={game.id} />
             {isAdmin && <MoreActions game_id={game.id} />}
           </div>
         </div>

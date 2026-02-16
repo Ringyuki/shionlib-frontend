@@ -32,8 +32,13 @@ export const reactHotToastProps: Omit<ReactHotToastProps, 'children'> = {
 
 type SileoToasterProps = ComponentProps<typeof SileoToaster>
 export const sileoToastProps: Omit<SileoToasterProps, 'children'> = {
+  offset: {
+    top: 'var(--topbar-top-offset, 0px)',
+    bottom: 'var(--topbar-top-offset, 0px)',
+    right: 'var(--removed-body-scroll-bar-size, 0px)',
+  },
   options: {
     styles: {},
-    duration: 3000,
+    duration: 4000,
   },
 }
