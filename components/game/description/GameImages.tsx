@@ -48,7 +48,7 @@ export const GameImages = ({ images, content_limit }: GameImagesProps) => {
                 if (content_limit === ContentLimit.JUST_SHOW)
                   return <_GameImage key={image.url} image={image} />
               }
-              return <_GameImage image={image} key={image.url} />
+              return null
             })}
           </div>
         </ImageLightboxGallery>
