@@ -31,10 +31,13 @@ export const GameImages = ({ images, content_limit }: GameImagesProps) => {
   return (
     images.length > 0 && (
       <>
-        <h2 className="flex items-center gap-2 text-lg font-bold">
-          <ImageIcon />
-          <span>{t('images')}</span>
-        </h2>
+        {(!!content_limit ||
+          images.filter(images => images.sexual === 0 && images.violence === 0).length > 0) && (
+          <h2 className="flex items-center gap-2 text-lg font-bold">
+            <ImageIcon />
+            <span>{t('images')}</span>
+          </h2>
+        )}
         <ImageLightboxGallery>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
             {images.map(image => {
@@ -47,8 +50,9 @@ export const GameImages = ({ images, content_limit }: GameImagesProps) => {
                   )
                 if (content_limit === ContentLimit.JUST_SHOW)
                   return <_GameImage key={image.url} image={image} />
+                return null
               }
-              return null
+              return <_GameImage key={image.url} image={image} />
             })}
           </div>
         </ImageLightboxGallery>
