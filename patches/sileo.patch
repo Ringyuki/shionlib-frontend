@@ -1,0 +1,28 @@
+diff --git a/dist/index.js b/dist/index.js
+index 8183c19ab94a2141175aac31e20581e06f15f1f5..f425cca4192207a5937344e0f59c646843c6b821 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -537,6 +537,9 @@ const HEADER_EXIT_MS = 150;
+     }, []);
+     const handlePointerDown = react.useCallback((e)=>{
+         if (exiting || !onDismiss) return;
++        if (e.pointerType === "mouse") return;
++        const target = e.target;
++        if (target instanceof Element && target.closest("[data-sileo-button]")) return;
+         pointerStartRef.current = e.clientY;
+         e.currentTarget.setPointerCapture(e.pointerId);
+     }, [
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 942e5dbe138bdd2ea31ee98ea2fcd7593af5319b..bc626a926104d5403bfc43e609357b7d4edce263 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -535,6 +535,9 @@ const HEADER_EXIT_MS = 150;
+     }, []);
+     const handlePointerDown = useCallback((e)=>{
+         if (exiting || !onDismiss) return;
++        if (e.pointerType === "mouse") return;
++        const target = e.target;
++        if (target instanceof Element && target.closest("[data-sileo-button]")) return;
+         pointerStartRef.current = e.clientY;
+         e.currentTarget.setPointerCapture(e.pointerId);
+     }, [

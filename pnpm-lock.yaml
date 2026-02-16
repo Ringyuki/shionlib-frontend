@@ -8,6 +8,11 @@ overrides:
   '@types/react': 19.2.2
   '@types/react-dom': 19.2.2
 
+patchedDependencies:
+  sileo@0.0.7:
+    hash: 1d38f05c4882af5f3b2287f429e5594de65a6a065ae87953b5f1b485ce5664c0
+    path: patches/sileo.patch
+
 importers:
 
   .:
@@ -296,7 +301,7 @@ importers:
         version: 1.29.2
       sileo:
         specifier: ^0.0.7
-        version: 0.0.7(lucide-react@0.544.0(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        version: 0.0.7(patch_hash=1d38f05c4882af5f3b2287f429e5594de65a6a065ae87953b5f1b485ce5664c0)(lucide-react@0.544.0(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       socket.io-client:
         specifier: ^4.8.1
         version: 4.8.1
@@ -9769,7 +9774,7 @@ snapshots:
 
   signal-exit@4.1.0: {}
 
-  sileo@0.0.7(lucide-react@0.544.0(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
+  sileo@0.0.7(patch_hash=1d38f05c4882af5f3b2287f429e5594de65a6a065ae87953b5f1b485ce5664c0)(lucide-react@0.544.0(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
     dependencies:
       lucide-react: 0.544.0(react@19.2.3)
       react: 19.2.3
