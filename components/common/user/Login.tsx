@@ -49,7 +49,7 @@ export const Login = ({ onSuccess }: LoginProps) => {
   const onSubmit = async (data: z.infer<typeof loginSchema>) => {
     try {
       setLoading(true)
-      await shionlibRequest().post('/user/login', { data })
+      await shionlibRequest({ forceThrowError: true }).post('/user/login', { data })
       try {
         const data = await shionlibRequest().get<User>('/user/me')
         setUser(data.data!)

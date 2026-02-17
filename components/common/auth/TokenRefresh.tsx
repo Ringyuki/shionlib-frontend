@@ -5,9 +5,7 @@ import { useShionlibUserStore } from '@/store/userStore'
 import { useEffect } from 'react'
 
 const getMe = async () => {
-  return await shionlibRequest()
-    .get('/user/me')
-    .catch(() => {})
+  return await shionlibRequest().get('/user/me')
 }
 
 export const TokenRefresh = () => {

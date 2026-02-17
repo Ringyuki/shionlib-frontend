@@ -45,7 +45,7 @@ export const PasswordSettings = () => {
       })
       // toast.success(t('success'))
       sileo.success({ title: t('success') })
-      logout()
+      await logout()
     } catch {
     } finally {
       setIsUpdating(false)

@@ -63,7 +63,7 @@ export const Forget = () => {
       })
       // toast.success(t('resetSuccess'))
       sileo.success({ title: t('resetSuccess') })
-      logout()
+      await logout()
       router.push('/')
     } catch {
     } finally {

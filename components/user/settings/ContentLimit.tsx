@@ -41,7 +41,7 @@ export const ContentLimit = ({ initialContentLimit }: ContentLimitProps) => {
   const { logout } = useShionlibUserStore()
   const { openAuthDialog } = useAuthDialogStore()
   const relogin = () => {
-    logout()
+    void logout().catch(() => {})
     openAuthDialog()
   }
 

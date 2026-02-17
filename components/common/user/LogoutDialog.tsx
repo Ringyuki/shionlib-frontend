@@ -9,7 +9,6 @@ import {
   AlertDialogCancel,
 } from '@/components/shionui/AlertDialog'
 import { useShionlibUserStore } from '@/store/userStore'
-import { shionlibRequest } from '@/utils/shionlib-request'
 import { useState } from 'react'
 import { useAuthDialogStore } from '@/store/authDialogStore'
 import { useTranslations } from 'next-intl'
@@ -24,12 +23,12 @@ export const LogoutDialog = ({ open, onOpenChange }: LogoutDialogProps) => {
   const [loading, setLoading] = useState(false)
 
   const { closeLogoutDialog } = useAuthDialogStore()
+  const { logout } = useShionlibUserStore()
 
   const handleLogout = async () => {
     setLoading(true)
     try {
-      useShionlibUserStore.getState().logout()
-      await shionlibRequest().post('/auth/logout')
+      await logout()
     } catch {
     } finally {
       setLoading(false)
