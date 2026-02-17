@@ -1,4 +1,4 @@
-import { shionlibRequest } from './shionlib-request'
+import { shionlibRequest } from './request'
 import { VerificationCodeRes } from '@/interfaces/auth/verification-code.interface'
 
 export const verficationCodeUtil = () => {

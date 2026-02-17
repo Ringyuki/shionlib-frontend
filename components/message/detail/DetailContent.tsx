@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { Message } from '@/interfaces/message/message.interface'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { Detail } from './Detail'
 import { DetailSkeleton } from './DetailSkeleton'
 import { cn } from '@/utils/cn'

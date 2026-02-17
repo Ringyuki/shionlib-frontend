@@ -1,6 +1,6 @@
 import { Header } from '@/components/game/filter/Header'
 import { GameFilter } from '@/components/game/filter/GameFilter'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { SortBy, SortOrder } from '@/components/game/filter/enums/Sort.enum'
 import { Games } from '@/components/game/filter/Games'
 import { PaginatedResponse, PaginatedMeta } from '@/interfaces/api/shionlib-api-res.interface'

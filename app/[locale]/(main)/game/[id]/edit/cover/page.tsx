@@ -1,5 +1,5 @@
 import { Cover } from '@/components/game/edit/Cover'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { GameCover } from '@/interfaces/game/game.interface'
 
 interface CoverPageProps {

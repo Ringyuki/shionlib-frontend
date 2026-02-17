@@ -3,7 +3,7 @@ import {
   AsyncMultiSelectContent,
   AsyncMultiSelectItem,
 } from '@/components/shionui/AsyncMultiSelect'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import { Hash } from 'lucide-react'

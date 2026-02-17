@@ -7,7 +7,7 @@ import { ActivityCard } from './ActivityCard'
 import { Masonry } from '@/components/common/shared/Masonry'
 import { FileProgress } from './activities/FileProgress'
 import { buildActivityFeed } from './activities/helpers/activity-feed.helper'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { ActivityLoadMore } from './LoadMore'
 import { useTranslations } from 'next-intl'
 

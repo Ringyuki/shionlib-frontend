@@ -1,4 +1,4 @@
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { User } from '@/interfaces/user/user.interface'
 import { redirect } from 'next/navigation'
 import { AdminSidebar } from '@/components/admin/layout/AdminSidebar'

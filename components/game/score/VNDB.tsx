@@ -1,4 +1,4 @@
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { VNDBScore } from '@/interfaces/game/score/vndb.interface'
 import { useParams } from 'next/navigation'
 import { Skeleton } from '@/components/shionui/Skeleton'

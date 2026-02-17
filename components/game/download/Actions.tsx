@@ -22,7 +22,7 @@ import {
   History as HistoryIcon,
 } from 'lucide-react'
 import { useState } from 'react'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { GameDownloadResourceFileHistory } from '@/interfaces/game/game-download-resource'
 
 interface ActionsProps {

@@ -1,4 +1,4 @@
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { BangumiScore } from '@/interfaces/game/score/bangumi.interface'
 import { useParams } from 'next/navigation'
 import { Skeleton } from '@/components/shionui/Skeleton'

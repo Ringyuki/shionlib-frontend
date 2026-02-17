@@ -1,4 +1,4 @@
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { OverviewData } from '@/interfaces/analysis/data.interface'
 import { Gamepad2, HardDrive, Download, FileArchive } from 'lucide-react'
 import { formatBytes, formatNumber } from '@/utils/format'

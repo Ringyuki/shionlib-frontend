@@ -1,4 +1,4 @@
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { GameDetail as GameDetailType } from '@/interfaces/game/game.interface'
 import { GameDetail } from '@/components/game/description/GameDetail'
 

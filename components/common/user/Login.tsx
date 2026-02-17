@@ -18,7 +18,7 @@ import {
 // import { toast } from 'react-hot-toast'
 import { sileo } from 'sileo'
 import { useState } from 'react'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { User } from '@/interfaces/user/user.interface'
 import { Link, usePathname, useRouter } from '@/i18n/navigation.client'
 import { useLocale } from 'next-intl'

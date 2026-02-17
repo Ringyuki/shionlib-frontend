@@ -3,7 +3,7 @@
 import { Button } from '@/components/shionui/Button'
 import { Trash } from 'lucide-react'
 import { useState } from 'react'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 // import { toast } from 'react-hot-toast'
 import { sileo } from 'sileo'
 import { useTranslations } from 'next-intl'

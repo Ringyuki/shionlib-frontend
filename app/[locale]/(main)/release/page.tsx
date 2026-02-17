@@ -1,7 +1,7 @@
 import { ReleaseListHeader } from '@/components/release/list/Header'
 import { Releases } from '@/components/release/list/Releases'
 import { ReleaseItem } from '@/interfaces/release/upload.interface'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
 import { createGenerateMetadata } from '@/libs/seo/metadata'
 import { getTranslations } from 'next-intl/server'

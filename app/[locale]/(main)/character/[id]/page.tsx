@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { CharacterContent } from '@/components/character/CharacterContent'
 import { createGenerateMetadata } from '@/libs/seo/metadata'
 import { getPreferredCharacterContent } from '@/components/game/description/helpers/getPreferredContent'

@@ -3,13 +3,26 @@ import {
   ErrorResponse,
   FieldError,
 } from '@/interfaces/api/shionlib-api-res.interface'
-import { resolvePreferredLocale } from './language-preference'
+import { resolvePreferredLocale } from '@/utils/language-preference'
 import { ShionlibBizError } from '@/libs/errors'
 import { SHOULD_REFRESH_CODES, IS_FATAL_AUTH_BY_CODES } from '@/constants/auth/auth-status-codes'
 import { NOT_FOUND_CODES } from '@/constants/not-found-codes'
 import { useShionlibUserStore } from '@/store/userStore'
+import { RefreshResult, ServerRequestContext } from './types'
+import {
+  isBrowser,
+  getServerRequestContext,
+  applySetCookiesToCookieHeader,
+  hasOptionalTokenStaleSignal,
+  resolveRefreshLockKey,
+  extractSetCookies,
+  shouldPreRefreshServerCookie,
+} from './helpers'
 
-let refreshPromise: Promise<void> | null = null
+let refreshPromises = new Map<string, Promise<RefreshResult>>()
+let ensureFreshPromise: Promise<boolean> | null = null
+let lastEnsureFreshAt = 0
+
 const shouldRefresh = (code: number) => {
   return SHOULD_REFRESH_CODES.includes(code)
 }
@@ -17,10 +30,33 @@ const isFatalAuthByCode = (code: number) => {
   return IS_FATAL_AUTH_BY_CODES.includes(code)
 }
 
-const isBrowser = typeof window !== 'undefined'
 const baseUrl = isBrowser
   ? process.env.NEXT_PUBLIC_PROD_API_PATH
   : `http://localhost:${process.env.INTERNAL_API_PORT}`
+const SSR_PRE_REFRESH_LEEWAY_MS = 10 * 1000
+
+export const ensureFreshToken = async ({
+  force = false,
+  minIntervalMs = 30 * 1000,
+}: { force?: boolean; minIntervalMs?: number } = {}) => {
+  if (!isBrowser) return true
+  if (!baseUrl) return false
+  const now = Date.now()
+  if (!force && now - lastEnsureFreshAt < minIntervalMs) return true
+
+  if (!ensureFreshPromise) {
+    ensureFreshPromise = doRefresh(baseUrl)
+      .then(() => {
+        lastEnsureFreshAt = Date.now()
+        return true
+      })
+      .catch(() => false)
+      .finally(() => {
+        ensureFreshPromise = null
+      })
+  }
+  return ensureFreshPromise
+}
 
 export const shionlibRequest = ({
   forceThrowError = false,
@@ -31,19 +67,24 @@ export const shionlibRequest = ({
     options: RequestInit,
     params?: Record<string, any>,
   ): Promise<BasicResponse<T>> => {
+    const serverContext = await getServerRequestContext()
+    let serverCookieHeader = serverContext?.cookieHeader || ''
+
+    const getRefreshContext = (): ServerRequestContext | undefined =>
+      isBrowser
+        ? undefined
+        : {
+            cookieHeader: serverCookieHeader,
+            realIp: serverContext?.realIp,
+            userAgent: serverContext?.userAgent,
+          }
+
     const init = async (): Promise<RequestInit> => {
       const headers = new Headers(await buildHeaders(options))
       if (!isBrowser) {
-        const { cookies, headers: nextHeaders } = await import('next/headers')
-        const cookieString = (await cookies()).toString()
-        if (cookieString) headers.set('Cookie', cookieString)
-        try {
-          const incoming = await nextHeaders()
-          const realIp =
-            incoming.get('cf-connecting-ip') ||
-            incoming.get('x-forwarded-for')?.split(',')[0]?.trim()
-          if (realIp) headers.set('x-real-ip', realIp)
-        } catch {}
+        if (serverCookieHeader) headers.set('Cookie', serverCookieHeader)
+        if (serverContext?.realIp) headers.set('x-real-ip', serverContext.realIp)
+        if (serverContext?.userAgent) headers.set('user-agent', serverContext.userAgent)
       }
       // if body is FormData, we will not manually set Content-Type so browser can set boundary.
       const opt: RequestInit = { ...options, headers, credentials: 'include' }
@@ -64,6 +105,34 @@ export const shionlibRequest = ({
       return { data, headers }
     }
 
+    const refreshAndRetry = async () => {
+      if (!baseUrl) return null
+      const refreshResult = await doRefresh(baseUrl, getRefreshContext())
+      if (!isBrowser && refreshResult.setCookies.length > 0) {
+        serverCookieHeader = applySetCookiesToCookieHeader(
+          serverCookieHeader,
+          refreshResult.setCookies,
+        )
+      }
+      return requestOnce()
+    }
+
+    const tryPreRefreshForServerRequest = async () => {
+      if (isBrowser || !baseUrl) return
+      if (!shouldPreRefreshServerCookie(serverCookieHeader, SSR_PRE_REFRESH_LEEWAY_MS)) return
+      try {
+        const refreshResult = await doRefresh(baseUrl, getRefreshContext())
+        if (refreshResult.setCookies.length > 0) {
+          serverCookieHeader = applySetCookiesToCookieHeader(
+            serverCookieHeader,
+            refreshResult.setCookies,
+          )
+        }
+      } catch {
+        // continue with original request path: optional endpoints can still degrade to guest
+      }
+    }
+
     let rht
     let sileo
     if (isBrowser) {
@@ -72,20 +141,37 @@ export const shionlibRequest = ({
       sileo = await import('sileo')
     }
 
-    const { data, headers } = await requestOnce()
+    await tryPreRefreshForServerRequest()
+
+    let { data, headers } = await requestOnce()
+    if (data && data.code === 0 && hasOptionalTokenStaleSignal(data, headers)) {
+      try {
+        const retried = await refreshAndRetry()
+        if (retried?.data?.code === 0) {
+          return retried.data
+        }
+      } catch {
+        return data
+      }
+      return data
+    }
+
     if (data && data.code === 0) return data
 
     if (isFatalAuthByCode(data.code)) {
       if (rht) rht.toast.error(data.message)
       if (sileo) sileo.sileo.error({ title: data.message })
-      await doLogout(baseUrl!)
+      await doLogout(baseUrl!, getRefreshContext())
       throw new ShionlibBizError(data.code, data.message)
     }
     if (shouldRefresh(data.code)) {
       try {
-        await doRefresh(baseUrl!)
-        const { data: retried } = await requestOnce()
-        if (retried.code === 0) return retried
+        const retried = await refreshAndRetry()
+        if (retried) {
+          data = retried.data
+          headers = retried.headers
+          if (retried.data.code === 0) return retried.data
+        }
       } catch {
         if (forceNotThrowError) return data
         throw new ShionlibBizError(data.code, data.message)
@@ -245,39 +331,64 @@ const buildHeaders = async (options?: RequestInit): Promise<HeadersInit> => {
   return record
 }
 
-const doRefresh = async (baseUrl: string) => {
-  if (!refreshPromise) {
-    refreshPromise = fetch(`${baseUrl}/auth/token/refresh`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then(async res => {
-        const data = await res.json().catch(() => ({}))
-        if (!(res.ok && data && data.code === 0)) {
-          if (isFatalAuthByCode(data.code)) {
-            await doLogout(baseUrl)
-            throw new ShionlibBizError(data.code, data.message)
-          }
-          throw new Error((data && data.message) || 'Token refresh failed')
-        }
-      })
-      .finally(() => {
-        refreshPromise = null
-      })
+const doRefresh = async (
+  baseUrl: string,
+  context?: ServerRequestContext,
+): Promise<RefreshResult> => {
+  const refreshKey = resolveRefreshLockKey(context)
+  const existing = refreshPromises.get(refreshKey)
+  if (existing) return existing
+
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' }
+  if (!isBrowser) {
+    if (context?.cookieHeader) headers.cookie = context.cookieHeader
+    if (context?.realIp) headers['x-real-ip'] = context.realIp
+    if (context?.userAgent) headers['user-agent'] = context.userAgent
   }
-  return refreshPromise
+
+  const promise = fetch(`${baseUrl}/auth/token/refresh`, {
+    method: 'POST',
+    credentials: 'include',
+    headers,
+  })
+    .then(async res => {
+      const data = await res.json().catch(() => ({}))
+      if (!(res.ok && data && data.code === 0)) {
+        if (isFatalAuthByCode(data.code)) {
+          await doLogout(baseUrl, context)
+          throw new ShionlibBizError(data.code, data.message)
+        }
+        throw new Error((data && data.message) || 'Token refresh failed')
+      }
+      return {
+        setCookies: extractSetCookies(res.headers),
+      }
+    })
+    .finally(() => {
+      refreshPromises.delete(refreshKey)
+    })
+
+  refreshPromises.set(refreshKey, promise)
+  return promise
 }
 
-const doLogout = async (baseUrl: string) => {
+const doLogout = async (baseUrl: string, context?: ServerRequestContext) => {
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' }
+  if (!isBrowser) {
+    if (context?.cookieHeader) headers.cookie = context.cookieHeader
+    if (context?.realIp) headers['x-real-ip'] = context.realIp
+    if (context?.userAgent) headers['user-agent'] = context.userAgent
+  }
+
   return fetch(`${baseUrl}/auth/logout`, {
     method: 'POST',
     credentials: 'include',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
   }).finally(async () => {
-    refreshPromise = null
+    refreshPromises = new Map<string, Promise<RefreshResult>>()
+    ensureFreshPromise = null
     if (isBrowser) {
-      useShionlibUserStore.getState().logout()
+      useShionlibUserStore.getState().logout(false)
     }
   })
 }

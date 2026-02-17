@@ -1,4 +1,4 @@
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { User } from '@/interfaces/user/user.interface'
 import { AdminUsersClient } from '@/components/admin/users/AdminUsersClient'
 

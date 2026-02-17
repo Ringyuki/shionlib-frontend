@@ -1,5 +1,5 @@
 import { Image as GameImageEditComponent } from '@/components/game/edit/Image'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { GameImage } from '@/interfaces/game/game.interface'
 
 interface ImagePageProps {

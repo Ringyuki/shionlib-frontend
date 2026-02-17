@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { UploadSession } from '@/interfaces/upload/upload-session.interface'
 import { useTranslations } from 'next-intl'
 import { timeFromNow } from '@/utils/time-format'

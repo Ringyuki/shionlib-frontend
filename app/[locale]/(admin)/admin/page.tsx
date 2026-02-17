@@ -1,4 +1,4 @@
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { StatsOverview, StatsTrend } from '@/interfaces/admin/stats.interface'
 import { StatsCardGrid } from '@/components/admin/dashboard/StatsCardGrid'
 import { TrendChart } from '@/components/admin/dashboard/TrendChart'

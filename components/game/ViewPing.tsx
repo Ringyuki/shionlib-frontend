@@ -1,6 +1,6 @@
 'use client'
 
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { useEffect } from 'react'
 import { useParams } from 'next/navigation'
 

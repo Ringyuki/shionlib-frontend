@@ -1,7 +1,7 @@
 import { useRef, useState, forwardRef, useImperativeHandle } from 'react'
 import { Turnstile } from '@/components/common/auth/turnstile/Turnstile'
 import { GameDownloadResourceFileLink } from '@/interfaces/game/game-download-resource'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 
 interface GetDownloadLinkProps {
   fileId: number

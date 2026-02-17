@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 // import toast from 'react-hot-toast'
 import { sileo } from 'sileo'
 import { zodResolver } from '@hookform/resolvers/zod'

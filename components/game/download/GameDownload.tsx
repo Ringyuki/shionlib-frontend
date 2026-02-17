@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { GameDownloadResource } from '@/interfaces/game/game-download-resource'
 import { GameDownloadDrawer } from './GameDownloadDrawer'
 import { GameDownloadDialog } from './GameDownloadDialog'

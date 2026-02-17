@@ -1,7 +1,7 @@
 import { SearchTrendingItem } from '@/interfaces/search/search.interface'
 import { CommandGroup, CommandItem } from '@/components/shionui/Command'
 import { useTranslations } from 'next-intl'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { useEffect } from 'react'
 import { useSearchStore } from '@/store/searchStore'
 

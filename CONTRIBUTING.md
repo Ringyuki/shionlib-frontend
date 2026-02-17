@@ -63,7 +63,7 @@ Keep commits small and focused. Write in imperative mood.
 - i18n: Use `next-intl`; add strings in `messages/*.json` for all supported locales. Keep keys consistent.
 - Content: MDX content in `contents/<locale>/**`. Preserve frontmatter and headings structure.
 - Editor: Lexical editor code is in `components/editor/**`—follow existing node/plugin patterns.
-- API calls: Use existing request utils in `utils/shionlib-request.ts` when applicable.
+- API calls: Use existing request utils in `utils/request` when applicable.
 
 ### Pull Request Process
 

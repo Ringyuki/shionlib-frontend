@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { GameScalar } from '@/interfaces/edit/scalar.interface'
 import { AdminGameScalarEditor } from '@/components/admin/games/AdminGameScalarEditor'
 

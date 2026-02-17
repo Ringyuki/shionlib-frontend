@@ -1,4 +1,4 @@
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
 import { Comment } from '@/interfaces/comment/comment.interface'
 import { CommentContent } from '@/components/user/home/comments/CommentContent'

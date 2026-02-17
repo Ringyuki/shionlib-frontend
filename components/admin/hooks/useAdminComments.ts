@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
 import {
   AdminCommentItem,

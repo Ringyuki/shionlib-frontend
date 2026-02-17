@@ -3,7 +3,7 @@ import { Button } from '@/components/shionui/Button'
 import { Search, Plus } from 'lucide-react'
 import { GameCharacterRelation } from '@/interfaces/game/game.interface'
 import { useTranslations } from 'next-intl'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { useState } from 'react'
 import {
   Select,

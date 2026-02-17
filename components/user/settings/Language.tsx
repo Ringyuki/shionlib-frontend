@@ -12,7 +12,7 @@ import {
 import { useShionlibUserStore } from '@/store/userStore'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import {
   Select,
   SelectTrigger,

@@ -2,7 +2,7 @@ import { Button } from '@/components/shionui/Button'
 import { Heart } from 'lucide-react'
 import { cn } from '@/utils/cn'
 import { useState } from 'react'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { useCommentListStore } from '@/store/commentListStore'
 
 interface LikeProps {

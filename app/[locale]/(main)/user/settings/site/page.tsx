@@ -1,4 +1,4 @@
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { User } from '@/interfaces/user/user.interface'
 import { SiteSettings } from '@/components/user/settings/SiteSettings'
 import { LoginRequired } from '@/components/user/settings/LoginRequired'

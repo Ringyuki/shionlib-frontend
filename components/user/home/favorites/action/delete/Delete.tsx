@@ -9,7 +9,7 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
 } from '@/components/shionui/AlertDialog'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { useTranslations } from 'next-intl'
 // import { toast } from 'react-hot-toast'
 import { sileo } from 'sileo'

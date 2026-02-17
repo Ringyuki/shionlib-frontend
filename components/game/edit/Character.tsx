@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react'
 import { useTranslations } from 'next-intl'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 // import { toast } from 'react-hot-toast'
 import { sileo } from 'sileo'
 import { GameCharacterRelation, GameCharacterRole } from '@/interfaces/game/game.interface'

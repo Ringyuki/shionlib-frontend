@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import {
   AlertDialog,
   AlertDialogContent,

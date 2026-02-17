@@ -1,7 +1,7 @@
 import { Button } from '@/components/shionui/Button'
 import { useTranslations } from 'next-intl'
 import { UndoIcon } from 'lucide-react'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import {
   AlertDialog,
   AlertDialogContent,

@@ -22,7 +22,7 @@ import {
 // import { toast } from 'react-hot-toast'
 import { sileo } from 'sileo'
 import { useState } from 'react'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { verficationCodeUtil } from '@/utils/verification-code'
 import { resolvePreferredLocale } from '@/utils/language-preference'
 import { useCountdown } from '@/hooks/useCountdown'

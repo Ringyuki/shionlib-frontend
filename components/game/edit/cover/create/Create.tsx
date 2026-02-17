@@ -8,7 +8,7 @@ import { z } from 'zod'
 import { gameCoverSchemaType } from '../Form'
 import { GameCover } from '@/interfaces/game/game.interface'
 import { useParams } from 'next/navigation'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 // import { toast } from 'react-hot-toast'
 import { sileo } from 'sileo'
 

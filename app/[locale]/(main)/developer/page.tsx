@@ -1,5 +1,5 @@
 import { Header } from '@/components/developer/list/Header'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
 import { Developer } from '@/interfaces/developer/developer.interface'
 import { Search } from '@/components/developer/list/Search'

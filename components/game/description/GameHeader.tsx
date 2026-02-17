@@ -10,7 +10,7 @@ import { GameCover } from '../cover/GameCover'
 import { getLocale } from 'next-intl/server'
 import { GameScores } from '../score/GameScores'
 import { GameBackground } from './GameBackground'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 
 interface GameHeaderProps {
   game: GameHeaderType

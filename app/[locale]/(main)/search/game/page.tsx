@@ -1,6 +1,6 @@
 import { PaginatedResponse, PaginatedMeta } from '@/interfaces/api/shionlib-api-res.interface'
 import { GameSearchItem } from '@/interfaces/game/game.interface'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { Results } from '@/components/common/search/game/Results'
 import { createGenerateMetadata } from '@/libs/seo/metadata'
 import { getTranslations } from 'next-intl/server'

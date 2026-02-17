@@ -12,7 +12,7 @@ import {
 import { Button } from '@/components/shionui/Button'
 import { useTranslations } from 'next-intl'
 import { useState, useRef } from 'react'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { useShionlibUserStore } from '@/store/userStore'
 // import { toast } from 'react-hot-toast'
 import { sileo } from 'sileo'

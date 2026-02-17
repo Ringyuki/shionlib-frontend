@@ -1,9 +1,20 @@
+export interface AuthResponseMeta {
+  optionalTokenStale?: boolean
+  optionalTokenReason?: string
+}
+
+export interface ShionlibResponseMeta {
+  auth?: AuthResponseMeta
+  [key: string]: unknown
+}
+
 interface ShionlibApiRes<T> {
   code: number
   message: string
   data: T | PaginatedRes<T> | null
   requestId: string
   timestamp: string
+  meta?: ShionlibResponseMeta
 }
 
 export interface PaginatedMeta {

@@ -1,5 +1,5 @@
 import { Character } from '@/components/game/edit/Character'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { GameCharacterRelation } from '@/interfaces/game/game.interface'
 
 interface CharacterPageProps {

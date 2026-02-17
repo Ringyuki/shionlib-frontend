@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { Developer } from '@/interfaces/developer/developer.interface'
 import { GameItem } from '@/interfaces/game/game.interface'
 import { DeveloperContent } from '@/components/developer/DeveloperContent'

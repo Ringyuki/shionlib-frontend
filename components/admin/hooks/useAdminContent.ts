@@ -9,7 +9,7 @@ import {
   AdminDeveloperListResult,
   AdminDeveloperListQuery,
 } from '@/interfaces/admin/content.interface'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 
 export function useAdminGameList(query: AdminGameListQuery = {}) {
   const [data, setData] = useState<AdminGameListResult | null>(null)

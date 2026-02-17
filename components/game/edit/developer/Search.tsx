@@ -4,7 +4,7 @@ import { Search, Plus } from 'lucide-react'
 import { DeveloperRelation } from '@/interfaces/game/game.interface'
 import { useTranslations } from 'next-intl'
 import { DeveloperSearchResult } from '@/interfaces/developer/developer.interface'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { useState } from 'react'
 
 interface SearchDeveloperProps {

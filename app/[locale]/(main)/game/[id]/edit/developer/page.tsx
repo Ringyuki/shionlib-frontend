@@ -1,5 +1,5 @@
 import { Developer } from '@/components/game/edit/Developer'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { DeveloperRelation } from '@/interfaces/game/game.interface'
 
 interface DeveloperPageProps {

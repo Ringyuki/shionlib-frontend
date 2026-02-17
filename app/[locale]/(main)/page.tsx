@@ -1,5 +1,5 @@
 import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { Activity as ActivityInterface } from '@/interfaces/activity/activity.interface'
 import { GameItem } from '@/interfaces/game/game.interface'
 import { Container } from '@/components/home/Container'

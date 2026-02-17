@@ -1,6 +1,6 @@
 import { DeveloperScalarEdit } from '@/components/developer/edit/Scalar'
 import { DeveloperScalar } from '@/interfaces/developer/developer-scalar.interface'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 
 interface ScalarPageProps {
   params: Promise<{ id: string }>

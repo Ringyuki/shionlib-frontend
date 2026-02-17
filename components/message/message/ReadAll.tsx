@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { useRouter } from '@/i18n/navigation.client'
 import { Button } from '@/components/shionui/Button'
 import { CheckCheck } from 'lucide-react'

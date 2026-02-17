@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { Progress } from '@/components/shionui/Progress'
 import { UploadQuota as UploadQuotaType } from '@/interfaces/upload/upload-quota.interface'
 import { useEffect, useState, useRef } from 'react'

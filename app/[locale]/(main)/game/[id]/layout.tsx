@@ -1,7 +1,7 @@
 import { hasLocale } from 'next-intl'
 import { routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { GameData } from '@/interfaces/game/game.interface'
 import { ViewPing } from '@/components/game/ViewPing'
 import { GameHeader } from '@/components/game/description/GameHeader'

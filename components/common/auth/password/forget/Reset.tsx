@@ -19,7 +19,7 @@ import {
 } from '@/components/shionui/Card'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { useRouter } from '@/i18n/navigation.client'
 import { useEffect } from 'react'
 

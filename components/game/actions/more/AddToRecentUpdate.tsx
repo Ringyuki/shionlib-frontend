@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 // import { toast } from 'react-hot-toast'
 import { sileo } from 'sileo'
 import { Plus } from 'lucide-react'

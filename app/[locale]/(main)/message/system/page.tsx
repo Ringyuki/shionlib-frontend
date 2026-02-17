@@ -1,4 +1,4 @@
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { Message as MessageInterface, MessageType } from '@/interfaces/message/message.interface'
 import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
 import { Messages } from '@/components/message/message/Messages'

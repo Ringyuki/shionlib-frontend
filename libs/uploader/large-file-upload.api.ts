@@ -1,4 +1,4 @@
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { LargeFileUploadApi, InitResp, StatusResp } from './types/api'
 
 export function createShionlibLargeFileUploadApi(prefix = '/uploads/large'): LargeFileUploadApi {

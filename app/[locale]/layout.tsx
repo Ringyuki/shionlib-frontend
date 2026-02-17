@@ -7,7 +7,6 @@ import { langMap } from './metadata'
 import { SupportedLocales } from '@/config/i18n/supported'
 export { generateMetadata } from './metadata'
 import '@/public/assets/styles/globals.css'
-import { TokenRefresh } from '@/components/common/auth/TokenRefresh'
 import { Noto_Sans, Noto_Sans_SC, Noto_Sans_JP, Noto_Sans_Mono } from 'next/font/google'
 import { Cinzel } from 'next/font/google'
 import { UmamiProvider } from '@/components/common/site/UmamiProvider'
@@ -59,7 +58,6 @@ export default async function RootLayout({ children, params }: Readonly<Props>) 
         <RybbitProvider />
       </head>
       <body>
-        <TokenRefresh />
         <NextIntlClientProvider>
           <ShionlibProvider>{children}</ShionlibProvider>
         </NextIntlClientProvider>

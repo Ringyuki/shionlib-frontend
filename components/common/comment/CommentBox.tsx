@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react'
 import { CommentEditor } from './CommentEditor'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { SerializedEditorState } from 'lexical'
 import { useTranslations } from 'next-intl'
 // import { toast } from 'react-hot-toast'

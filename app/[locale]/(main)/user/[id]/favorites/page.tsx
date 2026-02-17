@@ -1,7 +1,7 @@
 import { FavoriteContent } from '@/components/user/home/favorites/FavoriteContent'
 import { FavoriteItemsHeader } from '@/components/user/home/favorites/FavoriteItemsHeader'
 import { Empty } from '@/components/common/content/Empty'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 import { PaginatedResponse } from '@/interfaces/api/shionlib-api-res.interface'
 import { FavoriteItem } from '@/interfaces/favorite/favorite-item.interface'
 import { ContentLimit } from '@/interfaces/user/user.interface'

@@ -1,6 +1,6 @@
 import { CharacterScalarEdit } from '@/components/character/edit/Scalar'
 import { CharacterScalar } from '@/interfaces/character/character-scalar.interface'
-import { shionlibRequest } from '@/utils/shionlib-request'
+import { shionlibRequest } from '@/utils/request'
 
 interface ScalarPageProps {
   params: Promise<{ id: string }>
